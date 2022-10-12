@@ -1,0 +1,799 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4888A4AB-1286-4D4F-AFD9-60A95157D3D5}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ANRPC_Inventory</RootNamespace>
+    <AssemblyName>ANRPC_Inventory</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>iconfinder_Box_content_33548.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Guna.UI2">
+      <HintPath>C:\Users\yomna.zidan\Downloads\Guna.UI-Framework-Lib-master\Guna.UI2.WinForms_v2.0.0.6\.net 4.0\Guna.UI2.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Reporting.WinForms.v11.1.0.0.0\lib\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Reporting.WinForms.v11.1.0.0.0\lib\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Reporting.WinForms.v11.1.0.0.0\lib\Microsoft.ReportViewer.WinForms.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Reporting.WinForms.v11.1.0.0.0\lib\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EzonTahwel_PopUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EzonTahwel_PopUp.Designer.cs">
+      <DependentUpon>EzonTahwel_PopUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FinancialYearHandler.cs" />
+    <Compile Include="FTransfer_A.cs">
+      <SubType>Form</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="FTransfer_A.Designer.cs">
+      <DependentUpon>FTransfer_A.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="FTransfer_AA.cs">
+      <SubType>Form</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="FTransfer_AA.Designer.cs">
+      <DependentUpon>FTransfer_AA.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="FTransfer_M.cs">
+      <SubType>Form</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="FTransfer_M.Designer.cs">
+      <DependentUpon>FTransfer_M.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="FTransfer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FTransfer.Designer.cs">
+      <DependentUpon>FTransfer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperClass.cs" />
+    <Compile Include="Redirect_PopUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Redirect_PopUp.Designer.cs">
+      <DependentUpon>Redirect_PopUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PDF_PopUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PDF_PopUp.Designer.cs">
+      <DependentUpon>PDF_PopUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ANRPC_InventoryDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ANRPC_InventoryDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ANRPC_InventoryDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ANRPC_InventoryDataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ANRPC_InventoryDataSet3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ANRPC_InventoryDataSet3.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ANRPC_InventoryDataSet4.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ANRPC_InventoryDataSet4.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ANRPC_InventoryDataSet5.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ANRPC_InventoryDataSet5.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ANRPC_InventoryDataSet6.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ANRPC_InventoryDataSet6.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ANRPC_InventoryDataSet7.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ANRPC_InventoryDataSet7.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ANRPC_Inventory_v2DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ANRPC_Inventory_v2DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ANRPC_Inventory_v2DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ANRPC_Inventory_v2DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ANRPC_Inventory_v2DataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ANRPC_Inventory_v2DataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ANRPC_Inventory_v2DataSet3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ANRPC_Inventory_v2DataSet3.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ANRPC_Inventory_v2DataSet4.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ANRPC_Inventory_v2DataSet4.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ANRPC_Inventory_v2DataSet5.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ANRPC_Inventory_v2DataSet5.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="CurrencyConverter.cs" />
+    <Compile Include="CurrencyConverter2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CurrencyConverter2.Designer.cs">
+      <DependentUpon>CurrencyConverter2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CurrencyConverter3.cs" />
+    <Compile Include="CurrencyData3.cs" />
+    <Compile Include="CurrencyInfo.cs" />
+    <Compile Include="FEdafaMakhzania_F_Edara.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FEdafaMakhzania_F_Edara.Designer.cs">
+      <DependentUpon>FEdafaMakhzania_F_Edara.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FEdafaMakhzania_F.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FEdafaMakhzania_F.Designer.cs">
+      <DependentUpon>FEdafaMakhzania_F.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Estlam_F.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Estlam_F.Designer.cs">
+      <DependentUpon>Estlam_F.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ANRPC_InventoryDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ANRPC_InventoryDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Estlam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Estlam.Designer.cs">
+      <DependentUpon>Estlam.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Constants.cs" />
+    <Compile Include="FEdafaMakhzania.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FEdafaMakhzania.Designer.cs">
+      <DependentUpon>FEdafaMakhzania.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FLogin.Designer.cs">
+      <DependentUpon>FLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fmain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fmain.Designer.cs">
+      <DependentUpon>Fmain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FPublic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FPublic.Designer.cs">
+      <DependentUpon>FPublic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FReports.Designer.cs">
+      <DependentUpon>FReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FUsers.designer.cs">
+      <DependentUpon>FUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FInventoryControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FInventoryControl.Designer.cs">
+      <DependentUpon>FInventoryControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EznSarf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EznSarf.Designer.cs">
+      <DependentUpon>EznSarf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AmrSheraa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AmrSheraa.Designer.cs">
+      <DependentUpon>AmrSheraa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Amrsheraa_PopUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Amrsheraa_PopUp.Designer.cs">
+      <DependentUpon>Amrsheraa_PopUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EznSarf_F.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EznSarf_F.Designer.cs">
+      <DependentUpon>EznSarf_F.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="InsertTasnifTrans.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InsertTasnifTrans.Designer.cs">
+      <DependentUpon>InsertTasnifTrans.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Signature.cs" />
+    <Compile Include="TasnifTrans.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TasnifTrans.Designer.cs">
+      <DependentUpon>TasnifTrans.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tasnif.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tasnif.Designer.cs">
+      <DependentUpon>Tasnif.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TalbTawred.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TalbTawred.Designer.cs">
+      <DependentUpon>TalbTawred.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="ToWord.cs" />
+    <Compile Include="Search_TalbTawreed.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Search_TalbTawreed.Designer.cs">
+      <DependentUpon>Search_TalbTawreed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Track_TalbTawreed.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Track_TalbTawreed.Designer.cs">
+      <DependentUpon>Track_TalbTawreed.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="EzonTahwel_PopUp.resx">
+      <DependentUpon>EzonTahwel_PopUp.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FTransfer_A.resx">
+      <DependentUpon>FTransfer_A.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FTransfer_AA.resx">
+      <DependentUpon>FTransfer_AA.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FTransfer_M.resx">
+      <DependentUpon>FTransfer_M.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FTransfer.resx">
+      <DependentUpon>FTransfer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Redirect_PopUp.resx">
+      <DependentUpon>Redirect_PopUp.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PDF_PopUp.resx">
+      <DependentUpon>PDF_PopUp.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Amrsheraa_R1.rdlc" />
+    <EmbeddedResource Include="CurrencyConverter2.resx">
+      <DependentUpon>CurrencyConverter2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FUsers.resx">
+      <DependentUpon>FUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FInventoryControl.resx">
+      <DependentUpon>FInventoryControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="R_MinQuan.rdlc" />
+    <EmbeddedResource Include="R_MaxQuan.rdlc" />
+    <EmbeddedResource Include="R_SafeAmount.rdlc" />
+    <EmbeddedResource Include="SanfID_R1.rdlc" />
+    <EmbeddedResource Include="EznSarf_R1.rdlc" />
+    <EmbeddedResource Include="TalbTawreed_R1.rdlc" />
+    <EmbeddedResource Include="Edafa_R1.rdlc" />
+    <EmbeddedResource Include="FEdafaMakhzania_F_Edara.resx">
+      <DependentUpon>FEdafaMakhzania_F_Edara.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FEdafaMakhzania_F.resx">
+      <DependentUpon>FEdafaMakhzania_F.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Estlam_F.resx">
+      <DependentUpon>Estlam_F.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Estlam.resx">
+      <DependentUpon>Estlam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FEdafaMakhzania.resx">
+      <DependentUpon>FEdafaMakhzania.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FLogin.resx">
+      <DependentUpon>FLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fmain.resx">
+      <DependentUpon>Fmain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FPublic.resx">
+      <DependentUpon>FPublic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FReports.resx">
+      <DependentUpon>FReports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="obj\Edafa_R1.rdlc" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="EznSarf.resx">
+      <DependentUpon>EznSarf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AmrSheraa.resx">
+      <DependentUpon>AmrSheraa.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Amrsheraa_PopUp.resx">
+      <DependentUpon>Amrsheraa_PopUp.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EznSarf_F.resx">
+      <DependentUpon>EznSarf_F.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="R_Estlam.rdlc" />
+    <EmbeddedResource Include="R_Estagal.rdlc" />
+    <EmbeddedResource Include="R_Motabka.rdlc" />
+    <EmbeddedResource Include="R_TasnifCard.rdlc" />
+    <EmbeddedResource Include="InsertTasnifTrans.resx">
+      <DependentUpon>InsertTasnifTrans.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TasnifTrans.resx">
+      <DependentUpon>TasnifTrans.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tasnif.resx">
+      <DependentUpon>Tasnif.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TalbTawred.resx">
+      <DependentUpon>TalbTawred.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Search_TalbTawreed.resx">
+      <DependentUpon>Search_TalbTawreed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Track_TalbTawreed.resx">
+      <DependentUpon>Track_TalbTawreed.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="ANRPC_InventoryDataSet.xsc">
+      <DependentUpon>ANRPC_InventoryDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_InventoryDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ANRPC_InventoryDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ANRPC_InventoryDataSet.xss">
+      <DependentUpon>ANRPC_InventoryDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_InventoryDataSet1.xsc">
+      <DependentUpon>ANRPC_InventoryDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_InventoryDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ANRPC_InventoryDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ANRPC_InventoryDataSet1.xss">
+      <DependentUpon>ANRPC_InventoryDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_InventoryDataSet2.xsc">
+      <DependentUpon>ANRPC_InventoryDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_InventoryDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ANRPC_InventoryDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ANRPC_InventoryDataSet2.xss">
+      <DependentUpon>ANRPC_InventoryDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_InventoryDataSet3.xsc">
+      <DependentUpon>ANRPC_InventoryDataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_InventoryDataSet3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ANRPC_InventoryDataSet3.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ANRPC_InventoryDataSet3.xss">
+      <DependentUpon>ANRPC_InventoryDataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_InventoryDataSet4.xsc">
+      <DependentUpon>ANRPC_InventoryDataSet4.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_InventoryDataSet4.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ANRPC_InventoryDataSet4.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ANRPC_InventoryDataSet4.xss">
+      <DependentUpon>ANRPC_InventoryDataSet4.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_InventoryDataSet5.xsc">
+      <DependentUpon>ANRPC_InventoryDataSet5.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_InventoryDataSet5.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ANRPC_InventoryDataSet5.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ANRPC_InventoryDataSet5.xss">
+      <DependentUpon>ANRPC_InventoryDataSet5.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_InventoryDataSet6.xsc">
+      <DependentUpon>ANRPC_InventoryDataSet6.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_InventoryDataSet6.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ANRPC_InventoryDataSet6.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ANRPC_InventoryDataSet6.xss">
+      <DependentUpon>ANRPC_InventoryDataSet6.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_InventoryDataSet7.xsc">
+      <DependentUpon>ANRPC_InventoryDataSet7.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_InventoryDataSet7.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ANRPC_InventoryDataSet7.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ANRPC_InventoryDataSet7.xss">
+      <DependentUpon>ANRPC_InventoryDataSet7.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_Inventory_v2DataSet.xsc">
+      <DependentUpon>ANRPC_Inventory_v2DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_Inventory_v2DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ANRPC_Inventory_v2DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ANRPC_Inventory_v2DataSet.xss">
+      <DependentUpon>ANRPC_Inventory_v2DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_Inventory_v2DataSet1.xsc">
+      <DependentUpon>ANRPC_Inventory_v2DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_Inventory_v2DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ANRPC_Inventory_v2DataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ANRPC_Inventory_v2DataSet1.xss">
+      <DependentUpon>ANRPC_Inventory_v2DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_Inventory_v2DataSet2.xsc">
+      <DependentUpon>ANRPC_Inventory_v2DataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_Inventory_v2DataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ANRPC_Inventory_v2DataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ANRPC_Inventory_v2DataSet2.xss">
+      <DependentUpon>ANRPC_Inventory_v2DataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_Inventory_v2DataSet3.xsc">
+      <DependentUpon>ANRPC_Inventory_v2DataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_Inventory_v2DataSet3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ANRPC_Inventory_v2DataSet3.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ANRPC_Inventory_v2DataSet3.xss">
+      <DependentUpon>ANRPC_Inventory_v2DataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_Inventory_v2DataSet4.xsc">
+      <DependentUpon>ANRPC_Inventory_v2DataSet4.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_Inventory_v2DataSet4.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ANRPC_Inventory_v2DataSet4.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ANRPC_Inventory_v2DataSet4.xss">
+      <DependentUpon>ANRPC_Inventory_v2DataSet4.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_Inventory_v2DataSet5.xsc">
+      <DependentUpon>ANRPC_Inventory_v2DataSet5.xsd</DependentUpon>
+    </None>
+    <None Include="ANRPC_Inventory_v2DataSet5.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ANRPC_Inventory_v2DataSet5.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ANRPC_Inventory_v2DataSet5.xss">
+      <DependentUpon>ANRPC_Inventory_v2DataSet5.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bk3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kartony.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bar1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\anrpc logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Anrpc - small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Anrpc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Warehousing_iStock_000019153618Small.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minmize_btn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tabimage.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bar - Copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minmize_btn - Copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bk0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bk00.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pngtree-wooden-board-empty-table-with-blur-background-image_311163.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\011.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\empty-perspective-wood-plank-table-top-with-abstract-bokeh-light-background-montage-your-product_55710-159.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\goExit - Copy1 - Copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\goExit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backBtncopy1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minmize_btn1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kartony1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kartony2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\profileLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\proflog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\577-5777489_inventory-icon-png-clipart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\11a255014bad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\000000.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inventory-computer-icons-product-return-business.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\box-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inventory %281%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\but1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\but12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\beta2etSanf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download-inventory-manager-is-a-simple-inventory-management-inventory-management-png-399_329.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\transparent-check-inventory-4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\5262033-inventory-png-93-images-in-collection-page-2-inventory-png-360_240_preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\packing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backBtncopy11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="iconfinder_Box_content_33548.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AcroPDFLib">
+      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="AxAcroPDFLib">
+      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
