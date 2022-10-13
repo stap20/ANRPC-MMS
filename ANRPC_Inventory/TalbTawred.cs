@@ -11,7 +11,6 @@ using System.Data.SqlClient;
 using System.IO;
 using static System.Windows.Forms.AxHost;
 using System.Xml.Linq;
-using Guna.UI2.AnimatorNS;
 using static System.Windows.Forms.LinkLabel;
 
 namespace ANRPC_Inventory
