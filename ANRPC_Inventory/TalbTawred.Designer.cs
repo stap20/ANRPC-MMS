@@ -133,7 +133,6 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.BTN_Search = new System.Windows.Forms.Button();
             this.BTN_Tracking = new System.Windows.Forms.Button();
-            this.BTN_Track = new System.Windows.Forms.Button();
             this.BTN_Print2 = new System.Windows.Forms.Button();
             this.Editbtn = new System.Windows.Forms.Button();
             this.BTN_Save2 = new System.Windows.Forms.Button();
@@ -1074,7 +1073,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.dataGridView1.Size = new System.Drawing.Size(1148, 221);
+            this.dataGridView1.Size = new System.Drawing.Size(1148, 133);
             this.dataGridView1.TabIndex = 42;
             this.dataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
@@ -1540,7 +1539,6 @@
             this.panel7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel7.Controls.Add(this.BTN_Search);
             this.panel7.Controls.Add(this.BTN_Tracking);
-            this.panel7.Controls.Add(this.BTN_Track);
             this.panel7.Controls.Add(this.BTN_Print2);
             this.panel7.Controls.Add(this.Editbtn);
             this.panel7.Controls.Add(this.BTN_Save2);
@@ -1553,10 +1551,12 @@
             this.panel7.Controls.Add(this.button3);
             this.panel7.Controls.Add(this.button2);
             this.panel7.Controls.Add(this.label25);
-            this.panel7.Location = new System.Drawing.Point(1, 303);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Location = new System.Drawing.Point(1, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(1148, 105);
+            this.panel7.Size = new System.Drawing.Size(1148, 88);
             this.panel7.TabIndex = 27;
+            this.panel7.Visible = false;
             // 
             // BTN_Search
             // 
@@ -1572,7 +1572,7 @@
             this.BTN_Search.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BTN_Search.Location = new System.Drawing.Point(204, 13);
             this.BTN_Search.Name = "BTN_Search";
-            this.BTN_Search.Size = new System.Drawing.Size(199, 87);
+            this.BTN_Search.Size = new System.Drawing.Size(199, 68);
             this.BTN_Search.TabIndex = 305;
             this.BTN_Search.Text = "بحث طلبات التوريد";
             this.BTN_Search.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1593,32 +1593,13 @@
             this.BTN_Tracking.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BTN_Tracking.Location = new System.Drawing.Point(1, 13);
             this.BTN_Tracking.Name = "BTN_Tracking";
-            this.BTN_Tracking.Size = new System.Drawing.Size(199, 87);
+            this.BTN_Tracking.Size = new System.Drawing.Size(197, 68);
             this.BTN_Tracking.TabIndex = 304;
             this.BTN_Tracking.Text = "تتبع طلبات التوريد";
             this.BTN_Tracking.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BTN_Tracking.UseVisualStyleBackColor = false;
             this.BTN_Tracking.Visible = false;
             this.BTN_Tracking.Click += new System.EventHandler(this.BTN_Tracking_Click);
-            // 
-            // BTN_Track
-            // 
-            this.BTN_Track.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Track.BackColor = System.Drawing.Color.LightGray;
-            this.BTN_Track.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_Track.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_Track.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
-            this.BTN_Track.FlatAppearance.BorderSize = 3;
-            this.BTN_Track.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_Track.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.BTN_Track.ForeColor = System.Drawing.Color.DarkSalmon;
-            this.BTN_Track.Location = new System.Drawing.Point(124, 48);
-            this.BTN_Track.Name = "BTN_Track";
-            this.BTN_Track.Size = new System.Drawing.Size(76, 39);
-            this.BTN_Track.TabIndex = 303;
-            this.BTN_Track.Text = "Track";
-            this.BTN_Track.UseVisualStyleBackColor = false;
-            this.BTN_Track.Visible = false;
             // 
             // BTN_Print2
             // 
@@ -1627,7 +1608,7 @@
             this.BTN_Print2.ForeColor = System.Drawing.Color.DarkSalmon;
             this.BTN_Print2.Image = ((System.Drawing.Image)(resources.GetObject("BTN_Print2.Image")));
             this.BTN_Print2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BTN_Print2.Location = new System.Drawing.Point(637, 46);
+            this.BTN_Print2.Location = new System.Drawing.Point(637, 27);
             this.BTN_Print2.Name = "BTN_Print2";
             this.BTN_Print2.Size = new System.Drawing.Size(45, 44);
             this.BTN_Print2.TabIndex = 241;
@@ -1645,7 +1626,7 @@
             this.Editbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Editbtn.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.Editbtn.ForeColor = System.Drawing.Color.Maroon;
-            this.Editbtn.Location = new System.Drawing.Point(519, 51);
+            this.Editbtn.Location = new System.Drawing.Point(519, 32);
             this.Editbtn.Name = "Editbtn";
             this.Editbtn.Size = new System.Drawing.Size(72, 32);
             this.Editbtn.TabIndex = 47;
@@ -1663,7 +1644,7 @@
             this.BTN_Save2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_Save2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.BTN_Save2.ForeColor = System.Drawing.Color.Maroon;
-            this.BTN_Save2.Location = new System.Drawing.Point(418, 50);
+            this.BTN_Save2.Location = new System.Drawing.Point(418, 31);
             this.BTN_Save2.Name = "BTN_Save2";
             this.BTN_Save2.Size = new System.Drawing.Size(72, 32);
             this.BTN_Save2.TabIndex = 49;
@@ -1680,7 +1661,7 @@
             this.Cmb_TalbNo2.Items.AddRange(new object[] {
             "2019_2020",
             "2020_2021"});
-            this.Cmb_TalbNo2.Location = new System.Drawing.Point(688, 55);
+            this.Cmb_TalbNo2.Location = new System.Drawing.Point(688, 36);
             this.Cmb_TalbNo2.Name = "Cmb_TalbNo2";
             this.Cmb_TalbNo2.Size = new System.Drawing.Size(110, 27);
             this.Cmb_TalbNo2.TabIndex = 26;
@@ -1695,7 +1676,7 @@
             this.Cmb_FYear2.Items.AddRange(new object[] {
             "2020_2021",
             "2021_2022"});
-            this.Cmb_FYear2.Location = new System.Drawing.Point(814, 55);
+            this.Cmb_FYear2.Location = new System.Drawing.Point(814, 36);
             this.Cmb_FYear2.Name = "Cmb_FYear2";
             this.Cmb_FYear2.Size = new System.Drawing.Size(110, 27);
             this.Cmb_FYear2.TabIndex = 25;
@@ -1792,7 +1773,7 @@
             this.label25.BackColor = System.Drawing.Color.Transparent;
             this.label25.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label25.ForeColor = System.Drawing.Color.MintCream;
-            this.label25.Location = new System.Drawing.Point(942, 57);
+            this.label25.Location = new System.Drawing.Point(942, 38);
             this.label25.Name = "label25";
             this.label25.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label25.Size = new System.Drawing.Size(141, 24);
@@ -1811,7 +1792,7 @@
             this.panel2.Controls.Add(this.Addbtn);
             this.panel2.Controls.Add(this.SaveBtn);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(1, 0);
+            this.panel2.Location = new System.Drawing.Point(1, 88);
             this.panel2.Name = "panel2";
             this.panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.panel2.Size = new System.Drawing.Size(1148, 150);
@@ -2296,7 +2277,7 @@
             this.BTN_Cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_Cancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.BTN_Cancel.ForeColor = System.Drawing.Color.Blue;
-            this.BTN_Cancel.Location = new System.Drawing.Point(861, 3);
+            this.BTN_Cancel.Location = new System.Drawing.Point(860, 3);
             this.BTN_Cancel.Name = "BTN_Cancel";
             this.BTN_Cancel.Size = new System.Drawing.Size(70, 31);
             this.BTN_Cancel.TabIndex = 332;
@@ -2326,7 +2307,7 @@
             this.Editbtn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Editbtn2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.Editbtn2.ForeColor = System.Drawing.Color.Blue;
-            this.Editbtn2.Location = new System.Drawing.Point(1005, 3);
+            this.Editbtn2.Location = new System.Drawing.Point(1004, 3);
             this.Editbtn2.Name = "Editbtn2";
             this.Editbtn2.Size = new System.Drawing.Size(70, 31);
             this.Editbtn2.TabIndex = 50;
@@ -2344,7 +2325,7 @@
             this.Addbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Addbtn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.Addbtn.ForeColor = System.Drawing.Color.Blue;
-            this.Addbtn.Location = new System.Drawing.Point(1077, 3);
+            this.Addbtn.Location = new System.Drawing.Point(1076, 3);
             this.Addbtn.Name = "Addbtn";
             this.Addbtn.Size = new System.Drawing.Size(70, 31);
             this.Addbtn.TabIndex = 46;
@@ -2362,7 +2343,7 @@
             this.SaveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SaveBtn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.SaveBtn.ForeColor = System.Drawing.Color.Blue;
-            this.SaveBtn.Location = new System.Drawing.Point(933, 3);
+            this.SaveBtn.Location = new System.Drawing.Point(932, 3);
             this.SaveBtn.Name = "SaveBtn";
             this.SaveBtn.Size = new System.Drawing.Size(70, 31);
             this.SaveBtn.TabIndex = 20;
@@ -2400,7 +2381,7 @@
             this.panel15.Controls.Add(this.panel5);
             this.panel15.Controls.Add(this.panel6);
             this.panel15.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel15.Location = new System.Drawing.Point(1, 150);
+            this.panel15.Location = new System.Drawing.Point(1, 238);
             this.panel15.Name = "panel15";
             this.panel15.Size = new System.Drawing.Size(1148, 153);
             this.panel15.TabIndex = 43;
@@ -2409,9 +2390,9 @@
             // 
             this.panel16.Controls.Add(this.dataGridView1);
             this.panel16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel16.Location = new System.Drawing.Point(1, 303);
+            this.panel16.Location = new System.Drawing.Point(1, 391);
             this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(1148, 221);
+            this.panel16.Size = new System.Drawing.Size(1148, 133);
             this.panel16.TabIndex = 44;
             // 
             // errorProvider
@@ -2431,10 +2412,10 @@
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(1150, 720);
             this.Controls.Add(this.panel16);
-            this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel15);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel13);
+            this.Controls.Add(this.panel7);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TalbTawred";
             this.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
@@ -2541,7 +2522,6 @@
         private System.Windows.Forms.TextBox TXT_TalbNo2;
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.Button BTN_Tracking;
-        private System.Windows.Forms.Button BTN_Track;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button BTN_Search;
         private System.Windows.Forms.ComboBox Cmb_Currency;
