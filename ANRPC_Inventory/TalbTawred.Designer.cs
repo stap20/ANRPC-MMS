@@ -1383,7 +1383,7 @@
             this.TXT_Edara.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.TXT_Edara.Location = new System.Drawing.Point(3, 41);
             this.TXT_Edara.Name = "TXT_Edara";
-            this.TXT_Edara.Size = new System.Drawing.Size(126, 26);
+            this.TXT_Edara.Size = new System.Drawing.Size(152, 26);
             this.TXT_Edara.TabIndex = 15;
             // 
             // panel3

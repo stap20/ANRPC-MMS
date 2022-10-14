@@ -141,14 +141,14 @@ namespace ANRPC_Inventory
             if (Constants.EznSarf_FF == false) 
             {
                 panel7.Visible = true;
-                panel2.Visible = false;
+                eznSarfDataPanel.Visible = false;
                 panel7.Dock = DockStyle.Top;
             }
             else if (Constants.EznSarf_FF == true)
             {
-                panel2.Visible = true;
+                eznSarfDataPanel.Visible = true;
                 panel7.Visible = false;
-                panel2.Dock = DockStyle.Top;
+                eznSarfDataPanel.Dock = DockStyle.Top;
             }
             else { }
         //    if (Constants.User_Type != "A")
@@ -355,30 +355,8 @@ namespace ANRPC_Inventory
                 Image2 = "";
                 picflag = 0;
 
-                SearchImage1(TXT_StockNoAll.Text);
-                SearchImage2(TXT_StockNoAll.Text);
-                //    if (searchflag == 1)
-                //    {
-
-                CMB_ApproxValue.Text = "";
-                query = "SELECT stock_no_all,[PRICE_UNIT] ,(PRICE_UNIT + ' '+ in_mm + '/' +in_yy) as x FROM [tr_out_1_2015_2020] where stock_no_all=@a order by in_yy desc ,in_mm desc";
-                query = "SELECT stock_no_all,[PRICE_UNIT] ,(cast(price_unit as nvarchar(50)) + '     '+ in_mm + '/' +in_yy) as x FROM [tr_out_1_2015_2020] where stock_no_all=@a order by in_yy desc ,in_mm desc";
-
-                //   string query = "SELECT stock_no_all,[PRICE_UNIT] , in_mm ,in_yy FROM [tr_out_1_2015_2020] where stock_no_all=@a order by in_yy desc ,in_mm desc";
-                SqlCommand cmd4 = new SqlCommand(query, con);
-                cmd4.Parameters.AddWithValue("@a", TXT_StockNoAll.Text);
-                //      }
-
-
-
-
-                DataTable dts = new DataTable();
-                dts.Load(cmd4.ExecuteReader());
-
-                CMB_ApproxValue.DataSource = dts;
-                CMB_ApproxValue.ValueMember = "PRICE_UNIT";
-                CMB_ApproxValue.DisplayMember = "x";
-                CMB_ApproxValue.SelectedIndex = -1;
+               //SearchImage1(TXT_StockNoAll.Text);
+               //SearchImage2(TXT_StockNoAll.Text);
             }
             else
             {
@@ -435,11 +413,11 @@ namespace ANRPC_Inventory
         {
             Graphics surface = e.Graphics;
             Pen pen1 = new Pen(Color.Black, 2);
-            surface.DrawLine(pen1, panel1.Location.X + 4,  4, panel1.Location.X + 4, panel1.Location.Y + panel1.Size.Height); // Left Line
-            surface.DrawLine(pen1, panel1.Size.Width - 4, 4, panel1.Size.Width - 4, panel1.Location.Y + panel1.Size.Height); // Right Line
+            surface.DrawLine(pen1, bottomPanel.Location.X + 4,  4, bottomPanel.Location.X + 4, bottomPanel.Location.Y + bottomPanel.Size.Height); // Left Line
+            surface.DrawLine(pen1, bottomPanel.Size.Width - 4, 4, bottomPanel.Size.Width - 4, bottomPanel.Location.Y + bottomPanel.Size.Height); // Right Line
             //---------------------------
-            surface.DrawLine(pen1, 4,4, panel1.Location.X + panel1.Size.Width - 4,4); // Top Line
-            surface.DrawLine(pen1, 4, panel1.Size.Height -1, panel1.Location.X + panel1.Size.Width - 4, panel1.Size.Height -1); // Bottom Line
+            surface.DrawLine(pen1, 4,4, bottomPanel.Location.X + bottomPanel.Size.Width - 4,4); // Top Line
+            surface.DrawLine(pen1, 4, bottomPanel.Size.Height -1, bottomPanel.Location.X + bottomPanel.Size.Width - 4, bottomPanel.Size.Height -1); // Bottom Line
        
             //---------------------------
             // Middle_Line
@@ -467,7 +445,7 @@ namespace ANRPC_Inventory
                 {
                     con.Open();
                 }  //--> OPEN CONNECTION
-                CMB_ApproxValue.Text = "";
+
                 SearchTasnif(2);
             }
         }
@@ -481,7 +459,6 @@ namespace ANRPC_Inventory
                     con.Open();
                 }  //--> OPEN CONNECTION
 
-                CMB_ApproxValue.Text = "";
                 SearchTasnif(1);
             }
         }
@@ -728,11 +705,6 @@ namespace ANRPC_Inventory
 
                     }
                     
-                }
-                if (CMB_ApproxValue.Text.ToString() == "")
-                {
-                  //  MessageBox.Show("يجب اختيار القيمة التقديرية ");
-                  //  return;
                 }
          
                 //    for (int row = 0; row < dataGridView1.Rows.Count - 1; row++)
@@ -1947,18 +1919,18 @@ namespace ANRPC_Inventory
                              wazifa1 = p.Split(':')[2];
                              pp = p.Split(':')[0];
 
-                             ((PictureBox)this.panel1.Controls["Pic_Sign" + "1"]).Image = Image.FromFile(@pp);
+                             ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "1"]).Image = Image.FromFile(@pp);
 
                              FlagSign1 = 1;
                              FlagEmpn1 = s1;
-                             ((PictureBox)this.panel1.Controls["Pic_Sign" + "1"]).BackColor = Color.Green;
+                             ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "1"]).BackColor = Color.Green;
                              toolTip1.SetToolTip(Pic_Sign1, Ename1 + Environment.NewLine + wazifa1);
                          }
 
                      }
                      else
                      {
-                         ((PictureBox)this.panel1.Controls["Pic_Sign" + "1"]).BackColor = Color.Red;
+                         ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "1"]).BackColor = Color.Red;
                      }
                      if (s2 != "")
                      {
@@ -1970,17 +1942,17 @@ namespace ANRPC_Inventory
                              Ename2 = p.Split(':')[1];
                              wazifa2 = p.Split(':')[2];
                              pp = p.Split(':')[0];
-                             ((PictureBox)this.panel1.Controls["Pic_Sign" + "2"]).Image = Image.FromFile(@pp);
+                             ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "2"]).Image = Image.FromFile(@pp);
                              FlagSign2 = 1;
                              FlagEmpn2 = s2;
-                             ((PictureBox)this.panel1.Controls["Pic_Sign" + "2"]).BackColor = Color.Green;
+                             ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "2"]).BackColor = Color.Green;
                              toolTip1.SetToolTip(Pic_Sign2, Ename2 + Environment.NewLine + wazifa2);
                          }
 
                      }
                      else
                      {
-                         ((PictureBox)this.panel1.Controls["Pic_Sign" + "2"]).BackColor = Color.Red;
+                         ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "2"]).BackColor = Color.Red;
                      }
                      if (s3 != "")
                      {
@@ -1992,10 +1964,10 @@ namespace ANRPC_Inventory
                              Ename3 = p.Split(':')[1];
                              wazifa3 = p.Split(':')[2];
                              pp = p.Split(':')[0];
-                             ((PictureBox)this.panel1.Controls["Pic_Sign" + "3"]).Image = Image.FromFile(@pp);
+                             ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "3"]).Image = Image.FromFile(@pp);
                              FlagSign3 = 1;
                              FlagEmpn3 = s3;
-                             ((PictureBox)this.panel1.Controls["Pic_Sign" + "3"]).BackColor = Color.Green;
+                             ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "3"]).BackColor = Color.Green;
                              toolTip1.SetToolTip(Pic_Sign3, Ename3 + Environment.NewLine + wazifa3);
                           
                          
@@ -2004,7 +1976,7 @@ namespace ANRPC_Inventory
                      }
                      else
                      {
-                         ((PictureBox)this.panel1.Controls["Pic_Sign" + "3"]).BackColor = Color.Red;
+                         ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "3"]).BackColor = Color.Red;
                      }
                      if (s4 != "")
                      {
@@ -2016,10 +1988,10 @@ namespace ANRPC_Inventory
                              Ename3 = p.Split(':')[1];
                              wazifa3 = p.Split(':')[2];
                              pp = p.Split(':')[0];
-                             ((PictureBox)this.panel1.Controls["Pic_Sign" + "4"]).Image = Image.FromFile(@pp);
+                             ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "4"]).Image = Image.FromFile(@pp);
                              FlagSign4 = 1;
                              FlagEmpn4 = s4;
-                             ((PictureBox)this.panel1.Controls["Pic_Sign" + "4"]).BackColor = Color.Green;
+                             ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "4"]).BackColor = Color.Green;
                              toolTip1.SetToolTip(Pic_Sign4, Ename4+ Environment.NewLine + wazifa4);
 
 
@@ -2030,7 +2002,7 @@ namespace ANRPC_Inventory
                      }
                      else
                      {
-                         ((PictureBox)this.panel1.Controls["Pic_Sign" + "4"]).BackColor = Color.Red;
+                         ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "4"]).BackColor = Color.Red;
                      }
                      if (s5 != "")
                      {
@@ -2042,10 +2014,10 @@ namespace ANRPC_Inventory
                              Ename5 = p.Split(':')[1];
                              wazifa5 = p.Split(':')[2];
                              pp = p.Split(':')[0];
-                             ((PictureBox)this.panel1.Controls["Pic_Sign" + "5"]).Image = Image.FromFile(@pp);
+                             ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "5"]).Image = Image.FromFile(@pp);
                              FlagSign5 = 1;
                              FlagEmpn5 = s5;
-                             ((PictureBox)this.panel1.Controls["Pic_Sign" + "5"]).BackColor = Color.Green;
+                             ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "5"]).BackColor = Color.Green;
                              toolTip1.SetToolTip(Pic_Sign5, Ename5 + Environment.NewLine + wazifa5);
                           
                          }
@@ -2053,7 +2025,7 @@ namespace ANRPC_Inventory
                      }
                      else
                      {
-                         ((PictureBox)this.panel1.Controls["Pic_Sign" + "5"]).BackColor = Color.Red;
+                         ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "5"]).BackColor = Color.Red;
                      }
 
                       //  string s6=dr["Mohmat_Sign"].ToString();
@@ -3100,7 +3072,6 @@ namespace ANRPC_Inventory
                 {
                     con.Open();
                 }  //--> OPEN CONNECTION
-                CMB_ApproxValue.Text = "";
                 SearchTasnif(3);
             }
         }
@@ -3176,6 +3147,10 @@ namespace ANRPC_Inventory
                 TXT_TRNO2.Text = Cmb_CType2.SelectedValue.ToString();
             }
         }
-    
+
+        private void label33_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

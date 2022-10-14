@@ -18,7 +18,7 @@ namespace ANRPC_Inventory
     public static class Constants
     {
         #region atrr - nour
-        public static string constring = "server=172.18.8.48;database=ANRPC_Inventory_v2;user=TMS;password=P@ssw0rd;MultipleActiveResultSets=true";
+        public static string constring = "server=172.18.8.48;database=ANRPC_Inventory_v2;user=sa;password=P@ssw0rd;MultipleActiveResultSets=true";
         public static string constring2 = "server=172.18.8.48;database=ANRPC_Root;user=TMS;password=P@ssw0rd;MultipleActiveResultSets=true";
         public static string constring3 = "server=172.18.8.48;database=ANRPC_Inventory_foriegn_v2;user=TMS;password=P@ssw0rd;MultipleActiveResultSets=true";
 

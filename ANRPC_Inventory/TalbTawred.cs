@@ -2104,8 +2104,8 @@ namespace ANRPC_Inventory
                 Image2 = "";
                 picflag = 0;
 
-                SearchImage1(TXT_StockNoAll.Text);
-                SearchImage2(TXT_StockNoAll.Text);
+                //SearchImage1(TXT_StockNoAll.Text);
+                //SearchImage2(TXT_StockNoAll.Text);
                 //    if (searchflag == 1)
                 //    {
 
