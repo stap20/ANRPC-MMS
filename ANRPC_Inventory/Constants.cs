@@ -238,12 +238,10 @@ namespace ANRPC_Inventory
 
 
                 }
-
                 return path;
             }
             else
-            {
-
+            {     
                 return "";
             }
             Constants.closecon();

@@ -33,6 +33,7 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.label25 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
@@ -54,7 +55,6 @@
             this.Cmb_FYear2 = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel7.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -118,6 +118,15 @@
             this.panel1.Size = new System.Drawing.Size(1116, 468);
             this.panel1.TabIndex = 27;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint_1);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(15, 17);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(235, 299);
+            this.pictureBox1.TabIndex = 45;
+            this.pictureBox1.TabStop = false;
             // 
             // label4
             // 
@@ -276,7 +285,7 @@
             // BTN_Report
             // 
             this.BTN_Report.BackColor = System.Drawing.Color.NavajoWhite;
-            this.BTN_Report.Font = new System.Drawing.Font("Arabic Transparent", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_Report.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTN_Report.Location = new System.Drawing.Point(165, 350);
             this.BTN_Report.Name = "BTN_Report";
             this.BTN_Report.Size = new System.Drawing.Size(176, 73);
@@ -288,7 +297,7 @@
             // BTN_Cycle
             // 
             this.BTN_Cycle.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.BTN_Cycle.Font = new System.Drawing.Font("Arabic Transparent", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_Cycle.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTN_Cycle.Location = new System.Drawing.Point(415, 350);
             this.BTN_Cycle.Name = "BTN_Cycle";
             this.BTN_Cycle.Size = new System.Drawing.Size(176, 73);
@@ -300,7 +309,7 @@
             // BTN_Form
             // 
             this.BTN_Form.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.BTN_Form.Font = new System.Drawing.Font("Arabic Transparent", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_Form.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTN_Form.Location = new System.Drawing.Point(662, 350);
             this.BTN_Form.Name = "BTN_Form";
             this.BTN_Form.Size = new System.Drawing.Size(176, 73);
@@ -313,7 +322,7 @@
             // 
             this.radioButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Font = new System.Drawing.Font("Arabic Transparent", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton3.Location = new System.Drawing.Point(645, 231);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -329,7 +338,7 @@
             // 
             this.radioButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Font = new System.Drawing.Font("Arabic Transparent", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton2.ForeColor = System.Drawing.Color.DarkOrange;
             this.radioButton2.Location = new System.Drawing.Point(1017, 122);
             this.radioButton2.Name = "radioButton2";
@@ -345,7 +354,7 @@
             // 
             this.radioButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Font = new System.Drawing.Font("Arabic Transparent", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton1.ForeColor = System.Drawing.Color.DarkOrange;
             this.radioButton1.Location = new System.Drawing.Point(999, 63);
             this.radioButton1.Name = "radioButton1";
@@ -366,7 +375,7 @@
             this.Cmb_TalbNo2.Items.AddRange(new object[] {
             "2019_2020",
             "2020_2021"});
-            this.Cmb_TalbNo2.Location = new System.Drawing.Point(403, 227);
+            this.Cmb_TalbNo2.Location = new System.Drawing.Point(392, 227);
             this.Cmb_TalbNo2.Name = "Cmb_TalbNo2";
             this.Cmb_TalbNo2.Size = new System.Drawing.Size(110, 27);
             this.Cmb_TalbNo2.TabIndex = 26;
@@ -383,7 +392,7 @@
             this.Cmb_FYear2.Items.AddRange(new object[] {
             "2020_2021",
             "2021_2022"});
-            this.Cmb_FYear2.Location = new System.Drawing.Point(529, 227);
+            this.Cmb_FYear2.Location = new System.Drawing.Point(518, 227);
             this.Cmb_FYear2.Name = "Cmb_FYear2";
             this.Cmb_FYear2.Size = new System.Drawing.Size(110, 27);
             this.Cmb_FYear2.TabIndex = 25;
@@ -392,15 +401,6 @@
             // toolTip2
             // 
             this.toolTip2.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip2_Popup);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(15, 17);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(235, 299);
-            this.pictureBox1.TabIndex = 45;
-            this.pictureBox1.TabStop = false;
             // 
             // Search_TalbTawreed
             // 

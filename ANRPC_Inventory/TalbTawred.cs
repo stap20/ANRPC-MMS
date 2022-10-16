@@ -145,12 +145,32 @@ namespace ANRPC_Inventory
                 ADD_NEW_TASNIF,
                 ATTACH_FILE,
                 SEARCH,
+                CONFIRM_SEARCH,
                
             }
         #endregion
 
         //------------------------------------------ Helper ---------------------------------
         #region Helpers
+            private decimal getApproxValue()
+            {
+                decimal result;
+
+                int index = CMB_ApproxValue.Text.IndexOf(' ');
+
+                if (index == -1)
+                {
+                    result = Convert.ToDecimal(CMB_ApproxValue.Text);
+                }
+                else
+                {
+                    index = CMB_ApproxValue.Text.IndexOf(' ', index);
+                    result = Convert.ToDecimal(CMB_ApproxValue.Text.Substring(0, index));
+                }
+
+                return result;
+            }
+            
             private int GetCurrentActivatedBuyMethod(Panel panel)
             {
                 int current_active = -1;
@@ -227,7 +247,7 @@ namespace ANRPC_Inventory
                 {
                     if (checkedListBox1.GetItemChecked(i))
                     {
-                        if(i == checkedListBox1.Items.Count-1)
+                        if(i < checkedListBox1.Items.Count-1)
                         {
                             regions = regions + checkedListBox1.Items[i].ToString() + ",";
                         }
@@ -390,22 +410,10 @@ namespace ANRPC_Inventory
                         dataGridView1.Rows[r].Cells[3].Value = Convert.ToDouble(Txt_ReqQuan.Text);
                         dataGridView1.Rows[r].Cells[10].Value = 0;
                     }
-                    // dataGridView1.Rows[r].Cells[9].Value = CMB_ApproxValue.SelectedValue;
-                    if (CMB_ApproxValue.SelectedIndex == -1)
-                    {
-                        //   dataGridView1.Rows[r].Cells[9].Value = Convert.ToString(Convert.ToDouble(CMB_ApproxValue.Text) * Convert.ToDouble(Txt_ReqQuan.Text));
-                        dataGridView1.Rows[r].Cells[9].Value = Convert.ToDouble(Convert.ToDouble(CMB_ApproxValue.Text) * Convert.ToDouble(dataGridView1.Rows[r].Cells[3].Value));
-                        dataGridView1.Rows[r].Cells[9].Value = Convert.ToDouble(dataGridView1.Rows[r].Cells[9].Value) * ExchangeRate;
 
-                    }
-                    else if (CMB_ApproxValue.SelectedIndex >= 0)
-                    {
-                        // dataGridView1.Rows[r].Cells[9].Value = Convert.ToString(Convert.ToDouble(CMB_ApproxValue.SelectedValue) * Convert.ToDouble(Txt_ReqQuan.Text));
 
-                        dataGridView1.Rows[r].Cells[9].Value = Convert.ToDouble(Convert.ToDouble(CMB_ApproxValue.SelectedValue) * Convert.ToDouble(dataGridView1.Rows[r].Cells[3].Value));
-
-                    }
-
+                    dataGridView1.Rows[r].Cells[9].Value = Convert.ToDouble(Convert.ToDouble(getApproxValue()) * Convert.ToDouble(dataGridView1.Rows[r].Cells[3].Value));
+                    dataGridView1.Rows[r].Cells[9].Value = Convert.ToDouble(dataGridView1.Rows[r].Cells[9].Value) * ExchangeRate;
 
                     dataGridView1.Rows[r].Cells[11].Value = isNewTasnif;//not new tasnif
 
@@ -495,7 +503,8 @@ namespace ANRPC_Inventory
             radioButton1.Checked = true;
 
             dataGridView1.ReadOnly = true;
-            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToAddRows = true;
+            dataGridView1.AllowUserToDeleteRows = true;
         }
 
         public void PrepareEditState()
@@ -512,25 +521,87 @@ namespace ANRPC_Inventory
             Pic_Sign2.BackColor = Color.White;
         }
 
-        public void PrepareConfirmState(int currentUserNumber)
+        public void PrepareConfirmState()
         {
             DisableControls();
-            
-            if(currentUserNumber == 8)
+            BTN_Save2.Enabled = true;
+
+            if (Constants.User_Type == "A")
             {
-                //mo3taz
+                if (FlagSign2 != 1 && FlagSign1 == 1)
+                {
+                    BTN_Sign2.Enabled = true;
+                }
+                else if(FlagSign3!=1 && FlagSign2 == 1)
+                {
+                    BTN_Sign3.Enabled = true;
+                    DeleteBtn2.Enabled = true;
+                }
+            }
+            else if(Constants.User_Type == "B")
+            {
+                if (Constants.UserTypeB == "ChangeTasnif" || Constants.UserTypeB == "NewTasnif")
+                {
+                    dataGridView1.ReadOnly = false;
+                    foreach (DataGridViewRow row in dataGridView1.Rows)
+                    {
+                        for (int i = 0; i <= 12; i++)
+                        {
+                            row.Cells[i].ReadOnly = true;
+                        }
+                        //  dataGridView1.ReadOnly = true;
+                        row.Cells[6].ReadOnly = false;//in perm
+                    }
+                    BTN_Sign8.Enabled = true;
+                }
+                else if (Constants.UserTypeB == "InventoryControl")
+                {
+                    BTN_Sign12.Enabled = true;
+                }
+                else if (Constants.UserTypeB == "Mwazna")
+                { 
+                    if (FlagSign4 != 1 && FlagSign12 == 1)
+                    {
+                        BTN_Sign4.Enabled = true;
+                    }
+
+                    else if (FlagSign11 != 1 && FlagSign4 == 1)
+                    {
+                        BTN_Sign11.Enabled = true;
+                    }
+
+                    TXT_BndMwazna.Enabled = true;
+                }
+                else if (Constants.UserTypeB == "TechnicalFollowUp")
+                {
+                    BTN_Sign9.Enabled = true;
+                }
+                else if (Constants.UserTypeB == "Chairman" && (talbstatus == 3 || talbstatus == 4))
+                {
+                    BTN_Sign7.Enabled = true;
+                    BTN_Sign10.Enabled = true;
+                }
+                else if (Constants.UserTypeB == "ViceChairman" && talbstatus == 2)
+                {
+                    BTN_Sign13.Enabled = true;
+                }
+                else if (Constants.UserTypeB == "Purchases")
+                {
+                    BTN_Sign5.Enabled = true;
+                    TXT_AppValue.Enabled = true;
+                    TXT_ArabicValue.Enabled = true;
+                }
+                else if (Constants.UserTypeB == "GMInventory")
+                {
+                    BTN_Sign6.Enabled = true;
+                    TXT_AppValue.Enabled = true;
+                    TXT_ArabicValue.Enabled = true;
+                }
             }
 
-            else if(currentUserNumber == 4 || currentUserNumber == 11)
-            {
-                TXT_BndMwazna.Enabled = true;
-            }
-            else if(currentUserNumber == 3)
-            {
-                DeleteBtn2.Enabled = true;
-            }
-
-            ((Button)panel13.Controls["BTN_Sign" + Convert.ToString(currentUserNumber)]).Enabled = true;
+            AddEditFlag = 1;
+            TNO = TXT_TalbNo.Text;
+            FY = Cmb_FYear.Text;        
         }
 
         public void prepareSearchState()
@@ -582,6 +653,8 @@ namespace ANRPC_Inventory
             Addbtn.Enabled = true;
             BTN_SearchTalb.Enabled = true;
             SaveBtn.Enabled = false;
+            BTN_Save2.Enabled = false;
+            Editbtn.Enabled = false;
             BTN_Cancel.Enabled = false;
             Addbtn2.Enabled = false;
             AddNewbtn.Enabled = false;
@@ -589,12 +662,14 @@ namespace ANRPC_Inventory
             BTN_PDF.Enabled = false;
             Editbtn2.Enabled = false;
             BTN_Print.Enabled = false;
+            BTN_Print2.Enabled = false;
 
             //signature btn
             changePanelState(panel13, false);
 
             dataGridView1.ReadOnly = true;
             dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
 
             //moshtrayat types
             DisableMoshtryat();
@@ -746,6 +821,7 @@ namespace ANRPC_Inventory
             newtasnifcount = 0;
             AdditionQuan = 0;
             AdditionFlag = 0;
+            AddEditFlag = 0;
         }
         #endregion
 
@@ -1380,7 +1456,7 @@ namespace ANRPC_Inventory
                     cmd1.ExecuteNonQuery();
                     executemsg = true;
                     flag = (int)cmd1.Parameters["@p4"].Value;
-                    MessageBox.Show("flag number is" + flag);
+                    //MessageBox.Show("flag number is" + flag);
 
                     //call the other procedure ///////////////////////////////\   string query = "exec  SP_CheckFinancialTalb @p1,@p2,@p3,@p4 out";
 
@@ -1397,11 +1473,11 @@ namespace ANRPC_Inventory
                     executemsg = true;
                     flag2 = (int)cmd2.Parameters["@p3"].Value;
                     Constants.AuthFlag = flag2;
-                    MessageBox.Show("flag number2 is" + flag2);
+                    //MessageBox.Show("flag number2 is" + flag2);
                     if (flag2 == 1)
                     {
                         //go and update flag9 and flag7 and set =1
-                        MessageBox.Show("next step is mohmat");
+                        //MessageBox.Show("next step is mohmat");
 
                         string q = "exec SP_UpdateTalbTawreedAuthority  @p1,@p2,@p3";
                         SqlCommand cmd3 = new SqlCommand(q, Constants.con);
@@ -1414,7 +1490,7 @@ namespace ANRPC_Inventory
                     else if (flag2 == 2)
                     {
                         //change in notfication go and set flag9=1 and make flag7 for vice not for manger
-                        MessageBox.Show("next step is vice");
+                        //MessageBox.Show("next step is vice");
                         string q = "exec SP_UpdateTalbTawreedAuthority  @p1,@p2,@p3";
                         SqlCommand cmd3 = new SqlCommand(q, Constants.con);
                         cmd3.Parameters.AddWithValue("@p1", Convert.ToInt32(TXT_TalbNo.Text));
@@ -1425,7 +1501,7 @@ namespace ANRPC_Inventory
                     else if (flag2 == 3)
                     {
                         //notification will go normal
-                        MessageBox.Show("nextstep is r2es sherka");
+                        //MessageBox.Show("nextstep is r2es sherka");
                         string q = "exec SP_UpdateTalbTawreedAuthority  @p1,@p2,@p3";
                         SqlCommand cmd3 = new SqlCommand(q, Constants.con);
                         cmd3.Parameters.AddWithValue("@p1", Convert.ToInt32(TXT_TalbNo.Text));
@@ -1436,7 +1512,7 @@ namespace ANRPC_Inventory
                     else if (flag2 == 4)
                     {
                         //notfication will go normal
-                        MessageBox.Show("next step is mgls edara");
+                        //MessageBox.Show("next step is mgls edara");
                         string q = "exec SP_UpdateTalbTawreedAuthority  @p1,@p2,@p3";
                         SqlCommand cmd3 = new SqlCommand(q, Constants.con);
                         cmd3.Parameters.AddWithValue("@p1", Convert.ToInt32(TXT_TalbNo.Text));
@@ -1749,10 +1825,6 @@ namespace ANRPC_Inventory
 
                 DisableControls();
                 Input_Reset();
-
-                SaveBtn.Visible = false;
-                Addbtn.Enabled = true;
-                AddEditFlag = 0;
             }
             else if (executemsg == true && flag == 2)
             {
@@ -1946,7 +2018,7 @@ namespace ANRPC_Inventory
                 {
                     errorsList.Add((errorProvider, CMB_ApproxValue, "يجب اختيار القيمة التقديرية "));
                 }
-                else if (Convert.ToDecimal(CMB_ApproxValue.Text) <= 0)
+                else if (Convert.ToDecimal(getApproxValue()) <= 0)
                 {
                     errorsList.Add((alertProvider, CMB_ApproxValue, "يجب ان تكون القيمة التقديرية اكبر من صفر"));
                 }
@@ -1985,24 +2057,42 @@ namespace ANRPC_Inventory
                 return errorsList;
             }
 
-            private List<(ErrorProvider, Control, string)> ValidateSearch()
+            private List<(ErrorProvider, Control, string)> ValidateSearch(bool isConfirm = false)
             {
                 List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
 
-                #region Cmb_FYear
-                    if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
-                    {
-                        errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
-                    }
-            #endregion
-
-                #region TXT_TalbNo
-                    if (string.IsNullOrWhiteSpace(TXT_TalbNo.Text))
-                    {
-                        errorsList.Add((errorProvider, TXT_TalbNo, "يجب اختيار رقم طلب توريد"));
-                    }
+            if (isConfirm)
+            {
+                #region Cmb_FYear2
+                if (string.IsNullOrWhiteSpace(Cmb_FYear2.Text) || Cmb_FYear2.SelectedIndex == -1)
+                {
+                    errorsList.Add((errorProvider, Cmb_FYear2, "تاكد من  اختيار السنة المالية"));
+                }
                 #endregion
 
+                #region Cmb_TalbNo2
+                if (string.IsNullOrWhiteSpace(Cmb_TalbNo2.Text))
+                {
+                    errorsList.Add((errorProvider, Cmb_TalbNo2, "يجب اختيار رقم طلب توريد"));
+                }
+                #endregion
+            }
+            else
+            {
+                #region Cmb_FYear
+                if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
+                {
+                    errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
+                }
+                #endregion
+
+                #region TXT_TalbNo
+                if (string.IsNullOrWhiteSpace(TXT_TalbNo.Text))
+                {
+                    errorsList.Add((errorProvider, TXT_TalbNo, "يجب اختيار رقم طلب توريد"));
+                }
+                #endregion
+            }
 
                 return errorsList;
             }
@@ -2010,8 +2100,8 @@ namespace ANRPC_Inventory
         private bool IsValidCase(VALIDATION_TYPES type)
             {
                 List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
-                
-                if(type == VALIDATION_TYPES.ADD_TASNIF)
+            
+                if (type == VALIDATION_TYPES.ADD_TASNIF)
                 {
                     errorsList = ValidateAddTasnif(false);
                 }
@@ -2025,7 +2115,11 @@ namespace ANRPC_Inventory
                 }
                 else if(type == VALIDATION_TYPES.SEARCH)
                 {
-                    errorsList = ValidateSearch();
+                    errorsList = ValidateSearch(false);
+                }
+                else if (type == VALIDATION_TYPES.CONFIRM_SEARCH)
+                {
+                    errorsList = ValidateSearch(true);
                 }
                 
                 errorProviderHandler(errorsList);
@@ -2212,8 +2306,15 @@ namespace ANRPC_Inventory
 
             }
             Constants.closecon();
-
+            Cmb_FYear2.SelectedIndex = -1;
+            Cmb_FYear.SelectedIndex = -1;
             reset();
+
+            if (Constants.talbtawred_F == false)
+            {
+                TXT_TalbNo.Enabled = false;
+                Cmb_FYear.Enabled=false;
+            }
         }
         //===========================================================================
 
@@ -2740,9 +2841,6 @@ Constants.opencon();
             //{
             //    dataGridView1.Columns["ArrivalDate"].ReadOnly = true;
             //}
-
-            dataGridView1.AllowUserToAddRows = true;
-
         }
 
 
@@ -2755,267 +2853,9 @@ Constants.opencon();
                     MessageBox.Show("يجب اختيار طلب التوريد المراد تعديله");
                     return;
                 }
-                else
-                {
-                    AddEditFlag = 1;
-                    TNO = TXT_TalbNo.Text;
-                    FY = Cmb_FYear.Text;
-                    var button = (Button)sender;
 
-
-                    if (button.Name == "Editbtn2") //da al edit button bata3 create talb al tawred me4 aly fi al motab3a
-                    {
-                        PrepareEditState();
-                    }
-                    else
-                    {
-                        DisableControls();
-                    }
-                    /////////////////////////////////////////////////////بعد توقيع مدير العام لا يمكن التعديل///////////////////////////////
-                    if (FlagSign3 == 1)
-                    {
-                        DisableControls();
-                    }
-
-                    /////////////////////////////////////////////////////////////////////
-                    if (button.Name == "Editbtn" && Constants.UserTypeB == "ChangeTasnif")
-                    {
-                        dataGridView1.ReadOnly = false;
-                        foreach (DataGridViewRow row in dataGridView1.Rows)
-                        {
-                            for (int i = 0; i <= 12; i++)
-                            {
-                                row.Cells[i].ReadOnly = true;
-                            }
-                            //  dataGridView1.ReadOnly = true;
-                            row.Cells[6].ReadOnly = false;//in perm
-                        }
-                    }
-
-                    if (button.Name == "Editbtn" && Constants.User_Type == "A")
-                    {
-                        //BTN_Sign1.Enabled = true;
-
-                        BTN_Sign2.Enabled = true;
-                        BTN_Sign3.Enabled = true;
-                        DeleteBtn2.Enabled = true;
-                        BTN_Sign4.Enabled = false;
-                        TXT_BndMwazna.Enabled = false;
-                        BTN_Sign5.Enabled = false;
-                        BTN_Sign6.Enabled = false;
-                        BTN_Sign7.Enabled = false;
-                        BTN_Sign8.Enabled = false;
-                        BTN_Sign9.Enabled = false;
-                        BTN_Sign10.Enabled = false;
-                        BTN_Sign11.Enabled = false;
-                        BTN_Sign12.Enabled = false;
-                        BTN_Sign13.Enabled = false;
-                        DisableMoshtryat();
-                        TXT_AppValue.Enabled = false;
-                        TXT_ArabicValue.Enabled = false;
-
-
-                    }
-                    else if (button.Name == "Editbtn" && Constants.User_Type == "B" && Constants.UserTypeB == "Stock")
-                    {
-                        //BTN_Sign1.Enabled = true;
-                        BTN_Sign1.Enabled = false;
-                        BTN_Sign2.Enabled = false;
-                        BTN_Sign3.Enabled = false;
-
-                        BTN_Sign4.Enabled = false;
-                        TXT_BndMwazna.Enabled = false;
-                        BTN_Sign5.Enabled = false;
-                        BTN_Sign6.Enabled = true;
-                        // EnableMoshtryat();
-                        BTN_Sign8.Enabled = false;
-                        BTN_Sign9.Enabled = false;
-                        BTN_Sign10.Enabled = false;
-                        BTN_Sign11.Enabled = false;
-                        BTN_Sign12.Enabled = false;
-                        BTN_Sign13.Enabled = false;
-                        BTN_Sign7.Enabled = false;
-                        TXT_AppValue.Enabled = true;
-                        TXT_ArabicValue.Enabled = true;
-                    }
-
-                    else if (button.Name == "Editbtn" && Constants.User_Type == "B" && Constants.UserTypeB == "Purchases")
-                    {
-                        //BTN_Sign1.Enabled = true;
-                        BTN_Sign1.Enabled = false;
-                        BTN_Sign2.Enabled = false;
-                        BTN_Sign3.Enabled = false;
-
-                        BTN_Sign4.Enabled = false;
-                        TXT_BndMwazna.Enabled = false;
-                        BTN_Sign5.Enabled = true;
-                        BTN_Sign6.Enabled = false;
-                        //  EnableMoshtryat();
-                        BTN_Sign8.Enabled = false;
-                        BTN_Sign9.Enabled = false;
-                        BTN_Sign10.Enabled = false;
-                        BTN_Sign11.Enabled = false;
-                        BTN_Sign12.Enabled = false;
-                        BTN_Sign13.Enabled = false;
-                        BTN_Sign7.Enabled = false;
-                        TXT_AppValue.Enabled = true;
-                        TXT_ArabicValue.Enabled = true;
-                    }
-                    else if (button.Name == "Editbtn" && Constants.User_Type == "B" && Constants.UserTypeB == "GMInventory")
-                    {
-                        //BTN_Sign1.Enabled = true;
-                        BTN_Sign1.Enabled = false;
-                        BTN_Sign2.Enabled = false;
-                        BTN_Sign3.Enabled = false;
-
-                        BTN_Sign4.Enabled = false;
-                        TXT_BndMwazna.Enabled = false;
-                        BTN_Sign5.Enabled = false;
-                        BTN_Sign6.Enabled = true;
-                        // EnableMoshtryat();
-                        BTN_Sign8.Enabled = false;
-                        BTN_Sign9.Enabled = false;
-                        BTN_Sign10.Enabled = false;
-                        BTN_Sign11.Enabled = false;
-                        BTN_Sign12.Enabled = false;
-                        BTN_Sign13.Enabled = false;
-                        BTN_Sign7.Enabled = false;
-                        TXT_AppValue.Enabled = true;
-                        TXT_ArabicValue.Enabled = true;
-                    }
-
-
-                    else if ((button.Name == "Editbtn" && Constants.User_Type == "B" && Constants.UserTypeB == "Chairman") && (talbstatus == 3 || talbstatus == 4))
-                    {
-                        //BTN_Sign1.Enabled = true;
-                        BTN_Sign1.Enabled = false;
-                        BTN_Sign2.Enabled = false;
-                        BTN_Sign3.Enabled = false;
-                        DisableMoshtryat();
-                        BTN_Sign4.Enabled = false;
-                        TXT_BndMwazna.Enabled = false;
-                        BTN_Sign5.Enabled = false;
-                        BTN_Sign6.Enabled = false;
-                        BTN_Sign8.Enabled = false;
-                        BTN_Sign9.Enabled = false;
-                        BTN_Sign11.Enabled = false;
-                        BTN_Sign12.Enabled = false;
-                        BTN_Sign13.Enabled = false;
-                        BTN_Sign7.Enabled = true;
-                        BTN_Sign10.Enabled = true;
-                    }
-                    else if ((button.Name == "Editbtn" && Constants.User_Type == "B" && Constants.UserTypeB == "ViceChairman") && (talbstatus == 2))
-                    {
-                        //BTN_Sign1.Enabled = true;
-                        BTN_Sign1.Enabled = false;
-                        BTN_Sign2.Enabled = false;
-                        BTN_Sign3.Enabled = false;
-                        DisableMoshtryat();
-                        BTN_Sign4.Enabled = false;
-                        TXT_BndMwazna.Enabled = false;
-                        BTN_Sign5.Enabled = false;
-                        BTN_Sign6.Enabled = false;
-                        BTN_Sign8.Enabled = false;
-                        BTN_Sign9.Enabled = false;
-                        BTN_Sign11.Enabled = false;
-                        BTN_Sign12.Enabled = false;
-                        BTN_Sign13.Enabled = true;
-                        BTN_Sign7.Enabled = false;
-                        BTN_Sign10.Enabled = false;
-                    }
-                    else if (button.Name == "Editbtn" && Constants.User_Type == "B" && Constants.UserTypeB == "Mwazna")
-                    {
-                        //BTN_Sign1.Enabled = true;
-                        BTN_Sign1.Enabled = false;
-                        BTN_Sign2.Enabled = false;
-                        BTN_Sign3.Enabled = false;
-                        DisableMoshtryat();
-                        BTN_Sign4.Enabled = true;
-                        TXT_BndMwazna.Enabled = true;
-                        BTN_Sign5.Enabled = false;
-                        BTN_Sign6.Enabled = false;
-                        BTN_Sign8.Enabled = false;
-                        BTN_Sign9.Enabled = false;
-                        BTN_Sign7.Enabled = false;
-                        BTN_Sign10.Enabled = false;
-                        BTN_Sign12.Enabled = false;
-                        BTN_Sign13.Enabled = false;
-                        BTN_Sign11.Enabled = true;
-
-                    }
-                    else if (button.Name == "Editbtn" && Constants.User_Type == "B" && Constants.UserTypeB == "TechnicalFollowUp")
-                    {
-                        //BTN_Sign1.Enabled = true;
-                        BTN_Sign1.Enabled = false;
-                        BTN_Sign2.Enabled = false;
-                        BTN_Sign3.Enabled = false;
-                        DisableMoshtryat();
-                        BTN_Sign4.Enabled = false;
-                        TXT_BndMwazna.Enabled = false;
-                        BTN_Sign5.Enabled = false;
-                        BTN_Sign6.Enabled = false;
-                        BTN_Sign8.Enabled = false;
-                        BTN_Sign9.Enabled = true;
-                        BTN_Sign7.Enabled = false;
-                        BTN_Sign10.Enabled = false;
-                        BTN_Sign11.Enabled = false;
-                        BTN_Sign12.Enabled = false;
-                        BTN_Sign13.Enabled = false;
-                    }
-                    else if (button.Name == "Editbtn" && Constants.User_Type == "B" && Constants.UserTypeB == "InventoryControl")
-                    {
-                        //BTN_Sign1.Enabled = true;
-                        BTN_Sign1.Enabled = false;
-                        BTN_Sign2.Enabled = false;
-                        BTN_Sign3.Enabled = false;
-                        DisableMoshtryat();
-                        BTN_Sign4.Enabled = false;
-                        TXT_BndMwazna.Enabled = false;
-                        BTN_Sign5.Enabled = false;
-                        BTN_Sign6.Enabled = false;
-                        BTN_Sign8.Enabled = false;
-                        BTN_Sign9.Enabled = false;
-                        BTN_Sign7.Enabled = false;
-                        BTN_Sign10.Enabled = false;
-                        BTN_Sign11.Enabled = false;
-                        BTN_Sign12.Enabled = true;
-                        BTN_Sign13.Enabled = false;
-                    }
-                    else if (button.Name == "Editbtn" && Constants.User_Type == "B" && Constants.UserTypeB == "NewTasnif")
-                    {
-                        //BTN_Sign1.Enabled = true;
-                        BTN_Sign1.Enabled = false;
-                        BTN_Sign2.Enabled = false;
-                        BTN_Sign3.Enabled = false;
-                        DisableMoshtryat();
-                        BTN_Sign4.Enabled = false;
-                        TXT_BndMwazna.Enabled = false;
-                        BTN_Sign5.Enabled = false;
-                        BTN_Sign6.Enabled = false;
-                        BTN_Sign8.Enabled = true;
-                        BTN_Sign9.Enabled = false;
-                        BTN_Sign7.Enabled = false;
-                        BTN_Sign10.Enabled = false;
-                        BTN_Sign11.Enabled = false;
-                        BTN_Sign12.Enabled = false;
-                        BTN_Sign13.Enabled = false;
-                        dataGridView1.Enabled = true;
-                        dataGridView1.ReadOnly = false;
-                        foreach (DataGridViewRow row in dataGridView1.Rows)
-                        {
-                            for (int i = 0; i <= 12; i++)
-                            {
-                                row.Cells[i].ReadOnly = true;
-                            }
-                            //  dataGridView1.ReadOnly = true;
-                            row.Cells[6].ReadOnly = false;//in perm
-                        }
-                    }
-                }
-
+                PrepareConfirmState();
             }
-
-            browseBTN.Enabled = false;
         }
 
         private void Cmb_FYear2_SelectedIndexChanged(object sender, EventArgs e)
@@ -3123,7 +2963,7 @@ Constants.opencon();
 
 
 
-        public void SearchTalb(string talbNo,string fyear, bool isCompleted = false)
+        public bool SearchTalb(string talbNo,string fyear, bool isCompleted = false)
         {
             //call sp that get last num that eentered for this MM and this YYYY
             Constants.opencon();
@@ -3499,13 +3339,15 @@ Constants.opencon();
             {
                 MessageBox.Show("من فضلك تاكد من رقم طلب التوريد");
                 reset();
-                return;
+                return false;
             }
 
             dr.Close();
 
             GetTalbTawreedBnod(TXT_TalbNo.Text, Cmb_FYear.Text);
             Constants.closecon();
+
+            return true;
         }
 
         private void BTN_Save2_Click(object sender, EventArgs e)
@@ -3597,66 +3439,6 @@ Constants.opencon();
                 }
                 Constants.closecon();
             }
-        }
-
-        private void Cmb_TalbNo2_TextChanged(object sender, EventArgs e)
-        {
-            // Input_Reset();
-            Pic_Sign1.Image = null;
-            Pic_Sign2.Image = null;
-            Pic_Sign3.Image = null;
-            Pic_Sign4.Image = null;
-
-
-            Pic_Sign5.Image = null;
-            Pic_Sign6.Image = null;
-            Pic_Sign7.Image = null;
-            Pic_Sign8.Image = null;
-            Pic_Sign9.Image = null;
-            Pic_Sign11.Image = null;
-
-
-            FlagSign1 = 0;
-            FlagSign2 = 0;
-            FlagSign3 = 0;
-            FlagSign4 = 0;
-            FlagSign5 = 0;
-            FlagSign6 = 0;
-            FlagSign7 = 0;
-            FlagSign8 = 0;
-            FlagSign9 = 0;
-            FlagSign10 = 0;
-            FlagSign11 = 0;
-            Pic_Sign1.BackColor = Color.White;
-            Pic_Sign2.BackColor = Color.White;
-            Pic_Sign3.BackColor = Color.White;
-            Pic_Sign4.BackColor = Color.White;
-            Pic_Sign5.BackColor = Color.White;
-            Pic_Sign6.BackColor = Color.White;
-            Pic_Sign7.BackColor = Color.White;
-            Pic_Sign8.BackColor = Color.White;
-            Pic_Sign9.BackColor = Color.White;
-            Pic_Sign11.BackColor = Color.White;
-        }
-
-        private void Cmb_TalbNo2_DropDownClosed(object sender, EventArgs e)
-        {
-            if (!(string.IsNullOrWhiteSpace(Cmb_TalbNo2.Text) || string.IsNullOrEmpty(Cmb_TalbNo2.Text)))       
-            {
-                Input_Reset();
-                //SearchTalb(2);
-            }
-        }
-
-        private void TXT_TalbNo_KeyDown(object sender, KeyEventArgs e)
-        {
-
-            //else if (e.KeyCode == Keys.Enter && AddEditFlag == 0)
-            //{
-            //    cleargridview();
-            //    SearchTalb(1);
-            //    BTN_Print.Visible=true;
-            //}
         }
 
         private void TXT_AppValue_TextChanged(object sender, EventArgs e)
@@ -3920,10 +3702,6 @@ Constants.opencon();
          // 
          F.Dock = DockStyle.Fill;
           //  tableLayoutPanel1.Visible = false;
-        }
-
-        private void TXT_TalbNo2_KeyDown(object sender, KeyEventArgs e)
-        {
         }
 
         private void BTN_Search_Click(object sender, EventArgs e)
@@ -4418,7 +4196,6 @@ Constants.opencon();
             }
         }
 
-
         private void BTN_Sign8_Click(object sender, EventArgs e)
         {
             if (FlagSign1 != 1 || FlagSign2 != 1 || FlagSign3 != 1)
@@ -4713,8 +4490,9 @@ Constants.opencon();
                             Constants.TalbFY = Cmb_FYear.Text;
                             Constants.TalbNo = Convert.ToInt32(TXT_TalbNo.Text);
                             Constants.FormNo = 88;
-                            FReports f = new FReports();
-                            f.Show();
+                            
+                            //FReports f = new FReports();
+                            //f.Show();
 
                             /*
                             Stream rdlStream = this.GetType().Assembly.GetManifestResourceStream("LightSwitchApplication.ReportTemplate.GroupingAggReport.rdlc");
@@ -4917,16 +4695,50 @@ Constants.opencon();
                 return;
             }
 
-            SearchTalb(TXT_TalbNo.Text, Cmb_FYear.Text, false);
-            Editbtn2.Enabled = true;
+            string talb_no = TXT_TalbNo.Text;
+            string fyear = Cmb_FYear.Text;
+
+            reset();
+
+            if (SearchTalb(talb_no, fyear, false))
+            {
+                if (FlagSign3 != 1 && FlagSign2 != 1)
+                {
+                    Editbtn2.Enabled = true;
+                }
+                else
+                {
+                    Editbtn2.Enabled = false;
+                }
+            }
+
         }
 
         private void Cmb_TalbNo2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(Cmb_TalbNo2.SelectedIndex != -1)
+
+        }
+
+        private void BTN_Search_Motab3a_Click(object sender, EventArgs e)
+        {
+            if (!IsValidCase(VALIDATION_TYPES.CONFIRM_SEARCH))
             {
-                SearchTalb(Cmb_TalbNo2.Text,Cmb_FYear2.Text,false);
+                return;
             }
+
+            string talb_no = Cmb_TalbNo2.Text;
+            string fyear = Cmb_FYear2.Text;
+
+            reset();
+
+            if (SearchTalb(talb_no, fyear, false))
+            {
+                Editbtn.Enabled = true;
+                BTN_Print2.Enabled = true;
+            }
+
+            TXT_TalbNo.Enabled = false;
+            Cmb_FYear.Enabled = false;
         }
     }
 }
