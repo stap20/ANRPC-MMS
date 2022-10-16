@@ -194,6 +194,7 @@
             this.panel16 = new System.Windows.Forms.Panel();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.alertProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.BTN_SearchTalb = new System.Windows.Forms.Button();
             this.panel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign11)).BeginInit();
@@ -509,6 +510,7 @@
             // panel8
             // 
             this.panel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel8.Controls.Add(this.radioButton5);
             this.panel8.Controls.Add(this.radioButton4);
             this.panel8.Controls.Add(this.radioButton3);
@@ -582,7 +584,7 @@
             this.radioButton2.AutoSize = true;
             this.radioButton2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radioButton2.ForeColor = System.Drawing.Color.DarkBlue;
-            this.radioButton2.Location = new System.Drawing.Point(249, 28);
+            this.radioButton2.Location = new System.Drawing.Point(247, 28);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(89, 17);
             this.radioButton2.TabIndex = 44;
@@ -596,7 +598,7 @@
             this.radioButton1.AutoSize = true;
             this.radioButton1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radioButton1.ForeColor = System.Drawing.Color.DarkBlue;
-            this.radioButton1.Location = new System.Drawing.Point(256, 6);
+            this.radioButton1.Location = new System.Drawing.Point(254, 6);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(82, 17);
             this.radioButton1.TabIndex = 43;
@@ -894,6 +896,7 @@
             // 
             // panel14
             // 
+            this.panel14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel14.Controls.Add(this.TXT_DateTaamen);
             this.panel14.Controls.Add(this.RadioBTN_Taamen2);
             this.panel14.Controls.Add(this.RadioBTN_Tammen1);
@@ -1032,7 +1035,7 @@
             this.label39.ForeColor = System.Drawing.Color.Blue;
             this.label39.Location = new System.Drawing.Point(3, 65);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(122, 23);
+            this.label39.Size = new System.Drawing.Size(122, 22);
             this.label39.TabIndex = 18;
             this.label39.Text = "تم توجيه الى";
             this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1437,7 +1440,7 @@
             this.TXT_TalbNo2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_TalbNo2.Enabled = false;
             this.TXT_TalbNo2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_TalbNo2.Location = new System.Drawing.Point(46, 86);
+            this.TXT_TalbNo2.Location = new System.Drawing.Point(46, 88);
             this.TXT_TalbNo2.Name = "TXT_TalbNo2";
             this.TXT_TalbNo2.Size = new System.Drawing.Size(61, 26);
             this.TXT_TalbNo2.TabIndex = 242;
@@ -1489,13 +1492,11 @@
             this.TXT_TalbNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_TalbNo.Enabled = false;
             this.TXT_TalbNo.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_TalbNo.Location = new System.Drawing.Point(46, 58);
+            this.TXT_TalbNo.Location = new System.Drawing.Point(46, 60);
             this.TXT_TalbNo.Name = "TXT_TalbNo";
             this.TXT_TalbNo.Size = new System.Drawing.Size(61, 26);
             this.TXT_TalbNo.TabIndex = 13;
-            this.TXT_TalbNo.TextChanged += new System.EventHandler(this.TXT_TalbNo_TextChanged);
             this.TXT_TalbNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TXT_TalbNo_KeyDown);
-            this.TXT_TalbNo.Leave += new System.EventHandler(this.TXT_TalbNo_Leave);
             // 
             // label7
             // 
@@ -1570,7 +1571,7 @@
             this.BTN_Search.ForeColor = System.Drawing.Color.Maroon;
             this.BTN_Search.Image = ((System.Drawing.Image)(resources.GetObject("BTN_Search.Image")));
             this.BTN_Search.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BTN_Search.Location = new System.Drawing.Point(204, 13);
+            this.BTN_Search.Location = new System.Drawing.Point(205, 13);
             this.BTN_Search.Name = "BTN_Search";
             this.BTN_Search.Size = new System.Drawing.Size(199, 68);
             this.BTN_Search.TabIndex = 305;
@@ -1591,7 +1592,7 @@
             this.BTN_Tracking.ForeColor = System.Drawing.Color.Maroon;
             this.BTN_Tracking.Image = ((System.Drawing.Image)(resources.GetObject("BTN_Tracking.Image")));
             this.BTN_Tracking.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BTN_Tracking.Location = new System.Drawing.Point(1, 13);
+            this.BTN_Tracking.Location = new System.Drawing.Point(3, 13);
             this.BTN_Tracking.Name = "BTN_Tracking";
             this.BTN_Tracking.Size = new System.Drawing.Size(197, 68);
             this.BTN_Tracking.TabIndex = 304;
@@ -1607,10 +1608,9 @@
             this.BTN_Print2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTN_Print2.ForeColor = System.Drawing.Color.DarkSalmon;
             this.BTN_Print2.Image = ((System.Drawing.Image)(resources.GetObject("BTN_Print2.Image")));
-            this.BTN_Print2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BTN_Print2.Location = new System.Drawing.Point(637, 27);
+            this.BTN_Print2.Location = new System.Drawing.Point(629, 25);
             this.BTN_Print2.Name = "BTN_Print2";
-            this.BTN_Print2.Size = new System.Drawing.Size(45, 44);
+            this.BTN_Print2.Size = new System.Drawing.Size(53, 49);
             this.BTN_Print2.TabIndex = 241;
             this.BTN_Print2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BTN_Print2.UseVisualStyleBackColor = true;
@@ -1665,6 +1665,7 @@
             this.Cmb_TalbNo2.Name = "Cmb_TalbNo2";
             this.Cmb_TalbNo2.Size = new System.Drawing.Size(110, 27);
             this.Cmb_TalbNo2.TabIndex = 26;
+            this.Cmb_TalbNo2.SelectedIndexChanged += new System.EventHandler(this.Cmb_TalbNo2_SelectedIndexChanged);
             this.Cmb_TalbNo2.DropDownClosed += new System.EventHandler(this.Cmb_TalbNo2_DropDownClosed);
             this.Cmb_TalbNo2.TextChanged += new System.EventHandler(this.Cmb_TalbNo2_TextChanged);
             // 
@@ -1785,6 +1786,7 @@
             this.panel2.BackColor = System.Drawing.Color.Transparent;
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel2.Controls.Add(this.BTN_SearchTalb);
             this.panel2.Controls.Add(this.panel17);
             this.panel2.Controls.Add(this.BTN_Cancel);
             this.panel2.Controls.Add(this.pictureBox1);
@@ -2193,7 +2195,7 @@
             // 
             this.TXT_StockName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_StockName.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_StockName.Location = new System.Drawing.Point(3, 1);
+            this.TXT_StockName.Location = new System.Drawing.Point(3, 2);
             this.TXT_StockName.Name = "TXT_StockName";
             this.TXT_StockName.Size = new System.Drawing.Size(228, 26);
             this.TXT_StockName.TabIndex = 43;
@@ -2404,6 +2406,24 @@
             // 
             this.alertProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.alertProvider.ContainerControl = this;
+            // 
+            // BTN_SearchTalb
+            // 
+            this.BTN_SearchTalb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_SearchTalb.BackColor = System.Drawing.Color.LightGray;
+            this.BTN_SearchTalb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_SearchTalb.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
+            this.BTN_SearchTalb.FlatAppearance.BorderSize = 3;
+            this.BTN_SearchTalb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_SearchTalb.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.BTN_SearchTalb.ForeColor = System.Drawing.Color.Blue;
+            this.BTN_SearchTalb.Location = new System.Drawing.Point(788, 3);
+            this.BTN_SearchTalb.Name = "BTN_SearchTalb";
+            this.BTN_SearchTalb.Size = new System.Drawing.Size(70, 31);
+            this.BTN_SearchTalb.TabIndex = 333;
+            this.BTN_SearchTalb.Text = "بحث";
+            this.BTN_SearchTalb.UseVisualStyleBackColor = false;
+            this.BTN_SearchTalb.Click += new System.EventHandler(this.BTN_SearchTalb_Click);
             // 
             // TalbTawred
             // 
@@ -2640,5 +2660,6 @@
         private System.Windows.Forms.Button Addbtn2;
         private System.Windows.Forms.Button AddNewbtn;
         private System.Windows.Forms.ErrorProvider alertProvider;
+        private System.Windows.Forms.Button BTN_SearchTalb;
     }
 }

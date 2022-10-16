@@ -138,234 +138,289 @@ namespace ANRPC_Inventory
 
         #endregion
 
+        #region myDefVariable
+            enum VALIDATION_TYPES
+            {
+                ADD_TASNIF,
+                ADD_NEW_TASNIF,
+                ATTACH_FILE,
+                SEARCH,
+               
+            }
+        #endregion
+
         //------------------------------------------ Helper ---------------------------------
         #region Helpers
-        private int GetCurrentActivatedBuyMethod(Panel panel)
-        {
-            int current_active = -1;
-            try
+            private int GetCurrentActivatedBuyMethod(Panel panel)
             {
-                foreach (RadioButton radio in panel.Controls)
+                int current_active = -1;
+                try
                 {
-                    if(radio.Checked == true)
+                    foreach (RadioButton radio in panel.Controls)
+                    {
+                        if(radio.Checked == true)
+                        {
+                            string s = radio.Name;
+
+                            current_active = s[s.Length - 1]-48;
+
+                            return current_active;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+                return current_active;
+            }
+
+            private void SetCurrentActivatedBuyMethod(Panel panel,string bum)
+            {
+                try
+                {
+                    foreach (RadioButton radio in panel.Controls)
                     {
                         string s = radio.Name;
+                        if (Convert.ToString(s[s.Length - 1]) == bum)
+                        {
+                            radio.Checked = true;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
 
-                        current_active = s[s.Length - 1]-48;
+            private void errorProviderHandler(List<(ErrorProvider, Control, string)> errosList)
+            {
+                alertProvider.Clear();
+                errorProvider.Clear();
+                foreach (var error in errosList)
+                {
+                    ////Txt_ReqQuan.Location = new Point(Txt_ReqQuan.Location.X + errorProvider.Icon.Width, Txt_ReqQuan.Location.Y);
+                    //error.Item2.Width = error.Item2.Width - error.Item1.Icon.Width;
+                    error.Item1.SetError(error.Item2, error.Item3);
+                }
+            }
+            
+            private bool isNumber(string s)
+            {
+                int t;
+                decimal f;
 
-                        return current_active;
+                if (!(int.TryParse(s, out t) || decimal.TryParse(s, out f)))
+                {
+                    return false;
+                }
+
+                return true;
+            }
+
+            private string GetActiveRegions()
+            {
+                string regions = "";
+
+                for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                {
+                    if (checkedListBox1.GetItemChecked(i))
+                    {
+                        if(i == checkedListBox1.Items.Count-1)
+                        {
+                            regions = regions + checkedListBox1.Items[i].ToString() + ",";
+                        }
+                        else
+                        {
+                            regions = regions + checkedListBox1.Items[i].ToString();
+                        }
+                    
+                    }
+                }
+
+                return regions;
+            }
+
+            public void SP_UpdateSignatures(int x, DateTime D1, DateTime? D2 = null)
+            {
+                string cmdstring = "Exec  SP_UpdateSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
+                SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+
+                cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_TalbNo.Text));
+                cmd.Parameters.AddWithValue("@TNO2", DBNull.Value);
+
+                cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
+                cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
+                cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
+                cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
+
+                cmd.Parameters.AddWithValue("@FN", 1);
+
+                cmd.Parameters.AddWithValue("@SN", x);
+
+                cmd.Parameters.AddWithValue("@D1", D1);
+                if (D2 == null)
+                {
+                    cmd.Parameters.AddWithValue("@D2", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@D2", D2);
+                }
+
+                cmd.ExecuteNonQuery();
+            }
+
+            public void SP_InsertSignatures(int signNumber,int formNumber,int talbNo,string fyear,DateTime creationDate,string codeEdara,string nameEdara)
+            {
+                string cmdstring = @"Exec  SP_InsertSignDates @TalbTwareed_No,@TalbTwareed_No2,@FYear,@CreationDate,@CodeEdara,
+                                     @NameEdara,@FormNo,@SignatureNo,@Date1,@Date2";
+
+                SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+
+                cmd.Parameters.AddWithValue("@TalbTwareed_No", talbNo);
+                cmd.Parameters.AddWithValue("@TalbTwareed_No2", DBNull.Value);
+
+                cmd.Parameters.AddWithValue("@FYear", fyear);
+                cmd.Parameters.AddWithValue("@CreationDate", creationDate);
+                cmd.Parameters.AddWithValue("@CodeEdara", codeEdara);
+                cmd.Parameters.AddWithValue("@NameEdara", nameEdara);
+
+                cmd.Parameters.AddWithValue("@FormNo", formNumber);
+
+                cmd.Parameters.AddWithValue("@SignatureNo", signNumber);
+
+                cmd.Parameters.AddWithValue("@Date1", DBNull.Value);
+
+                cmd.Parameters.AddWithValue("@Date2", DBNull.Value);
+                cmd.ExecuteNonQuery();
+            }
+
+            public void LoopGridview()
+            {
+                newtasnifcount = 0;
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (!row.IsNewRow)
+                    {
+                        if (row.Cells[11].Value.ToString() == "True")
+                        {
+                            newtasnifcount = newtasnifcount + 1;
+                            NewTasnifFlag = 1;
+                        }
                     }
                 }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            return current_active;
-        }
-        
-        private string GetActiveRegions()
-        {
-            string regions = "";
 
-            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            private void InsertTalbTawreedBnood()
             {
-                if (checkedListBox1.GetItemChecked(i))
+                SqlCommand cmd;
+
+                foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
-                    if(i == checkedListBox1.Items.Count-1)
+                    if (!row.IsNewRow)
                     {
-                        regions = regions + checkedListBox1.Items[i].ToString() + ",";
+                        string q = @"exec SP_InsertBnodTalbTawreed @TalbTwareed_No,@FYear,@Bnd_No,@RequestedQuan,
+                                        @Unit,@BIAN_TSNIF,@STOCK_NO_ALL,@Quan,@ApproxValue,@AdditionStockFlag,@NewTasnifFlag";
+                        cmd = new SqlCommand(q, Constants.con);
+                        cmd.Parameters.AddWithValue("@TalbTwareed_No", row.Cells[0].Value);
+                        cmd.Parameters.AddWithValue("@FYear", row.Cells[1].Value);
+                        cmd.Parameters.AddWithValue("@Bnd_No", row.Cells[2].Value);
+                        cmd.Parameters.AddWithValue("@RequestedQuan", row.Cells[3].Value ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Unit", row.Cells[4].Value);
+                        cmd.Parameters.AddWithValue("@BIAN_TSNIF", row.Cells[5].Value);
+                        cmd.Parameters.AddWithValue("@STOCK_NO_ALL", row.Cells[6].Value);
+                        cmd.Parameters.AddWithValue("@Quan", row.Cells[7].Value ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@ApproxValue", row.Cells[9].Value ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@AdditionStockFlag", row.Cells[10].Value ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@NewTasnifFlag", row.Cells[11].Value ?? DBNull.Value);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (!row.IsNewRow)
+                    {
+                        string q = "exec SP_UpdateVirtualQuan @stockall,@additionstock";
+                        cmd = new SqlCommand(q, Constants.con);
+                        cmd.Parameters.AddWithValue("@stockall", row.Cells[10].Value);
+                        cmd.Parameters.AddWithValue("@additionstock", row.Cells[6].Value);
+                    }
+                }
+
+            }
+
+            private void AddNewTasnifInDataGridView(int isNewTasnif = 0)
+            {
+                #region Add row to dataGridView
+                    r = dataGridView1.Rows.Count - 1;
+
+                    rowflag = 1;
+                    DataRow newRow = table.NewRow();
+
+                    // Add the row to the rows collection.
+                    //   table.Rows.Add(newRow);
+                    table.Rows.InsertAt(newRow, r);
+
+                    dataGridView1.DataSource = table;
+                    dataGridView1.Rows[r].Cells[4].Value = TXT_Unit.Text.ToString();
+                    dataGridView1.Rows[r].Cells[5].Value = TXT_StockBian.Text;
+                    //  dataGridView1.Rows[r].Cells[3].Value = TXT_StockBian.Text;
+                    dataGridView1.Rows[r].Cells[6].Value = TXT_StockNoAll.Text;
+                    if (string.IsNullOrWhiteSpace(Txt_Quan.Text))
+                    {
+                        dataGridView1.Rows[r].Cells[7].Value = DBNull.Value;
+
                     }
                     else
                     {
-                        regions = regions + checkedListBox1.Items[i].ToString();
+                        dataGridView1.Rows[r].Cells[7].Value = Convert.ToDouble(Txt_Quan.Text);
                     }
-                    
-                }
-            }
-
-            return regions;
-        }
-
-        public void SP_UpdateSignatures(int x, DateTime D1, DateTime? D2 = null)
-        {
-            string cmdstring = "Exec  SP_UpdateSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
-            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-
-            cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_TalbNo.Text));
-            cmd.Parameters.AddWithValue("@TNO2", DBNull.Value);
-
-            cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
-            cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
-            cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
-            cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
-
-            cmd.Parameters.AddWithValue("@FN", 1);
-
-            cmd.Parameters.AddWithValue("@SN", x);
-
-            cmd.Parameters.AddWithValue("@D1", D1);
-            if (D2 == null)
-            {
-                cmd.Parameters.AddWithValue("@D2", DBNull.Value);
-            }
-            else
-            {
-                cmd.Parameters.AddWithValue("@D2", D2);
-            }
-
-            cmd.ExecuteNonQuery();
-        }
-
-        public void SP_InsertSignatures(int signNumber,int formNumber,int talbNo,string fyear,DateTime creationDate,string codeEdara,string nameEdara)
-        {
-            string cmdstring = @"Exec  SP_InsertSignDates @TalbTwareed_No,@TalbTwareed_No2,@FYear,@CreationDate,@CodeEdara,
-                                 @NameEdara,@FormNo,@SignatureNo,@Date1,@Date2";
-
-            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-
-            cmd.Parameters.AddWithValue("@TalbTwareed_No", talbNo);
-            cmd.Parameters.AddWithValue("@TalbTwareed_No2", DBNull.Value);
-
-            cmd.Parameters.AddWithValue("@FYear", fyear);
-            cmd.Parameters.AddWithValue("@CreationDate", creationDate);
-            cmd.Parameters.AddWithValue("@CodeEdara", codeEdara);
-            cmd.Parameters.AddWithValue("@NameEdara", nameEdara);
-
-            cmd.Parameters.AddWithValue("@FormNo", formNumber);
-
-            cmd.Parameters.AddWithValue("@SignatureNo", signNumber);
-
-            cmd.Parameters.AddWithValue("@Date1", DBNull.Value);
-
-            cmd.Parameters.AddWithValue("@Date2", DBNull.Value);
-            cmd.ExecuteNonQuery();
-        }
-
-        public void LoopGridview()
-        {
-            newtasnifcount = 0;
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                if (!row.IsNewRow)
-                {
-                    if (row.Cells[11].Value.ToString() == "True")
+                    //////////////////////newpart///////////////////
+                    if (AdditionFlag == 1)
                     {
-                        newtasnifcount = newtasnifcount + 1;
-                        NewTasnifFlag = 1;
+                        dataGridView1.Rows[r].Cells[10].Value = Convert.ToDouble(Txt_Quan.Text);
+                        dataGridView1.Rows[r].Cells[3].Value = AdditionQuan;
                     }
-                }
+                    else
+                    {
+                        dataGridView1.Rows[r].Cells[3].Value = Convert.ToDouble(Txt_ReqQuan.Text);
+                        dataGridView1.Rows[r].Cells[10].Value = 0;
+                    }
+                    // dataGridView1.Rows[r].Cells[9].Value = CMB_ApproxValue.SelectedValue;
+                    if (CMB_ApproxValue.SelectedIndex == -1)
+                    {
+                        //   dataGridView1.Rows[r].Cells[9].Value = Convert.ToString(Convert.ToDouble(CMB_ApproxValue.Text) * Convert.ToDouble(Txt_ReqQuan.Text));
+                        dataGridView1.Rows[r].Cells[9].Value = Convert.ToDouble(Convert.ToDouble(CMB_ApproxValue.Text) * Convert.ToDouble(dataGridView1.Rows[r].Cells[3].Value));
+                        dataGridView1.Rows[r].Cells[9].Value = Convert.ToDouble(dataGridView1.Rows[r].Cells[9].Value) * ExchangeRate;
+
+                    }
+                    else if (CMB_ApproxValue.SelectedIndex >= 0)
+                    {
+                        // dataGridView1.Rows[r].Cells[9].Value = Convert.ToString(Convert.ToDouble(CMB_ApproxValue.SelectedValue) * Convert.ToDouble(Txt_ReqQuan.Text));
+
+                        dataGridView1.Rows[r].Cells[9].Value = Convert.ToDouble(Convert.ToDouble(CMB_ApproxValue.SelectedValue) * Convert.ToDouble(dataGridView1.Rows[r].Cells[3].Value));
+
+                    }
+
+
+                    dataGridView1.Rows[r].Cells[11].Value = isNewTasnif;//not new tasnif
+
+                    ///////////////////////////////////////////////
+
+                    dataGridView1.Rows[r].Cells[0].Value = TXT_TalbNo.Text;
+                    dataGridView1.Rows[r].Cells[1].Value = Cmb_FYear.Text;
+
+                    dataGridView1.Rows[r].Cells[2].Value = r + 1;
+                    //  dataGridView1.Rows[r].Cells[3].Value = Txt_ReqQuan.Value;
+
+
+                    dataGridView1.DataSource = table;
+                #endregion
             }
-        }
-
-        private void InsertTalbTawreedBnood()
-        {
-            SqlCommand cmd;
-
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                if (!row.IsNewRow)
-                {
-                    string q = @"exec SP_InsertBnodTalbTawreed @TalbTwareed_No,@FYear,@Bnd_No,@RequestedQuan,
-                                    @Unit,@BIAN_TSNIF,@STOCK_NO_ALL,@Quan,@ApproxValue,@AdditionStockFlag,@NewTasnifFlag";
-                    cmd = new SqlCommand(q, Constants.con);
-                    cmd.Parameters.AddWithValue("@TalbTwareed_No", row.Cells[0].Value);
-                    cmd.Parameters.AddWithValue("@FYear", row.Cells[1].Value);
-                    cmd.Parameters.AddWithValue("@Bnd_No", row.Cells[2].Value);
-                    cmd.Parameters.AddWithValue("@RequestedQuan", row.Cells[3].Value ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Unit", row.Cells[4].Value);
-                    cmd.Parameters.AddWithValue("@BIAN_TSNIF", row.Cells[5].Value);
-                    cmd.Parameters.AddWithValue("@STOCK_NO_ALL", row.Cells[6].Value);
-                    cmd.Parameters.AddWithValue("@Quan", row.Cells[7].Value ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@ApproxValue", row.Cells[9].Value ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@AdditionStockFlag", row.Cells[10].Value ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@NewTasnifFlag", row.Cells[11].Value ?? DBNull.Value);
-
-                    cmd.ExecuteNonQuery();
-                }
-            }
-
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                if (!row.IsNewRow)
-                {
-                    string q = "exec SP_UpdateVirtualQuan @stockall,@additionstock";
-                    cmd = new SqlCommand(q, Constants.con);
-                    cmd.Parameters.AddWithValue("@stockall", row.Cells[10].Value);
-                    cmd.Parameters.AddWithValue("@additionstock", row.Cells[6].Value);
-                }
-            }
-
-        }
-
-        private void AddNewTasnifInDataGridView(int isNewTasnif = 0)
-        {
-            #region Add row to dataGridView
-                r = dataGridView1.Rows.Count - 1;
-
-                rowflag = 1;
-                DataRow newRow = table.NewRow();
-
-                // Add the row to the rows collection.
-                //   table.Rows.Add(newRow);
-                table.Rows.InsertAt(newRow, r);
-
-                dataGridView1.DataSource = table;
-                dataGridView1.Rows[r].Cells[4].Value = TXT_Unit.Text.ToString();
-                dataGridView1.Rows[r].Cells[5].Value = TXT_StockBian.Text;
-                //  dataGridView1.Rows[r].Cells[3].Value = TXT_StockBian.Text;
-                dataGridView1.Rows[r].Cells[6].Value = TXT_StockNoAll.Text;
-                if (string.IsNullOrWhiteSpace(Txt_Quan.Text))
-                {
-                    dataGridView1.Rows[r].Cells[7].Value = DBNull.Value;
-
-                }
-                else
-                {
-                    dataGridView1.Rows[r].Cells[7].Value = Convert.ToDouble(Txt_Quan.Text);
-                }
-                //////////////////////newpart///////////////////
-                if (AdditionFlag == 1)
-                {
-                    dataGridView1.Rows[r].Cells[10].Value = Convert.ToDouble(Txt_Quan.Text);
-                    dataGridView1.Rows[r].Cells[3].Value = AdditionQuan;
-                }
-                else
-                {
-                    dataGridView1.Rows[r].Cells[3].Value = Convert.ToDouble(Txt_ReqQuan.Text);
-                    dataGridView1.Rows[r].Cells[10].Value = 0;
-                }
-                // dataGridView1.Rows[r].Cells[9].Value = CMB_ApproxValue.SelectedValue;
-                if (CMB_ApproxValue.SelectedIndex == -1)
-                {
-                    //   dataGridView1.Rows[r].Cells[9].Value = Convert.ToString(Convert.ToDouble(CMB_ApproxValue.Text) * Convert.ToDouble(Txt_ReqQuan.Text));
-                    dataGridView1.Rows[r].Cells[9].Value = Convert.ToDouble(Convert.ToDouble(CMB_ApproxValue.Text) * Convert.ToDouble(dataGridView1.Rows[r].Cells[3].Value));
-                    dataGridView1.Rows[r].Cells[9].Value = Convert.ToDouble(dataGridView1.Rows[r].Cells[9].Value) * ExchangeRate;
-
-                }
-                else if (CMB_ApproxValue.SelectedIndex >= 0)
-                {
-                    // dataGridView1.Rows[r].Cells[9].Value = Convert.ToString(Convert.ToDouble(CMB_ApproxValue.SelectedValue) * Convert.ToDouble(Txt_ReqQuan.Text));
-
-                    dataGridView1.Rows[r].Cells[9].Value = Convert.ToDouble(Convert.ToDouble(CMB_ApproxValue.SelectedValue) * Convert.ToDouble(dataGridView1.Rows[r].Cells[3].Value));
-
-                }
-
-
-                dataGridView1.Rows[r].Cells[11].Value = isNewTasnif;//not new tasnif
-
-                ///////////////////////////////////////////////
-
-                dataGridView1.Rows[r].Cells[0].Value = TXT_TalbNo.Text;
-                dataGridView1.Rows[r].Cells[1].Value = Cmb_FYear.Text;
-
-                dataGridView1.Rows[r].Cells[2].Value = r + 1;
-                //  dataGridView1.Rows[r].Cells[3].Value = Txt_ReqQuan.Value;
-
-
-                dataGridView1.DataSource = table;
-            #endregion
-        }
         #endregion
 
         //------------------------------------------ State Handler ---------------------------------
@@ -410,6 +465,7 @@ namespace ANRPC_Inventory
             //ta2men 5%
             changePanelState(panel10, true);
             changePanelState(panel14, true);
+            RadioBTN_Taamen2.Checked = true;
 
             //mowazna
             changePanelState(panel6, false);
@@ -422,11 +478,12 @@ namespace ANRPC_Inventory
             SaveBtn.Enabled = true;
             BTN_Cancel.Enabled = true;
             Addbtn2.Enabled = true;
-            AddNewbtn.Enabled = true;
+            AddNewbtn.Enabled = false;
             browseBTN.Enabled = true;
             BTN_PDF.Enabled = true;
             Addbtn.Enabled = false;
             Editbtn2.Enabled = false;
+            BTN_SearchTalb.Enabled = false;
             BTN_Print.Enabled = false;
 
             //signature btn
@@ -435,6 +492,7 @@ namespace ANRPC_Inventory
 
             //moshtrayat types
             EnableMoshtryat();
+            radioButton1.Checked = true;
 
             dataGridView1.ReadOnly = true;
             dataGridView1.AllowUserToAddRows = false;
@@ -481,8 +539,8 @@ namespace ANRPC_Inventory
             Input_Reset();
             Cmb_FYear.Enabled = true;
             TXT_TalbNo.Enabled = true;
-            TXT_TalbNo2.Enabled = true;
-            BTN_Print.Enabled = false;
+            BTN_Print.Enabled=true;
+            TXT_TalbNo2.Enabled = false;
             Cmb_Currency.Enabled = false;
         }
 
@@ -522,6 +580,7 @@ namespace ANRPC_Inventory
             //btn Section
             //generalBtn
             Addbtn.Enabled = true;
+            BTN_SearchTalb.Enabled = true;
             SaveBtn.Enabled = false;
             BTN_Cancel.Enabled = false;
             Addbtn2.Enabled = false;
@@ -689,7 +748,6 @@ namespace ANRPC_Inventory
             AdditionFlag = 0;
         }
         #endregion
-
 
         //------------------------------------------ Logic Handler ---------------------------------
         #region Logic Handler
@@ -1833,7 +1891,152 @@ namespace ANRPC_Inventory
 
         //------------------------------------------ Validation Handler ---------------------------------
         #region Validation Handler
+            private List<(ErrorProvider, Control, string)> ValidateAddTasnif(bool isNewTasnif = false)
+            {
+                List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
 
+                if (!isNewTasnif)
+                {
+                    #region TXT_StockNoAll
+                    if (string.IsNullOrWhiteSpace(TXT_StockNoAll.Text))
+                    {
+                        errorsList.Add((errorProvider, TXT_StockNoAll, "يجب اختيار التصنيف المراد اضافته"));
+                    }
+                    else if (TXT_StockNoAll.Text.Length != 8)
+                    {
+                        errorsList.Add((alertProvider, TXT_StockNoAll, "رقم التصنيف يجب ان يتكون من 8"));
+                    }
+                    else if (Txt_Quan.Text == "")
+                    {
+                        errorsList.Add((alertProvider, TXT_StockNoAll, "هذا التصنيف غير موجود"));
+                    }
+                    foreach (DataGridViewRow row in dataGridView1.Rows)
+                    {
+                        if (!row.IsNewRow)
+                        {
+                            if (row.Cells[6].Value.ToString().ToLower() == TXT_StockNoAll.Text.ToLower() && TXT_StockNoAll.Text != "")
+                            {
+                                errorsList.Add((alertProvider, TXT_StockNoAll, "تم ادخال رقم هذا التصنيف من قبل"));
+
+                                break;
+                            }
+                        }
+                    }
+                    #endregion
+                }
+
+                #region Txt_ReqQuan
+                if (string.IsNullOrWhiteSpace(Txt_ReqQuan.Text))
+                {
+                    errorsList.Add((errorProvider, Txt_ReqQuan, "يجب ادخال الكمية المطلوبة"));
+                }
+                else if (!string.IsNullOrWhiteSpace(Txt_ReqQuan.Text) && Convert.ToDecimal(Txt_ReqQuan.Text) <= 0)
+                {
+                    errorsList.Add((alertProvider, Txt_ReqQuan, "يجب ان تكون الكمية المطلوبة اكبر من صفر"));
+                }
+                else if (!string.IsNullOrWhiteSpace(Txt_Quan.Text) && Txt_Quan.Text != "" && Convert.ToDouble(Txt_Quan.Text) > 0 && Convert.ToDouble(Txt_Quan.Text) >= Convert.ToDouble(Txt_ReqQuan.Text))
+                {
+                    errorsList.Add((alertProvider, Txt_ReqQuan, "الكمية المطلوبة متاحة فى المخزن يمكنك انشاء اذن صرف بها"));
+                }
+
+                #endregion
+
+                #region CMB_ApproxValue
+                if (string.IsNullOrWhiteSpace(CMB_ApproxValue.Text))
+                {
+                    errorsList.Add((errorProvider, CMB_ApproxValue, "يجب اختيار القيمة التقديرية "));
+                }
+                else if (Convert.ToDecimal(CMB_ApproxValue.Text) <= 0)
+                {
+                    errorsList.Add((alertProvider, CMB_ApproxValue, "يجب ان تكون القيمة التقديرية اكبر من صفر"));
+                }
+                #endregion
+
+                #region Cmb_FYear
+                if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
+                {
+                    errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
+                }
+                #endregion
+
+                if (isNewTasnif)
+                {
+                    #region Description
+                    if (string.IsNullOrWhiteSpace(TXT_StockBian.Text))
+                    {
+                        errorsList.Add((errorProvider, TXT_StockBian, "يجب ادخال مواصفة للتصنيف الجديد"));
+                    }
+                    #endregion
+                }
+
+                return errorsList;
+            }
+
+            private List<(ErrorProvider, Control, string)> ValidateAttachFile()
+            {
+                List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+                #region Cmb_FYear
+                    if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
+                    {
+                        errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
+                    }
+                #endregion
+                return errorsList;
+            }
+
+            private List<(ErrorProvider, Control, string)> ValidateSearch()
+            {
+                List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+                #region Cmb_FYear
+                    if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
+                    {
+                        errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
+                    }
+            #endregion
+
+                #region TXT_TalbNo
+                    if (string.IsNullOrWhiteSpace(TXT_TalbNo.Text))
+                    {
+                        errorsList.Add((errorProvider, TXT_TalbNo, "يجب اختيار رقم طلب توريد"));
+                    }
+                #endregion
+
+
+                return errorsList;
+            }
+
+        private bool IsValidCase(VALIDATION_TYPES type)
+            {
+                List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+                
+                if(type == VALIDATION_TYPES.ADD_TASNIF)
+                {
+                    errorsList = ValidateAddTasnif(false);
+                }
+                else if(type == VALIDATION_TYPES.ADD_NEW_TASNIF)
+                {
+                    errorsList = ValidateAddTasnif(true);
+                }
+                else if(type == VALIDATION_TYPES.ATTACH_FILE)
+                {
+                    errorsList = ValidateAttachFile();
+                }
+                else if(type == VALIDATION_TYPES.SEARCH)
+                {
+                    errorsList = ValidateSearch();
+                }
+                
+                errorProviderHandler(errorsList);
+
+                if (errorsList.Count > 0)
+                {                  
+                    return false;
+                }
+
+                return true;
+            }
         #endregion
 
         public TalbTawred()
@@ -2004,7 +2207,7 @@ namespace ANRPC_Inventory
             {
                 //GetData(Convert.ToInt32(TXT_TalbNo.Text), Cmb_FYear.Text);
                 cleargridview();
-                SearchTalb(1);
+                //SearchTalb(1);
                 BTN_Print.Visible = true;
 
             }
@@ -2178,6 +2381,7 @@ namespace ANRPC_Inventory
                     CMB_ApproxValue.DisplayMember = "x";*/
             }
         }
+
         public void SearchImage2(string stockall)
         {
             // string partialName = "webapi";
@@ -2215,6 +2419,8 @@ namespace ANRPC_Inventory
                 picflag = 1;
             }
         }
+
+
         private void TXT_StockNoAll_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)  // Search and get the data by the name 
@@ -2259,134 +2465,12 @@ namespace ANRPC_Inventory
         }
 
 
-
-
-        private void errorProviderHandler(List<(ErrorProvider, Control, string)> errosList)
-        {
-            alertProvider.Clear();
-            errorProvider.Clear();
-            foreach (var error in errosList)
-            {
-                ////Txt_ReqQuan.Location = new Point(Txt_ReqQuan.Location.X + errorProvider.Icon.Width, Txt_ReqQuan.Location.Y);
-                //error.Item2.Width = error.Item2.Width - error.Item1.Icon.Width;
-                error.Item1.SetError(error.Item2, error.Item3);
-            }
-        }
-        private bool isNumber(string s)
-        {
-            int t;
-            decimal f;
-
-            if (!(int.TryParse(s, out t) || decimal.TryParse(s, out f)))
-            {
-                return false;
-            }
-
-            return true;
-        }
-
         #region AddTasnif
-            private List<(ErrorProvider, Control, string)> ValidateAddTasnif(bool isNewTasnif = false)
-            {
-                List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
-
-                if (AddEditFlag != 2 && AddEditFlag != 1)//not in add mode
-                {
-                    // MessageBox.Show("يجب اضافة/تعديل طلب التوريد اولا");
-                    // return;
-                   // isValid = false;
-                }
-
-                if (!isNewTasnif)
-                {
-                    #region TXT_StockNoAll
-                        if (string.IsNullOrWhiteSpace(TXT_StockNoAll.Text))
-                        {
-                            errorsList.Add((errorProvider, TXT_StockNoAll, "يجب اختيار التصنيف المراد اضافته"));
-                        }
-                        else if (TXT_StockNoAll.Text.Length != 8)
-                        {
-                            errorsList.Add((alertProvider, TXT_StockNoAll, "رقم التصنيف يجب ان يتكون من 8"));
-                        }
-                        else if (Txt_Quan.Text == "")
-                        {
-                            errorsList.Add((alertProvider, TXT_StockNoAll, "هذا التصنيف غير موجود"));
-                        }
-                        foreach (DataGridViewRow row in dataGridView1.Rows)
-                        {
-                            if (!row.IsNewRow)
-                            {
-                                if (row.Cells[6].Value.ToString().ToLower() == TXT_StockNoAll.Text.ToLower() && TXT_StockNoAll.Text != "")
-                                {
-                                    errorsList.Add((alertProvider, TXT_StockNoAll, "تم ادخال رقم هذا التصنيف من قبل"));
-
-                                    break;
-                                }
-                            }
-                        }
-                    #endregion
-                }
-
-                #region Txt_ReqQuan
-            if (string.IsNullOrWhiteSpace(Txt_ReqQuan.Text))
-                    {
-                        errorsList.Add((errorProvider, Txt_ReqQuan, "يجب ادخال الكمية المطلوبة"));
-                    }
-                    else if (!isNumber(Txt_ReqQuan.Text))
-                    {
-                        errorsList.Add((alertProvider, Txt_ReqQuan, "يجب ان تكون الكمية مكونة من ارقام فقط"));
-                    }
-                    else if (!string.IsNullOrWhiteSpace(Txt_Quan.Text) && Txt_Quan.Text != "" && Convert.ToDouble(Txt_Quan.Text) > 0 && Convert.ToDouble(Txt_Quan.Text) >= Convert.ToDouble(Txt_ReqQuan.Text))
-                    {
-                        errorsList.Add((alertProvider, Txt_ReqQuan, "الكمية المطلوبة متاحة فى المخزن يمكنك انشاء اذن صرف بها"));
-                    }
-                    else if (!string.IsNullOrWhiteSpace(Txt_Quan.Text) && Convert.ToDecimal(Txt_Quan.Text) <= 0)
-                    {
-                        errorsList.Add((alertProvider, Txt_Quan, "يجب ان تكون الكمية اكبر من صفر"));
-                    }
-                #endregion
-
-                #region CMB_ApproxValue
-                if (string.IsNullOrWhiteSpace(CMB_ApproxValue.Text))
-                    {
-                        errorsList.Add((errorProvider, CMB_ApproxValue, "يجب اختيار القيمة التقديرية "));
-                    }
-                    else if (!isNumber(CMB_ApproxValue.Text))
-                    {
-                        errorsList.Add((alertProvider, CMB_ApproxValue, "يجب ان تكون القيمة التقديرية مكونة من ارقام فقط"));
-                    }
-                    else if(Convert.ToDecimal(CMB_ApproxValue.Text) <= 0)
-                    {
-                        errorsList.Add((alertProvider, CMB_ApproxValue, "يجب ان تكون القيمة التقديرية اكبر من صفر"));
-                    }
-                #endregion
-
-                #region Cmb_FYear
-                    if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
-                    {
-                        errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
-                    }
-                #endregion
-
-                if (isNewTasnif)
-                {
-                    #region Description
-                    if (string.IsNullOrWhiteSpace(TXT_StockBian.Text))
-                    {
-                        errorsList.Add((errorProvider, TXT_StockBian, "يجب ادخال مواصفة للتصنيف الجديد"));
-                    }
-                    #endregion
-                }
-
-                return errorsList;
-            }
             private void Addbtn2_Click(object sender, EventArgs e)
             {
-            
-                List<(ErrorProvider,Control, string)> errorsList= ValidateAddTasnif();
-                if (errorsList.Count > 0)
-                {
-                    errorProviderHandler(errorsList);
+               
+                if (!IsValidCase(VALIDATION_TYPES.ADD_TASNIF))
+                {          
                     return;
                 }
 
@@ -2447,32 +2531,20 @@ namespace ANRPC_Inventory
                 AddNewTasnifInDataGridView();
             }
 
-        private void AddNewbtn_Click(object sender, EventArgs e)
-        {
-            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
-            if (CHK_NewTasnif.Checked == false)
+            private void AddNewbtn_Click(object sender, EventArgs e)
             {
-                //MessageBox.Show("برجاء اختيار إضافة تصنيف جديد أولاً");
-                errorsList.Add((errorProvider, CHK_NewTasnif, "برجاء اختيار إضافة تصنيف جديد أولاً"));
-                errorProviderHandler(errorsList);
-                return;
+                if (!IsValidCase(VALIDATION_TYPES.ADD_NEW_TASNIF))
+                {          
+                    return;
+                }
+
+                Currency = Cmb_Currency.Text;
+                NewTasnifFlag = 1;
+
+                AddNewTasnifInDataGridView(NewTasnifFlag);
+
+                CHK_NewTasnif.Checked = false;
             }
-
-            errorsList = ValidateAddTasnif(true);
-            if (errorsList.Count > 0)
-            {
-                errorProviderHandler(errorsList);
-                return;
-            }
-            
-            Currency = Cmb_Currency.Text;
-            NewTasnifFlag = 1;
-
-            AddNewTasnifInDataGridView(NewTasnifFlag);
-
-            CHK_NewTasnif.Checked = false;
-        }
-
         #endregion
 
 
@@ -2587,7 +2659,7 @@ Constants.opencon();
                         TXT_TalbNo.Text = flag.ToString();//el rakm el new
                         if (AddEditFlag == 2)
                         {
-                            GetData(Convert.ToInt32(TXT_TalbNo.Text), Cmb_FYear.Text);
+                            GetTalbTawreedBnod(TXT_TalbNo.Text, Cmb_FYear.Text);
 
                         }
 
@@ -2606,30 +2678,7 @@ Constants.opencon();
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
-            browseBTN.Enabled = false;
-
-            foreach (DataGridViewRow rw in this.dataGridView1.Rows)
-            {
-                if (!rw.IsNewRow && rw.Cells[11].Value.ToString() == "True")
-                {
-                    if (rw.Cells[3].Value == null || rw.Cells[3].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[3].Value.ToString()))
-                    {
-                        MessageBox.Show("من فضلك تاكد من ادخال الكمية لكل التصنييفات الجديدة");
-                        return;
-
-                        // here is your message box...
-                    }
-                    if (rw.Cells[9].Value == null || rw.Cells[9].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[9].Value.ToString()))
-                    {
-                        MessageBox.Show("من فضلك تاكد من ادخال القيمة التقديرية لكل التصنييفات الجديدة");
-                        return;
-
-                        // here is your message box...
-                    }
-                }
-            }
-
-
+            
             if (AddEditFlag == 2)
             {
                 if (FlagSign1 != 1)
@@ -2640,92 +2689,59 @@ Constants.opencon();
 
                 AddLogic();
             }
+            
             else if (AddEditFlag == 1)
             {
-
                 EditLogic();
-                ////////////////call sp to know status of talb/////////////////////
-                //    SP_CheckFinancialTalb
-
-                //   if (FlagSign11 == 1 || FlagSign11 !=1)//check anyway with every update
-
-                //if (FlagSign3 == 1)
-
             }
 
             reset();
         }
 
-        private void Getdata(string cmd)
+        private void GetTalbTawreedBnod(string talbNo,string fyear)
         {
-            dataadapter = new SqlDataAdapter(cmd, Constants.con);
+            table.Clear();
+
+            string TableQuery = @"SELECT  [TalbTwareed_No] ,[FYear],[Bnd_No],[RequestedQuan],Unit,[BIAN_TSNIF] ,STOCK_NO_ALL,Quan,[ArrivalDate] ,
+                                ApproxValue,AdditionStockFlag,NewTasnifFlag ,TalbTwareed_No2 FROM [T_TalbTawreed_Benod] 
+                                Where TalbTwareed_No = " + talbNo + " and Fyear='" + fyear + "'";
+
+            dataadapter = new SqlDataAdapter(TableQuery, Constants.con);
             table.Locale = System.Globalization.CultureInfo.InvariantCulture;
             dataadapter.Fill(table);
             dataGridView1.DataSource = table;
 
             dataGridView1.Columns["TalbTwareed_No"].HeaderText = "رقم طلب التوريد";//col0
-            dataGridView1.Columns["TalbTwareed_No"].ReadOnly = true;
-            // dataGridView1.Columns["TalbTwareed_No"].Width = 60;
             dataGridView1.Columns["FYear"].HeaderText = "السنة المالية";//col1
-            dataGridView1.Columns["FYear"].ReadOnly = true;
             dataGridView1.Columns["Bnd_No"].HeaderText = "رقم البند";//col2
-            dataGridView1.Columns["Bnd_No"].ReadOnly = true;
-            //dataGridView1.Columns["Bnd_No"].Width = 40;
             dataGridView1.Columns["RequestedQuan"].HeaderText = "الكمية";//col3
-
-            //dataGridView1.Columns["RequestedQuan"].Width = 50;
             dataGridView1.Columns["Unit"].HeaderText = "الوحدة";//col4
             dataGridView1.Columns["BIAN_TSNIF"].HeaderText = "بيان الموصفات";//col5
-            //dataGridView1.Columns["BIAN_TSNIF"].Width = 150;
             dataGridView1.Columns["STOCK_NO_ALL"].HeaderText = "الدليل الرقمى";//col6
-            dataGridView1.Columns["STOCK_NO_ALL"].ReadOnly = true;
-
             dataGridView1.Columns["Quan"].HeaderText = "رصيد المخزن";//col7
-            dataGridView1.Columns["Quan"].ReadOnly = true;
 
             if (Constants.User_Type == "NewTasnif")
             {
                 dataGridView1.Columns["STOCK_NO_ALL"].ReadOnly = false;
                 dataGridView1.Columns["Quan"].ReadOnly = false;
             }
+
             dataGridView1.Columns["ArrivalDate"].HeaderText = "تاريخ وروده";//col8
             dataGridView1.Columns["ArrivalDate"].Visible = false;
+
             dataGridView1.Columns["ApproxValue"].HeaderText = "القيمة التقديرية";//col9
             dataGridView1.Columns["AdditionStockFlag"].HeaderText = "بالاضافة الى رصيد";//col10
-            dataGridView1.Columns["AdditionStockFlag"].ReadOnly = true;
             dataGridView1.Columns["NewTasnifFlag"].HeaderText = "تصنيف جديد";//col11
 
-            dataGridView1.Columns["NewTasnifFlag"].ReadOnly = true;
             dataGridView1.Columns["TalbTwareed_No2"].HeaderText = "رقم طلب التوريد";//col12
             dataGridView1.Columns["TalbTwareed_No2"].Visible = false;
 
-
-
-
-            if (Constants.User_Type == "A")
-            {
-                dataGridView1.Columns["ArrivalDate"].ReadOnly = true;
-            }
-
+            //if (Constants.User_Type == "A")
+            //{
+            //    dataGridView1.Columns["ArrivalDate"].ReadOnly = true;
+            //}
 
             dataGridView1.AllowUserToAddRows = true;
-
-        }
-
-        private void GetData(int x, string y)
-        {
-            if (string.IsNullOrWhiteSpace(TXT_TalbNo.Text))
-            {
-                // MessageBox.Show("ادخل رقم التصريح");
-                //  PermNo_text.Focus();
-                return;
-            }
-            else
-            {
-                table.Clear();
-                TableQuery = "SELECT  [TalbTwareed_No] ,[FYear],[Bnd_No],[RequestedQuan],Unit,[BIAN_TSNIF] ,STOCK_NO_ALL,Quan,[ArrivalDate] ,ApproxValue,AdditionStockFlag,NewTasnifFlag ,TalbTwareed_No2 FROM [T_TalbTawreed_Benod] Where TalbTwareed_No = " + x + " and Fyear='" + y + "'";
-                Getdata(TableQuery);
-            }
 
         }
 
@@ -3105,68 +3121,29 @@ Constants.opencon();
 
         }
 
-        private void Cmb_TalbNo2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (Cmb_TalbNo2.SelectedIndex != -1)
-            {
-                SearchTalb(2);
-            }
-        }
 
-        public void SearchTalb(int x)
+
+        public void SearchTalb(string talbNo,string fyear, bool isCompleted = false)
         {
             //call sp that get last num that eentered for this MM and this YYYY
             Constants.opencon();
+
             // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
-            string cmdstring = "";
-            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-            if (x == 1 && Constants.User_Type == "A")
-            {
-                cmdstring = "select * from  T_TalbTawreed where TalbTwareed_No=@TN and FYear=@FY and CodeEdara=@EC";
-                cmd = new SqlCommand(cmdstring, Constants.con);
-                cmd.Parameters.AddWithValue("@TN", TXT_TalbNo.Text);
-                cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text);
-                cmd.Parameters.AddWithValue("@EC", Constants.CodeEdara);
-            }
-            else if (x == 2 && Constants.User_Type == "A")
-            {
-                cmdstring = "select * from  T_TalbTawreed where TalbTwareed_No=@TN and FYear=@FY and CodeEdara=@EC";
-                cmd = new SqlCommand(cmdstring, Constants.con);
-                cmd.Parameters.AddWithValue("@TN", Cmb_TalbNo2.Text);
-                cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
-                cmd.Parameters.AddWithValue("@EC", Constants.CodeEdara);
-            }
-            else if (x == 2 && Constants.User_Type == "B")
-            {
-                cmdstring = "select * from  T_TalbTawreed where TalbTwareed_No=@TN and FYear=@FY";
-                cmd = new SqlCommand(cmdstring, Constants.con);
-                cmd.Parameters.AddWithValue("@TN", Cmb_TalbNo2.Text);
-                cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
-            }
-            else if (x == 1 && Constants.User_Type == "B")
-            {
-                cmdstring = "select * from  T_TalbTawreed where TalbTwareed_No=@TN and FYear=@FY";
-                cmd = new SqlCommand(cmdstring, Constants.con);
-                cmd.Parameters.AddWithValue("@TN", TXT_TalbNo.Text);
-                cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text);
-            }
-            else if (x == 3 && Constants.User_Type == "B")
+            string cmdstring;
+            SqlCommand cmd;
+
+            if (isCompleted)
             {
                 cmdstring = "select * from  T_TalbTawreed where TalbTwareed_No2=@TN and FYear=@FY";
-                cmd = new SqlCommand(cmdstring, Constants.con);
-                cmd.Parameters.AddWithValue("@TN", TXT_TalbNo2.Text);
-                cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text);
             }
-            else if (x == 3 && Constants.User_Type == "A")
+            else
             {
-                cmdstring = "select * from  T_TalbTawreed where TalbTwareed_No2=@TN and FYear=@FY and CodeEdara=@EC";
-                cmd = new SqlCommand(cmdstring, Constants.con);
-                cmd.Parameters.AddWithValue("@TN", TXT_TalbNo2.Text);
-                cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text);
-                cmd.Parameters.AddWithValue("@EC", Constants.CodeEdara);
+                cmdstring = "select * from  T_TalbTawreed where TalbTwareed_No=@TN and FYear=@FY";
             }
-            // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
 
+            cmd = new SqlCommand(cmdstring, Constants.con);
+            cmd.Parameters.AddWithValue("@TN", talbNo);
+            cmd.Parameters.AddWithValue("@FY", fyear);
 
             SqlDataReader dr = cmd.ExecuteReader();
 
@@ -3179,8 +3156,8 @@ Constants.opencon();
 
                         TXT_TalbNo.Text = dr["TalbTwareed_No"].ToString();
                         TXT_TalbNo2.Text = dr["TalbTwareed_No2"].ToString();
-                        /////////////////////////////////////////////////////
                         TXT_DateTaamen.Text = dr["TaamenDate"].ToString();
+
                         if (Convert.ToBoolean(dr["TaamenFlag"].ToString()) == true)
                         {
                             RadioBTN_Tammen1.Checked = true;
@@ -3193,19 +3170,12 @@ Constants.opencon();
                             TXT_DateTaamen.Text = (dr["TaamenDate"].ToString());
 
                         }
-                        // RadioBTN_Taamen2.Checked=Convert.ToBoolean( dr["TammenFlag"].ToString());
-
+                        
                         ChBTN_Analysis.Checked = Convert.ToBoolean(dr["NeedAnalysisFlag"].ToString());
                         ChBTN_Origin.Checked = Convert.ToBoolean(dr["OriginFlag"].ToString());
                         ChBTN_Tests.Checked = Convert.ToBoolean(dr["NeedTestsFlag"].ToString());
                         string country = dr["Country"].ToString();
-                        //   string author = "Name: Mahesh Chand, Book: C# Programming, Publisher: C# Corner, Year: 2020";
                         string[] countryinfo = country.Split(',');
-                        //  foreach (string info in countryinfo)
-                        // {
-                        //     checkedListBox1.Items(info).Checked = true;
-                        //Console.WriteLine("   {0}", info.Substring(info.IndexOf(": ") + 1));
-                        // }
 
                         for (int count = 0; count < checkedListBox1.Items.Count; count++)
                         {
@@ -3228,63 +3198,34 @@ Constants.opencon();
                         TXT_BndMwazna.Text = dr["BndMwazna"].ToString();
                         Cmb_Currency.Text = dr["CurrencyBefore"].ToString();
                         TXT_PriceSarf.Text = dr["ExchangeRate"].ToString();
-
                         TXT_RedirectedFor.Text = dr["RedirectedFor"].ToString();
                         TXT_RedirectedDate.Text = dr["RedirectedForDate"].ToString();
 
                         string s1 = dr["Req_Signature"].ToString();
-
-
                         string s2 = dr["Confirm_Sign1"].ToString();
                         string s3 = dr["Confirm_Sign2"].ToString();
                         string s4 = dr["Stock_Sign"].ToString();
                         string s5 = dr["Audit_Sign"].ToString();
                         string s6 = dr["Mohmat_Sign"].ToString();
                         string s7 = dr["CH_Sign"].ToString();
-
                         string s8 = dr["Sign8"].ToString();
                         string s9 = dr["Sign9"].ToString();
                         string s10 = dr["Sign10"].ToString();
                         string s11 = dr["Sign11"].ToString();
                         string s12 = dr["Sign12"].ToString();
+
                         string BUM = dr["BuyMethod"].ToString();
-                        if (BUM == "1")
-                        {
-                            radioButton1.Checked = true;
-                        }
-                        else if (BUM == "2")
-                        {
-                            radioButton2.Checked = true;
-                        }
-                        else if (BUM == "3")
-                        {
-                            radioButton3.Checked = true;
-                        }
-                        else if (BUM == "4")
-                        {
-                            radioButton4.Checked = true;
-                        }
-                        else if (BUM == "5")
-                        {
-                            radioButton5.Checked = true;
-                        }
-                        else if (BUM == "6")
-                        {
-                            radioButton6.Checked = true;
-                        }
-                        //  FlagCmbYear = 1;
+
+                        SetCurrentActivatedBuyMethod(panel8, BUM);
                         Cmb_FYear.Text = dr["FYear"].ToString();
 
-                        ////////////////////////////////
-                        talbstatus = Constants.GetTalbStatus(TXT_TalbNo.Text, Cmb_FYear.Text);
-                        MessageBox.Show("talb status is" + talbstatus.ToString());
-
+                        //talbstatus = Constants.GetTalbStatus(TXT_TalbNo.Text, Cmb_FYear.Text);
+                        ////MessageBox.Show("talb status is" + talbstatus.ToString());
                         ///////////////////////////////////////
 
                         if (s1 != "")
                         {
                             string p = Constants.RetrieveSignature("1", "1", s1);
-
 
                             if (p != "")
                             {
@@ -3307,6 +3248,7 @@ Constants.opencon();
                         {
                             ((PictureBox)this.panel13.Controls["Pic_Sign" + "1"]).BackColor = Color.Red;
                         }
+                        
                         if (s2 != "")
                         {
                             string p = Constants.RetrieveSignature("2", "1", s2);
@@ -3329,6 +3271,7 @@ Constants.opencon();
                         {
                             ((PictureBox)this.panel13.Controls["Pic_Sign" + "2"]).BackColor = Color.Red;
                         }
+                        
                         if (s3 != "")
                         {
                             string p = Constants.RetrieveSignature("3", "1", s3);
@@ -3353,6 +3296,7 @@ Constants.opencon();
                         {
                             ((PictureBox)this.panel13.Controls["Pic_Sign" + "3"]).BackColor = Color.Red;
                         }
+                        
                         if (s4 != "")
                         {
                             string p = Constants.RetrieveSignature("4", "1", s4);
@@ -3374,6 +3318,7 @@ Constants.opencon();
                         {
                             ((PictureBox)this.panel13.Controls["Pic_Sign" + "4"]).BackColor = Color.Red;
                         }
+                        
                         if (s5 != "")
                         {
                             string p = Constants.RetrieveSignature("5", "1", s5);
@@ -3398,6 +3343,7 @@ Constants.opencon();
                         {
                             ((PictureBox)this.panel13.Controls["Pic_Sign" + "5"]).BackColor = Color.Red;
                         }
+                        
                         if (s6 != "")
                         {
                             string p = Constants.RetrieveSignature("6", "1", s6);
@@ -3421,6 +3367,7 @@ Constants.opencon();
                         {
                             ((PictureBox)this.panel13.Controls["Pic_Sign" + "6"]).BackColor = Color.Red;
                         }
+                        
                         if (s7 != "")
                         {
                             string p = Constants.RetrieveSignature("7", "1", s7);
@@ -3442,6 +3389,7 @@ Constants.opencon();
                         {
                             ((PictureBox)this.panel13.Controls["Pic_Sign" + "7"]).BackColor = Color.Red;
                         }
+                        
                         if (s8 != "")
                         {
                             string p = Constants.RetrieveSignature("8", "1", s8);
@@ -3465,6 +3413,7 @@ Constants.opencon();
                         {
                             ((PictureBox)this.panel13.Controls["Pic_Sign" + "8"]).BackColor = Color.Red;
                         }
+                        
                         if (s9 != "")
                         {
                             string p = Constants.RetrieveSignature("9", "1", s9);
@@ -3536,12 +3485,6 @@ Constants.opencon();
                             ((PictureBox)this.panel13.Controls["Pic_Sign" + "12"]).BackColor = Color.Red;
                         }
 
-
-
-
-
-
-
                     }
                 }
                 finally
@@ -3551,77 +3494,17 @@ Constants.opencon();
                         dr.Dispose();
                     }
                 }
-                /*
-                for (int i = 1; i <= 7; i++)
-                {
-                    string p = Constants.RetrieveSignature(i.ToString(), "1");
-                    if (p != "")
-                    {
-                        //   Pic_Sign1
-                        //	"Pic_Sign1"	string
-
-                        ((PictureBox)this.panel1.Controls["Pic_Sign" + i.ToString()]).Image = Image.FromFile(@p);
-
-                    }
-
-                }*/
-                if (x == 1) {
-                    BTN_Print.Visible = true;
-                    BTN_Print.Enabled = true;
-                }
-                else {
-                    BTN_Print2.Visible = true;
-                    BTN_Print2.Enabled = true;
-                }
-
             }
-
             else
             {
                 MessageBox.Show("من فضلك تاكد من رقم طلب التوريد");
-                if (x == 1) {
-                    //   BTN_Print.Visible=true;
-                    BTN_Print.Enabled = false;
-                }
-                else {
-                    //  BTN_Print2.Visible=true;
-                    BTN_Print2.Enabled = false;
-                }
-
+                reset();
                 return;
-
             }
+
             dr.Close();
 
-
-            //  string query1 = "SELECT  [TalbTwareed_No] ,[FYear] ,[Bnd_No],[RequestedQuan],[Unit],[BIAN_TSNIF] ,[STOCK_NO_ALL],[Quan] ,[ArrivalDate] FROM [T_TalbTawreed_Benod] where  [TalbTwareed_No]=@T and [FYear]=@F ";
-            //  SqlCommand cmd1 = new SqlCommand(query1, Constants.con);
-            //  cmd1.Parameters.AddWithValue("@T",Cmb_TalbNo2.Text);
-            //  cmd1.Parameters.AddWithValue("@F", Cmb_FYear2.Text);
-
-
-            // DT.Clear();
-            // DT.Load(cmd1.ExecuteReader());
-            // cleargridview();
-            GetData(Convert.ToInt32(TXT_TalbNo.Text), Cmb_FYear.Text);
-            if (DT.Rows.Count == 0)
-            {
-                //  MessageBox.Show("لا يوجد حركات لهذا الموظف");
-                // Input_Reset();
-                //   label11.Visible = false;
-                // label12.Visible = false;
-                // BTN_Save.Visible = false;
-                // panel2.Visible = false;
-
-            }
-            else
-            {
-
-
-            }
-            // searchbtn1 = false;
-            //  DataGridViewReset();
-
+            GetTalbTawreedBnod(TXT_TalbNo.Text, Cmb_FYear.Text);
             Constants.closecon();
         }
 
@@ -3716,12 +3599,6 @@ Constants.opencon();
             }
         }
 
-        private void TXT_TalbNo_TextChanged(object sender, EventArgs e)
-        {
-            Constants.validateTextboxNumbersonly(sender);
-            //  MessageBox.Show("من فضلك تاكد من العملة ");
-        }
-
         private void Cmb_TalbNo2_TextChanged(object sender, EventArgs e)
         {
             // Input_Reset();
@@ -3767,33 +3644,19 @@ Constants.opencon();
             if (!(string.IsNullOrWhiteSpace(Cmb_TalbNo2.Text) || string.IsNullOrEmpty(Cmb_TalbNo2.Text)))       
             {
                 Input_Reset();
-                SearchTalb(2);
+                //SearchTalb(2);
             }
-        }
-
-        private void TXT_TalbNo_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(TXT_TalbNo.Text) == false)
-            {
-                GetData(Convert.ToInt32(TXT_TalbNo.Text), Cmb_FYear.Text);
-             
-            }
-       
         }
 
         private void TXT_TalbNo_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode ==Keys.Enter && AddEditFlag==2)
-            {
-                GetData(Convert.ToInt32(TXT_TalbNo.Text), Cmb_FYear.Text);
-             
-            }
-            else if (e.KeyCode == Keys.Enter && AddEditFlag == 0)
-            {
-                cleargridview();
-                SearchTalb(1);
-                BTN_Print.Visible=true;
-            }
+
+            //else if (e.KeyCode == Keys.Enter && AddEditFlag == 0)
+            //{
+            //    cleargridview();
+            //    SearchTalb(1);
+            //    BTN_Print.Visible=true;
+            //}
         }
 
         private void TXT_AppValue_TextChanged(object sender, EventArgs e)
@@ -4000,13 +3863,13 @@ Constants.opencon();
                         if (flag1 != 2)
                         {
 
-                            if (Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value) >= Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[3].Value))
-                            {
-                                MessageBox.Show("كمية المطلوبة اقل من كمية المخزن لا نحناج الى طلب توريد");
-                                return;
-                            }
+                            //if (Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value) >= Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[3].Value))
+                            //{
+                            //    MessageBox.Show("كمية المطلوبة اقل من كمية المخزن لا نحناج الى طلب توريد");
+                            //    return;
+                            //}
 
-                            else if ((Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value) < Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[3].Value)) && Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value) != 0)
+                            if ((Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value) < Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[3].Value)) && Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value) != 0)
                             {
                                 dataGridView1.Rows[e.RowIndex].Cells[3].Value = Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[3].Value) - Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value);
                                 dataGridView1.Rows[e.RowIndex].Cells[10].Value = dataGridView1.Rows[e.RowIndex].Cells[7].Value;
@@ -4061,17 +3924,6 @@ Constants.opencon();
 
         private void TXT_TalbNo2_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && AddEditFlag == 2)
-            {
-              //  GetData(Convert.ToInt32(TXT_TalbNo2.Text), Cmb_FYear.Text);
-
-            }
-            else if (e.KeyCode == Keys.Enter && AddEditFlag == 0)
-            {
-                cleargridview();
-                SearchTalb(3);
-                BTN_Print.Visible = true;
-            }
         }
 
         private void BTN_Search_Click(object sender, EventArgs e)
@@ -4261,60 +4113,54 @@ Constants.opencon();
 
         private void browseBTN_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(TXT_TalbNo.Text) || string.IsNullOrEmpty(Cmb_FYear.Text))
+            if (!IsValidCase(VALIDATION_TYPES.ATTACH_FILE))
             {
-                MessageBox.Show("يجب اختيار السنة المالية ورقم طلب التوريد اولا");
                 return;
             }
-            else
+
+            openFileDialog1.Filter = "PDF(*.pdf)|*.pdf";
+            DialogResult dialogRes = openFileDialog1.ShowDialog();
+            string ConstantPath = @"\\172.18.8.83\MaterialAPP\PDF\";//////////////////change it to server path
+
+            foreach (String file in openFileDialog1.FileNames)
             {
-                openFileDialog1.Filter = "PDF(*.pdf)|*.pdf";
-                openFileDialog1.ShowDialog();
-                string ConstantPath = @"\\172.18.8.83\MaterialAPP\PDF\";//////////////////change it to server path
-
-                foreach (String file in openFileDialog1.FileNames)
+                if (dialogRes == DialogResult.OK)
                 {
-                    if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                    string VariablePath = string.Concat(Constants.CodeEdara, @"\");
+                    string path = ConstantPath + VariablePath;
+
+                    if (!Directory.Exists(path))
                     {
-                        string VariablePath = string.Concat(Constants.CodeEdara, @"\");
-                        string path = ConstantPath + VariablePath;
+                        MessageBox.Show("عفوا لايمكنك ارفاق مرفقات برجاء الرجوع إلي إدارة نظم المعلومات");
+                        return;
+                    }
 
-                        if (!Directory.Exists(path))
-                        {
-                            MessageBox.Show("عفوا لايمكنك ارفاق مرفقات برجاء الرجوع إلي إدارة نظم المعلومات");
-                            return;
-                        }
+                    path += Cmb_FYear.Text + @"\";
 
-                        path += Cmb_FYear.Text + @"\";
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
 
-                        if (!Directory.Exists(path))
-                        {
-                            Directory.CreateDirectory(path);
-                        }
+                    path += TXT_TalbNo.Text + @"\";
 
-                        path += TXT_TalbNo.Text + @"\";
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
 
-                        if (!Directory.Exists(path))
-                        {
-                            Directory.CreateDirectory(path);
-                        }
+                    string filename = Path.GetFileName(file);
+                    path += filename;
 
-                        string filename = Path.GetFileName(file);
-                        path += filename;
-
-                        if (!File.Exists(path))
-                        {
-                            File.Copy(file, path);
-                        }
-
-                        //File.Move(file, path);
-
-                        //MessageBox.Show(file);
+                    if (!File.Exists(path))
+                    {
+                        File.Copy(file, path);
                     }
                 }
-
-                MessageBox.Show("تم إرفاق المرفقات");
             }
+
+            MessageBox.Show("تم إرفاق المرفقات");
+            
         }
 
         private void radioButton11_CheckedChanged(object sender, EventArgs e)
@@ -4397,6 +4243,9 @@ Constants.opencon();
                 TXT_StockBian.Enabled = false;
                 TXT_Unit.Enabled = false;
             }
+
+            Addbtn2.Enabled = !CHK_NewTasnif.Checked;
+            AddNewbtn.Enabled = CHK_NewTasnif.Checked;
         }
 
         private void dataGridView1_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
@@ -4415,12 +4264,6 @@ Constants.opencon();
         private void BTN_Sign1_Click(object sender, EventArgs e)
         {
             LoopGridview();
-
-            //if (radioButton1.Checked == false && radioButton2.Checked == false && radioButton3.Checked == false && radioButton4.Checked == false && radioButton5.Checked == false && radioButton6.Checked == false)
-            //{
-            //    //MessageBox.Show("من فضلك تاكد من اختيار طريقة الشراء");
-            //    return;
-            //}
 
             string Empn1 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد الخاص بك", "توقيع على انشاء طلب توريد", "");
 
@@ -5064,8 +4907,26 @@ Constants.opencon();
 
             }
         }
+
         #endregion
 
+        private void BTN_SearchTalb_Click(object sender, EventArgs e)
+        {
+            if (!IsValidCase(VALIDATION_TYPES.SEARCH))
+            {
+                return;
+            }
 
+            SearchTalb(TXT_TalbNo.Text, Cmb_FYear.Text, false);
+            Editbtn2.Enabled = true;
+        }
+
+        private void Cmb_TalbNo2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(Cmb_TalbNo2.SelectedIndex != -1)
+            {
+                SearchTalb(Cmb_TalbNo2.Text,Cmb_FYear2.Text,false);
+            }
+        }
     }
 }
