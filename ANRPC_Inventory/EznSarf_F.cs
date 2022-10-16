@@ -14,107 +14,438 @@ namespace ANRPC_Inventory
 {
     public partial class EznSarf_F : Form
     {
-        List<CurrencyInfo> currencies = new List<CurrencyInfo>();
-        public SqlConnection con;//sql conn for anrpc_sms db
-        Image DefaulteImg;
-        Image image1;
-        Image image2;
-        string[,] array1 = new string[100, 6];
-        string Image1;
-        string Image2;
+        #region Def Variables
+            List<CurrencyInfo> currencies = new List<CurrencyInfo>();
+            public SqlConnection con;//sql conn for anrpc_sms db
+            Image DefaulteImg;
+            Image image1;
+            Image image2;
+            string[,] array1 = new string[100, 6];
+            string Image1;
+            string Image2;
 
-        public int indeximg = 0;
-        byte[] img1;
-        byte[] img2;
-        int picflag = 0;
-        public DataTable DT = new DataTable();
-        private BindingSource bindingsource1 = new BindingSource();
-        private string TableQuery;
-        private int AddEditFlag;
-        public Boolean executemsg;
-        public double totalprice;
-        public double oldvalue;
-      //  private string TableQuery;
-        public string stockallold;
-        public DataTable table = new DataTable();
-        public SqlDataAdapter dataadapter;
-        public DataSet ds = new DataSet();
-        ///////////////////////
-        public string Sign1;
-        public string Sign2;
-        public string Sign3;
-        public string Sign4;
-        public string Sign5;
-        public string Sign6;
-        public string Sign7;
+            public int indeximg = 0;
+            byte[] img1;
+            byte[] img2;
+            int picflag = 0;
+            public DataTable DT = new DataTable();
+            private BindingSource bindingsource1 = new BindingSource();
+            private string TableQuery;
+            private int AddEditFlag;
+            public Boolean executemsg;
+            public double totalprice;
+            public double oldvalue;
+          //  private string TableQuery;
+            public string stockallold;
+            public DataTable table = new DataTable();
+            public SqlDataAdapter dataadapter;
+            public DataSet ds = new DataSet();
+            ///////////////////////
+            public string Sign1;
+            public string Sign2;
+            public string Sign3;
+            public string Sign4;
+            public string Sign5;
+            public string Sign6;
+            public string Sign7;
 
-        public string Empn1;
-        public string Empn2;
-        public string Empn3;
-        public string Empn4;
-        public string Empn5;
-        public string Empn6;
-        public string Empn7;
+            public string Empn1;
+            public string Empn2;
+            public string Empn3;
+            public string Empn4;
+            public string Empn5;
+            public string Empn6;
+            public string Empn7;
 
-        public string FlagEmpn1;
-        public string FlagEmpn2;
-        public string FlagEmpn3;
-        public string FlagEmpn4;
-        public string FlagEmpn5;
-        public string FlagEmpn6;
-        public string FlagEmpn7;
-
-
-        public int FlagSign1; 
-        public int FlagSign2;
-        public int FlagSign3;
-        public int FlagSign4;
-        public int FlagSign5;
-        public int FlagSign6;
-        public int FlagSign7;
+            public string FlagEmpn1;
+            public string FlagEmpn2;
+            public string FlagEmpn3;
+            public string FlagEmpn4;
+            public string FlagEmpn5;
+            public string FlagEmpn6;
+            public string FlagEmpn7;
 
 
+            public int FlagSign1; 
+            public int FlagSign2;
+            public int FlagSign3;
+            public int FlagSign4;
+            public int FlagSign5;
+            public int FlagSign6;
+            public int FlagSign7;
 
 
-        public string wazifa1;
-        public string wazifa2;
-        public string wazifa3;
-        public string wazifa4;
-        public string wazifa5;
-        public string wazifa6;
-        public string wazifa7;
-        public string wazifa8;
-        public string wazifa9;
-        public string wazifa10;
-        public string wazifa11;
 
-        public string Ename1;
-        public string Ename2;
-        public string Ename3;
-        public string Ename4;
-        public string Ename5;
-        public string Ename6;
-        public string Ename7;
-        public string Ename8;
-        public string Ename9;
-        public string Ename10;
-        public string Ename11;
 
-        public string pp;
-        public string TNO;
-        public string FY;
-        public int r;
-        public int rowflag = 0;
-        public decimal sum = 0;
-        public int MaxFlag;
-     //  public string TableQuery;
+            public string wazifa1;
+            public string wazifa2;
+            public string wazifa3;
+            public string wazifa4;
+            public string wazifa5;
+            public string wazifa6;
+            public string wazifa7;
+            public string wazifa8;
+            public string wazifa9;
+            public string wazifa10;
+            public string wazifa11;
+
+            public string Ename1;
+            public string Ename2;
+            public string Ename3;
+            public string Ename4;
+            public string Ename5;
+            public string Ename6;
+            public string Ename7;
+            public string Ename8;
+            public string Ename9;
+            public string Ename10;
+            public string Ename11;
+
+            public string pp;
+            public string TNO;
+            public string FY;
+            public int r;
+            public int rowflag = 0;
+            public int MaxFlag;
+         //  public string TableQuery;
         
-        AutoCompleteStringCollection TasnifColl = new AutoCompleteStringCollection(); //empn
-        AutoCompleteStringCollection TasnifNameColl = new AutoCompleteStringCollection(); //empn
+            AutoCompleteStringCollection TasnifColl = new AutoCompleteStringCollection(); //empn
+            AutoCompleteStringCollection TasnifNameColl = new AutoCompleteStringCollection(); //empn
 
-        AutoCompleteStringCollection UnitColl = new AutoCompleteStringCollection(); //empn
-        AutoCompleteStringCollection EznColl = new AutoCompleteStringCollection(); //empn
-        AutoCompleteStringCollection PartColl = new AutoCompleteStringCollection(); //empn
+            AutoCompleteStringCollection UnitColl = new AutoCompleteStringCollection(); //empn
+            AutoCompleteStringCollection EznColl = new AutoCompleteStringCollection(); //empn
+            AutoCompleteStringCollection PartColl = new AutoCompleteStringCollection(); //empn
+        #endregion
+
+
+        #region myDefVariable
+            enum VALIDATION_TYPES
+            {
+                ADD_TASNIF,
+                ADD_NEW_TASNIF,
+                ATTACH_FILE,
+                SEARCH,
+                CONFIRM_SEARCH,
+
+            }
+        #endregion
+
+
+        //------------------------------------------ State Handler ---------------------------------
+        #region State Handler
+
+        private void changePanelState(Panel panel, bool state)
+        {
+            try
+            {
+                foreach (Control control in panel.Controls)
+                {
+                    if (control.GetType() == typeof(Panel))
+                    {
+                        changePanelState((Panel)control, state);
+                    }
+                    else
+                    {
+                        control.Enabled = state;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        public void PrepareAddState()
+        {
+            //Search sec
+            changePanelState(panel5, true);
+
+            //dataViewre sec
+            changePanelState(panel6, false);
+            Txt_ReqQuan.Enabled = true;
+
+            //fyear sec
+            changePanelState(panel8, false);
+            Cmb_FYear.Enabled = true;
+            Cmb_CType.Enabled = true;
+
+            //bian edara sec
+            changePanelState(panel9, true);
+            TXT_Edara.Enabled = false;
+
+            //arabic value
+            changePanelState(panel11, false);
+
+
+            //btn Section
+            //generalBtn
+            SaveBtn.Enabled = true;
+            BTN_Cancel.Enabled = true;
+            Addbtn2.Enabled = true;
+            Addbtn.Enabled = false;
+            Editbtn2.Enabled = false;
+            BTN_SearchEzn.Enabled = false;
+            BTN_Print.Enabled = false;
+
+            //signature btn
+            changePanelState(signatureTable, false);
+            BTN_Sign1.Enabled = true;
+
+            //takalid types
+            DisableTakalef();
+
+            dataGridView1.ReadOnly = true;
+            dataGridView1.AllowUserToAddRows = true;
+            dataGridView1.AllowUserToDeleteRows = true;
+        }
+
+        public void PrepareEditState()
+        {
+            PrepareAddState();
+            panel8.Enabled = false;
+            BTN_Print.Enabled = true;
+
+            Pic_Sign1.Image = null;
+            Pic_Sign2.Image = null;
+            FlagSign1 = 0;
+            FlagSign2 = 0;
+            Pic_Sign1.BackColor = Color.White;
+            Pic_Sign2.BackColor = Color.White;
+        }
+
+        //public void PrepareConfirmState()
+        //{
+        //    DisableControls();
+        //    BTN_Save2.Enabled = true;
+
+        //    if (Constants.User_Type == "A")
+        //    {
+        //        if (FlagSign2 != 1 && FlagSign1 == 1)
+        //        {
+        //            BTN_Sign2.Enabled = true;
+        //        }
+        //        else if (FlagSign3 != 1 && FlagSign2 == 1)
+        //        {
+        //            BTN_Sign3.Enabled = true;
+        //            DeleteBtn2.Enabled = true;
+        //        }
+        //    }
+        //    else if (Constants.User_Type == "B")
+        //    {
+        //        if (Constants.UserTypeB == "ChangeTasnif" || Constants.UserTypeB == "NewTasnif")
+        //        {
+        //            dataGridView1.ReadOnly = false;
+        //            foreach (DataGridViewRow row in dataGridView1.Rows)
+        //            {
+        //                for (int i = 0; i <= 12; i++)
+        //                {
+        //                    row.Cells[i].ReadOnly = true;
+        //                }
+        //                //  dataGridView1.ReadOnly = true;
+        //                row.Cells[6].ReadOnly = false;//in perm
+        //            }
+        //            BTN_Sign8.Enabled = true;
+        //        }
+        //        else if (Constants.UserTypeB == "InventoryControl")
+        //        {
+        //            BTN_Sign12.Enabled = true;
+        //        }
+        //        else if (Constants.UserTypeB == "Mwazna")
+        //        {
+        //            if (FlagSign4 != 1 && FlagSign12 == 1)
+        //            {
+        //                BTN_Sign4.Enabled = true;
+        //            }
+
+        //            else if (FlagSign11 != 1 && FlagSign4 == 1)
+        //            {
+        //                BTN_Sign11.Enabled = true;
+        //            }
+
+        //            TXT_BndMwazna.Enabled = true;
+        //        }
+        //        else if (Constants.UserTypeB == "TechnicalFollowUp")
+        //        {
+        //            BTN_Sign9.Enabled = true;
+        //        }
+        //        else if (Constants.UserTypeB == "Chairman" && (talbstatus == 3 || talbstatus == 4))
+        //        {
+        //            BTN_Sign7.Enabled = true;
+        //            BTN_Sign10.Enabled = true;
+        //        }
+        //        else if (Constants.UserTypeB == "ViceChairman" && talbstatus == 2)
+        //        {
+        //            BTN_Sign13.Enabled = true;
+        //        }
+        //        else if (Constants.UserTypeB == "Purchases")
+        //        {
+        //            BTN_Sign5.Enabled = true;
+        //            TXT_AppValue.Enabled = true;
+        //            TXT_ArabicValue.Enabled = true;
+        //        }
+        //        else if (Constants.UserTypeB == "GMInventory")
+        //        {
+        //            BTN_Sign6.Enabled = true;
+        //            TXT_AppValue.Enabled = true;
+        //            TXT_ArabicValue.Enabled = true;
+        //        }
+        //    }
+
+        //    AddEditFlag = 1;
+        //    TNO = TXT_TalbNo.Text;
+        //    FY = Cmb_FYear.Text;
+        //}
+
+        public void prepareSearchState()
+        {
+            DisableControls();
+            Input_Reset();
+            Cmb_FYear.Enabled = true;
+            TXT_EznNo.Enabled = true;
+            BTN_Print.Enabled = true;
+        }
+
+        public void EnableTakalef()
+        {
+            changePanelState(takalefTable, true);
+        }
+
+        public void DisableTakalef()
+        {
+            changePanelState(takalefTable, false);
+        }
+
+
+        public void reset()
+        {
+            prepareSearchState();
+        }
+
+        public void DisableControls()
+        {
+            //Search sec
+            changePanelState(panel5, false);
+
+            //dataViewre sec
+            changePanelState(panel6, false);
+
+            //fyear sec
+            changePanelState(panel8, false);
+
+            //bian edara sec
+            changePanelState(panel9, false);
+
+            //arabic value
+            changePanelState(panel11, false);
+
+            //btn Section
+            //generalBtn
+            Addbtn.Enabled = true;
+            BTN_SearchEzn.Enabled = true;
+            SaveBtn.Enabled = false;
+            BTN_Save2.Enabled = false;
+            Editbtn.Enabled = false;
+            BTN_Cancel.Enabled = false;
+            Addbtn2.Enabled = false;
+            Editbtn2.Enabled = false;
+            BTN_Print.Enabled = false;
+
+            //signature btn
+            changePanelState(signatureTable, false);
+
+            dataGridView1.ReadOnly = true;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+
+            //takalif
+            DisableTakalef();
+        }
+
+        public void resetSignature()
+        {
+            //btn Section
+            //signature btn
+            Pic_Sign1.Image = null;
+            FlagSign1 = 0;
+            Pic_Sign1.BackColor = Color.White;
+
+            Pic_Sign2.Image = null;
+            FlagSign2 = 0;
+            Pic_Sign2.BackColor = Color.White;
+
+            Pic_Sign3.Image = null;
+            FlagSign3 = 0;
+            Pic_Sign3.BackColor = Color.White;
+
+            Pic_Sign4.Image = null;
+            FlagSign4 = 0;
+            Pic_Sign4.BackColor = Color.White;
+
+            Pic_Sign5.Image = null;
+            FlagSign5 = 0;
+            Pic_Sign5.BackColor = Color.White;
+        }
+
+        public void Input_Reset()
+        {
+            //Search sec
+            TXT_StockNoAll.Text = "";
+            TXT_StockName.Text = "";
+            TXT_PartNo.Text = "";
+
+            //dataViewre sec
+            TXT_StockBian.Text = "";
+            Txt_Quan.Text = "";
+            Txt_ReqQuan.Text = "";
+            TXT_Unit.Text = "";
+            Quan_Min.Value = 0;
+            Quan_Max.Value = 0;
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+
+
+            //fyear sec
+            Cmb_CType.Text = "";
+            Cmb_FYear.Text = "";
+            TXT_EznNo.Text = "";
+            TXT_TRNO.Text = "";
+
+            //bian edara sec
+            TXT_Edara.Text = "";
+            TXT_RequestedFor.Text = "";
+            TXT_Date.Value = DateTime.Today;
+
+            //arabic value
+            TXT_ProcessNo.Text = "";
+            TXT_RespCentre.Text = "";
+            TXT_Total.Text = "";
+            TXT_ArabicValue.Text = "";           
+
+            resetSignature();
+
+            //tkalifData types
+            TXT_AccNo.Text = "";
+            TXT_PaccNo.Text = "";
+            TXT_MTaklif.Text = "";
+            TXT_MResp.Text = "";
+            TXT_Masrof.Text = "";
+            TXT_Morakba.Text = "";
+            TXT_Enfak.Text = "";
+
+            cleargridview();
+
+            Image1 = "";
+            Image2 = "";
+            pictureBox2.Image = null;
+
+            oldvalue = 0;
+            picflag = 0;
+            MaxFlag = 0;
+            AddEditFlag = 0;
+        }
+        #endregion
+
 
         public EznSarf_F()
         {
@@ -124,10 +455,14 @@ namespace ANRPC_Inventory
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
         }
         //======================================
-        private void TalbTawred_Load(object sender, EventArgs e)
+        private void EznSarf_F_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'aNRPC_InventoryDataSet.T_BnodAwamershraa' table. You can move, or remove it, as needed.
-           // this.t_BnodAwamershraaTableAdapter.Fill(this.aNRPC_InventoryDataSet.T_BnodAwamershraa);
+            // this.t_BnodAwamershraaTableAdapter.Fill(this.aNRPC_InventoryDataSet.T_BnodAwamershraa);
+
+            HelperClass.comboBoxFiller(Cmb_FYear, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
+            HelperClass.comboBoxFiller(Cmb_FYear2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
+
 
             currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.Egypt));
             currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.Syria));
@@ -136,9 +471,9 @@ namespace ANRPC_Inventory
             currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.Tunisia));
             currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.Gold));
             MaxFlag = 0;
-            
+
             AddEditFlag = 0;
-            if (Constants.EznSarf_FF == false) 
+            if (Constants.EznSarf_FF == false)
             {
                 panel7.Visible = true;
                 eznSarfDataPanel.Visible = false;
@@ -151,10 +486,10 @@ namespace ANRPC_Inventory
                 eznSarfDataPanel.Dock = DockStyle.Top;
             }
             else { }
-        //    if (Constants.User_Type != "A")
-          //  {
-                DisableControls();
-           // }
+            //    if (Constants.User_Type != "A")
+            //  {
+           // DisableControls();
+            // }
             //------------------------------------------
 
             con = new SqlConnection(Constants.constring);
@@ -166,7 +501,7 @@ namespace ANRPC_Inventory
             this.dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
-          
+
             //*******************************************s
             // ******    AUTO COMPLETE
             //*******************************************
@@ -261,6 +596,8 @@ namespace ANRPC_Inventory
             TXT_EznNo.AutoCompleteCustomSource = EznColl;
 
             con.Close();
+
+            reset();
         }
         //===========================================================================
 
@@ -346,7 +683,7 @@ namespace ANRPC_Inventory
 
                     }
 
-                    Num_Quan.Text = dr["VirtualQuan"].ToString();
+                    Txt_Quan.Text = dr["VirtualQuan"].ToString();
 
                 }
 
@@ -427,11 +764,6 @@ namespace ANRPC_Inventory
             surface.Dispose();
         }
 
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
@@ -467,28 +799,14 @@ namespace ANRPC_Inventory
         {
             if ((MessageBox.Show("هل تريد اضافة اذن صرف جديد؟", "", MessageBoxButtons.YesNo)) == DialogResult.Yes)
             {
-                MessageBox.Show("برجاء اختيار نوع اذن الصرف و السنة المالية");
-                //btn_print.Enabled = false;
-                EnableControls();
+                reset();
+                PrepareAddState();
 
-                Input_Reset();
-                cleargridview();
                 AddEditFlag = 2;
                 TXT_Edara.Text = Constants.NameEdara;
-               /////////////////// TXT_Momayz.Text = "68"; //default valud
-                SaveBtn.Visible = true;
-                BTN_Print.Enabled = false;
-                Editbtn2.Enabled = false;
          
-            }
-            else
-            {
-                //do nothing
-            }
-           
+            }       
         }
-
-
 
         public void EnableControls()
         {
@@ -540,87 +858,7 @@ namespace ANRPC_Inventory
         }
 
 
-        public void Input_Reset()
-        {
-            Image1 = "";
-            Image2 = "";
-            picflag = 0;
-            MaxFlag = 0;
-            pictureBox2.Image = null;
-            cleargridview();
-            TXT_EznNo.Text = "";
-            Cmb_FYear.Text = "";
-            Cmb_CType.Text = "";
-            checkBox1.Checked = false;
-            checkBox2.Checked = false;
-            MaxFlag = 0;
-        //    TXT_Date.Enabled = true;
-                 TXT_TRNO.Text = "";
-            TXT_RespCentre.Text = "";
-            TXT_RequestedFor.Text = "";
-            TXT_ProcessNo.Text = "";
-            TXT_AccNo.Text = "";
-            TXT_PaccNo.Text = "";
-            TXT_MTaklif.Text = "";
-            TXT_MResp.Text = "";
-            TXT_Masrof.Text = "";
-            TXT_Enfak.Text = "";
-            TXT_Morakba.Text="";
-            TXT_StockBian.Text = "";
-            TXT_StockNoAll.Text = "";
-            TXT_StockName.Text = "";
-            Num_Quan.Value = 0;
-            Num_ReqQuan.Value = 0;
-            sum = 0;
-            oldvalue = 0;
-            TXT_Unit.Text = "";
-            Pic_Sign1.Image = null;
-            Pic_Sign2.Image = null;
-            Pic_Sign3.Image = null;
-            Pic_Sign4.Image = null;
-            Pic_Sign5.Image = null;
-      
-            FlagSign1 = 0;
-            FlagSign2 = 0;
-            FlagSign3 = 0;
-            FlagSign4 = 0;
-            FlagSign5 = 0;
-          
-            Pic_Sign1.BackColor = Color.White;
-            Pic_Sign2.BackColor = Color.White;
-            Pic_Sign3.BackColor = Color.White;
-            Pic_Sign4.BackColor = Color.White;
-            Pic_Sign5.BackColor = Color.White;
-        }
-        public void DisableControls()
-        {
-           // TXT_TalbNo.Enabled = false;
-            //Cmb_FYear.Enabled =false;
-           // AddNewbtn.Enabled = false;
-            Addbtn2.Enabled = false;
-            //dataGridView1.Enabled = false;
-            TXT_Date.Enabled = false;
-            TXT_TRNO.Enabled = false;
-            Cmb_CType.Enabled = false;
-            TXT_RespCentre.Enabled = true;
-            TXT_RequestedFor.Enabled = false;
-            TXT_ProcessNo.Enabled = false;
-            BTN_Sign1.Enabled =false;
-            BTN_Sign2.Enabled = false;
 
-            //dataGridView1.Enabled = false;
-            // dataGridView1.ReadOnly = true;
-            foreach (DataGridViewColumn dgvc in dataGridView1.Columns)
-            {
-                dgvc.ReadOnly = true;
-            }
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-
-            TXT_ProcessNo.Enabled = false;
-            TXT_Edara.Enabled = false;
-           // BTN_Sign3.Enabled =false;
-        }
 
 
 
@@ -652,13 +890,13 @@ namespace ANRPC_Inventory
                     return;
                 }
 
-                if ((Num_ReqQuan.Value > Num_Quan.Value))
+                if ((Convert.ToDouble(Txt_ReqQuan.Text) > Convert.ToDouble(Txt_Quan.Text)))
                 {
                     MessageBox.Show("الكمية المطلوبة اكتر من المتاحة");
                     return;
 
                 }
-                if (Num_Quan.Value == 0)
+                if (string.IsNullOrEmpty(Txt_Quan.Text))
                 {
                     MessageBox.Show("لا يوجد رصيد من هذا الصنف");
                     return;
@@ -667,7 +905,7 @@ namespace ANRPC_Inventory
 
 
 
-                if ((Num_ReqQuan.Value == 0))
+                if (string.IsNullOrEmpty(Txt_ReqQuan.Text))
                 {
                     MessageBox.Show("يجب ادخال الكمية المطلوبة");
                     return;
@@ -689,7 +927,7 @@ namespace ANRPC_Inventory
 
                 if (checkBox1.Checked == true || checkBox2.Checked == true)
                 {
-                    if ((Num_Quan.Value) - (Num_ReqQuan.Value) < Quan_Min.Value)
+                    if ((Convert.ToDouble(Txt_Quan.Text)) - (Convert.ToDouble(Txt_ReqQuan.Text)) < Convert.ToDouble(Quan_Min.Value))
                     {
                         MessageBox.Show("بعد صرف الكمية المطلوبة الكمية المتاحة ستكون اقل من الحد الادنى ");
                         MaxFlag = MaxFlag + 1;
@@ -700,7 +938,7 @@ namespace ANRPC_Inventory
                         array1[MaxFlag - 1, 1] = TXT_EznNo.Text;
 
                         array1[MaxFlag - 1, 2] = Cmb_FYear.Text;
-                        array1[MaxFlag - 1, 4] = Num_ReqQuan.Text;
+                        array1[MaxFlag - 1, 4] = Txt_ReqQuan.Text;
                         array1[MaxFlag - 1, 5] = Quan_Min.Text;
 
                     }
@@ -725,7 +963,7 @@ namespace ANRPC_Inventory
                 table.Rows.InsertAt(newRow, r);
 
                 dataGridView1.DataSource = table;
-                dataGridView1.Rows[r].Cells[3].Value = Num_ReqQuan.Text.ToString();
+                dataGridView1.Rows[r].Cells[3].Value = Convert.ToDouble(Txt_ReqQuan.Text);
                // dataGridView1.Rows[r].Cells[4].Value = TXT_Unit.Text.ToString();
                 dataGridView1.Rows[r].Cells[5].Value = TXT_Unit.Text;
                 //  dataGridView1.Rows[r].Cells[3].Value = TXT_StockBian.Text;
@@ -738,14 +976,14 @@ namespace ANRPC_Inventory
                 dataGridView1.Rows[r].Cells[9].Value = TXT_StockNoAll.Text;
 
 
-                if (string.IsNullOrEmpty(Num_Quan.Text))
+                if (string.IsNullOrEmpty(Txt_Quan.Text))
                 {
                     dataGridView1.Rows[r].Cells[10].Value =DBNull.Value;
 
                 }
                 else
                 {
-                    dataGridView1.Rows[r].Cells[10].Value = Num_Quan.Text;
+                    dataGridView1.Rows[r].Cells[10].Value = Convert.ToDouble(Txt_Quan.Text);
 
                 }
                 
@@ -1634,11 +1872,6 @@ namespace ANRPC_Inventory
               {
                   //cancel
               }
-          }
-
-          private void Num_ReqQuan_ValueChanged(object sender, EventArgs e)
-          {
-
           }
 
           private void Editbtn_Click_1(object sender, EventArgs e)
@@ -2744,7 +2977,7 @@ namespace ANRPC_Inventory
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
 
-
+            decimal sum = 0;
         
             if (e.ColumnIndex == 11)
             {
@@ -2954,7 +3187,7 @@ namespace ANRPC_Inventory
 
         private void TXT_StockNoAll_TextChanged(object sender, EventArgs e)
         {
-            Num_ReqQuan.Value = 0;
+            Txt_ReqQuan.Text = "";
         }
 
         private void TXT_EznNo_TextChanged(object sender, EventArgs e)
@@ -3148,9 +3381,6 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void label33_Click(object sender, EventArgs e)
-        {
-
-        }
+  
     }
 }

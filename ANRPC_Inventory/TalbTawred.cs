@@ -677,14 +677,12 @@ namespace ANRPC_Inventory
 
         public void EnableMoshtryat()
         {
-            panel8.Enabled = true;
             changePanelState(panel8, true);
             BTN_Sign5.Enabled = true;
         }
 
         public void DisableMoshtryat()
         {
-            panel8.Enabled = false;
             changePanelState(panel8, false);
             BTN_Sign5.Enabled = false;
         }
@@ -753,7 +751,6 @@ namespace ANRPC_Inventory
             TXT_StockBian.Text = "";
             Txt_Quan.Text = "";
             Txt_ReqQuan.Text = "";
-            TXT_PartNo.Text = "";
             TXT_Unit.Text = "";
             CMB_ApproxValue.Text = "";
             Quan_Min.Value = 0;
@@ -2550,7 +2547,6 @@ namespace ANRPC_Inventory
 
         private void Addbtn_Click(object sender, EventArgs e)
         {
-
             if ((MessageBox.Show("هل تريد اضافة طلب توريد جديد؟", "", MessageBoxButtons.YesNo)) == DialogResult.Yes)
             {
                 reset();
@@ -2951,7 +2947,6 @@ Constants.opencon();
             Cmb_TalbNo2.ValueMember = "TalbTwareed_No";
             Cmb_TalbNo2.DisplayMember = "TalbTwareed_No";
             Cmb_TalbNo2.SelectedIndex = -1;
-            Cmb_TalbNo2.SelectedIndexChanged += new EventHandler(Cmb_TalbNo2_SelectedIndexChanged);
             toolTip1.ShowAlways = true;
 
             // Set up the ToolTip text for the Button and Checkbox.
@@ -4711,11 +4706,6 @@ Constants.opencon();
                     Editbtn2.Enabled = false;
                 }
             }
-
-        }
-
-        private void Cmb_TalbNo2_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
         }
 

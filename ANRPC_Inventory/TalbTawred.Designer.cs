@@ -131,6 +131,7 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel7 = new System.Windows.Forms.Panel();
+            this.BTN_Search_Motab3a = new System.Windows.Forms.Button();
             this.BTN_Search = new System.Windows.Forms.Button();
             this.BTN_Tracking = new System.Windows.Forms.Button();
             this.BTN_Print2 = new System.Windows.Forms.Button();
@@ -195,7 +196,6 @@
             this.panel16 = new System.Windows.Forms.Panel();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.alertProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.BTN_Search_Motab3a = new System.Windows.Forms.Button();
             this.panel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign11)).BeginInit();
@@ -1560,6 +1560,24 @@
             this.panel7.TabIndex = 27;
             this.panel7.Visible = false;
             // 
+            // BTN_Search_Motab3a
+            // 
+            this.BTN_Search_Motab3a.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Search_Motab3a.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.BTN_Search_Motab3a.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Search_Motab3a.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
+            this.BTN_Search_Motab3a.FlatAppearance.BorderSize = 3;
+            this.BTN_Search_Motab3a.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_Search_Motab3a.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.BTN_Search_Motab3a.ForeColor = System.Drawing.Color.Maroon;
+            this.BTN_Search_Motab3a.Location = new System.Drawing.Point(611, 31);
+            this.BTN_Search_Motab3a.Name = "BTN_Search_Motab3a";
+            this.BTN_Search_Motab3a.Size = new System.Drawing.Size(72, 32);
+            this.BTN_Search_Motab3a.TabIndex = 306;
+            this.BTN_Search_Motab3a.Text = "بحث";
+            this.BTN_Search_Motab3a.UseVisualStyleBackColor = false;
+            this.BTN_Search_Motab3a.Click += new System.EventHandler(this.BTN_Search_Motab3a_Click);
+            // 
             // BTN_Search
             // 
             this.BTN_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -2419,24 +2437,6 @@
             // 
             this.alertProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.alertProvider.ContainerControl = this;
-            // 
-            // BTN_Search_Motab3a
-            // 
-            this.BTN_Search_Motab3a.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Search_Motab3a.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.BTN_Search_Motab3a.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_Search_Motab3a.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
-            this.BTN_Search_Motab3a.FlatAppearance.BorderSize = 3;
-            this.BTN_Search_Motab3a.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_Search_Motab3a.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.BTN_Search_Motab3a.ForeColor = System.Drawing.Color.Maroon;
-            this.BTN_Search_Motab3a.Location = new System.Drawing.Point(611, 31);
-            this.BTN_Search_Motab3a.Name = "BTN_Search_Motab3a";
-            this.BTN_Search_Motab3a.Size = new System.Drawing.Size(72, 32);
-            this.BTN_Search_Motab3a.TabIndex = 306;
-            this.BTN_Search_Motab3a.Text = "بحث";
-            this.BTN_Search_Motab3a.UseVisualStyleBackColor = false;
-            this.BTN_Search_Motab3a.Click += new System.EventHandler(this.BTN_Search_Motab3a_Click);
             // 
             // TalbTawred
             // 
