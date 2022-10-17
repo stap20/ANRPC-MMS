@@ -125,12 +125,15 @@ namespace ANRPC_Inventory
 
             ///////////////////////////////////////////////////////
           //  ConstantPath = @"N:\PDF\";//////////////////change it to server path
-            ConstantPath = @"\\172.18.8.83\MaterialAPP\PDF\";//////////////////change it to server path
-            VariablePath =string.Concat(CodeEdara,@"\",Fyear,@"\",TalbNo);
+            //ConstantPath = @"\\172.18.8.83\MaterialAPP\PDF\";//////////////////change it to server path
 
+
+            //after change attach concept which add for all steps attachment
+            //VariablePath =string.Concat(CodeEdara,@"\",Fyear,@"\",TalbNo);
+            //WholePath = ConstantPath + VariablePath + @"\";
 
             ////////////////////////////////////////////////////
-           // OpenFileDialog open = new OpenFileDialog();
+            // OpenFileDialog open = new OpenFileDialog();
             // open.InitialDirectory = @"\\10.10.6.244\it_cloud\Customized_Programs\PDF";
             //   string[] paths = { @"\\Financial-app","pdf", TXT_MM.Text.ToString() + "_" + TXT_YYYY.Text.ToString() };
             //    string fullpath = Path.Combine(paths);
@@ -154,8 +157,8 @@ namespace ANRPC_Inventory
                 PDF_box.Items.Add(Path.GetFileNameWithoutExtension(open.FileName));
                 PDFListBox1.Items.Add(open.FileName);//save full path in PDFLISTBOX1
             }*/////////////////////
-         //   string path = "C:\\MyFolde";
-            WholePath = ConstantPath + VariablePath+@"\";
+               //   string path = "C:\\MyFolde";
+
 
             if (Directory.Exists(WholePath))
             {

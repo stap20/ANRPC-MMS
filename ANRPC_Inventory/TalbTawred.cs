@@ -2107,58 +2107,65 @@ namespace ANRPC_Inventory
                 return errorsList;
             }
 
-            private List<(ErrorProvider, Control, string)> ValidateAttachFile()
-            {
-                List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+        private List<(ErrorProvider, Control, string)> ValidateAttachFile()
+        {
+            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
 
-                #region Cmb_FYear
-                    if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
-                    {
-                        errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
-                    }
-                #endregion
-                return errorsList;
-            }
-
-            private List<(ErrorProvider, Control, string)> ValidateSearch(bool isConfirm = false)
-            {
-                List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
-
-            if (isConfirm)
-            {
-                #region Cmb_FYear2
-                if (string.IsNullOrWhiteSpace(Cmb_FYear2.Text) || Cmb_FYear2.SelectedIndex == -1)
-                {
-                    errorsList.Add((errorProvider, Cmb_FYear2, "تاكد من  اختيار السنة المالية"));
-                }
-                #endregion
-
-                #region Cmb_TalbNo2
-                if (string.IsNullOrWhiteSpace(Cmb_TalbNo2.Text))
-                {
-                    errorsList.Add((errorProvider, Cmb_TalbNo2, "يجب اختيار رقم طلب توريد"));
-                }
-                #endregion
-            }
-            else
-            {
-                #region Cmb_FYear
+            #region Cmb_FYear
                 if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
                 {
                     errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
                 }
-                #endregion
-
-                #region TXT_TalbNo
+            #endregion
+            #region TXT_TalbNo
                 if (string.IsNullOrWhiteSpace(TXT_TalbNo.Text))
                 {
                     errorsList.Add((errorProvider, TXT_TalbNo, "يجب اختيار رقم طلب توريد"));
                 }
-                #endregion
-            }
+            #endregion
 
-                return errorsList;
+            return errorsList;
+        }
+
+        private List<(ErrorProvider, Control, string)> ValidateSearch(bool isConfirm = false)
+        {
+            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+        if (isConfirm)
+        {
+            #region Cmb_FYear2
+            if (string.IsNullOrWhiteSpace(Cmb_FYear2.Text) || Cmb_FYear2.SelectedIndex == -1)
+            {
+                errorsList.Add((errorProvider, Cmb_FYear2, "تاكد من  اختيار السنة المالية"));
             }
+            #endregion
+
+            #region Cmb_TalbNo2
+            if (string.IsNullOrWhiteSpace(Cmb_TalbNo2.Text))
+            {
+                errorsList.Add((errorProvider, Cmb_TalbNo2, "يجب اختيار رقم طلب توريد"));
+            }
+            #endregion
+        }
+        else
+        {
+            #region Cmb_FYear
+            if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
+            {
+                errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
+            }
+            #endregion
+
+            #region TXT_TalbNo
+            if (string.IsNullOrWhiteSpace(TXT_TalbNo.Text))
+            {
+                errorsList.Add((errorProvider, TXT_TalbNo, "يجب اختيار رقم طلب توريد"));
+            }
+            #endregion
+        }
+
+            return errorsList;
+        }
 
         private bool IsValidCase(VALIDATION_TYPES type)
             {
@@ -2592,22 +2599,6 @@ namespace ANRPC_Inventory
                 Constants.opencon();
                 CMB_ApproxValue.Text = "";
                 SearchTasnif(1);
-                /*
-                 string query = "select  A.Amrshraa_No,A.AmrSheraa_sanamalia,Rakm_Tasnif,UnitPrice ,A.Date_amrshraa from T_BnodAwamershraa BA inner join T_Awamershraa  A on A.Amrshraa_No=Ba.Amrshraa_No and A.AmrSheraa_sanamalia=BA.AmrSheraa_sanamalia where Rakm_Tasnif=@a order by Date_amrshraa ";
-                 SqlCommand cmd4 = new SqlCommand(query, Constants.con);
-                 cmd4.Parameters.AddWithValue("@a", TXT_StockNoAll.Text);
-                 DataTable dts = new DataTable();
-                 dts.Load(cmd4.ExecuteReader());
-
-                 CMB_ApproxValue.DataSource = dts;
-                 CMB_ApproxValue.ValueMember = "UnitPrice";
-                 CMB_ApproxValue.DisplayMember = "UnitPrice" + "   " + "Date_amrshraa";/*/
-
-                // CMB_ApproxValue.Text = "";
-                //SearchTasnif(2);
-                //   string query = "select  A.Amrshraa_No,A.AmrSheraa_sanamalia,Rakm_Tasnif,UnitPrice ,A.Date_amrshraa from T_BnodAwamershraa BA inner join T_Awamershraa  A on A.Amrshraa_No=Ba.Amrshraa_No and A.AmrSheraa_sanamalia=BA.AmrSheraa_sanamalia where Rakm_Tasnif=@a order by Date_amrshraa ";
-
-
             }
         }
 
@@ -2760,7 +2751,7 @@ namespace ANRPC_Inventory
 
                 try
                 {
-Constants.opencon();
+                    Constants.opencon();
                     // cmd.ExecuteNonQuery();
                     var count = cmd.ExecuteScalar();
                     executemsg = true;
@@ -2825,7 +2816,7 @@ Constants.opencon();
                 catch (SqlException sqlEx)
                 {
                     executemsg = false;
-                    MessageBox.Show(sqlEx.ToString());
+                    Console.WriteLine(sqlEx);
                     // flag = (int)cmd.Parameters["@Num"].Value;
                 }
             }
@@ -3824,39 +3815,40 @@ Constants.opencon();
 
         private void BTN_PDF_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(TXT_TalbNo.Text) || string.IsNullOrEmpty(Cmb_FYear.Text))
+            if (!IsValidCase(VALIDATION_TYPES.ATTACH_FILE))
             {
-                MessageBox.Show("يجب اختيار السنة المالية ورقم طلب التوريد اولا");
                 return;
             }
-            else
+
+            PDF_PopUp popup = new PDF_PopUp();
+
+            if (AddEditFlag == 0)//search
             {
+                //popup.TalbNo= TXT_TalbNo.Text;
+                //popup.Fyear = Cmb_FYear.Text;
+                //popup.CodeEdara = currentcodeedara;.
 
-                PDF_PopUp popup = new PDF_PopUp();
-
-                if (AddEditFlag == 0)//search
-                {
-                    popup.TalbNo= TXT_TalbNo.Text;
-                    popup.Fyear = Cmb_FYear.Text;
-                    popup.CodeEdara = currentcodeedara;
-                }
-                else//add or edit
-                {
-                    popup.TalbNo = TXT_TalbNo.Text;
-                    popup.Fyear = Cmb_FYear.Text;
-                    popup.CodeEdara = Constants.CodeEdara;
-                }
-                try
-                {
-                    popup.ShowDialog(this);
-                }
-                catch(Exception ex)
-                {
-                    Console.WriteLine(ex);
-                }
-
-                popup.Dispose();
+                popup.WholePath = @"\\172.18.8.83\MaterialAPP\PDF\" + currentcodeedara + @"\"+ Cmb_FYear.Text + @"\TALB_TAWREED\"+ TXT_TalbNo.Text + @"\";
             }
+            else//add or edit
+            {
+                //popup.TalbNo = TXT_TalbNo.Text;
+                //popup.Fyear = Cmb_FYear.Text;
+                //popup.CodeEdara = Constants.CodeEdara;
+
+                popup.WholePath = @"\\172.18.8.83\MaterialAPP\PDF\" + Constants.CodeEdara + @"\" + Cmb_FYear.Text + @"\TALB_TAWREED\" + TXT_TalbNo.Text + @"\";
+            }
+            try
+            {
+                popup.ShowDialog(this);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            popup.Dispose();
+
         }
 
         private void browseBTN_Click(object sender, EventArgs e)
@@ -3890,6 +3882,14 @@ Constants.opencon();
                         Directory.CreateDirectory(path);
                     }
 
+
+                    path += "TALB_TAWREED" + @"\";
+
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+
                     path += TXT_TalbNo.Text + @"\";
 
                     if (!Directory.Exists(path))
@@ -3907,7 +3907,14 @@ Constants.opencon();
                 }
             }
 
-            MessageBox.Show("تم إرفاق المرفقات");
+            if (dialogRes == DialogResult.OK)
+            {
+                MessageBox.Show("تم إرفاق المرفقات");
+            }
+            else
+            {
+                MessageBox.Show("لم يتم إرفاق المرفقات");
+            }
             
         }
 
