@@ -364,10 +364,12 @@ namespace ANRPC_Inventory
                 {
                     if (!row.IsNewRow)
                     {
-                        string q = "exec SP_UpdateVirtualQuan @stockall,@additionstock";
+                        string q = "exec SP_UpdateVirtualQuan @stockall,@additionstock,@p3";
                         cmd = new SqlCommand(q, Constants.con);
                         cmd.Parameters.AddWithValue("@stockall", row.Cells[10].Value);
                         cmd.Parameters.AddWithValue("@additionstock", row.Cells[6].Value);
+                        cmd.Parameters.AddWithValue("@p3", 2);
+                        cmd.ExecuteNonQuery();
                     }
                 }
 
@@ -896,8 +898,6 @@ namespace ANRPC_Inventory
                 Console.WriteLine(sqlEx);
             }
 
-            Console.WriteLine(cmd.Parameters["@flag"].Value);
-
             flag = (int)cmd.Parameters["@flag"].Value;
 
             if (executemsg == true && flag == 1)
@@ -977,25 +977,6 @@ namespace ANRPC_Inventory
                 MessageBox.Show("لم يتم إدخال طلب التوريد بنجاج!!");
             }
             Constants.closecon();
-        }
-
-        private void ConfirmLogic(int currentUserNumber)
-        {
-            if (currentUserNumber == 8)
-            {
-                //mo3taz
-            }
-
-            else if (currentUserNumber == 4 || currentUserNumber == 11)
-            {
-               
-            }
-            else if (currentUserNumber == 3)
-            {
-                
-            }
-
-            ((Button)panel13.Controls["BTN_Sign" + Convert.ToString(currentUserNumber)]).Enabled = true;
         }
 
         private void UpdateTalbTawreedTSignatureCycle()
@@ -1956,11 +1937,96 @@ namespace ANRPC_Inventory
 
         }
 
+        public bool DeleteTalb()
+        {
+
+            if ((MessageBox.Show("هل تريد حذف طلب توريد ؟", "", MessageBoxButtons.YesNo)) == DialogResult.Yes)
+            {
+                if (string.IsNullOrWhiteSpace(TXT_TalbNo.Text))
+                {
+                    MessageBox.Show("يجب اختيار طلب التوريد اولا");
+                    return false;
+                }
+                Constants.opencon();
+                string cmdstring1 = "select STOCK_NO_ALL,AdditionStockFlag,Bnd_No from T_TalbTawreed_Benod where FYear=@FY and TalbTwareed_No=@TNO";
+                SqlCommand cmd1 = new SqlCommand(cmdstring1, Constants.con);
+
+
+                cmd1.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_TalbNo.Text));
+                cmd1.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
+                SqlDataReader dr = cmd1.ExecuteReader();
+
+                //---------------------------------
+                if (dr.HasRows == true)
+                {
+                    while (dr.Read())
+                    {
+
+                        string cmdstring2 = "Exec SP_UndoVirtualQuan @TNO,@FY,@BN";
+
+                        SqlCommand cmd2 = new SqlCommand(cmdstring2, Constants.con);
+
+                        cmd2.Parameters.AddWithValue("@TNO", (dr["STOCK_NO_ALL"].ToString()));
+                        if (dr["AdditionStockFlag"].ToString() == "" || dr["AdditionStockFlag"] == DBNull.Value)
+                        {
+                            cmd2.Parameters.AddWithValue("@FY", 0);
+                        }
+                        else
+                        {
+                            cmd2.Parameters.AddWithValue("@FY", Convert.ToDouble(dr["AdditionStockFlag"].ToString()));
+                        }
+                        cmd2.Parameters.AddWithValue("@BN", (dr["Bnd_No"].ToString()));
+                        ///   cmd2.ExecuteNonQuery();
+
+                    }
+                }
+                dr.Close();
+
+
+                string cmdstring = "Exec SP_deleteTalbTawreed @TNO,@FY,@aot output";
+
+                SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+
+                cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_TalbNo.Text));
+                cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
+                cmd.Parameters.Add("@aot", SqlDbType.Int, 32);  //-------> output parameter
+                cmd.Parameters["@aot"].Direction = ParameterDirection.Output;
+
+                int flag;
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    executemsg = true;
+                }
+                catch (SqlException sqlEx)
+                {
+                    executemsg = false;
+                    Console.WriteLine(sqlEx);                    
+                }
+
+                flag = (int)cmd.Parameters["@aot"].Value;
+                Constants.closecon();
+
+                if (executemsg == true && flag == 1)
+                {
+                    MessageBox.Show("تم الحذف بنجاح");
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("لم يتم الحذف");
+                    return false;
+                }
+            }
+            return false;
+        }
+
         #endregion
 
         //------------------------------------------ Validation Handler ---------------------------------
         #region Validation Handler
-            private List<(ErrorProvider, Control, string)> ValidateAddTasnif(bool isNewTasnif = false)
+        private List<(ErrorProvider, Control, string)> ValidateAddTasnif(bool isNewTasnif = false)
             {
                 List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
 
@@ -2556,12 +2622,6 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void EditBtn_Click(object sender, EventArgs e)
-        {
-            AddEditFlag = 1;
-        }
-
-
         #region AddTasnif
             private void Addbtn2_Click(object sender, EventArgs e)
             {
@@ -2643,8 +2703,6 @@ namespace ANRPC_Inventory
                 CHK_NewTasnif.Checked = false;
             }
         #endregion
-
-
 
         private void Cmb_FYear_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -3339,7 +3397,7 @@ Constants.opencon();
 
             dr.Close();
 
-            GetTalbTawreedBnod(TXT_TalbNo.Text, Cmb_FYear.Text);
+            GetTalbTawreedBnod(talbNo, fyear);
             Constants.closecon();
 
             return true;
@@ -3354,85 +3412,6 @@ Constants.opencon();
                 Cmb_FYear2.SelectedIndex = -1;
                 Cmb_TalbNo2.SelectedIndex = -1;
                 Cmb_TalbNo2.Text = "";
-            }
-        }
-
-        public void DeleteTalb()
-        {
-
-            if ((MessageBox.Show("هل تريد حذف طلب توريد ؟", "", MessageBoxButtons.YesNo)) == DialogResult.Yes)
-            {
-                if (string.IsNullOrWhiteSpace(TXT_TalbNo.Text))
-                {
-                    MessageBox.Show("يجب اختيار طلب التوريد اولا");
-                    return;
-                }
-                Constants.opencon();
-                string cmdstring1 = "select STOCK_NO_ALL,AdditionStockFlag,Bnd_No from T_TalbTawreed_Benod where FYear=@FY and TalbTwareed_No=@TNO";
-                SqlCommand cmd1 = new SqlCommand(cmdstring1, Constants.con);
-
-
-                cmd1.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_TalbNo.Text));
-                cmd1.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
-                SqlDataReader dr = cmd1.ExecuteReader();
-
-                //---------------------------------
-                if (dr.HasRows == true)
-                {
-                    while (dr.Read())
-                    {
-
-                        string cmdstring2 = "Exec SP_UndoVirtualQuan @TNO,@FY,@BN";
-
-                        SqlCommand cmd2 = new SqlCommand(cmdstring2, Constants.con);
-
-                        cmd2.Parameters.AddWithValue("@TNO", (dr["STOCK_NO_ALL"].ToString()));
-                        if (dr["AdditionStockFlag"].ToString() == "" || dr["AdditionStockFlag"] == DBNull.Value)
-                        {
-                            cmd2.Parameters.AddWithValue("@FY", 0);
-                        }
-                        else
-                        {
-
-                            cmd2.Parameters.AddWithValue("@FY", Convert.ToDouble(dr["AdditionStockFlag"].ToString()));
-                        }
-                        cmd2.Parameters.AddWithValue("@BN", (dr["Bnd_No"].ToString()));
-                        ///   cmd2.ExecuteNonQuery();
-
-                    }
-                }
-                dr.Close();
-
-
-                string cmdstring = "Exec SP_deleteTalbTawreed @TNO,@FY,@aot output";
-
-                SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-
-                cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_TalbNo.Text));
-                cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
-                cmd.Parameters.Add("@aot", SqlDbType.Int, 32);  //-------> output parameter
-                cmd.Parameters["@aot"].Direction = ParameterDirection.Output;
-
-                int flag;
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                    executemsg = true;
-                    flag = (int)cmd.Parameters["@aot"].Value;
-                }
-                catch (SqlException sqlEx)
-                {
-                    executemsg = false;
-                    MessageBox.Show(sqlEx.ToString());
-                    flag = (int)cmd.Parameters["@aot"].Value;
-                }
-                if (executemsg == true && flag == 1)
-                {
-                    MessageBox.Show("تم الحذف بنجاح");
-                    Input_Reset();
-                }
-                Constants.closecon();
             }
         }
 
@@ -3597,10 +3576,6 @@ Constants.opencon();
                if (e.FormattedValue != DBNull.Value  && e.FormattedValue !="")// && dataGridView1.Rows[e.RowIndex].Cells[11].Value != "true")
                 
                 {
-
-
-
-
                     string query = "exec Sp_CheckTasnif @a,@p1 out,@p2 out,@p3 out,@flag out ";
                     SqlCommand cmd = new SqlCommand(query, Constants.con);
                     cmd.Parameters.AddWithValue("@a", (e.FormattedValue));
@@ -4174,20 +4149,16 @@ Constants.opencon();
 
                     FlagSign3 = result.Item2;
                     FlagEmpn3 = Empn3;
-                    DeleteTalb();
-                    //  MessageBox.Show(" تم الحذف بنجاح");
-
-                    ///////////////////////////////
+                    if (DeleteTalb())
+                    {
+                        reset();
+                    }
                 }
                 else
                 {
                     FlagSign3 = 0;
                     FlagEmpn3 = "";
                 }
-                // result.Item1;
-                // result.Item2;
-
-
             }
         }
 

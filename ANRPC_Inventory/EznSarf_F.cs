@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.IO;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace ANRPC_Inventory
 {
@@ -122,7 +123,6 @@ namespace ANRPC_Inventory
             enum VALIDATION_TYPES
             {
                 ADD_TASNIF,
-                ADD_NEW_TASNIF,
                 ATTACH_FILE,
                 SEARCH,
                 CONFIRM_SEARCH,
@@ -130,6 +130,241 @@ namespace ANRPC_Inventory
             }
         #endregion
 
+        //------------------------------------------ Helper ---------------------------------
+        #region Helpers
+        private void errorProviderHandler(List<(ErrorProvider, Control, string)> errosList)
+        {
+            alertProvider.Clear();
+            errorProvider.Clear();
+            foreach (var error in errosList)
+            {
+                ////Txt_ReqQuan.Location = new Point(Txt_ReqQuan.Location.X + errorProvider.Icon.Width, Txt_ReqQuan.Location.Y);
+                //error.Item2.Width = error.Item2.Width - error.Item1.Icon.Width;
+                error.Item1.SetError(error.Item2, error.Item3);
+            }
+        }
+
+        public void SP_UpdateSignatures(int x, DateTime D1, DateTime? D2 = null)
+        {
+            string cmdstring = "Exec  SP_UpdateSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
+            SqlCommand cmd = new SqlCommand(cmdstring, con);
+
+            cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_EznNo.Text));
+            cmd.Parameters.AddWithValue("@TNO2", Convert.ToInt32(TXT_TRNO.Text));
+
+            cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
+            cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
+            cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
+            cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
+
+            cmd.Parameters.AddWithValue("@FN", 2);
+
+            cmd.Parameters.AddWithValue("@SN", x);
+
+            cmd.Parameters.AddWithValue("@D1", D1);
+            if (D2 == null)
+            {
+                cmd.Parameters.AddWithValue("@D2", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@D2", D2);
+            }
+
+            cmd.ExecuteNonQuery();
+        }
+
+        private void InsertEznSarfBnood()
+        {
+            SqlCommand cmd;
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    string q = "exec SP_InsertBnodEznSarf @p1,@p111,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12 ";
+                    cmd = new SqlCommand(q, con);
+                    cmd.Parameters.AddWithValue("@p1", row.Cells[0].Value);
+                    cmd.Parameters.AddWithValue("@p111", TXT_TRNO.Text);///new
+                    cmd.Parameters.AddWithValue("@p2", row.Cells[1].Value);
+
+                    cmd.Parameters.AddWithValue("@p3", row.Cells[2].Value);
+                    cmd.Parameters.AddWithValue("@p4", row.Cells[3].Value ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@p5", row.Cells[5].Value);
+                    cmd.Parameters.AddWithValue("@p6", row.Cells[4].Value ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@p7", row.Cells[6].Value);
+                    cmd.Parameters.AddWithValue("@p8", row.Cells[7].Value);
+                    cmd.Parameters.AddWithValue("@p9", row.Cells[8].Value);
+                    cmd.Parameters.AddWithValue("@p10", row.Cells[9].Value);
+                    cmd.Parameters.AddWithValue("@p11", row.Cells[10].Value ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@p12", row.Cells[11].Value);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    string q = "exec SP_UpdateVirtualQuan @stockall,@additionstock,@p3";
+                    cmd = new SqlCommand(q, con);
+
+                    if (row.Cells[4].Value == DBNull.Value || row.Cells[4].Value.ToString() == "")
+                    {
+                        cmd.Parameters.AddWithValue("@stockall", row.Cells[3].Value);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@stockall", row.Cells[4].Value);
+                    }
+                    cmd.Parameters.AddWithValue("@additionstock", row.Cells[9].Value);
+                    cmd.Parameters.AddWithValue("@p3", 1);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void UpdateQuan()
+        {
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    string cmdstring = "Exec SP_UpdateQuanTsnif @Quan,@ST,@F,@EZ,@FY,@B,@TRNO";
+
+                    SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+
+                    cmd.Parameters.AddWithValue("@Quan", Convert.ToDouble(row.Cells[4].Value));
+                    //will send rased badl else monsrf
+                    // cmd.Parameters.AddWithValue("@Quan", Convert.ToDouble(row.Cells[10].Value));
+                    cmd.Parameters.AddWithValue("@ST", (row.Cells[9].Value));
+                    cmd.Parameters.AddWithValue("@F", 2);
+                    cmd.Parameters.AddWithValue("@EZ", TXT_EznNo.Text);
+                    cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text);
+
+                    cmd.Parameters.AddWithValue("@B", row.Cells[2].Value);
+                    cmd.Parameters.AddWithValue("@TRNO", TXT_TRNO.Text);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void InsertTrans()
+        {
+            string cmdstring = "Exec SP_deleteTR2 @TNO,@FY,@TRNO";
+
+            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+
+            cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_EznNo.Text));
+            cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
+            cmd.Parameters.AddWithValue("@TRNO", TXT_TRNO.Text.ToString());
+
+            cmd.ExecuteNonQuery();
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+
+                if (!row.IsNewRow)
+                {
+
+                    cmdstring = "exec SP_InsertTR2 @p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29";
+                    cmd = new SqlCommand(cmdstring, Constants.con);
+
+                    cmd.Parameters.AddWithValue("@p1", Convert.ToInt32(TXT_EznNo.Text));
+                    cmd.Parameters.AddWithValue("@p2", Cmb_FYear.Text.ToString());
+                    cmd.Parameters.AddWithValue("@p3", row.Cells[2].Value);
+                    cmd.Parameters.AddWithValue("@p4", row.Cells[9].Value);
+                    cmd.Parameters.AddWithValue("@p5", TXT_Date.Text.ToString());
+                    cmd.Parameters.AddWithValue("@p6", TXT_TRNO.Text.ToString());
+                    cmd.Parameters.AddWithValue("@p7", TXT_AccNo.Text.ToString());
+                    cmd.Parameters.AddWithValue("@p8", TXT_PaccNo.Text.ToString());
+                    string st = row.Cells[9].Value.ToString();
+                    cmd.Parameters.AddWithValue("@p9", (st).Substring(0, 2));
+                    cmd.Parameters.AddWithValue("@p10", (st).Substring(2, 2));
+
+                    cmd.Parameters.AddWithValue("@p11", (st).Substring(4, 2));
+                    cmd.Parameters.AddWithValue("@p12", (st).Substring(6, 2));
+                    cmd.Parameters.AddWithValue("@p13", row.Cells[4].Value);
+                    cmd.Parameters.AddWithValue("@p14", row.Cells[10].Value);
+                    cmd.Parameters.AddWithValue("@p15", row.Cells[5].Value);
+                    cmd.Parameters.AddWithValue("@p16", TXT_Edara.SelectedText);
+                    cmd.Parameters.AddWithValue("@p17", TXT_Edara.SelectedText);
+                    cmd.Parameters.AddWithValue("@p18", TXT_Date.Value.Day.ToString());
+                    cmd.Parameters.AddWithValue("@p19", TXT_Date.Value.Month.ToString());
+                    cmd.Parameters.AddWithValue("@p20", TXT_Date.Value.Year.ToString());
+
+                    cmd.Parameters.AddWithValue("@p21", (row.Cells[8].Value));
+                    cmd.Parameters.AddWithValue("@p22", row.Cells[7].Value);
+                    cmd.Parameters.AddWithValue("@p23", TXT_MTaklif.Text.ToString());
+                    cmd.Parameters.AddWithValue("@p24", TXT_MResp.Text.ToString());
+                    cmd.Parameters.AddWithValue("@p25", TXT_Masrof.Text.ToString());
+                    cmd.Parameters.AddWithValue("@p26", TXT_Enfak.Text.ToString());
+                    cmd.Parameters.AddWithValue("@p27", TXT_Enfak.Text.ToString());
+                    cmd.Parameters.AddWithValue("@p28", TXT_Morakba.Text.ToString());
+                    cmd.Parameters.AddWithValue("@p29", row.Cells[11].Value);
+                    // cmd.Parameters.AddWithValue("@p30", Cmb_FYear.Text.ToString());
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            MessageBox.Show("تم ادخال الحركة بنجاح");
+        }
+
+        private void AddNewTasnifInDataGridView()
+        {
+            #region Add row to dataGridView
+            r = dataGridView1.Rows.Count - 1;
+
+            rowflag = 1;
+            DataRow newRow = table.NewRow();
+
+            // Add the row to the rows collection.
+            //   table.Rows.Add(newRow);
+            table.Rows.InsertAt(newRow, r);
+
+            dataGridView1.DataSource = table;
+            dataGridView1.Rows[r].Cells[3].Value = Convert.ToDouble(Txt_ReqQuan.Text);
+            dataGridView1.Rows[r].Cells[5].Value = TXT_Unit.Text;
+            dataGridView1.Rows[r].Cells[6].Value = TXT_Unit.Text;
+            dataGridView1.Rows[r].Cells[7].Value = TXT_StockBian.Text;
+            dataGridView1.Rows[r].Cells[8].Value = TXT_StockName.Text;
+            dataGridView1.Rows[r].Cells[9].Value = TXT_StockNoAll.Text;
+
+            if (string.IsNullOrEmpty(Txt_Quan.Text))
+            {
+                dataGridView1.Rows[r].Cells[10].Value = DBNull.Value;
+            }
+            else
+            {
+                dataGridView1.Rows[r].Cells[10].Value = Convert.ToDouble(Txt_Quan.Text);
+            }
+
+            dataGridView1.Rows[r].Cells[11].Value = DBNull.Value;
+
+            dataGridView1.Rows[r].Cells[0].Value = TXT_EznNo.Text;
+            dataGridView1.Rows[r].Cells[1].Value = Cmb_FYear.Text;
+            dataGridView1.Rows[r].Cells[2].Value = r + 1;
+            dataGridView1.DataSource = table;
+            #endregion
+
+            //dataGridView1.Rows[r + 1].Cells[4].Value = DBNull.Value;
+            //dataGridView1.Rows[r + 1].Cells[5].Value = DBNull.Value;
+            ////  dataGridView1.Rows[r].Cells[3].Value = TXT_StockBian.Text;
+            //dataGridView1.Rows[r + 1].Cells[6].Value = DBNull.Value;
+            //dataGridView1.Rows[r + 1].Cells[7].Value = DBNull.Value;
+            //dataGridView1.Rows[r + 1].Cells[8].Value = DBNull.Value;
+            //dataGridView1.Rows[r + 1].Cells[9].Value = DBNull.Value;
+            //dataGridView1.Rows[r + 1].Cells[10].Value = DBNull.Value;
+            //dataGridView1.Rows[r + 1].Cells[11].Value = DBNull.Value;
+
+            //dataGridView1.Rows[r + 1].Cells[0].Value = DBNull.Value;
+            //dataGridView1.Rows[r + 1].Cells[1].Value = DBNull.Value;
+
+            //dataGridView1.Rows[r + 1].Cells[2].Value = DBNull.Value;
+            //dataGridView1.Rows[r + 1].Cells[3].Value = DBNull.Value;
+
+        }
+        #endregion
 
         //------------------------------------------ State Handler ---------------------------------
         #region State Handler
@@ -214,94 +449,43 @@ namespace ANRPC_Inventory
             Pic_Sign2.BackColor = Color.White;
         }
 
-        //public void PrepareConfirmState()
-        //{
-        //    DisableControls();
-        //    BTN_Save2.Enabled = true;
+        public void PrepareConfirmState()
+        {
+            DisableControls();
+            BTN_Save2.Enabled = true;
 
-        //    if (Constants.User_Type == "A")
-        //    {
-        //        if (FlagSign2 != 1 && FlagSign1 == 1)
-        //        {
-        //            BTN_Sign2.Enabled = true;
-        //        }
-        //        else if (FlagSign3 != 1 && FlagSign2 == 1)
-        //        {
-        //            BTN_Sign3.Enabled = true;
-        //            DeleteBtn2.Enabled = true;
-        //        }
-        //    }
-        //    else if (Constants.User_Type == "B")
-        //    {
-        //        if (Constants.UserTypeB == "ChangeTasnif" || Constants.UserTypeB == "NewTasnif")
-        //        {
-        //            dataGridView1.ReadOnly = false;
-        //            foreach (DataGridViewRow row in dataGridView1.Rows)
-        //            {
-        //                for (int i = 0; i <= 12; i++)
-        //                {
-        //                    row.Cells[i].ReadOnly = true;
-        //                }
-        //                //  dataGridView1.ReadOnly = true;
-        //                row.Cells[6].ReadOnly = false;//in perm
-        //            }
-        //            BTN_Sign8.Enabled = true;
-        //        }
-        //        else if (Constants.UserTypeB == "InventoryControl")
-        //        {
-        //            BTN_Sign12.Enabled = true;
-        //        }
-        //        else if (Constants.UserTypeB == "Mwazna")
-        //        {
-        //            if (FlagSign4 != 1 && FlagSign12 == 1)
-        //            {
-        //                BTN_Sign4.Enabled = true;
-        //            }
+            if (Constants.User_Type == "A")
+            {
+                if (FlagSign2 != 1 && FlagSign1 == 1)
+                {
+                    BTN_Sign2.Enabled = true;
+                    DeleteBtn.Enabled = true;
+                }
+            }
+            else if (Constants.User_Type == "B")
+            {
+                if (Constants.UserTypeB == "Sarf")
+                {
+                    BTN_Sign3.Enabled = true;
+                    dataGridView1.Columns["Quan2"].ReadOnly = false;
+                }
+                else if (Constants.UserTypeB == "Tkalif" || Constants.UserTypeB == "Finance")
+                {
+                    EnableTakalef();
+                }
+            }
 
-        //            else if (FlagSign11 != 1 && FlagSign4 == 1)
-        //            {
-        //                BTN_Sign11.Enabled = true;
-        //            }
-
-        //            TXT_BndMwazna.Enabled = true;
-        //        }
-        //        else if (Constants.UserTypeB == "TechnicalFollowUp")
-        //        {
-        //            BTN_Sign9.Enabled = true;
-        //        }
-        //        else if (Constants.UserTypeB == "Chairman" && (talbstatus == 3 || talbstatus == 4))
-        //        {
-        //            BTN_Sign7.Enabled = true;
-        //            BTN_Sign10.Enabled = true;
-        //        }
-        //        else if (Constants.UserTypeB == "ViceChairman" && talbstatus == 2)
-        //        {
-        //            BTN_Sign13.Enabled = true;
-        //        }
-        //        else if (Constants.UserTypeB == "Purchases")
-        //        {
-        //            BTN_Sign5.Enabled = true;
-        //            TXT_AppValue.Enabled = true;
-        //            TXT_ArabicValue.Enabled = true;
-        //        }
-        //        else if (Constants.UserTypeB == "GMInventory")
-        //        {
-        //            BTN_Sign6.Enabled = true;
-        //            TXT_AppValue.Enabled = true;
-        //            TXT_ArabicValue.Enabled = true;
-        //        }
-        //    }
-
-        //    AddEditFlag = 1;
-        //    TNO = TXT_TalbNo.Text;
-        //    FY = Cmb_FYear.Text;
-        //}
+            AddEditFlag = 1;
+            TNO = TXT_EznNo.Text;
+            FY = Cmb_FYear.Text;
+        }
 
         public void prepareSearchState()
         {
             DisableControls();
             Input_Reset();
             Cmb_FYear.Enabled = true;
+            Cmb_CType.Enabled = true;
             TXT_EznNo.Enabled = true;
             BTN_Print.Enabled = true;
         }
@@ -446,6 +630,574 @@ namespace ANRPC_Inventory
         }
         #endregion
 
+        //------------------------------------------ Logic Handler ---------------------------------
+        #region Logic Handler
+        private void AddLogic()
+        {
+            Constants.opencon();
+
+            string cmdstring = "Exec SP_InsertEznSarf @TNO,@FY,@CE,@NE,@CD,@MO,@RF,@RC,@TR,@ACC,@PACC,@MT,@MR,@MA,@EN,@MK,@S1,@S2,@S3,@S4,@S5,@LU,@LD,@TT,@aot output";
+
+            SqlCommand cmd = new SqlCommand(cmdstring, con);
+
+            cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_EznNo.Text));
+            cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
+            cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
+            cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
+            cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
+            cmd.Parameters.AddWithValue("@MO", TXT_TRNO.Text.ToString());
+            cmd.Parameters.AddWithValue("@RF", TXT_RequestedFor.Text.ToString());
+            cmd.Parameters.AddWithValue("@RC", TXT_RespCentre.Text.ToString());
+            cmd.Parameters.AddWithValue("@TR", TXT_TRNO.Text.ToString());
+            cmd.Parameters.AddWithValue("@ACC", TXT_AccNo.Text.ToString());
+            cmd.Parameters.AddWithValue("@PACC", TXT_PaccNo.Text.ToString());
+            cmd.Parameters.AddWithValue("@MT", TXT_MTaklif.Text.ToString());
+            cmd.Parameters.AddWithValue("@MR", TXT_MResp.Text.ToString());
+            cmd.Parameters.AddWithValue("@MA", TXT_Masrof.Text.ToString());
+            cmd.Parameters.AddWithValue("@EN", TXT_Enfak.Text.ToString());
+            cmd.Parameters.AddWithValue("@MK", TXT_Morakba.Text.ToString());
+            cmd.Parameters.AddWithValue("@S1", FlagEmpn1);
+            cmd.Parameters.AddWithValue("@S2", DBNull.Value);
+            cmd.Parameters.AddWithValue("@S3", DBNull.Value);
+            cmd.Parameters.AddWithValue("@S4", DBNull.Value);
+            cmd.Parameters.AddWithValue("@S5", DBNull.Value);
+            cmd.Parameters.AddWithValue("@LU", Constants.User_Name.ToString());
+            cmd.Parameters.AddWithValue("@LD", Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+
+            if (TXT_Total.Text.ToString() == "")
+            {
+                cmd.Parameters.AddWithValue("@TT", DBNull.Value);
+
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@TT", Convert.ToDecimal(TXT_Total.Text));
+
+            }
+
+            cmd.Parameters.Add("@aot", SqlDbType.Int, 32);  //-------> output parameter
+            cmd.Parameters["@aot"].Direction = ParameterDirection.Output;
+
+            int flag;
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                executemsg = true;
+                flag = (int)cmd.Parameters["@aot"].Value;
+            }
+            catch (SqlException sqlEx)
+            {
+                executemsg = false;
+                Console.WriteLine(sqlEx);
+                
+            }
+
+            flag = (int)cmd.Parameters["@aot"].Value;
+
+            if (executemsg == true && flag == 1)
+            {
+                InsertEznSarfBnood();
+
+                for (int i = 1; i <= 4; i++)
+                {
+                    cmdstring = "Exec  SP_InsertSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
+                    cmd = new SqlCommand(cmdstring, con);
+                    cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_EznNo.Text));
+                    cmd.Parameters.AddWithValue("@TNO2", Convert.ToInt32(TXT_TRNO.Text));
+                    cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
+                    cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
+                    cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
+                    cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
+                    cmd.Parameters.AddWithValue("@FN", 2);
+                    cmd.Parameters.AddWithValue("@SN", i);
+                    cmd.Parameters.AddWithValue("@D1", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@D2", DBNull.Value);
+                    cmd.ExecuteNonQuery();
+                }
+
+                SP_UpdateSignatures(1, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                SP_UpdateSignatures(2, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+
+                //////////////////////////////////////////////////////////////////
+                if (MaxFlag > 0)
+                {
+                    for (int i = 0; i < MaxFlag; i++)
+                    {
+                        string query = "exec SP_InsertTMinQuan @p1,@p2,@p3,@p4,@p5,@p6,@p7";
+                        SqlCommand cmd1 = new SqlCommand(query, Constants.con);
+                        cmd1.Parameters.AddWithValue("@p1", array1[i, 0]);
+                        cmd1.Parameters.AddWithValue("@p2", array1[i, 1]);
+                        cmd1.Parameters.AddWithValue("@p3", array1[i, 2]);
+                        cmd1.Parameters.AddWithValue("@p4", array1[i, 3]);
+                        cmd1.Parameters.AddWithValue("@p5", array1[i, 4]);
+                        cmd1.Parameters.AddWithValue("@p6", array1[i, 5]);
+                        cmd1.Parameters.AddWithValue("@p7", DBNull.Value);
+                        cmd1.ExecuteNonQuery();
+                    }
+                }
+
+                MessageBox.Show("تم الإضافة بنجاح  ! ");
+                reset();
+            }
+            else if (executemsg == true && flag == 2)
+            {
+                MessageBox.Show("تم إدخال رقم اذن الصرف  من قبل  ! ");
+            }
+            else if (executemsg == false)
+            {
+                MessageBox.Show("لم يتم إدخال إذن الصرف بنجاج!!");
+            }
+
+            Constants.closecon();
+        }
+
+        private void UpdateEznSarfTSignatureCycle()
+        {
+            if (FlagSign2 == 1)
+            {
+                SP_UpdateSignatures(2, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                SP_UpdateSignatures(3, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+
+            }
+            if (FlagSign3 == 1)
+            {
+                SP_UpdateSignatures(3, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                SP_UpdateSignatures(4, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+            }
+            if (FlagSign4 == 1)
+            {
+                SP_UpdateSignatures(4, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                SP_UpdateSignatures(5, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+            }
+            if (FlagSign5 == 1)
+            {
+                SP_UpdateSignatures(5, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+            }
+        }
+
+        public void UpdateEznSarf()
+        {
+            Constants.opencon();
+
+            string cmdstring1 = "select STOCK_NO_ALL,quan1,quan2 from T_EznSarf_Benod where FYear=@FY and EznSarf_No=@TNO";
+            SqlCommand cmd1 = new SqlCommand(cmdstring1, con);
+            cmd1.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_EznNo.Text));
+            cmd1.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
+            SqlDataReader dr = cmd1.ExecuteReader();
+
+            if (dr.HasRows == true)
+            {
+                while (dr.Read())
+                {
+                    if (!(string.IsNullOrWhiteSpace(dr["quan1"].ToString()) || string.IsNullOrEmpty(dr["quan1"].ToString()))) 
+                    { 
+                        string cmdstring2 = "Exec SP_UndoVirtualQuan2 @TNO,@QUAN";
+                        SqlCommand cmd2 = new SqlCommand(cmdstring2, con);
+
+                        cmd2.Parameters.AddWithValue("@TNO", (dr["STOCK_NO_ALL"].ToString()));
+                        if (dr["quan2"].ToString() == "")
+                        {
+
+                            cmd2.Parameters.AddWithValue("@QUAN", Convert.ToDouble(dr["quan1"].ToString()));
+                        }
+                        else
+                        {
+                            cmd2.Parameters.AddWithValue("@QUAN", Convert.ToDouble(dr["quan2"].ToString()));
+                        }
+
+                        cmd2.ExecuteNonQuery();
+                    }
+
+                }
+            }
+            dr.Close();
+
+            /////////////////////////////////////////
+            string cmdstring = "Exec SP_UpdateEznSarf @TNOold,@FYold, @TNO,@FY,@CE,@NE,@CD,@MO,@RF,@RC,@TR,@ACC,@PACC,@MT,@MR,@MA,@EN,@MK,@S1,@S2,@S3,@S4,@S5,@LU,@LD,@TT,@aot output";
+
+
+            SqlCommand cmd = new SqlCommand(cmdstring, con);
+            cmd.Parameters.AddWithValue("@TNOold", TNO);
+            cmd.Parameters.AddWithValue("@FYold", FY);
+            cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_EznNo.Text));
+            cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
+            cmd.Parameters.AddWithValue("@CE", TXT_CodeEdara.Text);
+            cmd.Parameters.AddWithValue("@NE", TXT_Edara.Text);
+            cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
+            cmd.Parameters.AddWithValue("@MO", TXT_TRNO.Text.ToString());
+            cmd.Parameters.AddWithValue("@RF", TXT_RequestedFor.Text.ToString());
+            cmd.Parameters.AddWithValue("@RC", TXT_RespCentre.Text.ToString());
+            cmd.Parameters.AddWithValue("@TR", TXT_TRNO.Text.ToString());
+            cmd.Parameters.AddWithValue("@ACC", TXT_AccNo.Text.ToString());
+            cmd.Parameters.AddWithValue("@PACC", TXT_PaccNo.Text.ToString());
+            cmd.Parameters.AddWithValue("@MT", TXT_MTaklif.Text.ToString());
+            cmd.Parameters.AddWithValue("@MR", TXT_MResp.Text.ToString());
+            cmd.Parameters.AddWithValue("@MA", TXT_Masrof.Text.ToString());
+            cmd.Parameters.AddWithValue("@EN", TXT_Enfak.Text.ToString());
+            cmd.Parameters.AddWithValue("@MK", TXT_Morakba.Text.ToString());
+
+            if (FlagSign1 == 1)
+            {
+                cmd.Parameters.AddWithValue("@S1", FlagEmpn1);
+
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@S1", DBNull.Value);
+
+            }
+            if (FlagSign2 == 1)
+            {
+                cmd.Parameters.AddWithValue("@S2", FlagEmpn2);
+
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@S2", DBNull.Value);
+
+            }
+            if (FlagSign3 == 1)
+            {
+                cmd.Parameters.AddWithValue("@S3", FlagEmpn3);
+
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@S3", DBNull.Value);
+
+            }
+
+            if (FlagSign4 == 1)
+            {
+                cmd.Parameters.AddWithValue("@S4", FlagEmpn4);
+
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@S4", DBNull.Value);
+
+            }
+
+            if (FlagSign5 == 1)
+            {
+                cmd.Parameters.AddWithValue("@S5", FlagEmpn5);
+
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@S5", DBNull.Value);
+            }
+
+            cmd.Parameters.AddWithValue("@LU", Constants.User_Name.ToString());
+            cmd.Parameters.AddWithValue("@LD", Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+
+            if (TXT_Total.Text.ToString() == "")
+            {
+                cmd.Parameters.AddWithValue("@TT", DBNull.Value);
+
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@TT", Convert.ToDecimal(TXT_Total.Text));
+
+            }
+
+            cmd.Parameters.Add("@aot", SqlDbType.Int, 32);  //-------> output parameter
+            cmd.Parameters["@aot"].Direction = ParameterDirection.Output;
+
+            int flag;
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                executemsg = true;               
+            }
+            catch (SqlException sqlEx)
+            {
+                executemsg = false;
+                Console.WriteLine(sqlEx);
+            }
+            flag = (int)cmd.Parameters["@aot"].Value;
+
+            if (executemsg == true && flag == 2)
+            {
+                InsertEznSarfBnood();
+                UpdateEznSarfTSignatureCycle();
+
+                if (FlagSign3 == 1)
+                {
+                    UpdateQuan();
+                    InsertTrans();
+                }
+
+                MessageBox.Show("تم التعديل بنجاح  ! ");
+
+                DisableControls();
+                Input_Reset();
+            }
+            else if (executemsg == true && flag == 2)
+            {
+                MessageBox.Show("إذن الصرف المراد تعديله غير موجود !!");
+            }
+
+            Constants.closecon();
+        }
+
+        private void EditLogic()
+        {
+            UpdateEznSarf();
+        }
+
+        public bool DeleteEznSarf()
+        {
+            if ((MessageBox.Show("هل تريد حذف اذن الصرف ؟", "", MessageBoxButtons.YesNo)) == DialogResult.Yes)
+            {
+                if (string.IsNullOrWhiteSpace(TXT_EznNo.Text))
+
+                {
+                    MessageBox.Show("يجب اختياراذن الصرف   اولا");
+                    return false;
+                }
+
+                Constants.opencon();
+
+                string cmdstring1 = "select STOCK_NO_ALL,quan1,quan2 from T_EznSarf_Benod where FYear=@FY and EznSarf_No=@TNO";
+                SqlCommand cmd1 = new SqlCommand(cmdstring1, con);
+
+
+                cmd1.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_EznNo.Text));
+                cmd1.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
+                SqlDataReader dr = cmd1.ExecuteReader();
+
+                //---------------------------------
+                if (dr.HasRows == true)
+                {
+                    while (dr.Read())
+                    {
+                        if (!(string.IsNullOrWhiteSpace(dr["quan1"].ToString()) || string.IsNullOrEmpty(dr["quan1"].ToString())))
+                        {
+                            string cmdstring2 = "Exec SP_UndoVirtualQuan2 @TNO,@FY";
+                            SqlCommand cmd2 = new SqlCommand(cmdstring2, con);
+
+                            cmd2.Parameters.AddWithValue("@TNO", (dr["STOCK_NO_ALL"].ToString()));
+                            if (dr["quan2"].ToString() == "")
+                            {
+                                cmd2.Parameters.AddWithValue("@FY", Convert.ToDouble(dr["quan1"].ToString()));
+                            }
+                            else
+                            {
+                                cmd2.Parameters.AddWithValue("@FY", Convert.ToDouble(dr["quan2"].ToString()));
+                            }
+
+                            cmd2.ExecuteNonQuery();
+                        }
+                    }
+                }
+                dr.Close();
+
+                string cmdstring = "Exec SP_deleteEznSarf @TNO,@FY,@TRNO,@aot output";
+
+                SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+
+                cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_EznNo.Text));
+                cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
+                cmd.Parameters.AddWithValue("@TRNO", TXT_TRNO.Text.ToString());
+
+                cmd.Parameters.Add("@aot", SqlDbType.Int, 32);  //-------> output parameter
+                cmd.Parameters["@aot"].Direction = ParameterDirection.Output;
+
+                int flag;
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    executemsg = true;
+                }
+                catch (SqlException sqlEx)
+                {
+                    executemsg = false;
+                    Console.WriteLine(sqlEx);
+                    
+                }
+
+                flag = (int)cmd.Parameters["@aot"].Value;
+
+                Constants.closecon();
+
+                if (executemsg == true && flag == 1)
+                {
+                    MessageBox.Show("تم الحذف بنجاح");
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("لم يتم الحذف");
+                    return false;
+                }
+            }
+
+            return false;
+        }
+        #endregion
+
+        //------------------------------------------ Validation Handler ---------------------------------
+        #region Validation Handler
+        private List<(ErrorProvider, Control, string)> ValidateAddTasnif()
+        {
+            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+            #region TXT_StockNoAll
+                if (string.IsNullOrWhiteSpace(TXT_StockNoAll.Text))
+                {
+                    errorsList.Add((errorProvider, TXT_StockNoAll, "يجب اختيار التصنيف المراد اضافته"));
+                }
+                else if (TXT_StockNoAll.Text.Length != 8)
+                {
+                    errorsList.Add((alertProvider, TXT_StockNoAll, "رقم التصنيف يجب ان يتكون من 8"));
+                }
+                else if (Txt_Quan.Text == "")
+                {
+                    errorsList.Add((alertProvider, TXT_StockNoAll, "هذا التصنيف غير موجود"));
+                }
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (!row.IsNewRow)
+                    {
+                        if (row.Cells[9].Value.ToString().ToLower() == TXT_StockNoAll.Text.ToLower() && TXT_StockNoAll.Text != "")
+                        {
+                            errorsList.Add((alertProvider, TXT_StockNoAll, "تم ادخال رقم هذا التصنيف من قبل"));
+
+                            break;
+                        }
+                    }
+                }
+            #endregion
+
+            #region Txt_ReqQuan
+            if (string.IsNullOrWhiteSpace(Txt_ReqQuan.Text))
+            {
+                errorsList.Add((errorProvider, Txt_ReqQuan, "يجب ادخال الكمية المطلوبة"));
+            }
+            else if (!string.IsNullOrWhiteSpace(Txt_ReqQuan.Text) && Convert.ToDecimal(Txt_ReqQuan.Text) <= 0)
+            {
+                errorsList.Add((alertProvider, Txt_ReqQuan, "يجب ان تكون الكمية المطلوبة اكبر من صفر"));
+            }
+            else if (!string.IsNullOrWhiteSpace(Txt_Quan.Text) && Txt_Quan.Text != "" && Convert.ToDouble(Txt_Quan.Text) >= 0 && Convert.ToDouble(Txt_ReqQuan.Text) > Convert.ToDouble(Txt_Quan.Text))
+            {
+                errorsList.Add((alertProvider, Txt_ReqQuan, "الكمية المطلوبة اكبر من المتاحة فى المخزن"));
+            }
+            #endregion
+
+            #region Cmb_FYear
+            if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
+            {
+                errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
+            }
+            #endregion
+
+            #region Cmb_CType
+            if (string.IsNullOrWhiteSpace(Cmb_CType.Text) || Cmb_CType.SelectedIndex == -1)
+            {
+                errorsList.Add((errorProvider, Cmb_CType, "تاكد من  اختيار نوع إذن الصرف"));
+            }
+            #endregion
+
+            return errorsList;
+        }
+
+        private List<(ErrorProvider, Control, string)> ValidateAttachFile()
+        {
+            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+            #region Cmb_FYear
+            if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
+            {
+                errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
+            }
+            #endregion
+            return errorsList;
+        }
+
+        private List<(ErrorProvider, Control, string)> ValidateSearch(bool isConfirm = false)
+        {
+            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+            if (isConfirm)
+            {
+                //#region Cmb_FYear2
+                //if (string.IsNullOrWhiteSpace(Cmb_FYear2.Text) || Cmb_FYear2.SelectedIndex == -1)
+                //{
+                //    errorsList.Add((errorProvider, Cmb_FYear2, "تاكد من  اختيار السنة المالية"));
+                //}
+                //#endregion
+
+                //#region Cmb_TalbNo2
+                //if (string.IsNullOrWhiteSpace(Cmb_TalbNo2.Text))
+                //{
+                //    errorsList.Add((errorProvider, Cmb_TalbNo2, "يجب اختيار رقم طلب توريد"));
+                //}
+                //#endregion
+            }
+            else
+            {
+                #region Cmb_CType
+                if (string.IsNullOrWhiteSpace(Cmb_CType.Text) || Cmb_CType.SelectedIndex == -1)
+                {
+                    errorsList.Add((errorProvider, Cmb_CType, "تاكد من  اختيار نوع إذن الصرف"));
+                }
+                #endregion
+
+                #region Cmb_FYear
+                if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
+                {
+                    errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
+                }
+                #endregion
+
+                #region TXT_EznNo
+                if (string.IsNullOrWhiteSpace(TXT_EznNo.Text))
+                {
+                    errorsList.Add((errorProvider, TXT_EznNo, "يجب اختيار رقم إذن الصرف"));
+                }
+                #endregion
+            }
+
+            return errorsList;
+        }
+
+        private bool IsValidCase(VALIDATION_TYPES type)
+        {
+            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+            if (type == VALIDATION_TYPES.ADD_TASNIF)
+            {
+                errorsList = ValidateAddTasnif();
+            }
+
+            else if (type == VALIDATION_TYPES.ATTACH_FILE)
+            {
+                errorsList = ValidateAttachFile();
+            }
+            else if (type == VALIDATION_TYPES.SEARCH)
+            {
+                errorsList = ValidateSearch(false);
+            }
+            else if (type == VALIDATION_TYPES.CONFIRM_SEARCH)
+            {
+                errorsList = ValidateSearch(true);
+            }
+
+            errorProviderHandler(errorsList);
+
+            if (errorsList.Count > 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        #endregion
 
         public EznSarf_F()
         {
@@ -459,7 +1211,8 @@ namespace ANRPC_Inventory
         {
             // TODO: This line of code loads data into the 'aNRPC_InventoryDataSet.T_BnodAwamershraa' table. You can move, or remove it, as needed.
             // this.t_BnodAwamershraaTableAdapter.Fill(this.aNRPC_InventoryDataSet.T_BnodAwamershraa);
-
+            
+            alertProvider.Icon = SystemIcons.Warning;
             HelperClass.comboBoxFiller(Cmb_FYear, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
             HelperClass.comboBoxFiller(Cmb_FYear2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
 
@@ -832,292 +1585,51 @@ namespace ANRPC_Inventory
   
         
         }
-        public void EnableControls_Malya()
-        {
-             TXT_AccNo.Enabled=true;
-            TXT_PaccNo.Enabled=true;
-            TXT_MTaklif.Enabled=true;
-            TXT_MResp.Enabled=true;
-            TXT_Masrof.Enabled=true;
-            TXT_Enfak.Enabled=true;
-            TXT_Morakba.Enabled = true;
-            Cmb_CType.Enabled = true;
-
-        }
-        public void DisableControls_Malya()
-        {
-            TXT_AccNo.Enabled = false;
-            TXT_PaccNo.Enabled = false;
-            TXT_MTaklif.Enabled = false;
-            TXT_MResp.Enabled = false;
-            TXT_Masrof.Enabled =false;
-            TXT_Enfak.Enabled = false;
-            TXT_Morakba.Enabled = false;
-            
-
-        }
-
-
-
-
-
-
 
         private void EditBtn_Click(object sender, EventArgs e)
         {
             AddEditFlag = 1;
         }
 
+
+
+
+
+
+
         private void Addbtn2_Click(object sender, EventArgs e)
         {
 
-            if (AddEditFlag != 2 && AddEditFlag != 1)//not in add mode
+            if (!IsValidCase(VALIDATION_TYPES.ADD_TASNIF))
             {
-                MessageBox.Show("يجب اضافة/تعديل اذن الصرف اولا");
                 return;
-
             }
-            else
+
+            string stocknoall = TXT_StockNoAll.Text;
+
+            if (checkBox1.Checked == true || checkBox2.Checked == true)
             {
-                if (string.IsNullOrEmpty(TXT_EznNo.Text) || string.IsNullOrEmpty(Cmb_FYear.Text))
+                if ((Convert.ToDouble(Txt_Quan.Text)) - (Convert.ToDouble(Txt_ReqQuan.Text)) < Convert.ToDouble(Quan_Min.Value))
                 {
-                    MessageBox.Show("تاكد من  اختيار السنة المالية ورقم اذن الصرف");
-                    return;
-                }
-                if (string.IsNullOrWhiteSpace(TXT_StockNoAll.Text))
-                {
-                    MessageBox.Show("يجب اختيار التصنيف المراد اضافته");
-                    return;
-                }
+                    MessageBox.Show("بعد صرف الكمية المطلوبة الكمية المتاحة ستكون اقل من الحد الادنى ");
+                    MaxFlag = MaxFlag + 1;
 
-                if ((Convert.ToDouble(Txt_ReqQuan.Text) > Convert.ToDouble(Txt_Quan.Text)))
-                {
-                    MessageBox.Show("الكمية المطلوبة اكتر من المتاحة");
-                    return;
+                    //  return;
+                    array1[MaxFlag - 1, 3] = TXT_StockNoAll.Text;
+                    array1[MaxFlag - 1, 0] = TXT_EznNo.Text;
+                    array1[MaxFlag - 1, 1] = TXT_EznNo.Text;
+
+                    array1[MaxFlag - 1, 2] = Cmb_FYear.Text;
+                    array1[MaxFlag - 1, 4] = Txt_ReqQuan.Text;
+                    array1[MaxFlag - 1, 5] = Quan_Min.Text;
 
                 }
-                if (string.IsNullOrEmpty(Txt_Quan.Text))
-                {
-                    MessageBox.Show("لا يوجد رصيد من هذا الصنف");
-                    return;
-                }
-
-
-
-
-                if (string.IsNullOrEmpty(Txt_ReqQuan.Text))
-                {
-                    MessageBox.Show("يجب ادخال الكمية المطلوبة");
-                    return;
-
-                }
-
-                string stocknoall = TXT_StockNoAll.Text;
-                foreach (DataGridViewRow row in dataGridView1.Rows)
-                {
-                    if (!row.IsNewRow)
-                    {
-                        if (row.Cells[9].Value.ToString().ToLower() == stocknoall.ToLower())
-                        {
-                            MessageBox.Show("تم ادخال رقم هذا التصنيف من قبل");
-                            return;
-                        }
-                    }
-                }
-
-                if (checkBox1.Checked == true || checkBox2.Checked == true)
-                {
-                    if ((Convert.ToDouble(Txt_Quan.Text)) - (Convert.ToDouble(Txt_ReqQuan.Text)) < Convert.ToDouble(Quan_Min.Value))
-                    {
-                        MessageBox.Show("بعد صرف الكمية المطلوبة الكمية المتاحة ستكون اقل من الحد الادنى ");
-                        MaxFlag = MaxFlag + 1;
-
-                        //  return;
-                        array1[MaxFlag - 1, 3] = TXT_StockNoAll.Text;
-                        array1[MaxFlag - 1, 0] = TXT_EznNo.Text;
-                        array1[MaxFlag - 1, 1] = TXT_EznNo.Text;
-
-                        array1[MaxFlag - 1, 2] = Cmb_FYear.Text;
-                        array1[MaxFlag - 1, 4] = Txt_ReqQuan.Text;
-                        array1[MaxFlag - 1, 5] = Quan_Min.Text;
-
-                    }
                     
-                }
-         
-                //    for (int row = 0; row < dataGridView1.Rows.Count - 1; row++)
-                //  {
-
-                //  dataGridView1.Rows.AddCopy(dataGridView1.Rows.Count - 1);
-                //  r = dataGridView1.CurrentCell.RowIndex ;
-
-                // if ( rowflag==0)
-                //   {
-                r = dataGridView1.Rows.Count - 1;
-
-                rowflag = 1;
-                DataRow newRow = table.NewRow();
-
-                // Add the row to the rows collection.
-                //   table.Rows.Add(newRow);
-                table.Rows.InsertAt(newRow, r);
-
-                dataGridView1.DataSource = table;
-                dataGridView1.Rows[r].Cells[3].Value = Convert.ToDouble(Txt_ReqQuan.Text);
-               // dataGridView1.Rows[r].Cells[4].Value = TXT_Unit.Text.ToString();
-                dataGridView1.Rows[r].Cells[5].Value = TXT_Unit.Text;
-                //  dataGridView1.Rows[r].Cells[3].Value = TXT_StockBian.Text;
-                dataGridView1.Rows[r].Cells[6].Value = TXT_Unit.Text;
-
-                dataGridView1.Rows[r].Cells[7].Value = TXT_StockBian.Text;
-
-                dataGridView1.Rows[r].Cells[8].Value = TXT_StockName.Text;
-
-                dataGridView1.Rows[r].Cells[9].Value = TXT_StockNoAll.Text;
-
-
-                if (string.IsNullOrEmpty(Txt_Quan.Text))
-                {
-                    dataGridView1.Rows[r].Cells[10].Value =DBNull.Value;
-
-                }
-                else
-                {
-                    dataGridView1.Rows[r].Cells[10].Value = Convert.ToDouble(Txt_Quan.Text);
-
-                }
-                
-                dataGridView1.Rows[r].Cells[0].Value = TXT_EznNo.Text;
-                dataGridView1.Rows[r].Cells[1].Value = Cmb_FYear.Text;
-
-                dataGridView1.Rows[r].Cells[2].Value = r + 1;
-             //   dataGridView1.Rows[r].Cells[3].Value = Num_ReqQuan.Value;
-                dataGridView1.DataSource = table;
-                dataGridView1.Rows[r + 1].Cells[4].Value = DBNull.Value;
-                dataGridView1.Rows[r + 1].Cells[5].Value = DBNull.Value;
-                //  dataGridView1.Rows[r].Cells[3].Value = TXT_StockBian.Text;
-                dataGridView1.Rows[r + 1].Cells[6].Value = DBNull.Value;
-                dataGridView1.Rows[r + 1].Cells[7].Value = DBNull.Value;
-                dataGridView1.Rows[r + 1].Cells[8].Value = DBNull.Value;
-                dataGridView1.Rows[r + 1].Cells[9].Value = DBNull.Value;
-                dataGridView1.Rows[r + 1].Cells[10].Value = DBNull.Value;
-                dataGridView1.Rows[r + 1].Cells[11].Value = DBNull.Value;
-
-                dataGridView1.Rows[r + 1].Cells[0].Value = DBNull.Value;
-                dataGridView1.Rows[r + 1].Cells[1].Value = DBNull.Value;
-
-                dataGridView1.Rows[r + 1].Cells[2].Value = DBNull.Value;
-                dataGridView1.Rows[r + 1].Cells[3].Value = DBNull.Value;
-                //   }
-                /*  else if(rowflag==1)
-                   {
-                       r = dataGridView1.Rows.Count - 1;
-                       //dataGridView1.Rows.AddCopy(dataGridView1.Rows.Count - 1);
-                       //    AddARow(table);
-                       // the table's schema.
-                       /*
-                       DataRow newRow = table.NewRow();
-
-                       // Add the row to the rows collection.
-                       //   table.Rows.Add(newRow);
-                       table.Rows.InsertAt(newRow, r );
-
-                       dataGridView1.DataSource = table;
-                    
-
-                       dataGridView1.Rows[r].Cells[4].Value = dataGridView1.Rows[r + 1].Cells[4].Value;
-                       dataGridView1.Rows[r].Cells[5].Value = dataGridView1.Rows[r + 1].Cells[5].Value;
-                       //  dataGridView1.Rows[r].Cells[3].Value = TXT_StockBian.Text;
-                       dataGridView1.Rows[r].Cells[6].Value = dataGridView1.Rows[r + 1].Cells[6].Value;
-
-                       if (string.IsNullOrEmpty(dataGridView1.Rows[r + 1].Cells[7].Value.ToString()))
-                       {
-
-                           dataGridView1.Rows[r].Cells[7].Value = DBNull.Value;
-                       }
-                       else
-                       {
-
-                           dataGridView1.Rows[r].Cells[7].Value = dataGridView1.Rows[r + 1].Cells[7].Value;
-                       }
-                       if (dataGridView1.Rows[r + 1].Cells[8].Value == null)
-                       {
-                           dataGridView1.Rows[r + 1].Cells[8].Value = "";
-                       }
-                       if (string.IsNullOrEmpty(dataGridView1.Rows[r + 1].Cells[8].Value.ToString()))
-                       {
-
-                           dataGridView1.Rows[r].Cells[8].Value = DBNull.Value;
-                       }
-                       else
-                       {
-
-                           dataGridView1.Rows[r].Cells[8].Value = dataGridView1.Rows[r + 1].Cells[8].Value;
-                       }
-                       //   dataGridView1.Rows[r].Cells[8].Value = dataGridView1.Rows[r + 1].Cells[8].Value;
-
-                       dataGridView1.Rows[r].Cells[0].Value = dataGridView1.Rows[r + 1].Cells[0].Value;
-                       dataGridView1.Rows[r].Cells[1].Value = dataGridView1.Rows[r + 1].Cells[1].Value;
-
-                       dataGridView1.Rows[r].Cells[2].Value =r+1;
-                       dataGridView1.Rows[r].Cells[3].Value = dataGridView1.Rows[r + 1].Cells[3].Value;
-
-                       dataGridView1.DataSource = table;
-                       dataGridView1.Rows[r].Cells[4].Value = TXT_Unit.Text.ToString();
-                       dataGridView1.Rows[r].Cells[5].Value = TXT_StockBian.Text;
-                       //  dataGridView1.Rows[r].Cells[3].Value = TXT_StockBian.Text;
-                       dataGridView1.Rows[r].Cells[6].Value = TXT_StockNoAll.Text;
-                     //  dataGridView1.Rows[r].Cells[7].Value = Num_Quan.Text;
-
-                       dataGridView1.Rows[r].Cells[0].Value = TXT_TalbNo.Text;
-                       dataGridView1.Rows[r].Cells[1].Value = Cmb_FYear.Text;
-
-                       dataGridView1.Rows[r].Cells[2].Value = r + 2;
-                       dataGridView1.Rows[r].Cells[3].Value = Num_ReqQuan.Value;
-                      // dataGridView1.CurrentCell = dataGridView1.Rows[r + 1].Cells[0];
-
-
-                      // dataGridView1.DataSource = table;
-                    //   dataGridView1.DataSource = table;
-                       //  table.DefaultView.Sort = "Bnd_No asc";
-                       // table = table.DefaultView.ToTable();
-                       //    GetData(Convert.ToInt32(TXT_TalbNo.Text), Cmb_FYear.Text);
-                       //  dataGridView1.DataSource = table;
-                       //  dataGridView1.DataBind();
-                 
-
-                  // }
-                   //r = table.Rows.Count ;
-                   /*    dataGridView1.Rows[r].Cells[4].Value = TXT_Unit.Text.ToString();
-                       dataGridView1.Rows[r].Cells[5].Value = TXT_StockBian.Text;
-                     //  dataGridView1.Rows[r].Cells[3].Value = TXT_StockBian.Text;
-                       dataGridView1.Rows[r].Cells[6].Value = TXT_StockNoAll.Text;
-                       dataGridView1.Rows[r].Cells[7].Value = Num_Quan.Text;
-
-                       dataGridView1.Rows[r].Cells[0].Value = TXT_TalbNo.Text;
-                       dataGridView1.Rows[r].Cells[1].Value = Cmb_FYear.Text;
-
-                       dataGridView1.Rows[r].Cells[2].Value = r + 1;
-                       dataGridView1.Rows[r].Cells[3].Value = Num_ReqQuan.Value;
-                       dataGridView1.DataSource=table;*/
-                //   dataGridView1.Rows[r].Cells[0].ReadOnly = true;
-                //   dataGridView1.Rows[r].Cells[1].ReadOnly = true;
-                //   dataGridView1.Rows[r].Cells[2].ReadOnly = true;
-                //   dataGridView1.Rows[r].Cells[4].ReadOnly = true;
-                //    dataGridView1.Rows[r].Cells[5].ReadOnly = true;
-                //     dataGridView1.Rows[r].Cells[6].ReadOnly = true;
-                //     dataGridView1.Rows[r].Cells[7].ReadOnly = true;
-                //  dataGridView1.Rows[e.RowIndex].Cells[5].ReadOnly = false;
-                //     dataGridView1.AllowUserToAddRows = true;
-                //         dataGridView1.AllowUserToDeleteRows = true;
-                // dataGridView1.EndEdit();
-
-
-                // }
-
-
             }
+
+            AddNewTasnifInDataGridView();       
         }
+        
         private void AddARow(DataTable t)
         {
          
@@ -1267,7 +1779,7 @@ namespace ANRPC_Inventory
                            // GetData(Convert.ToInt32(TXT_TalbNo.Text), Cmb_FYear.Text);
                             if (string.IsNullOrEmpty(TXT_EznNo.Text) == false)
                             {
-                                GetData(Convert.ToInt32(TXT_EznNo.Text), Cmb_FYear.Text,TXT_TRNO.Text);
+                                //GetData(Convert.ToInt32(TXT_EznNo.Text), Cmb_FYear.Text,TXT_TRNO.Text);
 
                             }
 
@@ -1309,8 +1821,7 @@ namespace ANRPC_Inventory
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
-        {
-           
+        {          
             if (AddEditFlag == 2)
             {
                 if (FlagSign1 != 1)
@@ -1318,388 +1829,281 @@ namespace ANRPC_Inventory
                     MessageBox.Show("من فضلك تاكد من توقيع اذن الصرف");
                     return;
                 }
-                if (con != null && con.State == ConnectionState.Closed)
-                {
-                    con.Open();
-                }
 
-                string cmdstring = "Exec SP_InsertEznSarf @TNO,@FY,@CE,@NE,@CD,@MO,@RF,@RC,@TR,@ACC,@PACC,@MT,@MR,@MA,@EN,@MK,@S1,@S2,@S3,@S4,@S5,@LU,@LD,@TT,@aot output";
-
-                SqlCommand cmd = new SqlCommand(cmdstring, con);
-
-                cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_EznNo.Text));
-                cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
-                cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
-                cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
-                cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
-                cmd.Parameters.AddWithValue("@MO", TXT_TRNO.Text.ToString());
-
-                cmd.Parameters.AddWithValue("@RF", TXT_RequestedFor.Text.ToString());
-
-                cmd.Parameters.AddWithValue("@RC", TXT_RespCentre.Text.ToString());
-
-                // cmd.Parameters.AddWithValue("@TR", TXT_ProcessNo.Text.ToString());
-                cmd.Parameters.AddWithValue("@TR", TXT_TRNO.Text.ToString());
-                cmd.Parameters.AddWithValue("@ACC", TXT_AccNo.Text.ToString());
-                cmd.Parameters.AddWithValue("@PACC", TXT_PaccNo.Text.ToString());
-                cmd.Parameters.AddWithValue("@MT", TXT_MTaklif.Text.ToString());
-                cmd.Parameters.AddWithValue("@MR", TXT_MResp.Text.ToString());
-                cmd.Parameters.AddWithValue("@MA", TXT_Masrof.Text.ToString());
-                cmd.Parameters.AddWithValue("@EN", TXT_Enfak.Text.ToString());
-                cmd.Parameters.AddWithValue("@MK", TXT_Morakba.Text.ToString());
-            
-                cmd.Parameters.AddWithValue("@S1", FlagEmpn1);
-
-                cmd.Parameters.AddWithValue("@S2", DBNull.Value);
-
-                cmd.Parameters.AddWithValue("@S3", DBNull.Value);
-
-                cmd.Parameters.AddWithValue("@S4", DBNull.Value);
-
-                cmd.Parameters.AddWithValue("@S5", DBNull.Value);
-
-
-
-
-                cmd.Parameters.AddWithValue("@LU", Constants.User_Name.ToString());
-                cmd.Parameters.AddWithValue("@LD", Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                if (TXT_Total.Text.ToString() == "")
-                {
-                    cmd.Parameters.AddWithValue("@TT", DBNull.Value);
-
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@TT", Convert.ToDecimal(TXT_Total.Text));
-
-                }
-
-                cmd.Parameters.Add("@aot", SqlDbType.Int, 32);  //-------> output parameter
-                cmd.Parameters["@aot"].Direction = ParameterDirection.Output;
-
-                int flag;
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                    executemsg = true;
-                    flag = (int)cmd.Parameters["@aot"].Value;
-                }
-                catch (SqlException sqlEx)
-                {
-                    executemsg = false;
-                    MessageBox.Show(sqlEx.ToString());
-                    flag = (int)cmd.Parameters["@aot"].Value;
-                }
-                if (executemsg == true && flag == 1)
-                {
-
-
-                    foreach (DataGridViewRow row in dataGridView1.Rows)
-                    {
-
-                        if (!row.IsNewRow)
-                        {
-
-
-
-                            string q = "exec SP_InsertBnodEznSarf @p1,@p111,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12 ";
-                            cmd = new SqlCommand(q, con);
-                            cmd.Parameters.AddWithValue("@p1", row.Cells[0].Value);
-                            cmd.Parameters.AddWithValue("@p111", TXT_TRNO.Text);///new
-                            cmd.Parameters.AddWithValue("@p2", row.Cells[1].Value);
-                           
-                            cmd.Parameters.AddWithValue("@p3", row.Cells[2].Value);
-                            cmd.Parameters.AddWithValue("@p4", row.Cells[3].Value ?? DBNull.Value);
-                            cmd.Parameters.AddWithValue("@p5", row.Cells[5].Value);
-                            cmd.Parameters.AddWithValue("@p6", row.Cells[4].Value ?? DBNull.Value);
-                            cmd.Parameters.AddWithValue("@p7", row.Cells[6].Value);
-                            cmd.Parameters.AddWithValue("@p8", row.Cells[7].Value );
-                            cmd.Parameters.AddWithValue("@p9", row.Cells[8].Value );
-                            cmd.Parameters.AddWithValue("@p10", row.Cells[9].Value);
-                            cmd.Parameters.AddWithValue("@p11", row.Cells[10].Value ?? DBNull.Value);
-                            cmd.Parameters.AddWithValue("@p12", row.Cells[11].Value);
-
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
-                    foreach (DataGridViewRow row in dataGridView1.Rows)
-                    {
-
-                        if (!row.IsNewRow)
-                        {
-
-
-
-                            string q = "exec SP_UpdateVirtualQuan @p1,@p2,@p3";
-                            cmd = new SqlCommand(q, con);
-
-                            if (row.Cells[4].Value == DBNull.Value || row.Cells[4].Value.ToString()=="")
-                            {
-                                cmd.Parameters.AddWithValue("@p1", row.Cells[3].Value);
-                            }
-
-                            else
-                            {
-                                cmd.Parameters.AddWithValue("@p1", row.Cells[4].Value);
-                            }
-                            cmd.Parameters.AddWithValue("@p2", row.Cells[9].Value);
-                            cmd.Parameters.AddWithValue("@p3", 1);
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
-
-
-                    ////////////////
-
-                    for (int i = 1; i <= 5; i++)
-                    {
-
-
-                        cmdstring = "Exec  SP_InsertSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
-                        cmd = new SqlCommand(cmdstring, con);
-
-                        cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_EznNo.Text));
-                        cmd.Parameters.AddWithValue("@TNO2", Convert.ToInt32(TXT_TRNO.Text));
-
-                        cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
-                        cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
-                        cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
-                        cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
-
-                        cmd.Parameters.AddWithValue("@FN", 2);
-
-                        cmd.Parameters.AddWithValue("@SN", i);
-
-                        cmd.Parameters.AddWithValue("@D1", DBNull.Value);
-
-                        cmd.Parameters.AddWithValue("@D2", DBNull.Value);
-                        cmd.ExecuteNonQuery();
-                    }
-                    SP_UpdateSignatures(1, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    SP_UpdateSignatures(2, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    //////////////////////////////////////////////////////////////////
-                    if (MaxFlag > 0)
-                    {
-                        for (int i = 0; i < MaxFlag; i++)
-                        {
-                            string query = "exec SP_InsertTMinQuan @p1,@p2,@p3,@p4,@p5,@p6,@p7";
-                            SqlCommand cmd1 = new SqlCommand(query, Constants.con);
-                            cmd1.Parameters.AddWithValue("@p1", array1[i, 0]);
-                            cmd1.Parameters.AddWithValue("@p2", array1[i, 1]);
-                            cmd1.Parameters.AddWithValue("@p3", array1[i, 2]);
-                            cmd1.Parameters.AddWithValue("@p4", array1[i, 3]);
-                            cmd1.Parameters.AddWithValue("@p5", array1[i, 4]);
-                            cmd1.Parameters.AddWithValue("@p6", array1[i, 5]);
-                            cmd1.Parameters.AddWithValue("@p7", DBNull.Value);
-
-
-
-                            cmd1.ExecuteNonQuery();
-
-                        }
-                    }
-
-
-
-                    ///////////////
-                     MessageBox.Show("تم الإضافة بنجاح  ! ");
-                    
-                       //  dataGridView1.EndEdit();
-                      //   dataGridView1.DataSource = table;
-
-                         //Getdata("SELECT  [TalbTwareed_No] ,[FYear],[Bnd_No],[RequestedQuan],Unit,[BIAN_TSNIF] ,STOCK_NO_ALL,Quan,[ArrivalDate] FROM [ANRPC_Inventory].[dbo].[T_TalbTawreed_Benod] ");
-                        //  // getdata2();
-                 
-                      //    dataadapter.InsertCommand = new SqlCommandBuilder(dataadapter).GetInsertCommand();
-                             
-                      //   dataadapter.Update(table);
-                      //  MessageBox.Show("تم  الإضافة بنجاح");
-                    DisableControls();
-                     BTN_Print.Visible = true;
-                     SaveBtn.Visible = false;
-                     Editbtn2.Enabled = true;
-                    AddEditFlag = 0;
-                }
-                else if (executemsg == true && flag == 2)
-                {
-                    MessageBox.Show("تم إدخال رقم اذن الصرف  من قبل  ! ");
-                }
-                con.Close();
+                AddLogic();
             }
             else if (AddEditFlag == 1)
             {
-                UpdateEznSarf();
+                EditLogic();
             }
-           
+
+            reset();
         }
 
-        public void SP_UpdateSignatures(int x, DateTime D1, DateTime? D2 = null)
+
+
+        private void HandleDataGridViewStyle()
         {
-            string cmdstring = "Exec  SP_UpdateSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
-            SqlCommand cmd = new SqlCommand(cmdstring, con);
 
-            cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_EznNo.Text));
-            cmd.Parameters.AddWithValue("@TNO2", Convert.ToInt32(TXT_TRNO.Text));
-
-            cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
-            cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
-            cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
-            cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
-
-            cmd.Parameters.AddWithValue("@FN", 2);
-
-            cmd.Parameters.AddWithValue("@SN", x);
-
-            cmd.Parameters.AddWithValue("@D1", D1);
-            if (D2 == null)
+            if(Constants.User_Type == "A")
             {
-                cmd.Parameters.AddWithValue("@D2", DBNull.Value);
+                //dataGridView1.Columns["Quan2"].ReadOnly = true;
+                //dataGridView1.Columns["TotalPrice"].ReadOnly = true;
             }
-            else
+            else if(Constants.User_Type == "B")
             {
-                cmd.Parameters.AddWithValue("@D2", D2);
-            }
-
-            cmd.ExecuteNonQuery();
-        }
-          private void Getdata(string cmd)
-        {
-            dataadapter = new SqlDataAdapter(cmd, con);
-            table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-            dataadapter.Fill(table);
-            dataGridView1.DataSource = table;
-            //SELECT [EznSarf_No],[FYear],[CodeEdara],[NameEdara],[Date],[Momayz],[RequestedFor],[Responsiblecenter],[TR_NO] ,[Sign1],[Sign2],[Sign3],[Sign4] ,[Sign5],[LUser] ,[LDate] FROM [dbo].[T_EznSarf]
-
-            dataGridView1.Columns["EznSarf_No"].HeaderText = "رقم اذن الصرف";//col0
-                dataGridView1.Columns["EznSarf_No"].Visible=false;
-                dataGridView1.Columns["EznSarf_No"].ContextMenuStrip = contextMenuStrip1;
-                dataGridView1.Columns["EznSarf_No"].ReadOnly = true;
-           // dataGridView1.Columns["TalbTwareed_No"].Width = 60;
-            dataGridView1.Columns["FYear"].HeaderText = "السنة المالية";//col1
-            dataGridView1.Columns["FYear"].Visible=false;
-
-            dataGridView1.Columns["Bnd_No"].HeaderText = "19/18";//col2
-            dataGridView1.Columns["Bnd_No"].Width = 40;
-            dataGridView1.Columns["Bnd_No"].ReadOnly = true;
-            dataGridView1.Columns["Bnd_No"].ContextMenuStrip = contextMenuStrip1;
-            dataGridView1.Columns["Quan1"].HeaderText = "المطلوب";//col3
-            dataGridView1.Columns["Quan1"].Width = 80;
-            dataGridView1.Columns["Quan1"].ContextMenuStrip = contextMenuStrip1;
-          //  dataGridView1.Columns["Quan1"].ReadOnly = true;
-              dataGridView1.Columns["Quan2"].HeaderText = "المنصرف";//col4
-            dataGridView1.Columns["Quan2"].Width = 80;
-            
-                dataGridView1.Columns["Quan2"].ContextMenuStrip = contextMenuStrip1;
-                if (Constants.User_Type == "B" && Constants.UserTypeB=="Sarf")
+                if(Constants.UserTypeB == "Sarf")
                 {
                     dataGridView1.Columns["Quan2"].DefaultCellStyle.BackColor = Color.Salmon;
                 }
-              if(Constants.User_Type=="A")
-              {
-                  dataGridView1.Columns["Quan2"].ReadOnly = true;
-           
-              }
-              if (Constants.User_Type == "B" && Constants.UserTypeB != "Sarf")
-              {
-                  dataGridView1.Columns["Quan2"].ReadOnly = false;
+                else{
+                    //dataGridView1.Columns["Quan2"].ReadOnly = false;
+                }
+                
+                if (Constants.UserTypeB == "Finance")
+                {
+                    dataGridView1.Columns["TotalPrice"].DefaultCellStyle.BackColor = Color.Salmon;
+                }
+                else
+                {
+                    //dataGridView1.Columns["TotalPrice"].ReadOnly = true;
+                }
+            }
 
-              }
-         
+        }
+        
+        private void GetEznBnod(string eznNo, string fyear, string momayz)
+        {
+            table.Clear();
+
+            string TableQuery = @"SELECT  [EznSarf_No],[FYear] ,[Bnd_No] ,[Quan1],[Quan2],[Unit1],[Unit2],
+                                [BIAN_TSNIF],[Stock_No],[STOCK_NO_ALL],[AvailableQuan],[TotalPrice]FROM [T_EznSarf_Benod] 
+                                Where EznSarf_No = " + eznNo + " and Fyear='" + fyear + "'and TR_NO='" + momayz + "'";
+
+            dataadapter = new SqlDataAdapter(TableQuery, Constants.con);
+            table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+            dataadapter.Fill(table);
+            dataGridView1.DataSource = table;
+
+            dataGridView1.Columns["EznSarf_No"].HeaderText = "رقم اذن الصرف";//col0;
+            dataGridView1.Columns["FYear"].HeaderText = "السنة المالية";//col1
+            dataGridView1.Columns["Bnd_No"].HeaderText = "19/18";//col2
+            dataGridView1.Columns["Quan1"].HeaderText = "المطلوب";//col3
+            dataGridView1.Columns["Quan2"].HeaderText = "المنصرف";//col4           
             dataGridView1.Columns["Unit1"].HeaderText = "//";//col5
-            dataGridView1.Columns["Unit1"].Width = 40;
-            dataGridView1.Columns["Unit1"].ReadOnly = true;
-            dataGridView1.Columns["Unit1"].ContextMenuStrip = contextMenuStrip1;
             dataGridView1.Columns["Unit2"].HeaderText = "29/28";//col6
-            dataGridView1.Columns["Unit2"].Width = 40;
-            dataGridView1.Columns["Unit2"].ReadOnly = true;
-            dataGridView1.Columns["Unit2"].ContextMenuStrip = contextMenuStrip1;
            
             dataGridView1.Columns["BIAN_TSNIF"].HeaderText = "البيان";//col7
-            dataGridView1.Columns["BIAN_TSNIF"].Width = 250;
-            dataGridView1.Columns["BIAN_TSNIF"].ContextMenuStrip = contextMenuStrip1;
-            dataGridView1.Columns["BIAN_TSNIF"].ReadOnly = true;
             dataGridView1.Columns["Stock_No"].HeaderText = "21/20";//col8
-            dataGridView1.Columns["Stock_No"].Width = 100;
-            dataGridView1.Columns["Stock_No"].ContextMenuStrip = contextMenuStrip1;
-            dataGridView1.Columns["Stock_No"].ReadOnly = true;
             dataGridView1.Columns["STOCK_NO_ALL"].HeaderText = "40/22";//col9
-            dataGridView1.Columns["STOCK_NO_ALL"].Width = 150;
-            dataGridView1.Columns["STOCK_NO_ALL"].ContextMenuStrip = contextMenuStrip1;
 
-            dataGridView1.Columns["STOCK_NO_ALL"].ReadOnly = true;
             dataGridView1.Columns["AvailableQuan"].HeaderText = "49/42";//col10
-            dataGridView1.Columns["AvailableQuan"].Width = 100;
-
-
-            dataGridView1.Columns["AvailableQuan"].ContextMenuStrip = contextMenuStrip1;
-            dataGridView1.Columns["AvailableQuan"].ReadOnly = true;
             //dataGridView1.Columns["PricePerUnit"].HeaderText = "سعر الوحدة";
             dataGridView1.Columns["TotalPrice"].HeaderText = "القيمة";//col11
-            dataGridView1.Columns["TotalPrice"].Width = 100;
-            dataGridView1.Columns["TotalPrice"].ContextMenuStrip = contextMenuStrip1;
-            if (Constants.User_Type == "B" && Constants.UserTypeB=="Finance")
-            {
-                dataGridView1.Columns["TotalPrice"].DefaultCellStyle.BackColor = Color.Salmon;
-            }
-            if (Constants.User_Type == "A")
-            {
-                dataGridView1.Columns["TotalPrice"].ReadOnly = true;
-            }
-            if (Constants.User_Type == "B" && Constants.UserTypeB !="Finance")
-            {
-                dataGridView1.Columns["TotalPrice"].ReadOnly = true;
-            }
-           // dataGridView1.Columns["TotalPrice"].ReadOnly = true;
-            dataGridView1.AllowUserToAddRows = true;
 
+            HandleDataGridViewStyle();
          }
-          private void GetData(int x,string y,string z)
-          {
-              if (string.IsNullOrWhiteSpace(TXT_EznNo.Text))
-              {
-                  // MessageBox.Show("ادخل رقم التصريح");
-                  //  PermNo_text.Focus();'EznSarf_No
-                  return;
-              }
-              else
-              {
-                  table.Clear();
-                  TableQuery = "SELECT  [EznSarf_No],[FYear] ,[Bnd_No] ,[Quan1],[Quan2],[Unit1],[Unit2],[BIAN_TSNIF],[Stock_No],[STOCK_NO_ALL],[AvailableQuan],[TotalPrice]FROM [T_EznSarf_Benod] Where EznSarf_No = " + x + " and Fyear='" + y + "'and TR_NO='" +z+"'";
-                  Getdata(TableQuery);
-              }
 
-          }
-          public void getdata2(string x)
-          {
-              using (SqlConnection con = new SqlConnection(Constants.constring))
-              {
-                  using (SqlCommand cmd = new SqlCommand(x))
-                  {
-                      SqlDataAdapter dt = new SqlDataAdapter();
-                      try
-                      {
-                          cmd.Connection = con;
-                          con.Open();
-                          dt.SelectCommand = cmd;
+        public bool SearchEznSarf(string eznNo, string fyear, string momayz)
+        {
+            //call sp that get last num that eentered for this MM and this YYYY
+            Constants.opencon();
 
-                          DataTable dTable = new DataTable();
-                          dt.Fill(dTable);
 
-                         dataGridView1.DataSource = dTable;
-                        // dataGridView1.Databind();
-                      }
-                      catch (Exception)
-                      {
-                       //   lblmsg.Text = "record not found";
-                      }
-                  }
-              }  
-          }
-          private void AddNewbtn_Click(object sender, EventArgs e)
+            // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
+            string cmdstring = "";
+            SqlCommand cmd;
+
+            cmdstring = "select * from T_EznSarf where EznSarf_No=@TN and FYear=@FY and TR_NO=@TRNO";
+
+            cmd = new SqlCommand(cmdstring, Constants.con);
+            cmd.Parameters.AddWithValue("@TN", eznNo);
+            cmd.Parameters.AddWithValue("@FY", fyear);
+            cmd.Parameters.AddWithValue("@TRNO", momayz);
+
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            if (dr.HasRows == true)
+            {
+                try
+                {
+                    while (dr.Read())
+                    {
+                        Cmb_FYear.Text = dr["FYear"].ToString();
+                        TXT_EznNo.Text = dr["EznSarf_No"].ToString();
+                        TXT_Edara.Text = dr["NameEdara"].ToString();
+                        TXT_CodeEdara.Text = dr["CodeEdara"].ToString();
+                        TXT_Date.Text = dr["Date"].ToString();
+                        TXT_TRNO.Text = dr["TR_NO"].ToString();
+                        if (!(string.IsNullOrEmpty(TXT_TRNO.Text) || string.IsNullOrWhiteSpace(TXT_TRNO.Text)))
+                        {
+                            Cmb_CType.SelectedValue = TXT_TRNO.Text.ToString();
+                        }
+
+                        TXT_RequestedFor.Text = dr["RequestedFor"].ToString();
+                        TXT_ProcessNo.Text = dr["TR_NO"].ToString();
+                        TXT_RespCentre.Text = dr["Responsiblecenter"].ToString();
+                        TXT_AccNo.Text = dr["Acc_No"].ToString();
+                        TXT_PaccNo.Text = dr["Pacc_No"].ToString();
+                        TXT_MTaklif.Text = dr["MTakalif"].ToString();
+                        TXT_MResp.Text = dr["MResponsible"].ToString();
+                        TXT_Masrof.Text = dr["Masrof"].ToString();
+                        TXT_Enfak.Text = dr["Enfak"].ToString();
+                        TXT_Morakba.Text = dr["Morakba"].ToString();
+                        TXT_Total.Text = dr["Total"].ToString();
+
+                        string s1 = dr["Sign1"].ToString();
+                        string s2 = dr["Sign2"].ToString();
+                        string s3 = dr["Sign3"].ToString();
+                        string s4 = dr["Sign4"].ToString();
+                        string s5 = dr["Sign5"].ToString();
+
+                        if (s1 != "")
+                        {
+                            string p = Constants.RetrieveSignature("1", "2", s1);
+                            if (p != "")
+                            {
+                                //   Pic_Sign1
+                                //	"Pic_Sign1"	string
+                                Ename1 = p.Split(':')[1];
+                                wazifa1 = p.Split(':')[2];
+                                pp = p.Split(':')[0];
+
+                                ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "1"]).Image = Image.FromFile(@pp);
+
+                                FlagSign1 = 1;
+                                FlagEmpn1 = s1;
+                                ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "1"]).BackColor = Color.Green;
+                                toolTip1.SetToolTip(Pic_Sign1, Ename1 + Environment.NewLine + wazifa1);
+                            }
+
+                        }
+                        else
+                        {
+                            ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "1"]).BackColor = Color.Red;
+                        }
+                        if (s2 != "")
+                        {
+                            string p = Constants.RetrieveSignature("2", "2", s2);
+                            if (p != "")
+                            {
+                                //   Pic_Sign1
+                                //	"Pic_Sign1"	string
+                                Ename2 = p.Split(':')[1];
+                                wazifa2 = p.Split(':')[2];
+                                pp = p.Split(':')[0];
+                                ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "2"]).Image = Image.FromFile(@pp);
+                                FlagSign2 = 1;
+                                FlagEmpn2 = s2;
+                                ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "2"]).BackColor = Color.Green;
+                                toolTip1.SetToolTip(Pic_Sign2, Ename2 + Environment.NewLine + wazifa2);
+                            }
+
+                        }
+                        else
+                        {
+                            ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "2"]).BackColor = Color.Red;
+                        }
+                        if (s3 != "")
+                        {
+                            string p = Constants.RetrieveSignature("3", "2", s3);
+                            if (p != "")
+                            {
+                                //   Pic_Sign1
+                                //	"Pic_Sign1"	string
+                                Ename3 = p.Split(':')[1];
+                                wazifa3 = p.Split(':')[2];
+                                pp = p.Split(':')[0];
+                                ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "3"]).Image = Image.FromFile(@pp);
+                                FlagSign3 = 1;
+                                FlagEmpn3 = s3;
+                                ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "3"]).BackColor = Color.Green;
+                                toolTip1.SetToolTip(Pic_Sign3, Ename3 + Environment.NewLine + wazifa3);
+
+
+                            }
+
+                        }
+                        else
+                        {
+                            ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "3"]).BackColor = Color.Red;
+                        }
+                        if (s4 != "")
+                        {
+                            string p = Constants.RetrieveSignature("4", "2", s4);
+                            if (p != "")
+                            {
+                                //   Pic_Sign1
+                                //	"Pic_Sign1"	string
+                                Ename3 = p.Split(':')[1];
+                                wazifa3 = p.Split(':')[2];
+                                pp = p.Split(':')[0];
+                                ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "4"]).Image = Image.FromFile(@pp);
+                                FlagSign4 = 1;
+                                FlagEmpn4 = s4;
+                                ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "4"]).BackColor = Color.Green;
+                                toolTip1.SetToolTip(Pic_Sign4, Ename4 + Environment.NewLine + wazifa4);
+
+
+
+                                ////
+                            }
+
+                        }
+                        else
+                        {
+                            ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "4"]).BackColor = Color.Red;
+                        }
+                        if (s5 != "")
+                        {
+                            string p = Constants.RetrieveSignature("4", "2", s5);
+                            if (p != "")
+                            {
+                                //   Pic_Sign1
+                                //	"Pic_Sign1"	string
+                                Ename5 = p.Split(':')[1];
+                                wazifa5 = p.Split(':')[2];
+                                pp = p.Split(':')[0];
+                                ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "5"]).Image = Image.FromFile(@pp);
+                                FlagSign5 = 1;
+                                FlagEmpn5 = s5;
+                                ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "5"]).BackColor = Color.Green;
+                                toolTip1.SetToolTip(Pic_Sign5, Ename5 + Environment.NewLine + wazifa5);
+
+                            }
+
+                        }
+                        else
+                        {
+                            ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "5"]).BackColor = Color.Red;
+                        }
+                    }
+                }
+                finally
+                {
+                    if (dr != null)
+                    {
+                        dr.Dispose();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("من فضلك تاكد من رقم اذن الصرف");
+                reset();
+                return false;
+
+            }
+            dr.Close();
+
+            GetEznBnod(eznNo, fyear,momayz);
+
+            Constants.closecon();
+
+            return true;
+        }
+
+        private void AddNewbtn_Click(object sender, EventArgs e)
           {
               if (AddEditFlag != 2 && AddEditFlag != 1)//not in add mode
               {
@@ -1748,247 +2152,20 @@ namespace ANRPC_Inventory
 
           }
         
-          private void BTN_Sign1_Click(object sender, EventArgs e)
-          {
 
 
-              Empn1 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد الخاص بك", "توقيع على انشاء اذن صرف", "");
-             
-              Sign1 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع على انشاء اذن صرف", "");
-           if (Sign1!="" && Empn1 !="")
-           {
-             //  MessageBox.Show("done");
-             // string result= Constants.CheckSign("1",Sign1);
-               Tuple<string, int, int, string, string> result = Constants.CheckSign("1", "2", Sign1, Empn1);
-               if (result.Item3 == 1)
-               {
-                   Pic_Sign1.Image = Image.FromFile(@result.Item1);
-
-                   FlagSign1 = result.Item2;
-                   FlagEmpn1 = Empn1;
-               }
-               else
-               {
-                   FlagSign1 = 0;
-                   FlagEmpn1 = "";
-               }
-              // result.Item1;
-              // result.Item2;
-
-
-           }
-           else
-           {
-//cancel
-           }
-          }
-
-          private void button4_Click(object sender, EventArgs e)
-          {
-              if (FlagSign1 != 1 || FlagSign2 !=1)
-              {
-                  MessageBox.Show("من فضلك تاكد من التوقيعات السابقة");
-                  return;
-              }
-
-              foreach (DataGridViewRow row in dataGridView1.Rows)
-              {
-                  if (!row.IsNewRow)
-                  {
-                      if (row.Cells[4].Value == DBNull.Value || row.Cells[4].Value.ToString()=="")
-                      {
-                          MessageBox.Show("يجب ادخال الكمية المنصرفة لجميع البنود");
-                          return;
-                      }
-                  }
-              }
-              Empn3 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد الخاص بك", "توقيع على استلام طلب توريد", "");
-            
-              Sign3 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع على استلام طلب توريد", "");
-            
-              if (Sign3 != "")
-              {
-                  //  MessageBox.Show("done");
-                  // string result= Constants.CheckSign("1",Sign1);
-                  Tuple<string, int, int, string, string> result = Constants.CheckSign("3", "2", Sign3, Empn3);
-                  if (result.Item3 == 1)
-                  {
-                      Pic_Sign3.Image = Image.FromFile(@result.Item1);
-
-                      FlagSign3= result.Item2;
-                      FlagEmpn3 = Empn3;
-                    
-                  }
-                  else
-                  {
-                      FlagSign3 = 0;
-                      FlagEmpn3 = "";
-                  }
-                  // result.Item1;
-                  // result.Item2;
-
-
-              }
-              else
-              {
-                  //cancel
-              }  
-          }
-
-          private void BTN_Sign2_Click(object sender, EventArgs e)
-          {
-              if (FlagSign1 != 1)
-              {
-                  MessageBox.Show("من فضلك تاكد من التوقيعات السابقة");
-                  return;
-              }
-              Empn2 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد الخاص بك", "توقيع على اعتماد اذن صرف", "");
-          
-              Sign2 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع على اعتماد اذن صرف", "");
-          
-              if (Sign2 != "" && Empn2 !="")
-              {
-                  //  MessageBox.Show("done");
-                  // string result= Constants.CheckSign("1",Sign1);
-                  Tuple<string, int, int, string, string> result = Constants.CheckSign("2", "2", Sign2, Empn2);
-                  if (result.Item3 == 1)
-                  {
-                      Pic_Sign2.Image = Image.FromFile(@result.Item1);
-
-                      FlagSign2 = result.Item2;
-                      FlagEmpn2 = Empn2;
-                  }
-                  else
-                  {
-                      FlagSign2= 0;
-                      FlagEmpn2 = "";
-                  }
-                  // result.Item1;
-                  // result.Item2;
-
-
-              }
-              else
-              {
-                  //cancel
-              }
-          }
 
           private void Editbtn_Click_1(object sender, EventArgs e)
           {
               if ((MessageBox.Show("هل تريد تعديل اذن الصرف ؟", "", MessageBoxButtons.YesNo)) == DialogResult.Yes)
               {
-                  if (string.IsNullOrEmpty(TXT_EznNo.Text) || string.IsNullOrEmpty(Cmb_FYear.Text)|| string.IsNullOrEmpty(TXT_TRNO.Text))
-                  {
-                      MessageBox.Show("يجب اختيار نوع اذن الصرف و رقم اذن الصرف المراد تعديله و السنة المالية");
-                      return;
-                  }
-                  else
-                  {
+                    if (string.IsNullOrEmpty(TXT_EznNo.Text) || string.IsNullOrEmpty(Cmb_FYear.Text)|| string.IsNullOrEmpty(TXT_TRNO.Text))
+                    {
+                        MessageBox.Show("يجب اختيار نوع اذن الصرف و رقم اذن الصرف المراد تعديله و السنة المالية");
+                        return;
+                    }
 
-                  AddEditFlag = 1;
-                  BTN_Print.Enabled = false;
-                  TNO = TXT_EznNo.Text;
-                  FY = Cmb_FYear.Text;
-                  SaveBtn.Visible = true;
-                  Addbtn.Enabled = false;
-                  var button = (Button)sender;
-                  if (button.Name == "Editbtn")
-                  {
-                      dataGridView1.Enabled = true;
-                      DisableControls();
-                     
-                      if (Constants.User_Type == "A")
-                      {
-                          //BTN_Sign1.Enabled = true;
-                          BTN_Sign1.Enabled = true;
-                          BTN_Sign2.Enabled = true;
-                          BTN_Sign4.Enabled = true;
-                          BTN_Sign5.Enabled = true;
-
-
-
-                      }
-                      else if (Constants.User_Type == "B" && Constants.UserTypeB=="Sarf")
-                      {
-                          //BTN_Sign1.Enabled = true;
-                          BTN_Sign1.Enabled = false;
-                          BTN_Sign2.Enabled = false;
-                          BTN_Sign4.Enabled = false;
-                          BTN_Sign5.Enabled = false;
-
-                          BTN_Sign3.Enabled = true;
-                          BTN_Sign4.Enabled = true; 
-                          dataGridView1.Enabled = true;
-                          dataGridView1.Columns["Quan2"].ReadOnly = false;
-                       
-                          //EnableControls_Malya();
-
-
-                      }
-                      else if (Constants.User_Type == "B" && (Constants.UserTypeB == "Tkalif" || Constants.UserTypeB=="Finance"))
-                      {
-                          //BTN_Sign1.Enabled = true;
-                          BTN_Sign1.Enabled = false;
-                          BTN_Sign2.Enabled = false;
-                          BTN_Sign4.Enabled = false;
-                          BTN_Sign5.Enabled = false;
-
-                          BTN_Sign3.Enabled =false;
-                          EnableControls_Malya();
-
-
-                      }
-                  }
-                  else if (button.Name == "Editbtn2")
-                  {
-                      
-                      if (Constants.User_Type == "A")
-                      {
-                          EnableControls();
-                          //BTN_Sign1.Enabled = true;
-                          BTN_Sign1.Enabled = true;
-                          BTN_Sign2.Enabled = true;
-                          BTN_Sign4.Enabled = true;
-                          BTN_Sign5.Enabled = true;
-
-
-
-                      }
-                      else if (Constants.User_Type == "B" && Constants.UserTypeB == "Sarf")
-                      {
-                          //BTN_Sign1.Enabled = true;
-                          BTN_Sign1.Enabled = false;
-                          BTN_Sign2.Enabled = false;
-                          BTN_Sign4.Enabled = false;
-                          BTN_Sign5.Enabled = false;
-
-                          BTN_Sign3.Enabled = true;
-                          dataGridView1.Enabled = true;
-                          dataGridView1.Columns["Quan2"].ReadOnly = false;
-                       
-
-
-                      }
-                      else if (Constants.User_Type == "B" && Constants.UserTypeB == "Tkalif")
-                      {
-                          //BTN_Sign1.Enabled = true;
-                          BTN_Sign1.Enabled = false;
-                          BTN_Sign2.Enabled = false;
-                          BTN_Sign4.Enabled = false;
-                          BTN_Sign5.Enabled = false;
-
-                          BTN_Sign3.Enabled = false;
-                          EnableControls_Malya();
-
-
-                      }
-                      
-
-                    //  BTN_Sign3.Enabled = true;
-                  }
-                  }
-
+                    PrepareConfirmState();
               }
           }
 
@@ -2044,289 +2221,13 @@ namespace ANRPC_Inventory
           {
             if (Cmb_TalbNo2.SelectedIndex != -1)
             {
-                SearchTalb(2);
+                //SearchTalb(2);
             }
           }
 
-          public void SearchTalb(int x)
-          {
-               //call sp that get last num that eentered for this MM and this YYYY
-              Constants.opencon();
-              // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
-              string cmdstring = "";
-              SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-        
-            //  SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-              if (x == 1 && Constants.User_Type == "A")
-              {
-                
-                  cmdstring = "select * from  T_EznSarf where EznSarf_No=@TN and FYear=@FY and CodeEdara=@EC and TR_NO=@TRNO";
-                  cmd = new SqlCommand(cmdstring, Constants.con);
-                  cmd.Parameters.AddWithValue("@TN", TXT_EznNo.Text);
-                  cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text);
-                  cmd.Parameters.AddWithValue("@EC", Constants.CodeEdara);
-                cmd.Parameters.AddWithValue("@TRNO", TXT_TRNO2.Text);
-            }
-              else if (x == 2 && Constants.User_Type == "A")
-              {
-                //  cmd = new SqlCommand(cmdstring, Constants.con);
-                  cmdstring = "select * from  T_EznSarf where EznSarf_No=@TN and FYear=@FY and CodeEdara=@EC and TR_NO=@TRNO";
-                  cmd = new SqlCommand(cmdstring, Constants.con);
-                  cmd.Parameters.AddWithValue("@TN", Cmb_TalbNo2.Text);
-                  cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
-                  cmd.Parameters.AddWithValue("@EC", Constants.CodeEdara);
-                cmd.Parameters.AddWithValue("@TRNO", TXT_TRNO2.Text);
-            }
-              else if (x == 2 && Constants.User_Type == "B")
-              {
-               //   cmd = new SqlCommand(cmdstring, Constants.con);
-                  cmdstring = "select * from  T_EznSarf where EznSarf_No=@TN and FYear=@FY and TR_NO=@TRNO ";
-                  cmd = new SqlCommand(cmdstring, Constants.con);
-                  cmd.Parameters.AddWithValue("@TN", Cmb_TalbNo2.Text);
-                  cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
-                cmd.Parameters.AddWithValue("@TRNO", TXT_TRNO2.Text);
-            }
-              else if (x == 1 && Constants.User_Type == "B")
-              {
-                //  cmd = new SqlCommand(cmdstring, Constants.con);
-                  cmdstring = "select * from  T_EznSarf where EznSarf_No=@TN and FYear=@FY and TR_NO=@TRNO";
-                  cmd = new SqlCommand(cmdstring, Constants.con);
-                  cmd.Parameters.AddWithValue("@TN", TXT_EznNo.Text);
-                  cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text);
-                cmd.Parameters.AddWithValue("@TRNO", TXT_TRNO2.Text);
-            }
-              // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
-            
-
-              SqlDataReader dr = cmd.ExecuteReader();
-
-              if (dr.HasRows == true)
-              {
-                  while (dr.Read())
-                  {
-                     Cmb_FYear.Text = dr["FYear"].ToString();
-                     TXT_EznNo.Text = dr["EznSarf_No"].ToString();
-                     TXT_Edara.Text = dr["NameEdara"].ToString();
-                     TXT_CodeEdara.Text = dr["CodeEdara"].ToString();
-                     TXT_Date.Text=dr["Date"].ToString();
-                     TXT_TRNO.Text = dr["TR_NO"].ToString();
-                     if (TXT_TRNO.Text.ToString() == "")
-                     {
-
-                     }
-                     else
-                     {
-                         Cmb_CType.SelectedValue = TXT_TRNO.Text.ToString();
-                     }
-                      TXT_RequestedFor.Text = dr["RequestedFor"].ToString();
-                      TXT_ProcessNo.Text = dr["TR_NO"].ToString();
-                      TXT_RespCentre.Text = dr["Responsiblecenter"].ToString(); 
-                      TXT_AccNo.Text=dr["Acc_No"].ToString();
-                      TXT_PaccNo.Text = dr["Pacc_No"].ToString();
-                      TXT_MTaklif.Text = dr["MTakalif"].ToString();
-                      TXT_MResp.Text = dr["MResponsible"].ToString();
-                      TXT_Masrof.Text = dr["Masrof"].ToString();
-                      TXT_Enfak.Text = dr["Enfak"].ToString();
-                      TXT_Morakba.Text = dr["Morakba"].ToString();
-                      TXT_Total.Text=dr["Total"].ToString();
 
 
 
-                      // TXT_BndMwazna.Text=dr["BndMwazna"].ToString();
-                     string s1=dr["Sign1"].ToString();
-                      string s2=dr["Sign2"].ToString();
-                    string s3=dr["Sign3"].ToString();
-                      string s4=dr["Sign4"].ToString();
-                     string s5=dr["Sign5"].ToString();
-                     //if (s1 == "1")
-                     if (s1 != "")
-                     {
-                         string p = Constants.RetrieveSignature("1", "2",s1);
-                         if (p != "")
-                         {
-                             //   Pic_Sign1
-                             //	"Pic_Sign1"	string
-                             //   Pic_Sign1
-                             //	"Pic_Sign1"	string
-                             Ename1 = p.Split(':')[1];
-                             wazifa1 = p.Split(':')[2];
-                             pp = p.Split(':')[0];
-
-                             ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "1"]).Image = Image.FromFile(@pp);
-
-                             FlagSign1 = 1;
-                             FlagEmpn1 = s1;
-                             ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "1"]).BackColor = Color.Green;
-                             toolTip1.SetToolTip(Pic_Sign1, Ename1 + Environment.NewLine + wazifa1);
-                         }
-
-                     }
-                     else
-                     {
-                         ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "1"]).BackColor = Color.Red;
-                     }
-                     if (s2 != "")
-                     {
-                         string p = Constants.RetrieveSignature("2", "2",s2);
-                         if (p != "")
-                         {
-                             //   Pic_Sign1
-                             //	"Pic_Sign1"	string
-                             Ename2 = p.Split(':')[1];
-                             wazifa2 = p.Split(':')[2];
-                             pp = p.Split(':')[0];
-                             ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "2"]).Image = Image.FromFile(@pp);
-                             FlagSign2 = 1;
-                             FlagEmpn2 = s2;
-                             ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "2"]).BackColor = Color.Green;
-                             toolTip1.SetToolTip(Pic_Sign2, Ename2 + Environment.NewLine + wazifa2);
-                         }
-
-                     }
-                     else
-                     {
-                         ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "2"]).BackColor = Color.Red;
-                     }
-                     if (s3 != "")
-                     {
-                         string p = Constants.RetrieveSignature("3", "2",s3);
-                         if (p != "")
-                         {
-                             //   Pic_Sign1
-                             //	"Pic_Sign1"	string
-                             Ename3 = p.Split(':')[1];
-                             wazifa3 = p.Split(':')[2];
-                             pp = p.Split(':')[0];
-                             ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "3"]).Image = Image.FromFile(@pp);
-                             FlagSign3 = 1;
-                             FlagEmpn3 = s3;
-                             ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "3"]).BackColor = Color.Green;
-                             toolTip1.SetToolTip(Pic_Sign3, Ename3 + Environment.NewLine + wazifa3);
-                          
-                         
-                         }
-
-                     }
-                     else
-                     {
-                         ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "3"]).BackColor = Color.Red;
-                     }
-                     if (s4 != "")
-                     {
-                         string p = Constants.RetrieveSignature("4", "2",s4);
-                         if (p != "")
-                         {
-                             //   Pic_Sign1
-                             //	"Pic_Sign1"	string
-                             Ename3 = p.Split(':')[1];
-                             wazifa3 = p.Split(':')[2];
-                             pp = p.Split(':')[0];
-                             ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "4"]).Image = Image.FromFile(@pp);
-                             FlagSign4 = 1;
-                             FlagEmpn4 = s4;
-                             ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "4"]).BackColor = Color.Green;
-                             toolTip1.SetToolTip(Pic_Sign4, Ename4+ Environment.NewLine + wazifa4);
-
-
-
-                             ////
-                         }
-
-                     }
-                     else
-                     {
-                         ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "4"]).BackColor = Color.Red;
-                     }
-                     if (s5 != "")
-                     {
-                         string p = Constants.RetrieveSignature("4", "2",s5);
-                         if (p != "")
-                         {
-                             //   Pic_Sign1
-                             //	"Pic_Sign1"	string
-                             Ename5 = p.Split(':')[1];
-                             wazifa5 = p.Split(':')[2];
-                             pp = p.Split(':')[0];
-                             ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "5"]).Image = Image.FromFile(@pp);
-                             FlagSign5 = 1;
-                             FlagEmpn5 = s5;
-                             ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "5"]).BackColor = Color.Green;
-                             toolTip1.SetToolTip(Pic_Sign5, Ename5 + Environment.NewLine + wazifa5);
-                          
-                         }
-
-                     }
-                     else
-                     {
-                         ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "5"]).BackColor = Color.Red;
-                     }
-
-                      //  string s6=dr["Mohmat_Sign"].ToString();
-                     // string s7=dr["CH_Sign"].ToString();
-                      //dr.Close();
-                   
-                  
-     
-                     
-                  }
-                  BTN_Print.Enabled = true;
-                 
-              }
-               
-              else
-              {
-                
-                  MessageBox.Show("من فضلك تاكد من رقم اذن الصرف");
-               
-                  BTN_Print.Enabled = false;
-
-              }
-              dr.Close();
-
-             /* for (int i = 1; i <= 5; i++)
-              {
-                 
-                  string p = Constants.RetrieveSignature( i.ToString(),"2");
-                  if (p != "")
-                  {
-                      //   Pic_Sign1
-                      //	"Pic_Sign1"	string
-                     
-                      ((PictureBox)this.panel1.Controls["Pic_Sign" + i.ToString()]).Image = Image.FromFile(@p);
-
-                  }
-
-              }*/
-            //  string query1 = "SELECT  [TalbTwareed_No] ,[FYear] ,[Bnd_No],[RequestedQuan],[Unit],[BIAN_TSNIF] ,[STOCK_NO_ALL],[Quan] ,[ArrivalDate] FROM [T_TalbTawreed_Benod] where  [TalbTwareed_No]=@T and [FYear]=@F ";
-            //  SqlCommand cmd1 = new SqlCommand(query1, Constants.con);
-           //  cmd1.Parameters.AddWithValue("@T",Cmb_TalbNo2.Text);
-           //  cmd1.Parameters.AddWithValue("@F", Cmb_FYear2.Text);
-
-
-            // DT.Clear();
-            // DT.Load(cmd1.ExecuteReader());
-             // cleargridview();
-              GetData(Convert.ToInt32(TXT_EznNo.Text),Cmb_FYear.Text, TXT_TRNO.Text);
-              if (DT.Rows.Count == 0)
-              {
-                  //  MessageBox.Show("لا يوجد حركات لهذا الموظف");
-                  // Input_Reset();
-                  //   label11.Visible = false;
-                  // label12.Visible = false;
-                  // BTN_Save.Visible = false;
-                  // panel2.Visible = false;
-
-              }
-              else
-              {
-                  
-
-              }
-             // searchbtn1 = false;
-            //  DataGridViewReset();
-
-              Constants.closecon();
-          }
 
           private void Cmb_TalbNo2_SelectionChangeCommitted(object sender, EventArgs e)
           {
@@ -2372,503 +2273,11 @@ namespace ANRPC_Inventory
                 Cmb_TalbNo2.Text = "";
             }
           }
-        public void UpdateEznSarf(){
-               if (con != null && con.State == ConnectionState.Closed)
-                {
-                    con.Open();
-                }
-            /////////////////////////////////////////////////
 
+        
 
-               string cmdstring1 = "select STOCK_NO_ALL,quan1,quan2 from T_EznSarf_Benod where FYear=@FY and EznSarf_No=@TNO";
-               SqlCommand cmd1 = new SqlCommand(cmdstring1, con);
 
 
-               cmd1.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_EznNo.Text));
-               cmd1.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
-               SqlDataReader dr = cmd1.ExecuteReader();
-
-               //---------------------------------
-               if (dr.HasRows == true)
-               {
-                   while (dr.Read())
-                   {
-                       if (dr["quan1"].ToString() == "")
-                       {
-
-                       }
-                       else
-                       {
-                           string cmdstring2 = "Exec SP_UndoVirtualQuan2 @TNO,@FY";
-
-                           SqlCommand cmd2 = new SqlCommand(cmdstring2, con);
-
-                           cmd2.Parameters.AddWithValue("@TNO", (dr["STOCK_NO_ALL"].ToString()));
-                           if (dr["quan2"].ToString() == "")
-                           {
-
-                               cmd2.Parameters.AddWithValue("@FY", Convert.ToDouble(dr["quan1"].ToString()));
-                           }
-                           else
-                           {
-                               cmd2.Parameters.AddWithValue("@FY", Convert.ToDouble(dr["quan2"].ToString()));
-                           }
-                         //  cmd2.Parameters.AddWithValue("@BN", (dr["Bnd_No"].ToString()));
-                           cmd2.ExecuteNonQuery();
-                       }
-
-                   }
-               }
-               dr.Close();
-
-
-
-            /////////////////////////////////////////
-               string cmdstring = "Exec SP_UpdateEznSarf @TNOold,@FYold, @TNO,@FY,@CE,@NE,@CD,@MO,@RF,@RC,@TR,@ACC,@PACC,@MT,@MR,@MA,@EN,@MK,@S1,@S2,@S3,@S4,@S5,@LU,@LD,@TT,@aot output";
-
-                
-                SqlCommand cmd = new SqlCommand(cmdstring, con);
-                cmd.Parameters.AddWithValue("@TNOold", TNO);
-                cmd.Parameters.AddWithValue("@FYold",FY);
-            
-
-                cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_EznNo.Text));
-                cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
-                cmd.Parameters.AddWithValue("@CE", TXT_CodeEdara.Text);
-                cmd.Parameters.AddWithValue("@NE", TXT_Edara.Text);
-                cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
-                cmd.Parameters.AddWithValue("@MO", TXT_TRNO.Text.ToString());
-
-                cmd.Parameters.AddWithValue("@RF", TXT_RequestedFor.Text.ToString());
-
-                cmd.Parameters.AddWithValue("@RC", TXT_RespCentre.Text.ToString());
-
-             //   cmd.Parameters.AddWithValue("@TR", TXT_ProcessNo.Text.ToString());
-            cmd.Parameters.AddWithValue("@TR", TXT_TRNO.Text.ToString());
-            cmd.Parameters.AddWithValue("@ACC", TXT_AccNo.Text.ToString());
-                cmd.Parameters.AddWithValue("@PACC", TXT_PaccNo.Text.ToString());
-                cmd.Parameters.AddWithValue("@MT", TXT_MTaklif.Text.ToString());
-                cmd.Parameters.AddWithValue("@MR", TXT_MResp.Text.ToString());
-                cmd.Parameters.AddWithValue("@MA", TXT_Masrof.Text.ToString());
-                cmd.Parameters.AddWithValue("@EN", TXT_Enfak.Text.ToString());
-                cmd.Parameters.AddWithValue("@MK", TXT_Morakba.Text.ToString());
-            
-             
-
-                if (FlagSign1 == 1)
-                {
-                    cmd.Parameters.AddWithValue("@S1", FlagEmpn1);
-
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@S1", DBNull.Value);
-
-                }
-                if (FlagSign2 == 1)
-                {
-                    cmd.Parameters.AddWithValue("@S2", FlagEmpn2);
-
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@S2", DBNull.Value);
-
-                }
-                if (FlagSign3 == 1)
-                {
-                    cmd.Parameters.AddWithValue("@S3",FlagEmpn3);
-
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@S3", DBNull.Value);
-
-                }
-
-                if (FlagSign4 == 1)
-                {
-                    cmd.Parameters.AddWithValue("@S4", FlagEmpn4);
-
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@S4", DBNull.Value);
-
-                }
-
-                if (FlagSign5 == 1)
-                {
-                    cmd.Parameters.AddWithValue("@S5",FlagEmpn5);
-
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@S5", DBNull.Value);
-
-                }
-               
-                cmd.Parameters.AddWithValue("@LU", Constants.User_Name.ToString());
-                cmd.Parameters.AddWithValue("@LD", Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-                if (TXT_Total.Text.ToString() == "")
-                {
-                        cmd.Parameters.AddWithValue("@TT",DBNull.Value);
-
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@TT", Convert.ToDecimal(TXT_Total.Text));
-
-                }
-             
-                cmd.Parameters.Add("@aot", SqlDbType.Int, 32);  //-------> output parameter
-                cmd.Parameters["@aot"].Direction = ParameterDirection.Output;
-
-                int flag;
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                    executemsg = true;
-                    flag = (int)cmd.Parameters["@aot"].Value;
-                }
-                catch (SqlException sqlEx)
-                {
-                    executemsg = false;
-                    MessageBox.Show(sqlEx.ToString());
-                    flag = (int)cmd.Parameters["@aot"].Value;
-                }
-                if (executemsg == true && flag == 2)
-                {
-
-
-                    foreach (DataGridViewRow row in dataGridView1.Rows)
-                    {
-
-                        if (!row.IsNewRow)
-                        {
-
-
-                            string q = "exec SP_InsertBnodEznSarf @p1,@p111,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12 ";
-                            cmd = new SqlCommand(q, con);
-                            cmd.Parameters.AddWithValue("@p1", row.Cells[0].Value);
-                        cmd.Parameters.AddWithValue("@p111", TXT_TRNO.Text);
-                        cmd.Parameters.AddWithValue("@p2", row.Cells[1].Value);
-                  
-                        cmd.Parameters.AddWithValue("@p3", row.Cells[2].Value);
-                            cmd.Parameters.AddWithValue("@p4", row.Cells[3].Value ?? DBNull.Value);
-                            cmd.Parameters.AddWithValue("@p5", row.Cells[5].Value);
-                            cmd.Parameters.AddWithValue("@p6", row.Cells[4].Value ?? DBNull.Value);
-                            cmd.Parameters.AddWithValue("@p7", row.Cells[6].Value);
-                            cmd.Parameters.AddWithValue("@p8", row.Cells[7].Value);
-                            cmd.Parameters.AddWithValue("@p9", row.Cells[8].Value);
-                            cmd.Parameters.AddWithValue("@p10", row.Cells[9].Value);
-                            cmd.Parameters.AddWithValue("@p11", row.Cells[10].Value ?? DBNull.Value);
-                            cmd.Parameters.AddWithValue("@p12", row.Cells[11].Value);
-
-                            cmd.ExecuteNonQuery();
-                        
-                        }
-                     
-                      
-                    
-                         //dataGridView1.EndEdit();
-                       //    dataGridView1.DataSource = table;
-
-                      //   Getdata("SELECT  [TalbTwareed_No] ,[FYear],[Bnd_No],[RequestedQuan],Unit,[BIAN_TSNIF] ,STOCK_NO_ALL,Quan,[ArrivalDate] FROM [ANRPC_Inventory].[dbo].[T_TalbTawreed_Benod] ");
-                        //  // getdata2();
-
-                        //  dataadapter.InsertCommand = new SqlCommandBuilder(dataadapter).GetInsertCommand();
-                       //   MessageBox.Show(dataadapter.InsertCommand.CommandText);
-                        //      MessageBox.Show(dataadapter.InsertCommand.Parameter);
-                        //   dataadapter.InsertCommand.Parameters.AddWithValue("p1", )
-
-                      //  dataadapter.Update(table);
-                       // MessageBox.Show("تم  التعديلس بنجاح");
-                        //////////////////////////////////////here must insert trans in tr_in_2////////////
-
-                        
-
-                        //////////////////////////
-                       
-                    }
-                    foreach (DataGridViewRow row in dataGridView1.Rows)
-                    {
-
-                        if (!row.IsNewRow)
-                        {
-
-
-
-                            string q = "exec SP_UpdateVirtualQuan @p1,@p2,@p3";
-                            cmd = new SqlCommand(q, con);
-
-                            if (row.Cells[4].Value == DBNull.Value || row.Cells[4].Value.ToString() == "")
-                            {
-                                cmd.Parameters.AddWithValue("@p1", row.Cells[3].Value);
-                            }
-
-                            else
-                            {
-                                cmd.Parameters.AddWithValue("@p1", row.Cells[4].Value);
-                            }
-                            cmd.Parameters.AddWithValue("@p2", row.Cells[9].Value);
-                            cmd.Parameters.AddWithValue("@p3", 1);
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
-                    if (FlagSign2 == 1)
-                    {
-
-                        SP_UpdateSignatures(2, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                        SP_UpdateSignatures(3, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    }
-                    if (FlagSign3 == 1)
-                    {
-
-                        SP_UpdateSignatures(3, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                        SP_UpdateSignatures(4, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    }
-                    if (FlagSign4 == 1)
-                    {
-
-                        SP_UpdateSignatures(4, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                        SP_UpdateSignatures(5, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    }
-                    if (FlagSign5 == 1)
-                    {
-
-                        SP_UpdateSignatures(5, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                      //  SP_UpdateSignatures(11, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    }
-           
-                        // InsertTrans();
-                        //   UpdateQuan();
-
-                        if (FlagSign3 == 1)
-                        {
-
-                            // InsertTrans();
-                            // UpdateQuan();
-
-
-                            UpdateQuan();
-                            InsertTrans();
-
-
-
-                        }
-
-                   
-                    MessageBox.Show("تم التعديل بنجاح  ! ");
-              
-                    DisableControls();
-                    DisableControls_Malya();
-                    BTN_Print.Visible = true;
-                    SaveBtn.Visible = false;
-                    Addbtn.Enabled = true;
-                    AddEditFlag = 0;
-                }
-                else if (executemsg == true && flag == 3)
-                {
-                    MessageBox.Show("تم إدخال رقم طلب التوريد  من قبل  ! ");
-                }
-                con.Close();
-    }
-          private void BTN_Sign4_Click(object sender, EventArgs e)
-          {
-              if (FlagSign1 != 1 || FlagSign2!=1 || FlagSign3!=1)
-              {
-                  MessageBox.Show("من فضلك تاكد من التوقيعات السابقة");
-                  return;
-              }
-
-              Empn4 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد الخاص بك", "توقيع على استلام اذن الصرف", "");
-             
-
-              Sign4 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع على استلام اذن الصرف", "");
-             
-              if (Sign4 != "")
-              {
-                  //  MessageBox.Show("done");
-                  // string result= Constants.CheckSign("1",Sign1);
-
-                  ///////// i will make them same people that make e3tmad so change 4 to 2(not inserted in table)
-                 
-                  Tuple<string, int, int, string, string> result = Constants.CheckSign("4", "2", Sign4, Empn4);
-                  // Tuple<string, int, int, string, string> result = Constants.CheckSign("1", "2", Sign4, Empn4);
-                 
-
-                  if (result.Item3 == 1)
-                  {
-                      Pic_Sign4.Image = Image.FromFile(@result.Item1);
-
-                      FlagSign4 = result.Item2;
-                      FlagEmpn4 = Empn4;
-                  }
-                  else
-                  {
-                      FlagSign4 = 0;
-                      FlagEmpn4 = "";
-                  }
-                  // result.Item1;
-                  // result.Item2;
-
-
-              }
-              else
-              {
-                  //cancel
-              }
-          }
-
-          private void BTN_Sign5_Click(object sender, EventArgs e)
-          {
-              if (FlagSign1 != 1 || FlagSign2 != 1 || FlagSign3 != 1 ||FlagSign4!=1)
-              {
-                  MessageBox.Show("من فضلك تاكد من التوقيعات السابقة");
-                  return;
-              }
-
-              Empn5 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد الخاص بك", "توقيع على رقم القيد", "");
-            
-              Sign5 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع على رقم القيد", "");
-            
-              if (Sign5 != "")
-              {
-                  //  MessageBox.Show("done");
-                  // string result= Constants.CheckSign("1",Sign1);
-
-//will make them same pople as e3tmad9not inserted in table)
-                  //
-
-                 // Tuple<string, int, int, string, string> result = Constants.CheckSign("5", "2", Sign5, Empn5);
-                  
-                  
-                  Tuple<string, int, int, string, string> result = Constants.CheckSign("4", "2", Sign5, Empn5);
-                  if (result.Item3 == 1)
-                  {
-                      Pic_Sign5.Image = Image.FromFile(@result.Item1);
-
-                      FlagSign5 = result.Item2;
-                      FlagEmpn5 = Empn5;
-                  }
-                  else
-                  {
-                      FlagSign5 = 0;
-                      FlagEmpn5 = "";
-                  }
-                  // result.Item1;
-                  // result.Item2;
-
-
-              }
-              else
-              {
-                  //cancel
-              }
-          }
-
-         
-
-          private void DeleteBtn_Click(object sender, EventArgs e)
-          {
-              if ((MessageBox.Show("هل تريد حذف اذن الصرف ؟", "", MessageBoxButtons.YesNo)) == DialogResult.Yes)
-              {
-                  if(string.IsNullOrWhiteSpace(TXT_EznNo.Text))
-                    
-                  {
-                   MessageBox.Show("يجب اختياراذن الصرف   اولا");
-                   return;
-                  }
-                  Constants.opencon();
-////////////////////////////////////////////////////////////////////
-
-                  string cmdstring1 = "select STOCK_NO_ALL,quan1,quan2 from T_EznSarf_Benod where FYear=@FY and EznSarf_No=@TNO";
-                  SqlCommand cmd1 = new SqlCommand(cmdstring1, con);
-
-
-                  cmd1.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_EznNo.Text));
-                  cmd1.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
-                  SqlDataReader dr = cmd1.ExecuteReader();
-
-                  //---------------------------------
-                  if (dr.HasRows == true)
-                  {
-                      while (dr.Read())
-                      {
-                          if (dr["quan1"].ToString() == "")
-                          {
-
-                          }
-                          else
-                          {
-                              string cmdstring2 = "Exec SP_UndoVirtualQuan2 @TNO,@FY";
-
-                              SqlCommand cmd2 = new SqlCommand(cmdstring2, con);
-
-                              cmd2.Parameters.AddWithValue("@TNO", (dr["STOCK_NO_ALL"].ToString()));
-                              if (dr["quan2"].ToString() == "")
-                              {
-
-                                  cmd2.Parameters.AddWithValue("@FY", Convert.ToDouble(dr["quan1"].ToString()));
-                              }
-                              else
-                              {
-                                  cmd2.Parameters.AddWithValue("@FY", Convert.ToDouble(dr["quan2"].ToString()));
-                              }
-                              //  cmd2.Parameters.AddWithValue("@BN", (dr["Bnd_No"].ToString()));
-                              cmd2.ExecuteNonQuery();
-                          }
-
-                      }
-                  }
-                  dr.Close();
-
-
-
-                    /////////////////////////////////////////////////////////////////////////
-                   string cmdstring = "Exec SP_deleteEznSarf @TNO,@FY,@TRNO,@aot output";
-
-                SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-
-                cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_EznNo.Text));
-                cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
-                cmd.Parameters.AddWithValue("@TRNO", TXT_TRNO.Text.ToString());
-
-                cmd.Parameters.Add("@aot", SqlDbType.Int, 32);  //-------> output parameter
-                cmd.Parameters["@aot"].Direction = ParameterDirection.Output;
-
-                int flag;
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                    executemsg = true;
-                    flag = (int)cmd.Parameters["@aot"].Value;
-                }
-                catch (SqlException sqlEx)
-                {
-                    executemsg = false;
-                    MessageBox.Show(sqlEx.ToString());
-                    flag = (int)cmd.Parameters["@aot"].Value;
-                }
-                if (executemsg == true && flag == 1)
-                {
-                    MessageBox.Show("تم الحذف بنجاح");
-                    Input_Reset();
-                }
-                  Constants.closecon();
-              }
-          }
 
           private void TXT_TalbNo_TextChanged(object sender, EventArgs e)
           {
@@ -2903,55 +2312,17 @@ namespace ANRPC_Inventory
              //SearchTalb(2);
           }
 
-          private void dataGridView1_RowEnter_1(object sender, DataGridViewCellEventArgs e)
-          {
-             if (e.RowIndex == dataGridView1.NewRowIndex)
-            {
-                  // user is in the new row, disable controls.
-
-                  
-                  dataGridView1.Rows[e.RowIndex].Cells[0].Value = TXT_EznNo.Text;
-                  dataGridView1.Rows[e.RowIndex].Cells[1].Value = Cmb_FYear.Text;
-                  dataGridView1.Rows[e.RowIndex].Cells[2].Value = e.RowIndex + 1;//in perm
-                  //dataGridView1.Rows[e.RowIndex].Cells[3].Value = 0;
-                  //   dataGridView1.Rows[e.RowIndex].Cells[5].Value = 1;//in perm
-                  //  dataGridView1.Rows[e.RowIndex].Cells[10].Value = PermNo_text.Text;
-                  dataGridView1.Rows[e.RowIndex].Cells[0].ReadOnly = true;
-                  dataGridView1.Rows[e.RowIndex].Cells[1].ReadOnly = true;
-                  dataGridView1.Rows[e.RowIndex].Cells[2].ReadOnly = true;
-                  dataGridView1.Rows[e.RowIndex].Cells[3].ReadOnly = true;
-                  dataGridView1.Rows[e.RowIndex].Cells[5].ReadOnly = true;
-                  dataGridView1.Rows[e.RowIndex].Cells[6].ReadOnly = true;
-                  dataGridView1.Rows[e.RowIndex].Cells[7].ReadOnly = true;
-                  dataGridView1.Rows[e.RowIndex].Cells[8].ReadOnly = true;
-                  dataGridView1.Rows[e.RowIndex].Cells[9].ReadOnly = true;
-                  dataGridView1.Rows[e.RowIndex].Cells[10].ReadOnly = true;
-                  dataGridView1.Rows[e.RowIndex].Cells[11].ReadOnly = true;
-
-
-                  //  dataGridView1.Rows[e.RowIndex].Cells[5].ReadOnly = false;
-                  dataGridView1.AllowUserToAddRows = true;
-                  dataGridView1.AllowUserToDeleteRows = true;
-
-             }
-          }
-
-          private void TXT_TalbNo_Leave(object sender, EventArgs e)
-          {
-            
-          }
-
           private void TXT_TalbNo_KeyDown(object sender, KeyEventArgs e)
           {
               if (e.KeyCode ==Keys.Enter && AddEditFlag==2)
               {
-                  GetData(Convert.ToInt32(TXT_EznNo.Text), Cmb_FYear.Text,TXT_TRNO.Text);
+                  //GetData(Convert.ToInt32(TXT_EznNo.Text), Cmb_FYear.Text,TXT_TRNO.Text);
              
               }
               else if (e.KeyCode == Keys.Enter && AddEditFlag == 0)
               {
                   cleargridview();
-                  SearchTalb(1);
+                  //SearchTalb(1);
 
               }
           }
@@ -2959,19 +2330,6 @@ namespace ANRPC_Inventory
         private void Cmb_TalbNo2_SelectedValueChanged(object sender, EventArgs e)
         {
         //    SearchTalb(2);
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 4)
-            {
-          
-                if (e.RowIndex >= 0 && dataGridView1.Rows[e.RowIndex].Cells[4].Value!=null)
-                {
-                    //oldvalue = Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
-                }
-            }
-          
         }
   
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -3040,107 +2398,6 @@ namespace ANRPC_Inventory
             }
         }
 
-        public void InsertTrans()
-        {
-            Constants.opencon();
-            string cmdstring = "Exec SP_deleteTR2 @TNO,@FY,@TRNO";
-
-                SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-
-                cmd.Parameters.AddWithValue("@TNO",Convert.ToInt32(TXT_EznNo.Text));
-                cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
-            cmd.Parameters.AddWithValue("@TRNO", TXT_TRNO.Text.ToString());
-
-            cmd.ExecuteNonQuery();
-                foreach (DataGridViewRow row in dataGridView1.Rows)
-                {
-
-                    if (!row.IsNewRow)
-                    {
-
-                cmdstring = "exec SP_InsertTR2 @p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29";
-                cmd = new SqlCommand(cmdstring, Constants.con);
-
-                cmd.Parameters.AddWithValue("@p1", Convert.ToInt32(TXT_EznNo.Text));
-                cmd.Parameters.AddWithValue("@p2", Cmb_FYear.Text.ToString());
-                cmd.Parameters.AddWithValue("@p3", row.Cells[2].Value);
-                cmd.Parameters.AddWithValue("@p4", row.Cells[9].Value);
-                cmd.Parameters.AddWithValue("@p5", TXT_Date.Text.ToString());
-                cmd.Parameters.AddWithValue("@p6", TXT_TRNO.Text.ToString());
-                cmd.Parameters.AddWithValue("@p7", TXT_AccNo.Text.ToString());
-                cmd.Parameters.AddWithValue("@p8", TXT_PaccNo.Text.ToString());
-                string st = row.Cells[9].Value.ToString();
-                cmd.Parameters.AddWithValue("@p9", (st).Substring(0,2));
-                cmd.Parameters.AddWithValue("@p10", (st).Substring(2, 2));
-
-                cmd.Parameters.AddWithValue("@p11", (st).Substring(4, 2));
-                cmd.Parameters.AddWithValue("@p12", (st).Substring(6, 2));
-                cmd.Parameters.AddWithValue("@p13", row.Cells[4].Value);
-                cmd.Parameters.AddWithValue("@p14", row.Cells[10].Value);
-                cmd.Parameters.AddWithValue("@p15", row.Cells[5].Value);
-                cmd.Parameters.AddWithValue("@p16", TXT_Edara.SelectedText);
-                cmd.Parameters.AddWithValue("@p17", TXT_Edara.SelectedText);
-                cmd.Parameters.AddWithValue("@p18", TXT_Date.Value.Day.ToString());
-                cmd.Parameters.AddWithValue("@p19", TXT_Date.Value.Month.ToString());
-                cmd.Parameters.AddWithValue("@p20", TXT_Date.Value.Year.ToString());
-
-                cmd.Parameters.AddWithValue("@p21", (row.Cells[8].Value));
-                cmd.Parameters.AddWithValue("@p22", row.Cells[7].Value);
-                cmd.Parameters.AddWithValue("@p23", TXT_MTaklif.Text.ToString());
-                cmd.Parameters.AddWithValue("@p24", TXT_MResp.Text.ToString());
-                cmd.Parameters.AddWithValue("@p25", TXT_Masrof.Text.ToString());
-                cmd.Parameters.AddWithValue("@p26", TXT_Enfak.Text.ToString());
-                cmd.Parameters.AddWithValue("@p27", TXT_Enfak.Text.ToString());
-                cmd.Parameters.AddWithValue("@p28", TXT_Morakba.Text.ToString());
-                cmd.Parameters.AddWithValue("@p29", row.Cells[11].Value);
-               // cmd.Parameters.AddWithValue("@p30", Cmb_FYear.Text.ToString());
-                cmd.ExecuteNonQuery();
-        }}
-                MessageBox.Show("تم ادخال الحركة بنجاح");
-        }
-
-        public void UpdateQuan()
-        {
-            Constants.opencon();
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-
-                if (!row.IsNewRow)
-                {
-                   // string st = "select AvailableQuan from TR_IN_2 where SER_DOC=@S and FYear=@FY and SER_LIN=@L ";
-                 //   SqlCommand cmd2 = new SqlCommand(st, Constants.con);
-
-                 //   cmd2.Parameters.AddWithValue("@S", TXT_EznNo.Text);
-                  ////  cmd2.Parameters.AddWithValue("@FY", Cmb_FYear.Text);
-                  //////  cmd2.Parameters.AddWithValue("@L", (row.Cells[2].Value));
-
-                  //  var oldvalue = cmd2.ExecuteScalar();
-                    
-                    
-                    string cmdstring = "Exec SP_UpdateQuanTsnif @Quan,@ST,@F,@EZ,@FY,@B,@TRNO";
-
-                    SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-
-                 cmd.Parameters.AddWithValue("@Quan", Convert.ToDouble(row.Cells[4].Value));
-                    //will send rased badl else monsrf
-                   // cmd.Parameters.AddWithValue("@Quan", Convert.ToDouble(row.Cells[10].Value));
-                    cmd.Parameters.AddWithValue("@ST", (row.Cells[9].Value));
-                    cmd.Parameters.AddWithValue("@F", 2);
-                    cmd.Parameters.AddWithValue("@EZ", TXT_EznNo.Text);
-                    cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text);
-
-                    cmd.Parameters.AddWithValue("@B", row.Cells[2].Value);
-                    cmd.Parameters.AddWithValue("@TRNO", TXT_TRNO.Text);
-
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-        private void Pic_Sign1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void TXT_StockBian_TextChanged(object sender, EventArgs e)
         {
@@ -3328,7 +2585,7 @@ namespace ANRPC_Inventory
         {
             if (string.IsNullOrEmpty(TXT_EznNo.Text) == false)
             {
-                GetData(Convert.ToInt32(TXT_EznNo.Text), Cmb_FYear.Text, TXT_TRNO.Text);
+                //GetData(Convert.ToInt32(TXT_EznNo.Text), Cmb_FYear.Text, TXT_TRNO.Text);
 
             }
         }
@@ -3381,6 +2638,277 @@ namespace ANRPC_Inventory
             }
         }
 
-  
+
+        //------------------------------------------ Signature Handler ---------------------------------
+        #region Signature Handler
+        private void BTN_Sign1_Click(object sender, EventArgs e)
+        {
+
+
+            Empn1 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد الخاص بك", "توقيع على انشاء اذن صرف", "");
+
+            Sign1 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع على انشاء اذن صرف", "");
+            if (Sign1 != "" && Empn1 != "")
+            {
+                //  MessageBox.Show("done");
+                // string result= Constants.CheckSign("1",Sign1);
+                Tuple<string, int, int, string, string> result = Constants.CheckSign("1", "2", Sign1, Empn1);
+                if (result.Item3 == 1)
+                {
+                    Pic_Sign1.Image = Image.FromFile(@result.Item1);
+
+                    FlagSign1 = result.Item2;
+                    FlagEmpn1 = Empn1;
+                }
+                else
+                {
+                    FlagSign1 = 0;
+                    FlagEmpn1 = "";
+                }
+                // result.Item1;
+                // result.Item2;
+
+
+            }
+            else
+            {
+                //cancel
+            }
+        }
+        private void BTN_Sign2_Click(object sender, EventArgs e)
+        {
+            if (FlagSign1 != 1)
+            {
+                MessageBox.Show("من فضلك تاكد من التوقيعات السابقة");
+                return;
+            }
+            Empn2 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد الخاص بك", "توقيع على اعتماد اذن صرف", "");
+
+            Sign2 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع على اعتماد اذن صرف", "");
+
+            if (Sign2 != "" && Empn2 != "")
+            {
+                //  MessageBox.Show("done");
+                // string result= Constants.CheckSign("1",Sign1);
+                Tuple<string, int, int, string, string> result = Constants.CheckSign("2", "2", Sign2, Empn2);
+                if (result.Item3 == 1)
+                {
+                    Pic_Sign2.Image = Image.FromFile(@result.Item1);
+
+                    FlagSign2 = result.Item2;
+                    FlagEmpn2 = Empn2;
+                }
+                else
+                {
+                    FlagSign2 = 0;
+                    FlagEmpn2 = "";
+                }
+                // result.Item1;
+                // result.Item2;
+
+
+            }
+            else
+            {
+                //cancel
+            }
+        }
+        private void DeleteBtn_Click(object sender, EventArgs e)
+        {
+            string Empn2 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد الخاص بك", "اعتماد المدير العام", "");
+            string Sign2 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "اعتماد المدير العام", "");
+
+            if (Sign2 != "" && Empn2 != "")
+            {
+                Tuple<string, int, int, string, string> result = Constants.CheckSign("2", "2", Sign2, Empn2);
+                if (result.Item3 == 1)
+                {
+                    Pic_Sign2.Image = Image.FromFile(@result.Item1);
+
+                    FlagSign2 = result.Item2;
+                    FlagEmpn2 = Empn2;
+
+                    if (DeleteEznSarf())
+                    {
+                        reset();
+                    }
+                }
+                else
+                {
+                    FlagSign2 = 0;
+                    FlagEmpn2 = "";
+                }
+            }
+        }
+
+        private void BTN_Sign3_Click(object sender, EventArgs e)
+        {
+            if (FlagSign1 != 1 || FlagSign2 != 1)
+            {
+                MessageBox.Show("من فضلك تاكد من التوقيعات السابقة");
+                return;
+            }
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    if (row.Cells[4].Value == DBNull.Value || row.Cells[4].Value.ToString() == "")
+                    {
+                        MessageBox.Show("يجب ادخال الكمية المنصرفة لجميع البنود");
+                        return;
+                    }
+                }
+            }
+            Empn3 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد الخاص بك", "توقيع على استلام طلب توريد", "");
+
+            Sign3 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع على استلام طلب توريد", "");
+
+            if (Sign3 != "")
+            {
+                //  MessageBox.Show("done");
+                // string result= Constants.CheckSign("1",Sign1);
+                Tuple<string, int, int, string, string> result = Constants.CheckSign("3", "2", Sign3, Empn3);
+                if (result.Item3 == 1)
+                {
+                    Pic_Sign3.Image = Image.FromFile(@result.Item1);
+
+                    FlagSign3 = result.Item2;
+                    FlagEmpn3 = Empn3;
+
+                }
+                else
+                {
+                    FlagSign3 = 0;
+                    FlagEmpn3 = "";
+                }
+                // result.Item1;
+                // result.Item2;
+
+
+            }
+            else
+            {
+                //cancel
+            }
+        }
+        private void BTN_Sign4_Click(object sender, EventArgs e)
+        {
+            if (FlagSign1 != 1 || FlagSign2 != 1 || FlagSign3 != 1)
+            {
+                MessageBox.Show("من فضلك تاكد من التوقيعات السابقة");
+                return;
+            }
+
+            Empn4 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد الخاص بك", "توقيع على استلام اذن الصرف", "");
+
+
+            Sign4 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع على استلام اذن الصرف", "");
+
+            if (Sign4 != "")
+            {
+                //  MessageBox.Show("done");
+                // string result= Constants.CheckSign("1",Sign1);
+
+                ///////// i will make them same people that make e3tmad so change 4 to 2(not inserted in table)
+
+                Tuple<string, int, int, string, string> result = Constants.CheckSign("4", "2", Sign4, Empn4);
+                // Tuple<string, int, int, string, string> result = Constants.CheckSign("1", "2", Sign4, Empn4);
+
+
+                if (result.Item3 == 1)
+                {
+                    Pic_Sign4.Image = Image.FromFile(@result.Item1);
+
+                    FlagSign4 = result.Item2;
+                    FlagEmpn4 = Empn4;
+                }
+                else
+                {
+                    FlagSign4 = 0;
+                    FlagEmpn4 = "";
+                }
+                // result.Item1;
+                // result.Item2;
+
+
+            }
+            else
+            {
+                //cancel
+            }
+        }
+        private void BTN_Sign5_Click(object sender, EventArgs e)
+        {
+            if (FlagSign1 != 1 || FlagSign2 != 1 || FlagSign3 != 1 || FlagSign4 != 1)
+            {
+                MessageBox.Show("من فضلك تاكد من التوقيعات السابقة");
+                return;
+            }
+
+            Empn5 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد الخاص بك", "توقيع على رقم القيد", "");
+
+            Sign5 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع على رقم القيد", "");
+
+            if (Sign5 != "")
+            {
+                Tuple<string, int, int, string, string> result = Constants.CheckSign("4", "2", Sign5, Empn5);
+                if (result.Item3 == 1)
+                {
+                    Pic_Sign5.Image = Image.FromFile(@result.Item1);
+
+                    FlagSign5 = result.Item2;
+                    FlagEmpn5 = Empn5;
+                }
+                else
+                {
+                    FlagSign5 = 0;
+                    FlagEmpn5 = "";
+                }
+                // result.Item1;
+                // result.Item2;
+
+
+            }
+        }
+        #endregion
+
+        private void BTN_SearchEzn_Click(object sender, EventArgs e)
+        {
+            if (!IsValidCase(VALIDATION_TYPES.SEARCH))
+            {
+                return;
+            }
+
+            string ezn_no = TXT_EznNo.Text;
+            string fyear = Cmb_FYear.Text;
+            string momayz = TXT_TRNO.Text;
+
+            reset();
+
+            if (SearchEznSarf(ezn_no, fyear, momayz))
+            {
+                if (FlagSign2 != 1 && FlagSign1 != 1)
+                {
+                    Editbtn2.Enabled = true;
+                }
+                else
+                {
+                    Editbtn2.Enabled = false;
+                }
+            }
+        }
+
+        private void dataGridView1_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    row.Cells[2].Value = row.Index + 1;
+                }
+            }
+            dataGridView1.Refresh();
+        }
     }
 }

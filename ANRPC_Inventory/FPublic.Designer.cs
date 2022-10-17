@@ -34,6 +34,15 @@
             this.ExitBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.button10 = new System.Windows.Forms.Button();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.label29 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
@@ -78,15 +87,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.button10 = new System.Windows.Forms.Button();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.label29 = new System.Windows.Forms.Label();
             this.toolStrip2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -188,6 +188,125 @@
             this.panel1.Size = new System.Drawing.Size(206, 721);
             this.panel1.TabIndex = 6;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label24.ForeColor = System.Drawing.Color.White;
+            this.label24.Location = new System.Drawing.Point(79, 673);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(21, 22);
+            this.label24.TabIndex = 46;
+            this.label24.Text = "0";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label25.ForeColor = System.Drawing.Color.White;
+            this.label25.Location = new System.Drawing.Point(64, 673);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(21, 22);
+            this.label25.TabIndex = 45;
+            this.label25.Text = "0";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label26.ForeColor = System.Drawing.Color.Gold;
+            this.label26.Location = new System.Drawing.Point(25, 673);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(25, 22);
+            this.label26.TabIndex = 44;
+            this.label26.Text = "G";
+            // 
+            // button10
+            // 
+            this.button10.AllowDrop = true;
+            this.button10.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button10.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(152)))), ((int)(((byte)(207)))));
+            this.button10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(152)))), ((int)(((byte)(207)))));
+            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button10.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.button10.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.button10.Location = new System.Drawing.Point(0, 738);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(194, 29);
+            this.button10.TabIndex = 40;
+            this.button10.Text = "متابعة اذن التحويل";
+            this.button10.UseMnemonic = false;
+            this.button10.UseVisualStyleBackColor = true;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label27.ForeColor = System.Drawing.Color.Red;
+            this.label27.Location = new System.Drawing.Point(3, 673);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(23, 22);
+            this.label27.TabIndex = 43;
+            this.label27.Text = "R";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label28.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.label28.Location = new System.Drawing.Point(48, 673);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(25, 22);
+            this.label28.TabIndex = 42;
+            this.label28.Text = "G";
+            // 
+            // button11
+            // 
+            this.button11.AllowDrop = true;
+            this.button11.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button11.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(152)))), ((int)(((byte)(207)))));
+            this.button11.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(152)))), ((int)(((byte)(207)))));
+            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button11.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.button11.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.button11.Location = new System.Drawing.Point(0, 773);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(194, 10);
+            this.button11.TabIndex = 41;
+            this.button11.Text = "بحث أذون الصرف";
+            this.button11.UseMnemonic = false;
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Visible = false;
+            // 
+            // button12
+            // 
+            this.button12.AllowDrop = true;
+            this.button12.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button12.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(152)))), ((int)(((byte)(207)))));
+            this.button12.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(152)))), ((int)(((byte)(207)))));
+            this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button12.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.button12.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.button12.Location = new System.Drawing.Point(9, 694);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(194, 24);
+            this.button12.TabIndex = 39;
+            this.button12.Text = "متابعة اذون التحويل";
+            this.button12.UseMnemonic = false;
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label29.ForeColor = System.Drawing.Color.Gold;
+            this.label29.Location = new System.Drawing.Point(95, 676);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(112, 18);
+            this.label29.TabIndex = 38;
+            this.label29.Text = "اذون التحويل خارجى";
             // 
             // label18
             // 
@@ -544,7 +663,7 @@
             this.BtnEznsarf.Name = "BtnEznsarf";
             this.BtnEznsarf.Size = new System.Drawing.Size(194, 36);
             this.BtnEznsarf.TabIndex = 10;
-            this.BtnEznsarf.Text = "إدخال جديد";
+            this.BtnEznsarf.Text = "إدخال جديد / تعديل البيانات";
             this.BtnEznsarf.UseMnemonic = false;
             this.BtnEznsarf.UseVisualStyleBackColor = true;
             this.BtnEznsarf.Click += new System.EventHandler(this.BtnEznsarf_Click);
@@ -701,7 +820,7 @@
             this.BtnTalbTawred.Name = "BtnTalbTawred";
             this.BtnTalbTawred.Size = new System.Drawing.Size(194, 36);
             this.BtnTalbTawred.TabIndex = 3;
-            this.BtnTalbTawred.Text = "إدخال جديد";
+            this.BtnTalbTawred.Text = "إدخال جديد / تعديل بيانات ";
             this.BtnTalbTawred.UseMnemonic = false;
             this.BtnTalbTawred.UseVisualStyleBackColor = true;
             this.BtnTalbTawred.Click += new System.EventHandler(this.BtnTalbTawred_Click);
@@ -744,125 +863,6 @@
             this.pictureBox2.TabIndex = 8;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label24.ForeColor = System.Drawing.Color.White;
-            this.label24.Location = new System.Drawing.Point(79, 673);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(21, 22);
-            this.label24.TabIndex = 46;
-            this.label24.Text = "0";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label25.ForeColor = System.Drawing.Color.White;
-            this.label25.Location = new System.Drawing.Point(64, 673);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(21, 22);
-            this.label25.TabIndex = 45;
-            this.label25.Text = "0";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label26.ForeColor = System.Drawing.Color.Gold;
-            this.label26.Location = new System.Drawing.Point(25, 673);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(25, 22);
-            this.label26.TabIndex = 44;
-            this.label26.Text = "G";
-            // 
-            // button10
-            // 
-            this.button10.AllowDrop = true;
-            this.button10.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button10.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(152)))), ((int)(((byte)(207)))));
-            this.button10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(152)))), ((int)(((byte)(207)))));
-            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.button10.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.button10.Location = new System.Drawing.Point(0, 738);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(194, 29);
-            this.button10.TabIndex = 40;
-            this.button10.Text = "متابعة اذن التحويل";
-            this.button10.UseMnemonic = false;
-            this.button10.UseVisualStyleBackColor = true;
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label27.ForeColor = System.Drawing.Color.Red;
-            this.label27.Location = new System.Drawing.Point(3, 673);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(23, 22);
-            this.label27.TabIndex = 43;
-            this.label27.Text = "R";
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label28.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.label28.Location = new System.Drawing.Point(48, 673);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(25, 22);
-            this.label28.TabIndex = 42;
-            this.label28.Text = "G";
-            // 
-            // button11
-            // 
-            this.button11.AllowDrop = true;
-            this.button11.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button11.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(152)))), ((int)(((byte)(207)))));
-            this.button11.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(152)))), ((int)(((byte)(207)))));
-            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button11.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.button11.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.button11.Location = new System.Drawing.Point(0, 773);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(194, 10);
-            this.button11.TabIndex = 41;
-            this.button11.Text = "بحث أذون الصرف";
-            this.button11.UseMnemonic = false;
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Visible = false;
-            // 
-            // button12
-            // 
-            this.button12.AllowDrop = true;
-            this.button12.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button12.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(152)))), ((int)(((byte)(207)))));
-            this.button12.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(152)))), ((int)(((byte)(207)))));
-            this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button12.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.button12.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.button12.Location = new System.Drawing.Point(9, 694);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(194, 24);
-            this.button12.TabIndex = 39;
-            this.button12.Text = "متابعة اذون التحويل";
-            this.button12.UseMnemonic = false;
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label29.ForeColor = System.Drawing.Color.Gold;
-            this.label29.Location = new System.Drawing.Point(95, 676);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(112, 18);
-            this.label29.TabIndex = 38;
-            this.label29.Text = "اذون التحويل خارجى";
             // 
             // FPublic
             // 

@@ -114,6 +114,7 @@
             this.aNRPC_InventoryDataSet = new ANRPC_Inventory.ANRPC_InventoryDataSet();
             this.t_BnodAwamershraaTableAdapter = new ANRPC_Inventory.ANRPC_InventoryDataSetTableAdapters.T_BnodAwamershraaTableAdapter();
             this.eznSarfDataPanel = new System.Windows.Forms.Panel();
+            this.BTN_SearchEzn = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.Txt_Quan = new System.Windows.Forms.TextBox();
             this.Txt_ReqQuan = new System.Windows.Forms.TextBox();
@@ -156,7 +157,8 @@
             this.panel10 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
             this.dataGridViewPanel = new System.Windows.Forms.Panel();
-            this.BTN_SearchEzn = new System.Windows.Forms.Button();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.alertProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.bottomPanel.SuspendLayout();
             this.takalefTable.SuspendLayout();
             this.signatureTable.SuspendLayout();
@@ -187,6 +189,8 @@
             this.panel10.SuspendLayout();
             this.panel11.SuspendLayout();
             this.dataGridViewPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.alertProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // bottomPanel
@@ -606,7 +610,7 @@
             this.BTN_Sign3.TabIndex = 32;
             this.BTN_Sign3.Text = "توقيع";
             this.BTN_Sign3.UseVisualStyleBackColor = false;
-            this.BTN_Sign3.Click += new System.EventHandler(this.button4_Click);
+            this.BTN_Sign3.Click += new System.EventHandler(this.BTN_Sign3_Click);
             // 
             // Pic_Sign3
             // 
@@ -657,7 +661,6 @@
             this.Pic_Sign1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign1.TabIndex = 27;
             this.Pic_Sign1.TabStop = false;
-            this.Pic_Sign1.Click += new System.EventHandler(this.Pic_Sign1_Click);
             // 
             // BTN_Sign1
             // 
@@ -945,7 +948,6 @@
             this.TXT_EznNo.TabIndex = 245;
             this.TXT_EznNo.TextChanged += new System.EventHandler(this.TXT_EznNo_TextChanged);
             this.TXT_EznNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TXT_TalbNo_KeyDown);
-            this.TXT_EznNo.Leave += new System.EventHandler(this.TXT_EznNo_Leave);
             // 
             // TXT_RequestedFor
             // 
@@ -1022,10 +1024,9 @@
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dataGridView1.Size = new System.Drawing.Size(1020, 163);
             this.dataGridView1.TabIndex = 42;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
-            this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowEnter_1);
+            this.dataGridView1.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView1_UserDeletedRow);
             // 
             // BTN_Sign5
             // 
@@ -1033,9 +1034,9 @@
             this.BTN_Sign5.BackColor = System.Drawing.Color.Green;
             this.BTN_Sign5.Enabled = false;
             this.BTN_Sign5.ForeColor = System.Drawing.Color.Black;
-            this.BTN_Sign5.Location = new System.Drawing.Point(177, 55);
+            this.BTN_Sign5.Location = new System.Drawing.Point(139, 55);
             this.BTN_Sign5.Name = "BTN_Sign5";
-            this.BTN_Sign5.Size = new System.Drawing.Size(32, 23);
+            this.BTN_Sign5.Size = new System.Drawing.Size(70, 23);
             this.BTN_Sign5.TabIndex = 38;
             this.BTN_Sign5.Text = "توقيع";
             this.BTN_Sign5.UseVisualStyleBackColor = false;
@@ -1275,6 +1276,24 @@
             this.eznSarfDataPanel.Size = new System.Drawing.Size(1020, 152);
             this.eznSarfDataPanel.TabIndex = 19;
             this.eznSarfDataPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // BTN_SearchEzn
+            // 
+            this.BTN_SearchEzn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_SearchEzn.BackColor = System.Drawing.Color.LightGray;
+            this.BTN_SearchEzn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_SearchEzn.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
+            this.BTN_SearchEzn.FlatAppearance.BorderSize = 3;
+            this.BTN_SearchEzn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_SearchEzn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.BTN_SearchEzn.ForeColor = System.Drawing.Color.Blue;
+            this.BTN_SearchEzn.Location = new System.Drawing.Point(654, 2);
+            this.BTN_SearchEzn.Name = "BTN_SearchEzn";
+            this.BTN_SearchEzn.Size = new System.Drawing.Size(70, 31);
+            this.BTN_SearchEzn.TabIndex = 336;
+            this.BTN_SearchEzn.Text = "بحث";
+            this.BTN_SearchEzn.UseVisualStyleBackColor = false;
+            this.BTN_SearchEzn.Click += new System.EventHandler(this.BTN_SearchEzn_Click);
             // 
             // panel6
             // 
@@ -1812,22 +1831,15 @@
             this.dataGridViewPanel.Size = new System.Drawing.Size(1020, 163);
             this.dataGridViewPanel.TabIndex = 283;
             // 
-            // BTN_SearchEzn
+            // errorProvider
             // 
-            this.BTN_SearchEzn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_SearchEzn.BackColor = System.Drawing.Color.LightGray;
-            this.BTN_SearchEzn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_SearchEzn.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
-            this.BTN_SearchEzn.FlatAppearance.BorderSize = 3;
-            this.BTN_SearchEzn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_SearchEzn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.BTN_SearchEzn.ForeColor = System.Drawing.Color.Blue;
-            this.BTN_SearchEzn.Location = new System.Drawing.Point(654, 2);
-            this.BTN_SearchEzn.Name = "BTN_SearchEzn";
-            this.BTN_SearchEzn.Size = new System.Drawing.Size(70, 31);
-            this.BTN_SearchEzn.TabIndex = 336;
-            this.BTN_SearchEzn.Text = "بحث";
-            this.BTN_SearchEzn.UseVisualStyleBackColor = false;
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider.ContainerControl = this;
+            // 
+            // alertProvider
+            // 
+            this.alertProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.alertProvider.ContainerControl = this;
             // 
             // EznSarf_F
             // 
@@ -1890,6 +1902,8 @@
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
             this.dataGridViewPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.alertProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2023,5 +2037,7 @@
         private System.Windows.Forms.TextBox Txt_Quan;
         private System.Windows.Forms.TextBox Txt_ReqQuan;
         private System.Windows.Forms.Button BTN_SearchEzn;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ErrorProvider alertProvider;
     }
 }
