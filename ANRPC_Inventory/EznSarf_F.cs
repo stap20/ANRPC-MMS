@@ -1944,18 +1944,18 @@ namespace ANRPC_Inventory
                                 wazifa1 = p.Split(':')[2];
                                 pp = p.Split(':')[0];
 
-                                ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "1"]).Image = Image.FromFile(@pp);
+                                ((PictureBox)this.bottomPanel.Controls["signatureTable"].Controls["panel13"].Controls["Pic_Sign" + "1"]).Image = Image.FromFile(@pp);
 
                                 FlagSign1 = 1;
                                 FlagEmpn1 = s1;
-                                ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "1"]).BackColor = Color.Green;
+                                ((PictureBox)this.bottomPanel.Controls["signatureTable"].Controls["panel13"].Controls["Pic_Sign" + "1"]).BackColor = Color.Green;
                                 toolTip1.SetToolTip(Pic_Sign1, Ename1 + Environment.NewLine + wazifa1);
                             }
 
                         }
                         else
                         {
-                            ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "1"]).BackColor = Color.Red;
+                            ((PictureBox)this.bottomPanel.Controls["signatureTable"].Controls["panel13"].Controls["Pic_Sign" + "1"]).BackColor = Color.Red;
                         }
                         if (s2 != "")
                         {
@@ -1967,10 +1967,10 @@ namespace ANRPC_Inventory
                                 Ename2 = p.Split(':')[1];
                                 wazifa2 = p.Split(':')[2];
                                 pp = p.Split(':')[0];
-                                ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "2"]).Image = Image.FromFile(@pp);
+                                ((PictureBox)this.bottomPanel.Controls["signatureTable"].Controls["panel13"].Controls["Pic_Sign" + "2"]).Image = Image.FromFile(@pp);
                                 FlagSign2 = 1;
                                 FlagEmpn2 = s2;
-                                ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "2"]).BackColor = Color.Green;
+                                ((PictureBox)this.bottomPanel.Controls["signatureTable"].Controls["panel13"].Controls["Pic_Sign" + "2"]).BackColor = Color.Green;
                                 toolTip1.SetToolTip(Pic_Sign2, Ename2 + Environment.NewLine + wazifa2);
                             }
 

@@ -128,8 +128,12 @@ namespace ANRPC_Inventory
          
         private void TalbTawred_Load(object sender, EventArgs e)
         {
-   
-           // dataGridView1.Parent = panel1;
+            HelperClass.comboBoxFiller(Cmb_FY2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
+            HelperClass.comboBoxFiller(Cmb_FY, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
+            HelperClass.comboBoxFiller(Cmb_FYear2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
+
+
+            // dataGridView1.Parent = panel1;
             //dataGridView1.Dock = DockStyle.Bottom;
             currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.Egypt));
             currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.Syria));
@@ -1028,18 +1032,18 @@ namespace ANRPC_Inventory
                             wazifa1 = p.Split(':')[2];
                             pp = p.Split(':')[0];
 
-                            ((PictureBox)this.panel1.Controls["Pic_Sign" + "1"]).Image = Image.FromFile(@pp);
+                            ((PictureBox)this.tableLayoutPanel1.Controls["panel15"].Controls["Pic_Sign" + "1"]).Image = Image.FromFile(@pp);
 
                             FlagSign1 = 1;
                             FlagEmpn1 = s1;
-                            ((PictureBox)this.panel1.Controls["Pic_Sign" + "1"]).BackColor = Color.Green;
+                            ((PictureBox)this.tableLayoutPanel1.Controls["panel15"].Controls["Pic_Sign" + "1"]).BackColor = Color.Green;
                             toolTip1.SetToolTip(Pic_Sign1, Ename1 + Environment.NewLine + wazifa1);
                         }
 
                     }
                     else
                     {
-                        ((PictureBox)this.panel1.Controls["Pic_Sign" + "1"]).BackColor = Color.Red;
+                        ((PictureBox)this.tableLayoutPanel1.Controls["panel15"].Controls["Pic_Sign" + "1"]).BackColor = Color.Red;
                     }
                     if (s2 != "")
                     {
@@ -1052,18 +1056,18 @@ namespace ANRPC_Inventory
                             wazifa2 = p.Split(':')[2];
                             pp = p.Split(':')[0];
 
-                            ((PictureBox)this.panel1.Controls["Pic_Sign" + "2"]).Image = Image.FromFile(@pp);
+                            ((PictureBox)this.tableLayoutPanel1.Controls["panel16"].Controls["Pic_Sign" + "2"]).Image = Image.FromFile(@pp);
 
                             FlagSign2 = 1;
                             FlagEmpn2 = s2;
-                            ((PictureBox)this.panel1.Controls["Pic_Sign" + "2"]).BackColor = Color.Green;
+                            ((PictureBox)this.tableLayoutPanel1.Controls["panel16"].Controls["Pic_Sign" + "2"]).BackColor = Color.Green;
                             toolTip1.SetToolTip(Pic_Sign2, Ename2 + Environment.NewLine + wazifa2);
                         }
 
                     }
                     else
                     {
-                        ((PictureBox)this.panel1.Controls["Pic_Sign" + "2"]).BackColor = Color.Red;
+                        ((PictureBox)this.tableLayoutPanel1.Controls["panel16"].Controls["Pic_Sign" + "2"]).BackColor = Color.Red;
                     }
                     if (s3 != "")
                     {
@@ -1076,18 +1080,18 @@ namespace ANRPC_Inventory
                             wazifa3 = p.Split(':')[2];
                             pp = p.Split(':')[0];
 
-                            ((PictureBox)this.panel1.Controls["Pic_Sign" + "3"]).Image = Image.FromFile(@pp);
+                            ((PictureBox)this.tableLayoutPanel1.Controls["panel17"].Controls["Pic_Sign" + "3"]).Image = Image.FromFile(@pp);
 
                             FlagSign3 = 1;
                             FlagEmpn3 = s3;
-                            ((PictureBox)this.panel1.Controls["Pic_Sign" + "3"]).BackColor = Color.Green;
+                            ((PictureBox)this.tableLayoutPanel1.Controls["panel17"].Controls["Pic_Sign" + "3"]).BackColor = Color.Green;
                             toolTip1.SetToolTip(Pic_Sign3, Ename3 + Environment.NewLine + wazifa3);
                         }
 
                     }
                     else
                     {
-                        ((PictureBox)this.panel1.Controls["Pic_Sign" + "3"]).BackColor = Color.Red;
+                        ((PictureBox)this.tableLayoutPanel1.Controls["panel17"].Controls["Pic_Sign" + "3"]).BackColor = Color.Red;
                     }
                     if (s4 != "")
                     {
@@ -1100,18 +1104,18 @@ namespace ANRPC_Inventory
                             wazifa4 = p.Split(':')[2];
                             pp = p.Split(':')[0];
 
-                            ((PictureBox)this.panel1.Controls["Pic_Sign" + "4"]).Image = Image.FromFile(@pp);
+                            ((PictureBox)this.tableLayoutPanel1.Controls["panel18"].Controls["Pic_Sign" + "4"]).Image = Image.FromFile(@pp);
 
                             FlagSign4 = 1;
                             FlagEmpn4 = s4;
-                            ((PictureBox)this.panel1.Controls["Pic_Sign" + "4"]).BackColor = Color.Green;
+                            ((PictureBox)this.tableLayoutPanel1.Controls["panel18"].Controls["Pic_Sign" + "4"]).BackColor = Color.Green;
                             toolTip1.SetToolTip(Pic_Sign4, Ename4 + Environment.NewLine + wazifa4);
                         }
 
                     }
                     else
                     {
-                        ((PictureBox)this.panel1.Controls["Pic_Sign" + "4"]).BackColor = Color.Red;
+                        ((PictureBox)this.tableLayoutPanel1.Controls["panel18"].Controls["Pic_Sign" + "4"]).BackColor = Color.Red;
                     }
                     ///////////////////
                     if (s5 != "")
@@ -1127,18 +1131,18 @@ namespace ANRPC_Inventory
                             wazifa5 = p.Split(':')[2];
                             pp = p.Split(':')[0];
 
-                            ((PictureBox)this.panel1.Controls["Pic_Sign" + "5"]).Image = Image.FromFile(@pp);
+                            ((PictureBox)this.tableLayoutPanel1.Controls["panel19"].Controls["Pic_Sign" + "5"]).Image = Image.FromFile(@pp);
 
                             FlagSign5 = 1;
                             FlagEmpn5 = s5;
-                            ((PictureBox)this.panel1.Controls["Pic_Sign" + "5"]).BackColor = Color.Green;
+                            ((PictureBox)this.tableLayoutPanel1.Controls["panel19"].Controls["Pic_Sign" + "5"]).BackColor = Color.Green;
                             toolTip1.SetToolTip(Pic_Sign5, Ename5 + Environment.NewLine + wazifa5);
                         }
 
                     }
                     else
                     {
-                        ((PictureBox)this.panel1.Controls["Pic_Sign" + "5"]).BackColor = Color.Red;
+                        ((PictureBox)this.tableLayoutPanel1.Controls["panel19"].Controls["Pic_Sign" + "5"]).BackColor = Color.Red;
                     }
                     ////////////////////
                     if (s6 != "")
@@ -1152,18 +1156,18 @@ namespace ANRPC_Inventory
                             wazifa6 = p.Split(':')[2];
                             pp = p.Split(':')[0];
 
-                            ((PictureBox)this.panel1.Controls["Pic_Sign" + "6"]).Image = Image.FromFile(@pp);
+                            //((PictureBox)this.panel1.Controls["Pic_Sign" + "6"]).Image = Image.FromFile(@pp);
 
                             FlagSign6= 1;
                             FlagEmpn6 = s6;
-                            ((PictureBox)this.panel1.Controls["Pic_Sign" + "6"]).BackColor = Color.Green;
+                            //((PictureBox)this.panel1.Controls["Pic_Sign" + "6"]).BackColor = Color.Green;
                             toolTip1.SetToolTip(Pic_Sign6, Ename6 + Environment.NewLine + wazifa6);
                         }
 
                     }
                     else
                     {
-                        ((PictureBox)this.panel1.Controls["Pic_Sign" + "6"]).BackColor = Color.Red;
+                        //((PictureBox)this.panel1.Controls["Pic_Sign" + "6"]).BackColor = Color.Red;
                     }
                     ///////////////////////////
                     if (s7 != "")
@@ -1177,18 +1181,18 @@ namespace ANRPC_Inventory
                             wazifa7= p.Split(':')[2];
                             pp = p.Split(':')[0];
 
-                            ((PictureBox)this.panel1.Controls["Pic_Sign" + "7"]).Image = Image.FromFile(@pp);
+                            //((PictureBox)this.panel1.Controls["Pic_Sign" + "7"]).Image = Image.FromFile(@pp);
 
                             FlagSign7 = 1;
                             FlagEmpn7 = s7;
-                            ((PictureBox)this.panel1.Controls["Pic_Sign" + "7"]).BackColor = Color.Green;
+                            //((PictureBox)this.panel1.Controls["Pic_Sign" + "7"]).BackColor = Color.Green;
                             toolTip1.SetToolTip(Pic_Sign7, Ename7 + Environment.NewLine + wazifa7);
                         }
 
                     }
                     else
                     {
-                        ((PictureBox)this.panel1.Controls["Pic_Sign" + "7"]).BackColor = Color.Red;
+                        //((PictureBox)this.panel1.Controls["Pic_Sign" + "7"]).BackColor = Color.Red;
                     }
 
 
@@ -2403,8 +2407,6 @@ namespace ANRPC_Inventory
             string cmdstring = "";
             if (UserB == "Stock")
             {
-
-
                 cmdstring = "select (Amrshraa_No) from  T_Awamershraa where AmrSheraa_sanamalia=@FY  and (Sign12 is null or Sign13  is null or Sign14 is null) order by  Amrshraa_No";
             }
             else if (UserB=="Finance")
@@ -2421,24 +2423,27 @@ namespace ANRPC_Inventory
                 cmdstring = "select (Amrshraa_No) from  T_Awamershraa where AmrSheraa_sanamalia=@FY and (Sign14 is not null) and( Sign3 is null) and CodeEdara=@C  order by  Amrshraa_No";
           
             }
-            
-            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
 
-            // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
-            cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
-            cmd.Parameters.AddWithValue("@C", Constants.CodeEdara);
-         ///   cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
+            if (cmdstring != "")
+            {
 
+                SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
 
-            DataTable dts = new DataTable();
+                // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
+                cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
+                cmd.Parameters.AddWithValue("@C", Constants.CodeEdara);
+                ///   cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
 
-            dts.Load(cmd.ExecuteReader());
-            Cmb_AmrNo2.DataSource = dts;
-            Cmb_AmrNo2.ValueMember = "Amrshraa_No";
-            Cmb_AmrNo2.DisplayMember = "Amrshraa_No";
-            Cmb_AmrNo2.SelectedIndex = -1;
-            Cmb_AmrNo2.SelectedIndexChanged += new EventHandler(Cmb_ِAmrNo2_SelectedIndexChanged);
-            Constants.closecon();
+                DataTable dts = new DataTable();
+
+                dts.Load(cmd.ExecuteReader());
+                Cmb_AmrNo2.DataSource = dts;
+                Cmb_AmrNo2.ValueMember = "Amrshraa_No";
+                Cmb_AmrNo2.DisplayMember = "Amrshraa_No";
+                Cmb_AmrNo2.SelectedIndex = -1;
+                Cmb_AmrNo2.SelectedIndexChanged += new EventHandler(Cmb_ِAmrNo2_SelectedIndexChanged);
+                Constants.closecon();
+            }
         }
 
         private void label27_Click(object sender, EventArgs e)
@@ -3147,6 +3152,16 @@ namespace ANRPC_Inventory
         }
 
         private void label18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel18_Paint(object sender, PaintEventArgs e)
         {
 
         }

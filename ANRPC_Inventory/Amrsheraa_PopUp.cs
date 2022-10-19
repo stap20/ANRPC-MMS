@@ -141,15 +141,18 @@ namespace ANRPC_Inventory
             else
             {
                 table.Clear();
-                TableQuery = "SELECT  [TalbTwareed_No2] ,[FYear],[Bnd_No],[RequestedQuan],Unit,[BIAN_TSNIF] ,STOCK_NO_ALL,Quan,[ArrivalDate] FROM [T_TalbTawreed_Benod] Where TalbTwareed_No2= " + x + " and Fyear='" + y +"'" + " and BuyMethod='" + BM + "'";
+                TableQuery = "SELECT  [TalbTwareed_No2] ,[FYear],[Bnd_No],[RequestedQuan],Unit,[BIAN_TSNIF] ,STOCK_NO_ALL,Quan,[ArrivalDate] FROM [T_TalbTawreed_Benod] Where TalbTwareed_No2= " + x + " and Fyear='" + y +"'" /*+ " and BuyMethod='" + BM + "'"*/;
                 Getdata(TableQuery);
             }
 
         }
         private void TalbTawred_Load(object sender, EventArgs e)
         {
-           // dataGridView1.Parent = panel1;
+            // dataGridView1.Parent = panel1;
             //dataGridView1.Dock = DockStyle.Bottom;
+
+            HelperClass.comboBoxFiller(CMB_FYear, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
+
             this.dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();

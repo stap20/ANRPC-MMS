@@ -2688,6 +2688,7 @@ namespace ANRPC_Inventory
 
                 Currency = Cmb_Currency.Text;
                 NewTasnifFlag = 1;
+                Txt_Quan.Text = "0";
 
                 AddNewTasnifInDataGridView(NewTasnifFlag);
 
