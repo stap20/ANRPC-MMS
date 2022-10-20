@@ -155,13 +155,13 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.BTN_PDF = new System.Windows.Forms.Button();
+            this.browseBTN = new System.Windows.Forms.Button();
             this.panel11 = new System.Windows.Forms.Panel();
             this.dataGridViewPanel = new System.Windows.Forms.Panel();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.alertProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.browseBTN = new System.Windows.Forms.Button();
-            this.BTN_PDF = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.bottomPanel.SuspendLayout();
             this.takalefTable.SuspendLayout();
@@ -191,11 +191,11 @@
             this.panel8.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel10.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.panel11.SuspendLayout();
             this.dataGridViewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.alertProvider)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // bottomPanel
@@ -751,11 +751,11 @@
             // Cmb_CType
             // 
             this.Cmb_CType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cmb_CType.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.Cmb_CType.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
             this.Cmb_CType.FormattingEnabled = true;
-            this.Cmb_CType.Location = new System.Drawing.Point(3, 5);
+            this.Cmb_CType.Location = new System.Drawing.Point(3, 4);
             this.Cmb_CType.Name = "Cmb_CType";
-            this.Cmb_CType.Size = new System.Drawing.Size(205, 24);
+            this.Cmb_CType.Size = new System.Drawing.Size(205, 27);
             this.Cmb_CType.TabIndex = 281;
             this.Cmb_CType.SelectedIndexChanged += new System.EventHandler(this.Cmb_CType_SelectedIndexChanged);
             // 
@@ -1802,6 +1802,56 @@
             this.panel10.Size = new System.Drawing.Size(1020, 132);
             this.panel10.TabIndex = 281;
             // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.BTN_PDF);
+            this.panel1.Controls.Add(this.browseBTN);
+            this.panel1.Location = new System.Drawing.Point(2, 4);
+            this.panel1.Name = "panel1";
+            this.panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.panel1.Size = new System.Drawing.Size(111, 124);
+            this.panel1.TabIndex = 283;
+            // 
+            // BTN_PDF
+            // 
+            this.BTN_PDF.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.BTN_PDF.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BTN_PDF.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BTN_PDF.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.BTN_PDF.FlatAppearance.BorderSize = 2;
+            this.BTN_PDF.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold);
+            this.BTN_PDF.ForeColor = System.Drawing.Color.DarkRed;
+            this.BTN_PDF.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.BTN_PDF.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.BTN_PDF.Location = new System.Drawing.Point(0, 61);
+            this.BTN_PDF.Name = "BTN_PDF";
+            this.BTN_PDF.Size = new System.Drawing.Size(109, 58);
+            this.BTN_PDF.TabIndex = 337;
+            this.BTN_PDF.Text = "عرض المرفقات";
+            this.BTN_PDF.UseVisualStyleBackColor = false;
+            this.BTN_PDF.Click += new System.EventHandler(this.BTN_PDF_Click);
+            // 
+            // browseBTN
+            // 
+            this.browseBTN.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.browseBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.browseBTN.Dock = System.Windows.Forms.DockStyle.Top;
+            this.browseBTN.Enabled = false;
+            this.browseBTN.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.browseBTN.FlatAppearance.BorderSize = 2;
+            this.browseBTN.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold);
+            this.browseBTN.ForeColor = System.Drawing.Color.DarkRed;
+            this.browseBTN.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.browseBTN.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.browseBTN.Location = new System.Drawing.Point(0, 0);
+            this.browseBTN.Name = "browseBTN";
+            this.browseBTN.Size = new System.Drawing.Size(109, 61);
+            this.browseBTN.TabIndex = 340;
+            this.browseBTN.Text = "إرفاق مرفقات";
+            this.browseBTN.UseVisualStyleBackColor = false;
+            this.browseBTN.Click += new System.EventHandler(this.browseBTN_Click);
+            // 
             // panel11
             // 
             this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -1836,56 +1886,6 @@
             // 
             this.alertProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.alertProvider.ContainerControl = this;
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.BTN_PDF);
-            this.panel1.Controls.Add(this.browseBTN);
-            this.panel1.Location = new System.Drawing.Point(2, 4);
-            this.panel1.Name = "panel1";
-            this.panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.panel1.Size = new System.Drawing.Size(111, 124);
-            this.panel1.TabIndex = 283;
-            // 
-            // browseBTN
-            // 
-            this.browseBTN.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.browseBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.browseBTN.Dock = System.Windows.Forms.DockStyle.Top;
-            this.browseBTN.Enabled = false;
-            this.browseBTN.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.browseBTN.FlatAppearance.BorderSize = 2;
-            this.browseBTN.Font = new System.Drawing.Font("Arabic Typesetting", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.browseBTN.ForeColor = System.Drawing.Color.DarkRed;
-            this.browseBTN.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.browseBTN.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.browseBTN.Location = new System.Drawing.Point(0, 0);
-            this.browseBTN.Name = "browseBTN";
-            this.browseBTN.Size = new System.Drawing.Size(109, 61);
-            this.browseBTN.TabIndex = 340;
-            this.browseBTN.Text = "إرفاق مرفقات";
-            this.browseBTN.UseVisualStyleBackColor = false;
-            this.browseBTN.Click += new System.EventHandler(this.browseBTN_Click);
-            // 
-            // BTN_PDF
-            // 
-            this.BTN_PDF.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.BTN_PDF.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.BTN_PDF.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BTN_PDF.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.BTN_PDF.FlatAppearance.BorderSize = 2;
-            this.BTN_PDF.Font = new System.Drawing.Font("Arabic Typesetting", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_PDF.ForeColor = System.Drawing.Color.DarkRed;
-            this.BTN_PDF.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.BTN_PDF.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BTN_PDF.Location = new System.Drawing.Point(0, 61);
-            this.BTN_PDF.Name = "BTN_PDF";
-            this.BTN_PDF.Size = new System.Drawing.Size(109, 58);
-            this.BTN_PDF.TabIndex = 337;
-            this.BTN_PDF.Text = "عرض المرفقات";
-            this.BTN_PDF.UseVisualStyleBackColor = false;
-            this.BTN_PDF.Click += new System.EventHandler(this.BTN_PDF_Click);
             // 
             // openFileDialog1
             // 
@@ -1952,12 +1952,12 @@
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
             this.panel10.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
             this.dataGridViewPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.alertProvider)).EndInit();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

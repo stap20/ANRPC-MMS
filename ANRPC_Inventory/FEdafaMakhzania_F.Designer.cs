@@ -31,12 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FEdafaMakhzania_F));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label26 = new System.Windows.Forms.Label();
             this.BTN_Estagal = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.Pic_Sign4 = new System.Windows.Forms.PictureBox();
-            this.TXT_TRNO = new System.Windows.Forms.TextBox();
             this.BTN_Sign4 = new System.Windows.Forms.Button();
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
@@ -67,14 +65,16 @@
             this.BTN_Sign1 = new System.Windows.Forms.Button();
             this.Pic_Sign1 = new System.Windows.Forms.PictureBox();
             this.label17 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.CH_Direct = new System.Windows.Forms.CheckBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.TXT_TRNO = new System.Windows.Forms.TextBox();
             this.TXT_HesabMward1 = new System.Windows.Forms.TextBox();
             this.TXT_HesabMward2 = new System.Windows.Forms.TextBox();
             this.TXT_TaslemPlace = new System.Windows.Forms.TextBox();
             this.TXT_Name = new System.Windows.Forms.TextBox();
             this.TXT_Payment = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.TXT_Date = new System.Windows.Forms.DateTimePicker();
-            this.label8 = new System.Windows.Forms.Label();
             this.TXT_Egmali = new System.Windows.Forms.TextBox();
             this.TXT_TalbNo = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -93,26 +93,47 @@
             this.label7 = new System.Windows.Forms.Label();
             this.Cmb_CType = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label25 = new System.Windows.Forms.Label();
-            this.Cmb_AmrNo = new System.Windows.Forms.ComboBox();
-            this.BTN_Print = new System.Windows.Forms.Button();
-            this.TXT_NameMward = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.SaveBtn = new System.Windows.Forms.Button();
             this.DeleteBtn = new System.Windows.Forms.Button();
             this.EditBtn = new System.Windows.Forms.Button();
             this.Addbtn = new System.Windows.Forms.Button();
+            this.label25 = new System.Windows.Forms.Label();
+            this.Cmb_AmrNo = new System.Windows.Forms.ComboBox();
+            this.BTN_Print = new System.Windows.Forms.Button();
+            this.TXT_NameMward = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.Cmb_FY2 = new System.Windows.Forms.ComboBox();
-            this.TXT_AmrNo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.TXT_EdafaNo = new System.Windows.Forms.TextBox();
             this.Cmb_FY = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.CH_Direct = new System.Windows.Forms.CheckBox();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.BTN_Print2 = new System.Windows.Forms.Button();
+            this.BTN_Search_Motab3a = new System.Windows.Forms.Button();
+            this.BTN_Save2 = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.TXT_TRNO2 = new System.Windows.Forms.TextBox();
+            this.label54 = new System.Windows.Forms.Label();
+            this.label55 = new System.Windows.Forms.Label();
+            this.Cmb_CType2 = new System.Windows.Forms.ComboBox();
+            this.Cmb_TalbNo2 = new System.Windows.Forms.ComboBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.Cmb_FYear2 = new System.Windows.Forms.ComboBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.BTN_PDF = new System.Windows.Forms.Button();
+            this.browseBTN = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign4)).BeginInit();
             this.panel3.SuspendLayout();
@@ -122,6 +143,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.panel7.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.panel10.SuspendLayout();
+            this.panel12.SuspendLayout();
+            this.panel13.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -129,13 +159,10 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.CH_Direct);
-            this.panel1.Controls.Add(this.label26);
             this.panel1.Controls.Add(this.BTN_Estagal);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.Pic_Sign4);
-            this.panel1.Controls.Add(this.TXT_TRNO);
             this.panel1.Controls.Add(this.BTN_Sign4);
             this.panel1.Controls.Add(this.label23);
             this.panel1.Controls.Add(this.label22);
@@ -144,46 +171,12 @@
             this.panel1.Controls.Add(this.BTN_Sign1);
             this.panel1.Controls.Add(this.Pic_Sign1);
             this.panel1.Controls.Add(this.label17);
-            this.panel1.Controls.Add(this.TXT_HesabMward1);
-            this.panel1.Controls.Add(this.TXT_HesabMward2);
-            this.panel1.Controls.Add(this.TXT_TaslemPlace);
-            this.panel1.Controls.Add(this.TXT_Name);
-            this.panel1.Controls.Add(this.TXT_Payment);
             this.panel1.Controls.Add(this.dataGridView1);
-            this.panel1.Controls.Add(this.TXT_Date);
-            this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.TXT_Egmali);
-            this.panel1.Controls.Add(this.TXT_TalbNo);
-            this.panel1.Controls.Add(this.label13);
-            this.panel1.Controls.Add(this.label14);
-            this.panel1.Controls.Add(this.label15);
-            this.panel1.Controls.Add(this.TXT_BndMwazna);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.TXT_Edara);
-            this.panel1.Controls.Add(this.TXT_TaslemDate);
-            this.panel1.Controls.Add(this.TXT_Momayz);
-            this.panel1.Controls.Add(this.label12);
-            this.panel1.Controls.Add(this.label11);
-            this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.label9);
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Location = new System.Drawing.Point(0, 125);
+            this.panel1.Location = new System.Drawing.Point(38, 598);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1100, 492);
+            this.panel1.Size = new System.Drawing.Size(738, 19);
             this.panel1.TabIndex = 5;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
-            // label26
-            // 
-            this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label26.Location = new System.Drawing.Point(682, 99);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(76, 18);
-            this.label26.TabIndex = 286;
-            this.label26.Text = "طريقة الشراء";
             // 
             // BTN_Estagal
             // 
@@ -193,7 +186,7 @@
             this.BTN_Estagal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.BTN_Estagal.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BTN_Estagal.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.BTN_Estagal.Location = new System.Drawing.Point(219, 416);
+            this.BTN_Estagal.Location = new System.Drawing.Point(-143, 416);
             this.BTN_Estagal.Name = "BTN_Estagal";
             this.BTN_Estagal.Size = new System.Drawing.Size(235, 41);
             this.BTN_Estagal.TabIndex = 284;
@@ -209,7 +202,7 @@
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button1.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.button1.Location = new System.Drawing.Point(219, 371);
+            this.button1.Location = new System.Drawing.Point(-143, 371);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(235, 41);
             this.button1.TabIndex = 283;
@@ -221,7 +214,7 @@
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(219, 339);
+            this.textBox1.Location = new System.Drawing.Point(-143, 339);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(239, 26);
             this.textBox1.TabIndex = 282;
@@ -230,30 +223,19 @@
             // Pic_Sign4
             // 
             this.Pic_Sign4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Pic_Sign4.Location = new System.Drawing.Point(42, 364);
+            this.Pic_Sign4.Location = new System.Drawing.Point(-320, 364);
             this.Pic_Sign4.Name = "Pic_Sign4";
             this.Pic_Sign4.Size = new System.Drawing.Size(160, 93);
             this.Pic_Sign4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign4.TabIndex = 280;
             this.Pic_Sign4.TabStop = false;
             // 
-            // TXT_TRNO
-            // 
-            this.TXT_TRNO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_TRNO.Enabled = false;
-            this.TXT_TRNO.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_TRNO.Location = new System.Drawing.Point(985, 2);
-            this.TXT_TRNO.Name = "TXT_TRNO";
-            this.TXT_TRNO.Size = new System.Drawing.Size(42, 26);
-            this.TXT_TRNO.TabIndex = 285;
-            this.TXT_TRNO.TextChanged += new System.EventHandler(this.TXT_TRNO_TextChanged);
-            // 
             // BTN_Sign4
             // 
             this.BTN_Sign4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BTN_Sign4.BackColor = System.Drawing.Color.Green;
             this.BTN_Sign4.Enabled = false;
-            this.BTN_Sign4.Location = new System.Drawing.Point(99, 339);
+            this.BTN_Sign4.Location = new System.Drawing.Point(-263, 339);
             this.BTN_Sign4.Name = "BTN_Sign4";
             this.BTN_Sign4.Size = new System.Drawing.Size(53, 23);
             this.BTN_Sign4.TabIndex = 281;
@@ -267,7 +249,7 @@
             this.label23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label23.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label23.ForeColor = System.Drawing.Color.Maroon;
-            this.label23.Location = new System.Drawing.Point(39, 319);
+            this.label23.Location = new System.Drawing.Point(-323, 319);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(163, 138);
             this.label23.TabIndex = 279;
@@ -279,7 +261,7 @@
             this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label22.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label22.Location = new System.Drawing.Point(208, 319);
+            this.label22.Location = new System.Drawing.Point(-154, 319);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(258, 138);
             this.label22.TabIndex = 278;
@@ -311,7 +293,7 @@
             this.panel3.Controls.Add(this.label31);
             this.panel3.Controls.Add(this.label32);
             this.panel3.Controls.Add(this.label34);
-            this.panel3.Location = new System.Drawing.Point(472, 314);
+            this.panel3.Location = new System.Drawing.Point(110, 314);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(487, 142);
             this.panel3.TabIndex = 270;
@@ -580,7 +562,7 @@
             this.BTN_Sigm1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BTN_Sigm1.BackColor = System.Drawing.Color.SandyBrown;
             this.BTN_Sigm1.Enabled = false;
-            this.BTN_Sigm1.Location = new System.Drawing.Point(997, 339);
+            this.BTN_Sigm1.Location = new System.Drawing.Point(635, 339);
             this.BTN_Sigm1.Name = "BTN_Sigm1";
             this.BTN_Sigm1.Size = new System.Drawing.Size(53, 23);
             this.BTN_Sigm1.TabIndex = 245;
@@ -592,7 +574,7 @@
             // 
             this.BTN_Sign1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BTN_Sign1.Enabled = false;
-            this.BTN_Sign1.Location = new System.Drawing.Point(1187, 290);
+            this.BTN_Sign1.Location = new System.Drawing.Point(825, 290);
             this.BTN_Sign1.Name = "BTN_Sign1";
             this.BTN_Sign1.Size = new System.Drawing.Size(53, 23);
             this.BTN_Sign1.TabIndex = 240;
@@ -603,7 +585,7 @@
             // Pic_Sign1
             // 
             this.Pic_Sign1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Pic_Sign1.Location = new System.Drawing.Point(974, 368);
+            this.Pic_Sign1.Location = new System.Drawing.Point(612, 368);
             this.Pic_Sign1.Name = "Pic_Sign1";
             this.Pic_Sign1.Size = new System.Drawing.Size(91, 77);
             this.Pic_Sign1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -617,7 +599,7 @@
             this.label17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label17.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label17.ForeColor = System.Drawing.Color.Maroon;
-            this.label17.Location = new System.Drawing.Point(969, 314);
+            this.label17.Location = new System.Drawing.Point(607, 314);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(107, 139);
             this.label17.TabIndex = 236;
@@ -625,66 +607,11 @@
             this.label17.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label17.Click += new System.EventHandler(this.label17_Click);
             // 
-            // TXT_HesabMward1
-            // 
-            this.TXT_HesabMward1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_HesabMward1.Enabled = false;
-            this.TXT_HesabMward1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_HesabMward1.Location = new System.Drawing.Point(605, 64);
-            this.TXT_HesabMward1.Name = "TXT_HesabMward1";
-            this.TXT_HesabMward1.Size = new System.Drawing.Size(78, 26);
-            this.TXT_HesabMward1.TabIndex = 235;
-            this.TXT_HesabMward1.TextChanged += new System.EventHandler(this.TXT_HesabMward1_TextChanged);
-            // 
-            // TXT_HesabMward2
-            // 
-            this.TXT_HesabMward2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_HesabMward2.Enabled = false;
-            this.TXT_HesabMward2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_HesabMward2.Location = new System.Drawing.Point(509, 64);
-            this.TXT_HesabMward2.Name = "TXT_HesabMward2";
-            this.TXT_HesabMward2.Size = new System.Drawing.Size(88, 26);
-            this.TXT_HesabMward2.TabIndex = 234;
-            this.TXT_HesabMward2.TextChanged += new System.EventHandler(this.TXT_HesabMward2_TextChanged);
-            // 
-            // TXT_TaslemPlace
-            // 
-            this.TXT_TaslemPlace.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_TaslemPlace.Enabled = false;
-            this.TXT_TaslemPlace.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_TaslemPlace.Location = new System.Drawing.Point(509, 31);
-            this.TXT_TaslemPlace.Name = "TXT_TaslemPlace";
-            this.TXT_TaslemPlace.Size = new System.Drawing.Size(174, 26);
-            this.TXT_TaslemPlace.TabIndex = 233;
-            this.TXT_TaslemPlace.TextChanged += new System.EventHandler(this.TXT_TaslemPlace_TextChanged);
-            // 
-            // TXT_Name
-            // 
-            this.TXT_Name.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_Name.Enabled = false;
-            this.TXT_Name.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_Name.Location = new System.Drawing.Point(868, 67);
-            this.TXT_Name.Name = "TXT_Name";
-            this.TXT_Name.Size = new System.Drawing.Size(159, 26);
-            this.TXT_Name.TabIndex = 232;
-            this.TXT_Name.TextChanged += new System.EventHandler(this.TXT_Name_TextChanged);
-            // 
-            // TXT_Payment
-            // 
-            this.TXT_Payment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_Payment.Enabled = false;
-            this.TXT_Payment.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_Payment.Location = new System.Drawing.Point(868, 97);
-            this.TXT_Payment.Name = "TXT_Payment";
-            this.TXT_Payment.Size = new System.Drawing.Size(159, 26);
-            this.TXT_Payment.TabIndex = 231;
-            this.TXT_Payment.TextChanged += new System.EventHandler(this.TXT_Payment_TextChanged);
-            // 
             // dataGridView1
             // 
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(26, 124);
+            this.dataGridView1.Location = new System.Drawing.Point(-336, 124);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dataGridView1.Size = new System.Drawing.Size(1059, 179);
@@ -698,50 +625,128 @@
             this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
             this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowEnter);
             // 
+            // CH_Direct
+            // 
+            this.CH_Direct.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CH_Direct.AutoSize = true;
+            this.CH_Direct.Enabled = false;
+            this.CH_Direct.Location = new System.Drawing.Point(170, 13);
+            this.CH_Direct.Name = "CH_Direct";
+            this.CH_Direct.Size = new System.Drawing.Size(53, 17);
+            this.CH_Direct.TabIndex = 288;
+            this.CH_Direct.Text = "مباشر";
+            this.CH_Direct.UseVisualStyleBackColor = true;
+            this.CH_Direct.Visible = false;
+            // 
+            // label26
+            // 
+            this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.label26.Location = new System.Drawing.Point(162, 98);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(95, 19);
+            this.label26.TabIndex = 286;
+            this.label26.Text = " : طريقة الشراء";
+            this.label26.Click += new System.EventHandler(this.label26_Click_1);
+            // 
+            // TXT_TRNO
+            // 
+            this.TXT_TRNO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TXT_TRNO.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.TXT_TRNO.Location = new System.Drawing.Point(61, 65);
+            this.TXT_TRNO.Name = "TXT_TRNO";
+            this.TXT_TRNO.ReadOnly = true;
+            this.TXT_TRNO.Size = new System.Drawing.Size(45, 26);
+            this.TXT_TRNO.TabIndex = 285;
+            this.toolTip1.SetToolTip(this.TXT_TRNO, "ميمز المستند");
+            this.TXT_TRNO.MouseHover += new System.EventHandler(this.TXT_TRNO_MouseHover);
+            // 
+            // TXT_HesabMward1
+            // 
+            this.TXT_HesabMward1.Enabled = false;
+            this.TXT_HesabMward1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.TXT_HesabMward1.Location = new System.Drawing.Point(3, 32);
+            this.TXT_HesabMward1.Name = "TXT_HesabMward1";
+            this.TXT_HesabMward1.Size = new System.Drawing.Size(77, 26);
+            this.TXT_HesabMward1.TabIndex = 235;
+            this.TXT_HesabMward1.TextChanged += new System.EventHandler(this.TXT_HesabMward1_TextChanged);
+            // 
+            // TXT_HesabMward2
+            // 
+            this.TXT_HesabMward2.Enabled = false;
+            this.TXT_HesabMward2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.TXT_HesabMward2.Location = new System.Drawing.Point(86, 32);
+            this.TXT_HesabMward2.Name = "TXT_HesabMward2";
+            this.TXT_HesabMward2.Size = new System.Drawing.Size(84, 26);
+            this.TXT_HesabMward2.TabIndex = 234;
+            this.TXT_HesabMward2.TextChanged += new System.EventHandler(this.TXT_HesabMward2_TextChanged);
+            // 
+            // TXT_TaslemPlace
+            // 
+            this.TXT_TaslemPlace.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TXT_TaslemPlace.Enabled = false;
+            this.TXT_TaslemPlace.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.TXT_TaslemPlace.Location = new System.Drawing.Point(5, 90);
+            this.TXT_TaslemPlace.Multiline = true;
+            this.TXT_TaslemPlace.Name = "TXT_TaslemPlace";
+            this.TXT_TaslemPlace.Size = new System.Drawing.Size(95, 72);
+            this.TXT_TaslemPlace.TabIndex = 233;
+            this.TXT_TaslemPlace.TextChanged += new System.EventHandler(this.TXT_TaslemPlace_TextChanged);
+            // 
+            // TXT_Name
+            // 
+            this.TXT_Name.Enabled = false;
+            this.TXT_Name.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.TXT_Name.Location = new System.Drawing.Point(3, 6);
+            this.TXT_Name.Name = "TXT_Name";
+            this.TXT_Name.Size = new System.Drawing.Size(197, 26);
+            this.TXT_Name.TabIndex = 232;
+            this.TXT_Name.TextChanged += new System.EventHandler(this.TXT_Name_TextChanged);
+            // 
+            // TXT_Payment
+            // 
+            this.TXT_Payment.Enabled = false;
+            this.TXT_Payment.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.TXT_Payment.Location = new System.Drawing.Point(3, 91);
+            this.TXT_Payment.Multiline = true;
+            this.TXT_Payment.Name = "TXT_Payment";
+            this.TXT_Payment.Size = new System.Drawing.Size(168, 67);
+            this.TXT_Payment.TabIndex = 231;
+            this.TXT_Payment.TextChanged += new System.EventHandler(this.TXT_Payment_TextChanged);
+            // 
             // TXT_Date
             // 
-            this.TXT_Date.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TXT_Date.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_Date.Enabled = false;
-            this.TXT_Date.Font = new System.Drawing.Font("Arabic Typesetting", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_Date.Font = new System.Drawing.Font("Arial", 12F);
             this.TXT_Date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.TXT_Date.Location = new System.Drawing.Point(867, 31);
+            this.TXT_Date.Location = new System.Drawing.Point(5, 2);
             this.TXT_Date.Name = "TXT_Date";
             this.TXT_Date.ShowUpDown = true;
-            this.TXT_Date.Size = new System.Drawing.Size(159, 35);
+            this.TXT_Date.Size = new System.Drawing.Size(125, 26);
             this.TXT_Date.TabIndex = 229;
             this.TXT_Date.ValueChanged += new System.EventHandler(this.TXT_Date_ValueChanged);
             // 
-            // label8
-            // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label8.Location = new System.Drawing.Point(1024, 6);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(64, 18);
-            this.label8.TabIndex = 6;
-            this.label8.Text = "مميز مستند";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
-            // 
             // TXT_Egmali
             // 
-            this.TXT_Egmali.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_Egmali.Enabled = false;
             this.TXT_Egmali.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_Egmali.Location = new System.Drawing.Point(27, 92);
+            this.TXT_Egmali.Location = new System.Drawing.Point(3, 61);
             this.TXT_Egmali.Name = "TXT_Egmali";
-            this.TXT_Egmali.Size = new System.Drawing.Size(367, 26);
+            this.TXT_Egmali.Size = new System.Drawing.Size(132, 26);
             this.TXT_Egmali.TabIndex = 26;
             this.TXT_Egmali.TextChanged += new System.EventHandler(this.TXT_Egmali_TextChanged);
             // 
             // TXT_TalbNo
             // 
-            this.TXT_TalbNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_TalbNo.Enabled = false;
             this.TXT_TalbNo.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_TalbNo.Location = new System.Drawing.Point(27, 2);
+            this.TXT_TalbNo.Location = new System.Drawing.Point(3, 65);
             this.TXT_TalbNo.Name = "TXT_TalbNo";
-            this.TXT_TalbNo.Size = new System.Drawing.Size(405, 26);
+            this.TXT_TalbNo.Size = new System.Drawing.Size(171, 26);
             this.TXT_TalbNo.TabIndex = 25;
             this.TXT_TalbNo.TextChanged += new System.EventHandler(this.TXT_TalbNo_TextChanged);
             // 
@@ -749,48 +754,47 @@
             // 
             this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.label13.Location = new System.Drawing.Point(402, 95);
+            this.label13.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.label13.ForeColor = System.Drawing.Color.Black;
+            this.label13.Location = new System.Drawing.Point(143, 64);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(99, 18);
+            this.label13.Size = new System.Drawing.Size(122, 19);
             this.label13.TabIndex = 23;
-            this.label13.Text = "اجمالى امر الشراء";
+            this.label13.Text = " : اجمالى امر الشراء";
             this.label13.Click += new System.EventHandler(this.label13_Click);
             // 
             // label14
             // 
             this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label14.Location = new System.Drawing.Point(682, 67);
+            this.label14.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.label14.Location = new System.Drawing.Point(180, 35);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(70, 18);
+            this.label14.Size = new System.Drawing.Size(85, 19);
             this.label14.TabIndex = 22;
-            this.label14.Text = "حساب مورد";
+            this.label14.Text = " : حساب مورد";
             this.label14.Click += new System.EventHandler(this.label14_Click);
             // 
             // label15
             // 
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label15.ForeColor = System.Drawing.Color.DarkRed;
-            this.label15.Location = new System.Drawing.Point(438, 3);
+            this.label15.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.label15.ForeColor = System.Drawing.Color.Black;
+            this.label15.Location = new System.Drawing.Point(180, 68);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(63, 18);
+            this.label15.Size = new System.Drawing.Size(76, 19);
             this.label15.TabIndex = 21;
-            this.label15.Text = "طلب توريد";
+            this.label15.Text = " : طلب توريد";
             this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
             // TXT_BndMwazna
             // 
-            this.TXT_BndMwazna.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_BndMwazna.Enabled = false;
             this.TXT_BndMwazna.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_BndMwazna.Location = new System.Drawing.Point(27, 60);
+            this.TXT_BndMwazna.Location = new System.Drawing.Point(3, 3);
             this.TXT_BndMwazna.Name = "TXT_BndMwazna";
-            this.TXT_BndMwazna.Size = new System.Drawing.Size(405, 26);
+            this.TXT_BndMwazna.Size = new System.Drawing.Size(167, 26);
             this.TXT_BndMwazna.TabIndex = 20;
             this.TXT_BndMwazna.TextChanged += new System.EventHandler(this.TXT_BndMwazna_TextChanged);
             // 
@@ -798,57 +802,59 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label6.ForeColor = System.Drawing.Color.DarkRed;
-            this.label6.Location = new System.Drawing.Point(438, 67);
+            this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.label6.ForeColor = System.Drawing.Color.Black;
+            this.label6.Location = new System.Drawing.Point(181, 6);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 18);
+            this.label6.Size = new System.Drawing.Size(84, 19);
             this.label6.TabIndex = 19;
-            this.label6.Text = "بند الموازنة";
+            this.label6.Text = " : بند الموازنة";
             this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label5.Location = new System.Drawing.Point(1029, 101);
+            this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.label5.Location = new System.Drawing.Point(181, 96);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 18);
+            this.label5.Size = new System.Drawing.Size(84, 19);
             this.label5.TabIndex = 17;
-            this.label5.Text = "طريقة الدفع";
+            this.label5.Text = " : طريقة الدفع";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // TXT_Edara
             // 
-            this.TXT_Edara.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TXT_Edara.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_Edara.Enabled = false;
             this.TXT_Edara.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_Edara.Location = new System.Drawing.Point(27, 32);
+            this.TXT_Edara.Location = new System.Drawing.Point(5, 31);
             this.TXT_Edara.Name = "TXT_Edara";
-            this.TXT_Edara.Size = new System.Drawing.Size(405, 26);
+            this.TXT_Edara.Size = new System.Drawing.Size(92, 26);
             this.TXT_Edara.TabIndex = 16;
             this.TXT_Edara.TextChanged += new System.EventHandler(this.TXT_Edara_TextChanged);
             // 
             // TXT_TaslemDate
             // 
-            this.TXT_TaslemDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TXT_TaslemDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_TaslemDate.Enabled = false;
             this.TXT_TaslemDate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_TaslemDate.Location = new System.Drawing.Point(509, 3);
+            this.TXT_TaslemDate.Location = new System.Drawing.Point(5, 61);
             this.TXT_TaslemDate.Name = "TXT_TaslemDate";
-            this.TXT_TaslemDate.Size = new System.Drawing.Size(174, 26);
+            this.TXT_TaslemDate.Size = new System.Drawing.Size(95, 26);
             this.TXT_TaslemDate.TabIndex = 15;
             this.TXT_TaslemDate.TextChanged += new System.EventHandler(this.TXT_TaslemDate_TextChanged);
             // 
             // TXT_Momayz
             // 
-            this.TXT_Momayz.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_Momayz.Enabled = false;
             this.TXT_Momayz.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_Momayz.Location = new System.Drawing.Point(509, 92);
+            this.TXT_Momayz.Location = new System.Drawing.Point(3, 95);
+            this.TXT_Momayz.Multiline = true;
             this.TXT_Momayz.Name = "TXT_Momayz";
-            this.TXT_Momayz.Size = new System.Drawing.Size(159, 26);
+            this.TXT_Momayz.Size = new System.Drawing.Size(159, 66);
             this.TXT_Momayz.TabIndex = 14;
             this.TXT_Momayz.TextChanged += new System.EventHandler(this.TXT_Momayz_TextChanged);
             this.TXT_Momayz.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
@@ -857,166 +863,92 @@
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label12.ForeColor = System.Drawing.Color.DarkRed;
-            this.label12.Location = new System.Drawing.Point(432, 35);
+            this.label12.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.label12.ForeColor = System.Drawing.Color.Black;
+            this.label12.Location = new System.Drawing.Point(100, 34);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(77, 18);
+            this.label12.Size = new System.Drawing.Size(95, 19);
             this.label12.TabIndex = 10;
-            this.label12.Text = "الادارة الطالبة";
+            this.label12.Text = " : الادارة الطالبة";
             this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
             // label11
             // 
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label11.Location = new System.Drawing.Point(1042, 71);
+            this.label11.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.label11.Location = new System.Drawing.Point(205, 9);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(34, 18);
+            this.label11.Size = new System.Drawing.Size(51, 19);
             this.label11.TabIndex = 9;
-            this.label11.Text = "الأسم";
+            this.label11.Text = " : الأسم";
             this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // label10
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label10.Location = new System.Drawing.Point(682, 35);
+            this.label10.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.label10.Location = new System.Drawing.Point(106, 94);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(67, 18);
+            this.label10.Size = new System.Drawing.Size(89, 19);
             this.label10.TabIndex = 8;
-            this.label10.Text = "مكان التسليم";
+            this.label10.Text = " : مكان التسليم";
             this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // label9
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label9.Location = new System.Drawing.Point(682, 9);
+            this.label9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.label9.Location = new System.Drawing.Point(104, 64);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(69, 18);
+            this.label9.Size = new System.Drawing.Size(91, 19);
             this.label9.TabIndex = 7;
-            this.label9.Text = "موعد التسليم";
+            this.label9.Text = " : موعد التسليم";
             this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label7
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label7.Location = new System.Drawing.Point(1033, 41);
+            this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.label7.Location = new System.Drawing.Point(136, 5);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(42, 18);
+            this.label7.Size = new System.Drawing.Size(59, 19);
             this.label7.TabIndex = 5;
-            this.label7.Text = "التاريخ";
+            this.label7.Text = " : التاريخ";
             this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // Cmb_CType
             // 
             this.Cmb_CType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cmb_CType.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Cmb_CType.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
             this.Cmb_CType.FormattingEnabled = true;
-            this.Cmb_CType.Location = new System.Drawing.Point(795, 44);
+            this.Cmb_CType.Location = new System.Drawing.Point(3, 4);
             this.Cmb_CType.Name = "Cmb_CType";
-            this.Cmb_CType.Size = new System.Drawing.Size(128, 27);
+            this.Cmb_CType.Size = new System.Drawing.Size(163, 27);
             this.Cmb_CType.TabIndex = 241;
             this.Cmb_CType.SelectedIndexChanged += new System.EventHandler(this.Cmb_CType_SelectedIndexChanged);
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Transparent;
-            this.panel2.BackgroundImage = global::ANRPC_Inventory.Properties.Resources.bar1;
+            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel2.Controls.Add(this.label25);
-            this.panel2.Controls.Add(this.Cmb_CType);
-            this.panel2.Controls.Add(this.Cmb_AmrNo);
-            this.panel2.Controls.Add(this.BTN_Print);
-            this.panel2.Controls.Add(this.TXT_NameMward);
-            this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.pictureBox2);
             this.panel2.Controls.Add(this.SaveBtn);
             this.panel2.Controls.Add(this.DeleteBtn);
+            this.panel2.Controls.Add(this.CH_Direct);
             this.panel2.Controls.Add(this.EditBtn);
             this.panel2.Controls.Add(this.Addbtn);
-            this.panel2.Controls.Add(this.label16);
-            this.panel2.Controls.Add(this.Cmb_FY2);
-            this.panel2.Controls.Add(this.TXT_AmrNo);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.TXT_EdafaNo);
-            this.panel2.Controls.Add(this.Cmb_FY);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Location = new System.Drawing.Point(0, 59);
             this.panel2.Name = "panel2";
             this.panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.panel2.Size = new System.Drawing.Size(1100, 119);
+            this.panel2.Size = new System.Drawing.Size(1150, 42);
             this.panel2.TabIndex = 19;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
-            // 
-            // label25
-            // 
-            this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label25.ForeColor = System.Drawing.Color.DarkRed;
-            this.label25.Location = new System.Drawing.Point(929, 47);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(159, 24);
-            this.label25.TabIndex = 242;
-            this.label25.Text = "نوع الاضافة المخزنية";
-            // 
-            // Cmb_AmrNo
-            // 
-            this.Cmb_AmrNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cmb_AmrNo.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Cmb_AmrNo.FormattingEnabled = true;
-            this.Cmb_AmrNo.Items.AddRange(new object[] {
-            "2020_2021"});
-            this.Cmb_AmrNo.Location = new System.Drawing.Point(543, 86);
-            this.Cmb_AmrNo.Name = "Cmb_AmrNo";
-            this.Cmb_AmrNo.Size = new System.Drawing.Size(133, 27);
-            this.Cmb_AmrNo.TabIndex = 239;
-            this.Cmb_AmrNo.SelectedIndexChanged += new System.EventHandler(this.Cmb_AmrNo_SelectedIndexChanged);
-            this.Cmb_AmrNo.SelectionChangeCommitted += new System.EventHandler(this.Cmb_AmrNo_SelectionChangeCommitted);
-            // 
-            // BTN_Print
-            // 
-            this.BTN_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Print.Font = new System.Drawing.Font("Arabic Typesetting", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_Print.ForeColor = System.Drawing.Color.DarkSalmon;
-            this.BTN_Print.Image = ((System.Drawing.Image)(resources.GetObject("BTN_Print.Image")));
-            this.BTN_Print.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BTN_Print.Location = new System.Drawing.Point(200, 33);
-            this.BTN_Print.Name = "BTN_Print";
-            this.BTN_Print.Size = new System.Drawing.Size(45, 44);
-            this.BTN_Print.TabIndex = 238;
-            this.BTN_Print.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BTN_Print.UseVisualStyleBackColor = true;
-            this.BTN_Print.Click += new System.EventHandler(this.BTN_Print_Click);
-            // 
-            // TXT_NameMward
-            // 
-            this.TXT_NameMward.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_NameMward.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_NameMward.Location = new System.Drawing.Point(307, 90);
-            this.TXT_NameMward.Name = "TXT_NameMward";
-            this.TXT_NameMward.Size = new System.Drawing.Size(159, 26);
-            this.TXT_NameMward.TabIndex = 235;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label3.Location = new System.Drawing.Point(472, 93);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 18);
-            this.label3.TabIndex = 234;
-            this.label3.Text = "اسم المورد";
             // 
             // pictureBox2
             // 
@@ -1024,7 +956,7 @@
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(3, 3);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(149, 83);
+            this.pictureBox2.Size = new System.Drawing.Size(131, 29);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 233;
             this.pictureBox2.TabStop = false;
@@ -1038,7 +970,7 @@
             this.SaveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SaveBtn.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.SaveBtn.ForeColor = System.Drawing.Color.Blue;
-            this.SaveBtn.Location = new System.Drawing.Point(737, 2);
+            this.SaveBtn.Location = new System.Drawing.Point(787, 2);
             this.SaveBtn.Name = "SaveBtn";
             this.SaveBtn.Size = new System.Drawing.Size(75, 32);
             this.SaveBtn.TabIndex = 29;
@@ -1055,7 +987,7 @@
             this.DeleteBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DeleteBtn.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.DeleteBtn.ForeColor = System.Drawing.Color.Blue;
-            this.DeleteBtn.Location = new System.Drawing.Point(832, 3);
+            this.DeleteBtn.Location = new System.Drawing.Point(882, 3);
             this.DeleteBtn.Name = "DeleteBtn";
             this.DeleteBtn.Size = new System.Drawing.Size(75, 32);
             this.DeleteBtn.TabIndex = 28;
@@ -1072,7 +1004,7 @@
             this.EditBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.EditBtn.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.EditBtn.ForeColor = System.Drawing.Color.Blue;
-            this.EditBtn.Location = new System.Drawing.Point(921, 3);
+            this.EditBtn.Location = new System.Drawing.Point(971, 3);
             this.EditBtn.Name = "EditBtn";
             this.EditBtn.Size = new System.Drawing.Size(75, 32);
             this.EditBtn.TabIndex = 27;
@@ -1089,7 +1021,7 @@
             this.Addbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Addbtn.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.Addbtn.ForeColor = System.Drawing.Color.Blue;
-            this.Addbtn.Location = new System.Drawing.Point(1016, 3);
+            this.Addbtn.Location = new System.Drawing.Point(1070, 3);
             this.Addbtn.Name = "Addbtn";
             this.Addbtn.Size = new System.Drawing.Size(75, 32);
             this.Addbtn.TabIndex = 26;
@@ -1097,17 +1029,76 @@
             this.Addbtn.UseVisualStyleBackColor = false;
             this.Addbtn.Click += new System.EventHandler(this.Addbtn_Click);
             // 
+            // label25
+            // 
+            this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.label25.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label25.Location = new System.Drawing.Point(171, 8);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(128, 19);
+            this.label25.TabIndex = 242;
+            this.label25.Text = ":نوع الاضافة المخزنية";
+            // 
+            // Cmb_AmrNo
+            // 
+            this.Cmb_AmrNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cmb_AmrNo.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Cmb_AmrNo.FormattingEnabled = true;
+            this.Cmb_AmrNo.Items.AddRange(new object[] {
+            "2020_2021"});
+            this.Cmb_AmrNo.Location = new System.Drawing.Point(3, 33);
+            this.Cmb_AmrNo.Name = "Cmb_AmrNo";
+            this.Cmb_AmrNo.Size = new System.Drawing.Size(149, 27);
+            this.Cmb_AmrNo.TabIndex = 239;
+            this.Cmb_AmrNo.SelectedIndexChanged += new System.EventHandler(this.Cmb_AmrNo_SelectedIndexChanged);
+            this.Cmb_AmrNo.SelectionChangeCommitted += new System.EventHandler(this.Cmb_AmrNo_SelectionChangeCommitted);
+            // 
+            // BTN_Print
+            // 
+            this.BTN_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Print.Font = new System.Drawing.Font("Arabic Typesetting", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_Print.ForeColor = System.Drawing.Color.DarkSalmon;
+            this.BTN_Print.Image = ((System.Drawing.Image)(resources.GetObject("BTN_Print.Image")));
+            this.BTN_Print.Location = new System.Drawing.Point(3, 35);
+            this.BTN_Print.Name = "BTN_Print";
+            this.BTN_Print.Size = new System.Drawing.Size(52, 57);
+            this.BTN_Print.TabIndex = 238;
+            this.BTN_Print.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BTN_Print.UseVisualStyleBackColor = true;
+            this.BTN_Print.Click += new System.EventHandler(this.BTN_Print_Click);
+            // 
+            // TXT_NameMward
+            // 
+            this.TXT_NameMward.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.TXT_NameMward.Location = new System.Drawing.Point(3, 35);
+            this.TXT_NameMward.Name = "TXT_NameMward";
+            this.TXT_NameMward.Size = new System.Drawing.Size(171, 26);
+            this.TXT_NameMward.TabIndex = 235;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.label3.Location = new System.Drawing.Point(177, 38);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(81, 19);
+            this.label3.TabIndex = 234;
+            this.label3.Text = " : اسم المورد";
+            // 
             // label16
             // 
             this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label16.ForeColor = System.Drawing.Color.DarkRed;
-            this.label16.Location = new System.Drawing.Point(685, 49);
+            this.label16.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.label16.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label16.Location = new System.Drawing.Point(219, 38);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(98, 24);
+            this.label16.Size = new System.Drawing.Size(82, 19);
             this.label16.TabIndex = 24;
-            this.label16.Text = "السنة المالية";
+            this.label16.Text = ":السنة المالية";
             this.label16.Click += new System.EventHandler(this.label16_Click);
             // 
             // Cmb_FY2
@@ -1117,70 +1108,57 @@
             this.Cmb_FY2.FormattingEnabled = true;
             this.Cmb_FY2.Items.AddRange(new object[] {
             "2020_2021"});
-            this.Cmb_FY2.Location = new System.Drawing.Point(509, 47);
+            this.Cmb_FY2.Location = new System.Drawing.Point(61, 35);
             this.Cmb_FY2.Name = "Cmb_FY2";
-            this.Cmb_FY2.Size = new System.Drawing.Size(165, 27);
+            this.Cmb_FY2.Size = new System.Drawing.Size(121, 27);
             this.Cmb_FY2.TabIndex = 25;
             this.Cmb_FY2.SelectedIndexChanged += new System.EventHandler(this.Cmb_FY2_SelectedIndexChanged);
-            // 
-            // TXT_AmrNo
-            // 
-            this.TXT_AmrNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_AmrNo.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_AmrNo.Location = new System.Drawing.Point(543, 84);
-            this.TXT_AmrNo.Name = "TXT_AmrNo";
-            this.TXT_AmrNo.Size = new System.Drawing.Size(133, 26);
-            this.TXT_AmrNo.TabIndex = 23;
-            this.TXT_AmrNo.TextChanged += new System.EventHandler(this.TXT_AmrNo_TextChanged);
-            this.TXT_AmrNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TXT_AmrNo_KeyDown);
-            this.TXT_AmrNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
             // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label1.ForeColor = System.Drawing.Color.DarkRed;
-            this.label1.Location = new System.Drawing.Point(917, 93);
+            this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label1.Location = new System.Drawing.Point(157, 7);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 24);
+            this.label1.Size = new System.Drawing.Size(149, 19);
             this.label1.TabIndex = 4;
-            this.label1.Text = "السنة المالية";
+            this.label1.Text = ":السنة المالية لأمر الشراء";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label2.ForeColor = System.Drawing.Color.DarkRed;
-            this.label2.Location = new System.Drawing.Point(357, 46);
+            this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.label2.Location = new System.Drawing.Point(183, 68);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(146, 24);
+            this.label2.Size = new System.Drawing.Size(118, 19);
             this.label2.TabIndex = 6;
-            this.label2.Text = "رقم اضافة المخزنية";
+            this.label2.Text = ":رقم اضافة المخزنية";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label4
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label4.ForeColor = System.Drawing.Color.DarkRed;
-            this.label4.Location = new System.Drawing.Point(676, 86);
+            this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label4.Location = new System.Drawing.Point(212, 35);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(105, 24);
+            this.label4.Size = new System.Drawing.Size(88, 19);
             this.label4.TabIndex = 8;
-            this.label4.Text = "أمر شراء رقم";
+            this.label4.Text = ":أمر شراء رقم";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // TXT_EdafaNo
             // 
             this.TXT_EdafaNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_EdafaNo.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_EdafaNo.Location = new System.Drawing.Point(250, 47);
+            this.TXT_EdafaNo.Location = new System.Drawing.Point(107, 65);
             this.TXT_EdafaNo.Name = "TXT_EdafaNo";
-            this.TXT_EdafaNo.Size = new System.Drawing.Size(101, 26);
+            this.TXT_EdafaNo.Size = new System.Drawing.Size(75, 26);
             this.TXT_EdafaNo.TabIndex = 1;
             this.TXT_EdafaNo.TextChanged += new System.EventHandler(this.TXT_MonksaNo_TextChanged);
             this.TXT_EdafaNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TXT_EdafaNo_KeyDown);
@@ -1193,32 +1171,361 @@
             this.Cmb_FY.FormattingEnabled = true;
             this.Cmb_FY.Items.AddRange(new object[] {
             "2020_2021"});
-            this.Cmb_FY.Location = new System.Drawing.Point(784, 87);
+            this.Cmb_FY.Location = new System.Drawing.Point(3, 3);
             this.Cmb_FY.Name = "Cmb_FY";
-            this.Cmb_FY.Size = new System.Drawing.Size(133, 27);
+            this.Cmb_FY.Size = new System.Drawing.Size(148, 27);
             this.Cmb_FY.TabIndex = 10;
             this.Cmb_FY.SelectedIndexChanged += new System.EventHandler(this.Cmb_FY_SelectedIndexChanged);
             // 
-            // CH_Direct
+            // panel7
             // 
-            this.CH_Direct.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CH_Direct.AutoSize = true;
-            this.CH_Direct.Enabled = false;
-            this.CH_Direct.Location = new System.Drawing.Point(867, 8);
-            this.CH_Direct.Name = "CH_Direct";
-            this.CH_Direct.Size = new System.Drawing.Size(53, 17);
-            this.CH_Direct.TabIndex = 288;
-            this.CH_Direct.Text = "مباشر";
-            this.CH_Direct.UseVisualStyleBackColor = true;
+            this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel7.BackgroundImage")));
+            this.panel7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel7.Controls.Add(this.BTN_Print2);
+            this.panel7.Controls.Add(this.BTN_Search_Motab3a);
+            this.panel7.Controls.Add(this.BTN_Save2);
+            this.panel7.Controls.Add(this.panel4);
+            this.panel7.Controls.Add(this.button2);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Location = new System.Drawing.Point(0, 0);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(1150, 59);
+            this.panel7.TabIndex = 28;
+            this.panel7.Visible = false;
+            // 
+            // BTN_Print2
+            // 
+            this.BTN_Print2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Print2.Font = new System.Drawing.Font("Arabic Typesetting", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_Print2.ForeColor = System.Drawing.Color.DarkSalmon;
+            this.BTN_Print2.Image = ((System.Drawing.Image)(resources.GetObject("BTN_Print2.Image")));
+            this.BTN_Print2.Location = new System.Drawing.Point(38, 6);
+            this.BTN_Print2.Name = "BTN_Print2";
+            this.BTN_Print2.Size = new System.Drawing.Size(53, 47);
+            this.BTN_Print2.TabIndex = 241;
+            this.BTN_Print2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BTN_Print2.UseVisualStyleBackColor = true;
+            // 
+            // BTN_Search_Motab3a
+            // 
+            this.BTN_Search_Motab3a.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Search_Motab3a.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.BTN_Search_Motab3a.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Search_Motab3a.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
+            this.BTN_Search_Motab3a.FlatAppearance.BorderSize = 3;
+            this.BTN_Search_Motab3a.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_Search_Motab3a.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.BTN_Search_Motab3a.ForeColor = System.Drawing.Color.Maroon;
+            this.BTN_Search_Motab3a.Location = new System.Drawing.Point(244, 12);
+            this.BTN_Search_Motab3a.Name = "BTN_Search_Motab3a";
+            this.BTN_Search_Motab3a.Size = new System.Drawing.Size(72, 33);
+            this.BTN_Search_Motab3a.TabIndex = 308;
+            this.BTN_Search_Motab3a.Text = "بحث";
+            this.BTN_Search_Motab3a.UseVisualStyleBackColor = false;
+            // 
+            // BTN_Save2
+            // 
+            this.BTN_Save2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Save2.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.BTN_Save2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Save2.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
+            this.BTN_Save2.FlatAppearance.BorderSize = 3;
+            this.BTN_Save2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_Save2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.BTN_Save2.ForeColor = System.Drawing.Color.Maroon;
+            this.BTN_Save2.Location = new System.Drawing.Point(96, 12);
+            this.BTN_Save2.Name = "BTN_Save2";
+            this.BTN_Save2.Size = new System.Drawing.Size(72, 33);
+            this.BTN_Save2.TabIndex = 49;
+            this.BTN_Save2.Text = "حفظ";
+            this.BTN_Save2.UseVisualStyleBackColor = false;
+            // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.BackColor = System.Drawing.Color.Transparent;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.TXT_TRNO2);
+            this.panel4.Controls.Add(this.label54);
+            this.panel4.Controls.Add(this.label55);
+            this.panel4.Controls.Add(this.Cmb_CType2);
+            this.panel4.Controls.Add(this.Cmb_TalbNo2);
+            this.panel4.Controls.Add(this.label27);
+            this.panel4.Controls.Add(this.Cmb_FYear2);
+            this.panel4.Location = new System.Drawing.Point(323, 8);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(823, 42);
+            this.panel4.TabIndex = 28;
+            // 
+            // TXT_TRNO2
+            // 
+            this.TXT_TRNO2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TXT_TRNO2.Enabled = false;
+            this.TXT_TRNO2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_TRNO2.Location = new System.Drawing.Point(4, 6);
+            this.TXT_TRNO2.Name = "TXT_TRNO2";
+            this.TXT_TRNO2.Size = new System.Drawing.Size(44, 26);
+            this.TXT_TRNO2.TabIndex = 285;
+            // 
+            // label54
+            // 
+            this.label54.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label54.AutoSize = true;
+            this.label54.BackColor = System.Drawing.Color.Transparent;
+            this.label54.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold);
+            this.label54.ForeColor = System.Drawing.Color.MintCream;
+            this.label54.Location = new System.Drawing.Point(659, 9);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(159, 24);
+            this.label54.TabIndex = 282;
+            this.label54.Text = "نوع الاضافة المخزنية";
+            // 
+            // label55
+            // 
+            this.label55.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label55.AutoSize = true;
+            this.label55.BackColor = System.Drawing.Color.Transparent;
+            this.label55.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold);
+            this.label55.ForeColor = System.Drawing.Color.MintCream;
+            this.label55.Location = new System.Drawing.Point(54, 9);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(76, 21);
+            this.label55.TabIndex = 284;
+            this.label55.Text = "مميز مستند";
+            // 
+            // Cmb_CType2
+            // 
+            this.Cmb_CType2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cmb_CType2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.Cmb_CType2.FormattingEnabled = true;
+            this.Cmb_CType2.Location = new System.Drawing.Point(516, 8);
+            this.Cmb_CType2.Name = "Cmb_CType2";
+            this.Cmb_CType2.Size = new System.Drawing.Size(142, 24);
+            this.Cmb_CType2.TabIndex = 283;
+            // 
+            // Cmb_TalbNo2
+            // 
+            this.Cmb_TalbNo2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cmb_TalbNo2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.Cmb_TalbNo2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Cmb_TalbNo2.FormattingEnabled = true;
+            this.Cmb_TalbNo2.Items.AddRange(new object[] {
+            "2019_2020",
+            "2020_2021"});
+            this.Cmb_TalbNo2.Location = new System.Drawing.Point(133, 6);
+            this.Cmb_TalbNo2.Name = "Cmb_TalbNo2";
+            this.Cmb_TalbNo2.Size = new System.Drawing.Size(110, 27);
+            this.Cmb_TalbNo2.TabIndex = 26;
+            // 
+            // label27
+            // 
+            this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label27.AutoSize = true;
+            this.label27.BackColor = System.Drawing.Color.Transparent;
+            this.label27.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label27.ForeColor = System.Drawing.Color.MintCream;
+            this.label27.Location = new System.Drawing.Point(360, 7);
+            this.label27.Name = "label27";
+            this.label27.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label27.Size = new System.Drawing.Size(154, 24);
+            this.label27.TabIndex = 5;
+            this.label27.Text = "بحث إضافة المخزنية";
+            // 
+            // Cmb_FYear2
+            // 
+            this.Cmb_FYear2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cmb_FYear2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Cmb_FYear2.FormattingEnabled = true;
+            this.Cmb_FYear2.Items.AddRange(new object[] {
+            "2019_2020",
+            "2020_2021"});
+            this.Cmb_FYear2.Location = new System.Drawing.Point(246, 6);
+            this.Cmb_FYear2.Name = "Cmb_FYear2";
+            this.Cmb_FYear2.Size = new System.Drawing.Size(110, 27);
+            this.Cmb_FYear2.TabIndex = 25;
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
+            this.button2.FlatAppearance.BorderSize = 3;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.button2.ForeColor = System.Drawing.Color.Maroon;
+            this.button2.Location = new System.Drawing.Point(170, 12);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(72, 33);
+            this.button2.TabIndex = 47;
+            this.button2.Text = "تعديل";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // panel5
+            // 
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.TXT_Name);
+            this.panel5.Controls.Add(this.label11);
+            this.panel5.Controls.Add(this.TXT_NameMward);
+            this.panel5.Controls.Add(this.TXT_Momayz);
+            this.panel5.Controls.Add(this.label3);
+            this.panel5.Controls.Add(this.label26);
+            this.panel5.Controls.Add(this.TXT_TalbNo);
+            this.panel5.Controls.Add(this.label15);
+            this.panel5.Location = new System.Drawing.Point(99, 4);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(259, 167);
+            this.panel5.TabIndex = 243;
+            this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
+            // 
+            // panel6
+            // 
+            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Controls.Add(this.Cmb_FY);
+            this.panel6.Controls.Add(this.label1);
+            this.panel6.Controls.Add(this.Cmb_AmrNo);
+            this.panel6.Controls.Add(this.label4);
+            this.panel6.Location = new System.Drawing.Point(840, 5);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(305, 66);
+            this.panel6.TabIndex = 244;
+            this.panel6.Paint += new System.Windows.Forms.PaintEventHandler(this.panel6_Paint);
+            // 
+            // panel8
+            // 
+            this.panel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel8.Controls.Add(this.Cmb_CType);
+            this.panel8.Controls.Add(this.label25);
+            this.panel8.Controls.Add(this.BTN_Print);
+            this.panel8.Controls.Add(this.label2);
+            this.panel8.Controls.Add(this.Cmb_FY2);
+            this.panel8.Controls.Add(this.TXT_EdafaNo);
+            this.panel8.Controls.Add(this.label16);
+            this.panel8.Controls.Add(this.TXT_TRNO);
+            this.panel8.Location = new System.Drawing.Point(840, 75);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(305, 97);
+            this.panel8.TabIndex = 289;
+            // 
+            // panel9
+            // 
+            this.panel9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel9.Controls.Add(this.TXT_TaslemPlace);
+            this.panel9.Controls.Add(this.TXT_Date);
+            this.panel9.Controls.Add(this.label9);
+            this.panel9.Controls.Add(this.label7);
+            this.panel9.Controls.Add(this.TXT_Edara);
+            this.panel9.Controls.Add(this.label12);
+            this.panel9.Controls.Add(this.TXT_TaslemDate);
+            this.panel9.Controls.Add(this.label10);
+            this.panel9.Location = new System.Drawing.Point(638, 5);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(200, 167);
+            this.panel9.TabIndex = 290;
+            // 
+            // panel10
+            // 
+            this.panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel10.Controls.Add(this.label14);
+            this.panel10.Controls.Add(this.TXT_Payment);
+            this.panel10.Controls.Add(this.label6);
+            this.panel10.Controls.Add(this.TXT_BndMwazna);
+            this.panel10.Controls.Add(this.label5);
+            this.panel10.Controls.Add(this.TXT_HesabMward2);
+            this.panel10.Controls.Add(this.TXT_Egmali);
+            this.panel10.Controls.Add(this.label13);
+            this.panel10.Controls.Add(this.TXT_HesabMward1);
+            this.panel10.Location = new System.Drawing.Point(362, 4);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(272, 167);
+            this.panel10.TabIndex = 244;
+            this.panel10.Paint += new System.Windows.Forms.PaintEventHandler(this.panel10_Paint);
+            // 
+            // panel11
+            // 
+            this.panel11.Location = new System.Drawing.Point(746, 432);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(116, 79);
+            this.panel11.TabIndex = 244;
+            // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.panel13);
+            this.panel12.Controls.Add(this.panel6);
+            this.panel12.Controls.Add(this.panel9);
+            this.panel12.Controls.Add(this.panel10);
+            this.panel12.Controls.Add(this.panel8);
+            this.panel12.Controls.Add(this.panel5);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel12.Location = new System.Drawing.Point(0, 101);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(1150, 177);
+            this.panel12.TabIndex = 245;
+            // 
+            // panel13
+            // 
+            this.panel13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel13.Controls.Add(this.BTN_PDF);
+            this.panel13.Controls.Add(this.browseBTN);
+            this.panel13.Location = new System.Drawing.Point(3, 4);
+            this.panel13.Name = "panel13";
+            this.panel13.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.panel13.Size = new System.Drawing.Size(94, 168);
+            this.panel13.TabIndex = 289;
+            // 
+            // BTN_PDF
+            // 
+            this.BTN_PDF.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.BTN_PDF.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BTN_PDF.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BTN_PDF.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.BTN_PDF.FlatAppearance.BorderSize = 2;
+            this.BTN_PDF.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_PDF.ForeColor = System.Drawing.Color.DarkRed;
+            this.BTN_PDF.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.BTN_PDF.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.BTN_PDF.Location = new System.Drawing.Point(0, 83);
+            this.BTN_PDF.Name = "BTN_PDF";
+            this.BTN_PDF.Size = new System.Drawing.Size(92, 80);
+            this.BTN_PDF.TabIndex = 337;
+            this.BTN_PDF.Text = "عرض المرفقات";
+            this.BTN_PDF.UseVisualStyleBackColor = false;
+            // 
+            // browseBTN
+            // 
+            this.browseBTN.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.browseBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.browseBTN.Dock = System.Windows.Forms.DockStyle.Top;
+            this.browseBTN.Enabled = false;
+            this.browseBTN.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.browseBTN.FlatAppearance.BorderSize = 2;
+            this.browseBTN.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.browseBTN.ForeColor = System.Drawing.Color.DarkRed;
+            this.browseBTN.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.browseBTN.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.browseBTN.Location = new System.Drawing.Point(0, 0);
+            this.browseBTN.Name = "browseBTN";
+            this.browseBTN.Size = new System.Drawing.Size(92, 83);
+            this.browseBTN.TabIndex = 340;
+            this.browseBTN.Text = "إرفاق مرفقات";
+            this.browseBTN.UseVisualStyleBackColor = false;
             // 
             // FEdafaMakhzania_F
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(1100, 629);
+            this.ClientSize = new System.Drawing.Size(1150, 629);
+            this.Controls.Add(this.panel12);
+            this.Controls.Add(this.panel11);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel7);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FEdafaMakhzania_F";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -1236,6 +1543,21 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.panel7.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
+            this.panel12.ResumeLayout(false);
+            this.panel13.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1253,7 +1575,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox TXT_Edara;
         private System.Windows.Forms.TextBox TXT_TaslemDate;
@@ -1266,7 +1587,6 @@
         private System.Windows.Forms.TextBox TXT_BndMwazna;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox TXT_AmrNo;
         private System.Windows.Forms.DateTimePicker TXT_Date;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label16;
@@ -1322,8 +1642,31 @@
         private System.Windows.Forms.ComboBox Cmb_AmrNo;
         private System.Windows.Forms.ComboBox Cmb_CType;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.TextBox TXT_TRNO;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.CheckBox CH_Direct;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.TextBox TXT_TRNO2;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.ComboBox Cmb_CType2;
+        private System.Windows.Forms.ComboBox Cmb_TalbNo2;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.ComboBox Cmb_FYear2;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button BTN_Save2;
+        private System.Windows.Forms.Button BTN_Search_Motab3a;
+        private System.Windows.Forms.Button BTN_Print2;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.Button BTN_PDF;
+        private System.Windows.Forms.Button browseBTN;
+        public System.Windows.Forms.TextBox TXT_TRNO;
     }
 }

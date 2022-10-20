@@ -85,6 +85,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.BTN_Search_Motab3a = new System.Windows.Forms.Button();
             this.BTN_Print2 = new System.Windows.Forms.Button();
             this.EditBtn2 = new System.Windows.Forms.Button();
             this.BTN_Save2 = new System.Windows.Forms.Button();
@@ -92,6 +93,12 @@
             this.Cmb_FYear2 = new System.Windows.Forms.ComboBox();
             this.label25 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.Cmb_FY2 = new System.Windows.Forms.ComboBox();
+            this.TXT_MonksaNo = new System.Windows.Forms.TextBox();
+            this.TXT_Type = new System.Windows.Forms.TextBox();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
@@ -99,30 +106,23 @@
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.TXT_Type = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
+            this.BTN_Search = new System.Windows.Forms.Button();
+            this.BTN_Cancel = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.Addbtn = new System.Windows.Forms.Button();
+            this.EditBtn = new System.Windows.Forms.Button();
+            this.SaveBtn = new System.Windows.Forms.Button();
             this.TXT_CodeEdara = new System.Windows.Forms.TextBox();
             this.BTN_Print = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.SaveBtn = new System.Windows.Forms.Button();
             this.DeleteBtn = new System.Windows.Forms.Button();
-            this.EditBtn = new System.Windows.Forms.Button();
-            this.Addbtn = new System.Windows.Forms.Button();
-            this.Cmb_FY2 = new System.Windows.Forms.ComboBox();
             this.TXT_AmrNo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.TXT_MonksaNo = new System.Windows.Forms.TextBox();
             this.Cmb_FY = new System.Windows.Forms.ComboBox();
             this.CMB_Sadr = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.BTN_Search_Motab3a = new System.Windows.Forms.Button();
-            this.BTN_Cancel = new System.Windows.Forms.Button();
-            this.BTN_Search = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -134,18 +134,18 @@
             this.browseBTN = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.panel15 = new System.Windows.Forms.Panel();
-            this.panel16 = new System.Windows.Forms.Panel();
-            this.label16 = new System.Windows.Forms.Label();
-            this.panel17 = new System.Windows.Forms.Panel();
-            this.label26 = new System.Windows.Forms.Label();
-            this.panel18 = new System.Windows.Forms.Panel();
-            this.label27 = new System.Windows.Forms.Label();
+            this.panel20 = new System.Windows.Forms.Panel();
             this.panel19 = new System.Windows.Forms.Panel();
             this.label31 = new System.Windows.Forms.Label();
+            this.panel18 = new System.Windows.Forms.Panel();
             this.DeleteBtn2 = new System.Windows.Forms.Button();
-            this.panel20 = new System.Windows.Forms.Panel();
+            this.label27 = new System.Windows.Forms.Label();
+            this.panel17 = new System.Windows.Forms.Panel();
+            this.label26 = new System.Windows.Forms.Label();
+            this.panel16 = new System.Windows.Forms.Panel();
+            this.label16 = new System.Windows.Forms.Label();
+            this.panel15 = new System.Windows.Forms.Panel();
+            this.panel14 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign2)).BeginInit();
@@ -156,10 +156,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel7.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -169,13 +169,13 @@
             this.panel13.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.panel14.SuspendLayout();
-            this.panel15.SuspendLayout();
-            this.panel16.SuspendLayout();
-            this.panel17.SuspendLayout();
-            this.panel18.SuspendLayout();
-            this.panel19.SuspendLayout();
             this.panel20.SuspendLayout();
+            this.panel19.SuspendLayout();
+            this.panel18.SuspendLayout();
+            this.panel17.SuspendLayout();
+            this.panel16.SuspendLayout();
+            this.panel15.SuspendLayout();
+            this.panel14.SuspendLayout();
             this.SuspendLayout();
             // 
             // TXT_EgmaliAfter
@@ -635,13 +635,13 @@
             // 
             this.TXT_Date.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_Date.CalendarFont = new System.Drawing.Font("Arabic Typesetting", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_Date.Font = new System.Drawing.Font("Arabic Typesetting", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_Date.CalendarFont = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_Date.Font = new System.Drawing.Font("Arial", 12F);
             this.TXT_Date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.TXT_Date.Location = new System.Drawing.Point(4, 4);
             this.TXT_Date.Name = "TXT_Date";
             this.TXT_Date.ShowUpDown = true;
-            this.TXT_Date.Size = new System.Drawing.Size(212, 30);
+            this.TXT_Date.Size = new System.Drawing.Size(212, 26);
             this.TXT_Date.TabIndex = 229;
             this.TXT_Date.ValueChanged += new System.EventHandler(this.TXT_Date_ValueChanged);
             // 
@@ -884,6 +884,23 @@
             this.panel7.TabIndex = 28;
             this.panel7.Paint += new System.Windows.Forms.PaintEventHandler(this.panel7_Paint);
             // 
+            // BTN_Search_Motab3a
+            // 
+            this.BTN_Search_Motab3a.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Search_Motab3a.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.BTN_Search_Motab3a.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Search_Motab3a.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
+            this.BTN_Search_Motab3a.FlatAppearance.BorderSize = 3;
+            this.BTN_Search_Motab3a.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_Search_Motab3a.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.BTN_Search_Motab3a.ForeColor = System.Drawing.Color.Maroon;
+            this.BTN_Search_Motab3a.Location = new System.Drawing.Point(541, 17);
+            this.BTN_Search_Motab3a.Name = "BTN_Search_Motab3a";
+            this.BTN_Search_Motab3a.Size = new System.Drawing.Size(72, 33);
+            this.BTN_Search_Motab3a.TabIndex = 307;
+            this.BTN_Search_Motab3a.Text = "بحث";
+            this.BTN_Search_Motab3a.UseVisualStyleBackColor = false;
+            // 
             // BTN_Print2
             // 
             this.BTN_Print2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1001,6 +1018,88 @@
             this.panel2.TabIndex = 19;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.label2);
+            this.panel4.Controls.Add(this.Cmb_FY2);
+            this.panel4.Controls.Add(this.TXT_MonksaNo);
+            this.panel4.Controls.Add(this.TXT_Type);
+            this.panel4.Controls.Add(this.cboCurrency);
+            this.panel4.Controls.Add(this.BTN_Sign6);
+            this.panel4.Controls.Add(this.label23);
+            this.panel4.Controls.Add(this.TXT_Shick1);
+            this.panel4.Controls.Add(this.Pic_Sign6);
+            this.panel4.Controls.Add(this.label19);
+            this.panel4.Controls.Add(this.BTN_Sign7);
+            this.panel4.Controls.Add(this.Pic_Sign7);
+            this.panel4.Location = new System.Drawing.Point(10, 30);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(143, 54);
+            this.panel4.TabIndex = 243;
+            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label2.ForeColor = System.Drawing.Color.Maroon;
+            this.label2.Location = new System.Drawing.Point(83, 4);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(54, 14);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "رقم المناقصة";
+            this.label2.Visible = false;
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // Cmb_FY2
+            // 
+            this.Cmb_FY2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cmb_FY2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Cmb_FY2.FormattingEnabled = true;
+            this.Cmb_FY2.Items.AddRange(new object[] {
+            "2020_2021"});
+            this.Cmb_FY2.Location = new System.Drawing.Point(102, 21);
+            this.Cmb_FY2.Name = "Cmb_FY2";
+            this.Cmb_FY2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Cmb_FY2.Size = new System.Drawing.Size(35, 27);
+            this.Cmb_FY2.TabIndex = 25;
+            this.Cmb_FY2.Visible = false;
+            this.Cmb_FY2.SelectedIndexChanged += new System.EventHandler(this.Cmb_FY2_SelectedIndexChanged);
+            // 
+            // TXT_MonksaNo
+            // 
+            this.TXT_MonksaNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TXT_MonksaNo.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_MonksaNo.Location = new System.Drawing.Point(88, 21);
+            this.TXT_MonksaNo.Name = "TXT_MonksaNo";
+            this.TXT_MonksaNo.Size = new System.Drawing.Size(13, 26);
+            this.TXT_MonksaNo.TabIndex = 13;
+            this.TXT_MonksaNo.Visible = false;
+            this.TXT_MonksaNo.TextChanged += new System.EventHandler(this.TXT_MonksaNo_TextChanged);
+            this.TXT_MonksaNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_MonksaNo_KeyPress);
+            // 
+            // TXT_Type
+            // 
+            this.TXT_Type.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TXT_Type.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_Type.Location = new System.Drawing.Point(52, 22);
+            this.TXT_Type.Name = "TXT_Type";
+            this.TXT_Type.Size = new System.Drawing.Size(15, 26);
+            this.TXT_Type.TabIndex = 242;
+            this.TXT_Type.Visible = false;
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.panel8);
+            this.panel3.Controls.Add(this.label24);
+            this.panel3.Location = new System.Drawing.Point(608, 40);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(535, 74);
+            this.panel3.TabIndex = 335;
+            // 
             // panel8
             // 
             this.panel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1106,16 +1205,6 @@
             this.radioButton1.Text = "مناقصة عامة";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
-            // TXT_Type
-            // 
-            this.TXT_Type.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_Type.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_Type.Location = new System.Drawing.Point(52, 22);
-            this.TXT_Type.Name = "TXT_Type";
-            this.TXT_Type.Size = new System.Drawing.Size(15, 26);
-            this.TXT_Type.TabIndex = 242;
-            this.TXT_Type.Visible = false;
-            // 
             // label24
             // 
             this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1127,6 +1216,102 @@
             this.label24.Size = new System.Drawing.Size(118, 24);
             this.label24.TabIndex = 241;
             this.label24.Text = "نوع أمر الشراء";
+            // 
+            // BTN_Search
+            // 
+            this.BTN_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Search.BackColor = System.Drawing.Color.LightGray;
+            this.BTN_Search.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Search.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
+            this.BTN_Search.FlatAppearance.BorderSize = 3;
+            this.BTN_Search.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_Search.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.BTN_Search.ForeColor = System.Drawing.Color.Blue;
+            this.BTN_Search.Location = new System.Drawing.Point(785, 3);
+            this.BTN_Search.Name = "BTN_Search";
+            this.BTN_Search.Size = new System.Drawing.Size(70, 31);
+            this.BTN_Search.TabIndex = 334;
+            this.BTN_Search.Text = "بحث";
+            this.BTN_Search.UseVisualStyleBackColor = false;
+            // 
+            // BTN_Cancel
+            // 
+            this.BTN_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Cancel.BackColor = System.Drawing.Color.LightGray;
+            this.BTN_Cancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Cancel.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
+            this.BTN_Cancel.FlatAppearance.BorderSize = 3;
+            this.BTN_Cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_Cancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.BTN_Cancel.ForeColor = System.Drawing.Color.Blue;
+            this.BTN_Cancel.Location = new System.Drawing.Point(857, 3);
+            this.BTN_Cancel.Name = "BTN_Cancel";
+            this.BTN_Cancel.Size = new System.Drawing.Size(70, 31);
+            this.BTN_Cancel.TabIndex = 333;
+            this.BTN_Cancel.Text = "إلغاء";
+            this.BTN_Cancel.UseVisualStyleBackColor = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(131, 29);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 232;
+            this.pictureBox1.TabStop = false;
+            // 
+            // Addbtn
+            // 
+            this.Addbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Addbtn.BackColor = System.Drawing.Color.LightGray;
+            this.Addbtn.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
+            this.Addbtn.FlatAppearance.BorderSize = 3;
+            this.Addbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Addbtn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.Addbtn.ForeColor = System.Drawing.Color.Blue;
+            this.Addbtn.Location = new System.Drawing.Point(1073, 3);
+            this.Addbtn.Name = "Addbtn";
+            this.Addbtn.Size = new System.Drawing.Size(70, 31);
+            this.Addbtn.TabIndex = 26;
+            this.Addbtn.Text = "إضافة";
+            this.Addbtn.UseVisualStyleBackColor = false;
+            this.Addbtn.Click += new System.EventHandler(this.Addbtn_Click);
+            // 
+            // EditBtn
+            // 
+            this.EditBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.EditBtn.BackColor = System.Drawing.Color.LightGray;
+            this.EditBtn.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
+            this.EditBtn.FlatAppearance.BorderSize = 3;
+            this.EditBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.EditBtn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.EditBtn.ForeColor = System.Drawing.Color.Blue;
+            this.EditBtn.Location = new System.Drawing.Point(1001, 3);
+            this.EditBtn.Name = "EditBtn";
+            this.EditBtn.Size = new System.Drawing.Size(70, 31);
+            this.EditBtn.TabIndex = 27;
+            this.EditBtn.Text = "تعديل";
+            this.EditBtn.UseVisualStyleBackColor = false;
+            this.EditBtn.Click += new System.EventHandler(this.EditBtn_Click);
+            // 
+            // SaveBtn
+            // 
+            this.SaveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SaveBtn.BackColor = System.Drawing.Color.LightGray;
+            this.SaveBtn.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
+            this.SaveBtn.FlatAppearance.BorderSize = 3;
+            this.SaveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SaveBtn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.SaveBtn.ForeColor = System.Drawing.Color.Blue;
+            this.SaveBtn.Location = new System.Drawing.Point(929, 3);
+            this.SaveBtn.Name = "SaveBtn";
+            this.SaveBtn.Size = new System.Drawing.Size(70, 31);
+            this.SaveBtn.TabIndex = 29;
+            this.SaveBtn.Text = "حفظ";
+            this.SaveBtn.UseVisualStyleBackColor = false;
+            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
             // TXT_CodeEdara
             // 
@@ -1151,34 +1336,6 @@
             this.BTN_Print.UseVisualStyleBackColor = true;
             this.BTN_Print.Click += new System.EventHandler(this.BTN_Print_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(131, 29);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 232;
-            this.pictureBox1.TabStop = false;
-            // 
-            // SaveBtn
-            // 
-            this.SaveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SaveBtn.BackColor = System.Drawing.Color.LightGray;
-            this.SaveBtn.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
-            this.SaveBtn.FlatAppearance.BorderSize = 3;
-            this.SaveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SaveBtn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-            this.SaveBtn.ForeColor = System.Drawing.Color.Blue;
-            this.SaveBtn.Location = new System.Drawing.Point(929, 3);
-            this.SaveBtn.Name = "SaveBtn";
-            this.SaveBtn.Size = new System.Drawing.Size(70, 31);
-            this.SaveBtn.TabIndex = 29;
-            this.SaveBtn.Text = "حفظ";
-            this.SaveBtn.UseVisualStyleBackColor = false;
-            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
-            // 
             // DeleteBtn
             // 
             this.DeleteBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1194,55 +1351,6 @@
             this.DeleteBtn.Text = "حذف";
             this.DeleteBtn.UseVisualStyleBackColor = false;
             this.DeleteBtn.Click += new System.EventHandler(this.DeleteBtn_Click);
-            // 
-            // EditBtn
-            // 
-            this.EditBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.EditBtn.BackColor = System.Drawing.Color.LightGray;
-            this.EditBtn.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
-            this.EditBtn.FlatAppearance.BorderSize = 3;
-            this.EditBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.EditBtn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-            this.EditBtn.ForeColor = System.Drawing.Color.Blue;
-            this.EditBtn.Location = new System.Drawing.Point(1001, 3);
-            this.EditBtn.Name = "EditBtn";
-            this.EditBtn.Size = new System.Drawing.Size(70, 31);
-            this.EditBtn.TabIndex = 27;
-            this.EditBtn.Text = "تعديل";
-            this.EditBtn.UseVisualStyleBackColor = false;
-            this.EditBtn.Click += new System.EventHandler(this.EditBtn_Click);
-            // 
-            // Addbtn
-            // 
-            this.Addbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Addbtn.BackColor = System.Drawing.Color.LightGray;
-            this.Addbtn.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
-            this.Addbtn.FlatAppearance.BorderSize = 3;
-            this.Addbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Addbtn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-            this.Addbtn.ForeColor = System.Drawing.Color.Blue;
-            this.Addbtn.Location = new System.Drawing.Point(1073, 3);
-            this.Addbtn.Name = "Addbtn";
-            this.Addbtn.Size = new System.Drawing.Size(70, 31);
-            this.Addbtn.TabIndex = 26;
-            this.Addbtn.Text = "إضافة";
-            this.Addbtn.UseVisualStyleBackColor = false;
-            this.Addbtn.Click += new System.EventHandler(this.Addbtn_Click);
-            // 
-            // Cmb_FY2
-            // 
-            this.Cmb_FY2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cmb_FY2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Cmb_FY2.FormattingEnabled = true;
-            this.Cmb_FY2.Items.AddRange(new object[] {
-            "2020_2021"});
-            this.Cmb_FY2.Location = new System.Drawing.Point(102, 21);
-            this.Cmb_FY2.Name = "Cmb_FY2";
-            this.Cmb_FY2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Cmb_FY2.Size = new System.Drawing.Size(35, 27);
-            this.Cmb_FY2.TabIndex = 25;
-            this.Cmb_FY2.Visible = false;
-            this.Cmb_FY2.SelectedIndexChanged += new System.EventHandler(this.Cmb_FY2_SelectedIndexChanged);
             // 
             // TXT_AmrNo
             // 
@@ -1270,20 +1378,6 @@
             this.label1.Text = ":السنة المالية";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label2.ForeColor = System.Drawing.Color.Maroon;
-            this.label2.Location = new System.Drawing.Point(83, 4);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 14);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "رقم المناقصة";
-            this.label2.Visible = false;
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1310,18 +1404,6 @@
             this.label4.Text = ":أمر شراء رقم";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // TXT_MonksaNo
-            // 
-            this.TXT_MonksaNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_MonksaNo.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_MonksaNo.Location = new System.Drawing.Point(88, 21);
-            this.TXT_MonksaNo.Name = "TXT_MonksaNo";
-            this.TXT_MonksaNo.Size = new System.Drawing.Size(13, 26);
-            this.TXT_MonksaNo.TabIndex = 13;
-            this.TXT_MonksaNo.Visible = false;
-            this.TXT_MonksaNo.TextChanged += new System.EventHandler(this.TXT_MonksaNo_TextChanged);
-            this.TXT_MonksaNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_MonksaNo_KeyPress);
-            // 
             // Cmb_FY
             // 
             this.Cmb_FY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1345,88 +1427,6 @@
             this.CMB_Sadr.Size = new System.Drawing.Size(168, 27);
             this.CMB_Sadr.TabIndex = 11;
             this.CMB_Sadr.SelectedIndexChanged += new System.EventHandler(this.CMB_Sadr_SelectedIndexChanged);
-            // 
-            // BTN_Search_Motab3a
-            // 
-            this.BTN_Search_Motab3a.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Search_Motab3a.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.BTN_Search_Motab3a.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_Search_Motab3a.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
-            this.BTN_Search_Motab3a.FlatAppearance.BorderSize = 3;
-            this.BTN_Search_Motab3a.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_Search_Motab3a.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.BTN_Search_Motab3a.ForeColor = System.Drawing.Color.Maroon;
-            this.BTN_Search_Motab3a.Location = new System.Drawing.Point(541, 17);
-            this.BTN_Search_Motab3a.Name = "BTN_Search_Motab3a";
-            this.BTN_Search_Motab3a.Size = new System.Drawing.Size(72, 33);
-            this.BTN_Search_Motab3a.TabIndex = 307;
-            this.BTN_Search_Motab3a.Text = "بحث";
-            this.BTN_Search_Motab3a.UseVisualStyleBackColor = false;
-            // 
-            // BTN_Cancel
-            // 
-            this.BTN_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Cancel.BackColor = System.Drawing.Color.LightGray;
-            this.BTN_Cancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_Cancel.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
-            this.BTN_Cancel.FlatAppearance.BorderSize = 3;
-            this.BTN_Cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_Cancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.BTN_Cancel.ForeColor = System.Drawing.Color.Blue;
-            this.BTN_Cancel.Location = new System.Drawing.Point(857, 3);
-            this.BTN_Cancel.Name = "BTN_Cancel";
-            this.BTN_Cancel.Size = new System.Drawing.Size(70, 31);
-            this.BTN_Cancel.TabIndex = 333;
-            this.BTN_Cancel.Text = "إلغاء";
-            this.BTN_Cancel.UseVisualStyleBackColor = false;
-            // 
-            // BTN_Search
-            // 
-            this.BTN_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Search.BackColor = System.Drawing.Color.LightGray;
-            this.BTN_Search.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_Search.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
-            this.BTN_Search.FlatAppearance.BorderSize = 3;
-            this.BTN_Search.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_Search.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.BTN_Search.ForeColor = System.Drawing.Color.Blue;
-            this.BTN_Search.Location = new System.Drawing.Point(785, 3);
-            this.BTN_Search.Name = "BTN_Search";
-            this.BTN_Search.Size = new System.Drawing.Size(70, 31);
-            this.BTN_Search.TabIndex = 334;
-            this.BTN_Search.Text = "بحث";
-            this.BTN_Search.UseVisualStyleBackColor = false;
-            // 
-            // panel3
-            // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.panel8);
-            this.panel3.Controls.Add(this.label24);
-            this.panel3.Location = new System.Drawing.Point(608, 40);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(535, 74);
-            this.panel3.TabIndex = 335;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.label2);
-            this.panel4.Controls.Add(this.Cmb_FY2);
-            this.panel4.Controls.Add(this.TXT_MonksaNo);
-            this.panel4.Controls.Add(this.TXT_Type);
-            this.panel4.Controls.Add(this.cboCurrency);
-            this.panel4.Controls.Add(this.BTN_Sign6);
-            this.panel4.Controls.Add(this.label23);
-            this.panel4.Controls.Add(this.TXT_Shick1);
-            this.panel4.Controls.Add(this.Pic_Sign6);
-            this.panel4.Controls.Add(this.label19);
-            this.panel4.Controls.Add(this.BTN_Sign7);
-            this.panel4.Controls.Add(this.Pic_Sign7);
-            this.panel4.Location = new System.Drawing.Point(10, 30);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(143, 54);
-            this.panel4.TabIndex = 243;
-            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
             // panel5
             // 
@@ -1535,7 +1535,7 @@
             this.BTN_PDF.Dock = System.Windows.Forms.DockStyle.Top;
             this.BTN_PDF.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.BTN_PDF.FlatAppearance.BorderSize = 2;
-            this.BTN_PDF.Font = new System.Drawing.Font("Arabic Typesetting", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_PDF.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTN_PDF.ForeColor = System.Drawing.Color.DarkRed;
             this.BTN_PDF.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
             this.BTN_PDF.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -1554,7 +1554,7 @@
             this.browseBTN.Enabled = false;
             this.browseBTN.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.browseBTN.FlatAppearance.BorderSize = 2;
-            this.browseBTN.Font = new System.Drawing.Font("Arabic Typesetting", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.browseBTN.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.browseBTN.ForeColor = System.Drawing.Color.DarkRed;
             this.browseBTN.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
             this.browseBTN.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -1596,111 +1596,16 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1150, 97);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // panel14
+            // panel20
             // 
-            this.panel14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel14.Controls.Add(this.TXT_EgmaliAfter);
-            this.panel14.Controls.Add(this.label28);
-            this.panel14.Controls.Add(this.TXT_EgmaliBefore);
-            this.panel14.Controls.Add(this.label29);
-            this.panel14.Controls.Add(this.label30);
-            this.panel14.Controls.Add(this.TXT_EgmaliDareba);
-            this.panel14.Controls.Add(this.label18);
-            this.panel14.Controls.Add(this.txt_arabicword);
-            this.panel14.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel14.Location = new System.Drawing.Point(0, 0);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(1150, 69);
-            this.panel14.TabIndex = 243;
-            // 
-            // panel15
-            // 
-            this.panel15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel15.Controls.Add(this.label17);
-            this.panel15.Controls.Add(this.BTN_Sigm1);
-            this.panel15.Controls.Add(this.Pic_Sign1);
-            this.panel15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel15.Location = new System.Drawing.Point(769, 3);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(378, 42);
-            this.panel15.TabIndex = 266;
-            // 
-            // panel16
-            // 
-            this.panel16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel16.Controls.Add(this.label16);
-            this.panel16.Controls.Add(this.Pic_Sign2);
-            this.panel16.Controls.Add(this.BTN_Sigm12);
-            this.panel16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel16.Location = new System.Drawing.Point(386, 3);
-            this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(377, 42);
-            this.panel16.TabIndex = 266;
-            // 
-            // label16
-            // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Arial", 12F);
-            this.label16.ForeColor = System.Drawing.Color.Maroon;
-            this.label16.Location = new System.Drawing.Point(287, 9);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(84, 18);
-            this.label16.TabIndex = 237;
-            this.label16.Text = ":توقيع التصديق";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // panel17
-            // 
-            this.panel17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel17.Controls.Add(this.label26);
-            this.panel17.Controls.Add(this.BTN_Sigm13);
-            this.panel17.Controls.Add(this.Pic_Sign3);
-            this.panel17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel17.Location = new System.Drawing.Point(3, 3);
-            this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(377, 42);
-            this.panel17.TabIndex = 266;
-            // 
-            // label26
-            // 
-            this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Arial", 12F);
-            this.label26.ForeColor = System.Drawing.Color.Maroon;
-            this.label26.Location = new System.Drawing.Point(250, 11);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(122, 18);
-            this.label26.TabIndex = 238;
-            this.label26.Text = ":توقيع مدير عام مساعد";
-            this.label26.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // panel18
-            // 
-            this.panel18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel18.Controls.Add(this.DeleteBtn2);
-            this.panel18.Controls.Add(this.label27);
-            this.panel18.Controls.Add(this.Pic_Sign4);
-            this.panel18.Controls.Add(this.BTN_Sigm14);
-            this.panel18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel18.Location = new System.Drawing.Point(769, 51);
-            this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(378, 43);
-            this.panel18.TabIndex = 266;
-            this.panel18.Paint += new System.Windows.Forms.PaintEventHandler(this.panel18_Paint);
-            // 
-            // label27
-            // 
-            this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Arial", 12F);
-            this.label27.ForeColor = System.Drawing.Color.Maroon;
-            this.label27.Location = new System.Drawing.Point(277, 10);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(96, 18);
-            this.label27.TabIndex = 239;
-            this.label27.Text = ":توقيع المدير العام";
-            this.label27.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.panel20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel20.Controls.Add(this.TXT_ShickNo);
+            this.panel20.Controls.Add(this.label22);
+            this.panel20.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel20.Location = new System.Drawing.Point(386, 51);
+            this.panel20.Name = "panel20";
+            this.panel20.Size = new System.Drawing.Size(377, 43);
+            this.panel20.TabIndex = 266;
             // 
             // panel19
             // 
@@ -1728,6 +1633,20 @@
             this.label31.Text = ":مدير عام الادارة الطالبة";
             this.label31.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // panel18
+            // 
+            this.panel18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel18.Controls.Add(this.DeleteBtn2);
+            this.panel18.Controls.Add(this.label27);
+            this.panel18.Controls.Add(this.Pic_Sign4);
+            this.panel18.Controls.Add(this.BTN_Sigm14);
+            this.panel18.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel18.Location = new System.Drawing.Point(769, 51);
+            this.panel18.Name = "panel18";
+            this.panel18.Size = new System.Drawing.Size(378, 43);
+            this.panel18.TabIndex = 266;
+            this.panel18.Paint += new System.Windows.Forms.PaintEventHandler(this.panel18_Paint);
+            // 
             // DeleteBtn2
             // 
             this.DeleteBtn2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1744,16 +1663,97 @@
             this.DeleteBtn2.Text = "حذف";
             this.DeleteBtn2.UseVisualStyleBackColor = false;
             // 
-            // panel20
+            // label27
             // 
-            this.panel20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel20.Controls.Add(this.TXT_ShickNo);
-            this.panel20.Controls.Add(this.label22);
-            this.panel20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel20.Location = new System.Drawing.Point(386, 51);
-            this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(377, 43);
-            this.panel20.TabIndex = 266;
+            this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Arial", 12F);
+            this.label27.ForeColor = System.Drawing.Color.Maroon;
+            this.label27.Location = new System.Drawing.Point(277, 10);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(96, 18);
+            this.label27.TabIndex = 239;
+            this.label27.Text = ":توقيع المدير العام";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // panel17
+            // 
+            this.panel17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel17.Controls.Add(this.label26);
+            this.panel17.Controls.Add(this.BTN_Sigm13);
+            this.panel17.Controls.Add(this.Pic_Sign3);
+            this.panel17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel17.Location = new System.Drawing.Point(3, 3);
+            this.panel17.Name = "panel17";
+            this.panel17.Size = new System.Drawing.Size(377, 42);
+            this.panel17.TabIndex = 266;
+            // 
+            // label26
+            // 
+            this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Arial", 12F);
+            this.label26.ForeColor = System.Drawing.Color.Maroon;
+            this.label26.Location = new System.Drawing.Point(250, 11);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(122, 18);
+            this.label26.TabIndex = 238;
+            this.label26.Text = ":توقيع مدير عام مساعد";
+            this.label26.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // panel16
+            // 
+            this.panel16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel16.Controls.Add(this.label16);
+            this.panel16.Controls.Add(this.Pic_Sign2);
+            this.panel16.Controls.Add(this.BTN_Sigm12);
+            this.panel16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel16.Location = new System.Drawing.Point(386, 3);
+            this.panel16.Name = "panel16";
+            this.panel16.Size = new System.Drawing.Size(377, 42);
+            this.panel16.TabIndex = 266;
+            // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Arial", 12F);
+            this.label16.ForeColor = System.Drawing.Color.Maroon;
+            this.label16.Location = new System.Drawing.Point(287, 9);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(84, 18);
+            this.label16.TabIndex = 237;
+            this.label16.Text = ":توقيع التصديق";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // panel15
+            // 
+            this.panel15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel15.Controls.Add(this.label17);
+            this.panel15.Controls.Add(this.BTN_Sigm1);
+            this.panel15.Controls.Add(this.Pic_Sign1);
+            this.panel15.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel15.Location = new System.Drawing.Point(769, 3);
+            this.panel15.Name = "panel15";
+            this.panel15.Size = new System.Drawing.Size(378, 42);
+            this.panel15.TabIndex = 266;
+            // 
+            // panel14
+            // 
+            this.panel14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel14.Controls.Add(this.TXT_EgmaliAfter);
+            this.panel14.Controls.Add(this.label28);
+            this.panel14.Controls.Add(this.TXT_EgmaliBefore);
+            this.panel14.Controls.Add(this.label29);
+            this.panel14.Controls.Add(this.label30);
+            this.panel14.Controls.Add(this.TXT_EgmaliDareba);
+            this.panel14.Controls.Add(this.label18);
+            this.panel14.Controls.Add(this.txt_arabicword);
+            this.panel14.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel14.Location = new System.Drawing.Point(0, 0);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(1150, 69);
+            this.panel14.TabIndex = 243;
             // 
             // AmrSheraa
             // 
@@ -1783,13 +1783,13 @@
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel6.ResumeLayout(false);
@@ -1803,20 +1803,20 @@
             this.panel13.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.panel14.ResumeLayout(false);
-            this.panel14.PerformLayout();
-            this.panel15.ResumeLayout(false);
-            this.panel15.PerformLayout();
-            this.panel16.ResumeLayout(false);
-            this.panel16.PerformLayout();
-            this.panel17.ResumeLayout(false);
-            this.panel17.PerformLayout();
-            this.panel18.ResumeLayout(false);
-            this.panel18.PerformLayout();
-            this.panel19.ResumeLayout(false);
-            this.panel19.PerformLayout();
             this.panel20.ResumeLayout(false);
             this.panel20.PerformLayout();
+            this.panel19.ResumeLayout(false);
+            this.panel19.PerformLayout();
+            this.panel18.ResumeLayout(false);
+            this.panel18.PerformLayout();
+            this.panel17.ResumeLayout(false);
+            this.panel17.PerformLayout();
+            this.panel16.ResumeLayout(false);
+            this.panel16.PerformLayout();
+            this.panel15.ResumeLayout(false);
+            this.panel15.PerformLayout();
+            this.panel14.ResumeLayout(false);
+            this.panel14.PerformLayout();
             this.ResumeLayout(false);
 
         }

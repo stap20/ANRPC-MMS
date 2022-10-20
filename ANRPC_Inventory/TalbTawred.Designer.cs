@@ -997,7 +997,7 @@
             this.browseBTN.Enabled = false;
             this.browseBTN.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.browseBTN.FlatAppearance.BorderSize = 2;
-            this.browseBTN.Font = new System.Drawing.Font("Arabic Typesetting", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.browseBTN.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold);
             this.browseBTN.ForeColor = System.Drawing.Color.DarkRed;
             this.browseBTN.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
             this.browseBTN.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -1047,7 +1047,7 @@
             this.BTN_PDF.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.BTN_PDF.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.BTN_PDF.FlatAppearance.BorderSize = 2;
-            this.BTN_PDF.Font = new System.Drawing.Font("Arabic Typesetting", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_PDF.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold);
             this.BTN_PDF.ForeColor = System.Drawing.Color.DarkRed;
             this.BTN_PDF.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
             this.BTN_PDF.ImeMode = System.Windows.Forms.ImeMode.NoControl;

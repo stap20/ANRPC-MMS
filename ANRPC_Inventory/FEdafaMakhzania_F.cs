@@ -279,14 +279,6 @@ namespace ANRPC_Inventory
             TXT_EdafaNo.AutoCompleteSource = AutoCompleteSource.CustomSource;
             TXT_EdafaNo.AutoCompleteCustomSource = edafacoll;*/
 
-
-
-
-            
-            TXT_AmrNo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            TXT_AmrNo.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            TXT_AmrNo.AutoCompleteCustomSource = TalbColl;
-
             con.Close();
         }
         private void Getdata(string cmd)
@@ -638,7 +630,6 @@ namespace ANRPC_Inventory
             BTN_Sign2.Enabled = true;
             BTN_Sign3.Enabled = true;
             Cmb_FY.Enabled = true;
-            TXT_AmrNo.Enabled = true;
             Cmb_AmrNo.Enabled = true;
             dataGridView1.Enabled = true;
   
@@ -649,7 +640,6 @@ namespace ANRPC_Inventory
             directflag = 0;
             CH_Direct.Checked = false;
             BTN_Print.Enabled = false;
-            TXT_AmrNo.Text = "";
             Cmb_AmrNo.Text = "";
             Cmb_AmrNo.SelectedIndex = -1;
             Cmb_CType.Text = "";
@@ -687,7 +677,6 @@ namespace ANRPC_Inventory
         {      //BTN_ChooseTalb.Enabled = false;
             dataGridView1.Enabled = false;
             TXT_NameMward.Enabled = false;
-            TXT_AmrNo.Enabled = false;
             Cmb_AmrNo.Enabled = false;
             Cmb_FY.Enabled = false;
 
@@ -876,8 +865,6 @@ namespace ANRPC_Inventory
             Cmb_AmrNo.SelectedIndexChanged -= new EventHandler(Cmb_AmrNo_SelectedIndexChanged);
             Cmb_AmrNo.DataSource = null;
             Cmb_AmrNo.Items.Clear();
-            TXT_AmrNo.AutoCompleteMode = AutoCompleteMode.None;
-            TXT_AmrNo.AutoCompleteSource = AutoCompleteSource.None; ;
             //string cmdstring3 = "SELECT  Amrshraa_No from T_Awamershraa  where  Sign3 is not null and AmrSheraa_sanamalia='" + Cmb_FY.Text + "' order by  Amrshraa_No";
             string cmdstring3 = "select  Amrshraa_No from T_estlam where sign3 is not null and AmrSheraa_sanamalia='" + Cmb_FY.Text + "' and amrshraa_no not in(select Amrshraa_No from T_Edafa group by Amrshraa_No, AmrSheraa_sanamalia)group by Amrshraa_No,AmrSheraa_sanamalia";
             SqlCommand cmd3 = new SqlCommand(cmdstring3, Constants.con);
@@ -891,10 +878,6 @@ namespace ANRPC_Inventory
 
                 }
             }
-
-            TXT_AmrNo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            TXT_AmrNo.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            TXT_AmrNo.AutoCompleteCustomSource = TalbColl;
 
             ////////////////////////////////////////////////////////
 
@@ -949,8 +932,6 @@ namespace ANRPC_Inventory
                 }
                 Constants.opencon();
                
-               TXT_AmrNo.AutoCompleteMode = AutoCompleteMode.None;
-                TXT_AmrNo.AutoCompleteSource = AutoCompleteSource.None; ;
                  //get only finished amrsheraa
                 string cmdstring4 = "SELECT  Amrshraa_No from T_Awamershraa  where (Sign3 is not null) and AmrSheraa_sanamalia='" + Cmb_FY.Text + "' order by  Amrshraa_No";
                 SqlCommand cmd4 = new SqlCommand(cmdstring4, Constants.con);
@@ -964,10 +945,7 @@ namespace ANRPC_Inventory
 
                     }
                 }
-              
-                TXT_AmrNo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                TXT_AmrNo.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                TXT_AmrNo.AutoCompleteCustomSource = TalbColl;
+
                 Constants.closecon();
 
             }
@@ -1049,7 +1027,6 @@ namespace ANRPC_Inventory
 
                     Cmb_FY.Text = dr["AmrSheraa_sanamalia"].ToString();
                    // Cmb_FY2.Text = dr["monaksa_sanamalia"].ToString();
-                    TXT_AmrNo.Text = dr["Amrshraa_No"].ToString();
                     Cmb_AmrNo.Text = dr["Amrshraa_No"].ToString(); 
                  //   TXT_EdafaNo.Text = dr["Monaksa_No"].ToString();
                     TXT_Momayz.Text = dr["Momayz"].ToString();
@@ -2193,10 +2170,7 @@ namespace ANRPC_Inventory
 
         private void BTN_Save2_Click(object sender, EventArgs e)
         {
-            if (AddEditFlag == 1)
-            {
-                UpdateEdafa();
-            }
+
         }
 
         private void Cmb_ِAmrNo2_SelectedIndexChanged(object sender, EventArgs e)
@@ -2727,7 +2701,6 @@ namespace ANRPC_Inventory
 
                     Cmb_FY.Text = dr["AmrSheraa_sanamalia"].ToString();
                  //   Cmb_FY2.Text = dr["monaksa_sanamalia"].ToString();
-                    TXT_AmrNo.Text = dr["Amrshraa_No"].ToString();
 
                     Cmb_AmrNo.Text = dr["Amrshraa_No"].ToString();
 
@@ -3489,14 +3462,36 @@ namespace ANRPC_Inventory
 
         }
 
-        private void TXT_TRNO_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+ 
 
         private void label25_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void panel6_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel10_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label26_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TXT_TRNO_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.Show("مميز متند ", TXT_TRNO);
         }
 
 
