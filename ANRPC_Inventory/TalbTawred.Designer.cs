@@ -1073,16 +1073,19 @@
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.alertProvider.SetIconAlignment(this.dataGridView1, System.Windows.Forms.ErrorIconAlignment.TopRight);
+            this.errorProvider.SetIconAlignment(this.dataGridView1, System.Windows.Forms.ErrorIconAlignment.TopRight);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.dataGridView1.Size = new System.Drawing.Size(1148, 133);
+            this.dataGridView1.Size = new System.Drawing.Size(1142, 127);
             this.dataGridView1.TabIndex = 42;
+            this.dataGridView1.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellMouseEnter);
             this.dataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
-            this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
             this.dataGridView1.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView1_UserDeletedRow);
             // 
             // panel6
@@ -2346,7 +2349,7 @@
             this.Editbtn2.TabIndex = 50;
             this.Editbtn2.Text = "تعديل";
             this.Editbtn2.UseVisualStyleBackColor = false;
-            this.Editbtn2.Click += new System.EventHandler(this.Editbtn_Click_1);
+            this.Editbtn2.Click += new System.EventHandler(this.Editbtn2_Click);
             // 
             // Addbtn
             // 
@@ -2425,6 +2428,7 @@
             this.panel16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel16.Location = new System.Drawing.Point(1, 391);
             this.panel16.Name = "panel16";
+            this.panel16.Padding = new System.Windows.Forms.Padding(3);
             this.panel16.Size = new System.Drawing.Size(1148, 133);
             this.panel16.TabIndex = 44;
             // 

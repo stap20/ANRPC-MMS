@@ -59,7 +59,7 @@
             this.user_txt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.user_txt.BackColor = System.Drawing.SystemColors.Control;
             this.user_txt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.user_txt.Font = new System.Drawing.Font("Arial", 13.3F);
+            this.user_txt.Font = new System.Drawing.Font("Arial", 13.3F, System.Drawing.FontStyle.Bold);
             this.user_txt.ForeColor = System.Drawing.SystemColors.WindowText;
             this.user_txt.Location = new System.Drawing.Point(45, 94);
             this.user_txt.Name = "user_txt";
@@ -76,7 +76,7 @@
             // 
             this.password_txt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.password_txt.BackColor = System.Drawing.SystemColors.Control;
-            this.password_txt.Font = new System.Drawing.Font("Arial", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.password_txt.Font = new System.Drawing.Font("Arial", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.password_txt.ForeColor = System.Drawing.SystemColors.WindowText;
             this.password_txt.Location = new System.Drawing.Point(45, 150);
             this.password_txt.Name = "password_txt";
@@ -108,6 +108,7 @@
             // 
             // panel1
             // 
+            this.panel1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -116,7 +117,7 @@
             this.panel1.Controls.Add(this.Password_label);
             this.panel1.Controls.Add(this.password_txt);
             this.panel1.Controls.Add(this.lgnBtn);
-            this.panel1.Location = new System.Drawing.Point(532, 155);
+            this.panel1.Location = new System.Drawing.Point(424, 95);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(400, 317);
             this.panel1.TabIndex = 85;
