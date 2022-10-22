@@ -3252,6 +3252,10 @@ namespace ANRPC_Inventory
         {
             if (AddEditFlag == 0)
             {
+                if(TXT_TalbNo.Text != "")
+                {
+                    return;
+                }
                 Constants.opencon();
 
                 TXT_TalbNo.AutoCompleteMode = AutoCompleteMode.None;
@@ -3614,81 +3618,84 @@ namespace ANRPC_Inventory
 
         private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            if (e.ColumnIndex == 6 && (bool)dataGridView1.Rows[e.RowIndex].Cells[11].Value == true) // 1 should be your column index
+            if (e.RowIndex >= 0 && !dataGridView1.Rows[e.RowIndex].IsNewRow)
             {
-
-                if (e.FormattedValue != DBNull.Value  && e.FormattedValue !="")// && dataGridView1.Rows[e.RowIndex].Cells[11].Value != "true")
-                
+                if (e.ColumnIndex == 6 && (bool)dataGridView1.Rows[e.RowIndex].Cells[11].Value == true) // 1 should be your column index
                 {
-                    string query = "exec Sp_CheckTasnif @a,@p1 out,@p2 out,@p3 out,@flag out ";
-                    SqlCommand cmd = new SqlCommand(query, Constants.con);
-                    cmd.Parameters.AddWithValue("@a", (e.FormattedValue));
-                    cmd.Parameters.Add("@flag", SqlDbType.Int, 32);  //-------> output parameter
-                    cmd.Parameters["@flag"].Direction = ParameterDirection.Output;
-                    cmd.Parameters.Add("@p1", SqlDbType.NVarChar, 500);  //-------> output parameter
-                    cmd.Parameters["@p1"].Direction = ParameterDirection.Output;
 
+                    if (e.FormattedValue != DBNull.Value && e.FormattedValue != "")// && dataGridView1.Rows[e.RowIndex].Cells[11].Value != "true")
 
-                    cmd.Parameters.Add("@p2", SqlDbType.NVarChar, 50);  //-------> output parameter
-                    cmd.Parameters["@p2"].Direction = ParameterDirection.Output;
-
-
-                    cmd.Parameters.Add("@p3", SqlDbType.Int, 32);  //-------> output parameter
-                    cmd.Parameters["@p3"].Direction = ParameterDirection.Output;
-
-
-
-
-                    // cmd3.ExecuteNonQuery();
-                    //  int flag1;
-                    Constants.opencon();
-                    try
                     {
+                        string query = "exec Sp_CheckTasnif @a,@p1 out,@p2 out,@p3 out,@flag out ";
+                        SqlCommand cmd = new SqlCommand(query, Constants.con);
+                        cmd.Parameters.AddWithValue("@a", (e.FormattedValue));
+                        cmd.Parameters.Add("@flag", SqlDbType.Int, 32);  //-------> output parameter
+                        cmd.Parameters["@flag"].Direction = ParameterDirection.Output;
+                        cmd.Parameters.Add("@p1", SqlDbType.NVarChar, 500);  //-------> output parameter
+                        cmd.Parameters["@p1"].Direction = ParameterDirection.Output;
 
-                        cmd.ExecuteNonQuery();
-                        executemsg = true;
 
-                        flag1 = (int)cmd.Parameters["@flag"].Value;
+                        cmd.Parameters.Add("@p2", SqlDbType.NVarChar, 50);  //-------> output parameter
+                        cmd.Parameters["@p2"].Direction = ParameterDirection.Output;
 
-                        dataGridView1.Rows[e.RowIndex].Cells[5].Value = cmd.Parameters["@p1"].Value;
-                        dataGridView1.Rows[e.RowIndex].Cells[4].Value = cmd.Parameters["@p2"].Value;
-                        dataGridView1.Rows[e.RowIndex].Cells[7].Value = cmd.Parameters["@p3"].Value;
-                        dataGridView1.Rows[e.RowIndex].Cells[11].Value = false;
 
-                        if (flag1 != 2)
+                        cmd.Parameters.Add("@p3", SqlDbType.Int, 32);  //-------> output parameter
+                        cmd.Parameters["@p3"].Direction = ParameterDirection.Output;
+
+
+
+
+                        // cmd3.ExecuteNonQuery();
+                        //  int flag1;
+                        Constants.opencon();
+                        try
                         {
 
-                            //if (Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value) >= Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[3].Value))
-                            //{
-                            //    MessageBox.Show("كمية المطلوبة اقل من كمية المخزن لا نحناج الى طلب توريد");
-                            //    return;
-                            //}
+                            cmd.ExecuteNonQuery();
+                            executemsg = true;
 
-                            if ((Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value) < Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[3].Value)) && Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value) != 0)
+                            flag1 = (int)cmd.Parameters["@flag"].Value;
+
+                            dataGridView1.Rows[e.RowIndex].Cells[5].Value = cmd.Parameters["@p1"].Value;
+                            dataGridView1.Rows[e.RowIndex].Cells[4].Value = cmd.Parameters["@p2"].Value;
+                            dataGridView1.Rows[e.RowIndex].Cells[7].Value = cmd.Parameters["@p3"].Value;
+                            dataGridView1.Rows[e.RowIndex].Cells[11].Value = false;
+
+                            if (flag1 != 2)
                             {
-                                dataGridView1.Rows[e.RowIndex].Cells[3].Value = Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[3].Value) - Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value);
-                                dataGridView1.Rows[e.RowIndex].Cells[10].Value = dataGridView1.Rows[e.RowIndex].Cells[7].Value;
+
+                                //if (Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value) >= Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[3].Value))
+                                //{
+                                //    MessageBox.Show("كمية المطلوبة اقل من كمية المخزن لا نحناج الى طلب توريد");
+                                //    return;
+                                //}
+
+                                if ((Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value) < Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[3].Value)) && Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value) != 0)
+                                {
+                                    dataGridView1.Rows[e.RowIndex].Cells[3].Value = Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[3].Value) - Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value);
+                                    dataGridView1.Rows[e.RowIndex].Cells[10].Value = dataGridView1.Rows[e.RowIndex].Cells[7].Value;
+
+                                }
+                                else if (Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value) == 0)
+                                {
+                                    // dataGridView1.Rows[e.RowIndex].Cells[3].Value = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[3].Value) - Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[7].Value);
+                                    dataGridView1.Rows[e.RowIndex].Cells[10].Value = 0;
+
+                                }
 
                             }
-                            else if (Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value) == 0)
-                            {
-                                // dataGridView1.Rows[e.RowIndex].Cells[3].Value = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[3].Value) - Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[7].Value);
-                                dataGridView1.Rows[e.RowIndex].Cells[10].Value = 0;
-
-                            }
-
                         }
-                    }
-                    catch (SqlException sqlEx)
-                    {
-                        executemsg = false;
-                        MessageBox.Show(sqlEx.ToString());
-                        flag1 = (int)cmd.Parameters["@flag"].Value;
-                    }
-                    if (flag1 == 2)
-                    {
-                        MessageBox.Show("لا يوجد رقم تصنييف بهذا الرقم");
-                        e.Cancel = true;
+                        catch (SqlException sqlEx)
+                        {
+                            executemsg = false;
+                            MessageBox.Show(sqlEx.ToString());
+                            flag1 = (int)cmd.Parameters["@flag"].Value;
+                        }
+                        if (flag1 == 2)
+                        {
+                            MessageBox.Show("لا يوجد رقم تصنييف بهذا الرقم");
+                            e.Cancel = true;
+                        }
                     }
                 }
             }
@@ -4763,7 +4770,7 @@ namespace ANRPC_Inventory
 
         private void dataGridView1_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0 && !dataGridView1.Rows[e.RowIndex].IsNewRow)
             {
                 if (e.ColumnIndex == 6 && (bool)dataGridView1.Rows[e.RowIndex].Cells[11].Value == true) // 1 should be your column index
                 {
