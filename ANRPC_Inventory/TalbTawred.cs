@@ -25,7 +25,7 @@ namespace ANRPC_Inventory
         Image DefaulteImg;
         Image image1;
         Image image2;
-        string[,] array1 = new string[4, 6];
+        string[,] array1 = new string[100, 6];
         string Image1;
         string Image2;
         public int indeximg = 0;
@@ -3252,12 +3252,7 @@ namespace ANRPC_Inventory
         {
             if (AddEditFlag == 0)
             {
-                if(TXT_TalbNo.Text != "")
-                {
-                    return;
-                }
                 Constants.opencon();
-
                 TXT_TalbNo.AutoCompleteMode = AutoCompleteMode.None;
                 TXT_TalbNo.AutoCompleteSource = AutoCompleteSource.None; ;
                 string cmdstring3 = "";
@@ -3292,6 +3287,11 @@ namespace ANRPC_Inventory
             //go and get talbTawreed_no for this FYear
             if (AddEditFlag == 2)//add
             {
+
+                if (TXT_TalbNo.Text != "")
+                {
+                    return;
+                }
                 //call sp that get last num that eentered for this MM and this YYYY
                 Constants.opencon();
 

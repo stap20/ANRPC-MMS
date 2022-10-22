@@ -1975,7 +1975,7 @@ namespace ANRPC_Inventory
             if (AddEditFlag == 2)//add
             {
 
-                if (string.IsNullOrEmpty(TXT_TRNO.Text))
+                if (TXT_EznNo.Text != "")
                 {
                     return;
                 }
