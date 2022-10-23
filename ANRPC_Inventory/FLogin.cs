@@ -101,8 +101,39 @@ namespace ANRPC_Inventory
             Constants.Minimize_Btn(this);
         }
 
+
+        private void compareVersions()
+        {
+            double maxVersion;
+            double currentVesion;
+            SqlConnection sqlConnction = new SqlConnection(Constants.constring);
+            using (SqlCommand cmd = new SqlCommand("SELECT MAX(VERSION)  FROM VERSIONS", sqlConnction))
+            {
+                sqlConnction.Open();
+                maxVersion = Convert.ToDouble(cmd.ExecuteScalar());
+                sqlConnction.Close(); 
+            }
+            using (SqlCommand cmd = new SqlCommand("SELECT VERSION  FROM VERSIONS where COMPUTER_NAME='" + Environment.MachineName +"'", sqlConnction))
+            {
+                sqlConnction.Open();
+                currentVesion = Convert.ToDouble(cmd.ExecuteScalar());
+                sqlConnction.Close();
+            }
+
+            if(maxVersion != currentVesion)
+            {
+                MessageBox.Show("هذة النسخة غير محدثة من فضلك تواصل مع نظم المعلومات ", "التواصل مع نظم المعلومات ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.Close();
+            }
+
+
+        }
         private void lgnBtn_Click(object sender, EventArgs e)
         {
+
+            compareVersions();
+
+
 
             username = "";
             password = "";
