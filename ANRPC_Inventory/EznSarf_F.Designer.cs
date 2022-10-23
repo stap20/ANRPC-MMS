@@ -212,7 +212,6 @@
             this.bottomPanel.Padding = new System.Windows.Forms.Padding(5);
             this.bottomPanel.Size = new System.Drawing.Size(1208, 225);
             this.bottomPanel.TabIndex = 5;
-            this.bottomPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // takalefTable
             // 
@@ -1306,7 +1305,6 @@
             this.eznSarfDataPanel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.eznSarfDataPanel.Size = new System.Drawing.Size(1208, 152);
             this.eznSarfDataPanel.TabIndex = 19;
-            this.eznSarfDataPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // BTN_SearchEzn
             // 
@@ -1548,7 +1546,6 @@
             this.TXT_StockBian.Size = new System.Drawing.Size(595, 39);
             this.TXT_StockBian.TabIndex = 12;
             this.TXT_StockBian.Text = "";
-            this.TXT_StockBian.TextChanged += new System.EventHandler(this.TXT_StockBian_TextChanged);
             // 
             // panel5
             // 

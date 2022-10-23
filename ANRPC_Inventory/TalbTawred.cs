@@ -3543,7 +3543,7 @@ namespace ANRPC_Inventory
                 return;
             }
 
-            UpdateTalbTawreed();
+            EditLogic();
 
             reset();
 
