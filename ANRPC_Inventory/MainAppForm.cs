@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media.Animation;
 using FontAwesome.Sharp;
 
 namespace ANRPC_Inventory
@@ -24,6 +25,7 @@ namespace ANRPC_Inventory
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(8, 54);
             panelButtons.Controls.Add(leftBorderBtn);
+            this.WindowState = FormWindowState.Maximized;
         }
         //Structs
         private struct RGBColors
@@ -99,7 +101,6 @@ namespace ANRPC_Inventory
             childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.Dock = DockStyle.Fill;
             formwraper.Controls.Add(childForm);
-            formwraper.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
 
@@ -131,25 +132,45 @@ namespace ANRPC_Inventory
         private void btnOrder_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color3);
-            formwraper.Visible = false;
+
+            TalbTawred TalbTawreed = new TalbTawred();
+            Constants.talbtawred_F = true; //--> panel7 --> Invisible - panel2 --> visible
+            openChildForm(TalbTawreed);
+
+            formwraper.Visible = true;
         }
 
         private void btnTransaction_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color4);
-            formwraper.Visible = false;
+
+            TalbTawred TalbTawreed = new TalbTawred();
+            Constants.talbtawred_F = false; //--> panel7 --> Invisible - panel2 --> visible
+            openChildForm(TalbTawreed);
+
+            formwraper.Visible = true;
         }
 
         private void btnStock_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color5);
-            formwraper.Visible = false;
+
+            EznSarf_F EznSarf = new EznSarf_F();
+            Constants.EznSarf_FF = true; //--> panel7 --> visible - panel2 --> Invisible
+            openChildForm(EznSarf);
+
+            formwraper.Visible = true;
         }
 
         private void btnFinancial_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color6);
-            formwraper.Visible = false;
+
+            EznSarf_F EznSarf = new EznSarf_F();
+            Constants.EznSarf_FF = false; //--> panel7 --> visible - panel2 --> Invisible
+            openChildForm(EznSarf);
+
+            formwraper.Visible = true;
         }
 
         private void btnReport_Click(object sender, EventArgs e)

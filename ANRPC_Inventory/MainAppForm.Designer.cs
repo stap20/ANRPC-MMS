@@ -153,6 +153,7 @@ namespace ANRPC_Inventory
             // btnSettings
             // 
             this.btnSettings.BackColor = System.Drawing.Color.Transparent;
+            this.btnSettings.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnSettings.FlatAppearance.BorderSize = 0;
             this.btnSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
             this.btnSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
@@ -221,7 +222,7 @@ namespace ANRPC_Inventory
             this.btnFinancial.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnFinancial.Size = new System.Drawing.Size(250, 54);
             this.btnFinancial.TabIndex = 5;
-            this.btnFinancial.Text = "   Financial";
+            this.btnFinancial.Text = "   متابعة إذن الصرف";
             this.btnFinancial.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnFinancial.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnFinancial.UseVisualStyleBackColor = false;
@@ -247,7 +248,7 @@ namespace ANRPC_Inventory
             this.btnStock.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnStock.Size = new System.Drawing.Size(250, 54);
             this.btnStock.TabIndex = 4;
-            this.btnStock.Text = "   Stock";
+            this.btnStock.Text = "   إدخال جديد / تعديل البيانات";
             this.btnStock.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnStock.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnStock.UseVisualStyleBackColor = false;
@@ -273,7 +274,7 @@ namespace ANRPC_Inventory
             this.btnTransaction.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnTransaction.Size = new System.Drawing.Size(250, 54);
             this.btnTransaction.TabIndex = 3;
-            this.btnTransaction.Text = "   Transaction";
+            this.btnTransaction.Text = "   متابعة طلب التوريد";
             this.btnTransaction.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTransaction.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTransaction.UseVisualStyleBackColor = false;
@@ -299,7 +300,7 @@ namespace ANRPC_Inventory
             this.btnOrder.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnOrder.Size = new System.Drawing.Size(250, 54);
             this.btnOrder.TabIndex = 2;
-            this.btnOrder.Text = "   Order";
+            this.btnOrder.Text = "   إدخال جديد / تعديل بيانات ";
             this.btnOrder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnOrder.UseVisualStyleBackColor = false;
@@ -379,13 +380,13 @@ namespace ANRPC_Inventory
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // Form1
+            // MainAppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(929, 590);
             this.Controls.Add(this.container);
-            this.Name = "Form1";
+            this.Name = "MainAppForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.container.ResumeLayout(false);
