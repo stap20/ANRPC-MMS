@@ -105,7 +105,7 @@ namespace ANRPC_Inventory
 
             currentChildForm = childForm;
         }
-
+           
 
         private void btnDashboard_Click(object sender, EventArgs e)
         {
