@@ -126,6 +126,8 @@ namespace ANRPC_Inventory
         public double ExchangeRate;
         public string Currency = "";
         private int lastCurrencySelectedIdx = 0;
+
+        decimal sum = 0;
         //  public string TableQuery;
 
         AutoCompleteStringCollection TasnifColl = new AutoCompleteStringCollection(); //empn
@@ -425,6 +427,13 @@ namespace ANRPC_Inventory
 
                     dataGridView1.Rows[r].Cells[0].Value = TXT_TalbNo.Text;
                     dataGridView1.Rows[r].Cells[1].Value = Cmb_FYear.Text;
+
+
+                    sum = sum + (decimal)dataGridView1.Rows[r].Cells[9].Value;
+                    AppValueOriginal = sum;
+                    TXT_AppValue.Text = sum.ToString();
+
+
 
                     dataGridView1.Rows[r].Cells[2].Value = r + 1;
                     //  dataGridView1.Rows[r].Cells[3].Value = Txt_ReqQuan.Value;
@@ -1046,7 +1055,7 @@ namespace ANRPC_Inventory
                     Pic_Sign9.BackColor = Color.Green;
                     currentSignNumber = 9;
                 }
-                else if (Constants.UserTypeB == "Chairman" && (talbstatus == 3 || talbstatus == 4))
+                else if (Constants.UserTypeB == "Chairman")
                 {
                     BTN_Sign7.Enabled = true;
                     BTN_Sign10.Enabled = true;
@@ -1327,6 +1336,9 @@ namespace ANRPC_Inventory
             AdditionQuan = 0;
             AdditionFlag = 0;
             AddEditFlag = 0;
+
+            sum = 0;
+
         }
         #endregion
 
@@ -1899,7 +1911,7 @@ namespace ANRPC_Inventory
             }
             MessageBox.Show("تم التعديل بنجاح  ! ");
 
-            if (FlagSign3 == 1)
+            if (FlagSign5 == 1)
             {
                 Constants.opencon();
                 string query = "exec  SP_CheckFinancialTalb @p1,@p2,@p3,@p4 out";
@@ -3443,9 +3455,9 @@ namespace ANRPC_Inventory
                 cmdstring = "select (TalbTwareed_No) from  T_TalbTawreed where FYear=@FY and( Confirm_Sign1 is not null) and( Confirm_Sign2 is not null)  and(Sign8 is not null )  and (Sign11 is not null )and( Stock_Sign is not null) and (Sign9 is not  null) and CH_Sign is not null and (Audit_Sign is not null) and (Mohmat_Sign is null)";
 
             }
-            else if (Constants.User_Type == "B" && Constants.UserTypeB == " Purchases")
+            else if (Constants.User_Type == "B" && Constants.UserTypeB == "Purchases")
             {
-                cmdstring = "select (TalbTwareed_No) from  T_TalbTawreed where FYear=@FY and( Confirm_Sign1 is not null) and( Confirm_Sign2 is not null)  and(Sign8 is not null )  and (Sign11 is not null )  and (Sign12 is not null )   and( Stock_Sign is not null) and (Sign9 is not  null) and CH_Sign is not null and (Audit_Sign is null )and Mohmat_Sign is null)";
+                cmdstring = "select (TalbTwareed_No) from  T_TalbTawreed where FYear=@FY and( Confirm_Sign1 is not null) and( Confirm_Sign2 is not null)  and(Sign8 is not null )  and (Sign11 is not null )and (Sign12 is not null )  and( Stock_Sign is not  null) and (Audit_Sign is null)";
 
             }
 
@@ -3469,8 +3481,7 @@ namespace ANRPC_Inventory
 
             else if (Constants.User_Type == "B" && Constants.UserTypeB == "TechnicalFollowUp")
             {
-                cmdstring = "select (TalbTwareed_No) from  T_TalbTawreed where FYear=@FY and( Confirm_Sign1 is not null) and( Confirm_Sign2 is not null)  and(Sign8 is not null )  and (Sign11 is not null )and (Sign12 is not null )  and( Stock_Sign is not  null) and Sign9 is null";
-
+                cmdstring = "select (TalbTwareed_No) from  T_TalbTawreed where FYear=@FY and( Confirm_Sign1 is not null) and( Confirm_Sign2 is not null)  and(Sign8 is not null )  and (Sign11 is not null )  and (Sign12 is not null )   and( Stock_Sign is not null) and (Audit_Sign is not null ) and (Sign9 is null)";
             }
 
             else if (Constants.User_Type == "B" && Constants.UserTypeB == "Chairman")
@@ -4064,6 +4075,7 @@ namespace ANRPC_Inventory
 
         private void dataGridView1_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
         {
+
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 if (!row.IsNewRow)
@@ -4799,7 +4811,7 @@ namespace ANRPC_Inventory
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            decimal sum;
+            
             if (e.ColumnIndex == 9)
             {
                 if (e.RowIndex >= 0 && dataGridView1.Rows[e.RowIndex].Cells[9].Value != null && dataGridView1.Rows[e.RowIndex].Cells[9].Value != DBNull.Value)
@@ -4816,6 +4828,13 @@ namespace ANRPC_Inventory
 
                 }
             }
+        }
+
+        private void dataGridView1_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            sum = sum - (decimal)dataGridView1.Rows[r].Cells[9].Value;
+            AppValueOriginal = sum;
+            TXT_AppValue.Text = sum.ToString();
         }
     }
 }

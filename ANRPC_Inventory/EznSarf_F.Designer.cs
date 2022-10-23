@@ -100,6 +100,8 @@
             this.Pic_Sign5 = new System.Windows.Forms.PictureBox();
             this.label23 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.BTN_Print2 = new System.Windows.Forms.Button();
+            this.BTN_Search_Motab3a = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.TXT_TRNO2 = new System.Windows.Forms.TextBox();
             this.label55 = new System.Windows.Forms.Label();
@@ -163,8 +165,6 @@
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.alertProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.BTN_Search_Motab3a = new System.Windows.Forms.Button();
-            this.BTN_Print2 = new System.Windows.Forms.Button();
             this.bottomPanel.SuspendLayout();
             this.takalefTable.SuspendLayout();
             this.signatureTable.SuspendLayout();
@@ -1091,6 +1091,38 @@
             this.panel7.TabIndex = 27;
             this.panel7.Visible = false;
             // 
+            // BTN_Print2
+            // 
+            this.BTN_Print2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Print2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_Print2.ForeColor = System.Drawing.Color.DarkSalmon;
+            this.BTN_Print2.Image = ((System.Drawing.Image)(resources.GetObject("BTN_Print2.Image")));
+            this.BTN_Print2.Location = new System.Drawing.Point(101, 4);
+            this.BTN_Print2.Name = "BTN_Print2";
+            this.BTN_Print2.Size = new System.Drawing.Size(53, 45);
+            this.BTN_Print2.TabIndex = 308;
+            this.BTN_Print2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BTN_Print2.UseVisualStyleBackColor = true;
+            this.BTN_Print2.Click += new System.EventHandler(this.BTN_Print2_Click);
+            // 
+            // BTN_Search_Motab3a
+            // 
+            this.BTN_Search_Motab3a.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Search_Motab3a.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.BTN_Search_Motab3a.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Search_Motab3a.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
+            this.BTN_Search_Motab3a.FlatAppearance.BorderSize = 3;
+            this.BTN_Search_Motab3a.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_Search_Motab3a.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.BTN_Search_Motab3a.ForeColor = System.Drawing.Color.Maroon;
+            this.BTN_Search_Motab3a.Location = new System.Drawing.Point(306, 9);
+            this.BTN_Search_Motab3a.Name = "BTN_Search_Motab3a";
+            this.BTN_Search_Motab3a.Size = new System.Drawing.Size(72, 32);
+            this.BTN_Search_Motab3a.TabIndex = 307;
+            this.BTN_Search_Motab3a.Text = "بحث";
+            this.BTN_Search_Motab3a.UseVisualStyleBackColor = false;
+            this.BTN_Search_Motab3a.Click += new System.EventHandler(this.BTN_Search_Motab3a_Click);
+            // 
             // panel4
             // 
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1898,38 +1930,6 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Multiselect = true;
             this.openFileDialog1.Title = "اختر المرفقات الطلوبة";
-            // 
-            // BTN_Search_Motab3a
-            // 
-            this.BTN_Search_Motab3a.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Search_Motab3a.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.BTN_Search_Motab3a.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_Search_Motab3a.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
-            this.BTN_Search_Motab3a.FlatAppearance.BorderSize = 3;
-            this.BTN_Search_Motab3a.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_Search_Motab3a.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.BTN_Search_Motab3a.ForeColor = System.Drawing.Color.Maroon;
-            this.BTN_Search_Motab3a.Location = new System.Drawing.Point(306, 9);
-            this.BTN_Search_Motab3a.Name = "BTN_Search_Motab3a";
-            this.BTN_Search_Motab3a.Size = new System.Drawing.Size(72, 32);
-            this.BTN_Search_Motab3a.TabIndex = 307;
-            this.BTN_Search_Motab3a.Text = "بحث";
-            this.BTN_Search_Motab3a.UseVisualStyleBackColor = false;
-            this.BTN_Search_Motab3a.Click += new System.EventHandler(this.BTN_Search_Motab3a_Click);
-            // 
-            // BTN_Print2
-            // 
-            this.BTN_Print2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Print2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_Print2.ForeColor = System.Drawing.Color.DarkSalmon;
-            this.BTN_Print2.Image = ((System.Drawing.Image)(resources.GetObject("BTN_Print2.Image")));
-            this.BTN_Print2.Location = new System.Drawing.Point(101, 4);
-            this.BTN_Print2.Name = "BTN_Print2";
-            this.BTN_Print2.Size = new System.Drawing.Size(53, 45);
-            this.BTN_Print2.TabIndex = 308;
-            this.BTN_Print2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BTN_Print2.UseVisualStyleBackColor = true;
-            this.BTN_Print2.Click += new System.EventHandler(this.BTN_Print2_Click);
             // 
             // EznSarf_F
             // 
