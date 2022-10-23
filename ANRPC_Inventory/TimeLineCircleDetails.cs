@@ -8,9 +8,9 @@ namespace ANRPC_Inventory
 {
     internal class TimeLineCircleDetails
     {
-        public string mainString { get; set; }
+        public DrawedCircleText mainText { get; set; }
 
-        public string circleDetails { get; set; }
+        public DrawedCircleText circleDetailsText { get; set; }
 
         public int donePercent { get; set; }
 

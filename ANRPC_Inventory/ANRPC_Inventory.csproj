@@ -108,6 +108,7 @@
     <Compile Include="Cycledetails_Form.Designer.cs">
       <DependentUpon>Cycledetails_Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="DrawedCircleText.cs" />
     <Compile Include="EzonTahwel_PopUp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +116,7 @@
       <DependentUpon>EzonTahwel_PopUp.cs</DependentUpon>
     </Compile>
     <Compile Include="FinancialYearHandler.cs" />
+    <Compile Include="Fonts.cs" />
     <Compile Include="FTransfer_A.cs">
       <SubType>Form</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

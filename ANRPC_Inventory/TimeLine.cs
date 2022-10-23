@@ -42,17 +42,17 @@ namespace ANRPC_Inventory
 
                 if (details.isDone)
                 {
-                   TimeLineHelper.DrawShape(this.paintEvent, start_x + ((i - 1) * (length)), start_y, length, r, details.donePercent);
+                   TimeLineHelper.DrawShape(this.paintEvent, start_x + ((i - 1) * (length)), start_y, length, r, details.donePercent, this.timeLineList[i]);
                 }
 
                 else
                 {
-                    TimeLineHelper.DrawShape(this.paintEvent, start_x + ((i - 1) * (length)), start_y, length, r,details.donePercent);
+                    TimeLineHelper.DrawShape(this.paintEvent, start_x + ((i - 1) * (length)), start_y, length, r,details.donePercent, this.timeLineList[i]);
                 }
             }
 
 
-            TimeLineHelper.DrawCompletedCircle(this.paintEvent, start_x, start_y, r, true);
+            TimeLineHelper.DrawCompletedCircle(this.paintEvent, start_x, start_y, r, this.timeLineList[0], true);
 
         }
 
@@ -60,7 +60,7 @@ namespace ANRPC_Inventory
         {
             public static void DrawPoint(PaintEventArgs e, int x, int y, Color c)
             {
-                e.Graphics.FillRectangle(new SolidBrush(c), x, y, 1, 1);
+                e.Graphics.FillRectangle(new SolidBrush(c), x, y, 5, 5);
             }
 
             public static void DrawLine(PaintEventArgs e, int x, int y, int length, bool isActiveLine = false, bool isEndCurved = false)
@@ -135,30 +135,37 @@ namespace ANRPC_Inventory
             }
 
             
-            private static void DrawText(PaintEventArgs e, int center_x, int center_y, int r, Color color)
+            private static void DrawText(PaintEventArgs e, int center_x, int center_y, int r, Color color, int offsetY,  DrawedCircleText drawedText,bool isTitle)
             {
-                String drawString1 = "June";
+                SizeF s;
 
-                // Create font and brush.
-                Font drawFont1 = new Font("Arial", 13);
+                if (!isTitle)
+                {
+                    s = e.Graphics.MeasureString(drawedText.Text, drawedText.Font,100);
+                }
+                else{
+                    s = e.Graphics.MeasureString(drawedText.Text, drawedText.Font);
+                }
+              
+                int start_x, start_y;
 
-                SizeF s = e.Graphics.MeasureString(drawString1, drawFont1);
-
-                int start_x, start_y,offsetY;
-                offsetY = 0 - center_y;
                 start_x = center_x - Convert.ToInt32(s.Width) / 2 + 1;
-                start_y = (center_y - Convert.ToInt32(s.Height) / 2 - 1);
+                start_y = center_y + offsetY;
 
                 SolidBrush drawBrush1 = new SolidBrush(color);
 
                 // Set format of string.
                 StringFormat drawFormat1 = new StringFormat();
 
+                RectangleF textWrapper;
+                textWrapper = new RectangleF(start_x, start_y, s.Width,s.Height);
+                
+
                 // Draw string to screen.
-                e.Graphics.DrawString(drawString1, drawFont1, drawBrush1, start_x, start_y, drawFormat1);
+                e.Graphics.DrawString(drawedText.Text, drawedText.Font, drawBrush1,textWrapper, drawFormat1);
             }
             
-            public static void DrawCompletedCircle(PaintEventArgs e, int center_x, int center_y, int r, bool isActiveCircle = false)
+            public static void DrawCompletedCircle(PaintEventArgs e, int center_x, int center_y, int r, TimeLineCircleDetails details, bool isActiveCircle = false)
             {
                 e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 
@@ -181,10 +188,12 @@ namespace ANRPC_Inventory
                 DrawCircle(e, center_x, center_y, r, color);
                 DrawCircle(e, center_x, center_y, r - 5, W);
                 DrawSymbol(e, center_x, center_y, symbolColor);
-                DrawText(e, center_x, center_y, r, color);
+
+                DrawText(e, center_x, center_y, r, color,-(Convert.ToInt32(r*2.5)), details.mainText,true);
+                DrawText(e, center_x, center_y, r, Color.WhiteSmoke, (Convert.ToInt32(r*1.5)), details.circleDetailsText, false);
             }
 
-            public static void DrawShape(PaintEventArgs e, int x, int y, int length, int r, int SuccessSeqPercent)
+            public static void DrawShape(PaintEventArgs e, int x, int y, int length, int r, int SuccessSeqPercent,TimeLineCircleDetails details)
             {
                 e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
                 int center_x, center_y;
@@ -207,7 +216,7 @@ namespace ANRPC_Inventory
                 center_x = x + length;
                 center_y = y;
 
-                DrawCompletedCircle(e, center_x, center_y, r, isActive);
+                DrawCompletedCircle(e, center_x, center_y, r, details,isActive);
             }
 
 

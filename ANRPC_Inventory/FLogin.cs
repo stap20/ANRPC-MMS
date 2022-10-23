@@ -131,7 +131,7 @@ namespace ANRPC_Inventory
         private void lgnBtn_Click(object sender, EventArgs e)
         {
 
-            compareVersions();
+            //compareVersions();
 
 
 

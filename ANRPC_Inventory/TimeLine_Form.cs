@@ -28,13 +28,13 @@ namespace ANRPC_Inventory
             guna2GradientPanel1.Controls.Add(BottomBorderBtn);
 
 
-            for(int i = 0; i < 8; i++)
+            for(int i = 0; i < 12; i++)
             {
                 TimeLineCircleDetails details = new TimeLineCircleDetails();
                 
                 details.isDone = false;
-                details.mainString = i.ToString();
-                details.circleDetails = i.ToString() + "1";
+                details.mainText = new DrawedCircleText("Jan "+ i,new Font("Arial",16,FontStyle.Bold));
+                details.circleDetailsText = new DrawedCircleText("مدير عام الادارة الطالبة" + i, new Font("Arial", 10, FontStyle.Bold));
                 details.donePercent = 0;
 
 
@@ -142,7 +142,7 @@ namespace ANRPC_Inventory
         private void guna2GradientPanel6_Paint(object sender, PaintEventArgs e)
         {
             TimeLine timeLineGraph = new TimeLine(e, guna2GradientPanel6.Width, list);
-            timeLineGraph.DarwSequance();
+            timeLineGraph.DarwSequance(offsetX:60);
         }
 
         private void openChildForm(Form childForm)
