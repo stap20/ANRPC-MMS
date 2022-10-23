@@ -182,7 +182,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.next_btn = new System.Windows.Forms.Button();
             this.Addbtn2 = new System.Windows.Forms.Button();
-            this.AddNewbtn = new System.Windows.Forms.Button();
             this.BTN_Cancel = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Editbtn2 = new System.Windows.Forms.Button();
@@ -1085,7 +1084,6 @@
             this.dataGridView1.TabIndex = 42;
             this.dataGridView1.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellMouseEnter);
             this.dataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
-            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView1_UserDeletedRow);
             this.dataGridView1.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataGridView1_UserDeletingRow);
             // 
@@ -1845,7 +1843,6 @@
             this.panel17.Controls.Add(this.panel12);
             this.panel17.Controls.Add(this.next_btn);
             this.panel17.Controls.Add(this.Addbtn2);
-            this.panel17.Controls.Add(this.AddNewbtn);
             this.panel17.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel17.Location = new System.Drawing.Point(0, 38);
             this.panel17.Name = "panel17";
@@ -1858,7 +1855,7 @@
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label19.ForeColor = System.Drawing.Color.Green;
-            this.label19.Location = new System.Drawing.Point(133, 36);
+            this.label19.Location = new System.Drawing.Point(80, 39);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(140, 18);
             this.label19.TabIndex = 335;
@@ -1868,7 +1865,7 @@
             // 
             this.CHK_NewTasnif.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.CHK_NewTasnif.AutoSize = true;
-            this.CHK_NewTasnif.Location = new System.Drawing.Point(272, 39);
+            this.CHK_NewTasnif.Location = new System.Drawing.Point(219, 42);
             this.CHK_NewTasnif.Name = "CHK_NewTasnif";
             this.CHK_NewTasnif.Size = new System.Drawing.Size(15, 14);
             this.CHK_NewTasnif.TabIndex = 336;
@@ -1898,9 +1895,9 @@
             this.panel11.Controls.Add(this.label33);
             this.panel11.Controls.Add(this.label51);
             this.panel11.Controls.Add(this.checkBox2);
-            this.panel11.Location = new System.Drawing.Point(291, 36);
+            this.panel11.Location = new System.Drawing.Point(240, 36);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(854, 73);
+            this.panel11.Size = new System.Drawing.Size(905, 73);
             this.panel11.TabIndex = 333;
             // 
             // TXT_StockBian
@@ -1908,7 +1905,7 @@
             this.TXT_StockBian.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_StockBian.Enabled = false;
             this.TXT_StockBian.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_StockBian.Location = new System.Drawing.Point(164, 0);
+            this.TXT_StockBian.Location = new System.Drawing.Point(215, 0);
             this.TXT_StockBian.Name = "TXT_StockBian";
             this.TXT_StockBian.Size = new System.Drawing.Size(514, 39);
             this.TXT_StockBian.TabIndex = 12;
@@ -1919,9 +1916,9 @@
             this.Txt_ReqQuan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Txt_ReqQuan.Enabled = false;
             this.Txt_ReqQuan.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Txt_ReqQuan.Location = new System.Drawing.Point(4, 7);
+            this.Txt_ReqQuan.Location = new System.Drawing.Point(3, 7);
             this.Txt_ReqQuan.Name = "Txt_ReqQuan";
-            this.Txt_ReqQuan.Size = new System.Drawing.Size(75, 26);
+            this.Txt_ReqQuan.Size = new System.Drawing.Size(127, 26);
             this.Txt_ReqQuan.TabIndex = 330;
             this.Txt_ReqQuan.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.Txt_ReqQuan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Txt_ReqQuan_KeyPress);
@@ -1931,7 +1928,7 @@
             this.Txt_Quan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Txt_Quan.Enabled = false;
             this.Txt_Quan.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Txt_Quan.Location = new System.Drawing.Point(382, 44);
+            this.Txt_Quan.Location = new System.Drawing.Point(433, 44);
             this.Txt_Quan.Name = "Txt_Quan";
             this.Txt_Quan.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.Txt_Quan.Size = new System.Drawing.Size(67, 22);
@@ -1945,7 +1942,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(679, 4);
+            this.label4.Location = new System.Drawing.Point(730, 4);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(103, 18);
             this.label4.TabIndex = 8;
@@ -1955,7 +1952,7 @@
             // 
             this.TXT_Currency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_Currency.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_Currency.Location = new System.Drawing.Point(2, 42);
+            this.TXT_Currency.Location = new System.Drawing.Point(3, 42);
             this.TXT_Currency.Name = "TXT_Currency";
             this.TXT_Currency.ReadOnly = true;
             this.TXT_Currency.Size = new System.Drawing.Size(49, 26);
@@ -1966,7 +1963,7 @@
             this.TXT_Unit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_Unit.Enabled = false;
             this.TXT_Unit.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_Unit.Location = new System.Drawing.Point(271, 44);
+            this.TXT_Unit.Location = new System.Drawing.Point(322, 44);
             this.TXT_Unit.Name = "TXT_Unit";
             this.TXT_Unit.Size = new System.Drawing.Size(62, 22);
             this.TXT_Unit.TabIndex = 15;
@@ -1976,7 +1973,7 @@
             this.Quan_Max.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Quan_Max.Enabled = false;
             this.Quan_Max.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Quan_Max.Location = new System.Drawing.Point(570, 44);
+            this.Quan_Max.Location = new System.Drawing.Point(621, 44);
             this.Quan_Max.Maximum = new decimal(new int[] {
             -727379968,
             232,
@@ -1994,9 +1991,9 @@
             this.CMB_ApproxValue.Enabled = false;
             this.CMB_ApproxValue.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
             this.CMB_ApproxValue.FormattingEnabled = true;
-            this.CMB_ApproxValue.Location = new System.Drawing.Point(57, 42);
+            this.CMB_ApproxValue.Location = new System.Drawing.Point(54, 42);
             this.CMB_ApproxValue.Name = "CMB_ApproxValue";
-            this.CMB_ApproxValue.Size = new System.Drawing.Size(101, 27);
+            this.CMB_ApproxValue.Size = new System.Drawing.Size(155, 27);
             this.CMB_ApproxValue.TabIndex = 301;
             this.CMB_ApproxValue.TextChanged += new System.EventHandler(this.CMB_ApproxValue_TextChanged);
             this.CMB_ApproxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CMB_ApproxValue_KeyPress);
@@ -2007,7 +2004,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label6.ForeColor = System.Drawing.Color.DarkRed;
-            this.label6.Location = new System.Drawing.Point(82, 10);
+            this.label6.Location = new System.Drawing.Point(133, 10);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(84, 18);
             this.label6.TabIndex = 16;
@@ -2019,7 +2016,7 @@
             this.label29.AutoSize = true;
             this.label29.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label29.ForeColor = System.Drawing.Color.Tomato;
-            this.label29.Location = new System.Drawing.Point(786, 46);
+            this.label29.Location = new System.Drawing.Point(837, 46);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(61, 18);
             this.label29.TabIndex = 306;
@@ -2031,7 +2028,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(454, 46);
+            this.label2.Location = new System.Drawing.Point(505, 46);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(111, 18);
             this.label2.TabIndex = 6;
@@ -2043,7 +2040,7 @@
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label36.ForeColor = System.Drawing.Color.Tomato;
-            this.label36.Location = new System.Drawing.Point(641, 46);
+            this.label36.Location = new System.Drawing.Point(692, 46);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(69, 18);
             this.label36.TabIndex = 308;
@@ -2055,7 +2052,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(337, 48);
+            this.label5.Location = new System.Drawing.Point(388, 48);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 18);
             this.label5.TabIndex = 9;
@@ -2066,7 +2063,7 @@
             this.Quan_Min.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Quan_Min.Enabled = false;
             this.Quan_Min.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Quan_Min.Location = new System.Drawing.Point(715, 44);
+            this.Quan_Min.Location = new System.Drawing.Point(766, 44);
             this.Quan_Min.Maximum = new decimal(new int[] {
             -727379968,
             232,
@@ -2084,7 +2081,7 @@
             this.label52.AutoSize = true;
             this.label52.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label52.ForeColor = System.Drawing.Color.Tomato;
-            this.label52.Location = new System.Drawing.Point(786, 4);
+            this.label52.Location = new System.Drawing.Point(837, 4);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(47, 18);
             this.label52.TabIndex = 325;
@@ -2095,7 +2092,7 @@
             this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox1.AutoSize = true;
             this.checkBox1.Enabled = false;
-            this.checkBox1.Location = new System.Drawing.Point(832, 7);
+            this.checkBox1.Location = new System.Drawing.Point(883, 7);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(15, 14);
             this.checkBox1.TabIndex = 326;
@@ -2107,7 +2104,7 @@
             this.label33.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label33.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label33.ForeColor = System.Drawing.Color.Blue;
-            this.label33.Location = new System.Drawing.Point(164, 44);
+            this.label33.Location = new System.Drawing.Point(215, 44);
             this.label33.Name = "label33";
             this.label33.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label33.Size = new System.Drawing.Size(102, 22);
@@ -2121,7 +2118,7 @@
             this.label51.AutoSize = true;
             this.label51.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label51.ForeColor = System.Drawing.Color.Tomato;
-            this.label51.Location = new System.Drawing.Point(757, 23);
+            this.label51.Location = new System.Drawing.Point(808, 23);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(76, 18);
             this.label51.TabIndex = 324;
@@ -2132,7 +2129,7 @@
             this.checkBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox2.AutoSize = true;
             this.checkBox2.Enabled = false;
-            this.checkBox2.Location = new System.Drawing.Point(832, 26);
+            this.checkBox2.Location = new System.Drawing.Point(883, 26);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(15, 14);
             this.checkBox2.TabIndex = 327;
@@ -2144,7 +2141,7 @@
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(8, 5);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(113, 41);
+            this.pictureBox2.Size = new System.Drawing.Size(19, 41);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 302;
             this.pictureBox2.TabStop = false;
@@ -2160,7 +2157,7 @@
             this.prev_btn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.prev_btn.Location = new System.Drawing.Point(4, 50);
             this.prev_btn.Name = "prev_btn";
-            this.prev_btn.Size = new System.Drawing.Size(45, 11);
+            this.prev_btn.Size = new System.Drawing.Size(13, 11);
             this.prev_btn.TabIndex = 304;
             this.prev_btn.UseVisualStyleBackColor = false;
             this.prev_btn.Visible = false;
@@ -2256,9 +2253,9 @@
             this.next_btn.Font = new System.Drawing.Font("Arabic Typesetting", 24F);
             this.next_btn.Image = ((System.Drawing.Image)(resources.GetObject("next_btn.Image")));
             this.next_btn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.next_btn.Location = new System.Drawing.Point(76, 50);
+            this.next_btn.Location = new System.Drawing.Point(23, 47);
             this.next_btn.Name = "next_btn";
-            this.next_btn.Size = new System.Drawing.Size(45, 11);
+            this.next_btn.Size = new System.Drawing.Size(10, 15);
             this.next_btn.TabIndex = 305;
             this.next_btn.UseVisualStyleBackColor = false;
             this.next_btn.Visible = false;
@@ -2277,32 +2274,13 @@
             this.Addbtn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Addbtn2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.Addbtn2.ForeColor = System.Drawing.Color.Tomato;
-            this.Addbtn2.Location = new System.Drawing.Point(134, 75);
+            this.Addbtn2.Location = new System.Drawing.Point(4, 75);
             this.Addbtn2.Name = "Addbtn2";
-            this.Addbtn2.Size = new System.Drawing.Size(154, 33);
+            this.Addbtn2.Size = new System.Drawing.Size(230, 33);
             this.Addbtn2.TabIndex = 17;
             this.Addbtn2.Text = "إضافة التصنيف الى طلب التوريد";
             this.Addbtn2.UseVisualStyleBackColor = false;
             this.Addbtn2.Click += new System.EventHandler(this.Addbtn2_Click);
-            // 
-            // AddNewbtn
-            // 
-            this.AddNewbtn.BackColor = System.Drawing.Color.LightGray;
-            this.AddNewbtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.AddNewbtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.AddNewbtn.Enabled = false;
-            this.AddNewbtn.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
-            this.AddNewbtn.FlatAppearance.BorderSize = 3;
-            this.AddNewbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AddNewbtn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.AddNewbtn.ForeColor = System.Drawing.Color.Tomato;
-            this.AddNewbtn.Location = new System.Drawing.Point(4, 75);
-            this.AddNewbtn.Name = "AddNewbtn";
-            this.AddNewbtn.Size = new System.Drawing.Size(127, 33);
-            this.AddNewbtn.TabIndex = 22;
-            this.AddNewbtn.Text = "إضافة تصنيف جديد";
-            this.AddNewbtn.UseVisualStyleBackColor = false;
-            this.AddNewbtn.Click += new System.EventHandler(this.AddNewbtn_Click);
             // 
             // BTN_Cancel
             // 
@@ -2676,7 +2654,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button next_btn;
         private System.Windows.Forms.Button Addbtn2;
-        private System.Windows.Forms.Button AddNewbtn;
         private System.Windows.Forms.ErrorProvider alertProvider;
         private System.Windows.Forms.Button BTN_SearchTalb;
         private System.Windows.Forms.Button BTN_Search_Motab3a;

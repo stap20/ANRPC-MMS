@@ -894,6 +894,46 @@ namespace ANRPC_Inventory
             }
         }
         
+        private void HandleNewTasnifState()
+        {
+            //do new tasnif
+            changePanelState(panel12, false);
+
+            //Search sec
+            TXT_StockNoAll.Text = "";
+            TXT_StockName.Text = "";
+            TXT_PartNo.Text = "";
+
+            //dataViewre sec
+            TXT_StockBian.Text = "";
+            Txt_Quan.Text = "0";
+            Txt_ReqQuan.Text = "";
+            TXT_Unit.Text = "";
+            CMB_ApproxValue.Text = "";
+            Quan_Min.Value = 0;
+            Quan_Max.Value = 0;
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+
+            TXT_StockBian.Enabled = true;
+            TXT_Unit.Enabled = true;
+        }
+
+        private void HandleExistTasnifState()
+        {
+            //reset to default
+            changePanelState(panel12, true);
+
+            //dataViewre sec
+            TXT_StockBian.Text = "";
+            Txt_ReqQuan.Text = "";
+            TXT_Unit.Text = "";
+            CMB_ApproxValue.Text = "";
+
+            TXT_StockBian.Enabled = false;
+            TXT_Unit.Enabled = false;
+        }
+
         public void PrepareAddState()
         {
             //Search sec
@@ -919,6 +959,7 @@ namespace ANRPC_Inventory
             //ta2men 5%
             changePanelState(panel10, true);
             changePanelState(panel14, true);
+            checkedListBox1.SelectionMode = SelectionMode.One;
             RadioBTN_Taamen2.Checked = true;
 
             //mowazna
@@ -932,7 +973,6 @@ namespace ANRPC_Inventory
             SaveBtn.Enabled = true;
             BTN_Cancel.Enabled = true;
             Addbtn2.Enabled = true;
-            AddNewbtn.Enabled = false;
             browseBTN.Enabled = true;
             BTN_PDF.Enabled = true;
             Addbtn.Enabled = false;
@@ -1151,7 +1191,6 @@ namespace ANRPC_Inventory
             Editbtn.Enabled = false;
             BTN_Cancel.Enabled = false;
             Addbtn2.Enabled = false;
-            AddNewbtn.Enabled = false;
             browseBTN.Enabled = false;
             BTN_PDF.Enabled = false;
             Editbtn2.Enabled = false;
@@ -1167,6 +1206,7 @@ namespace ANRPC_Inventory
             dataGridView1.ReadOnly = true;
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
+
             foreach (DataGridViewColumn column in dataGridView1.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -2541,85 +2581,104 @@ namespace ANRPC_Inventory
         //------------------------------------------ Validation Handler ---------------------------------
         #region Validation Handler
         private List<(ErrorProvider, Control, string)> ValidateAddTasnif(bool isNewTasnif = false)
+        {
+            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+            if (!isNewTasnif)
             {
-                List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
-
-                if (!isNewTasnif)
+                #region TXT_StockNoAll
+                if (string.IsNullOrWhiteSpace(TXT_StockNoAll.Text))
                 {
-                    #region TXT_StockNoAll
-                    if (string.IsNullOrWhiteSpace(TXT_StockNoAll.Text))
+                    errorsList.Add((errorProvider, TXT_StockNoAll, "يجب اختيار التصنيف المراد اضافته"));
+                }
+                else if (TXT_StockNoAll.Text.Length != 8)
+                {
+                    errorsList.Add((alertProvider, TXT_StockNoAll, "رقم التصنيف يجب ان يتكون من 8"));
+                }
+                else if (Txt_Quan.Text == "")
+                {
+                    errorsList.Add((alertProvider, TXT_StockNoAll, "هذا التصنيف غير موجود"));
+                }
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (!row.IsNewRow)
                     {
-                        errorsList.Add((errorProvider, TXT_StockNoAll, "يجب اختيار التصنيف المراد اضافته"));
-                    }
-                    else if (TXT_StockNoAll.Text.Length != 8)
-                    {
-                        errorsList.Add((alertProvider, TXT_StockNoAll, "رقم التصنيف يجب ان يتكون من 8"));
-                    }
-                    else if (Txt_Quan.Text == "")
-                    {
-                        errorsList.Add((alertProvider, TXT_StockNoAll, "هذا التصنيف غير موجود"));
-                    }
-                    foreach (DataGridViewRow row in dataGridView1.Rows)
-                    {
-                        if (!row.IsNewRow)
+                        if (row.Cells[6].Value.ToString().ToLower() == TXT_StockNoAll.Text.ToLower() && TXT_StockNoAll.Text != "")
                         {
-                            if (row.Cells[6].Value.ToString().ToLower() == TXT_StockNoAll.Text.ToLower() && TXT_StockNoAll.Text != "")
-                            {
-                                errorsList.Add((alertProvider, TXT_StockNoAll, "تم ادخال رقم هذا التصنيف من قبل"));
+                            errorsList.Add((alertProvider, TXT_StockNoAll, "تم ادخال رقم هذا التصنيف من قبل"));
 
-                                break;
-                            }
+                            break;
                         }
                     }
-                    #endregion
-                }
-
-                #region Txt_ReqQuan
-                if (string.IsNullOrWhiteSpace(Txt_ReqQuan.Text))
-                {
-                    errorsList.Add((errorProvider, Txt_ReqQuan, "يجب ادخال الكمية المطلوبة"));
-                }
-                else if (!string.IsNullOrWhiteSpace(Txt_ReqQuan.Text) && Convert.ToDecimal(Txt_ReqQuan.Text) <= 0)
-                {
-                    errorsList.Add((alertProvider, Txt_ReqQuan, "يجب ان تكون الكمية المطلوبة اكبر من صفر"));
-                }
-                else if (!string.IsNullOrWhiteSpace(Txt_Quan.Text) && Txt_Quan.Text != "" && Convert.ToDouble(Txt_Quan.Text) > 0 && Convert.ToDouble(Txt_Quan.Text) >= Convert.ToDouble(Txt_ReqQuan.Text))
-                {
-                    errorsList.Add((alertProvider, Txt_ReqQuan, "الكمية المطلوبة متاحة فى المخزن يمكنك انشاء اذن صرف بها"));
-                }
-
-                #endregion
-
-                #region CMB_ApproxValue
-                if (string.IsNullOrWhiteSpace(CMB_ApproxValue.Text))
-                {
-                    errorsList.Add((errorProvider, CMB_ApproxValue, "يجب اختيار القيمة التقديرية "));
-                }
-                else if (Convert.ToDecimal(getApproxValue()) <= 0)
-                {
-                    errorsList.Add((alertProvider, CMB_ApproxValue, "يجب ان تكون القيمة التقديرية اكبر من صفر"));
                 }
                 #endregion
-
-                #region Cmb_FYear
-                if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
-                {
-                    errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
-                }
-                #endregion
-
-                if (isNewTasnif)
-                {
-                    #region Description
-                    if (string.IsNullOrWhiteSpace(TXT_StockBian.Text))
-                    {
-                        errorsList.Add((errorProvider, TXT_StockBian, "يجب ادخال مواصفة للتصنيف الجديد"));
-                    }
-                    #endregion
-                }
-
-                return errorsList;
             }
+
+            #region Txt_ReqQuan
+            if (string.IsNullOrWhiteSpace(Txt_ReqQuan.Text))
+            {
+                errorsList.Add((errorProvider, Txt_ReqQuan, "يجب ادخال الكمية المطلوبة"));
+            }
+            else if (!string.IsNullOrWhiteSpace(Txt_ReqQuan.Text) && Convert.ToDecimal(Txt_ReqQuan.Text) <= 0)
+            {
+                errorsList.Add((alertProvider, Txt_ReqQuan, "يجب ان تكون الكمية المطلوبة اكبر من صفر"));
+            }
+            else if (!string.IsNullOrWhiteSpace(Txt_Quan.Text) && Txt_Quan.Text != "" && Convert.ToDouble(Txt_Quan.Text) > 0 && Convert.ToDouble(Txt_Quan.Text) >= Convert.ToDouble(Txt_ReqQuan.Text))
+            {
+                errorsList.Add((alertProvider, Txt_ReqQuan, "الكمية المطلوبة متاحة فى المخزن يمكنك انشاء اذن صرف بها"));
+            }
+
+            #endregion
+
+            #region CMB_ApproxValue
+            if (string.IsNullOrWhiteSpace(CMB_ApproxValue.Text))
+            {
+                errorsList.Add((errorProvider, CMB_ApproxValue, "يجب اختيار القيمة التقديرية "));
+            }
+            else if (Convert.ToDecimal(getApproxValue()) <= 0)
+            {
+                errorsList.Add((alertProvider, CMB_ApproxValue, "يجب ان تكون القيمة التقديرية اكبر من صفر"));
+            }
+            #endregion
+
+            #region Cmb_FYear
+            if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
+            {
+                errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
+            }
+            #endregion
+
+            if (isNewTasnif)
+            {
+                #region Description
+                if (string.IsNullOrWhiteSpace(TXT_StockBian.Text))
+                {
+                    errorsList.Add((errorProvider, TXT_StockBian, "يجب ادخال مواصفة للتصنيف الجديد"));
+                }
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (!row.IsNewRow)
+                    {
+                        if (row.Cells[5].Value.ToString().ToLower() == TXT_StockBian.Text.ToLower() && TXT_StockBian.Text != "")
+                        {
+                            errorsList.Add((alertProvider, TXT_StockBian, "تم ادخال مواصفة هذا التصنيف من قبل"));
+
+                            break;
+                        }
+                    }
+                }
+                #endregion
+
+                #region Unit
+                if (string.IsNullOrWhiteSpace(TXT_Unit.Text))
+                {
+                    errorsList.Add((errorProvider, TXT_Unit, "يجب ادخال وحدة للتصنيف الجديد"));
+                }
+                #endregion                     
+            }
+
+            return errorsList;
+        }
 
         private List<(ErrorProvider, Control, string)> ValidateAttachFile()
         {
@@ -3178,86 +3237,114 @@ namespace ANRPC_Inventory
         }
 
         #region AddTasnif
-            private void Addbtn2_Click(object sender, EventArgs e)
+
+        private void HandleTasnifALreadyExistInMaster()
+        {
+            Currency = Cmb_Currency.Text;
+
+            string stocknoall = TXT_StockNoAll.Text;
+
+            if (checkBox1.Checked == true || checkBox2.Checked == true)
             {
+                if ((Convert.ToDouble(Txt_ReqQuan.Text)) > Convert.ToDouble(Quan_Max.Value))
+                {
+                    MessageBox.Show("بعد توريد الكمية المطلوبة الكمية المتاحة ستكون اكثر من الحد الاقصى ");
+                    MaxFlag = MaxFlag + 1;
+
+                    //  return;
+                    array1[MaxFlag - 1, 3] = TXT_StockNoAll.Text;
+                    array1[MaxFlag - 1, 0] = TXT_TalbNo.Text;
+                    array1[MaxFlag - 1, 1] = TXT_TalbNo.Text;
+
+                    array1[MaxFlag - 1, 2] = Cmb_FYear.Text;
+                    array1[MaxFlag - 1, 4] = Txt_ReqQuan.Text;
+                    array1[MaxFlag - 1, 5] = Quan_Max.Text;
+
+                }
+
+                if (Convert.ToDouble(Txt_Quan.Text) < Convert.ToDouble(Quan_Min.Value)) //case lw el availble less than min
+                {
+                    if (Convert.ToDouble(Txt_ReqQuan.Text) < Convert.ToDouble(Quan_Min.Value))
+                    {
+                        MessageBox.Show("بعد توريد الكمية المطلوبة الكمية المتاحة ستكون اقل  من الحد الادنى ");
+                    }
+
+                    MaxFlag = MaxFlag + 1;
+
+                    //  return;
+                    array1[MaxFlag - 1, 3] = TXT_StockNoAll.Text;
+                    array1[MaxFlag - 1, 0] = TXT_TalbNo.Text;
+                    array1[MaxFlag - 1, 1] = TXT_TalbNo.Text;
+
+                    array1[MaxFlag - 1, 2] = Cmb_FYear.Text;
+                    array1[MaxFlag - 1, 4] = Txt_ReqQuan.Text;
+                    array1[MaxFlag - 1, 5] = Quan_Max.Text;
+
+                }
+            }
+
+            if (Convert.ToDouble(Txt_Quan.Text) > 0 && Convert.ToDouble(Txt_Quan.Text) < Convert.ToDouble(Txt_ReqQuan.Text))
+            {
+                MessageBox.Show("طلب توريد بالاضافة الى رصيد");
+                AdditionFlag = 1;
+                AdditionQuan = Convert.ToDouble(Txt_ReqQuan.Text) - Convert.ToDouble(Txt_Quan.Text);
+            }
+            else
+            {
+                AdditionFlag = 0;
+            }
+
+            AddNewTasnifInDataGridView();
+        }
+
+        private void HandleNewTasnid()
+        {
+            Currency = Cmb_Currency.Text;
+            NewTasnifFlag = 1;
+
+            AddNewTasnifInDataGridView(NewTasnifFlag);
+        }
+
+        private void AddTasnifToDataGridView(bool isNew)
+        {
+            if (isNew)
+            {
+                HandleTasnifALreadyExistInMaster();
+            }
+            else
+            {
+                HandleNewTasnid();
+            }
+        }
+        
+        private void Addbtn2_Click(object sender, EventArgs e)
+        {
+            VALIDATION_TYPES type;
+
+            type = CHK_NewTasnif.Checked ? VALIDATION_TYPES.ADD_NEW_TASNIF:VALIDATION_TYPES.ADD_TASNIF;
                
-                if (!IsValidCase(VALIDATION_TYPES.ADD_TASNIF))
-                {          
-                    return;
-                }
-
-                Currency = Cmb_Currency.Text;
-            
-                string stocknoall = TXT_StockNoAll.Text;
-
-                if (checkBox1.Checked == true || checkBox2.Checked == true)
-                {
-                    if ((Convert.ToDouble(Txt_ReqQuan.Text)) > Convert.ToDouble(Quan_Max.Value))
-                    {
-                        MessageBox.Show("بعد توريد الكمية المطلوبة الكمية المتاحة ستكون اكثر من الحد الاقصى ");
-                        MaxFlag = MaxFlag + 1;
-
-                        //  return;
-                        array1[MaxFlag - 1, 3] = TXT_StockNoAll.Text;
-                        array1[MaxFlag - 1, 0] = TXT_TalbNo.Text;
-                        array1[MaxFlag - 1, 1] = TXT_TalbNo.Text;
-
-                        array1[MaxFlag - 1, 2] = Cmb_FYear.Text;
-                        array1[MaxFlag - 1, 4] = Txt_ReqQuan.Text;
-                        array1[MaxFlag - 1, 5] = Quan_Max.Text;
-
-                    }
-
-                    if (Convert.ToDouble(Txt_Quan.Text) < Convert.ToDouble(Quan_Min.Value)) //case lw el availble less than min
-                    {
-                        if (Convert.ToDouble(Txt_ReqQuan.Text) < Convert.ToDouble(Quan_Min.Value))
-                        {
-                            MessageBox.Show("بعد توريد الكمية المطلوبة الكمية المتاحة ستكون اقل  من الحد الادنى ");
-                        }
-
-                        MaxFlag = MaxFlag + 1;
-
-                        //  return;
-                        array1[MaxFlag - 1, 3] = TXT_StockNoAll.Text;
-                        array1[MaxFlag - 1, 0] = TXT_TalbNo.Text;
-                        array1[MaxFlag - 1, 1] = TXT_TalbNo.Text;
-
-                        array1[MaxFlag - 1, 2] = Cmb_FYear.Text;
-                        array1[MaxFlag - 1, 4] = Txt_ReqQuan.Text;
-                        array1[MaxFlag - 1, 5] = Quan_Max.Text;
-
-                    }
-                }
-
-                if (Convert.ToDouble(Txt_Quan.Text) > 0 && Convert.ToDouble(Txt_Quan.Text) < Convert.ToDouble(Txt_ReqQuan.Text))
-                {
-                    MessageBox.Show("طلب توريد بالاضافة الى رصيد");
-                    AdditionFlag = 1;
-                    AdditionQuan = Convert.ToDouble(Txt_ReqQuan.Text) - Convert.ToDouble(Txt_Quan.Text);
-                }
-                else
-                {
-                    AdditionFlag = 0;
-                }
-
-                AddNewTasnifInDataGridView();
-            }
-
-            private void AddNewbtn_Click(object sender, EventArgs e)
+            if (!IsValidCase(type))
             {
-                if (!IsValidCase(VALIDATION_TYPES.ADD_NEW_TASNIF))
-                {          
-                    return;
-                }
-
-                Currency = Cmb_Currency.Text;
-                NewTasnifFlag = 1;
-                Txt_Quan.Text = "0";
-
-                AddNewTasnifInDataGridView(NewTasnifFlag);
-
-                CHK_NewTasnif.Checked = false;
+                return;
             }
+
+            AddTasnifToDataGridView(CHK_NewTasnif.Checked);
+        }
+
+        private void CHK_NewTasnif_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CHK_NewTasnif.Checked == true)
+            {
+                HandleNewTasnifState();
+                Addbtn2.Text = "إضافة تصنيف جديد الى طلب التوريد";
+            }
+            else
+            {
+                HandleExistTasnifState();
+                Addbtn2.Text = "إضافة التصنيف الى طلب التوريد";
+            }
+        }
+
         #endregion
 
         private void Cmb_FYear_SelectedIndexChanged(object sender, EventArgs e)
@@ -4027,51 +4114,7 @@ namespace ANRPC_Inventory
             reset();
         }
 
-        private void CHK_NewTasnif_CheckedChanged(object sender, EventArgs e)
-        {
-            if (CHK_NewTasnif.Checked == true)
-            {
-                //do new tasnif
-                changePanelState(panel12, false);
 
-                //Search sec
-                TXT_StockNoAll.Text = "";
-                TXT_StockName.Text = "";
-                TXT_PartNo.Text = "";
-
-                //dataViewre sec
-                TXT_StockBian.Text = "";
-                Txt_Quan.Text = "";
-                Txt_ReqQuan.Text = "";
-                TXT_Unit.Text = "";
-                CMB_ApproxValue.Text = "";
-                Quan_Min.Value = 0;
-                Quan_Max.Value = 0;
-                checkBox1.Checked = false;
-                checkBox2.Checked = false;
-
-                TXT_StockBian.Enabled = true;
-                TXT_Unit.Enabled = true;
-
-            }
-            else
-            {
-                //reset to default
-                changePanelState(panel12, true);
-
-                //dataViewre sec
-                TXT_StockBian.Text = "";
-                Txt_ReqQuan.Text = "";
-                TXT_Unit.Text = "";
-                CMB_ApproxValue.Text = "";
-
-                TXT_StockBian.Enabled = false;
-                TXT_Unit.Enabled = false;
-            }
-
-            Addbtn2.Enabled = !CHK_NewTasnif.Checked;
-            AddNewbtn.Enabled = CHK_NewTasnif.Checked;
-        }
 
         private void dataGridView1_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
         {
@@ -4809,30 +4852,9 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            
-            if (e.ColumnIndex == 9)
-            {
-                if (e.RowIndex >= 0 && dataGridView1.Rows[e.RowIndex].Cells[9].Value != null && dataGridView1.Rows[e.RowIndex].Cells[9].Value != DBNull.Value)
-                {
-                    sum = 0;
-                    for (int i = 0; i <= e.RowIndex; i++)
-                    {
-
-                        sum = sum + Convert.ToDecimal(dataGridView1.Rows[i].Cells[9].Value);
-
-                    }
-                    AppValueOriginal = sum;
-                    TXT_AppValue.Text = sum.ToString();
-
-                }
-            }
-        }
-
         private void dataGridView1_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
-            sum = sum - (decimal)dataGridView1.Rows[r].Cells[9].Value;
+            sum = sum - (decimal)dataGridView1.Rows[e.Row.Index].Cells[9].Value;
             AppValueOriginal = sum;
             TXT_AppValue.Text = sum.ToString();
         }
