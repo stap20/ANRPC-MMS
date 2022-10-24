@@ -1474,30 +1474,35 @@ namespace ANRPC_Inventory
                 SP_UpdateSignatures(2, Convert.ToDateTime(DateTime.Now.ToShortDateString()));*/
                 //----------------------------------------------------------------------------------------------------------------
 
-                for (int i = 1; i <= 13; i++)
+                int[] sequence = { 1, 2, 3, 8,12,4,11,5,6 };
+                for (int i = 0; i < sequence.Length; i++)
                 {
 
+                    if (i != 10)
+                    {
+                        cmdstring = "Exec  SP_InsertSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
+                        cmd = new SqlCommand(cmdstring, Constants.con);
 
-                    cmdstring = "Exec  SP_InsertSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
-                    cmd = new SqlCommand(cmdstring, Constants.con);
+                        cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_TalbNo.Text));
+                        cmd.Parameters.AddWithValue("@TNO2", DBNull.Value);
 
-                    cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_TalbNo.Text));
-                    cmd.Parameters.AddWithValue("@TNO2", DBNull.Value);
+                        cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
+                        cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
+                        cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
+                        cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
 
-                    cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
-                    cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
-                    cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
-                    cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
+                        cmd.Parameters.AddWithValue("@FN", 1);
 
-                    cmd.Parameters.AddWithValue("@FN", 1);
+                        cmd.Parameters.AddWithValue("@SN", sequence[i]);
 
-                    cmd.Parameters.AddWithValue("@SN", i);
+                        cmd.Parameters.AddWithValue("@D1", DBNull.Value);
 
-                    cmd.Parameters.AddWithValue("@D1", DBNull.Value);
-
-                    cmd.Parameters.AddWithValue("@D2", DBNull.Value);
-                    cmd.ExecuteNonQuery();
+                        cmd.Parameters.AddWithValue("@D2", DBNull.Value);
+                        cmd.ExecuteNonQuery();
+                    }
                 }
+
+
                 SP_UpdateSignatures(1, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
                 SP_UpdateSignatures(2, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
@@ -3309,11 +3314,11 @@ namespace ANRPC_Inventory
         {
             if (isNew)
             {
-                HandleTasnifALreadyExistInMaster();
+                HandleNewTasnid();
             }
             else
-            {
-                HandleNewTasnid();
+            {               
+                HandleTasnifALreadyExistInMaster();
             }
         }
         
@@ -3630,7 +3635,7 @@ namespace ANRPC_Inventory
                 return;
             }
 
-            EditLogic();
+            UpdateTalbTawreed();
 
             reset();
 
