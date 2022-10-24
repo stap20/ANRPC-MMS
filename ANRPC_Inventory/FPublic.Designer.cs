@@ -199,6 +199,7 @@
             this.label24.Size = new System.Drawing.Size(21, 22);
             this.label24.TabIndex = 46;
             this.label24.Text = "0";
+            this.label24.Visible = false;
             // 
             // label25
             // 
@@ -210,6 +211,7 @@
             this.label25.Size = new System.Drawing.Size(21, 22);
             this.label25.TabIndex = 45;
             this.label25.Text = "0";
+            this.label25.Visible = false;
             // 
             // label26
             // 
@@ -221,6 +223,7 @@
             this.label26.Size = new System.Drawing.Size(25, 22);
             this.label26.TabIndex = 44;
             this.label26.Text = "G";
+            this.label26.Visible = false;
             // 
             // button10
             // 
@@ -238,6 +241,7 @@
             this.button10.Text = "متابعة اذن التحويل";
             this.button10.UseMnemonic = false;
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Visible = false;
             // 
             // label27
             // 
@@ -249,6 +253,7 @@
             this.label27.Size = new System.Drawing.Size(23, 22);
             this.label27.TabIndex = 43;
             this.label27.Text = "R";
+            this.label27.Visible = false;
             // 
             // label28
             // 
@@ -260,6 +265,7 @@
             this.label28.Size = new System.Drawing.Size(25, 22);
             this.label28.TabIndex = 42;
             this.label28.Text = "G";
+            this.label28.Visible = false;
             // 
             // button11
             // 
@@ -295,6 +301,7 @@
             this.button12.Text = "متابعة اذون التحويل";
             this.button12.UseMnemonic = false;
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Visible = false;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // label29
@@ -307,6 +314,7 @@
             this.label29.Size = new System.Drawing.Size(112, 18);
             this.label29.TabIndex = 38;
             this.label29.Text = "اذون التحويل خارجى";
+            this.label29.Visible = false;
             // 
             // label18
             // 
@@ -318,6 +326,7 @@
             this.label18.Size = new System.Drawing.Size(21, 22);
             this.label18.TabIndex = 37;
             this.label18.Text = "0";
+            this.label18.Visible = false;
             // 
             // label19
             // 
@@ -329,6 +338,7 @@
             this.label19.Size = new System.Drawing.Size(21, 22);
             this.label19.TabIndex = 36;
             this.label19.Text = "0";
+            this.label19.Visible = false;
             // 
             // label20
             // 
@@ -340,6 +350,7 @@
             this.label20.Size = new System.Drawing.Size(25, 22);
             this.label20.TabIndex = 35;
             this.label20.Text = "G";
+            this.label20.Visible = false;
             // 
             // button9
             // 
@@ -357,6 +368,7 @@
             this.button9.Text = "متابعة اذن التحويل";
             this.button9.UseMnemonic = false;
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Visible = false;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // label21
@@ -369,6 +381,7 @@
             this.label21.Size = new System.Drawing.Size(23, 22);
             this.label21.TabIndex = 34;
             this.label21.Text = "R";
+            this.label21.Visible = false;
             // 
             // label22
             // 
@@ -380,6 +393,7 @@
             this.label22.Size = new System.Drawing.Size(25, 22);
             this.label22.TabIndex = 33;
             this.label22.Text = "G";
+            this.label22.Visible = false;
             // 
             // button3
             // 
@@ -415,6 +429,7 @@
             this.button6.Text = "إدخال جديد";
             this.button6.UseMnemonic = false;
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Visible = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // label23
@@ -427,6 +442,7 @@
             this.label23.Size = new System.Drawing.Size(104, 18);
             this.label23.TabIndex = 29;
             this.label23.Text = "اذون التحويل محلى";
+            this.label23.Visible = false;
             // 
             // C3
             // 
@@ -549,6 +565,7 @@
             this.label9.Size = new System.Drawing.Size(25, 22);
             this.label9.TabIndex = 18;
             this.label9.Text = "G";
+            this.label9.Visible = false;
             // 
             // label10
             // 
@@ -560,6 +577,7 @@
             this.label10.Size = new System.Drawing.Size(23, 22);
             this.label10.TabIndex = 17;
             this.label10.Text = "R";
+            this.label10.Visible = false;
             // 
             // label11
             // 
@@ -571,6 +589,7 @@
             this.label11.Size = new System.Drawing.Size(25, 22);
             this.label11.TabIndex = 16;
             this.label11.Text = "G";
+            this.label11.Visible = false;
             // 
             // button2
             // 
@@ -588,6 +607,7 @@
             this.button2.Text = "اوامر الشراء";
             this.button2.UseMnemonic = false;
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label1
@@ -600,6 +620,7 @@
             this.label1.Size = new System.Drawing.Size(131, 22);
             this.label1.TabIndex = 14;
             this.label1.Text = "متابعة اوامر الشراء";
+            this.label1.Visible = false;
             // 
             // button1
             // 
