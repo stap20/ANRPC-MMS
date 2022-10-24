@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media.Animation;
 using FontAwesome.Sharp;
+using Guna.UI2.WinForms;
 
 namespace ANRPC_Inventory
 {
@@ -123,8 +124,8 @@ namespace ANRPC_Inventory
         {
             ActivateButton(sender, RGBColors.color2);
 
-            TimeLine_Form timeLine = new TimeLine_Form();
-            openChildForm(timeLine);
+            Search searchForm = new Search();
+            openChildForm(searchForm);
 
             formwraper.Visible = true;
         }
@@ -183,6 +184,28 @@ namespace ANRPC_Inventory
         {
             ActivateButton(sender, RGBColors.color8);
             formwraper.Visible = false;
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btn_max_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Maximized;
+            btn_max.SendToBack();
+        }
+
+        private void btnMin_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnWindowReset_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Normal;
+            btnWindowReset.SendToBack();
         }
     }
 }
