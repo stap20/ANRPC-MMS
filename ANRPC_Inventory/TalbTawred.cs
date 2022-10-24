@@ -268,6 +268,7 @@ namespace ANRPC_Inventory
 
             public void SP_UpdateSignatures(int x, DateTime D1, DateTime? D2 = null)
             {
+                Constants.opencon();
                 string cmdstring = "Exec  SP_UpdateSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
                 SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
 
@@ -294,7 +295,8 @@ namespace ANRPC_Inventory
                 }
 
                 cmd.ExecuteNonQuery();
-            }
+                Constants.closecon();
+        }
 
             public void SP_InsertSignatures(int signNumber,int formNumber,int talbNo,string fyear,DateTime creationDate,string codeEdara,string nameEdara)
             {
@@ -1544,63 +1546,72 @@ namespace ANRPC_Inventory
 
         private void UpdateTalbTawreedTSignatureCycle()
         {
-            if (FlagSign3 != 1 && FlagSign2 == 1)
+            if (currentSignNumber == 2 && FlagSign2 == 1)
             {
                 SP_UpdateSignatures(2, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
                 SP_UpdateSignatures(3, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
             }
 
-            if (Constants.AuthFlag == 3 || Constants.AuthFlag == 4)//normal case
+            if (currentSignNumber == 3 && FlagSign3 == 1)
             {
-                if (FlagSign2 == 1)
-                {
 
-                    SP_UpdateSignatures(2, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                SP_UpdateSignatures(3, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
-                    SP_UpdateSignatures(3, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                SP_UpdateSignatures(8, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
-                }
-                if (FlagSign3 == 1)
-                {
+            }
+            if (currentSignNumber == 8 && FlagSign8 == 1)
+            {
 
-                    SP_UpdateSignatures(3, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                SP_UpdateSignatures(8, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
-                    SP_UpdateSignatures(8, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                SP_UpdateSignatures(12, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
-                }
-                if (FlagSign8 == 1)
-                {
+            }
+            if (currentSignNumber == 12 && FlagSign12 == 1)
+            {
 
-                    SP_UpdateSignatures(8, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                SP_UpdateSignatures(12, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
-                    SP_UpdateSignatures(12, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                SP_UpdateSignatures(4, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
-                }
-                if (FlagSign12 == 1)
-                {
+            }
+            if (currentSignNumber == 4 && FlagSign4 == 1)
+            {
 
-                    SP_UpdateSignatures(12, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                SP_UpdateSignatures(4, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
-                    SP_UpdateSignatures(4, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                SP_UpdateSignatures(11, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
-                }
-                if (FlagSign4 == 1)
-                {
+            }
+            if (currentSignNumber == 11 && FlagSign11 == 1)
+            {
 
-                    SP_UpdateSignatures(4, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                SP_UpdateSignatures(11, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
-                    SP_UpdateSignatures(11, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                SP_UpdateSignatures(9, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
-                }
-                if (FlagSign11 == 1)
-                {
+            }
+            if (currentSignNumber == 5 && FlagSign5 == 1)
+            {
 
-                    SP_UpdateSignatures(11, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                SP_UpdateSignatures(5, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
-                    SP_UpdateSignatures(9, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                SP_UpdateSignatures(6, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
-                }
+            }
+            if (currentSignNumber == 6 && FlagSign6 == 1)
+            {
+
+                SP_UpdateSignatures(6, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+
+                // SP_UpdateSignatures(6, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+
+            }
+            
+            if (Constants.AuthFlag == 3 || Constants.AuthFlag == 4)//ra2es 4erka
+            {
                 if (FlagSign9 == 1)
                 {
 
@@ -1617,190 +1628,15 @@ namespace ANRPC_Inventory
                     SP_UpdateSignatures(5, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
                 }
-                if (FlagSign5 == 1)
-                {
-
-                    SP_UpdateSignatures(5, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    SP_UpdateSignatures(6, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                }
-                if (FlagSign6 == 1)
-                {
-
-                    SP_UpdateSignatures(6, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    // SP_UpdateSignatures(6, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                }
             }
-            else if (Constants.AuthFlag == 1)
+            else if (Constants.AuthFlag == 2) //mosa3ed ra2es 4erka
             {
-                if (FlagSign2 == 1)
-                {
-
-                    SP_UpdateSignatures(2, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    SP_UpdateSignatures(3, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                }
-                if (FlagSign3 == 1)
-                {
-
-                    SP_UpdateSignatures(3, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    SP_UpdateSignatures(8, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                }
-                if (FlagSign8 == 1)
-                {
-
-                    SP_UpdateSignatures(8, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    SP_UpdateSignatures(12, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                }
-                if (FlagSign12 == 1)
-                {
-
-                    SP_UpdateSignatures(12, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    SP_UpdateSignatures(4, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                }
-                if (FlagSign4 == 1)
-                {
-
-                    SP_UpdateSignatures(4, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    SP_UpdateSignatures(11, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                }
-                if (FlagSign11 == 1)
-                {
-
-                    SP_UpdateSignatures(11, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    //   SP_UpdateSignatures(9, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-                    SP_UpdateSignatures(5, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                }
-                /*
-                if (FlagSign9 == 1)
-                {
-
-                    SP_UpdateSignatures(9, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    SP_UpdateSignatures(7, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                }
-                if (FlagSign7 == 1)
-                {
-
-                    SP_UpdateSignatures(7, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    SP_UpdateSignatures(5, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                }*/
-                if (FlagSign5 == 1)
-                {
-
-                    SP_UpdateSignatures(5, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    SP_UpdateSignatures(6, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                }
-                if (FlagSign6 == 1)
-                {
-
-                    SP_UpdateSignatures(6, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    // SP_UpdateSignatures(6, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                }
-            }
-            else if (Constants.AuthFlag == 2)
-            {
-                if (FlagSign2 == 1)
-                {
-
-                    SP_UpdateSignatures(2, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    SP_UpdateSignatures(3, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                }
-                if (FlagSign3 == 1)
-                {
-
-                    SP_UpdateSignatures(3, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    SP_UpdateSignatures(8, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                }
-                if (FlagSign8 == 1)
-                {
-
-                    SP_UpdateSignatures(8, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    SP_UpdateSignatures(12, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                }
-                if (FlagSign12 == 1)
-                {
-
-                    SP_UpdateSignatures(12, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    SP_UpdateSignatures(4, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                }
-                if (FlagSign4 == 1)
-                {
-
-                    SP_UpdateSignatures(4, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    SP_UpdateSignatures(11, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                }
-                if (FlagSign11 == 1)
-                {
-
-                    SP_UpdateSignatures(11, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    //   SP_UpdateSignatures(9, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-                    SP_UpdateSignatures(13, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                }
-                /*
-                if (FlagSign9 == 1)
-                {
-
-                    SP_UpdateSignatures(9, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    SP_UpdateSignatures(7, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                }*/
                 if (FlagSign13 == 1)
                 {
 
                     SP_UpdateSignatures(13, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
                     SP_UpdateSignatures(5, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                }
-                if (FlagSign5 == 1)
-                {
-
-                    SP_UpdateSignatures(5, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    SP_UpdateSignatures(6, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                }
-                if (FlagSign6 == 1)
-                {
-
-                    SP_UpdateSignatures(6, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-                    // SP_UpdateSignatures(6, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
                 }
             }
@@ -1851,12 +1687,6 @@ namespace ANRPC_Inventory
             }
             if (FlagSign6 == 1 && Constants.UserTypeB == "GMInventory")
             {
-                MessageBox.Show("تم الانتهاء من طلب التوريد بنجاح ");
-            }
-            if (FlagSign5 == 1 && Constants.UserTypeB == "Purchases")
-            {
-
-
 
                 string q = "exec  SP_UpdateTalbNo2  @p1,@p2,@p22,@p3 out";
                 Constants.opencon();
@@ -1925,6 +1755,12 @@ namespace ANRPC_Inventory
                 Constants.closecon();
 
 
+
+            }
+            if (FlagSign5 == 1 && Constants.UserTypeB == "Purchases")
+            {
+
+                //MessageBox.Show("تم الانتهاء من طلب التوريد بنجاح ");
 
 
             }

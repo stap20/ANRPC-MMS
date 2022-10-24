@@ -31,26 +31,56 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FEdafaMakhzania_F));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.takalefTable = new System.Windows.Forms.TableLayoutPanel();
+            this.TXT_Enfak = new System.Windows.Forms.TextBox();
+            this.label41 = new System.Windows.Forms.Label();
+            this.TXT_Morakba = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.TXT_Masrof = new System.Windows.Forms.TextBox();
+            this.TXT_MResp = new System.Windows.Forms.TextBox();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.TXT_AccNo = new System.Windows.Forms.TextBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.TXT_MTaklif = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.TXT_PaccNo = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel14 = new System.Windows.Forms.Panel();
             this.BTN_Estagal = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.Pic_Sign4 = new System.Windows.Forms.PictureBox();
-            this.BTN_Sign4 = new System.Windows.Forms.Button();
-            this.label23 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.panel19 = new System.Windows.Forms.Panel();
+            this.TXT_Tasnif = new System.Windows.Forms.TextBox();
             this.TXT_Mobashr = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
+            this.panel18 = new System.Windows.Forms.Panel();
+            this.label23 = new System.Windows.Forms.Label();
+            this.Pic_Sign4 = new System.Windows.Forms.PictureBox();
+            this.DeleteBtn = new System.Windows.Forms.Button();
+            this.BTN_Sign4 = new System.Windows.Forms.Button();
+            this.panel17 = new System.Windows.Forms.Panel();
+            this.label21 = new System.Windows.Forms.Label();
             this.Pic_Sign3 = new System.Windows.Forms.PictureBox();
             this.BTN_Sign3 = new System.Windows.Forms.Button();
-            this.TXT_Tasnif = new System.Windows.Forms.TextBox();
+            this.panel16 = new System.Windows.Forms.Panel();
+            this.label20 = new System.Windows.Forms.Label();
             this.Pic_Sign2 = new System.Windows.Forms.PictureBox();
             this.BTN_Sign2 = new System.Windows.Forms.Button();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.BTN_Sigm1 = new System.Windows.Forms.Button();
-            this.BTN_Sign1 = new System.Windows.Forms.Button();
-            this.Pic_Sign1 = new System.Windows.Forms.PictureBox();
+            this.panel15 = new System.Windows.Forms.Panel();
             this.label17 = new System.Windows.Forms.Label();
+            this.BTN_Sigm1 = new System.Windows.Forms.Button();
+            this.Pic_Sign1 = new System.Windows.Forms.PictureBox();
+            this.BTN_Sign1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.CH_Direct = new System.Windows.Forms.CheckBox();
             this.label26 = new System.Windows.Forms.Label();
@@ -79,9 +109,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.Cmb_CType = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.BTN_SearchEzn = new System.Windows.Forms.Button();
+            this.BTN_Cancel = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.SaveBtn = new System.Windows.Forms.Button();
-            this.DeleteBtn = new System.Windows.Forms.Button();
             this.EditBtn = new System.Windows.Forms.Button();
             this.Addbtn = new System.Windows.Forms.Button();
             this.label25 = new System.Windows.Forms.Label();
@@ -119,42 +150,20 @@
             this.panel13 = new System.Windows.Forms.Panel();
             this.BTN_PDF = new System.Windows.Forms.Button();
             this.browseBTN = new System.Windows.Forms.Button();
-            this.BTN_SearchEzn = new System.Windows.Forms.Button();
-            this.BTN_Cancel = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.panel15 = new System.Windows.Forms.Panel();
-            this.panel16 = new System.Windows.Forms.Panel();
-            this.panel17 = new System.Windows.Forms.Panel();
-            this.panel18 = new System.Windows.Forms.Panel();
-            this.panel19 = new System.Windows.Forms.Panel();
-            this.takalefTable = new System.Windows.Forms.TableLayoutPanel();
-            this.TXT_Enfak = new System.Windows.Forms.TextBox();
-            this.label41 = new System.Windows.Forms.Label();
-            this.TXT_Morakba = new System.Windows.Forms.TextBox();
-            this.label35 = new System.Windows.Forms.Label();
-            this.TXT_Masrof = new System.Windows.Forms.TextBox();
-            this.TXT_MResp = new System.Windows.Forms.TextBox();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.TXT_AccNo = new System.Windows.Forms.TextBox();
-            this.label37 = new System.Windows.Forms.Label();
-            this.TXT_MTaklif = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
-            this.TXT_PaccNo = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.TXT_AmrNo = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
+            this.takalefTable.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.panel14.SuspendLayout();
+            this.panel19.SuspendLayout();
+            this.panel18.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign4)).BeginInit();
+            this.panel17.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign3)).BeginInit();
+            this.panel16.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign2)).BeginInit();
+            this.panel15.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -168,14 +177,6 @@
             this.panel10.SuspendLayout();
             this.panel12.SuspendLayout();
             this.panel13.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.panel14.SuspendLayout();
-            this.panel15.SuspendLayout();
-            this.panel16.SuspendLayout();
-            this.panel17.SuspendLayout();
-            this.panel18.SuspendLayout();
-            this.panel19.SuspendLayout();
-            this.takalefTable.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -191,6 +192,342 @@
             this.panel1.Size = new System.Drawing.Size(1150, 242);
             this.panel1.TabIndex = 5;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // takalefTable
+            // 
+            this.takalefTable.AutoSize = true;
+            this.takalefTable.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.takalefTable.ColumnCount = 7;
+            this.takalefTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.3F));
+            this.takalefTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.3F));
+            this.takalefTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.3F));
+            this.takalefTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.3F));
+            this.takalefTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.3F));
+            this.takalefTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.3F));
+            this.takalefTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.2F));
+            this.takalefTable.Controls.Add(this.TXT_Enfak, 0, 2);
+            this.takalefTable.Controls.Add(this.label41, 6, 1);
+            this.takalefTable.Controls.Add(this.TXT_Morakba, 1, 2);
+            this.takalefTable.Controls.Add(this.label35, 0, 1);
+            this.takalefTable.Controls.Add(this.TXT_Masrof, 2, 2);
+            this.takalefTable.Controls.Add(this.TXT_MResp, 3, 2);
+            this.takalefTable.Controls.Add(this.label42, 0, 0);
+            this.takalefTable.Controls.Add(this.label28, 6, 0);
+            this.takalefTable.Controls.Add(this.label36, 1, 1);
+            this.takalefTable.Controls.Add(this.label8, 1, 0);
+            this.takalefTable.Controls.Add(this.TXT_AccNo, 6, 2);
+            this.takalefTable.Controls.Add(this.label37, 2, 1);
+            this.takalefTable.Controls.Add(this.TXT_MTaklif, 4, 2);
+            this.takalefTable.Controls.Add(this.label22, 2, 0);
+            this.takalefTable.Controls.Add(this.label39, 3, 1);
+            this.takalefTable.Controls.Add(this.label29, 3, 0);
+            this.takalefTable.Controls.Add(this.label38, 4, 0);
+            this.takalefTable.Controls.Add(this.label40, 4, 1);
+            this.takalefTable.Controls.Add(this.label43, 5, 1);
+            this.takalefTable.Controls.Add(this.label44, 5, 0);
+            this.takalefTable.Controls.Add(this.TXT_PaccNo, 5, 2);
+            this.takalefTable.Dock = System.Windows.Forms.DockStyle.Top;
+            this.takalefTable.Location = new System.Drawing.Point(0, 139);
+            this.takalefTable.Name = "takalefTable";
+            this.takalefTable.RowCount = 3;
+            this.takalefTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.takalefTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.takalefTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.takalefTable.Size = new System.Drawing.Size(1150, 96);
+            this.takalefTable.TabIndex = 275;
+            // 
+            // TXT_Enfak
+            // 
+            this.TXT_Enfak.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TXT_Enfak.Enabled = false;
+            this.TXT_Enfak.Font = new System.Drawing.Font("Arial", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_Enfak.Location = new System.Drawing.Point(4, 66);
+            this.TXT_Enfak.Name = "TXT_Enfak";
+            this.TXT_Enfak.Size = new System.Drawing.Size(157, 22);
+            this.TXT_Enfak.TabIndex = 274;
+            this.TXT_Enfak.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TXT_Enfak.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
+            // 
+            // label41
+            // 
+            this.label41.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label41.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label41.Location = new System.Drawing.Point(988, 32);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(158, 22);
+            this.label41.TabIndex = 262;
+            this.label41.Text = "65/60";
+            this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // TXT_Morakba
+            // 
+            this.TXT_Morakba.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TXT_Morakba.Enabled = false;
+            this.TXT_Morakba.Font = new System.Drawing.Font("Arial", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_Morakba.Location = new System.Drawing.Point(168, 66);
+            this.TXT_Morakba.Name = "TXT_Morakba";
+            this.TXT_Morakba.Size = new System.Drawing.Size(157, 22);
+            this.TXT_Morakba.TabIndex = 271;
+            this.TXT_Morakba.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TXT_Morakba.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
+            // 
+            // label35
+            // 
+            this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label35.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label35.Location = new System.Drawing.Point(4, 32);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(157, 22);
+            this.label35.TabIndex = 268;
+            this.label35.Text = "80";
+            this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // TXT_Masrof
+            // 
+            this.TXT_Masrof.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TXT_Masrof.Enabled = false;
+            this.TXT_Masrof.Font = new System.Drawing.Font("Arial", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_Masrof.Location = new System.Drawing.Point(332, 66);
+            this.TXT_Masrof.Name = "TXT_Masrof";
+            this.TXT_Masrof.Size = new System.Drawing.Size(157, 22);
+            this.TXT_Masrof.TabIndex = 272;
+            this.TXT_Masrof.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TXT_Masrof.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
+            // 
+            // TXT_MResp
+            // 
+            this.TXT_MResp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TXT_MResp.Enabled = false;
+            this.TXT_MResp.Font = new System.Drawing.Font("Arial", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_MResp.Location = new System.Drawing.Point(496, 66);
+            this.TXT_MResp.Name = "TXT_MResp";
+            this.TXT_MResp.Size = new System.Drawing.Size(157, 22);
+            this.TXT_MResp.TabIndex = 273;
+            this.TXT_MResp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TXT_MResp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
+            // 
+            // label42
+            // 
+            this.label42.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label42.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label42.Location = new System.Drawing.Point(4, 1);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(157, 22);
+            this.label42.TabIndex = 260;
+            this.label42.Text = "انفاق";
+            this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label28
+            // 
+            this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label28.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label28.Location = new System.Drawing.Point(988, 1);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(158, 22);
+            this.label28.TabIndex = 254;
+            this.label28.Text = "ح/مالى";
+            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label36
+            // 
+            this.label36.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label36.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label36.Location = new System.Drawing.Point(168, 32);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(157, 22);
+            this.label36.TabIndex = 267;
+            this.label36.Text = "79";
+            this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label8.Location = new System.Drawing.Point(168, 1);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(157, 22);
+            this.label8.TabIndex = 259;
+            this.label8.Text = "عنصر مراقبة";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // TXT_AccNo
+            // 
+            this.TXT_AccNo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TXT_AccNo.Enabled = false;
+            this.TXT_AccNo.Font = new System.Drawing.Font("Arial", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_AccNo.Location = new System.Drawing.Point(988, 66);
+            this.TXT_AccNo.Name = "TXT_AccNo";
+            this.TXT_AccNo.Size = new System.Drawing.Size(158, 22);
+            this.TXT_AccNo.TabIndex = 261;
+            this.TXT_AccNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TXT_AccNo.TextChanged += new System.EventHandler(this.TXT_AccNo_TextChanged);
+            this.TXT_AccNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
+            // 
+            // label37
+            // 
+            this.label37.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label37.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label37.Location = new System.Drawing.Point(332, 32);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(157, 22);
+            this.label37.TabIndex = 266;
+            this.label37.Text = "78";
+            this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // TXT_MTaklif
+            // 
+            this.TXT_MTaklif.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TXT_MTaklif.Enabled = false;
+            this.TXT_MTaklif.Font = new System.Drawing.Font("Arial", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_MTaklif.Location = new System.Drawing.Point(660, 66);
+            this.TXT_MTaklif.Name = "TXT_MTaklif";
+            this.TXT_MTaklif.Size = new System.Drawing.Size(157, 22);
+            this.TXT_MTaklif.TabIndex = 270;
+            this.TXT_MTaklif.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TXT_MTaklif.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
+            // 
+            // label22
+            // 
+            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label22.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label22.Location = new System.Drawing.Point(332, 1);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(157, 22);
+            this.label22.TabIndex = 258;
+            this.label22.Text = "عنصر مصروف";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label39
+            // 
+            this.label39.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label39.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label39.Location = new System.Drawing.Point(496, 32);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(157, 22);
+            this.label39.TabIndex = 264;
+            this.label39.Text = "77/72";
+            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label29
+            // 
+            this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label29.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label29.Location = new System.Drawing.Point(496, 1);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(157, 22);
+            this.label29.TabIndex = 256;
+            this.label29.Text = "مركز مسئولية";
+            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label38
+            // 
+            this.label38.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label38.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label38.Location = new System.Drawing.Point(660, 1);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(157, 22);
+            this.label38.TabIndex = 257;
+            this.label38.Text = "م/تكاليف";
+            this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label40
+            // 
+            this.label40.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label40.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label40.Location = new System.Drawing.Point(660, 32);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(157, 22);
+            this.label40.TabIndex = 265;
+            this.label40.Text = "71/66";
+            this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label43
+            // 
+            this.label43.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label43.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label43.Location = new System.Drawing.Point(824, 32);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(157, 22);
+            this.label43.TabIndex = 263;
+            this.label43.Text = "71/66";
+            this.label43.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label44
+            // 
+            this.label44.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label44.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label44.Location = new System.Drawing.Point(824, 1);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(157, 22);
+            this.label44.TabIndex = 255;
+            this.label44.Text = "ح/فرعى";
+            this.label44.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // TXT_PaccNo
+            // 
+            this.TXT_PaccNo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TXT_PaccNo.Enabled = false;
+            this.TXT_PaccNo.Font = new System.Drawing.Font("Arial", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_PaccNo.Location = new System.Drawing.Point(824, 66);
+            this.TXT_PaccNo.Name = "TXT_PaccNo";
+            this.TXT_PaccNo.Size = new System.Drawing.Size(157, 22);
+            this.TXT_PaccNo.TabIndex = 269;
+            this.TXT_PaccNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TXT_PaccNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.Controls.Add(this.panel14, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.panel19, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.panel18, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.panel17, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel16, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel15, 2, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1150, 139);
+            this.tableLayoutPanel1.TabIndex = 241;
+            // 
+            // panel14
+            // 
+            this.panel14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel14.Controls.Add(this.BTN_Estagal);
+            this.panel14.Controls.Add(this.textBox1);
+            this.panel14.Controls.Add(this.button1);
+            this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel14.Location = new System.Drawing.Point(386, 72);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(377, 64);
+            this.panel14.TabIndex = 285;
             // 
             // BTN_Estagal
             // 
@@ -208,6 +545,18 @@
             this.BTN_Estagal.UseVisualStyleBackColor = false;
             this.BTN_Estagal.Click += new System.EventHandler(this.button2_Click_1);
             // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(3, 4);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(218, 56);
+            this.textBox1.TabIndex = 282;
+            this.textBox1.Text = "...........................................................";
+            // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -224,41 +573,77 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // textBox1
+            // panel19
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel19.Controls.Add(this.TXT_Tasnif);
+            this.panel19.Controls.Add(this.TXT_Mobashr);
+            this.panel19.Controls.Add(this.label18);
+            this.panel19.Controls.Add(this.label19);
+            this.panel19.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel19.Location = new System.Drawing.Point(769, 72);
+            this.panel19.Name = "panel19";
+            this.panel19.Size = new System.Drawing.Size(378, 64);
+            this.panel19.TabIndex = 286;
+            // 
+            // TXT_Tasnif
+            // 
+            this.TXT_Tasnif.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(3, 4);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(218, 56);
-            this.textBox1.TabIndex = 282;
-            this.textBox1.Text = "...........................................................";
+            this.TXT_Tasnif.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_Tasnif.Location = new System.Drawing.Point(3, 5);
+            this.TXT_Tasnif.Name = "TXT_Tasnif";
+            this.TXT_Tasnif.Size = new System.Drawing.Size(311, 26);
+            this.TXT_Tasnif.TabIndex = 275;
             // 
-            // Pic_Sign4
+            // TXT_Mobashr
             // 
-            this.Pic_Sign4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.TXT_Mobashr.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Pic_Sign4.Location = new System.Drawing.Point(3, 3);
-            this.Pic_Sign4.Name = "Pic_Sign4";
-            this.Pic_Sign4.Size = new System.Drawing.Size(178, 57);
-            this.Pic_Sign4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Pic_Sign4.TabIndex = 280;
-            this.Pic_Sign4.TabStop = false;
+            this.TXT_Mobashr.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_Mobashr.Location = new System.Drawing.Point(3, 34);
+            this.TXT_Mobashr.Name = "TXT_Mobashr";
+            this.TXT_Mobashr.Size = new System.Drawing.Size(311, 26);
+            this.TXT_Mobashr.TabIndex = 277;
             // 
-            // BTN_Sign4
+            // label18
             // 
-            this.BTN_Sign4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Sign4.BackColor = System.Drawing.Color.Green;
-            this.BTN_Sign4.Enabled = false;
-            this.BTN_Sign4.Location = new System.Drawing.Point(187, 6);
-            this.BTN_Sign4.Name = "BTN_Sign4";
-            this.BTN_Sign4.Size = new System.Drawing.Size(53, 27);
-            this.BTN_Sign4.TabIndex = 281;
-            this.BTN_Sign4.Text = "توقيع";
-            this.BTN_Sign4.UseVisualStyleBackColor = false;
-            this.BTN_Sign4.Click += new System.EventHandler(this.BTN_Sign4_Click);
+            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label18.ForeColor = System.Drawing.Color.Maroon;
+            this.label18.Location = new System.Drawing.Point(320, 8);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(51, 18);
+            this.label18.TabIndex = 254;
+            this.label18.Text = ":تصنيف";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label19
+            // 
+            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label19.ForeColor = System.Drawing.Color.Maroon;
+            this.label19.Location = new System.Drawing.Point(316, 39);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(56, 18);
+            this.label19.TabIndex = 276;
+            this.label19.Text = ":م. مباشر";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // panel18
+            // 
+            this.panel18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel18.Controls.Add(this.label23);
+            this.panel18.Controls.Add(this.Pic_Sign4);
+            this.panel18.Controls.Add(this.DeleteBtn);
+            this.panel18.Controls.Add(this.BTN_Sign4);
+            this.panel18.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel18.Location = new System.Drawing.Point(3, 72);
+            this.panel18.Name = "panel18";
+            this.panel18.Size = new System.Drawing.Size(377, 64);
+            this.panel18.TabIndex = 286;
             // 
             // label23
             // 
@@ -273,28 +658,71 @@
             this.label23.Text = ":مدير عام الادارة الطالبة";
             this.label23.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // TXT_Mobashr
+            // Pic_Sign4
             // 
-            this.TXT_Mobashr.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.Pic_Sign4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_Mobashr.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_Mobashr.Location = new System.Drawing.Point(3, 34);
-            this.TXT_Mobashr.Name = "TXT_Mobashr";
-            this.TXT_Mobashr.Size = new System.Drawing.Size(311, 26);
-            this.TXT_Mobashr.TabIndex = 277;
+            this.Pic_Sign4.Location = new System.Drawing.Point(3, 3);
+            this.Pic_Sign4.Name = "Pic_Sign4";
+            this.Pic_Sign4.Size = new System.Drawing.Size(178, 57);
+            this.Pic_Sign4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Pic_Sign4.TabIndex = 280;
+            this.Pic_Sign4.TabStop = false;
             // 
-            // label19
+            // DeleteBtn
             // 
-            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label19.ForeColor = System.Drawing.Color.Maroon;
-            this.label19.Location = new System.Drawing.Point(316, 39);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(56, 18);
-            this.label19.TabIndex = 276;
-            this.label19.Text = ":م. مباشر";
-            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.DeleteBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DeleteBtn.BackColor = System.Drawing.Color.OrangeRed;
+            this.DeleteBtn.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
+            this.DeleteBtn.FlatAppearance.BorderSize = 3;
+            this.DeleteBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.DeleteBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.DeleteBtn.Location = new System.Drawing.Point(187, 33);
+            this.DeleteBtn.Name = "DeleteBtn";
+            this.DeleteBtn.Size = new System.Drawing.Size(52, 25);
+            this.DeleteBtn.TabIndex = 28;
+            this.DeleteBtn.Text = "حذف";
+            this.DeleteBtn.UseVisualStyleBackColor = false;
+            this.DeleteBtn.Click += new System.EventHandler(this.DeleteBtn_Click);
+            // 
+            // BTN_Sign4
+            // 
+            this.BTN_Sign4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Sign4.BackColor = System.Drawing.Color.Green;
+            this.BTN_Sign4.Enabled = false;
+            this.BTN_Sign4.Location = new System.Drawing.Point(187, 6);
+            this.BTN_Sign4.Name = "BTN_Sign4";
+            this.BTN_Sign4.Size = new System.Drawing.Size(53, 27);
+            this.BTN_Sign4.TabIndex = 281;
+            this.BTN_Sign4.Text = "توقيع";
+            this.BTN_Sign4.UseVisualStyleBackColor = false;
+            this.BTN_Sign4.Click += new System.EventHandler(this.BTN_Sign4_Click);
+            // 
+            // panel17
+            // 
+            this.panel17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel17.Controls.Add(this.label21);
+            this.panel17.Controls.Add(this.Pic_Sign3);
+            this.panel17.Controls.Add(this.BTN_Sign3);
+            this.panel17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel17.Location = new System.Drawing.Point(3, 3);
+            this.panel17.Name = "panel17";
+            this.panel17.Size = new System.Drawing.Size(377, 63);
+            this.panel17.TabIndex = 286;
+            // 
+            // label21
+            // 
+            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label21.ForeColor = System.Drawing.Color.Maroon;
+            this.label21.Location = new System.Drawing.Point(224, 17);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(147, 18);
+            this.label21.TabIndex = 238;
+            this.label21.Text = ":إعتماد مدير عام م. المخازن";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label21.Click += new System.EventHandler(this.label21_Click);
             // 
             // Pic_Sign3
             // 
@@ -321,15 +749,31 @@
             this.BTN_Sign3.UseVisualStyleBackColor = false;
             this.BTN_Sign3.Click += new System.EventHandler(this.BTN_Sign3_Click);
             // 
-            // TXT_Tasnif
+            // panel16
             // 
-            this.TXT_Tasnif.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_Tasnif.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_Tasnif.Location = new System.Drawing.Point(3, 5);
-            this.TXT_Tasnif.Name = "TXT_Tasnif";
-            this.TXT_Tasnif.Size = new System.Drawing.Size(311, 26);
-            this.TXT_Tasnif.TabIndex = 275;
+            this.panel16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel16.Controls.Add(this.label20);
+            this.panel16.Controls.Add(this.Pic_Sign2);
+            this.panel16.Controls.Add(this.BTN_Sign2);
+            this.panel16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel16.Location = new System.Drawing.Point(386, 3);
+            this.panel16.Name = "panel16";
+            this.panel16.Size = new System.Drawing.Size(377, 63);
+            this.panel16.TabIndex = 286;
+            // 
+            // label20
+            // 
+            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label20.ForeColor = System.Drawing.Color.Maroon;
+            this.label20.Location = new System.Drawing.Point(298, 17);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(73, 18);
+            this.label20.TabIndex = 237;
+            this.label20.Text = ":أمين المخزن";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label20.Click += new System.EventHandler(this.label20_Click);
             // 
             // Pic_Sign2
             // 
@@ -356,83 +800,17 @@
             this.BTN_Sign2.UseVisualStyleBackColor = false;
             this.BTN_Sign2.Click += new System.EventHandler(this.BTN_Sign2_Click);
             // 
-            // label21
+            // panel15
             // 
-            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label21.ForeColor = System.Drawing.Color.Maroon;
-            this.label21.Location = new System.Drawing.Point(224, 17);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(147, 18);
-            this.label21.TabIndex = 238;
-            this.label21.Text = ":إعتماد مدير عام م. المخازن";
-            this.label21.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label21.Click += new System.EventHandler(this.label21_Click);
-            // 
-            // label20
-            // 
-            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label20.ForeColor = System.Drawing.Color.Maroon;
-            this.label20.Location = new System.Drawing.Point(298, 17);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(73, 18);
-            this.label20.TabIndex = 237;
-            this.label20.Text = ":أمين المخزن";
-            this.label20.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label20.Click += new System.EventHandler(this.label20_Click);
-            // 
-            // label18
-            // 
-            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label18.ForeColor = System.Drawing.Color.Maroon;
-            this.label18.Location = new System.Drawing.Point(320, 8);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(51, 18);
-            this.label18.TabIndex = 254;
-            this.label18.Text = ":تصنيف";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // BTN_Sigm1
-            // 
-            this.BTN_Sigm1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Sigm1.BackColor = System.Drawing.Color.SandyBrown;
-            this.BTN_Sigm1.Enabled = false;
-            this.BTN_Sigm1.Location = new System.Drawing.Point(230, 6);
-            this.BTN_Sigm1.Name = "BTN_Sigm1";
-            this.BTN_Sigm1.Size = new System.Drawing.Size(53, 40);
-            this.BTN_Sigm1.TabIndex = 245;
-            this.BTN_Sigm1.Text = "توقيع";
-            this.BTN_Sigm1.UseVisualStyleBackColor = false;
-            this.BTN_Sigm1.Click += new System.EventHandler(this.BTN_Sigm1_Click);
-            // 
-            // BTN_Sign1
-            // 
-            this.BTN_Sign1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Sign1.Enabled = false;
-            this.BTN_Sign1.Location = new System.Drawing.Point(1237, 290);
-            this.BTN_Sign1.Name = "BTN_Sign1";
-            this.BTN_Sign1.Size = new System.Drawing.Size(53, 23);
-            this.BTN_Sign1.TabIndex = 240;
-            this.BTN_Sign1.Text = "توقيع";
-            this.BTN_Sign1.UseVisualStyleBackColor = true;
-            this.BTN_Sign1.Click += new System.EventHandler(this.BTN_Sign1_Click);
-            // 
-            // Pic_Sign1
-            // 
-            this.Pic_Sign1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Pic_Sign1.Location = new System.Drawing.Point(3, 3);
-            this.Pic_Sign1.Name = "Pic_Sign1";
-            this.Pic_Sign1.Size = new System.Drawing.Size(221, 57);
-            this.Pic_Sign1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Pic_Sign1.TabIndex = 239;
-            this.Pic_Sign1.TabStop = false;
-            this.Pic_Sign1.Click += new System.EventHandler(this.Pic_Sign1_Click);
+            this.panel15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel15.Controls.Add(this.label17);
+            this.panel15.Controls.Add(this.BTN_Sigm1);
+            this.panel15.Controls.Add(this.Pic_Sign1);
+            this.panel15.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel15.Location = new System.Drawing.Point(769, 3);
+            this.panel15.Name = "panel15";
+            this.panel15.Size = new System.Drawing.Size(378, 63);
+            this.panel15.TabIndex = 286;
             // 
             // label17
             // 
@@ -447,6 +825,43 @@
             this.label17.Text = ":مخزن الاستلام";
             this.label17.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label17.Click += new System.EventHandler(this.label17_Click);
+            // 
+            // BTN_Sigm1
+            // 
+            this.BTN_Sigm1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Sigm1.BackColor = System.Drawing.Color.SandyBrown;
+            this.BTN_Sigm1.Enabled = false;
+            this.BTN_Sigm1.Location = new System.Drawing.Point(230, 6);
+            this.BTN_Sigm1.Name = "BTN_Sigm1";
+            this.BTN_Sigm1.Size = new System.Drawing.Size(53, 40);
+            this.BTN_Sigm1.TabIndex = 245;
+            this.BTN_Sigm1.Text = "توقيع";
+            this.BTN_Sigm1.UseVisualStyleBackColor = false;
+            this.BTN_Sigm1.Click += new System.EventHandler(this.BTN_Sigm1_Click);
+            // 
+            // Pic_Sign1
+            // 
+            this.Pic_Sign1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Pic_Sign1.Location = new System.Drawing.Point(3, 3);
+            this.Pic_Sign1.Name = "Pic_Sign1";
+            this.Pic_Sign1.Size = new System.Drawing.Size(221, 57);
+            this.Pic_Sign1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Pic_Sign1.TabIndex = 239;
+            this.Pic_Sign1.TabStop = false;
+            this.Pic_Sign1.Click += new System.EventHandler(this.Pic_Sign1_Click);
+            // 
+            // BTN_Sign1
+            // 
+            this.BTN_Sign1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Sign1.Enabled = false;
+            this.BTN_Sign1.Location = new System.Drawing.Point(1237, 290);
+            this.BTN_Sign1.Name = "BTN_Sign1";
+            this.BTN_Sign1.Size = new System.Drawing.Size(53, 23);
+            this.BTN_Sign1.TabIndex = 240;
+            this.BTN_Sign1.Text = "توقيع";
+            this.BTN_Sign1.UseVisualStyleBackColor = true;
+            this.BTN_Sign1.Click += new System.EventHandler(this.BTN_Sign1_Click);
             // 
             // dataGridView1
             // 
@@ -792,6 +1207,40 @@
             this.panel2.TabIndex = 19;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
+            // BTN_SearchEzn
+            // 
+            this.BTN_SearchEzn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_SearchEzn.BackColor = System.Drawing.Color.LightGray;
+            this.BTN_SearchEzn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_SearchEzn.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
+            this.BTN_SearchEzn.FlatAppearance.BorderSize = 3;
+            this.BTN_SearchEzn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_SearchEzn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.BTN_SearchEzn.ForeColor = System.Drawing.Color.Blue;
+            this.BTN_SearchEzn.Location = new System.Drawing.Point(792, 4);
+            this.BTN_SearchEzn.Name = "BTN_SearchEzn";
+            this.BTN_SearchEzn.Size = new System.Drawing.Size(70, 31);
+            this.BTN_SearchEzn.TabIndex = 338;
+            this.BTN_SearchEzn.Text = "بحث";
+            this.BTN_SearchEzn.UseVisualStyleBackColor = false;
+            // 
+            // BTN_Cancel
+            // 
+            this.BTN_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Cancel.BackColor = System.Drawing.Color.LightGray;
+            this.BTN_Cancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Cancel.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
+            this.BTN_Cancel.FlatAppearance.BorderSize = 3;
+            this.BTN_Cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_Cancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.BTN_Cancel.ForeColor = System.Drawing.Color.Blue;
+            this.BTN_Cancel.Location = new System.Drawing.Point(863, 4);
+            this.BTN_Cancel.Name = "BTN_Cancel";
+            this.BTN_Cancel.Size = new System.Drawing.Size(70, 31);
+            this.BTN_Cancel.TabIndex = 337;
+            this.BTN_Cancel.Text = "إلغاء";
+            this.BTN_Cancel.UseVisualStyleBackColor = false;
+            // 
             // pictureBox2
             // 
             this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
@@ -819,22 +1268,6 @@
             this.SaveBtn.Text = "حفظ";
             this.SaveBtn.UseVisualStyleBackColor = false;
             this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
-            // 
-            // DeleteBtn
-            // 
-            this.DeleteBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DeleteBtn.BackColor = System.Drawing.Color.OrangeRed;
-            this.DeleteBtn.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
-            this.DeleteBtn.FlatAppearance.BorderSize = 3;
-            this.DeleteBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.DeleteBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.DeleteBtn.Location = new System.Drawing.Point(187, 33);
-            this.DeleteBtn.Name = "DeleteBtn";
-            this.DeleteBtn.Size = new System.Drawing.Size(52, 25);
-            this.DeleteBtn.TabIndex = 28;
-            this.DeleteBtn.Text = "حذف";
-            this.DeleteBtn.UseVisualStyleBackColor = false;
-            this.DeleteBtn.Click += new System.EventHandler(this.DeleteBtn_Click);
             // 
             // EditBtn
             // 
@@ -1023,6 +1456,7 @@
             this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panel7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel7.BackgroundImage")));
             this.panel7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel7.Controls.Add(this.TXT_AmrNo);
             this.panel7.Controls.Add(this.BTN_Print2);
             this.panel7.Controls.Add(this.BTN_Search_Motab3a);
             this.panel7.Controls.Add(this.BTN_Save2);
@@ -1349,438 +1783,6 @@
             this.browseBTN.Text = "إرفاق مرفقات";
             this.browseBTN.UseVisualStyleBackColor = false;
             // 
-            // BTN_SearchEzn
-            // 
-            this.BTN_SearchEzn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_SearchEzn.BackColor = System.Drawing.Color.LightGray;
-            this.BTN_SearchEzn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_SearchEzn.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
-            this.BTN_SearchEzn.FlatAppearance.BorderSize = 3;
-            this.BTN_SearchEzn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_SearchEzn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.BTN_SearchEzn.ForeColor = System.Drawing.Color.Blue;
-            this.BTN_SearchEzn.Location = new System.Drawing.Point(792, 4);
-            this.BTN_SearchEzn.Name = "BTN_SearchEzn";
-            this.BTN_SearchEzn.Size = new System.Drawing.Size(70, 31);
-            this.BTN_SearchEzn.TabIndex = 338;
-            this.BTN_SearchEzn.Text = "بحث";
-            this.BTN_SearchEzn.UseVisualStyleBackColor = false;
-            // 
-            // BTN_Cancel
-            // 
-            this.BTN_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Cancel.BackColor = System.Drawing.Color.LightGray;
-            this.BTN_Cancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_Cancel.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
-            this.BTN_Cancel.FlatAppearance.BorderSize = 3;
-            this.BTN_Cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_Cancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.BTN_Cancel.ForeColor = System.Drawing.Color.Blue;
-            this.BTN_Cancel.Location = new System.Drawing.Point(863, 4);
-            this.BTN_Cancel.Name = "BTN_Cancel";
-            this.BTN_Cancel.Size = new System.Drawing.Size(70, 31);
-            this.BTN_Cancel.TabIndex = 337;
-            this.BTN_Cancel.Text = "إلغاء";
-            this.BTN_Cancel.UseVisualStyleBackColor = false;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.Controls.Add(this.panel14, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel19, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel18, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel17, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel16, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel15, 2, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1150, 139);
-            this.tableLayoutPanel1.TabIndex = 241;
-            // 
-            // panel14
-            // 
-            this.panel14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel14.Controls.Add(this.BTN_Estagal);
-            this.panel14.Controls.Add(this.textBox1);
-            this.panel14.Controls.Add(this.button1);
-            this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel14.Location = new System.Drawing.Point(386, 72);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(377, 64);
-            this.panel14.TabIndex = 285;
-            // 
-            // panel15
-            // 
-            this.panel15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel15.Controls.Add(this.label17);
-            this.panel15.Controls.Add(this.BTN_Sigm1);
-            this.panel15.Controls.Add(this.Pic_Sign1);
-            this.panel15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel15.Location = new System.Drawing.Point(769, 3);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(378, 63);
-            this.panel15.TabIndex = 286;
-            // 
-            // panel16
-            // 
-            this.panel16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel16.Controls.Add(this.label20);
-            this.panel16.Controls.Add(this.Pic_Sign2);
-            this.panel16.Controls.Add(this.BTN_Sign2);
-            this.panel16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel16.Location = new System.Drawing.Point(386, 3);
-            this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(377, 63);
-            this.panel16.TabIndex = 286;
-            // 
-            // panel17
-            // 
-            this.panel17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel17.Controls.Add(this.label21);
-            this.panel17.Controls.Add(this.Pic_Sign3);
-            this.panel17.Controls.Add(this.BTN_Sign3);
-            this.panel17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel17.Location = new System.Drawing.Point(3, 3);
-            this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(377, 63);
-            this.panel17.TabIndex = 286;
-            // 
-            // panel18
-            // 
-            this.panel18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel18.Controls.Add(this.label23);
-            this.panel18.Controls.Add(this.Pic_Sign4);
-            this.panel18.Controls.Add(this.DeleteBtn);
-            this.panel18.Controls.Add(this.BTN_Sign4);
-            this.panel18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel18.Location = new System.Drawing.Point(3, 72);
-            this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(377, 64);
-            this.panel18.TabIndex = 286;
-            // 
-            // panel19
-            // 
-            this.panel19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel19.Controls.Add(this.TXT_Tasnif);
-            this.panel19.Controls.Add(this.TXT_Mobashr);
-            this.panel19.Controls.Add(this.label18);
-            this.panel19.Controls.Add(this.label19);
-            this.panel19.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel19.Location = new System.Drawing.Point(769, 72);
-            this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(378, 64);
-            this.panel19.TabIndex = 286;
-            // 
-            // takalefTable
-            // 
-            this.takalefTable.AutoSize = true;
-            this.takalefTable.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.takalefTable.ColumnCount = 7;
-            this.takalefTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.3F));
-            this.takalefTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.3F));
-            this.takalefTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.3F));
-            this.takalefTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.3F));
-            this.takalefTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.3F));
-            this.takalefTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.3F));
-            this.takalefTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.2F));
-            this.takalefTable.Controls.Add(this.TXT_Enfak, 0, 2);
-            this.takalefTable.Controls.Add(this.label41, 6, 1);
-            this.takalefTable.Controls.Add(this.TXT_Morakba, 1, 2);
-            this.takalefTable.Controls.Add(this.label35, 0, 1);
-            this.takalefTable.Controls.Add(this.TXT_Masrof, 2, 2);
-            this.takalefTable.Controls.Add(this.TXT_MResp, 3, 2);
-            this.takalefTable.Controls.Add(this.label42, 0, 0);
-            this.takalefTable.Controls.Add(this.label28, 6, 0);
-            this.takalefTable.Controls.Add(this.label36, 1, 1);
-            this.takalefTable.Controls.Add(this.label8, 1, 0);
-            this.takalefTable.Controls.Add(this.TXT_AccNo, 6, 2);
-            this.takalefTable.Controls.Add(this.label37, 2, 1);
-            this.takalefTable.Controls.Add(this.TXT_MTaklif, 4, 2);
-            this.takalefTable.Controls.Add(this.label22, 2, 0);
-            this.takalefTable.Controls.Add(this.label39, 3, 1);
-            this.takalefTable.Controls.Add(this.label29, 3, 0);
-            this.takalefTable.Controls.Add(this.label38, 4, 0);
-            this.takalefTable.Controls.Add(this.label40, 4, 1);
-            this.takalefTable.Controls.Add(this.label43, 5, 1);
-            this.takalefTable.Controls.Add(this.label44, 5, 0);
-            this.takalefTable.Controls.Add(this.TXT_PaccNo, 5, 2);
-            this.takalefTable.Dock = System.Windows.Forms.DockStyle.Top;
-            this.takalefTable.Location = new System.Drawing.Point(0, 139);
-            this.takalefTable.Name = "takalefTable";
-            this.takalefTable.RowCount = 3;
-            this.takalefTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.takalefTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.takalefTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-            this.takalefTable.Size = new System.Drawing.Size(1150, 96);
-            this.takalefTable.TabIndex = 275;
-            // 
-            // TXT_Enfak
-            // 
-            this.TXT_Enfak.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_Enfak.Enabled = false;
-            this.TXT_Enfak.Font = new System.Drawing.Font("Arial", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_Enfak.Location = new System.Drawing.Point(4, 66);
-            this.TXT_Enfak.Name = "TXT_Enfak";
-            this.TXT_Enfak.Size = new System.Drawing.Size(157, 22);
-            this.TXT_Enfak.TabIndex = 274;
-            this.TXT_Enfak.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TXT_Enfak.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
-            // 
-            // label41
-            // 
-            this.label41.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label41.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label41.Location = new System.Drawing.Point(988, 32);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(158, 22);
-            this.label41.TabIndex = 262;
-            this.label41.Text = "65/60";
-            this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // TXT_Morakba
-            // 
-            this.TXT_Morakba.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_Morakba.Enabled = false;
-            this.TXT_Morakba.Font = new System.Drawing.Font("Arial", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_Morakba.Location = new System.Drawing.Point(168, 66);
-            this.TXT_Morakba.Name = "TXT_Morakba";
-            this.TXT_Morakba.Size = new System.Drawing.Size(157, 22);
-            this.TXT_Morakba.TabIndex = 271;
-            this.TXT_Morakba.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TXT_Morakba.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
-            // 
-            // label35
-            // 
-            this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label35.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label35.Location = new System.Drawing.Point(4, 32);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(157, 22);
-            this.label35.TabIndex = 268;
-            this.label35.Text = "80";
-            this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // TXT_Masrof
-            // 
-            this.TXT_Masrof.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_Masrof.Enabled = false;
-            this.TXT_Masrof.Font = new System.Drawing.Font("Arial", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_Masrof.Location = new System.Drawing.Point(332, 66);
-            this.TXT_Masrof.Name = "TXT_Masrof";
-            this.TXT_Masrof.Size = new System.Drawing.Size(157, 22);
-            this.TXT_Masrof.TabIndex = 272;
-            this.TXT_Masrof.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TXT_Masrof.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
-            // 
-            // TXT_MResp
-            // 
-            this.TXT_MResp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_MResp.Enabled = false;
-            this.TXT_MResp.Font = new System.Drawing.Font("Arial", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_MResp.Location = new System.Drawing.Point(496, 66);
-            this.TXT_MResp.Name = "TXT_MResp";
-            this.TXT_MResp.Size = new System.Drawing.Size(157, 22);
-            this.TXT_MResp.TabIndex = 273;
-            this.TXT_MResp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TXT_MResp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
-            // 
-            // label42
-            // 
-            this.label42.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label42.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label42.Location = new System.Drawing.Point(4, 1);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(157, 22);
-            this.label42.TabIndex = 260;
-            this.label42.Text = "انفاق";
-            this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label28
-            // 
-            this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label28.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label28.Location = new System.Drawing.Point(988, 1);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(158, 22);
-            this.label28.TabIndex = 254;
-            this.label28.Text = "ح/مالى";
-            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label36
-            // 
-            this.label36.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label36.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label36.Location = new System.Drawing.Point(168, 32);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(157, 22);
-            this.label36.TabIndex = 267;
-            this.label36.Text = "79";
-            this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label8
-            // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label8.Location = new System.Drawing.Point(168, 1);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(157, 22);
-            this.label8.TabIndex = 259;
-            this.label8.Text = "عنصر مراقبة";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // TXT_AccNo
-            // 
-            this.TXT_AccNo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_AccNo.Enabled = false;
-            this.TXT_AccNo.Font = new System.Drawing.Font("Arial", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_AccNo.Location = new System.Drawing.Point(988, 66);
-            this.TXT_AccNo.Name = "TXT_AccNo";
-            this.TXT_AccNo.Size = new System.Drawing.Size(158, 22);
-            this.TXT_AccNo.TabIndex = 261;
-            this.TXT_AccNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TXT_AccNo.TextChanged += new System.EventHandler(this.TXT_AccNo_TextChanged);
-            this.TXT_AccNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
-            // 
-            // label37
-            // 
-            this.label37.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label37.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label37.Location = new System.Drawing.Point(332, 32);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(157, 22);
-            this.label37.TabIndex = 266;
-            this.label37.Text = "78";
-            this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // TXT_MTaklif
-            // 
-            this.TXT_MTaklif.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_MTaklif.Enabled = false;
-            this.TXT_MTaklif.Font = new System.Drawing.Font("Arial", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_MTaklif.Location = new System.Drawing.Point(660, 66);
-            this.TXT_MTaklif.Name = "TXT_MTaklif";
-            this.TXT_MTaklif.Size = new System.Drawing.Size(157, 22);
-            this.TXT_MTaklif.TabIndex = 270;
-            this.TXT_MTaklif.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TXT_MTaklif.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
-            // 
-            // label22
-            // 
-            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label22.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label22.Location = new System.Drawing.Point(332, 1);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(157, 22);
-            this.label22.TabIndex = 258;
-            this.label22.Text = "عنصر مصروف";
-            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label39
-            // 
-            this.label39.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label39.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label39.Location = new System.Drawing.Point(496, 32);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(157, 22);
-            this.label39.TabIndex = 264;
-            this.label39.Text = "77/72";
-            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label29
-            // 
-            this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label29.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label29.Location = new System.Drawing.Point(496, 1);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(157, 22);
-            this.label29.TabIndex = 256;
-            this.label29.Text = "مركز مسئولية";
-            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label38
-            // 
-            this.label38.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label38.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label38.Location = new System.Drawing.Point(660, 1);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(157, 22);
-            this.label38.TabIndex = 257;
-            this.label38.Text = "م/تكاليف";
-            this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label40
-            // 
-            this.label40.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label40.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label40.Location = new System.Drawing.Point(660, 32);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(157, 22);
-            this.label40.TabIndex = 265;
-            this.label40.Text = "71/66";
-            this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label43
-            // 
-            this.label43.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label43.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label43.Location = new System.Drawing.Point(824, 32);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(157, 22);
-            this.label43.TabIndex = 263;
-            this.label43.Text = "71/66";
-            this.label43.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label44
-            // 
-            this.label44.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label44.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label44.Location = new System.Drawing.Point(824, 1);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(157, 22);
-            this.label44.TabIndex = 255;
-            this.label44.Text = "ح/فرعى";
-            this.label44.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // TXT_PaccNo
-            // 
-            this.TXT_PaccNo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_PaccNo.Enabled = false;
-            this.TXT_PaccNo.Font = new System.Drawing.Font("Arial", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_PaccNo.Location = new System.Drawing.Point(824, 66);
-            this.TXT_PaccNo.Name = "TXT_PaccNo";
-            this.TXT_PaccNo.Size = new System.Drawing.Size(157, 22);
-            this.TXT_PaccNo.TabIndex = 269;
-            this.TXT_PaccNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TXT_PaccNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
-            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.dataGridView1);
@@ -1789,6 +1791,16 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1150, 258);
             this.panel3.TabIndex = 246;
+            // 
+            // TXT_AmrNo
+            // 
+            this.TXT_AmrNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TXT_AmrNo.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_AmrNo.Location = new System.Drawing.Point(3, 15);
+            this.TXT_AmrNo.Name = "TXT_AmrNo";
+            this.TXT_AmrNo.Size = new System.Drawing.Size(29, 26);
+            this.TXT_AmrNo.TabIndex = 309;
+            this.TXT_AmrNo.Visible = false;
             // 
             // FEdafaMakhzania_F
             // 
@@ -1808,15 +1820,31 @@
             this.Load += new System.EventHandler(this.TalbTawred_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.takalefTable.ResumeLayout(false);
+            this.takalefTable.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel14.ResumeLayout(false);
+            this.panel14.PerformLayout();
+            this.panel19.ResumeLayout(false);
+            this.panel19.PerformLayout();
+            this.panel18.ResumeLayout(false);
+            this.panel18.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign4)).EndInit();
+            this.panel17.ResumeLayout(false);
+            this.panel17.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign3)).EndInit();
+            this.panel16.ResumeLayout(false);
+            this.panel16.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign2)).EndInit();
+            this.panel15.ResumeLayout(false);
+            this.panel15.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -1831,21 +1859,6 @@
             this.panel10.PerformLayout();
             this.panel12.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.panel14.ResumeLayout(false);
-            this.panel14.PerformLayout();
-            this.panel15.ResumeLayout(false);
-            this.panel15.PerformLayout();
-            this.panel16.ResumeLayout(false);
-            this.panel16.PerformLayout();
-            this.panel17.ResumeLayout(false);
-            this.panel17.PerformLayout();
-            this.panel18.ResumeLayout(false);
-            this.panel18.PerformLayout();
-            this.panel19.ResumeLayout(false);
-            this.panel19.PerformLayout();
-            this.takalefTable.ResumeLayout(false);
-            this.takalefTable.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -1974,5 +1987,6 @@
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.TextBox TXT_PaccNo;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.TextBox TXT_AmrNo;
     }
 }

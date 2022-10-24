@@ -28,14 +28,14 @@ namespace ANRPC_Inventory
         private void queryData()
         {
             string codeEdara = "850";
-            int TalbTwareed_No =  13 ;
+            int TalbTwareed_No =  19 ;
             string FYear = "2022_2023";
             string formNo = "1";
             SqlConnection sqlConnction = new SqlConnection(Constants.constring);
             SqlDataAdapter daTalabTawreed = new SqlDataAdapter(@"select *,cast(iif(Date2 is NULL ,0,1) as bit) as isDone, 
                                                                 FORMAT([Date2], 'd MMM', 'en-US') as signDate, DATEDIFF(day, 
                                                                 [Date1], [Date2]) AS Duration FROM T_SignaturesDates 
-                                                                where TalbTwareed_No = " + TalbTwareed_No + " and FormNo=" + formNo + " and CodeEdara = '"+ codeEdara + "' AND FYear='" + FYear +"'", sqlConnction);
+                                                                where TalbTwareed_No = " + TalbTwareed_No + " and FormNo=" + formNo + " AND FYear='" + FYear +"'", sqlConnction);
 
 
             sqlConnction.Open();

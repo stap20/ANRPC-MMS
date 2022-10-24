@@ -127,6 +127,8 @@ namespace ANRPC_Inventory
 
         private void TalbTawred_Load(object sender, EventArgs e)
         {
+            HelperClass.comboBoxFiller(Cmb_FY, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
+
             DisableControls();
             con = new SqlConnection(Constants.constring);
             Cmb_AmrNo.DrawMode = DrawMode.OwnerDrawFixed;
@@ -741,7 +743,7 @@ namespace ANRPC_Inventory
                 Cmb_AmrNo.Items.Clear();
                 TXT_AmrNo.AutoCompleteMode = AutoCompleteMode.None;
                 TXT_AmrNo.AutoCompleteSource = AutoCompleteSource.None; ;
-                string cmdstring3 = "SELECT  Amrshraa_No from T_Awamershraa  where  Sign3 is not null and AmrSheraa_sanamalia='" + Cmb_FY.Text + "' order by  Amrshraa_No";
+                string cmdstring3 = "SELECT  Amrshraa_No from T_Awamershraa  where  Sign14 is not null and AmrSheraa_sanamalia='" + Cmb_FY.Text + "' order by  Amrshraa_No";
                 SqlCommand cmd3 = new SqlCommand(cmdstring3, Constants.con);
                 SqlDataReader dr3 = cmd3.ExecuteReader();
                 //---------------------------------
@@ -789,7 +791,7 @@ namespace ANRPC_Inventory
                }
                else if (AddEditFlag == 2)
                {
-                    cmdstring = "select (Amrshraa_No) from  T_Awamershraa where (Sign3 is not null) and AmrSheraa_sanamalia=@FY   order by  Amrshraa_No";
+                    cmdstring = "select (Amrshraa_No) from  T_Awamershraa where (Sign14 is not null) and AmrSheraa_sanamalia=@FY   order by  Amrshraa_No";
 
                 //   cmdstring = "select (Amrshraa_No) from  T_Estlam  order by  Amrshraa_No";
 

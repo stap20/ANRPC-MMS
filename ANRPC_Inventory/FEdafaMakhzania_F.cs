@@ -2580,18 +2580,18 @@ namespace ANRPC_Inventory
                           wazifa1 = p.Split(':')[2];
                           pp = p.Split(':')[0];
 
-                          ((PictureBox)this.panel1.Controls["Pic_Sign" + "1"]).Image = Image.FromFile(@pp);
+                            ((PictureBox)this.tableLayoutPanel1.Controls["panel15"].Controls["Pic_Sign" + "1"]).Image = Image.FromFile(@pp);
 
                           FlagSign1 = 1;
                           FlagEmpn1 = s1;
-                          ((PictureBox)this.panel1.Controls["Pic_Sign" + "1"]).BackColor = Color.Green;
+                            ((PictureBox)this.tableLayoutPanel1.Controls["panel15"].Controls["Pic_Sign" + "1"]).BackColor = Color.Green;
                           toolTip1.SetToolTip(Pic_Sign1, Ename1 + Environment.NewLine + wazifa1);
                       }
 
                   }
                   else
                   {
-                      ((PictureBox)this.panel1.Controls["Pic_Sign" + "1"]).BackColor = Color.Red;
+                        ((PictureBox)this.tableLayoutPanel1.Controls["panel15"].Controls["Pic_Sign" + "1"]).BackColor = Color.Red;
                   }
                   if (s2 != "")
                   {
@@ -2605,18 +2605,18 @@ namespace ANRPC_Inventory
                           wazifa2 = p.Split(':')[2];
                           pp = p.Split(':')[0];
 
-                          ((PictureBox)this.panel3.Controls["Pic_Sign" + "2"]).Image = Image.FromFile(@pp);
+                            ((PictureBox)this.tableLayoutPanel1.Controls["panel16"].Controls["Pic_Sign" + "2"]).Image = Image.FromFile(@pp);
 
                           FlagSign2 = 1;
                           FlagEmpn2 = s2;
-                          ((PictureBox)this.panel3.Controls["Pic_Sign" + "2"]).BackColor = Color.Green;
+                            ((PictureBox)this.tableLayoutPanel1.Controls["panel16"].Controls["Pic_Sign" + "2"]).BackColor = Color.Green;
                           toolTip1.SetToolTip(Pic_Sign2, Ename2 + Environment.NewLine + wazifa2);
                       }
 
                   }
                   else
                   {
-                      ((PictureBox)this.panel3.Controls["Pic_Sign" + "2"]).BackColor = Color.Red;
+                        ((PictureBox)this.tableLayoutPanel1.Controls["panel16"].Controls["Pic_Sign" + "2"]).BackColor = Color.Red;
                   }
                   if (s3 != "")
                   {
@@ -2629,18 +2629,18 @@ namespace ANRPC_Inventory
                           wazifa3 = p.Split(':')[2];
                           pp = p.Split(':')[0];
 
-                          ((PictureBox)this.panel3.Controls["Pic_Sign" + "3"]).Image = Image.FromFile(@pp);
+                            ((PictureBox)this.tableLayoutPanel1.Controls["panel17"].Controls["Pic_Sign" + "3"]).Image = Image.FromFile(@pp);
 
                           FlagSign3 = 1;
                           FlagEmpn3 = s3;
-                          ((PictureBox)this.panel3.Controls["Pic_Sign" + "3"]).BackColor = Color.Green;
+                            ((PictureBox)this.tableLayoutPanel1.Controls["panel17"].Controls["Pic_Sign" + "3"]).BackColor = Color.Green;
                           toolTip1.SetToolTip(Pic_Sign3, Ename3 + Environment.NewLine + wazifa3);
                       }
 
                   }
                   else
                   {
-                      ((PictureBox)this.panel3.Controls["Pic_Sign" + "3"]).BackColor = Color.Red;
+                        ((PictureBox)this.tableLayoutPanel1.Controls["panel17"].Controls["Pic_Sign" + "3"]).BackColor = Color.Red;
                   }
                   if (s4 != "")
                   {
@@ -2653,18 +2653,18 @@ namespace ANRPC_Inventory
                           wazifa4 = p.Split(':')[2];
                           pp = p.Split(':')[0];
 
-                          ((PictureBox)this.panel1.Controls["Pic_Sign" + "4"]).Image = Image.FromFile(@pp);
+                            ((PictureBox)this.tableLayoutPanel1.Controls["panel18"].Controls["Pic_Sign" + "4"]).Image = Image.FromFile(@pp);
 
                           FlagSign4 = 1;
                           FlagEmpn4 = s4;
-                          ((PictureBox)this.panel1.Controls["Pic_Sign" + "4"]).BackColor = Color.Green;
+                            ((PictureBox)this.tableLayoutPanel1.Controls["panel18"].Controls["Pic_Sign" + "4"]).BackColor = Color.Green;
                           toolTip1.SetToolTip(Pic_Sign4, Ename4 + Environment.NewLine + wazifa4);
                       }
 
                   }
                   else
                   {
-                      ((PictureBox)this.panel1.Controls["Pic_Sign" + "4"]).BackColor = Color.Red;
+                        ((PictureBox)this.tableLayoutPanel1.Controls["panel18"].Controls["Pic_Sign" + "4"]).BackColor = Color.Red;
                   }
 
 
@@ -2679,7 +2679,7 @@ namespace ANRPC_Inventory
             dr.Close();
             //////////////////////////////////
 
-            cmdstring = "select * from  T_Awamershraa where   Amrshraa_No=@TN and AmrSheraa_sanamalia=@FY";
+            cmdstring = "select * from  T_Awamershraa where  Amrshraa_No=@TN and AmrSheraa_sanamalia=@FY";
             cmd = new SqlCommand(cmdstring, Constants.con);
             if (x == 1)
             {
@@ -2693,33 +2693,49 @@ namespace ANRPC_Inventory
             }
             // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
 
+
+            DataTable dtTalabTawreed = new DataTable();
+
+
+
+
+
+            SqlConnection sqlConnction = new SqlConnection(Constants.constring);
+            SqlDataAdapter daTalabTawreed = new SqlDataAdapter(@"select * from  T_Awamershraa where  Amrshraa_No="+ amrno + " and AmrSheraa_sanamalia='"+ amrsana + "'", sqlConnction);
+            sqlConnction.Open();
+            daTalabTawreed.Fill(dtTalabTawreed);
+            sqlConnction.Close();
+
+
+
             dr = cmd.ExecuteReader();
 
-            if (dr.HasRows == true)
+            if (dtTalabTawreed.Rows.Count > 0)
             {
-                while (dr.Read())
-                {
+                DataRow row = dtTalabTawreed.Rows[0];
+                //while (dr.Read())
+                //{
 
-                    Cmb_FY.Text = dr["AmrSheraa_sanamalia"].ToString();
-                 //   Cmb_FY2.Text = dr["monaksa_sanamalia"].ToString();
+                    Cmb_FY.Text = row["AmrSheraa_sanamalia"].ToString();
+                    //   Cmb_FY2.Text = dr["monaksa_sanamalia"].ToString();
+                    TXT_AmrNo.Text = row["Amrshraa_No"].ToString();
+                    Cmb_AmrNo.Text = row["Amrshraa_No"].ToString();
 
-                    Cmb_AmrNo.Text = dr["Amrshraa_No"].ToString();
 
+                    //  TXT_EdafaNo.Text = dr["Monaksa_No"].ToString();
+                    TXT_Momayz.Text = row["Momayz"].ToString();
 
-                  //  TXT_EdafaNo.Text = dr["Monaksa_No"].ToString();
-                    TXT_Momayz.Text = dr["Momayz"].ToString();
-
-                    TXT_Edara.Text = dr["NameEdara"].ToString();
-                    TXT_Date.Text = dr["Date_amrshraa"].ToString();
+                    TXT_Edara.Text = row["NameEdara"].ToString();
+                    TXT_Date.Text = row["Date_amrshraa"].ToString();
                     // CMB_Sadr.Text = dr["Sadr_To"].ToString();
-                    TXT_BndMwazna.Text = dr["Bnd_Mwazna"].ToString();
-                    TXT_Payment.Text = dr["Payment_Method"].ToString();
-                    TXT_TaslemDate.Text = dr["Date_Tslem"].ToString();
-                    TXT_TaslemPlace.Text = dr["Mkan_Tslem"].ToString();
-                    TXT_Name.Text = dr["Shick_Name"].ToString();
-                    TXT_HesabMward1.Text = dr["Hesab_Mward"].ToString();
-                    TXT_HesabMward2.Text = dr["Hesab_Mward"].ToString();
-                    TXT_Egmali.Text = dr["Egmali"].ToString();
+                    TXT_BndMwazna.Text = row["Bnd_Mwazna"].ToString();
+                    TXT_Payment.Text = row["Payment_Method"].ToString();
+                    TXT_TaslemDate.Text = row["Date_Tslem"].ToString();
+                    TXT_TaslemPlace.Text = row["Mkan_Tslem"].ToString();
+                    TXT_Name.Text = row["Shick_Name"].ToString();
+                    TXT_HesabMward1.Text = row["Hesab_Mward"].ToString();
+                    TXT_HesabMward2.Text = row["Hesab_Mward"].ToString();
+                    TXT_Egmali.Text = row["Egmali"].ToString();
 
                     /*     string s1 = dr["Sign1"].ToString();
                          string s2 = dr["Sign2"].ToString();
@@ -2769,7 +2785,7 @@ namespace ANRPC_Inventory
                          }*/
 
                     BTN_Print.Enabled = true;
-                }
+                //}
             }
             else
             {
@@ -2790,7 +2806,7 @@ namespace ANRPC_Inventory
             GetData(Convert.ToInt32(Cmb_AmrNo.Text), Cmb_FY.Text);
             if (DT.Rows.Count == 0)
             {
-            
+
 
             }
             else

@@ -348,7 +348,8 @@
             // 
             // Pic_Sign3
             // 
-            this.Pic_Sign3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Pic_Sign3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.Pic_Sign3.Location = new System.Drawing.Point(4, 4);
             this.Pic_Sign3.Name = "Pic_Sign3";
             this.Pic_Sign3.Size = new System.Drawing.Size(184, 32);
@@ -1619,6 +1620,7 @@
             this.panel19.Name = "panel19";
             this.panel19.Size = new System.Drawing.Size(377, 43);
             this.panel19.TabIndex = 266;
+            this.panel19.Visible = false;
             // 
             // label31
             // 

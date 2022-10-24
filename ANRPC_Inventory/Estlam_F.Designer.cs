@@ -226,7 +226,7 @@
             // 
             this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label21.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label21.Font = new System.Drawing.Font("Arabic Transparent", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label21.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label21.ForeColor = System.Drawing.Color.Maroon;
             this.label21.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label21.Location = new System.Drawing.Point(-1, 290);
@@ -241,7 +241,7 @@
             // 
             this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label20.Font = new System.Drawing.Font("Arabic Transparent", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label20.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label20.ForeColor = System.Drawing.Color.Maroon;
             this.label20.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.label20.Location = new System.Drawing.Point(361, 290);
@@ -256,7 +256,7 @@
             // 
             this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label17.Font = new System.Drawing.Font("Arabic Transparent", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label17.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label17.ForeColor = System.Drawing.Color.Maroon;
             this.label17.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label17.Location = new System.Drawing.Point(763, 290);
@@ -270,7 +270,7 @@
             // TXT_QuanTard
             // 
             this.TXT_QuanTard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_QuanTard.Font = new System.Drawing.Font("Arabic Transparent", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.TXT_QuanTard.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.TXT_QuanTard.Location = new System.Drawing.Point(836, 39);
             this.TXT_QuanTard.Name = "TXT_QuanTard";
             this.TXT_QuanTard.Size = new System.Drawing.Size(159, 26);
@@ -281,7 +281,7 @@
             // TXT_QuanBnod
             // 
             this.TXT_QuanBnod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_QuanBnod.Font = new System.Drawing.Font("Arabic Transparent", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.TXT_QuanBnod.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.TXT_QuanBnod.Location = new System.Drawing.Point(836, 72);
             this.TXT_QuanBnod.Name = "TXT_QuanBnod";
             this.TXT_QuanBnod.Size = new System.Drawing.Size(159, 26);
@@ -309,11 +309,11 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arabic Transparent", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label5.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label5.Location = new System.Drawing.Point(1006, 73);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 22);
+            this.label5.Size = new System.Drawing.Size(69, 22);
             this.label5.TabIndex = 17;
             this.label5.Text = "عدد البنود";
             this.label5.Click += new System.EventHandler(this.label5_Click);
@@ -321,7 +321,7 @@
             // TXT_Sanf
             // 
             this.TXT_Sanf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_Sanf.Font = new System.Drawing.Font("Arabic Transparent", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.TXT_Sanf.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.TXT_Sanf.Location = new System.Drawing.Point(316, 65);
             this.TXT_Sanf.Name = "TXT_Sanf";
             this.TXT_Sanf.Size = new System.Drawing.Size(350, 26);
@@ -331,7 +331,7 @@
             // TXT_NameMward
             // 
             this.TXT_NameMward.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_NameMward.Font = new System.Drawing.Font("Arabic Transparent", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.TXT_NameMward.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.TXT_NameMward.Location = new System.Drawing.Point(836, 8);
             this.TXT_NameMward.Name = "TXT_NameMward";
             this.TXT_NameMward.Size = new System.Drawing.Size(159, 26);
@@ -342,11 +342,11 @@
             // 
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Arabic Transparent", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label11.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label11.Location = new System.Drawing.Point(1002, 40);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(80, 22);
+            this.label11.Size = new System.Drawing.Size(79, 22);
             this.label11.TabIndex = 9;
             this.label11.Text = "عدد الطرود";
             this.label11.Click += new System.EventHandler(this.label11_Click);
@@ -355,11 +355,11 @@
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Arabic Transparent", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label10.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label10.Location = new System.Drawing.Point(668, 18);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(151, 22);
+            this.label10.Size = new System.Drawing.Size(148, 22);
             this.label10.TabIndex = 8;
             this.label10.Text = "تاريخ ورود امر الشراء";
             this.label10.Click += new System.EventHandler(this.label10_Click);
@@ -368,7 +368,7 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Arabic Transparent", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label9.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label9.Location = new System.Drawing.Point(697, 68);
             this.label9.Name = "label9";
@@ -381,11 +381,11 @@
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Arabic Transparent", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label8.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label8.Location = new System.Drawing.Point(1001, 8);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(74, 22);
+            this.label8.Size = new System.Drawing.Size(73, 22);
             this.label8.TabIndex = 6;
             this.label8.Text = "اسم المورد";
             this.label8.Click += new System.EventHandler(this.label8_Click);
@@ -434,7 +434,7 @@
             // Cmb_AmrNo
             // 
             this.Cmb_AmrNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cmb_AmrNo.Font = new System.Drawing.Font("Arabic Transparent", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Cmb_AmrNo.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Cmb_AmrNo.FormattingEnabled = true;
             this.Cmb_AmrNo.Items.AddRange(new object[] {
             "2019_2020",
@@ -452,11 +452,11 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arabic Transparent", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label3.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label3.ForeColor = System.Drawing.Color.Maroon;
             this.label3.Location = new System.Drawing.Point(1034, 131);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 25);
+            this.label3.Size = new System.Drawing.Size(58, 24);
             this.label3.TabIndex = 232;
             this.label3.Text = "التاريخ";
             this.label3.Click += new System.EventHandler(this.label3_Click_1);
@@ -477,11 +477,11 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.label2.Font = new System.Drawing.Font("Arabic Transparent", 20F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Arial", 20F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.Menu;
             this.label2.Location = new System.Drawing.Point(786, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(300, 32);
+            this.label2.Size = new System.Drawing.Size(297, 31);
             this.label2.TabIndex = 230;
             this.label2.Text = "مهمات واردة الى مخزن الاستلام";
             // 
@@ -492,7 +492,7 @@
             this.BTN_EstlamReport.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.BTN_EstlamReport.FlatAppearance.BorderSize = 3;
             this.BTN_EstlamReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_EstlamReport.Font = new System.Drawing.Font("Arabic Transparent", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.BTN_EstlamReport.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.BTN_EstlamReport.ForeColor = System.Drawing.Color.Tomato;
             this.BTN_EstlamReport.Image = ((System.Drawing.Image)(resources.GetObject("BTN_EstlamReport.Image")));
             this.BTN_EstlamReport.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -512,7 +512,7 @@
             this.SaveBtn.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
             this.SaveBtn.FlatAppearance.BorderSize = 3;
             this.SaveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SaveBtn.Font = new System.Drawing.Font("Arabic Transparent", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.SaveBtn.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.SaveBtn.ForeColor = System.Drawing.Color.Blue;
             this.SaveBtn.Location = new System.Drawing.Point(720, 62);
             this.SaveBtn.Name = "SaveBtn";
@@ -529,7 +529,7 @@
             this.DeleteBtn.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
             this.DeleteBtn.FlatAppearance.BorderSize = 3;
             this.DeleteBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DeleteBtn.Font = new System.Drawing.Font("Arabic Transparent", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.DeleteBtn.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.DeleteBtn.ForeColor = System.Drawing.Color.Blue;
             this.DeleteBtn.Location = new System.Drawing.Point(815, 63);
             this.DeleteBtn.Name = "DeleteBtn";
@@ -546,7 +546,7 @@
             this.EditBtn.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
             this.EditBtn.FlatAppearance.BorderSize = 3;
             this.EditBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.EditBtn.Font = new System.Drawing.Font("Arabic Transparent", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.EditBtn.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.EditBtn.ForeColor = System.Drawing.Color.Blue;
             this.EditBtn.Location = new System.Drawing.Point(904, 63);
             this.EditBtn.Name = "EditBtn";
@@ -563,7 +563,7 @@
             this.Addbtn.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
             this.Addbtn.FlatAppearance.BorderSize = 3;
             this.Addbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Addbtn.Font = new System.Drawing.Font("Arabic Transparent", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.Addbtn.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.Addbtn.ForeColor = System.Drawing.Color.Blue;
             this.Addbtn.Location = new System.Drawing.Point(999, 63);
             this.Addbtn.Name = "Addbtn";
@@ -576,7 +576,7 @@
             // TXT_AmrNo
             // 
             this.TXT_AmrNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_AmrNo.Font = new System.Drawing.Font("Arabic Transparent", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_AmrNo.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_AmrNo.Location = new System.Drawing.Point(313, 127);
             this.TXT_AmrNo.Name = "TXT_AmrNo";
             this.TXT_AmrNo.Size = new System.Drawing.Size(169, 26);
@@ -590,11 +590,11 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arabic Transparent", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label1.ForeColor = System.Drawing.Color.Maroon;
             this.label1.Location = new System.Drawing.Point(777, 134);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 25);
+            this.label1.Size = new System.Drawing.Size(98, 24);
             this.label1.TabIndex = 4;
             this.label1.Text = "السنة المالية";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -603,11 +603,11 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arabic Transparent", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label4.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label4.ForeColor = System.Drawing.Color.Maroon;
             this.label4.Location = new System.Drawing.Point(488, 128);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(116, 25);
+            this.label4.Size = new System.Drawing.Size(112, 24);
             this.label4.TabIndex = 8;
             this.label4.Text = "أمر شراء رقم:";
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -615,7 +615,7 @@
             // Cmb_FY
             // 
             this.Cmb_FY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cmb_FY.Font = new System.Drawing.Font("Arabic Transparent", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Cmb_FY.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Cmb_FY.FormattingEnabled = true;
             this.Cmb_FY.Items.AddRange(new object[] {
             "2020_2021"});

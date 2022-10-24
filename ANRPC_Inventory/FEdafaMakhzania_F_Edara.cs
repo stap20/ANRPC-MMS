@@ -118,7 +118,12 @@ namespace ANRPC_Inventory
 
         private void TalbTawred_Load(object sender, EventArgs e)
         {
-           // dataGridView1.Parent = panel1;
+
+
+            HelperClass.comboBoxFiller(Cmb_FY, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
+            HelperClass.comboBoxFiller(Cmb_FY2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
+
+            // dataGridView1.Parent = panel1;
             //dataGridView1.Dock = DockStyle.Bottom;
             AddEditFlag = 0;
             /*
