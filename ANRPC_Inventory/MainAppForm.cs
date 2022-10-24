@@ -31,14 +31,31 @@ namespace ANRPC_Inventory
         //Structs
         private struct RGBColors
         {
-            public static Color color1 = Color.FromArgb(226, 133, 222);
-            public static Color color2 = Color.FromArgb(120, 77, 253);
-            public static Color color3 = Color.FromArgb(74, 218, 236);
-            public static Color color4 = Color.FromArgb(251, 83, 155);
-            public static Color color5 = Color.FromArgb(126, 130, 252);
-            public static Color color6 = Color.FromArgb(255, 192, 71);
-            public static Color color7 = Color.FromArgb(239, 108, 150);
-            public static Color color8 = Color.FromArgb(120, 163, 252);
+            //192, 57, 94
+            //236, 114, 82
+            //255, 180, 80
+            //249, 248, 113
+            //232, 213, 181
+            //210, 165, 23
+            //184, 224, 103
+            //public static Color color1 = Color.FromArgb(226, 133, 222);
+            //public static Color color2 = Color.FromArgb(120, 77, 253);
+            //public static Color color3 = Color.FromArgb(74, 218, 236);
+            //public static Color color4 = Color.FromArgb(251, 83, 155);
+            //public static Color color5 = Color.FromArgb(126, 130, 252);
+            //public static Color color6 = Color.FromArgb(255, 192, 71);
+            //public static Color color7 = Color.FromArgb(239, 108, 150);
+            //public static Color color8 = Color.FromArgb(120, 163, 252);
+
+
+            public static Color color1 = Color.FromArgb(249, 248, 113);
+            public static Color color2 = Color.FromArgb(232, 213, 181);
+            public static Color color3 = Color.FromArgb(184, 224, 103);
+            public static Color color4 = Color.FromArgb(255, 180, 80);
+            public static Color color5 = Color.FromArgb(247, 213, 101);
+            public static Color color6 = Color.FromArgb(192, 57, 94);
+            public static Color color7 = Color.FromArgb(236, 113, 82);
+            
         }
         private void ActivateButton(object senderBtn, Color color)
         {
@@ -179,10 +196,20 @@ namespace ANRPC_Inventory
             ActivateButton(sender, RGBColors.color7);
             formwraper.Visible = false;
         }
+        private void btnTahwel_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender, RGBColors.color5);
+            formwraper.Visible = false;
+        }
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender, RGBColors.color6);
+            formwraper.Visible = false;
+        }
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
-            ActivateButton(sender, RGBColors.color8);
+            ActivateButton(sender, RGBColors.color7);
             formwraper.Visible = false;
         }
 
@@ -207,5 +234,7 @@ namespace ANRPC_Inventory
             this.WindowState = FormWindowState.Normal;
             btnWindowReset.SendToBack();
         }
+
+        
     }
 }

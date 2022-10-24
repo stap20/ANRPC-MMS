@@ -35,21 +35,21 @@ namespace ANRPC_Inventory
             this.main = new System.Windows.Forms.Panel();
             this.formwraper = new System.Windows.Forms.Panel();
             this.appbar = new System.Windows.Forms.Panel();
-            this.sidebar = new System.Windows.Forms.Panel();
-            this.panelButtons = new System.Windows.Forms.Panel();
-            this.panelLogo = new System.Windows.Forms.Panel();
             this.btnMin = new FontAwesome.Sharp.IconButton();
             this.btnClose = new FontAwesome.Sharp.IconButton();
             this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.btnWindowReset = new FontAwesome.Sharp.IconButton();
             this.btn_max = new FontAwesome.Sharp.IconButton();
+            this.sidebar = new System.Windows.Forms.Panel();
+            this.panelButtons = new System.Windows.Forms.Panel();
             this.btnSettings = new FontAwesome.Sharp.IconButton();
-            this.btnCustomers = new FontAwesome.Sharp.IconButton();
-            this.iconButton2 = new FontAwesome.Sharp.IconButton();
+            this.btnSearch = new FontAwesome.Sharp.IconButton();
+            this.btnTahwel = new FontAwesome.Sharp.IconButton();
             this.btnReport = new FontAwesome.Sharp.IconButton();
             this.btnFinancial = new FontAwesome.Sharp.IconButton();
             this.btnTransaction = new FontAwesome.Sharp.IconButton();
             this.btnDashboard = new FontAwesome.Sharp.IconButton();
+            this.panelLogo = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.container.SuspendLayout();
             this.main.SuspendLayout();
@@ -105,42 +105,6 @@ namespace ANRPC_Inventory
             this.appbar.Padding = new System.Windows.Forms.Padding(5, 0, 0, 9);
             this.appbar.Size = new System.Drawing.Size(679, 60);
             this.appbar.TabIndex = 0;
-            // 
-            // sidebar
-            // 
-            this.sidebar.Controls.Add(this.panelButtons);
-            this.sidebar.Controls.Add(this.panelLogo);
-            this.sidebar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.sidebar.Location = new System.Drawing.Point(0, 0);
-            this.sidebar.Name = "sidebar";
-            this.sidebar.Size = new System.Drawing.Size(250, 590);
-            this.sidebar.TabIndex = 0;
-            // 
-            // panelButtons
-            // 
-            this.panelButtons.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(16)))), ((int)(((byte)(90)))));
-            this.panelButtons.Controls.Add(this.btnSettings);
-            this.panelButtons.Controls.Add(this.btnCustomers);
-            this.panelButtons.Controls.Add(this.iconButton2);
-            this.panelButtons.Controls.Add(this.btnReport);
-            this.panelButtons.Controls.Add(this.btnFinancial);
-            this.panelButtons.Controls.Add(this.btnTransaction);
-            this.panelButtons.Controls.Add(this.btnDashboard);
-            this.panelButtons.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelButtons.Location = new System.Drawing.Point(0, 134);
-            this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(250, 456);
-            this.panelButtons.TabIndex = 1;
-            // 
-            // panelLogo
-            // 
-            this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(16)))), ((int)(((byte)(90)))));
-            this.panelLogo.Controls.Add(this.pictureBox1);
-            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelLogo.Location = new System.Drawing.Point(0, 0);
-            this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(250, 134);
-            this.panelLogo.TabIndex = 0;
             // 
             // btnMin
             // 
@@ -243,6 +207,32 @@ namespace ANRPC_Inventory
             this.btn_max.Visible = false;
             this.btn_max.Click += new System.EventHandler(this.btn_max_Click);
             // 
+            // sidebar
+            // 
+            this.sidebar.Controls.Add(this.panelButtons);
+            this.sidebar.Controls.Add(this.panelLogo);
+            this.sidebar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.sidebar.Location = new System.Drawing.Point(0, 0);
+            this.sidebar.Name = "sidebar";
+            this.sidebar.Size = new System.Drawing.Size(250, 590);
+            this.sidebar.TabIndex = 0;
+            // 
+            // panelButtons
+            // 
+            this.panelButtons.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(16)))), ((int)(((byte)(90)))));
+            this.panelButtons.Controls.Add(this.btnSettings);
+            this.panelButtons.Controls.Add(this.btnSearch);
+            this.panelButtons.Controls.Add(this.btnTahwel);
+            this.panelButtons.Controls.Add(this.btnReport);
+            this.panelButtons.Controls.Add(this.btnFinancial);
+            this.panelButtons.Controls.Add(this.btnTransaction);
+            this.panelButtons.Controls.Add(this.btnDashboard);
+            this.panelButtons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelButtons.Location = new System.Drawing.Point(0, 134);
+            this.panelButtons.Name = "panelButtons";
+            this.panelButtons.Size = new System.Drawing.Size(250, 456);
+            this.panelButtons.TabIndex = 1;
+            // 
             // btnSettings
             // 
             this.btnSettings.BackColor = System.Drawing.Color.Transparent;
@@ -263,59 +253,60 @@ namespace ANRPC_Inventory
             this.btnSettings.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnSettings.Size = new System.Drawing.Size(250, 54);
             this.btnSettings.TabIndex = 7;
-            this.btnSettings.Text = "الإعدادات";
+            this.btnSettings.Text = "    الإعدادت";
             this.btnSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSettings.UseVisualStyleBackColor = false;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
-            // btnCustomers
+            // btnSearch
             // 
-            this.btnCustomers.BackColor = System.Drawing.Color.Transparent;
-            this.btnCustomers.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnCustomers.FlatAppearance.BorderSize = 0;
-            this.btnCustomers.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
-            this.btnCustomers.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
-            this.btnCustomers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCustomers.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCustomers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(139)))), ((int)(((byte)(173)))));
-            this.btnCustomers.IconChar = FontAwesome.Sharp.IconChar.Search;
-            this.btnCustomers.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(139)))), ((int)(((byte)(173)))));
-            this.btnCustomers.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnCustomers.IconSize = 32;
-            this.btnCustomers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCustomers.Location = new System.Drawing.Point(0, 270);
-            this.btnCustomers.Name = "btnCustomers";
-            this.btnCustomers.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
-            this.btnCustomers.Size = new System.Drawing.Size(250, 54);
-            this.btnCustomers.TabIndex = 1;
-            this.btnCustomers.Text = "الــبــحــث";
-            this.btnCustomers.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCustomers.UseVisualStyleBackColor = false;
-            this.btnCustomers.Click += new System.EventHandler(this.btnCustomers_Click);
+            this.btnSearch.BackColor = System.Drawing.Color.Transparent;
+            this.btnSearch.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSearch.FlatAppearance.BorderSize = 0;
+            this.btnSearch.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
+            this.btnSearch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(139)))), ((int)(((byte)(173)))));
+            this.btnSearch.IconChar = FontAwesome.Sharp.IconChar.Search;
+            this.btnSearch.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(139)))), ((int)(((byte)(173)))));
+            this.btnSearch.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnSearch.IconSize = 32;
+            this.btnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSearch.Location = new System.Drawing.Point(0, 270);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
+            this.btnSearch.Size = new System.Drawing.Size(250, 54);
+            this.btnSearch.TabIndex = 1;
+            this.btnSearch.Text = "    البـــــحــــث";
+            this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // iconButton2
+            // btnTahwel
             // 
-            this.iconButton2.BackColor = System.Drawing.Color.Transparent;
-            this.iconButton2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.iconButton2.FlatAppearance.BorderSize = 0;
-            this.iconButton2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
-            this.iconButton2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
-            this.iconButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton2.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconButton2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(139)))), ((int)(((byte)(173)))));
-            this.iconButton2.IconChar = FontAwesome.Sharp.IconChar.DiagramPredecessor;
-            this.iconButton2.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(139)))), ((int)(((byte)(173)))));
-            this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton2.IconSize = 32;
-            this.iconButton2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton2.Location = new System.Drawing.Point(0, 216);
-            this.iconButton2.Name = "iconButton2";
-            this.iconButton2.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
-            this.iconButton2.Size = new System.Drawing.Size(250, 54);
-            this.iconButton2.TabIndex = 8;
-            this.iconButton2.Text = " إذون التحويل";
-            this.iconButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton2.UseVisualStyleBackColor = false;
+            this.btnTahwel.BackColor = System.Drawing.Color.Transparent;
+            this.btnTahwel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnTahwel.FlatAppearance.BorderSize = 0;
+            this.btnTahwel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
+            this.btnTahwel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
+            this.btnTahwel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTahwel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTahwel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(139)))), ((int)(((byte)(173)))));
+            this.btnTahwel.IconChar = FontAwesome.Sharp.IconChar.DiagramPredecessor;
+            this.btnTahwel.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(139)))), ((int)(((byte)(173)))));
+            this.btnTahwel.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnTahwel.IconSize = 32;
+            this.btnTahwel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTahwel.Location = new System.Drawing.Point(0, 216);
+            this.btnTahwel.Name = "btnTahwel";
+            this.btnTahwel.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
+            this.btnTahwel.Size = new System.Drawing.Size(250, 54);
+            this.btnTahwel.TabIndex = 8;
+            this.btnTahwel.Text = "    إذون التحويل";
+            this.btnTahwel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnTahwel.UseVisualStyleBackColor = false;
+            this.btnTahwel.Click += new System.EventHandler(this.btnTahwel_Click);
             // 
             // btnReport
             // 
@@ -337,7 +328,7 @@ namespace ANRPC_Inventory
             this.btnReport.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnReport.Size = new System.Drawing.Size(250, 54);
             this.btnReport.TabIndex = 6;
-            this.btnReport.Text = "المطابقة الفنية";
+            this.btnReport.Text = "    المطابقة الفنية";
             this.btnReport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnReport.UseVisualStyleBackColor = false;
             this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
@@ -362,7 +353,7 @@ namespace ANRPC_Inventory
             this.btnFinancial.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnFinancial.Size = new System.Drawing.Size(250, 54);
             this.btnFinancial.TabIndex = 5;
-            this.btnFinancial.Text = " إذن الــصــرف";
+            this.btnFinancial.Text = "    إذن الصرف";
             this.btnFinancial.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnFinancial.UseVisualStyleBackColor = false;
             this.btnFinancial.Click += new System.EventHandler(this.btnFinancial_Click);
@@ -387,7 +378,7 @@ namespace ANRPC_Inventory
             this.btnTransaction.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnTransaction.Size = new System.Drawing.Size(250, 54);
             this.btnTransaction.TabIndex = 3;
-            this.btnTransaction.Text = "طلب التوريد   ";
+            this.btnTransaction.Text = "    طلب التوريد";
             this.btnTransaction.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTransaction.UseVisualStyleBackColor = false;
             this.btnTransaction.Click += new System.EventHandler(this.btnTransaction_Click);
@@ -416,6 +407,16 @@ namespace ANRPC_Inventory
             this.btnDashboard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDashboard.UseVisualStyleBackColor = false;
             this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
+            // 
+            // panelLogo
+            // 
+            this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(16)))), ((int)(((byte)(90)))));
+            this.panelLogo.Controls.Add(this.pictureBox1);
+            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelLogo.Location = new System.Drawing.Point(0, 0);
+            this.panelLogo.Name = "panelLogo";
+            this.panelLogo.Size = new System.Drawing.Size(250, 134);
+            this.panelLogo.TabIndex = 0;
             // 
             // pictureBox1
             // 
@@ -464,10 +465,10 @@ namespace ANRPC_Inventory
         private FontAwesome.Sharp.IconButton btnReport;
         private FontAwesome.Sharp.IconButton btnFinancial;
         private FontAwesome.Sharp.IconButton btnTransaction;
-        private FontAwesome.Sharp.IconButton btnCustomers;
+        private FontAwesome.Sharp.IconButton btnSearch;
         private FontAwesome.Sharp.IconButton iconButton1;
         private PictureBox pictureBox1;
-        private FontAwesome.Sharp.IconButton iconButton2;
+        private FontAwesome.Sharp.IconButton btnTahwel;
         private FontAwesome.Sharp.IconButton btnMin;
         private FontAwesome.Sharp.IconButton btn_max;
         private FontAwesome.Sharp.IconButton btnClose;
