@@ -204,7 +204,11 @@ namespace ANRPC_Inventory
         private void btnSearch_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color6);
-            formwraper.Visible = false;
+
+            Search searchForm = new Search();
+            openChildForm(searchForm);
+
+            formwraper.Visible = true;
         }
 
         private void btnSettings_Click(object sender, EventArgs e)

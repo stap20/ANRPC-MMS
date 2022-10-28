@@ -36,7 +36,7 @@ namespace ANRPC_Inventory
             button.TextImageRelation = TextImageRelation.ImageBeforeText;
             button.IconFont = IconFont.Solid;
             button.IconSize = iconSize;
-            button.Size = new Size(145, 35);
+            button.Size = new Size(186, 52);
 
             button.FlatStyle = FlatStyle.Flat;
             button.FlatAppearance.MouseDownBackColor = defaultBackColor;
@@ -70,25 +70,25 @@ namespace ANRPC_Inventory
 
         private void btnDocumentCycle_Click(object sender, EventArgs e)
         {
-            if (!subTabContainer.Visible)
-            {
-                guna2GradientPanel1.Size = new Size(guna2GradientPanel1.Width, guna2GradientPanel1.Height + subTabContainer.Height + 10);
+            //if (!subTabContainer.Visible)
+            //{
+            //    guna2GradientPanel1.Size = new Size(guna2GradientPanel1.Width, guna2GradientPanel1.Height + subTabContainer.Height + 10);
 
-                panel2.Size = new Size(panel2.Width, panel2.Height + subTabContainer.Height + 10);
+            //    panel2.Size = new Size(panel2.Width, panel2.Height + subTabContainer.Height + 10);
 
 
-                subTabContainer.Location = new Point(btnDocumentCycle.Location.X+btnDocumentCycle.Size.Width, btnDocumentCycle.Location.Y + btnDocumentCycle.Size.Height + 5);
+            //    subTabContainer.Location = new Point(btnDocumentCycle.Location.X+btnDocumentCycle.Size.Width, btnDocumentCycle.Location.Y + btnDocumentCycle.Size.Height + 5);
 
-                subTabContainer.Visible = true;
-            }
+            //    subTabContainer.Visible = true;
+            //}
         }
 
         private void btnTasnif_Click(object sender, EventArgs e)
         {
-            guna2GradientPanel1.Size = new Size(guna2GradientPanel1.Width, 52);
-            panel2.Size = new Size(panel2.Width, 69);
+            //guna2GradientPanel1.Size = new Size(guna2GradientPanel1.Width, 52);
+            //panel2.Size = new Size(panel2.Width, 69);
 
-            subTabContainer.Visible = false;
+            //subTabContainer.Visible = false;
 
         }
     }
