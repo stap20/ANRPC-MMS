@@ -8,87 +8,147 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Guna.UI2.WinForms;
 
 namespace ANRPC_Inventory
 {
     public partial class Search : Form
     {
-        Panel subTabContainer = new Panel();
+        Panel secondBarPanel = new Panel();
         public Search()
         {
             InitializeComponent();
-            HandleSubTabs(guna2GradientPanel1);
-            subTabContainer.Visible = false;
+
+            secondBarPanel = getSecondBar(btnDocumentCycle.Text);
+            prepareSecondBar(panel1,secondBarPanel);
+
+            secondBarPanel.Visible=false;
+           // HandleSubTabs(guna2GradientPanel1);
+            //subTabContainer.Visible = false;
         }
 
-        private IconButton MakeTab(IconChar icon, int iconSize, string text,Font font ,Color defaultColor, Color defaultBackColor)
+
+        private IconButton getIndecatiorSection(string header)
         {
-            IconButton button = new IconButton();
-        
-            button.Text = text;
-            button.IconChar = icon;
-            button.IconColor = defaultColor;
-            button.ForeColor = defaultColor;
-            button.Font = font;
-            button.ImageAlign = ContentAlignment.MiddleLeft;
-            button.TextAlign = ContentAlignment.MiddleCenter;
+            IconButton indecator = new IconButton();
+            indecator.Font = new Font("Calibri", 11, FontStyle.Bold);
+            indecator.ForeColor = Color.FromArgb(155, 170, 192);
+            indecator.Text = header;
+            indecator.TextImageRelation = TextImageRelation.TextBeforeImage;
+            indecator.IconChar = IconChar.AngleRight;
+            indecator.IconSize = 18;
+            indecator.IconColor = Color.FromArgb(155, 170, 192);
+            indecator.IconFont = IconFont.Solid;
+            indecator.Dock = DockStyle.Left;
 
-            button.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button.IconFont = IconFont.Solid;
-            button.IconSize = iconSize;
-            button.Size = new Size(186, 52);
+            indecator.FlatAppearance.BorderSize = 0;
+            indecator.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            indecator.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            indecator.FlatStyle = FlatStyle.Flat;
 
-            button.FlatStyle = FlatStyle.Flat;
-            button.FlatAppearance.MouseDownBackColor = defaultBackColor;
-            button.FlatAppearance.MouseOverBackColor = defaultBackColor;
-            button.FlatAppearance.BorderSize = 0;
-
-            button.Dock = DockStyle.Left;
-
-            return button;
-        }
-
-        private void HandleSubTabs(Panel tabsContainer)
-        {
-            subTabContainer = new Panel();
-            subTabContainer.Dock = DockStyle.None;
-            //subTabContainer.Anchor = AnchorStyles.Top;
-
-            for (int i = 0; i < 5; i++)
-            {
-                Font font = new Font("Microsoft Sans Serif", 9, FontStyle.Bold);
-
-                IconButton button = MakeTab(IconChar.Clipboard, 23, "   دورة مستندية", font, Color.FromArgb(155, 170, 192), Color.FromArgb(43, 19, 114));
-
-                subTabContainer.Controls.Add(button);
+            indecator.AutoSize = true;
             
-            }
-            subTabContainer.AutoSize = true;
-            subTabContainer.Size = new Size(subTabContainer.Size.Width, 35);
-            tabsContainer.Controls.Add(subTabContainer);
+            return indecator;
+
         }
+
+        private IconButton getTab(string text, IconChar icon, Action<object,EventArgs> onClickCallBack)
+        {
+            IconButton tab = new IconButton();
+            tab.Font = new Font("Calibri", 11, FontStyle.Bold);
+            tab.ForeColor = Color.FromArgb(155, 170, 192);
+            tab.Text = text;
+
+            tab.TextImageRelation = TextImageRelation.ImageBeforeText;
+            tab.IconChar = icon;
+            tab.IconSize = 25;
+            tab.IconColor = Color.FromArgb(155, 170, 192);
+            tab.IconFont = IconFont.Solid;
+            tab.Dock = DockStyle.Left;
+
+            tab.FlatAppearance.BorderSize = 0;
+            tab.FlatAppearance.MouseDownBackColor = Color.FromArgb(43, 19, 114);
+            tab.FlatAppearance.MouseOverBackColor = Color.FromArgb(43, 19, 114);
+            tab.FlatStyle = FlatStyle.Flat;
+
+            tab.AutoSize = true;
+
+            tab.Click += new EventHandler(onClickCallBack);
+
+
+
+            return tab;
+        }
+        private Panel getSecondBar(string current)
+        {
+            int secondBardHeight = 40;
+            int spacing=10;
+
+            Panel secondBarContainer = new Panel();
+            secondBarContainer.Dock = DockStyle.Top;
+            secondBarContainer.BackColor = Color.Transparent;
+            
+
+            Guna2GradientPanel secondBar = new Guna2GradientPanel();
+            secondBar.Dock = DockStyle.Top;
+            secondBar.FillColor = Color.FromArgb(32, 15, 83);
+            secondBar.FillColor2 = Color.FromArgb(32, 15, 83);
+            secondBar.BorderRadius = 7;
+            secondBar.Size = new Size(secondBar.Width, secondBardHeight);
+
+
+            secondBarContainer.Size = new Size(secondBarContainer.Width, secondBardHeight + spacing);
+
+            Panel tabsContainer = new Panel();
+            tabsContainer.Dock = DockStyle.Fill;
+            tabsContainer.BackColor = Color.Transparent;
+
+
+
+            tabsContainer.Controls.Add(getTab("   تصنيف", IconChar.Book, (object sender, EventArgs e) =>
+            {
+                MessageBox.Show("a7a4");
+            }));
+            tabsContainer.Controls.Add(getTab("   دورة مستندية", IconChar.ClockFour, (object sender, EventArgs e) =>
+            {
+                MessageBox.Show("a7a3");
+            }));
+            tabsContainer.Controls.Add(getTab("   تصنيف", IconChar.Book, (object sender, EventArgs e) =>
+            {
+                MessageBox.Show("a7a2");
+            }));
+            tabsContainer.Controls.Add(getTab("   دورة مستندية",IconChar.ClockFour, (object sender, EventArgs e) =>
+            {
+                MessageBox.Show("a7a");
+            }));
+            
+
+            secondBar.Controls.Add(tabsContainer);
+            secondBar.Controls.Add(getIndecatiorSection(current));
+            secondBarContainer.Controls.Add(secondBar);
+            
+
+            return secondBarContainer;
+        }
+        
+        private void prepareSecondBar(Panel container, Panel secondBar)
+        {
+            container.Controls.Add(secondBar);
+            secondBar.BringToFront();
+        }
+
 
         private void btnDocumentCycle_Click(object sender, EventArgs e)
         {
-            //if (!subTabContainer.Visible)
-            //{
-            //    guna2GradientPanel1.Size = new Size(guna2GradientPanel1.Width, guna2GradientPanel1.Height + subTabContainer.Height + 10);
-
-            //    panel2.Size = new Size(panel2.Width, panel2.Height + subTabContainer.Height + 10);
-
-
-            //    subTabContainer.Location = new Point(btnDocumentCycle.Location.X+btnDocumentCycle.Size.Width, btnDocumentCycle.Location.Y + btnDocumentCycle.Size.Height + 5);
-
-            //    subTabContainer.Visible = true;
-            //}
+            if (!secondBarPanel.Visible)
+            {
+                secondBarPanel.Visible = true;
+            }
         }
 
         private void btnTasnif_Click(object sender, EventArgs e)
         {
-            //guna2GradientPanel1.Size = new Size(guna2GradientPanel1.Width, 52);
-            //panel2.Size = new Size(panel2.Width, 69);
-
-            //subTabContainer.Visible = false;
+            secondBarPanel.Visible = false;
 
         }
     }
