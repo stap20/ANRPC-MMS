@@ -10,11 +10,15 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ANRPC_Inventory
 {
+    public class Apperance
+    {
+
+    }
     public class Tab
     {
         private IconButton tabButton = new IconButton();
 
-        public Tab(Font font,string text,Color color, int iconSize,IconFont iconFont,IconChar icon, Action<object, EventArgs> onClickCallBack, int width = 0, int height = 0, FlatButtonAppearance appearance = null, bool isRL = false)
+        public Tab(Font font,string text,Color color, int iconSize,IconFont iconFont,IconChar icon, DockStyle dockStyle,Action<object, EventArgs> onClickCallBack, int width = 0, int height = 0,Padding ? padding = null, FlatButtonAppearance appearance = null, bool isRL = false)
         {
 
             tabButton.Font = font;
@@ -37,7 +41,7 @@ namespace ANRPC_Inventory
 
             tabButton.FlatStyle = FlatStyle.Flat;            
             tabButton.TextImageRelation = TextImageRelation.ImageBeforeText;
-            tabButton.Dock = DockStyle.Left;
+            tabButton.Dock = dockStyle;
 
 
 
@@ -61,6 +65,10 @@ namespace ANRPC_Inventory
                 tabButton.Size = new Size(width, height);
             }
 
+            if(padding != null)
+            {
+                tabButton.Padding = (Padding)padding;
+            }
 
             if (appearance != null)
             {
@@ -72,7 +80,6 @@ namespace ANRPC_Inventory
             if (isRL)
             {
                 tabButton.RightToLeft = RightToLeft.Yes;
-                tabButton.Dock = DockStyle.Right;
             }
 
         }

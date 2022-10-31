@@ -74,6 +74,7 @@
             this.iconPictureBox9 = new FontAwesome.Sharp.IconPictureBox();
             this.label16 = new System.Windows.Forms.Label();
             this.mainDashboard = new System.Windows.Forms.Panel();
+            this.container = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.guna2GradientPanel8.SuspendLayout();
@@ -104,6 +105,7 @@
             this.guna2GradientPanel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox9)).BeginInit();
             this.mainDashboard.SuspendLayout();
+            this.container.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -143,6 +145,7 @@
             this.tableLayoutPanel4.Location = new System.Drawing.Point(5, 311);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(755, 293);
@@ -160,18 +163,17 @@
             this.guna2GradientPanel8.Margin = new System.Windows.Forms.Padding(0, 0, 20, 15);
             this.guna2GradientPanel8.Name = "guna2GradientPanel8";
             this.guna2GradientPanel8.ShadowDecoration.Parent = this.guna2GradientPanel8;
-            this.guna2GradientPanel8.Size = new System.Drawing.Size(735, 278);
+            this.guna2GradientPanel8.Size = new System.Drawing.Size(735, 276);
             this.guna2GradientPanel8.TabIndex = 8;
             // 
             // pictureBox5
             // 
             this.pictureBox5.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
-            this.pictureBox5.Location = new System.Drawing.Point(0, 34);
+            this.pictureBox5.Location = new System.Drawing.Point(194, 76);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(735, 244);
+            this.pictureBox5.Size = new System.Drawing.Size(229, 163);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox5.TabIndex = 10;
             this.pictureBox5.TabStop = false;
@@ -614,7 +616,7 @@
             this.notificationDashboard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.notificationDashboard.Location = new System.Drawing.Point(0, 136);
             this.notificationDashboard.Name = "notificationDashboard";
-            this.notificationDashboard.Padding = new System.Windows.Forms.Padding(10, 15, 0, 15);
+            this.notificationDashboard.Padding = new System.Windows.Forms.Padding(10, 15, 0, 0);
             this.notificationDashboard.Size = new System.Drawing.Size(300, 459);
             this.notificationDashboard.TabIndex = 1;
             // 
@@ -630,7 +632,7 @@
             this.guna2GradientPanel9.Margin = new System.Windows.Forms.Padding(0, 0, 20, 15);
             this.guna2GradientPanel9.Name = "guna2GradientPanel9";
             this.guna2GradientPanel9.ShadowDecoration.Parent = this.guna2GradientPanel9;
-            this.guna2GradientPanel9.Size = new System.Drawing.Size(290, 429);
+            this.guna2GradientPanel9.Size = new System.Drawing.Size(290, 444);
             this.guna2GradientPanel9.TabIndex = 7;
             // 
             // panel4
@@ -641,7 +643,7 @@
             this.panel4.Location = new System.Drawing.Point(0, 46);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(5, 10, 5, 5);
-            this.panel4.Size = new System.Drawing.Size(290, 383);
+            this.panel4.Size = new System.Drawing.Size(290, 398);
             this.panel4.TabIndex = 1;
             // 
             // panel1
@@ -745,13 +747,23 @@
             this.mainDashboard.Size = new System.Drawing.Size(765, 595);
             this.mainDashboard.TabIndex = 4;
             // 
+            // container
+            // 
+            this.container.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(7)))), ((int)(((byte)(66)))));
+            this.container.Controls.Add(this.mainDashboard);
+            this.container.Controls.Add(this.sideDashboard);
+            this.container.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.container.Location = new System.Drawing.Point(0, 0);
+            this.container.Name = "container";
+            this.container.Size = new System.Drawing.Size(1065, 595);
+            this.container.TabIndex = 5;
+            // 
             // conForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1065, 595);
-            this.Controls.Add(this.mainDashboard);
-            this.Controls.Add(this.sideDashboard);
+            this.Controls.Add(this.container);
             this.Name = "conForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -797,6 +809,7 @@
             this.guna2GradientPanel10.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox9)).EndInit();
             this.mainDashboard.ResumeLayout(false);
+            this.container.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -847,6 +860,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Panel container;
     }
 }
 

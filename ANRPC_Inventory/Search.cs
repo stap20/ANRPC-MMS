@@ -64,12 +64,30 @@ namespace ANRPC_Inventory
         {
             Font font = new Font("Calibri", 11, FontStyle.Bold);
             Color color = Color.FromArgb(155, 170, 192);
-            secondBarList.Add(new Tab(font, "   دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour, (object sender, EventArgs e) => { MessageBox.Show("aaaa1"); },172));
-            secondBarList.Add(new Tab(font, "   2دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour, (object sender, EventArgs e) => { MessageBox.Show("aaaa2"); }, 172));
-            secondBarList.Add(new Tab(font, "   3دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour, (object sender, EventArgs e) => { MessageBox.Show("aaaa3"); }, 172));
-            secondBarList.Add(new Tab(font, "   4دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour, (object sender, EventArgs e) => { MessageBox.Show("aaaa4"); }, 172));
-            secondBarList.Add(new Tab(font, "   5دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour, (object sender, EventArgs e) => { MessageBox.Show("aaaa5"); }, 172));
+
+            secondBarList.Add(new Tab(font, "   دورة مستندية", color, 32, IconFont.Solid, IconChar.ChartSimple, 
+                              DockStyle.Left,(object sender, EventArgs e) => { MessageBox.Show("aaaa1"); },
+                              width:172));
+
+            secondBarList.Add(new Tab(font, "   2دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour,
+                            DockStyle.Left, (object sender, EventArgs e) => { MessageBox.Show("aaaa2"); },
+                            width: 172));
+
+            secondBarList.Add(new Tab(font, "   3دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour,
+                            DockStyle.Left, (object sender, EventArgs e) => { MessageBox.Show("aaaa3"); },
+                            width: 172));
+
+            secondBarList.Add(new Tab(font, "   4دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour,
+                            DockStyle.Left, (object sender, EventArgs e) => { MessageBox.Show("aaaa4"); }, 
+                            width: 172));
+
+            secondBarList.Add(new Tab(font, "   5دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour,
+                            DockStyle.Left, (object sender, EventArgs e) => { MessageBox.Show("aaaa5"); }, 
+                            width: 172));
         }
+
+
+
 
         private Panel getSecondBar(string current)
         {
@@ -111,8 +129,11 @@ namespace ANRPC_Inventory
         
         private void prepareSecondBar(Panel container, Panel secondBar)
         {
+            
             container.Controls.Add(secondBar);
             secondBar.BringToFront();
+            panel3.BringToFront();
+            
         }
 
 

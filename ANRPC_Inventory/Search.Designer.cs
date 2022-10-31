@@ -126,7 +126,6 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 60);
             this.panel3.Name = "panel3";
-            this.panel3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 17);
             this.panel3.Size = new System.Drawing.Size(800, 390);
             this.panel3.TabIndex = 10;
             // 
@@ -140,7 +139,7 @@
             this.guna2GradientPanel6.Margin = new System.Windows.Forms.Padding(0, 0, 20, 15);
             this.guna2GradientPanel6.Name = "guna2GradientPanel6";
             this.guna2GradientPanel6.ShadowDecoration.Parent = this.guna2GradientPanel6;
-            this.guna2GradientPanel6.Size = new System.Drawing.Size(800, 373);
+            this.guna2GradientPanel6.Size = new System.Drawing.Size(800, 390);
             this.guna2GradientPanel6.TabIndex = 7;
             // 
             // panel1

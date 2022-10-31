@@ -45,8 +45,8 @@ namespace ANRPC_Inventory
             this.panelLogo = new System.Windows.Forms.Panel();
             this.panelButtons = new System.Windows.Forms.Panel();
             this.guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
-            this.btnTransaction = new FontAwesome.Sharp.IconButton();
-            this.btnFinancial = new FontAwesome.Sharp.IconButton();
+            this.btnRequestOrder = new FontAwesome.Sharp.IconButton();
+            this.btnRequestDispatch = new FontAwesome.Sharp.IconButton();
             this.btnReport = new FontAwesome.Sharp.IconButton();
             this.btnTahwel = new FontAwesome.Sharp.IconButton();
             this.btnSearch = new FontAwesome.Sharp.IconButton();
@@ -80,7 +80,7 @@ namespace ANRPC_Inventory
             this.main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.main.Location = new System.Drawing.Point(250, 60);
             this.main.Name = "main";
-            this.main.Padding = new System.Windows.Forms.Padding(17, 0, 0, 0);
+            this.main.Padding = new System.Windows.Forms.Padding(17, 0, 17, 17);
             this.main.Size = new System.Drawing.Size(679, 530);
             this.main.TabIndex = 1;
             // 
@@ -89,8 +89,7 @@ namespace ANRPC_Inventory
             this.formwraper.Dock = System.Windows.Forms.DockStyle.Fill;
             this.formwraper.Location = new System.Drawing.Point(17, 0);
             this.formwraper.Name = "formwraper";
-            this.formwraper.Padding = new System.Windows.Forms.Padding(0, 0, 17, 0);
-            this.formwraper.Size = new System.Drawing.Size(662, 530);
+            this.formwraper.Size = new System.Drawing.Size(645, 513);
             this.formwraper.TabIndex = 1;
             // 
             // pictureBox1
@@ -100,7 +99,7 @@ namespace ANRPC_Inventory
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(235, 154);
+            this.pictureBox1.Size = new System.Drawing.Size(232, 154);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -228,7 +227,7 @@ namespace ANRPC_Inventory
             this.sidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.sidebar.Location = new System.Drawing.Point(0, 0);
             this.sidebar.Name = "sidebar";
-            this.sidebar.Padding = new System.Windows.Forms.Padding(15, 15, 0, 15);
+            this.sidebar.Padding = new System.Windows.Forms.Padding(15, 17, 3, 17);
             this.sidebar.Size = new System.Drawing.Size(250, 590);
             this.sidebar.TabIndex = 0;
             // 
@@ -239,24 +238,25 @@ namespace ANRPC_Inventory
             this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelLogo.Location = new System.Drawing.Point(0, 5);
             this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(235, 154);
+            this.panelLogo.Size = new System.Drawing.Size(232, 154);
             this.panelLogo.TabIndex = 0;
             this.panelLogo.Paint += new System.Windows.Forms.PaintEventHandler(this.panelLogo_Paint);
             // 
             // panelButtons
             // 
+            this.panelButtons.AutoScroll = true;
             this.panelButtons.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(16)))), ((int)(((byte)(90)))));
             this.panelButtons.Controls.Add(this.btnSettings);
             this.panelButtons.Controls.Add(this.btnSearch);
             this.panelButtons.Controls.Add(this.btnTahwel);
             this.panelButtons.Controls.Add(this.btnReport);
-            this.panelButtons.Controls.Add(this.btnFinancial);
-            this.panelButtons.Controls.Add(this.btnTransaction);
+            this.panelButtons.Controls.Add(this.btnRequestDispatch);
+            this.panelButtons.Controls.Add(this.btnRequestOrder);
             this.panelButtons.Controls.Add(this.btnDashboard);
             this.panelButtons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelButtons.Location = new System.Drawing.Point(0, 159);
             this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(235, 396);
+            this.panelButtons.Size = new System.Drawing.Size(232, 392);
             this.panelButtons.TabIndex = 1;
             // 
             // guna2GradientPanel1
@@ -267,62 +267,62 @@ namespace ANRPC_Inventory
             this.guna2GradientPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2GradientPanel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(16)))), ((int)(((byte)(90)))));
             this.guna2GradientPanel1.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(16)))), ((int)(((byte)(90)))));
-            this.guna2GradientPanel1.Location = new System.Drawing.Point(15, 15);
+            this.guna2GradientPanel1.Location = new System.Drawing.Point(15, 17);
             this.guna2GradientPanel1.Name = "guna2GradientPanel1";
             this.guna2GradientPanel1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
             this.guna2GradientPanel1.ShadowDecoration.Parent = this.guna2GradientPanel1;
-            this.guna2GradientPanel1.Size = new System.Drawing.Size(235, 560);
+            this.guna2GradientPanel1.Size = new System.Drawing.Size(232, 556);
             this.guna2GradientPanel1.TabIndex = 0;
             // 
-            // btnTransaction
+            // btnRequestOrder
             // 
-            this.btnTransaction.BackColor = System.Drawing.Color.Transparent;
-            this.btnTransaction.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnTransaction.FlatAppearance.BorderSize = 0;
-            this.btnTransaction.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
-            this.btnTransaction.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
-            this.btnTransaction.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTransaction.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTransaction.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(139)))), ((int)(((byte)(173)))));
-            this.btnTransaction.IconChar = FontAwesome.Sharp.IconChar.ClipboardList;
-            this.btnTransaction.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(139)))), ((int)(((byte)(173)))));
-            this.btnTransaction.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnTransaction.IconSize = 32;
-            this.btnTransaction.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTransaction.Location = new System.Drawing.Point(0, 54);
-            this.btnTransaction.Name = "btnTransaction";
-            this.btnTransaction.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
-            this.btnTransaction.Size = new System.Drawing.Size(235, 54);
-            this.btnTransaction.TabIndex = 3;
-            this.btnTransaction.Text = "    طلب التوريد";
-            this.btnTransaction.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTransaction.UseVisualStyleBackColor = false;
-            this.btnTransaction.Click += new System.EventHandler(this.btnTransaction_Click);
+            this.btnRequestOrder.BackColor = System.Drawing.Color.Transparent;
+            this.btnRequestOrder.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnRequestOrder.FlatAppearance.BorderSize = 0;
+            this.btnRequestOrder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
+            this.btnRequestOrder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
+            this.btnRequestOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRequestOrder.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRequestOrder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(139)))), ((int)(((byte)(173)))));
+            this.btnRequestOrder.IconChar = FontAwesome.Sharp.IconChar.ClipboardList;
+            this.btnRequestOrder.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(139)))), ((int)(((byte)(173)))));
+            this.btnRequestOrder.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnRequestOrder.IconSize = 32;
+            this.btnRequestOrder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRequestOrder.Location = new System.Drawing.Point(0, 54);
+            this.btnRequestOrder.Name = "btnRequestOrder";
+            this.btnRequestOrder.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
+            this.btnRequestOrder.Size = new System.Drawing.Size(232, 54);
+            this.btnRequestOrder.TabIndex = 3;
+            this.btnRequestOrder.Text = "    طلب التوريد";
+            this.btnRequestOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRequestOrder.UseVisualStyleBackColor = false;
+            this.btnRequestOrder.Click += new System.EventHandler(this.btnTransaction_Click);
             // 
-            // btnFinancial
+            // btnRequestDispatch
             // 
-            this.btnFinancial.BackColor = System.Drawing.Color.Transparent;
-            this.btnFinancial.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnFinancial.FlatAppearance.BorderSize = 0;
-            this.btnFinancial.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
-            this.btnFinancial.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
-            this.btnFinancial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFinancial.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFinancial.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(139)))), ((int)(((byte)(173)))));
-            this.btnFinancial.IconChar = FontAwesome.Sharp.IconChar.CartFlatbed;
-            this.btnFinancial.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(139)))), ((int)(((byte)(173)))));
-            this.btnFinancial.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnFinancial.IconSize = 35;
-            this.btnFinancial.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFinancial.Location = new System.Drawing.Point(0, 108);
-            this.btnFinancial.Name = "btnFinancial";
-            this.btnFinancial.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
-            this.btnFinancial.Size = new System.Drawing.Size(235, 54);
-            this.btnFinancial.TabIndex = 5;
-            this.btnFinancial.Text = "    إذن الصرف";
-            this.btnFinancial.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnFinancial.UseVisualStyleBackColor = false;
-            this.btnFinancial.Click += new System.EventHandler(this.btnFinancial_Click);
+            this.btnRequestDispatch.BackColor = System.Drawing.Color.Transparent;
+            this.btnRequestDispatch.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnRequestDispatch.FlatAppearance.BorderSize = 0;
+            this.btnRequestDispatch.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
+            this.btnRequestDispatch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
+            this.btnRequestDispatch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRequestDispatch.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRequestDispatch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(139)))), ((int)(((byte)(173)))));
+            this.btnRequestDispatch.IconChar = FontAwesome.Sharp.IconChar.CartFlatbed;
+            this.btnRequestDispatch.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(139)))), ((int)(((byte)(173)))));
+            this.btnRequestDispatch.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnRequestDispatch.IconSize = 35;
+            this.btnRequestDispatch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRequestDispatch.Location = new System.Drawing.Point(0, 108);
+            this.btnRequestDispatch.Name = "btnRequestDispatch";
+            this.btnRequestDispatch.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
+            this.btnRequestDispatch.Size = new System.Drawing.Size(232, 54);
+            this.btnRequestDispatch.TabIndex = 5;
+            this.btnRequestDispatch.Text = "    إذن الصرف";
+            this.btnRequestDispatch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRequestDispatch.UseVisualStyleBackColor = false;
+            this.btnRequestDispatch.Click += new System.EventHandler(this.btnFinancial_Click);
             // 
             // btnReport
             // 
@@ -342,7 +342,7 @@ namespace ANRPC_Inventory
             this.btnReport.Location = new System.Drawing.Point(0, 162);
             this.btnReport.Name = "btnReport";
             this.btnReport.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
-            this.btnReport.Size = new System.Drawing.Size(235, 54);
+            this.btnReport.Size = new System.Drawing.Size(232, 54);
             this.btnReport.TabIndex = 6;
             this.btnReport.Text = "    المطابقة الفنية";
             this.btnReport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -367,7 +367,7 @@ namespace ANRPC_Inventory
             this.btnTahwel.Location = new System.Drawing.Point(0, 216);
             this.btnTahwel.Name = "btnTahwel";
             this.btnTahwel.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
-            this.btnTahwel.Size = new System.Drawing.Size(235, 54);
+            this.btnTahwel.Size = new System.Drawing.Size(232, 54);
             this.btnTahwel.TabIndex = 8;
             this.btnTahwel.Text = "    إذون التحويل";
             this.btnTahwel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -392,7 +392,7 @@ namespace ANRPC_Inventory
             this.btnSearch.Location = new System.Drawing.Point(0, 270);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
-            this.btnSearch.Size = new System.Drawing.Size(235, 54);
+            this.btnSearch.Size = new System.Drawing.Size(232, 54);
             this.btnSearch.TabIndex = 1;
             this.btnSearch.Text = "    البـــــحــــث";
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -417,7 +417,7 @@ namespace ANRPC_Inventory
             this.btnSettings.Location = new System.Drawing.Point(0, 324);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
-            this.btnSettings.Size = new System.Drawing.Size(235, 54);
+            this.btnSettings.Size = new System.Drawing.Size(232, 54);
             this.btnSettings.TabIndex = 7;
             this.btnSettings.Text = "    الإعدادت";
             this.btnSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -443,7 +443,7 @@ namespace ANRPC_Inventory
             this.btnDashboard.Margin = new System.Windows.Forms.Padding(0);
             this.btnDashboard.Name = "btnDashboard";
             this.btnDashboard.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
-            this.btnDashboard.Size = new System.Drawing.Size(235, 54);
+            this.btnDashboard.Size = new System.Drawing.Size(232, 54);
             this.btnDashboard.TabIndex = 0;
             this.btnDashboard.Text = "    لوحة القيادة";
             this.btnDashboard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -492,8 +492,8 @@ namespace ANRPC_Inventory
         private FontAwesome.Sharp.IconButton btnSearch;
         private FontAwesome.Sharp.IconButton btnTahwel;
         private FontAwesome.Sharp.IconButton btnReport;
-        private FontAwesome.Sharp.IconButton btnFinancial;
-        private FontAwesome.Sharp.IconButton btnTransaction;
+        private FontAwesome.Sharp.IconButton btnRequestDispatch;
+        private FontAwesome.Sharp.IconButton btnRequestOrder;
         private FontAwesome.Sharp.IconButton btnDashboard;
     }
 }

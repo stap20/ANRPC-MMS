@@ -19,6 +19,7 @@ namespace ANRPC_Inventory
         private IconButton currentBtn;
         private Panel leftBorderBtn;
         private Form currentChildForm;
+        List<Tab> sideBarTabsList = new List<Tab>();
 
         public MainAppForm()
         {
@@ -31,23 +32,6 @@ namespace ANRPC_Inventory
         //Structs
         private struct RGBColors
         {
-            //192, 57, 94
-            //236, 114, 82
-            //255, 180, 80
-            //249, 248, 113
-            //232, 213, 181
-            //210, 165, 23
-            //184, 224, 103
-            //public static Color color1 = Color.FromArgb(226, 133, 222);
-            //public static Color color2 = Color.FromArgb(120, 77, 253);
-            //public static Color color3 = Color.FromArgb(74, 218, 236);
-            //public static Color color4 = Color.FromArgb(251, 83, 155);
-            //public static Color color5 = Color.FromArgb(126, 130, 252);
-            //public static Color color6 = Color.FromArgb(255, 192, 71);
-            //public static Color color7 = Color.FromArgb(239, 108, 150);
-            //public static Color color8 = Color.FromArgb(120, 163, 252);
-
-
             public static Color color1 = Color.FromArgb(249, 248, 113);
             public static Color color2 = Color.FromArgb(232, 213, 181);
             public static Color color3 = Color.FromArgb(184, 224, 103);
@@ -57,6 +41,40 @@ namespace ANRPC_Inventory
             public static Color color7 = Color.FromArgb(236, 113, 82);
             
         }
+
+        private void prepareSideBarTabsAction()
+        {
+            Font font = new Font("Calibri", 16, FontStyle.Bold);
+            Color color = Color.FromArgb(111, 139, 173);
+            Padding padd = new Padding(10, 0, 20, 0);
+            FlatButtonAppearance appearance = new FlatButtonAppearance(Color.Transparent,0,Color.Red,Color.Green);
+
+
+            sideBarTabsList.Add(new Tab(font, "    لوحة القيادة", color, 32, IconFont.Auto, IconChar.ChartSimple,
+                                DockStyle.Top, (object sender, EventArgs e) => { MessageBox.Show("aaaa1"); },
+                                height: 54, padding: padd));
+
+            sideBarTabsList.Add(new Tab(font, "    طلب التوريد", color, 32, IconFont.Auto, IconChar.ClipboardList,
+                                DockStyle.Top, (object sender, EventArgs e) => { MessageBox.Show("aaaa1"); },
+                                height: 54, padding: padd));
+
+            sideBarTabsList.Add(new Tab(font, "    إذن الصرف", color, 35, IconFont.Auto, IconChar.CartFlatbed,
+                    DockStyle.Top, (object sender, EventArgs e) => { MessageBox.Show("aaaa1"); },
+                    height: 54, padding: padd));
+
+            sideBarTabsList.Add(new Tab(font, "    المطابقة الفنية", color, 32, IconFont.Auto, IconChar.ClipboardCheck,
+                    DockStyle.Top, (object sender, EventArgs e) => { MessageBox.Show("aaaa1"); },
+                    height: 54, padding: padd));
+
+            sideBarTabsList.Add(new Tab(font, "    إذون التحويل", color, 32, IconFont.Auto, IconChar.DiagramPredecessor,
+                    DockStyle.Top, (object sender, EventArgs e) => { MessageBox.Show("aaaa1"); },
+                    height: 54, padding: padd));
+
+            sideBarTabsList.Add(new Tab(font, "    البـــــحــــث", color, 32, IconFont.Auto, IconChar.Search,
+                    DockStyle.Top, (object sender, EventArgs e) => { MessageBox.Show("aaaa1"); },
+                    height: 54, padding: padd));
+        }
+
         private void ActivateButton(object senderBtn, Color color)
         {
            
