@@ -71,6 +71,7 @@
             // 
             this.btnDocumentCycle.AutoSize = true;
             this.btnDocumentCycle.BackColor = System.Drawing.Color.Transparent;
+            this.btnDocumentCycle.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnDocumentCycle.FlatAppearance.BorderSize = 0;
             this.btnDocumentCycle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
             this.btnDocumentCycle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
@@ -82,10 +83,10 @@
             this.btnDocumentCycle.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.btnDocumentCycle.IconSize = 30;
             this.btnDocumentCycle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDocumentCycle.Location = new System.Drawing.Point(147, 2);
+            this.btnDocumentCycle.Location = new System.Drawing.Point(140, 0);
             this.btnDocumentCycle.Name = "btnDocumentCycle";
             this.btnDocumentCycle.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.btnDocumentCycle.Size = new System.Drawing.Size(172, 48);
+            this.btnDocumentCycle.Size = new System.Drawing.Size(172, 52);
             this.btnDocumentCycle.TabIndex = 9;
             this.btnDocumentCycle.Text = "   دورة مستندية";
             this.btnDocumentCycle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -96,6 +97,7 @@
             // 
             this.btnTasnif.AutoSize = true;
             this.btnTasnif.BackColor = System.Drawing.Color.Transparent;
+            this.btnTasnif.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnTasnif.FlatAppearance.BorderSize = 0;
             this.btnTasnif.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
             this.btnTasnif.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
@@ -107,10 +109,10 @@
             this.btnTasnif.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.btnTasnif.IconSize = 30;
             this.btnTasnif.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTasnif.Location = new System.Drawing.Point(2, 2);
+            this.btnTasnif.Location = new System.Drawing.Point(0, 0);
             this.btnTasnif.Name = "btnTasnif";
             this.btnTasnif.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
-            this.btnTasnif.Size = new System.Drawing.Size(140, 48);
+            this.btnTasnif.Size = new System.Drawing.Size(140, 52);
             this.btnTasnif.TabIndex = 8;
             this.btnTasnif.Text = "   تصنيف";
             this.btnTasnif.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;

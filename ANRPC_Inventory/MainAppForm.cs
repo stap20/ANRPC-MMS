@@ -239,6 +239,9 @@ namespace ANRPC_Inventory
             btnWindowReset.SendToBack();
         }
 
-        
+        private void panelLogo_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

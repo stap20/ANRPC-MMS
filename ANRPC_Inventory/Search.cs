@@ -15,11 +15,17 @@ namespace ANRPC_Inventory
     public partial class Search : Form
     {
         Panel secondBarPanel = new Panel();
+        List<Tab> secondBarList = new List<Tab> ();
+
         public Search()
         {
             InitializeComponent();
 
+
+            prepareSecondBarTabsList();
             secondBarPanel = getSecondBar(btnDocumentCycle.Text);
+            
+
             prepareSecondBar(panel1,secondBarPanel);
 
             secondBarPanel.Visible=false;
@@ -52,33 +58,19 @@ namespace ANRPC_Inventory
 
         }
 
-        private IconButton getTab(string text, IconChar icon, Action<object,EventArgs> onClickCallBack)
+        
+        
+        private void prepareSecondBarTabsList()
         {
-            IconButton tab = new IconButton();
-            tab.Font = new Font("Calibri", 11, FontStyle.Bold);
-            tab.ForeColor = Color.FromArgb(155, 170, 192);
-            tab.Text = text;
-
-            tab.TextImageRelation = TextImageRelation.ImageBeforeText;
-            tab.IconChar = icon;
-            tab.IconSize = 25;
-            tab.IconColor = Color.FromArgb(155, 170, 192);
-            tab.IconFont = IconFont.Solid;
-            tab.Dock = DockStyle.Left;
-
-            tab.FlatAppearance.BorderSize = 0;
-            tab.FlatAppearance.MouseDownBackColor = Color.FromArgb(43, 19, 114);
-            tab.FlatAppearance.MouseOverBackColor = Color.FromArgb(43, 19, 114);
-            tab.FlatStyle = FlatStyle.Flat;
-
-            tab.AutoSize = true;
-
-            tab.Click += new EventHandler(onClickCallBack);
-
-
-
-            return tab;
+            Font font = new Font("Calibri", 11, FontStyle.Bold);
+            Color color = Color.FromArgb(155, 170, 192);
+            secondBarList.Add(new Tab(font, "   دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour, (object sender, EventArgs e) => { MessageBox.Show("aaaa1"); },172));
+            secondBarList.Add(new Tab(font, "   2دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour, (object sender, EventArgs e) => { MessageBox.Show("aaaa2"); }, 172));
+            secondBarList.Add(new Tab(font, "   3دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour, (object sender, EventArgs e) => { MessageBox.Show("aaaa3"); }, 172));
+            secondBarList.Add(new Tab(font, "   4دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour, (object sender, EventArgs e) => { MessageBox.Show("aaaa4"); }, 172));
+            secondBarList.Add(new Tab(font, "   5دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour, (object sender, EventArgs e) => { MessageBox.Show("aaaa5"); }, 172));
         }
+
         private Panel getSecondBar(string current)
         {
             int secondBardHeight = 40;
@@ -102,26 +94,12 @@ namespace ANRPC_Inventory
             Panel tabsContainer = new Panel();
             tabsContainer.Dock = DockStyle.Fill;
             tabsContainer.BackColor = Color.Transparent;
+            tabsContainer.AutoScroll = true;
 
-
-
-            tabsContainer.Controls.Add(getTab("   تصنيف", IconChar.Book, (object sender, EventArgs e) =>
+            for(int i = secondBarList.Count-1; i >=0; i--)
             {
-                MessageBox.Show("a7a4");
-            }));
-            tabsContainer.Controls.Add(getTab("   دورة مستندية", IconChar.ClockFour, (object sender, EventArgs e) =>
-            {
-                MessageBox.Show("a7a3");
-            }));
-            tabsContainer.Controls.Add(getTab("   تصنيف", IconChar.Book, (object sender, EventArgs e) =>
-            {
-                MessageBox.Show("a7a2");
-            }));
-            tabsContainer.Controls.Add(getTab("   دورة مستندية",IconChar.ClockFour, (object sender, EventArgs e) =>
-            {
-                MessageBox.Show("a7a");
-            }));
-            
+                tabsContainer.Controls.Add(secondBarList[i].getTab());
+            }
 
             secondBar.Controls.Add(tabsContainer);
             secondBar.Controls.Add(getIndecatiorSection(current));
