@@ -10,15 +10,24 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ANRPC_Inventory
 {
-    public class Apperance
+    public class Appearance
     {
+        public int borderSize;
+        public Color mouseOverBackColor;
+        public Color mouseDownBAckColor;
 
+        public Appearance(int borderSize, Color mouseOver,Color mouseDown)
+        {
+            this.borderSize = borderSize;
+            this.mouseOverBackColor = mouseOver;
+            this.mouseDownBAckColor = mouseDown;
+        }
     }
     public class Tab
     {
         private IconButton tabButton = new IconButton();
 
-        public Tab(Font font,string text,Color color, int iconSize,IconFont iconFont,IconChar icon, DockStyle dockStyle,Action<object, EventArgs> onClickCallBack, int width = 0, int height = 0,Padding ? padding = null, FlatButtonAppearance appearance = null, bool isRL = false)
+        public Tab(Font font,string text,Color color, int iconSize,IconFont iconFont,IconChar icon, DockStyle dockStyle,Action<object, EventArgs> onClickCallBack, int width = 0, int height = 0,Padding ? padding = null, Appearance appearance = null, bool isRL = false)
         {
 
             tabButton.Font = font;
@@ -37,6 +46,8 @@ namespace ANRPC_Inventory
 
             tabButton.AutoSize = true;
 
+            tabButton.ImageAlign = ContentAlignment.MiddleLeft;
+
             tabButton.Click += new EventHandler(onClickCallBack);
 
             tabButton.FlatStyle = FlatStyle.Flat;            
@@ -51,7 +62,7 @@ namespace ANRPC_Inventory
             }
             else if (height != 0 || width != 0)
             {
-                if(height == 0)
+                if (height == 0)
                 {
                     tabButton.Size = new Size(width, tabButton.Size.Height);
                 }
@@ -72,9 +83,9 @@ namespace ANRPC_Inventory
 
             if (appearance != null)
             {
-                tabButton.FlatAppearance.BorderSize = appearance.BorderSize;
-                tabButton.FlatAppearance.MouseOverBackColor = appearance.MouseOverBackColor;
-                tabButton.FlatAppearance.MouseDownBackColor = appearance.MouseDownBackColor;
+                tabButton.FlatAppearance.BorderSize = appearance.borderSize;
+                tabButton.FlatAppearance.MouseOverBackColor = appearance.mouseOverBackColor;
+                tabButton.FlatAppearance.MouseDownBackColor = appearance.mouseDownBAckColor;
             }
 
             if (isRL)

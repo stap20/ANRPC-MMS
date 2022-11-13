@@ -4,12 +4,15 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Media3D;
 using FontAwesome.Sharp;
 using Guna.UI2.WinForms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace ANRPC_Inventory
 {
@@ -21,14 +24,78 @@ namespace ANRPC_Inventory
         private Form currentChildForm;
         List<Tab> sideBarTabsList = new List<Tab>();
 
-        public MainAppForm()
+        private void prepareSideBarActiveIndecator()
         {
-            InitializeComponent();
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(8, 54);
             panelButtons.Controls.Add(leftBorderBtn);
-            this.WindowState = FormWindowState.Maximized;
+            leftBorderBtn.Visible = false;
         }
+
+        private void prepareSideBarTabsAction()
+        {
+            Font font = new Font("Calibri", 16, FontStyle.Bold);
+            Color color = Color.FromArgb(111, 139, 173);
+            Padding padd = new Padding(10, 0, 20, 0);
+            Appearance appearance = new Appearance(0, Color.FromArgb(43, 19, 114), Color.FromArgb(43, 19, 114));
+
+            sideBarTabsList.Add(new Tab(font, "    لوحة القيادة", color, 32, IconFont.Auto, IconChar.ChartSimple,
+                                DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, RGBColors.color1, new conForm()); },
+                                height: 54, padding: padd, appearance: appearance));
+
+            sideBarTabsList.Add(new Tab(font, "    طلب التوريد", color, 32, IconFont.Auto, IconChar.ClipboardList,
+                                DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, RGBColors.color2, new TalbTawred()); },
+                                height: 54, padding: padd, appearance: appearance));
+
+            sideBarTabsList.Add(new Tab(font, "    إذن الصرف", color, 35, IconFont.Auto, IconChar.CartFlatbed,
+                    DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, RGBColors.color3, new conForm()); },
+                    height: 54, padding: padd, appearance: appearance));
+
+            sideBarTabsList.Add(new Tab(font, "    المطابقة الفنية", color, 32, IconFont.Auto, IconChar.ClipboardCheck,
+                    DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, RGBColors.color4, new conForm()); },
+                    height: 54, padding: padd, appearance: appearance));
+
+            sideBarTabsList.Add(new Tab(font, "    إذون التحويل", color, 32, IconFont.Auto, IconChar.DiagramPredecessor,
+                    DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, RGBColors.color5, new conForm()); },
+                    height: 54, padding: padd, appearance: appearance));
+
+            sideBarTabsList.Add(new Tab(font, "    البـــــحــــث", color, 32, IconFont.Auto, IconChar.Search,
+                    DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, RGBColors.color6, new Search()); },
+                    height: 54, padding: padd, appearance: appearance));
+
+            sideBarTabsList.Add(new Tab(font, "    الإعدادت", color, 32, IconFont.Auto, IconChar.Cog,
+                DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, RGBColors.color7, new conForm()); },
+                height: 54, padding: padd, appearance: appearance));
+        }
+
+        private void addTabsToSideBar()
+        {
+            for (int i = sideBarTabsList.Count - 1; i >= 0; i--)
+            {
+                panelButtons.Controls.Add(sideBarTabsList[i].getTab());
+            }
+        }
+
+
+        public MainAppForm()
+        {
+            InitializeComponent();
+            this.WindowState = FormWindowState.Maximized;
+            prepareSideBarTabsAction();
+            addTabsToSideBar();
+            prepareSideBarActiveIndecator();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            iconButton1.Visible = false;
+            formwraper.Visible = false;
+        }
+
+
+
+
+
         //Structs
         private struct RGBColors
         {
@@ -42,37 +109,17 @@ namespace ANRPC_Inventory
             
         }
 
-        private void prepareSideBarTabsAction()
+        private void DisableButton()
         {
-            Font font = new Font("Calibri", 16, FontStyle.Bold);
-            Color color = Color.FromArgb(111, 139, 173);
-            Padding padd = new Padding(10, 0, 20, 0);
-            FlatButtonAppearance appearance = new FlatButtonAppearance(Color.Transparent,0,Color.Red,Color.Green);
-
-
-            sideBarTabsList.Add(new Tab(font, "    لوحة القيادة", color, 32, IconFont.Auto, IconChar.ChartSimple,
-                                DockStyle.Top, (object sender, EventArgs e) => { MessageBox.Show("aaaa1"); },
-                                height: 54, padding: padd));
-
-            sideBarTabsList.Add(new Tab(font, "    طلب التوريد", color, 32, IconFont.Auto, IconChar.ClipboardList,
-                                DockStyle.Top, (object sender, EventArgs e) => { MessageBox.Show("aaaa1"); },
-                                height: 54, padding: padd));
-
-            sideBarTabsList.Add(new Tab(font, "    إذن الصرف", color, 35, IconFont.Auto, IconChar.CartFlatbed,
-                    DockStyle.Top, (object sender, EventArgs e) => { MessageBox.Show("aaaa1"); },
-                    height: 54, padding: padd));
-
-            sideBarTabsList.Add(new Tab(font, "    المطابقة الفنية", color, 32, IconFont.Auto, IconChar.ClipboardCheck,
-                    DockStyle.Top, (object sender, EventArgs e) => { MessageBox.Show("aaaa1"); },
-                    height: 54, padding: padd));
-
-            sideBarTabsList.Add(new Tab(font, "    إذون التحويل", color, 32, IconFont.Auto, IconChar.DiagramPredecessor,
-                    DockStyle.Top, (object sender, EventArgs e) => { MessageBox.Show("aaaa1"); },
-                    height: 54, padding: padd));
-
-            sideBarTabsList.Add(new Tab(font, "    البـــــحــــث", color, 32, IconFont.Auto, IconChar.Search,
-                    DockStyle.Top, (object sender, EventArgs e) => { MessageBox.Show("aaaa1"); },
-                    height: 54, padding: padd));
+            if (currentBtn != null)
+            {
+                currentBtn.BackColor = panelButtons.BackColor;
+                currentBtn.ForeColor = Color.FromArgb(111, 139, 173);
+                currentBtn.TextAlign = ContentAlignment.MiddleLeft;
+                currentBtn.IconColor = Color.FromArgb(111, 139, 173);
+                currentBtn.TextImageRelation = TextImageRelation.ImageBeforeText;
+                currentBtn.ImageAlign = ContentAlignment.MiddleLeft;
+            }
         }
 
         private void ActivateButton(object senderBtn, Color color)
@@ -80,8 +127,7 @@ namespace ANRPC_Inventory
            
             if (senderBtn != null)
             {
-
-                
+          
                 DisableButton();
                 //Button
                 currentBtn = (IconButton)senderBtn;
@@ -105,25 +151,6 @@ namespace ANRPC_Inventory
 
             }
         }
-        private void DisableButton()
-        {
-            if (currentBtn != null)
-            {
-                currentBtn.BackColor = panelButtons.BackColor;
-                currentBtn.ForeColor = Color.FromArgb(111, 139, 173);
-                currentBtn.TextAlign = ContentAlignment.MiddleLeft;
-                currentBtn.IconColor = Color.FromArgb(111, 139, 173);
-                currentBtn.TextImageRelation = TextImageRelation.ImageBeforeText;
-                currentBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            }
-        }
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-            iconButton1.Visible = false;
-            formwraper.Visible = false;
-        }
-
 
         private void openChildForm(Form childForm)
         {
@@ -137,106 +164,41 @@ namespace ANRPC_Inventory
             childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.Dock = DockStyle.Fill;
             formwraper.Controls.Add(childForm);
+
+
             childForm.BringToFront();
             childForm.Show();
 
             currentChildForm = childForm;
-        }
-
-
-        private void btnDashboard_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender, RGBColors.color1);
-            
-            conForm dashBoard = new conForm();
-            openChildForm(dashBoard);
-
-            formwraper.Visible = true;
 
         }
 
-        private void btnCustomers_Click(object sender, EventArgs e)
+        protected override CreateParams CreateParams
         {
-            ActivateButton(sender, RGBColors.color2);
-
-            Search searchForm = new Search();
-            openChildForm(searchForm);
-
-            formwraper.Visible = true;
+            get
+            {
+                CreateParams handleParam = base.CreateParams;
+                handleParam.ExStyle |= 0x02000000;   // WS_EX_COMPOSITED       
+                return handleParam;
+            }
         }
 
-        private void btnOrder_Click(object sender, EventArgs e)
+        private void SideBarBtnCLicked(object sender, EventArgs e, Color color,Form childForm = null)
         {
-            ActivateButton(sender, RGBColors.color3);
+            ActivateButton(sender, color);
 
-            TalbTawred TalbTawreed = new TalbTawred();
-            Constants.talbtawred_F = true; //--> panel7 --> Invisible - panel2 --> visible
-            openChildForm(TalbTawreed);
+            if (childForm != null)
+            {
+                openChildForm(childForm);
+            }
 
             formwraper.Visible = true;
         }
 
-        private void btnTransaction_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender, RGBColors.color4);
-
-            TalbTawred TalbTawreed = new TalbTawred();
-            Constants.talbtawred_F = false; //--> panel7 --> Invisible - panel2 --> visible
-            openChildForm(TalbTawreed);
-
-            formwraper.Visible = true;
-        }
-
-        private void btnStock_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender, RGBColors.color5);
-
-            EznSarf_F EznSarf = new EznSarf_F();
-            Constants.EznSarf_FF = true; //--> panel7 --> visible - panel2 --> Invisible
-            openChildForm(EznSarf);
-
-            formwraper.Visible = true;
-        }
-
-        private void btnFinancial_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender, RGBColors.color6);
-
-            EznSarf_F EznSarf = new EznSarf_F();
-            Constants.EznSarf_FF = false; //--> panel7 --> visible - panel2 --> Invisible
-            openChildForm(EznSarf);
-
-            formwraper.Visible = true;
-        }
-
-        private void btnReport_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender, RGBColors.color7);
-            formwraper.Visible = false;
-        }
-        private void btnTahwel_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender, RGBColors.color5);
-            formwraper.Visible = false;
-        }
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender, RGBColors.color6);
-
-            Search searchForm = new Search();
-            openChildForm(searchForm);
-
-            formwraper.Visible = true;
-        }
-
-        private void btnSettings_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender, RGBColors.color7);
-            formwraper.Visible = false;
-        }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            currentChildForm.Close();
             this.Close();
         }
 
