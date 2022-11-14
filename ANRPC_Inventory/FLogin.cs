@@ -219,10 +219,10 @@ namespace ANRPC_Inventory
        
                 if(Constants.User_Type=="A")
                 {
-                    //FPublic AF = new FPublic();
-                    //AF.Show();
-                    MainAppForm mainForm = new MainAppForm();
-                    mainForm.Show();
+                    FPublic AF = new FPublic();
+                    AF.Show();
+                    //MainAppForm mainForm = new MainAppForm();
+                    //mainForm.Show();
                     this.Hide();
                 }
                 else if(Constants.User_Type=="B"){

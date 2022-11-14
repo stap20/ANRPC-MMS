@@ -354,6 +354,7 @@
       <DependentUpon>Search.cs</DependentUpon>
     </Compile>
     <Compile Include="Signature.cs" />
+    <Compile Include="SubTabsHandler.cs" />
     <Compile Include="Tab.cs" />
     <Compile Include="TasnifTrans.cs">
       <SubType>Form</SubType>

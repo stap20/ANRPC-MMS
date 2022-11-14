@@ -9,14 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.IO;
-using System.Windows.Forms;
 
 namespace ANRPC_Inventory
 {
 
     public partial class AmrSheraa : Form
     {
-       List<CurrencyInfo> currencies = new List<CurrencyInfo>();
+
+        //------------------------------------------ Define Variables ---------------------------------
+        #region Def Variables
+        List<CurrencyInfo> currencies = new List<CurrencyInfo>();
         public SqlConnection con;//sql conn for anrpc_sms db
         public string UserB = "";
         public DataTable DT = new DataTable();
@@ -113,6 +115,326 @@ namespace ANRPC_Inventory
 
         AutoCompleteStringCollection UnitColl = new AutoCompleteStringCollection(); //empn
         AutoCompleteStringCollection TalbColl = new AutoCompleteStringCollection(); //empn
+
+        #endregion
+
+        #region myDefVariable
+        enum VALIDATION_TYPES
+        {
+            ADD_TASNIF,
+            ADD_NEW_TASNIF,
+            ATTACH_FILE,
+            SEARCH,
+            CONFIRM_SEARCH,
+            SAVE,
+
+        }
+        int currentSignNumber = 0;
+        #endregion
+
+
+        //------------------------------------------ State Handler ---------------------------------
+        #region State Handler
+        private void changePanelState(Panel panel, bool state)
+        {
+            try
+            {
+                foreach (Control control in panel.Controls)
+                {
+                    if (control.GetType() == typeof(Panel))
+                    {
+                        changePanelState((Panel)control, state);
+                    }
+                    else
+                    {
+                        control.Enabled = state;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        private void changeDataGridViewColumnState(DataGridView dataGridView, bool state)
+        {
+            try
+            {
+                foreach (DataGridViewColumn column in dataGridView.Columns)
+                {
+                    dataGridView.Columns[column.Index].ReadOnly = state;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        public void PrepareAddState()
+        {
+            //Search sec
+            changePanelState(panel5, true);
+
+            //dataViewre sec
+            changePanelState(panel6, false);
+            Txt_ReqQuan.Enabled = true;
+
+            //fyear sec
+            changePanelState(panel8, false);
+            Cmb_FYear.Enabled = true;
+            Cmb_CType.Enabled = true;
+
+            //bian edara sec
+            changePanelState(panel9, true);
+            TXT_Edara.Enabled = false;
+
+            //arabic value
+            changePanelState(panel11, true);
+            TXT_ArabicValue.Enabled = false;
+
+
+            //btn Section
+            //generalBtn
+            SaveBtn.Enabled = true;
+            BTN_Cancel.Enabled = true;
+            Addbtn2.Enabled = true;
+            Addbtn.Enabled = false;
+            Editbtn2.Enabled = false;
+            BTN_SearchEzn.Enabled = false;
+            BTN_Print.Enabled = false;
+            browseBTN.Enabled = true;
+            BTN_PDF.Enabled = true;
+
+            //signature btn
+            changePanelState(signatureTable, false);
+            BTN_Sign1.Enabled = true;
+
+            //takalid types
+            DisableTakalef();
+
+            changeDataGridViewColumnState(dataGridView1, true);
+
+            dataGridView1.AllowUserToAddRows = true;
+            dataGridView1.AllowUserToDeleteRows = true;
+        }
+
+        public void PrepareEditState()
+        {
+            PrepareAddState();
+            panel8.Enabled = false;
+            BTN_Print.Enabled = true;
+
+            Pic_Sign1.Image = null;
+            Pic_Sign2.Image = null;
+            FlagSign1 = 0;
+            FlagSign2 = 0;
+            Pic_Sign1.BackColor = Color.White;
+            Pic_Sign2.BackColor = Color.White;
+        }
+
+        public void PrepareConfirmState()
+        {
+            DisableControls();
+            BTN_Save2.Enabled = true;
+
+            if (Constants.User_Type == "A")
+            {
+                if (FlagSign2 != 1 && FlagSign1 == 1)
+                {
+                    BTN_Sign2.Enabled = true;
+                    DeleteBtn.Enabled = true;
+                }
+                else if (FlagSign4 != 1 && FlagSign3 == 1)
+                {
+                    BTN_Sign4.Enabled = true;
+                }
+            }
+            else if (Constants.User_Type == "B")
+            {
+                if (Constants.UserTypeB == "Sarf")
+                {
+                    BTN_Sign3.Enabled = true;
+                    //dataGridView1.ReadOnly = false;
+                    dataGridView1.Columns["Quan2"].ReadOnly = false;
+                }
+                else if (Constants.UserTypeB == "Tkalif" || Constants.UserTypeB == "Finance")
+                {
+                    EnableTakalef();
+                }
+            }
+
+            AddEditFlag = 1;
+            TNO = TXT_EznNo.Text;
+            FY = Cmb_FYear.Text;
+        }
+
+        public void prepareSearchState()
+        {
+            DisableControls();
+            Input_Reset();
+            Cmb_FYear.Enabled = true;
+            Cmb_CType.Enabled = true;
+            TXT_EznNo.Enabled = true;
+            BTN_Print.Enabled = true;
+        }
+
+
+        public void reset()
+        {
+            prepareSearchState();
+        }
+
+        public void DisableControls()
+        {
+
+            //amr sheraa type sec
+            changePanelState(panel3, false);
+
+            //fyear sec
+            changePanelState(panel5, false);
+
+            //moward sec
+            changePanelState(panel6, false);
+
+            //bian edara sec
+            changePanelState(panel10, false);
+
+            //mowazna value
+            changePanelState(panel11, false);
+
+            //dareba sec
+            changePanelState(panel14, false);
+
+            //sheek sec
+            changePanelState(panel20, false);
+
+            //btn Section
+            //generalBtn
+            Addbtn.Enabled = true;
+            BTN_Search.Enabled = true;
+            BTN_Search_Motab3a.Enabled = false;
+            SaveBtn.Enabled = false;
+            BTN_Save2.Enabled = false;
+
+            EditBtn.Enabled = false;
+            BTN_Cancel.Enabled = false;
+            BTN_ChooseTalb.Enabled = false;
+            EditBtn2.Enabled = false;
+            BTN_Print.Enabled = false;
+            BTN_Print2.Enabled = false;
+            browseBTN.Enabled = false;
+            BTN_PDF.Enabled = false;
+
+            //signature btn
+            changePanelState(signatureTable, false);
+
+            changeDataGridViewColumnState(dataGridView1, true);
+
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+
+        }
+
+        public void resetSignature()
+        {
+            //btn Section
+            //signature btn
+            Pic_Sign1.Image = null;
+            FlagSign1 = 0;
+            Pic_Sign1.BackColor = Color.White;
+
+            Pic_Sign2.Image = null;
+            FlagSign2 = 0;
+            Pic_Sign2.BackColor = Color.White;
+
+            Pic_Sign3.Image = null;
+            FlagSign3 = 0;
+            Pic_Sign3.BackColor = Color.White;
+
+            Pic_Sign4.Image = null;
+            FlagSign4 = 0;
+            Pic_Sign4.BackColor = Color.White;
+        }
+
+        public void Input_Reset()
+        {
+            //Search sec
+            TXT_StockNoAll.Text = "";
+            TXT_StockName.Text = "";
+            TXT_PartNo.Text = "";
+
+            //dataViewre sec
+            TXT_StockBian.Text = "";
+            Txt_Quan.Text = "";
+            Txt_ReqQuan.Text = "";
+            TXT_Unit.Text = "";
+            Quan_Min.Value = 0;
+            Quan_Max.Value = 0;
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+
+
+            //fyear sec
+            Cmb_CType.Text = "";
+            Cmb_CType.SelectedIndex = -1;
+
+            Cmb_FYear.Text = "";
+            Cmb_FYear.SelectedIndex = -1;
+
+            TXT_EznNo.Text = "";
+            TXT_TRNO.Text = "";
+
+            //bian edara sec
+            TXT_Edara.Text = "";
+            TXT_RequestedFor.Text = "";
+            TXT_Date.Value = DateTime.Today;
+
+            //arabic value
+            TXT_ProcessNo.Text = "";
+            TXT_RespCentre.Text = "";
+            TXT_Total.Text = "";
+            TXT_ArabicValue.Text = "";
+
+            //search sec
+            Cmb_CType2.Text = "";
+            Cmb_CType2.SelectedIndex = -1;
+
+            Cmb_FYear2.Text = "";
+            Cmb_FYear2.SelectedIndex = -1;
+
+            Cmb_EznNo2.Text = "";
+            Cmb_EznNo2.SelectedIndex = -1;
+
+            resetSignature();
+
+            //tkalifData types
+            TXT_AccNo.Text = "";
+            TXT_PaccNo.Text = "";
+            TXT_MTaklif.Text = "";
+            TXT_MResp.Text = "";
+            TXT_Masrof.Text = "";
+            TXT_Morakba.Text = "";
+            TXT_Enfak.Text = "";
+
+            cleargridview();
+
+            Image1 = "";
+            Image2 = "";
+            pictureBox2.Image = null;
+
+            oldvalue = 0;
+            picflag = 0;
+            MaxFlag = 0;
+            AddEditFlag = 0;
+        }
+        #endregion
+
+
+
+
+
         public AmrSheraa()
         {
             InitializeComponent();
@@ -121,12 +443,7 @@ namespace ANRPC_Inventory
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
         }
 
-        private void guna2Button1_Click(object sender, EventArgs e)
-        {
-
-        }
-         
-        private void TalbTawred_Load(object sender, EventArgs e)
+        private void AmrSheraa_Load(object sender, EventArgs e)
         {
             HelperClass.comboBoxFiller(Cmb_FY2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
             HelperClass.comboBoxFiller(Cmb_FY, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
@@ -313,6 +630,9 @@ namespace ANRPC_Inventory
 
             con.Close();
         }
+        
+        
+        
         private void Getdata(string cmd)
         {
             dataadapter = new SqlDataAdapter(cmd, con);
@@ -478,42 +798,7 @@ namespace ANRPC_Inventory
 
           }
         
-               
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Graphics surface = CreateGraphics();
-            Pen pen1 = new Pen(Color.Black, 2);
-            surface.DrawLine(pen1, 0, 185, 1000, 185);
-        }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            /*
-            Graphics surface = e.Graphics;
-            Pen pen1 = new Pen(Color.Black, 2);
-            surface.DrawLine(pen1, panel1.Location.X + 4,  4, panel1.Location.X + 4, panel1.Location.Y + panel1.Size.Height); // Left Line
-            surface.DrawLine(pen1, panel1.Size.Width - 4, 4, panel1.Size.Width - 4, panel1.Location.Y + panel1.Size.Height); // Right Line
-            //---------------------------
-            surface.DrawLine(pen1, 4,4, panel1.Location.X + panel1.Size.Width - 4,4); // Top Line
-           surface.DrawLine(pen1, 4, panel1.Size.Height -1, panel1.Location.X + panel1.Size.Width - 4, panel1.Size.Height -1); // Bottom Line
-       
-            //---------------------------
-            // Middle_Line
-            //-------------
-            surface.DrawLine(pen1, ((panel1.Size.Width) / 2) + 4, 4, ((panel1.Size.Width) / 2) + 4, panel1.Location.Y + panel1.Size.Height); // Left Line
-            surface.DrawLine(pen1, 4, 38, panel1.Location.X + panel1.Size.Width - 4, 40); // Top Line
-            surface.Dispose();*/
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -1032,18 +1317,18 @@ namespace ANRPC_Inventory
                             wazifa1 = p.Split(':')[2];
                             pp = p.Split(':')[0];
 
-                            ((PictureBox)this.tableLayoutPanel1.Controls["panel15"].Controls["Pic_Sign" + "1"]).Image = Image.FromFile(@pp);
+                            ((PictureBox)this.signatureTable.Controls["panel15"].Controls["Pic_Sign" + "1"]).Image = Image.FromFile(@pp);
 
                             FlagSign1 = 1;
                             FlagEmpn1 = s1;
-                            ((PictureBox)this.tableLayoutPanel1.Controls["panel15"].Controls["Pic_Sign" + "1"]).BackColor = Color.Green;
+                            ((PictureBox)this.signatureTable.Controls["panel15"].Controls["Pic_Sign" + "1"]).BackColor = Color.Green;
                             toolTip1.SetToolTip(Pic_Sign1, Ename1 + Environment.NewLine + wazifa1);
                         }
 
                     }
                     else
                     {
-                        ((PictureBox)this.tableLayoutPanel1.Controls["panel15"].Controls["Pic_Sign" + "1"]).BackColor = Color.Red;
+                        ((PictureBox)this.signatureTable.Controls["panel15"].Controls["Pic_Sign" + "1"]).BackColor = Color.Red;
                     }
                     if (s2 != "")
                     {
@@ -1056,18 +1341,18 @@ namespace ANRPC_Inventory
                             wazifa2 = p.Split(':')[2];
                             pp = p.Split(':')[0];
 
-                            ((PictureBox)this.tableLayoutPanel1.Controls["panel16"].Controls["Pic_Sign" + "2"]).Image = Image.FromFile(@pp);
+                            ((PictureBox)this.signatureTable.Controls["panel16"].Controls["Pic_Sign" + "2"]).Image = Image.FromFile(@pp);
 
                             FlagSign2 = 1;
                             FlagEmpn2 = s2;
-                            ((PictureBox)this.tableLayoutPanel1.Controls["panel16"].Controls["Pic_Sign" + "2"]).BackColor = Color.Green;
+                            ((PictureBox)this.signatureTable.Controls["panel16"].Controls["Pic_Sign" + "2"]).BackColor = Color.Green;
                             toolTip1.SetToolTip(Pic_Sign2, Ename2 + Environment.NewLine + wazifa2);
                         }
 
                     }
                     else
                     {
-                        ((PictureBox)this.tableLayoutPanel1.Controls["panel16"].Controls["Pic_Sign" + "2"]).BackColor = Color.Red;
+                        ((PictureBox)this.signatureTable.Controls["panel16"].Controls["Pic_Sign" + "2"]).BackColor = Color.Red;
                     }
                     if (s3 != "")
                     {
@@ -1080,18 +1365,18 @@ namespace ANRPC_Inventory
                             wazifa3 = p.Split(':')[2];
                             pp = p.Split(':')[0];
 
-                            ((PictureBox)this.tableLayoutPanel1.Controls["panel17"].Controls["Pic_Sign" + "3"]).Image = Image.FromFile(@pp);
+                            ((PictureBox)this.signatureTable.Controls["panel17"].Controls["Pic_Sign" + "3"]).Image = Image.FromFile(@pp);
 
                             FlagSign3 = 1;
                             FlagEmpn3 = s3;
-                            ((PictureBox)this.tableLayoutPanel1.Controls["panel17"].Controls["Pic_Sign" + "3"]).BackColor = Color.Green;
+                            ((PictureBox)this.signatureTable.Controls["panel17"].Controls["Pic_Sign" + "3"]).BackColor = Color.Green;
                             toolTip1.SetToolTip(Pic_Sign3, Ename3 + Environment.NewLine + wazifa3);
                         }
 
                     }
                     else
                     {
-                        ((PictureBox)this.tableLayoutPanel1.Controls["panel17"].Controls["Pic_Sign" + "3"]).BackColor = Color.Red;
+                        ((PictureBox)this.signatureTable.Controls["panel17"].Controls["Pic_Sign" + "3"]).BackColor = Color.Red;
                     }
                     if (s4 != "")
                     {
@@ -1104,18 +1389,18 @@ namespace ANRPC_Inventory
                             wazifa4 = p.Split(':')[2];
                             pp = p.Split(':')[0];
 
-                            ((PictureBox)this.tableLayoutPanel1.Controls["panel18"].Controls["Pic_Sign" + "4"]).Image = Image.FromFile(@pp);
+                            ((PictureBox)this.signatureTable.Controls["panel18"].Controls["Pic_Sign" + "4"]).Image = Image.FromFile(@pp);
 
                             FlagSign4 = 1;
                             FlagEmpn4 = s4;
-                            ((PictureBox)this.tableLayoutPanel1.Controls["panel18"].Controls["Pic_Sign" + "4"]).BackColor = Color.Green;
+                            ((PictureBox)this.signatureTable.Controls["panel18"].Controls["Pic_Sign" + "4"]).BackColor = Color.Green;
                             toolTip1.SetToolTip(Pic_Sign4, Ename4 + Environment.NewLine + wazifa4);
                         }
 
                     }
                     else
                     {
-                        ((PictureBox)this.tableLayoutPanel1.Controls["panel18"].Controls["Pic_Sign" + "4"]).BackColor = Color.Red;
+                        ((PictureBox)this.signatureTable.Controls["panel18"].Controls["Pic_Sign" + "4"]).BackColor = Color.Red;
                     }
                     ///////////////////
                     if (s5 != "")
@@ -1131,18 +1416,18 @@ namespace ANRPC_Inventory
                             wazifa5 = p.Split(':')[2];
                             pp = p.Split(':')[0];
 
-                            ((PictureBox)this.tableLayoutPanel1.Controls["panel19"].Controls["Pic_Sign" + "5"]).Image = Image.FromFile(@pp);
+                            ((PictureBox)this.signatureTable.Controls["panel19"].Controls["Pic_Sign" + "5"]).Image = Image.FromFile(@pp);
 
                             FlagSign5 = 1;
                             FlagEmpn5 = s5;
-                            ((PictureBox)this.tableLayoutPanel1.Controls["panel19"].Controls["Pic_Sign" + "5"]).BackColor = Color.Green;
+                            ((PictureBox)this.signatureTable.Controls["panel19"].Controls["Pic_Sign" + "5"]).BackColor = Color.Green;
                             toolTip1.SetToolTip(Pic_Sign5, Ename5 + Environment.NewLine + wazifa5);
                         }
 
                     }
                     else
                     {
-                        ((PictureBox)this.tableLayoutPanel1.Controls["panel19"].Controls["Pic_Sign" + "5"]).BackColor = Color.Red;
+                        ((PictureBox)this.signatureTable.Controls["panel19"].Controls["Pic_Sign" + "5"]).BackColor = Color.Red;
                     }
                     ////////////////////
                     if (s6 != "")
@@ -2175,41 +2460,6 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void Pic_Sign3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Pic_Sign2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BTN_Sign1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Pic_Sign1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label21_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label20_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label17_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void TXT_HesabMward1_TextChanged(object sender, EventArgs e)
         {
 
@@ -2260,35 +2510,11 @@ namespace ANRPC_Inventory
 
         }
 
-        private void label13_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label14_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label15_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void TXT_BndMwazna_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void TXT_Edara_TextChanged(object sender, EventArgs e)
         {
@@ -2305,35 +2531,6 @@ namespace ANRPC_Inventory
 
         }
 
-        private void label12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label16_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void Cmb_FY2_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -2341,26 +2538,6 @@ namespace ANRPC_Inventory
         }
 
         private void TXT_AmrNo_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
         {
 
         }
@@ -2446,40 +2623,6 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void label27_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label26_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox9_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox7_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label25_Click(object sender, EventArgs e)
-        {
-
-        }
         private void Column2_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = false;
@@ -3151,19 +3294,5 @@ namespace ANRPC_Inventory
             cmd.ExecuteNonQuery();
         }
 
-        private void label18_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel4_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel18_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

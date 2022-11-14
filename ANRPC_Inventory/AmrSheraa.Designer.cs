@@ -53,8 +53,6 @@
             this.cboCurrency = new System.Windows.Forms.ComboBox();
             this.BTN_Sigm1 = new System.Windows.Forms.Button();
             this.BTN_ChooseTalb = new System.Windows.Forms.Button();
-            this.BTN_Sign5 = new System.Windows.Forms.Button();
-            this.Pic_Sign5 = new System.Windows.Forms.PictureBox();
             this.BTN_Sign7 = new System.Windows.Forms.Button();
             this.Pic_Sign7 = new System.Windows.Forms.PictureBox();
             this.Pic_Sign1 = new System.Windows.Forms.PictureBox();
@@ -115,7 +113,6 @@
             this.SaveBtn = new System.Windows.Forms.Button();
             this.TXT_CodeEdara = new System.Windows.Forms.TextBox();
             this.BTN_Print = new System.Windows.Forms.Button();
-            this.DeleteBtn = new System.Windows.Forms.Button();
             this.TXT_AmrNo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -133,10 +130,8 @@
             this.BTN_PDF = new System.Windows.Forms.Button();
             this.browseBTN = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.signatureTable = new System.Windows.Forms.TableLayoutPanel();
             this.panel20 = new System.Windows.Forms.Panel();
-            this.panel19 = new System.Windows.Forms.Panel();
-            this.label31 = new System.Windows.Forms.Label();
             this.panel18 = new System.Windows.Forms.Panel();
             this.DeleteBtn2 = new System.Windows.Forms.Button();
             this.label27 = new System.Windows.Forms.Label();
@@ -150,7 +145,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -168,9 +162,8 @@
             this.panel12.SuspendLayout();
             this.panel13.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.signatureTable.SuspendLayout();
             this.panel20.SuspendLayout();
-            this.panel19.SuspendLayout();
             this.panel18.SuspendLayout();
             this.panel17.SuspendLayout();
             this.panel16.SuspendLayout();
@@ -252,7 +245,7 @@
             this.BTN_Sign6.FlatAppearance.BorderSize = 3;
             this.BTN_Sign6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BTN_Sign6.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_Sign6.Location = new System.Drawing.Point(-6, 28);
+            this.BTN_Sign6.Location = new System.Drawing.Point(-2, 28);
             this.BTN_Sign6.Name = "BTN_Sign6";
             this.BTN_Sign6.Size = new System.Drawing.Size(24, 23);
             this.BTN_Sign6.TabIndex = 258;
@@ -264,7 +257,7 @@
             // Pic_Sign6
             // 
             this.Pic_Sign6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Pic_Sign6.Location = new System.Drawing.Point(44, 3);
+            this.Pic_Sign6.Location = new System.Drawing.Point(48, 3);
             this.Pic_Sign6.Name = "Pic_Sign6";
             this.Pic_Sign6.Size = new System.Drawing.Size(33, 24);
             this.Pic_Sign6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -372,7 +365,7 @@
             // 
             this.TXT_Shick1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_Shick1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_Shick1.Location = new System.Drawing.Point(0, 8);
+            this.TXT_Shick1.Location = new System.Drawing.Point(4, 8);
             this.TXT_Shick1.Name = "TXT_Shick1";
             this.TXT_Shick1.Size = new System.Drawing.Size(76, 26);
             this.TXT_Shick1.TabIndex = 248;
@@ -396,7 +389,7 @@
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label19.ForeColor = System.Drawing.Color.Black;
-            this.label19.Location = new System.Drawing.Point(82, 11);
+            this.label19.Location = new System.Drawing.Point(86, 11);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(98, 18);
             this.label19.TabIndex = 246;
@@ -426,7 +419,6 @@
             this.label18.Size = new System.Drawing.Size(143, 24);
             this.label18.TabIndex = 235;
             this.label18.Text = "اجمالى مبلغ و قدره";
-            this.label18.Click += new System.EventHandler(this.label18_Click);
             // 
             // cboCurrency
             // 
@@ -436,7 +428,7 @@
             this.cboCurrency.Items.AddRange(new object[] {
             "2019_2020",
             "2020_2021"});
-            this.cboCurrency.Location = new System.Drawing.Point(73, 24);
+            this.cboCurrency.Location = new System.Drawing.Point(77, 24);
             this.cboCurrency.Name = "cboCurrency";
             this.cboCurrency.Size = new System.Drawing.Size(13, 27);
             this.cboCurrency.TabIndex = 233;
@@ -480,34 +472,6 @@
             this.BTN_ChooseTalb.UseVisualStyleBackColor = false;
             this.BTN_ChooseTalb.Click += new System.EventHandler(this.BTN_ChooseTalb_Click);
             // 
-            // BTN_Sign5
-            // 
-            this.BTN_Sign5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Sign5.BackColor = System.Drawing.Color.Gold;
-            this.BTN_Sign5.Enabled = false;
-            this.BTN_Sign5.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
-            this.BTN_Sign5.FlatAppearance.BorderSize = 3;
-            this.BTN_Sign5.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_Sign5.Location = new System.Drawing.Point(187, 1);
-            this.BTN_Sign5.Name = "BTN_Sign5";
-            this.BTN_Sign5.Size = new System.Drawing.Size(53, 21);
-            this.BTN_Sign5.TabIndex = 244;
-            this.BTN_Sign5.Text = "توقيع";
-            this.BTN_Sign5.UseVisualStyleBackColor = false;
-            this.BTN_Sign5.Click += new System.EventHandler(this.BTN_Sign3_Click);
-            // 
-            // Pic_Sign5
-            // 
-            this.Pic_Sign5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Pic_Sign5.Location = new System.Drawing.Point(4, 5);
-            this.Pic_Sign5.Name = "Pic_Sign5";
-            this.Pic_Sign5.Size = new System.Drawing.Size(177, 31);
-            this.Pic_Sign5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Pic_Sign5.TabIndex = 243;
-            this.Pic_Sign5.TabStop = false;
-            this.Pic_Sign5.Click += new System.EventHandler(this.Pic_Sign3_Click);
-            // 
             // BTN_Sign7
             // 
             this.BTN_Sign7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -517,7 +481,7 @@
             this.BTN_Sign7.FlatAppearance.BorderSize = 3;
             this.BTN_Sign7.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BTN_Sign7.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_Sign7.Location = new System.Drawing.Point(-6, 0);
+            this.BTN_Sign7.Location = new System.Drawing.Point(-2, 0);
             this.BTN_Sign7.Name = "BTN_Sign7";
             this.BTN_Sign7.Size = new System.Drawing.Size(22, 23);
             this.BTN_Sign7.TabIndex = 242;
@@ -529,14 +493,13 @@
             // Pic_Sign7
             // 
             this.Pic_Sign7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Pic_Sign7.Location = new System.Drawing.Point(-6, 3);
+            this.Pic_Sign7.Location = new System.Drawing.Point(-2, 3);
             this.Pic_Sign7.Name = "Pic_Sign7";
             this.Pic_Sign7.Size = new System.Drawing.Size(33, 23);
             this.Pic_Sign7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign7.TabIndex = 241;
             this.Pic_Sign7.TabStop = false;
             this.Pic_Sign7.Visible = false;
-            this.Pic_Sign7.Click += new System.EventHandler(this.Pic_Sign2_Click);
             // 
             // Pic_Sign1
             // 
@@ -548,7 +511,6 @@
             this.Pic_Sign1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign1.TabIndex = 239;
             this.Pic_Sign1.TabStop = false;
-            this.Pic_Sign1.Click += new System.EventHandler(this.Pic_Sign1_Click);
             // 
             // label17
             // 
@@ -562,7 +524,6 @@
             this.label17.TabIndex = 236;
             this.label17.Text = ":توقيع الاعداد";
             this.label17.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label17.Click += new System.EventHandler(this.label17_Click);
             // 
             // TXT_HesabMward1
             // 
@@ -680,7 +641,6 @@
             this.label13.Size = new System.Drawing.Size(103, 18);
             this.label13.TabIndex = 23;
             this.label13.Text = ":اجمالى امر الشراء";
-            this.label13.Click += new System.EventHandler(this.label13_Click);
             // 
             // label14
             // 
@@ -693,7 +653,6 @@
             this.label14.Size = new System.Drawing.Size(71, 18);
             this.label14.TabIndex = 22;
             this.label14.Text = ":فرعى مورد";
-            this.label14.Click += new System.EventHandler(this.label14_Click);
             // 
             // label15
             // 
@@ -706,7 +665,6 @@
             this.label15.Size = new System.Drawing.Size(67, 18);
             this.label15.TabIndex = 21;
             this.label15.Text = ":طلب توريد";
-            this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
             // TXT_BndMwazna
             // 
@@ -728,7 +686,6 @@
             this.label6.Size = new System.Drawing.Size(69, 18);
             this.label6.TabIndex = 19;
             this.label6.Text = ":بند الموازنة";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label5
             // 
@@ -740,7 +697,6 @@
             this.label5.Size = new System.Drawing.Size(69, 18);
             this.label5.TabIndex = 17;
             this.label5.Text = ":طريقة الدفع";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // TXT_Edara
             // 
@@ -786,7 +742,6 @@
             this.label12.Size = new System.Drawing.Size(81, 18);
             this.label12.TabIndex = 10;
             this.label12.Text = ":الادارة الطالبة";
-            this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
             // label11
             // 
@@ -796,10 +751,9 @@
             this.label11.ForeColor = System.Drawing.Color.Black;
             this.label11.Location = new System.Drawing.Point(193, 7);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(71, 18);
+            this.label11.Size = new System.Drawing.Size(65, 18);
             this.label11.TabIndex = 9;
-            this.label11.Text = ":اسم المستفيد";
-            this.label11.Click += new System.EventHandler(this.label11_Click);
+            this.label11.Text = ":اسم المورد";
             // 
             // label10
             // 
@@ -812,7 +766,6 @@
             this.label10.Size = new System.Drawing.Size(71, 18);
             this.label10.TabIndex = 8;
             this.label10.Text = ":مكان التسليم";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // label9
             // 
@@ -825,7 +778,6 @@
             this.label9.Size = new System.Drawing.Size(73, 18);
             this.label9.TabIndex = 7;
             this.label9.Text = ":موعد التسليم";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label8
             // 
@@ -837,7 +789,6 @@
             this.label8.Size = new System.Drawing.Size(80, 18);
             this.label8.TabIndex = 6;
             this.label8.Text = ":طريقة الشراء";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // label7
             // 
@@ -850,7 +801,6 @@
             this.label7.Size = new System.Drawing.Size(46, 18);
             this.label7.TabIndex = 5;
             this.label7.Text = ":التاريخ";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label23
             // 
@@ -858,7 +808,7 @@
             this.label23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label23.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label23.ForeColor = System.Drawing.Color.Maroon;
-            this.label23.Location = new System.Drawing.Point(34, 34);
+            this.label23.Location = new System.Drawing.Point(38, 34);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(62, 45);
             this.label23.TabIndex = 256;
@@ -994,7 +944,6 @@
             this.label25.Size = new System.Drawing.Size(137, 24);
             this.label25.TabIndex = 5;
             this.label25.Text = "بحث اوامر الشراء";
-            this.label25.Click += new System.EventHandler(this.label25_Click);
             // 
             // panel2
             // 
@@ -1017,7 +966,6 @@
             this.panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.panel2.Size = new System.Drawing.Size(1150, 124);
             this.panel2.TabIndex = 19;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // panel4
             // 
@@ -1035,9 +983,8 @@
             this.panel4.Controls.Add(this.Pic_Sign7);
             this.panel4.Location = new System.Drawing.Point(10, 30);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(143, 54);
+            this.panel4.Size = new System.Drawing.Size(147, 54);
             this.panel4.TabIndex = 243;
-            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
             // label2
             // 
@@ -1045,13 +992,12 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label2.ForeColor = System.Drawing.Color.Maroon;
-            this.label2.Location = new System.Drawing.Point(83, 4);
+            this.label2.Location = new System.Drawing.Point(87, 4);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 14);
             this.label2.TabIndex = 6;
             this.label2.Text = "رقم المناقصة";
             this.label2.Visible = false;
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // Cmb_FY2
             // 
@@ -1060,7 +1006,7 @@
             this.Cmb_FY2.FormattingEnabled = true;
             this.Cmb_FY2.Items.AddRange(new object[] {
             "2020_2021"});
-            this.Cmb_FY2.Location = new System.Drawing.Point(102, 21);
+            this.Cmb_FY2.Location = new System.Drawing.Point(106, 21);
             this.Cmb_FY2.Name = "Cmb_FY2";
             this.Cmb_FY2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Cmb_FY2.Size = new System.Drawing.Size(35, 27);
@@ -1072,7 +1018,7 @@
             // 
             this.TXT_MonksaNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_MonksaNo.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_MonksaNo.Location = new System.Drawing.Point(88, 21);
+            this.TXT_MonksaNo.Location = new System.Drawing.Point(92, 21);
             this.TXT_MonksaNo.Name = "TXT_MonksaNo";
             this.TXT_MonksaNo.Size = new System.Drawing.Size(13, 26);
             this.TXT_MonksaNo.TabIndex = 13;
@@ -1084,7 +1030,7 @@
             // 
             this.TXT_Type.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_Type.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_Type.Location = new System.Drawing.Point(52, 22);
+            this.TXT_Type.Location = new System.Drawing.Point(56, 22);
             this.TXT_Type.Name = "TXT_Type";
             this.TXT_Type.Size = new System.Drawing.Size(15, 26);
             this.TXT_Type.TabIndex = 242;
@@ -1337,22 +1283,6 @@
             this.BTN_Print.UseVisualStyleBackColor = true;
             this.BTN_Print.Click += new System.EventHandler(this.BTN_Print_Click);
             // 
-            // DeleteBtn
-            // 
-            this.DeleteBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DeleteBtn.BackColor = System.Drawing.Color.OrangeRed;
-            this.DeleteBtn.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
-            this.DeleteBtn.FlatAppearance.BorderSize = 3;
-            this.DeleteBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.DeleteBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.DeleteBtn.Location = new System.Drawing.Point(187, 21);
-            this.DeleteBtn.Name = "DeleteBtn";
-            this.DeleteBtn.Size = new System.Drawing.Size(53, 19);
-            this.DeleteBtn.TabIndex = 28;
-            this.DeleteBtn.Text = "حذف";
-            this.DeleteBtn.UseVisualStyleBackColor = false;
-            this.DeleteBtn.Click += new System.EventHandler(this.DeleteBtn_Click);
-            // 
             // TXT_AmrNo
             // 
             this.TXT_AmrNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1377,7 +1307,6 @@
             this.label1.Size = new System.Drawing.Size(70, 18);
             this.label1.TabIndex = 4;
             this.label1.Text = ":السنة المالية";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label3
             // 
@@ -1390,7 +1319,6 @@
             this.label3.Size = new System.Drawing.Size(62, 18);
             this.label3.TabIndex = 7;
             this.label3.Text = ":صادر إلى";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -1403,7 +1331,6 @@
             this.label4.Size = new System.Drawing.Size(81, 18);
             this.label4.TabIndex = 8;
             this.label4.Text = ":أمر شراء رقم";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // Cmb_FY
             // 
@@ -1568,7 +1495,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.tableLayoutPanel1);
+            this.panel1.Controls.Add(this.signatureTable);
             this.panel1.Controls.Add(this.panel14);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 588);
@@ -1576,26 +1503,25 @@
             this.panel1.Size = new System.Drawing.Size(1150, 166);
             this.panel1.TabIndex = 265;
             // 
-            // tableLayoutPanel1
+            // signatureTable
             // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel1.Controls.Add(this.panel20, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel19, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel18, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel17, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel16, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel15, 2, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 69);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1150, 97);
-            this.tableLayoutPanel1.TabIndex = 0;
+            this.signatureTable.ColumnCount = 3;
+            this.signatureTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.signatureTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.signatureTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.signatureTable.Controls.Add(this.panel20, 1, 1);
+            this.signatureTable.Controls.Add(this.panel18, 2, 1);
+            this.signatureTable.Controls.Add(this.panel17, 0, 0);
+            this.signatureTable.Controls.Add(this.panel16, 1, 0);
+            this.signatureTable.Controls.Add(this.panel15, 2, 0);
+            this.signatureTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.signatureTable.Location = new System.Drawing.Point(0, 69);
+            this.signatureTable.Name = "signatureTable";
+            this.signatureTable.RowCount = 2;
+            this.signatureTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.signatureTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.signatureTable.Size = new System.Drawing.Size(1150, 97);
+            this.signatureTable.TabIndex = 0;
             // 
             // panel20
             // 
@@ -1607,33 +1533,6 @@
             this.panel20.Name = "panel20";
             this.panel20.Size = new System.Drawing.Size(377, 43);
             this.panel20.TabIndex = 266;
-            // 
-            // panel19
-            // 
-            this.panel19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel19.Controls.Add(this.label31);
-            this.panel19.Controls.Add(this.Pic_Sign5);
-            this.panel19.Controls.Add(this.BTN_Sign5);
-            this.panel19.Controls.Add(this.DeleteBtn);
-            this.panel19.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel19.Location = new System.Drawing.Point(3, 51);
-            this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(377, 43);
-            this.panel19.TabIndex = 266;
-            this.panel19.Visible = false;
-            // 
-            // label31
-            // 
-            this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("Arial", 12F);
-            this.label31.ForeColor = System.Drawing.Color.Maroon;
-            this.label31.Location = new System.Drawing.Point(243, 13);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(129, 18);
-            this.label31.TabIndex = 239;
-            this.label31.Text = ":مدير عام الادارة الطالبة";
-            this.label31.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // panel18
             // 
@@ -1647,7 +1546,6 @@
             this.panel18.Name = "panel18";
             this.panel18.Size = new System.Drawing.Size(378, 43);
             this.panel18.TabIndex = 266;
-            this.panel18.Paint += new System.Windows.Forms.PaintEventHandler(this.panel18_Paint);
             // 
             // DeleteBtn2
             // 
@@ -1773,12 +1671,11 @@
             this.Name = "AmrSheraa";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "TalbTawred";
-            this.Load += new System.EventHandler(this.TalbTawred_Load);
+            this.Load += new System.EventHandler(this.AmrSheraa_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -1804,11 +1701,9 @@
             this.panel12.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
+            this.signatureTable.ResumeLayout(false);
             this.panel20.ResumeLayout(false);
             this.panel20.PerformLayout();
-            this.panel19.ResumeLayout(false);
-            this.panel19.PerformLayout();
             this.panel18.ResumeLayout(false);
             this.panel18.PerformLayout();
             this.panel17.ResumeLayout(false);
@@ -1859,14 +1754,11 @@
         private System.Windows.Forms.TextBox TXT_TaslemPlace;
         private System.Windows.Forms.TextBox TXT_HesabMward1;
         private System.Windows.Forms.TextBox TXT_HesabMward2;
-        private System.Windows.Forms.Button BTN_Sign5;
-        private System.Windows.Forms.PictureBox Pic_Sign5;
         private System.Windows.Forms.Button BTN_Sign7;
         private System.Windows.Forms.PictureBox Pic_Sign7;
         private System.Windows.Forms.PictureBox Pic_Sign1;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button SaveBtn;
-        private System.Windows.Forms.Button DeleteBtn;
         private System.Windows.Forms.Button EditBtn;
         private System.Windows.Forms.Button Addbtn;
         private System.Windows.Forms.Button BTN_ChooseTalb;
@@ -1928,7 +1820,7 @@
         private System.Windows.Forms.Button BTN_PDF;
         private System.Windows.Forms.Button browseBTN;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel signatureTable;
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.Panel panel15;
         private System.Windows.Forms.Panel panel17;
@@ -1937,8 +1829,6 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Panel panel18;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Panel panel19;
-        private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Button DeleteBtn2;
         private System.Windows.Forms.Panel panel20;
     }

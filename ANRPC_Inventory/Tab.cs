@@ -26,6 +26,7 @@ namespace ANRPC_Inventory
     public class Tab
     {
         private IconButton tabButton = new IconButton();
+        private Action<object, EventArgs> onClickCallBack;
 
         public Tab(Font font,string text,Color color, int iconSize,IconFont iconFont,IconChar icon, DockStyle dockStyle,Action<object, EventArgs> onClickCallBack, int width = 0, int height = 0,Padding ? padding = null, Appearance appearance = null, bool isRL = false)
         {
@@ -48,8 +49,10 @@ namespace ANRPC_Inventory
 
             tabButton.ImageAlign = ContentAlignment.MiddleLeft;
 
-            tabButton.Click += new EventHandler(onClickCallBack);
+            this.onClickCallBack = onClickCallBack;
 
+            tabButton.Click += new EventHandler(onClickCallBack);
+            
             tabButton.FlatStyle = FlatStyle.Flat;            
             tabButton.TextImageRelation = TextImageRelation.ImageBeforeText;
             tabButton.Dock = dockStyle;
@@ -96,6 +99,10 @@ namespace ANRPC_Inventory
         }
 
 
+        public Action<object, EventArgs> getOnClickCallback()
+        {
+            return this.onClickCallBack;
+        }
 
         public IconButton getTab()
         {
