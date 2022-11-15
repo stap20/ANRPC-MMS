@@ -141,6 +141,8 @@
             this.label16 = new System.Windows.Forms.Label();
             this.panel15 = new System.Windows.Forms.Panel();
             this.panel14 = new System.Windows.Forms.Panel();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.alertProvider = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign2)).BeginInit();
@@ -169,6 +171,8 @@
             this.panel16.SuspendLayout();
             this.panel15.SuspendLayout();
             this.panel14.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.alertProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // TXT_EgmaliAfter
@@ -179,7 +183,7 @@
             this.TXT_EgmaliAfter.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.TXT_EgmaliAfter.Location = new System.Drawing.Point(318, 4);
             this.TXT_EgmaliAfter.Name = "TXT_EgmaliAfter";
-            this.TXT_EgmaliAfter.Size = new System.Drawing.Size(272, 26);
+            this.TXT_EgmaliAfter.Size = new System.Drawing.Size(268, 26);
             this.TXT_EgmaliAfter.TabIndex = 264;
             // 
             // label30
@@ -188,7 +192,7 @@
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label30.ForeColor = System.Drawing.Color.Maroon;
-            this.label30.Location = new System.Drawing.Point(594, 7);
+            this.label30.Location = new System.Drawing.Point(590, 7);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(125, 19);
             this.label30.TabIndex = 263;
@@ -219,7 +223,7 @@
             this.TXT_EgmaliBefore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_EgmaliBefore.Enabled = false;
             this.TXT_EgmaliBefore.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_EgmaliBefore.Location = new System.Drawing.Point(723, 4);
+            this.TXT_EgmaliBefore.Location = new System.Drawing.Point(719, 4);
             this.TXT_EgmaliBefore.Name = "TXT_EgmaliBefore";
             this.TXT_EgmaliBefore.Size = new System.Drawing.Size(305, 26);
             this.TXT_EgmaliBefore.TabIndex = 260;
@@ -230,7 +234,7 @@
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label28.ForeColor = System.Drawing.Color.MediumBlue;
-            this.label28.Location = new System.Drawing.Point(1033, 7);
+            this.label28.Location = new System.Drawing.Point(1029, 7);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(111, 19);
             this.label28.TabIndex = 259;
@@ -405,7 +409,7 @@
             this.txt_arabicword.Name = "txt_arabicword";
             this.txt_arabicword.ReadOnly = true;
             this.txt_arabicword.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txt_arabicword.Size = new System.Drawing.Size(993, 26);
+            this.txt_arabicword.Size = new System.Drawing.Size(989, 26);
             this.txt_arabicword.TabIndex = 234;
             // 
             // label18
@@ -414,7 +418,7 @@
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label18.ForeColor = System.Drawing.Color.Maroon;
-            this.label18.Location = new System.Drawing.Point(1001, 35);
+            this.label18.Location = new System.Drawing.Point(997, 35);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(143, 24);
             this.label18.TabIndex = 235;
@@ -466,7 +470,7 @@
             this.BTN_ChooseTalb.ForeColor = System.Drawing.Color.OrangeRed;
             this.BTN_ChooseTalb.Location = new System.Drawing.Point(350, 79);
             this.BTN_ChooseTalb.Name = "BTN_ChooseTalb";
-            this.BTN_ChooseTalb.Size = new System.Drawing.Size(252, 35);
+            this.BTN_ChooseTalb.Size = new System.Drawing.Size(248, 35);
             this.BTN_ChooseTalb.TabIndex = 30;
             this.BTN_ChooseTalb.Text = "اضافة  بنود امر الشراء";
             this.BTN_ChooseTalb.UseVisualStyleBackColor = false;
@@ -553,7 +557,7 @@
             this.TXT_TaslemPlace.Location = new System.Drawing.Point(3, 95);
             this.TXT_TaslemPlace.Multiline = true;
             this.TXT_TaslemPlace.Name = "TXT_TaslemPlace";
-            this.TXT_TaslemPlace.Size = new System.Drawing.Size(187, 30);
+            this.TXT_TaslemPlace.Size = new System.Drawing.Size(183, 30);
             this.TXT_TaslemPlace.TabIndex = 233;
             this.TXT_TaslemPlace.TextChanged += new System.EventHandler(this.TXT_TaslemPlace_TextChanged);
             // 
@@ -579,12 +583,13 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.dataGridView1.Size = new System.Drawing.Size(1150, 256);
+            this.dataGridView1.Size = new System.Drawing.Size(1146, 252);
             this.dataGridView1.TabIndex = 230;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
@@ -603,7 +608,7 @@
             this.TXT_Date.Location = new System.Drawing.Point(4, 4);
             this.TXT_Date.Name = "TXT_Date";
             this.TXT_Date.ShowUpDown = true;
-            this.TXT_Date.Size = new System.Drawing.Size(212, 26);
+            this.TXT_Date.Size = new System.Drawing.Size(208, 26);
             this.TXT_Date.TabIndex = 229;
             this.TXT_Date.ValueChanged += new System.EventHandler(this.TXT_Date_ValueChanged);
             // 
@@ -615,7 +620,7 @@
             this.TXT_Egmali.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.TXT_Egmali.Location = new System.Drawing.Point(4, 66);
             this.TXT_Egmali.Name = "TXT_Egmali";
-            this.TXT_Egmali.Size = new System.Drawing.Size(160, 26);
+            this.TXT_Egmali.Size = new System.Drawing.Size(156, 26);
             this.TXT_Egmali.TabIndex = 26;
             this.TXT_Egmali.TextChanged += new System.EventHandler(this.TXT_Egmali_TextChanged);
             // 
@@ -636,7 +641,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label13.ForeColor = System.Drawing.Color.Black;
-            this.label13.Location = new System.Drawing.Point(164, 70);
+            this.label13.Location = new System.Drawing.Point(160, 70);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(103, 18);
             this.label13.TabIndex = 23;
@@ -706,7 +711,7 @@
             this.TXT_Edara.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.TXT_Edara.Location = new System.Drawing.Point(37, 37);
             this.TXT_Edara.Name = "TXT_Edara";
-            this.TXT_Edara.Size = new System.Drawing.Size(147, 26);
+            this.TXT_Edara.Size = new System.Drawing.Size(143, 26);
             this.TXT_Edara.TabIndex = 16;
             this.TXT_Edara.TextChanged += new System.EventHandler(this.TXT_Edara_TextChanged);
             // 
@@ -737,7 +742,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label12.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label12.Location = new System.Drawing.Point(187, 40);
+            this.label12.Location = new System.Drawing.Point(183, 40);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(81, 18);
             this.label12.TabIndex = 10;
@@ -761,7 +766,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(196, 98);
+            this.label10.Location = new System.Drawing.Point(192, 98);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(71, 18);
             this.label10.TabIndex = 8;
@@ -796,7 +801,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(221, 9);
+            this.label7.Location = new System.Drawing.Point(217, 9);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(46, 18);
             this.label7.TabIndex = 5;
@@ -829,9 +834,9 @@
             this.panel7.Controls.Add(this.Cmb_FYear2);
             this.panel7.Controls.Add(this.label25);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel7.Location = new System.Drawing.Point(0, 0);
+            this.panel7.Location = new System.Drawing.Point(2, 2);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(1150, 69);
+            this.panel7.Size = new System.Drawing.Size(1146, 69);
             this.panel7.TabIndex = 28;
             this.panel7.Paint += new System.Windows.Forms.PaintEventHandler(this.panel7_Paint);
             // 
@@ -845,12 +850,13 @@
             this.BTN_Search_Motab3a.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_Search_Motab3a.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.BTN_Search_Motab3a.ForeColor = System.Drawing.Color.Maroon;
-            this.BTN_Search_Motab3a.Location = new System.Drawing.Point(541, 17);
+            this.BTN_Search_Motab3a.Location = new System.Drawing.Point(537, 17);
             this.BTN_Search_Motab3a.Name = "BTN_Search_Motab3a";
             this.BTN_Search_Motab3a.Size = new System.Drawing.Size(72, 33);
             this.BTN_Search_Motab3a.TabIndex = 307;
             this.BTN_Search_Motab3a.Text = "بحث";
             this.BTN_Search_Motab3a.UseVisualStyleBackColor = false;
+            this.BTN_Search_Motab3a.Click += new System.EventHandler(this.BTN_Search_Motab3a_Click);
             // 
             // BTN_Print2
             // 
@@ -858,7 +864,7 @@
             this.BTN_Print2.Font = new System.Drawing.Font("Arabic Typesetting", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTN_Print2.ForeColor = System.Drawing.Color.DarkSalmon;
             this.BTN_Print2.Image = ((System.Drawing.Image)(resources.GetObject("BTN_Print2.Image")));
-            this.BTN_Print2.Location = new System.Drawing.Point(333, 12);
+            this.BTN_Print2.Location = new System.Drawing.Point(329, 12);
             this.BTN_Print2.Name = "BTN_Print2";
             this.BTN_Print2.Size = new System.Drawing.Size(53, 49);
             this.BTN_Print2.TabIndex = 240;
@@ -876,7 +882,7 @@
             this.EditBtn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.EditBtn2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.EditBtn2.ForeColor = System.Drawing.Color.Maroon;
-            this.EditBtn2.Location = new System.Drawing.Point(465, 17);
+            this.EditBtn2.Location = new System.Drawing.Point(461, 17);
             this.EditBtn2.Name = "EditBtn2";
             this.EditBtn2.Size = new System.Drawing.Size(72, 33);
             this.EditBtn2.TabIndex = 47;
@@ -894,7 +900,7 @@
             this.BTN_Save2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_Save2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.BTN_Save2.ForeColor = System.Drawing.Color.Maroon;
-            this.BTN_Save2.Location = new System.Drawing.Point(392, 17);
+            this.BTN_Save2.Location = new System.Drawing.Point(388, 17);
             this.BTN_Save2.Name = "BTN_Save2";
             this.BTN_Save2.Size = new System.Drawing.Size(67, 33);
             this.BTN_Save2.TabIndex = 49;
@@ -911,11 +917,10 @@
             this.Cmb_AmrNo2.Items.AddRange(new object[] {
             "2019_2020",
             "2020_2021"});
-            this.Cmb_AmrNo2.Location = new System.Drawing.Point(625, 22);
+            this.Cmb_AmrNo2.Location = new System.Drawing.Point(621, 22);
             this.Cmb_AmrNo2.Name = "Cmb_AmrNo2";
             this.Cmb_AmrNo2.Size = new System.Drawing.Size(110, 27);
             this.Cmb_AmrNo2.TabIndex = 26;
-            this.Cmb_AmrNo2.SelectedIndexChanged += new System.EventHandler(this.Cmb_AmrNo2_SelectedIndexChanged);
             // 
             // Cmb_FYear2
             // 
@@ -925,7 +930,7 @@
             this.Cmb_FYear2.Items.AddRange(new object[] {
             "2020_2021",
             "2021_2022"});
-            this.Cmb_FYear2.Location = new System.Drawing.Point(741, 22);
+            this.Cmb_FYear2.Location = new System.Drawing.Point(737, 22);
             this.Cmb_FYear2.Name = "Cmb_FYear2";
             this.Cmb_FYear2.Size = new System.Drawing.Size(110, 27);
             this.Cmb_FYear2.TabIndex = 25;
@@ -938,7 +943,7 @@
             this.label25.BackColor = System.Drawing.Color.Transparent;
             this.label25.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label25.ForeColor = System.Drawing.Color.MintCream;
-            this.label25.Location = new System.Drawing.Point(857, 25);
+            this.label25.Location = new System.Drawing.Point(853, 25);
             this.label25.Name = "label25";
             this.label25.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label25.Size = new System.Drawing.Size(137, 24);
@@ -961,10 +966,10 @@
             this.panel2.Controls.Add(this.SaveBtn);
             this.panel2.Controls.Add(this.BTN_ChooseTalb);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 69);
+            this.panel2.Location = new System.Drawing.Point(2, 71);
             this.panel2.Name = "panel2";
             this.panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.panel2.Size = new System.Drawing.Size(1150, 124);
+            this.panel2.Size = new System.Drawing.Size(1146, 124);
             this.panel2.TabIndex = 19;
             // 
             // panel4
@@ -1012,7 +1017,6 @@
             this.Cmb_FY2.Size = new System.Drawing.Size(35, 27);
             this.Cmb_FY2.TabIndex = 25;
             this.Cmb_FY2.Visible = false;
-            this.Cmb_FY2.SelectedIndexChanged += new System.EventHandler(this.Cmb_FY2_SelectedIndexChanged);
             // 
             // TXT_MonksaNo
             // 
@@ -1042,7 +1046,7 @@
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.panel8);
             this.panel3.Controls.Add(this.label24);
-            this.panel3.Location = new System.Drawing.Point(608, 40);
+            this.panel3.Location = new System.Drawing.Point(604, 40);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(535, 74);
             this.panel3.TabIndex = 335;
@@ -1174,12 +1178,13 @@
             this.BTN_Search.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_Search.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.BTN_Search.ForeColor = System.Drawing.Color.Blue;
-            this.BTN_Search.Location = new System.Drawing.Point(785, 3);
+            this.BTN_Search.Location = new System.Drawing.Point(781, 3);
             this.BTN_Search.Name = "BTN_Search";
             this.BTN_Search.Size = new System.Drawing.Size(70, 31);
             this.BTN_Search.TabIndex = 334;
             this.BTN_Search.Text = "بحث";
             this.BTN_Search.UseVisualStyleBackColor = false;
+            this.BTN_Search.Click += new System.EventHandler(this.BTN_Search_Click);
             // 
             // BTN_Cancel
             // 
@@ -1191,12 +1196,13 @@
             this.BTN_Cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_Cancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.BTN_Cancel.ForeColor = System.Drawing.Color.Blue;
-            this.BTN_Cancel.Location = new System.Drawing.Point(857, 3);
+            this.BTN_Cancel.Location = new System.Drawing.Point(853, 3);
             this.BTN_Cancel.Name = "BTN_Cancel";
             this.BTN_Cancel.Size = new System.Drawing.Size(70, 31);
             this.BTN_Cancel.TabIndex = 333;
             this.BTN_Cancel.Text = "إلغاء";
             this.BTN_Cancel.UseVisualStyleBackColor = false;
+            this.BTN_Cancel.Click += new System.EventHandler(this.BTN_Cancel_Click);
             // 
             // pictureBox1
             // 
@@ -1218,7 +1224,7 @@
             this.Addbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Addbtn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
             this.Addbtn.ForeColor = System.Drawing.Color.Blue;
-            this.Addbtn.Location = new System.Drawing.Point(1073, 3);
+            this.Addbtn.Location = new System.Drawing.Point(1069, 3);
             this.Addbtn.Name = "Addbtn";
             this.Addbtn.Size = new System.Drawing.Size(70, 31);
             this.Addbtn.TabIndex = 26;
@@ -1235,7 +1241,7 @@
             this.EditBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.EditBtn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
             this.EditBtn.ForeColor = System.Drawing.Color.Blue;
-            this.EditBtn.Location = new System.Drawing.Point(1001, 3);
+            this.EditBtn.Location = new System.Drawing.Point(997, 3);
             this.EditBtn.Name = "EditBtn";
             this.EditBtn.Size = new System.Drawing.Size(70, 31);
             this.EditBtn.TabIndex = 27;
@@ -1252,7 +1258,7 @@
             this.SaveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SaveBtn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
             this.SaveBtn.ForeColor = System.Drawing.Color.Blue;
-            this.SaveBtn.Location = new System.Drawing.Point(929, 3);
+            this.SaveBtn.Location = new System.Drawing.Point(925, 3);
             this.SaveBtn.Name = "SaveBtn";
             this.SaveBtn.Size = new System.Drawing.Size(70, 31);
             this.SaveBtn.TabIndex = 29;
@@ -1291,10 +1297,6 @@
             this.TXT_AmrNo.Name = "TXT_AmrNo";
             this.TXT_AmrNo.Size = new System.Drawing.Size(106, 26);
             this.TXT_AmrNo.TabIndex = 23;
-            this.TXT_AmrNo.TextChanged += new System.EventHandler(this.TXT_AmrNo_TextChanged);
-            this.TXT_AmrNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TXT_AmrNo_KeyDown);
-            this.TXT_AmrNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_AmrNo_KeyPress);
-            this.TXT_AmrNo.Leave += new System.EventHandler(this.TXT_AmrNo_Leave);
             // 
             // label1
             // 
@@ -1369,7 +1371,7 @@
             this.panel5.Controls.Add(this.BTN_Print);
             this.panel5.Controls.Add(this.CMB_Sadr);
             this.panel5.Controls.Add(this.label3);
-            this.panel5.Location = new System.Drawing.Point(898, 4);
+            this.panel5.Location = new System.Drawing.Point(894, 4);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(248, 130);
             this.panel5.TabIndex = 240;
@@ -1385,7 +1387,7 @@
             this.panel6.Controls.Add(this.TXT_HesabMward2);
             this.panel6.Controls.Add(this.TXT_HesabMward1);
             this.panel6.Controls.Add(this.label14);
-            this.panel6.Location = new System.Drawing.Point(626, 4);
+            this.panel6.Location = new System.Drawing.Point(622, 4);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(269, 130);
             this.panel6.TabIndex = 241;
@@ -1394,9 +1396,9 @@
             // 
             this.panel9.Controls.Add(this.dataGridView1);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel9.Location = new System.Drawing.Point(0, 332);
+            this.panel9.Location = new System.Drawing.Point(2, 334);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(1150, 256);
+            this.panel9.Size = new System.Drawing.Size(1146, 252);
             this.panel9.TabIndex = 242;
             // 
             // panel10
@@ -1415,7 +1417,7 @@
             this.panel10.Controls.Add(this.label7);
             this.panel10.Location = new System.Drawing.Point(352, 4);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(272, 130);
+            this.panel10.Size = new System.Drawing.Size(268, 130);
             this.panel10.TabIndex = 243;
             // 
             // panel11
@@ -1440,9 +1442,9 @@
             this.panel12.Controls.Add(this.panel13);
             this.panel12.Controls.Add(this.panel11);
             this.panel12.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel12.Location = new System.Drawing.Point(0, 193);
+            this.panel12.Location = new System.Drawing.Point(2, 195);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(1150, 139);
+            this.panel12.Size = new System.Drawing.Size(1146, 139);
             this.panel12.TabIndex = 245;
             // 
             // panel13
@@ -1498,9 +1500,9 @@
             this.panel1.Controls.Add(this.signatureTable);
             this.panel1.Controls.Add(this.panel14);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 588);
+            this.panel1.Location = new System.Drawing.Point(2, 586);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1150, 166);
+            this.panel1.Size = new System.Drawing.Size(1146, 166);
             this.panel1.TabIndex = 265;
             // 
             // signatureTable
@@ -1520,7 +1522,7 @@
             this.signatureTable.RowCount = 2;
             this.signatureTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.signatureTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.signatureTable.Size = new System.Drawing.Size(1150, 97);
+            this.signatureTable.Size = new System.Drawing.Size(1146, 97);
             this.signatureTable.TabIndex = 0;
             // 
             // panel20
@@ -1652,8 +1654,18 @@
             this.panel14.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel14.Location = new System.Drawing.Point(0, 0);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(1150, 69);
+            this.panel14.Size = new System.Drawing.Size(1146, 69);
             this.panel14.TabIndex = 243;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider.ContainerControl = this;
+            // 
+            // alertProvider
+            // 
+            this.alertProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.alertProvider.ContainerControl = this;
             // 
             // AmrSheraa
             // 
@@ -1669,6 +1681,7 @@
             this.Controls.Add(this.panel7);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AmrSheraa";
+            this.Padding = new System.Windows.Forms.Padding(2);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "TalbTawred";
             this.Load += new System.EventHandler(this.AmrSheraa_Load);
@@ -1714,6 +1727,8 @@
             this.panel15.PerformLayout();
             this.panel14.ResumeLayout(false);
             this.panel14.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.alertProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1831,5 +1846,7 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Button DeleteBtn2;
         private System.Windows.Forms.Panel panel20;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ErrorProvider alertProvider;
     }
 }

@@ -965,8 +965,7 @@ namespace ANRPC_Inventory
             catch (SqlException sqlEx)
             {
                 executemsg = false;
-                Console.WriteLine(sqlEx);
-                
+                Console.WriteLine(sqlEx);                
             }
 
             flag = (int)cmd.Parameters["@aot"].Value;
@@ -1143,7 +1142,6 @@ namespace ANRPC_Inventory
                 cmd.Parameters.AddWithValue("@S3", DBNull.Value);
 
             }
-
             if (FlagSign4 == 1)
             {
                 cmd.Parameters.AddWithValue("@S4", FlagEmpn4);
@@ -1154,7 +1152,6 @@ namespace ANRPC_Inventory
                 cmd.Parameters.AddWithValue("@S4", DBNull.Value);
 
             }
-
             if (FlagSign5 == 1)
             {
                 cmd.Parameters.AddWithValue("@S5", FlagEmpn5);
@@ -1209,8 +1206,7 @@ namespace ANRPC_Inventory
 
                 MessageBox.Show("تم التعديل بنجاح  ! ");
 
-                DisableControls();
-                Input_Reset();
+                reset();
             }
             else if (executemsg == true && flag == 2)
             {
@@ -1819,21 +1815,9 @@ namespace ANRPC_Inventory
                 }
             }
         }
-        public void SearchImage1(string stockall)
-        {
-            // string partialName = "webapi";
 
-            DirectoryInfo hdDirectoryInWhichToSearch = new DirectoryInfo(Constants.warehouse_app_machine_directory);
-            FileSystemInfo[] filesAndDirs = hdDirectoryInWhichToSearch.GetFileSystemInfos("*" + stockall + "*");
 
-            foreach (FileSystemInfo foundFile in filesAndDirs)
-            {
-                Image1 = foundFile.FullName;
-                Console.WriteLine(Image1);
-                pictureBox2.Image = Image.FromFile(@Image1);
-                picflag = 1;
-            }
-        }
+
         private void cleargridview()
         {
             this.dataGridView1.DataSource = null;
@@ -1873,10 +1857,6 @@ namespace ANRPC_Inventory
             }       
         }
 
-        private void EditBtn_Click(object sender, EventArgs e)
-        {
-            AddEditFlag = 1;
-        }
 
         private void Addbtn2_Click(object sender, EventArgs e)
         {
@@ -1911,17 +1891,6 @@ namespace ANRPC_Inventory
             AddNewTasnifInDataGridView();       
         }
         
-        private void AddARow(DataTable t)
-        {
-         
-            // Use the NewRow method to create a DataRow with 
-            // the table's schema.
-            DataRow newRow = t.NewRow();
-
-            // Add the row to the rows collection.
-           // t.Rows.Add(newRow);
-            t.Rows.InsertAt(newRow, table.Rows.Count+1);
-        }
 
         private void Cmb_FYear_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -2071,28 +2040,6 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (AddEditFlag == 2)
-            {
-
-
-                if (e.RowIndex == dataGridView1.NewRowIndex)
-                {
-                    // user is in the new row, disable controls.
-                   //  dataGridView1.Rows[e.RowIndex].Cells[0].Value = TXT_TalbNo.Text;
-                  //    dataGridView1.Rows[e.RowIndex].Cells[1].Value = Cmb_FYear.Text;
-                    
-                //    dataGridView1.Rows[e.RowIndex].Cells[2].Value = e.RowIndex + 1;
-                    // dataGridView1.Rows[e.RowIndex].Cells[3].Value = 1;
-
-                }
-                else
-                {
-                
-                }
-            }
-        }
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
@@ -2453,6 +2400,8 @@ namespace ANRPC_Inventory
         }
 
 
+
+
         //------------------------------------------ Signature Handler ---------------------------------
         #region Signature Handler
         private void BTN_Sign1_Click(object sender, EventArgs e)
@@ -2686,6 +2635,9 @@ namespace ANRPC_Inventory
             }
         }
         #endregion
+
+
+
 
         private void BTN_SearchEzn_Click(object sender, EventArgs e)
         {
