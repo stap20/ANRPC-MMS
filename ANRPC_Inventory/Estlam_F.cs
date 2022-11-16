@@ -13,8 +13,9 @@ namespace ANRPC_Inventory
 {
     public partial class Estlam_F : Form
     {
+        //------------------------------------------ Define Variables ---------------------------------
+        #region Def Variables
         public SqlConnection con;//sql conn for anrpc_sms db
-
         public DataTable DT = new DataTable();
         private BindingSource bindingsource1 = new BindingSource();
 
@@ -47,15 +48,15 @@ namespace ANRPC_Inventory
         public string  SignPath1="";
         public string SignPath2="";
         public string SignPath3="";
-   public string SignPath4="";
+        public string SignPath4="";
 
         public Boolean executemsg;
-       // public double totalprice;
-        //  private string TableQuery;
         public string stockallold;
         DataTable table = new DataTable();
         public SqlDataAdapter dataadapter;
         public DataSet ds = new DataSet();
+
+
         ///////////////////////
         public string Sign1;
         public string Sign2;
@@ -96,18 +97,294 @@ namespace ANRPC_Inventory
         public DateTime Dateold;
         public int r;
         public int rowflag = 0;
-        double quan;
-        double dareba;
-        decimal price;
-        decimal totalprice;
-        int changedflag = 0;
-        //  public string TableQuery;
 
-        AutoCompleteStringCollection TasnifColl = new AutoCompleteStringCollection(); //empn
-        AutoCompleteStringCollection TasnifNameColl = new AutoCompleteStringCollection(); //empn
 
         AutoCompleteStringCollection UnitColl = new AutoCompleteStringCollection(); //empn
         AutoCompleteStringCollection TalbColl = new AutoCompleteStringCollection(); //empn
+        #endregion
+
+        #region myDefVariable
+        enum VALIDATION_TYPES
+        {
+            ADD_AMRSHERAA_BNOD,
+            ATTACH_FILE,
+            SEARCH,
+            CONFIRM_SEARCH,
+            SAVE,
+
+        }
+        int currentSignNumber = 0;
+        #endregion
+
+        //------------------------------------------ State Handler ---------------------------------
+        #region State Handler
+        private void changePanelState(Panel panel, bool state)
+        {
+            try
+            {
+                foreach (Control control in panel.Controls)
+                {
+                    if (control.GetType() == typeof(Panel))
+                    {
+                        changePanelState((Panel)control, state);
+                    }
+                    else
+                    {
+                        control.Enabled = state;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        private void changeDataGridViewColumnState(DataGridView dataGridView, bool state)
+        {
+            try
+            {
+                foreach (DataGridViewColumn column in dataGridView.Columns)
+                {
+                    dataGridView.Columns[column.Index].ReadOnly = state;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        public void PrepareAddState()
+        {
+
+            //fyear sec
+            changePanelState(panel5, false);
+            Cmb_FY.Enabled = true;
+            CMB_Sadr.Enabled = true;
+
+            //moward sec
+            changePanelState(panel6, true);
+
+            //bian edara sec
+            changePanelState(panel10, true);
+            TXT_Edara.Enabled = false;
+            TXT_CodeEdara.Enabled = false;
+            TXT_Egmali.Enabled = false;
+
+            //mowazna value
+            changePanelState(panel11, false);
+            TXT_Payment.Enabled = true;
+
+
+            //btn Section
+            //generalBtn
+            SaveBtn.Enabled = true;
+            BTN_Cancel.Enabled = true;
+            BTN_ChooseTalb.Enabled = true;
+            browseBTN.Enabled = true;
+            BTN_PDF.Enabled = true;
+
+            Addbtn.Enabled = false;
+            EditBtn.Enabled = false;
+            BTN_Search.Enabled = false;
+            BTN_Print.Enabled = false;
+
+
+            //signature btn
+            changePanelState(signatureTable, false);
+            BTN_Sigm1.Enabled = true;
+
+            changeDataGridViewColumnState(dataGridView1, true);
+
+            dataGridView1.AllowUserToAddRows = true;
+            dataGridView1.AllowUserToDeleteRows = true;
+
+            currentSignNumber = 1;
+        }
+
+        public void PrepareEditState()
+        {
+            PrepareAddState();
+            BTN_Print.Enabled = true;
+
+            Pic_Sign1.Image = null;
+            Pic_Sign2.Image = null;
+            FlagSign1 = 0;
+            FlagSign2 = 0;
+            Pic_Sign1.BackColor = Color.White;
+            Pic_Sign2.BackColor = Color.White;
+        }
+
+        public void PrepareConfirmState()
+        {
+            DisableControls();
+            BTN_Save2.Enabled = true;
+
+
+            if (Constants.User_Type == "B")
+            {
+                if (Constants.UserTypeB == "Stock")
+                {
+                    if (FlagSign2 != 1 && FlagSign1 == 1)
+                    {
+                        BTN_Sigm12.Enabled = true;
+
+                        Pic_Sign2.BackColor = Color.Green;
+                        currentSignNumber = 2;
+                    }
+                    else if (FlagSign3 != 1 && FlagSign2 == 1)
+                    {
+                        BTN_Sigm13.Enabled = true;
+
+                        Pic_Sign3.BackColor = Color.Green;
+                        currentSignNumber = 3;
+                    }
+                    else if (FlagSign4 != 1 && FlagSign3 == 1)
+                    {
+                        BTN_Sigm14.Enabled = true;
+
+                        Pic_Sign4.BackColor = Color.Green;
+                        currentSignNumber = 4;
+                    }
+                }
+            }
+
+            AddEditFlag = 1;
+            TNO = TXT_AmrNo.Text;
+            FY = Cmb_FY.Text;
+        }
+
+        public void prepareSearchState()
+        {
+            DisableControls();
+            Input_Reset();
+            Cmb_FY.Enabled = true;
+            TXT_AmrNo.Enabled = true;
+            BTN_Print.Enabled = true;
+        }
+
+        public void reset()
+        {
+            prepareSearchState();
+        }
+
+        public void DisableControls()
+        {
+            //fyear
+            changePanelState(panel5, false);
+
+            //moward sec
+            changePanelState(panel3, false);
+
+
+            //btn Section
+            //generalBtn
+            Addbtn.Enabled = true;
+            BTN_Search.Enabled = true;
+            SaveBtn.Enabled = false;
+            EditBtn.Enabled = false;
+            BTN_Cancel.Enabled = false;
+            DeleteBtn.Enabled = false;
+            BTN_Print.Enabled = false;
+            browseBTN.Enabled = false;
+            BTN_PDF.Enabled = false;
+
+            //signature btn
+            changePanelState(signatureTable, false);
+
+            changeDataGridViewColumnState(dataGridView1, true);
+
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+        }
+
+        public void resetSignature()
+        {
+            //btn Section
+            //signature btn
+            Pic_Sign1.Image = null;
+            FlagSign1 = 0;
+            Pic_Sign1.BackColor = Color.White;
+
+            Pic_Sign2.Image = null;
+            FlagSign2 = 0;
+            Pic_Sign2.BackColor = Color.White;
+
+            Pic_Sign3.Image = null;
+            FlagSign3 = 0;
+            Pic_Sign3.BackColor = Color.White;
+
+            Pic_Sign4.Image = null;
+            FlagSign4 = 0;
+            Pic_Sign4.BackColor = Color.White;
+        }
+
+        public void Input_Reset()
+        {
+            //amr sheraa types
+            radioButton1.Checked = false;
+            radioButton2.Checked = false;
+            radioButton3.Checked = false;
+            radioButton4.Checked = false;
+            radioButton5.Checked = false;
+            radioButton6.Checked = false;
+
+
+            //fyear sec
+            TXT_AmrNo.Text = "";
+            TXT_TalbNo.Text = "";
+            Cmb_FY.Text = "";
+            Cmb_FY.SelectedIndex = -1;
+
+            CMB_Sadr.Text = "";
+            CMB_Sadr.SelectedIndex = -1;
+
+
+            //moward sec
+            TXT_Name.Text = "";
+            TXT_HesabMward1.Text = "";
+            TXT_HesabMward2.Text = "";
+            TXT_TaslemDate.Text = "";
+
+
+            //bian edara sec
+            TXT_Edara.Text = "";
+            TXT_CodeEdara.Text = "";
+            TXT_Egmali.Text = "";
+            TXT_TaslemPlace.Text = "";
+            TXT_Date.Value = DateTime.Today;
+
+            //mowazna value
+            TXT_Momayz.Text = "";
+            TXT_BndMwazna.Text = "";
+            TXT_Payment.Text = "";
+
+            //egamle dareba
+            TXT_EgmaliBefore.Text = "";
+            TXT_EgmaliAfter.Text = "";
+            TXT_EgmaliDareba.Text = "";
+            txt_arabicword.Text = "";
+
+            //search sec
+            Cmb_FY2.Text = "";
+            Cmb_FY2.SelectedIndex = -1;
+
+            Cmb_AmrNo2.Text = "";
+            Cmb_AmrNo2.SelectedIndex = -1;
+
+            resetSignature();
+
+            //shek sec
+            TXT_ShickNo.Text = "";
+
+            cleargridview();
+
+            AddEditFlag = 0;
+        }
+        #endregion
+
+
         public Estlam_F()
         {
             InitializeComponent();
@@ -116,10 +393,6 @@ namespace ANRPC_Inventory
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
         }
 
-        private void guna2Button1_Click(object sender, EventArgs e)
-        {
-
-        }
         private void Cmb_AmrNo_DropDownClosed(object sender, EventArgs e)
         {
             toolTip2.Hide(Cmb_AmrNo);
@@ -178,12 +451,7 @@ namespace ANRPC_Inventory
             //////////////////////////////////////////////
             Cmb_FY.SelectedIndex = 0;
           
-          
-            TXT_AmrNo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            TXT_AmrNo.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            TXT_AmrNo.AutoCompleteCustomSource = TalbColl;
-
-
+        
                //cmdstring = "select (Amrshraa_No) from  T_Awamershraa where Sign3 =1 and AmrSheraa_sanamalia=@FY and Sign2=1   order by  Amrshraa_No";
 
                /*  cmdstring = "select (Amrshraa_No) from  T_Estlam  order by  Amrshraa_No";
@@ -205,6 +473,7 @@ namespace ANRPC_Inventory
 
             con.Close();
         }
+       
         private void Getdata(string cmd)
         {
 
@@ -336,7 +605,8 @@ namespace ANRPC_Inventory
                    // TXT_Egmali.Text = total.ToString("N2");
             //cleargridview();
         }
-          private void GetData(int x,string y)
+          
+        private void GetData(int x,string y)
           {
 
              // if (string.IsNullOrWhiteSpace(Cmb_AmrNo.Text))
@@ -390,7 +660,8 @@ namespace ANRPC_Inventory
 
           }
 
-          private void Getdata2(string cmd)
+         
+        private void Getdata2(string cmd)
           {
               dataGridView1.Columns.Clear();
               dataGridView1.DataSource = null;
@@ -461,51 +732,11 @@ namespace ANRPC_Inventory
               // TXT_Egmali.Text = total.ToString("N2");
              // cleargridview();
           }   
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Graphics surface = CreateGraphics();
-            Pen pen1 = new Pen(Color.Black, 2);
-            surface.DrawLine(pen1, 0, 185, 1000, 185);
-        }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            /*
-            Graphics surface = e.Graphics;
-            Pen pen1 = new Pen(Color.Black, 2);
-            surface.DrawLine(pen1, panel1.Location.X + 4,  4, panel1.Location.X + 4, panel1.Location.Y + panel1.Size.Height); // Left Line
-            surface.DrawLine(pen1, panel1.Size.Width - 4, 4, panel1.Size.Width - 4, panel1.Location.Y + panel1.Size.Height); // Right Line
-            //---------------------------
-            surface.DrawLine(pen1, 4,4, panel1.Location.X + panel1.Size.Width - 4,4); // Top Line
-           surface.DrawLine(pen1, 4, panel1.Size.Height -1, panel1.Location.X + panel1.Size.Width - 4, panel1.Size.Height -1); // Bottom Line
-       
-            //---------------------------
-            // Middle_Line
-            //-------------
-            surface.DrawLine(pen1, ((panel1.Size.Width) / 2) + 4, 4, ((panel1.Size.Width) / 2) + 4, panel1.Location.Y + panel1.Size.Height); // Left Line
-            surface.DrawLine(pen1, 4, 38, panel1.Location.X + panel1.Size.Width - 4, 40); // Top Line
-            surface.Dispose();*/
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-          public void EnableControls()
+        public void EnableControls()
         {
          //  BTN_ChooseTalb.Enabled = true;
           
-            TXT_AmrNo.Enabled = true;
             Cmb_AmrNo.Enabled = true;
             Cmb_FY.Enabled = true;
             TXT_Date.Enabled = true;
@@ -534,9 +765,9 @@ namespace ANRPC_Inventory
   
         
         }
+
         public void Input_Reset()
         {
-            TXT_AmrNo.Text = "";
             Cmb_AmrNo.SelectedIndex = -1;
             Cmb_FY.Text = "";
             TXT_Date.Text = "";
@@ -561,6 +792,7 @@ namespace ANRPC_Inventory
 
 
         }
+
         public void DisableControls()
         {
            // BTN_ChooseTalb.Enabled = false;
@@ -589,6 +821,7 @@ namespace ANRPC_Inventory
   
         
         }
+
         private void cleargridview()
         {
             this.dataGridView1.DataSource = null;
@@ -607,7 +840,7 @@ namespace ANRPC_Inventory
                 Input_Reset();
                 cleargridview();
                 AddEditFlag = 2;
-                BTN_EstlamReport.Enabled =false;
+                BTN_Print.Enabled =false;
                 EditBtn.Enabled = false;
               //  TXT_Edara.Text = Constants.NameEdara;
               //  BTN_ChooseTalb.Enabled = true;
@@ -633,7 +866,7 @@ namespace ANRPC_Inventory
                 else
                 {
                     Addbtn.Enabled = false;
-                    BTN_EstlamReport.Enabled =false;
+                    BTN_Print.Enabled =false;
                     AddEditFlag = 1;
                     TNO = Cmb_AmrNo.SelectedValue.ToString();
                     FY = Cmb_FY.Text;
@@ -738,11 +971,8 @@ namespace ANRPC_Inventory
         {
           
                 Constants.opencon();
-                Cmb_AmrNo.SelectedIndexChanged -= new EventHandler(Cmb_AmrNo_SelectedIndexChanged);
                 Cmb_AmrNo.DataSource = null;
                 Cmb_AmrNo.Items.Clear();
-                TXT_AmrNo.AutoCompleteMode = AutoCompleteMode.None;
-                TXT_AmrNo.AutoCompleteSource = AutoCompleteSource.None; ;
                 string cmdstring3 = "SELECT  Amrshraa_No from T_Awamershraa  where  Sign14 is not null and AmrSheraa_sanamalia='" + Cmb_FY.Text + "' order by  Amrshraa_No";
                 SqlCommand cmd3 = new SqlCommand(cmdstring3, Constants.con);
                 SqlDataReader dr3 = cmd3.ExecuteReader();
@@ -756,9 +986,6 @@ namespace ANRPC_Inventory
                     }
                 }
               
-                TXT_AmrNo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                TXT_AmrNo.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                TXT_AmrNo.AutoCompleteCustomSource = TalbColl;
 
             ////////////////////////////////////////////////////////
 
@@ -786,7 +1013,6 @@ namespace ANRPC_Inventory
                   Cmb_AmrNo.ValueMember = "Amrshraa_No";
                   Cmb_AmrNo.DisplayMember = "x";
                   Cmb_AmrNo.SelectedIndex = -1;
-                  Cmb_AmrNo.SelectedIndexChanged += new EventHandler(Cmb_AmrNo_SelectedIndexChanged);
 
                }
                else if (AddEditFlag == 2)
@@ -806,7 +1032,6 @@ namespace ANRPC_Inventory
                     Cmb_AmrNo.ValueMember = "Amrshraa_No";
                     Cmb_AmrNo.DisplayMember = "Amrshraa_No";
                     Cmb_AmrNo.SelectedIndex = -1;
-                    Cmb_AmrNo.SelectedIndexChanged += new EventHandler(Cmb_AmrNo_SelectedIndexChanged);
                }
              
 
@@ -817,6 +1042,7 @@ namespace ANRPC_Inventory
             
         
         }
+  
         public void SearchTalb(int x)
         {
             //call sp that get last num that eentered for this MM and this YYYY
@@ -957,14 +1183,14 @@ namespace ANRPC_Inventory
                     }
                 }
                 GetData(Convert.ToInt32(Cmb_AmrNo.SelectedValue), Cmb_FY.Text);
-                BTN_EstlamReport.Enabled = true;
+                BTN_Print.Enabled = true;
 
 
             }
             else
             {
                 MessageBox.Show("من فضلك تاكد من تاريخ الاستلام و رقم امر الشراء");
-                BTN_EstlamReport.Enabled = false;
+                BTN_Print.Enabled = false;
 
             }
             dr.Close();
@@ -999,23 +1225,6 @@ namespace ANRPC_Inventory
             //  DataGridViewReset();
 
             Constants.closecon();
-        }
-        private void TXT_AmrNo_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter && AddEditFlag == 2)
-            {
-                
-                GetData(Convert.ToInt32(TXT_AmrNo.Text), Cmb_FY.Text);
-                
-            }
-         if (e.KeyCode == Keys.Enter  && AddEditFlag==0)
-            {
-                cleargridview();
-                SearchTalb(1);
-   
-            //    GetData(Convert.ToInt32(TXT_AmrNo.Text), Cmb_FY.Text);
-                
-            }
         }
 
       
@@ -1293,6 +1502,7 @@ namespace ANRPC_Inventory
                 UpdateEstlam();
             }
         }
+        
         public void UpdateEstlam()
         {
             if (con != null && con.State == ConnectionState.Closed)
@@ -1489,6 +1699,7 @@ namespace ANRPC_Inventory
             AddEditFlag = 0;
             con.Close();
         }
+       
         private void BTN_Sign2_Click(object sender, EventArgs e)
         {
             if ( FlagSign1 != 1)
@@ -1601,15 +1812,6 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void Pic_Sign3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Pic_Sign2_Click(object sender, EventArgs e)
-        {
-
-        }
         public void SP_UpdateSignatures(int x, DateTime D1, DateTime? D2 = null)
         {
             string cmdstring = "Exec  SP_UpdateSignDatesEstlam  @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
@@ -1649,190 +1851,6 @@ namespace ANRPC_Inventory
             cmd.ExecuteNonQuery();
         }
 
-        private void BTN_Sign1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Pic_Sign1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label21_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label20_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label17_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TXT_HesabMward1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TXT_HesabMward2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TXT_TaslemPlace_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TXT_Name_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TXT_Payment_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TXT_Date_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TXT_Egmali_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TXT_TalbNo_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label13_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label14_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label15_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TXT_BndMwazna_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TXT_Edara_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TXT_TaslemDate_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TXT_Momayz_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label16_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Cmb_FY2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TXT_AmrNo_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TXT_MonksaNo_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CMB_Sadr_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel7_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void BTN_Save2_Click(object sender, EventArgs e)
         {
@@ -1841,13 +1859,6 @@ namespace ANRPC_Inventory
                 UpdateEstlam();
             }
         }
-
-        private void Cmb_ِAmrNo2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            SearchTalb(2);
-        }
-
-
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
@@ -1942,34 +1953,6 @@ namespace ANRPC_Inventory
             
         }
 
-        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-           
-        }
-
-        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-         {
-            /*
-                if (e.ColumnIndex == 20)
-            {
-                if (!string.IsNullOrEmpty(dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].ToString()))
-          {
-               // your code goes here
-         
-            decimal total = table.AsEnumerable().Sum(row => row.Field<decimal>("TotalPriceAfter"));
-                            //  TXT_Egmali.Text = total.ToString("N2");
-                             
-            //    dataGridView1.FooterRow.Cells[1].Text = "Total";
-            //   dataGridView1.FooterRow.Cells[1].HorizontalAlign = HorizontalAlign.Right;
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-               string edara = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-             //  TXT_Edara.Text += edara;
-            }
-  
-            }}*/
-
-        }
 
         private void dataGridView1_CellLeave(object sender, DataGridViewCellEventArgs e)
         {
@@ -1979,6 +1962,8 @@ namespace ANRPC_Inventory
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+
+            //printaya
             if ((MessageBox.Show("هل تريد طباعة تقرير الاستلام ؟", "", MessageBoxButtons.YesNo)) == DialogResult.Yes)
             {
                 Constants.Date_E = TXT_Date.Text;
@@ -2014,27 +1999,8 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void label3_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Cmb_AmrNo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-          
-        }
 
         private void TXT_QuanTard_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            Constants.validatenumberkeypress(sender, e);
-        }
-
-        private void TXT_QuanBnod_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            Constants.validatenumberkeypress(sender, e);
-        }
-
-        private void TXT_AmrNo_KeyPress(object sender, KeyPressEventArgs e)
         {
             Constants.validatenumberkeypress(sender, e);
         }
@@ -2044,62 +2010,7 @@ namespace ANRPC_Inventory
             Constants.validatenumberkeypress(sender, e);
         }
 
-        private void Cmb_AmrNo_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-           // GetTalbData(Cmb_AmrNo.SelectedValue.ToString());
-         
-        }
-        public void GetTalbData(string t)
-        {
-            Constants.opencon();
-            string cmdstring = "";
-            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
 
-            //cmdstring = "select * from  T_Estlam where Amrshraa_No=@TN and AmrSheraa_sanamalia=@FY";
-            cmdstring = "select  (Amrshraa_No),date from T_Estlam group by date,Amrshraa_No,AmrSheraa_sanamalia having AmrSheraa_sanamalia=@FY   order by Amrshraa_No ";
-
-            cmd = new SqlCommand(cmdstring, Constants.con);
-
-                // cmd.Parameters.AddWithValue("@TN", Cmb_TalbNo2.Text);
-                cmd.Parameters.AddWithValue("@TN", t);
-                cmd.Parameters.AddWithValue("@FY", Cmb_FY.Text);
-            
-
-            // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
-
-
-            SqlDataReader dr = cmd.ExecuteReader();
-
-            if (dr.HasRows == true)
-            {
-                ST = "";
-                while (dr.Read())
-                {
-
-                    ST = dr["Date"].ToString();
-                   
-                    ST = ST + Environment.NewLine;
-
-
-
-                }
-             //   label1.Text = ST;
-                //  ShowToolTip(ST);
-
-            }
-
-
-            else
-            {
-                // MessageBox.Show("من فضلك تاكد من رقم طلب التوريد");
-
-
-                return;
-
-            }
-            dr.Close();
-            Constants.closecon();
-        }
         private void Cmb_AmrNo_SelectionChangeCommitted(object sender, EventArgs e)
         {
             if (AddEditFlag == 2 && Cmb_AmrNo.SelectedValue.ToString() != "")
@@ -2130,6 +2041,9 @@ namespace ANRPC_Inventory
             }
         }
 
+
+
+
         private void Cmb_AmrNo_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (e.Index < 0) { return; } // added this line thanks to Andrew's comment
@@ -2147,11 +2061,6 @@ namespace ANRPC_Inventory
             //    toolTip2.Show(ST, Cmb_AmrNo, e.Bounds.Right, e.Bounds.Bottom);
             }
             e.DrawFocusRectangle();
-        }
-
-        private void dataGridView1_DataSourceChanged(object sender, EventArgs e)
-        {
-            //MessageBox.Show("changed");
         }
     }
 }

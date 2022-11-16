@@ -143,6 +143,7 @@
             this.panel14 = new System.Windows.Forms.Panel();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.alertProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign2)).BeginInit();
@@ -278,7 +279,7 @@
             this.BTN_Sigm14.FlatAppearance.BorderSize = 3;
             this.BTN_Sigm14.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BTN_Sigm14.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_Sigm14.Location = new System.Drawing.Point(221, 1);
+            this.BTN_Sigm14.Location = new System.Drawing.Point(220, 1);
             this.BTN_Sigm14.Name = "BTN_Sigm14";
             this.BTN_Sigm14.Size = new System.Drawing.Size(52, 20);
             this.BTN_Sigm14.TabIndex = 255;
@@ -292,7 +293,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Pic_Sign4.Location = new System.Drawing.Point(3, 3);
             this.Pic_Sign4.Name = "Pic_Sign4";
-            this.Pic_Sign4.Size = new System.Drawing.Size(212, 35);
+            this.Pic_Sign4.Size = new System.Drawing.Size(211, 35);
             this.Pic_Sign4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign4.TabIndex = 254;
             this.Pic_Sign4.TabStop = false;
@@ -306,7 +307,7 @@
             this.BTN_Sigm12.FlatAppearance.BorderSize = 3;
             this.BTN_Sigm12.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BTN_Sigm12.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_Sigm12.Location = new System.Drawing.Point(232, 4);
+            this.BTN_Sigm12.Location = new System.Drawing.Point(231, 4);
             this.BTN_Sigm12.Name = "BTN_Sigm12";
             this.BTN_Sigm12.Size = new System.Drawing.Size(53, 31);
             this.BTN_Sigm12.TabIndex = 253;
@@ -320,7 +321,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Pic_Sign2.Location = new System.Drawing.Point(4, 4);
             this.Pic_Sign2.Name = "Pic_Sign2";
-            this.Pic_Sign2.Size = new System.Drawing.Size(222, 31);
+            this.Pic_Sign2.Size = new System.Drawing.Size(221, 31);
             this.Pic_Sign2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign2.TabIndex = 252;
             this.Pic_Sign2.TabStop = false;
@@ -335,7 +336,7 @@
             this.BTN_Sigm13.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BTN_Sigm13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTN_Sigm13.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_Sigm13.Location = new System.Drawing.Point(194, 4);
+            this.BTN_Sigm13.Location = new System.Drawing.Point(192, 4);
             this.BTN_Sigm13.Name = "BTN_Sigm13";
             this.BTN_Sigm13.Size = new System.Drawing.Size(53, 31);
             this.BTN_Sigm13.TabIndex = 251;
@@ -349,7 +350,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Pic_Sign3.Location = new System.Drawing.Point(4, 4);
             this.Pic_Sign3.Name = "Pic_Sign3";
-            this.Pic_Sign3.Size = new System.Drawing.Size(184, 32);
+            this.Pic_Sign3.Size = new System.Drawing.Size(182, 32);
             this.Pic_Sign3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign3.TabIndex = 250;
             this.Pic_Sign3.TabStop = false;
@@ -362,7 +363,7 @@
             this.TXT_ShickNo.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.TXT_ShickNo.Location = new System.Drawing.Point(6, 7);
             this.TXT_ShickNo.Name = "TXT_ShickNo";
-            this.TXT_ShickNo.Size = new System.Drawing.Size(298, 26);
+            this.TXT_ShickNo.Size = new System.Drawing.Size(297, 26);
             this.TXT_ShickNo.TabIndex = 249;
             // 
             // TXT_Shick1
@@ -381,7 +382,7 @@
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label22.ForeColor = System.Drawing.Color.Black;
-            this.label22.Location = new System.Drawing.Point(310, 11);
+            this.label22.Location = new System.Drawing.Point(309, 11);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(58, 18);
             this.label22.TabIndex = 247;
@@ -449,7 +450,7 @@
             this.BTN_Sigm1.FlatAppearance.BorderSize = 3;
             this.BTN_Sigm1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BTN_Sigm1.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_Sigm1.Location = new System.Drawing.Point(239, 4);
+            this.BTN_Sigm1.Location = new System.Drawing.Point(238, 4);
             this.BTN_Sigm1.Name = "BTN_Sigm1";
             this.BTN_Sigm1.Size = new System.Drawing.Size(53, 31);
             this.BTN_Sigm1.TabIndex = 245;
@@ -511,7 +512,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Pic_Sign1.Location = new System.Drawing.Point(3, 4);
             this.Pic_Sign1.Name = "Pic_Sign1";
-            this.Pic_Sign1.Size = new System.Drawing.Size(228, 31);
+            this.Pic_Sign1.Size = new System.Drawing.Size(227, 31);
             this.Pic_Sign1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign1.TabIndex = 239;
             this.Pic_Sign1.TabStop = false;
@@ -522,7 +523,7 @@
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Arial", 12F);
             this.label17.ForeColor = System.Drawing.Color.Maroon;
-            this.label17.Location = new System.Drawing.Point(296, 11);
+            this.label17.Location = new System.Drawing.Point(295, 11);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(75, 18);
             this.label17.TabIndex = 236;
@@ -888,7 +889,7 @@
             this.EditBtn2.TabIndex = 47;
             this.EditBtn2.Text = "تعديل";
             this.EditBtn2.UseVisualStyleBackColor = false;
-            this.EditBtn2.Click += new System.EventHandler(this.EditBtn_Click);
+            this.EditBtn2.Click += new System.EventHandler(this.EditBtn2_Click);
             // 
             // BTN_Save2
             // 
@@ -1475,6 +1476,7 @@
             this.BTN_PDF.TabIndex = 337;
             this.BTN_PDF.Text = "عرض المرفقات";
             this.BTN_PDF.UseVisualStyleBackColor = false;
+            this.BTN_PDF.Click += new System.EventHandler(this.BTN_PDF_Click);
             // 
             // browseBTN
             // 
@@ -1494,6 +1496,7 @@
             this.browseBTN.TabIndex = 340;
             this.browseBTN.Text = "إرفاق مرفقات";
             this.browseBTN.UseVisualStyleBackColor = false;
+            this.browseBTN.Click += new System.EventHandler(this.browseBTN_Click);
             // 
             // panel1
             // 
@@ -1531,9 +1534,9 @@
             this.panel20.Controls.Add(this.TXT_ShickNo);
             this.panel20.Controls.Add(this.label22);
             this.panel20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel20.Location = new System.Drawing.Point(386, 51);
+            this.panel20.Location = new System.Drawing.Point(384, 51);
             this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(377, 43);
+            this.panel20.Size = new System.Drawing.Size(376, 43);
             this.panel20.TabIndex = 266;
             // 
             // panel18
@@ -1544,9 +1547,9 @@
             this.panel18.Controls.Add(this.Pic_Sign4);
             this.panel18.Controls.Add(this.BTN_Sigm14);
             this.panel18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel18.Location = new System.Drawing.Point(769, 51);
+            this.panel18.Location = new System.Drawing.Point(766, 51);
             this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(378, 43);
+            this.panel18.Size = new System.Drawing.Size(377, 43);
             this.panel18.TabIndex = 266;
             // 
             // DeleteBtn2
@@ -1558,12 +1561,13 @@
             this.DeleteBtn2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.DeleteBtn2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.DeleteBtn2.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.DeleteBtn2.Location = new System.Drawing.Point(221, 22);
+            this.DeleteBtn2.Location = new System.Drawing.Point(220, 22);
             this.DeleteBtn2.Name = "DeleteBtn2";
             this.DeleteBtn2.Size = new System.Drawing.Size(52, 18);
             this.DeleteBtn2.TabIndex = 266;
             this.DeleteBtn2.Text = "حذف";
             this.DeleteBtn2.UseVisualStyleBackColor = false;
+            this.DeleteBtn2.Click += new System.EventHandler(this.DeleteBtn2_Click);
             // 
             // label27
             // 
@@ -1571,7 +1575,7 @@
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Arial", 12F);
             this.label27.ForeColor = System.Drawing.Color.Maroon;
-            this.label27.Location = new System.Drawing.Point(277, 10);
+            this.label27.Location = new System.Drawing.Point(276, 10);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(96, 18);
             this.label27.TabIndex = 239;
@@ -1587,7 +1591,7 @@
             this.panel17.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel17.Location = new System.Drawing.Point(3, 3);
             this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(377, 42);
+            this.panel17.Size = new System.Drawing.Size(375, 42);
             this.panel17.TabIndex = 266;
             // 
             // label26
@@ -1596,7 +1600,7 @@
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Arial", 12F);
             this.label26.ForeColor = System.Drawing.Color.Maroon;
-            this.label26.Location = new System.Drawing.Point(250, 11);
+            this.label26.Location = new System.Drawing.Point(248, 11);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(122, 18);
             this.label26.TabIndex = 238;
@@ -1610,9 +1614,9 @@
             this.panel16.Controls.Add(this.Pic_Sign2);
             this.panel16.Controls.Add(this.BTN_Sigm12);
             this.panel16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel16.Location = new System.Drawing.Point(386, 3);
+            this.panel16.Location = new System.Drawing.Point(384, 3);
             this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(377, 42);
+            this.panel16.Size = new System.Drawing.Size(376, 42);
             this.panel16.TabIndex = 266;
             // 
             // label16
@@ -1621,7 +1625,7 @@
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Arial", 12F);
             this.label16.ForeColor = System.Drawing.Color.Maroon;
-            this.label16.Location = new System.Drawing.Point(287, 9);
+            this.label16.Location = new System.Drawing.Point(286, 9);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(84, 18);
             this.label16.TabIndex = 237;
@@ -1635,9 +1639,9 @@
             this.panel15.Controls.Add(this.BTN_Sigm1);
             this.panel15.Controls.Add(this.Pic_Sign1);
             this.panel15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel15.Location = new System.Drawing.Point(769, 3);
+            this.panel15.Location = new System.Drawing.Point(766, 3);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(378, 42);
+            this.panel15.Size = new System.Drawing.Size(377, 42);
             this.panel15.TabIndex = 266;
             // 
             // panel14
@@ -1666,6 +1670,10 @@
             // 
             this.alertProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.alertProvider.ContainerControl = this;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // AmrSheraa
             // 
@@ -1848,5 +1856,6 @@
         private System.Windows.Forms.Panel panel20;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.ErrorProvider alertProvider;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

@@ -668,6 +668,9 @@ namespace ANRPC_Inventory
 
             //btn Section
             //generalBtn
+            BTN_SearchEzn.Enabled = true;
+            BTN_Search_Motab3a.Enabled = true;
+
             SaveBtn.Enabled = true;
             BTN_Cancel.Enabled = true;
             Addbtn2.Enabled = true;
