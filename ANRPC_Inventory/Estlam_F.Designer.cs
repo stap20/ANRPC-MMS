@@ -45,13 +45,13 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.BTN_Search = new System.Windows.Forms.Button();
             this.BTN_Cancel = new System.Windows.Forms.Button();
-            this.BTN_Print2 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.SaveBtn = new System.Windows.Forms.Button();
             this.DeleteBtn = new System.Windows.Forms.Button();
             this.EditBtn = new System.Windows.Forms.Button();
             this.Addbtn = new System.Windows.Forms.Button();
+            this.BTN_Print2 = new System.Windows.Forms.Button();
             this.Cmb_AmrNo = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -81,6 +81,16 @@
             this.BTN_Sign2 = new System.Windows.Forms.Button();
             this.Pic_Sign2 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.BTN_Search_Motab3a = new System.Windows.Forms.Button();
+            this.EditBtn2 = new System.Windows.Forms.Button();
+            this.BTN_Save2 = new System.Windows.Forms.Button();
+            this.Cmb_AmrNo2 = new System.Windows.Forms.ComboBox();
+            this.Cmb_FYear2 = new System.Windows.Forms.ComboBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.alertProvider = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -97,6 +107,9 @@
             this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign2)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.alertProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // TXT_DateEstlam
@@ -139,7 +152,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.dataGridView1.Size = new System.Drawing.Size(1096, 428);
+            this.dataGridView1.Size = new System.Drawing.Size(1096, 359);
             this.dataGridView1.TabIndex = 230;
             this.dataGridView1.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellLeave);
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
@@ -247,7 +260,6 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel2.Controls.Add(this.BTN_Search);
             this.panel2.Controls.Add(this.BTN_Cancel);
-            this.panel2.Controls.Add(this.BTN_Print2);
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.SaveBtn);
@@ -256,7 +268,7 @@
             this.panel2.Controls.Add(this.Addbtn);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel2.Location = new System.Drawing.Point(2, 0);
+            this.panel2.Location = new System.Drawing.Point(2, 69);
             this.panel2.Name = "panel2";
             this.panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.panel2.Size = new System.Drawing.Size(1096, 40);
@@ -278,6 +290,8 @@
             this.BTN_Search.TabIndex = 336;
             this.BTN_Search.Text = "بحث";
             this.BTN_Search.UseVisualStyleBackColor = false;
+            this.BTN_Search.Visible = false;
+            this.BTN_Search.Click += new System.EventHandler(this.BTN_Search_Click);
             // 
             // BTN_Cancel
             // 
@@ -295,20 +309,7 @@
             this.BTN_Cancel.TabIndex = 335;
             this.BTN_Cancel.Text = "إلغاء";
             this.BTN_Cancel.UseVisualStyleBackColor = false;
-            // 
-            // BTN_Print2
-            // 
-            this.BTN_Print2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Print2.Font = new System.Drawing.Font("Arabic Typesetting", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_Print2.ForeColor = System.Drawing.Color.DarkSalmon;
-            this.BTN_Print2.Image = ((System.Drawing.Image)(resources.GetObject("BTN_Print2.Image")));
-            this.BTN_Print2.Location = new System.Drawing.Point(153, 3);
-            this.BTN_Print2.Name = "BTN_Print2";
-            this.BTN_Print2.Size = new System.Drawing.Size(53, 31);
-            this.BTN_Print2.TabIndex = 241;
-            this.BTN_Print2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BTN_Print2.UseVisualStyleBackColor = true;
-            this.BTN_Print2.Visible = false;
+            this.BTN_Cancel.Click += new System.EventHandler(this.BTN_Cancel_Click);
             // 
             // pictureBox1
             // 
@@ -361,9 +362,9 @@
             this.DeleteBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DeleteBtn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
             this.DeleteBtn.ForeColor = System.Drawing.Color.Blue;
-            this.DeleteBtn.Location = new System.Drawing.Point(613, 3);
+            this.DeleteBtn.Location = new System.Drawing.Point(649, 3);
             this.DeleteBtn.Name = "DeleteBtn";
-            this.DeleteBtn.Size = new System.Drawing.Size(104, 31);
+            this.DeleteBtn.Size = new System.Drawing.Size(68, 31);
             this.DeleteBtn.TabIndex = 28;
             this.DeleteBtn.Text = "حذف";
             this.DeleteBtn.UseVisualStyleBackColor = false;
@@ -403,6 +404,21 @@
             this.Addbtn.UseVisualStyleBackColor = false;
             this.Addbtn.Click += new System.EventHandler(this.Addbtn_Click);
             // 
+            // BTN_Print2
+            // 
+            this.BTN_Print2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Print2.Font = new System.Drawing.Font("Arabic Typesetting", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_Print2.ForeColor = System.Drawing.Color.DarkSalmon;
+            this.BTN_Print2.Image = ((System.Drawing.Image)(resources.GetObject("BTN_Print2.Image")));
+            this.BTN_Print2.Location = new System.Drawing.Point(207, 12);
+            this.BTN_Print2.Name = "BTN_Print2";
+            this.BTN_Print2.Size = new System.Drawing.Size(53, 49);
+            this.BTN_Print2.TabIndex = 241;
+            this.BTN_Print2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BTN_Print2.UseVisualStyleBackColor = true;
+            this.BTN_Print2.Visible = false;
+            this.BTN_Print2.Click += new System.EventHandler(this.BTN_Print2_Click);
+            // 
             // Cmb_AmrNo
             // 
             this.Cmb_AmrNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -417,7 +433,6 @@
             this.Cmb_AmrNo.TabIndex = 233;
             this.Cmb_AmrNo.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.Cmb_AmrNo_DrawItem);
             this.Cmb_AmrNo.SelectionChangeCommitted += new System.EventHandler(this.Cmb_AmrNo_SelectionChangeCommitted);
-            this.Cmb_AmrNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Cmb_AmrNo_KeyPress);
             // 
             // label3
             // 
@@ -498,6 +513,7 @@
             this.BTN_Print.TabIndex = 242;
             this.BTN_Print.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BTN_Print.UseVisualStyleBackColor = true;
+            this.BTN_Print.Click += new System.EventHandler(this.BTN_Print_Click);
             // 
             // panel7
             // 
@@ -505,7 +521,7 @@
             this.panel7.Controls.Add(this.panel3);
             this.panel7.Controls.Add(this.panel5);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel7.Location = new System.Drawing.Point(2, 40);
+            this.panel7.Location = new System.Drawing.Point(2, 109);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(1096, 134);
             this.panel7.TabIndex = 237;
@@ -538,6 +554,7 @@
             this.BTN_PDF.TabIndex = 337;
             this.BTN_PDF.Text = "عرض المرفقات";
             this.BTN_PDF.UseVisualStyleBackColor = false;
+            this.BTN_PDF.Click += new System.EventHandler(this.BTN_PDF_Click);
             // 
             // browseBTN
             // 
@@ -557,6 +574,7 @@
             this.browseBTN.TabIndex = 340;
             this.browseBTN.Text = "إرفاق مرفقات";
             this.browseBTN.UseVisualStyleBackColor = false;
+            this.browseBTN.Click += new System.EventHandler(this.browseBTN_Click);
             // 
             // panel3
             // 
@@ -653,6 +671,7 @@
             this.BTN_Sign3.TabIndex = 253;
             this.BTN_Sign3.Text = "توقيع";
             this.BTN_Sign3.UseVisualStyleBackColor = false;
+            this.BTN_Sign3.Click += new System.EventHandler(this.BTN_Sign3_Click);
             // 
             // panel6
             // 
@@ -691,6 +710,7 @@
             this.BTN_Sigm1.TabIndex = 254;
             this.BTN_Sigm1.Text = "توقيع";
             this.BTN_Sigm1.UseVisualStyleBackColor = false;
+            this.BTN_Sigm1.Click += new System.EventHandler(this.BTN_Sigm1_Click);
             // 
             // Pic_Sign1
             // 
@@ -740,6 +760,7 @@
             this.BTN_Sign2.TabIndex = 251;
             this.BTN_Sign2.Text = "توقيع";
             this.BTN_Sign2.UseVisualStyleBackColor = false;
+            this.BTN_Sign2.Click += new System.EventHandler(this.BTN_Sign2_Click);
             // 
             // Pic_Sign2
             // 
@@ -756,10 +777,137 @@
             // 
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(2, 174);
+            this.panel1.Location = new System.Drawing.Point(2, 243);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1096, 428);
+            this.panel1.Size = new System.Drawing.Size(1096, 359);
             this.panel1.TabIndex = 239;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // panel10
+            // 
+            this.panel10.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.panel10.BackgroundImage = global::ANRPC_Inventory.Properties.Resources.bar1;
+            this.panel10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel10.Controls.Add(this.BTN_Search_Motab3a);
+            this.panel10.Controls.Add(this.BTN_Print2);
+            this.panel10.Controls.Add(this.EditBtn2);
+            this.panel10.Controls.Add(this.BTN_Save2);
+            this.panel10.Controls.Add(this.Cmb_AmrNo2);
+            this.panel10.Controls.Add(this.Cmb_FYear2);
+            this.panel10.Controls.Add(this.label25);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel10.Location = new System.Drawing.Point(2, 0);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(1096, 69);
+            this.panel10.TabIndex = 240;
+            // 
+            // BTN_Search_Motab3a
+            // 
+            this.BTN_Search_Motab3a.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Search_Motab3a.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.BTN_Search_Motab3a.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Search_Motab3a.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
+            this.BTN_Search_Motab3a.FlatAppearance.BorderSize = 3;
+            this.BTN_Search_Motab3a.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_Search_Motab3a.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.BTN_Search_Motab3a.ForeColor = System.Drawing.Color.Maroon;
+            this.BTN_Search_Motab3a.Location = new System.Drawing.Point(415, 17);
+            this.BTN_Search_Motab3a.Name = "BTN_Search_Motab3a";
+            this.BTN_Search_Motab3a.Size = new System.Drawing.Size(72, 33);
+            this.BTN_Search_Motab3a.TabIndex = 307;
+            this.BTN_Search_Motab3a.Text = "بحث";
+            this.BTN_Search_Motab3a.UseVisualStyleBackColor = false;
+            this.BTN_Search_Motab3a.Click += new System.EventHandler(this.BTN_Search_Motab3a_Click);
+            // 
+            // EditBtn2
+            // 
+            this.EditBtn2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.EditBtn2.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.EditBtn2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.EditBtn2.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
+            this.EditBtn2.FlatAppearance.BorderSize = 3;
+            this.EditBtn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.EditBtn2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.EditBtn2.ForeColor = System.Drawing.Color.Maroon;
+            this.EditBtn2.Location = new System.Drawing.Point(339, 17);
+            this.EditBtn2.Name = "EditBtn2";
+            this.EditBtn2.Size = new System.Drawing.Size(72, 33);
+            this.EditBtn2.TabIndex = 47;
+            this.EditBtn2.Text = "تعديل";
+            this.EditBtn2.UseVisualStyleBackColor = false;
+            this.EditBtn2.Click += new System.EventHandler(this.EditBtn2_Click);
+            // 
+            // BTN_Save2
+            // 
+            this.BTN_Save2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Save2.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.BTN_Save2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Save2.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
+            this.BTN_Save2.FlatAppearance.BorderSize = 3;
+            this.BTN_Save2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_Save2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.BTN_Save2.ForeColor = System.Drawing.Color.Maroon;
+            this.BTN_Save2.Location = new System.Drawing.Point(266, 17);
+            this.BTN_Save2.Name = "BTN_Save2";
+            this.BTN_Save2.Size = new System.Drawing.Size(67, 33);
+            this.BTN_Save2.TabIndex = 49;
+            this.BTN_Save2.Text = "حفظ";
+            this.BTN_Save2.UseVisualStyleBackColor = false;
+            this.BTN_Save2.Click += new System.EventHandler(this.BTN_Save2_Click);
+            // 
+            // Cmb_AmrNo2
+            // 
+            this.Cmb_AmrNo2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cmb_AmrNo2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.Cmb_AmrNo2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Cmb_AmrNo2.FormattingEnabled = true;
+            this.Cmb_AmrNo2.Items.AddRange(new object[] {
+            "2019_2020",
+            "2020_2021"});
+            this.Cmb_AmrNo2.Location = new System.Drawing.Point(493, 22);
+            this.Cmb_AmrNo2.Name = "Cmb_AmrNo2";
+            this.Cmb_AmrNo2.Size = new System.Drawing.Size(188, 27);
+            this.Cmb_AmrNo2.TabIndex = 26;
+            // 
+            // Cmb_FYear2
+            // 
+            this.Cmb_FYear2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cmb_FYear2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Cmb_FYear2.FormattingEnabled = true;
+            this.Cmb_FYear2.Items.AddRange(new object[] {
+            "2020_2021",
+            "2021_2022"});
+            this.Cmb_FYear2.Location = new System.Drawing.Point(687, 22);
+            this.Cmb_FYear2.Name = "Cmb_FYear2";
+            this.Cmb_FYear2.Size = new System.Drawing.Size(110, 27);
+            this.Cmb_FYear2.TabIndex = 25;
+            this.Cmb_FYear2.SelectedIndexChanged += new System.EventHandler(this.Cmb_FYear2_SelectedIndexChanged);
+            // 
+            // label25
+            // 
+            this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label25.AutoSize = true;
+            this.label25.BackColor = System.Drawing.Color.Transparent;
+            this.label25.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label25.ForeColor = System.Drawing.Color.MintCream;
+            this.label25.Location = new System.Drawing.Point(803, 25);
+            this.label25.Name = "label25";
+            this.label25.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label25.Size = new System.Drawing.Size(147, 24);
+            this.label25.TabIndex = 5;
+            this.label25.Text = "بحث طلبات الاستلام";
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider.ContainerControl = this;
+            // 
+            // alertProvider
+            // 
+            this.alertProvider.ContainerControl = this;
             // 
             // Estlam_F
             // 
@@ -771,12 +919,13 @@
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel10);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Estlam_F";
             this.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "TalbTawred";
-            this.Load += new System.EventHandler(this.TalbTawred_Load);
+            this.Load += new System.EventHandler(this.Estlam_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -799,6 +948,10 @@
             this.panel8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign2)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.alertProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -856,5 +1009,15 @@
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.Button BTN_PDF;
         private System.Windows.Forms.Button browseBTN;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Button BTN_Search_Motab3a;
+        private System.Windows.Forms.Button EditBtn2;
+        private System.Windows.Forms.Button BTN_Save2;
+        private System.Windows.Forms.ComboBox Cmb_AmrNo2;
+        private System.Windows.Forms.ComboBox Cmb_FYear2;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ErrorProvider alertProvider;
     }
 }

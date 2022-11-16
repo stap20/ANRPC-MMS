@@ -748,10 +748,14 @@ namespace ANRPC_Inventory
         {
             DisableControls();
             Input_Reset();
-            Cmb_FYear.Enabled = true;
-            Cmb_CType.Enabled = true;
-            TXT_EznNo.Enabled = true;
-            BTN_Print.Enabled = true;
+
+            if (Constants.EznSarf_FF)
+            {
+                Cmb_FYear.Enabled = true;
+                Cmb_CType.Enabled = true;
+                TXT_EznNo.Enabled = true;
+                BTN_Print.Enabled = true;
+            }
         }
 
         public void EnableTakalef()

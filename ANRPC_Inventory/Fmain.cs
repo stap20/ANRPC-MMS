@@ -867,6 +867,7 @@ namespace ANRPC_Inventory
                 Constants.currentOpened.Close();
             }
             //----------------------
+            Constants.Estlam_F = true;
             Estlam_F F = new Estlam_F();
             Constants.currentOpened = F;
             F.Show();
@@ -1111,6 +1112,26 @@ namespace ANRPC_Inventory
             //----------------------
             Constants.EzonTahwel_FF = true;
             FTransfer_AA F = new FTransfer_AA();
+            Constants.currentOpened = F;
+            F.Show();
+            this.IsMdiContainer = true;
+            F.MdiParent = this;
+            F.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Visible = false;
+            button11.Visible = false;
+            button10.Visible = false;
+            BTN_Redirect.Visible = false;
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            if (Constants.currentOpened != null)
+            {
+                Constants.currentOpened.Close();
+            }
+            //----------------------
+            Constants.Estlam_F = false;
+            Estlam_F F = new Estlam_F();
             Constants.currentOpened = F;
             F.Show();
             this.IsMdiContainer = true;

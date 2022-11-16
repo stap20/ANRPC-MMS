@@ -199,7 +199,7 @@ namespace ANRPC_Inventory
         public void SP_UpdateSignatures(int x, DateTime D1, DateTime? D2 = null)
         {
             string cmdstring = "Exec  SP_UpdateSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
-            SqlCommand cmd = new SqlCommand(cmdstring, con);
+            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
 
             cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_AmrNo.Text));
             cmd.Parameters.AddWithValue("@TNO2", DBNull.Value);
@@ -734,9 +734,13 @@ namespace ANRPC_Inventory
         {
             DisableControls();
             Input_Reset();
-            Cmb_FY.Enabled = true;
-            TXT_AmrNo.Enabled = true;
-            BTN_Print.Enabled = true;
+
+            if (Constants.Amrshera_F)
+            {
+                Cmb_FY.Enabled = true;
+                TXT_AmrNo.Enabled = true;
+                BTN_Print.Enabled = true;
+            }
         }
 
         public void reset()
@@ -988,7 +992,7 @@ namespace ANRPC_Inventory
                 for (int i = 1; i <= 7; i++)
                 {
                     cmdstring = "Exec  SP_InsertSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
-                    cmd = new SqlCommand(cmdstring, con);
+                    cmd = new SqlCommand(cmdstring, Constants.con);
                     cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_AmrNo.Text));
                     cmd.Parameters.AddWithValue("@TNO2", DBNull.Value);
                     cmd.Parameters.AddWithValue("@FY", Cmb_FY2.Text.ToString());
@@ -1232,6 +1236,10 @@ namespace ANRPC_Inventory
             else if (executemsg == true && flag == 3)
             {
                 MessageBox.Show("تم إدخال رقم امر الشراء  من قبل  ! ");
+            }
+            else if (executemsg == false)
+            {
+                MessageBox.Show("لم يتم تعديل امر الشراء بنجاج!!");
             }
 
             Constants.closecon();
@@ -1636,7 +1644,7 @@ namespace ANRPC_Inventory
 
                 // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
                 string cmdstring = "select ( COALESCE(MAX( Amrshraa_No), 0)) from  T_Awamershraa where AmrSheraa_sanamalia=@FY ";
-                SqlCommand cmd = new SqlCommand(cmdstring, con);
+                SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
 
                 // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
                 cmd.Parameters.AddWithValue("@FY", Cmb_FY.Text);
@@ -1946,7 +1954,7 @@ namespace ANRPC_Inventory
         {
             if (AddEditFlag == 1)
             {
-                UpdateAmrsheraa();
+                EditLogic();
             }
         }
 
@@ -2470,205 +2478,6 @@ namespace ANRPC_Inventory
             reset();
         }
 
-
-
-
-
-
-
-        //------------------------------------------ Signature Handler ---------------------------------
-        #region Signature Handler
-        private void BTN_Sigm1_Click(object sender, EventArgs e)
-        {
-
-            Empn1 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل  رقم القيد الخاص بك", "توقيع الاعدداد", "");
-
-            Sign1 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع الاعدادس", "");
-
-            if (Sign1 != "" && Empn1 != "")
-            {
-                //  MessageBox.Show("done");
-                // string result= Constants.CheckSign("1",Sign1);
-                Tuple<string, int, int, string, string> result = Constants.CheckSign("1", "3", Sign1, Empn1);
-                if (result.Item3 == 1)
-                {
-                    Pic_Sign1.Image = Image.FromFile(@result.Item1);
-
-                    FlagSign1 = result.Item2;
-                    FlagEmpn1 = Empn1;
-                }
-                else
-                {
-                    FlagSign1 = 0;
-                    FlagEmpn1 = "";
-
-                }
-
-
-            }
-        }
-
-        private void BTN_Sign2_Click(object sender, EventArgs e)
-        {
-            if (FlagSign1 != 1 || FlagSign1 != 2 || FlagSign1 != 3 || FlagSign1 != 4 || FlagSign1 != 5 || FlagSign1 != 6)
-            {
-                MessageBox.Show("يرجى التاكد من التوقعات السابقة اولا");
-                return;
-            }
-            Empn7 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد الخاص بك", "توقيع الحسابات", "");
-
-            Sign7 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع الحسابات", "");
-
-            if (Sign7 != "" && Empn7 != "")
-            {
-                Tuple<string, int, int, string, string> result = Constants.CheckSign("7", "3", Sign7, Empn7);
-                if (result.Item3 == 1)
-                {
-                    Pic_Sign7.Image = Image.FromFile(@result.Item1);
-
-                    FlagSign7 = result.Item2;
-                    FlagEmpn7 = Empn7;
-                }
-                else
-                {
-                    FlagSign7 = 0;
-                    FlagEmpn7 = "";
-                }
-            }
-        }
-
-        private void BTN_Sigm12_Click(object sender, EventArgs e)
-        {
-            if (FlagSign1 != 1)
-            {
-                MessageBox.Show("يرجى التاكد من التوقعات السابقة اولا");
-                return;
-            }
-            Empn2 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد سالخاص بك", "توقيع التصديق", "");
-
-            Sign2 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع التصديق", "");
-
-            if (Sign2 != "" && Empn2 != "")
-            {
-                //  MessageBox.Show("done");
-                // string result= Constants.CheckSign("1",Sign1);
-                Tuple<string, int, int, string, string> result = Constants.CheckSign("2", "3", Sign2, Empn2);
-                if (result.Item3 == 1)
-                {
-                    Pic_Sign2.Image = Image.FromFile(@result.Item1);
-
-                    FlagSign2 = result.Item2;
-                    FlagEmpn2 = Empn2;
-                }
-                else
-                {
-                    FlagSign2 = 0;
-                    FlagEmpn2 = "";
-                }
-                // result.Item1;
-                // result.Item2;
-
-
-            }
-            else
-            {
-                //cancel
-            }
-        }
-
-        private void BTN_Sigm13_Click(object sender, EventArgs e)
-        {
-            if (FlagSign1 != 1 || FlagSign2 != 1)
-            {
-                MessageBox.Show("يرجى التاكد من التوقعات السابقة اولا");
-                return;
-            }
-            Empn3 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد سالخاص بك", "توقيع مدير عام مساعد", "");
-
-            Sign3 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع مدير عام مساعد", "");
-
-            if (Sign3 != "" && Empn3 != "")
-            {
-                //  MessageBox.Show("done");
-                // string result= Constants.CheckSign("1",Sign1);
-                Tuple<string, int, int, string, string> result = Constants.CheckSign("3", "3", Sign3, Empn3);
-                if (result.Item3 == 1)
-                {
-                    Pic_Sign3.Image = Image.FromFile(@result.Item1);
-
-                    FlagSign3 = result.Item2;
-                    FlagEmpn3 = Empn3;
-                }
-                else
-                {
-                    FlagSign3 = 0;
-                    FlagEmpn3 = "";
-                }
-            }
-        }
-
-        private void BTN_Sigm14_Click(object sender, EventArgs e)
-        {
-            if (FlagSign1 != 1 || FlagSign2 != 1 || FlagSign3 != 1)
-            {
-                MessageBox.Show("يرجى التاكد من التوقعات السابقة اولا");
-                return;
-            }
-            Empn4 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد سالخاص بك", "توقيع مدير عام ", "");
-
-            Sign4 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع مدير عام ", "");
-
-            if (Sign4 != "" && Empn4 != "")
-            {
-                //  MessageBox.Show("done");
-                // string result= Constants.CheckSign("1",Sign1);
-                Tuple<string, int, int, string, string> result = Constants.CheckSign("4", "3", Sign4, Empn4);
-                if (result.Item3 == 1)
-                {
-                    Pic_Sign4.Image = Image.FromFile(@result.Item1);
-
-                    FlagSign4 = result.Item2;
-                    FlagEmpn4 = Empn4;
-                }
-                else
-                {
-                    FlagSign4 = 0;
-                    FlagEmpn4 = "";
-                }
-            }
-        }
-
-        private void BTN_Sign6_Click(object sender, EventArgs e)
-        {
-            if (FlagSign2 != 1 || FlagSign1 != 1 || FlagSign3 != 1 || FlagSign4 != 1 || FlagSign5 != 1)
-            {
-                MessageBox.Show("يرجى التاكد من التوقعات السابقة اولا");
-                return;
-            }
-            Empn6 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد الخاص بك", "اعتماد مدير عام الادارة الطالبة", "");
-
-            Sign6 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "  اعتماد مدير عام الادارة الطالبة", "");
-
-            if (Sign6 != "" && Empn6 != "")
-            {
-                //  MessageBox.Show("done");
-                // string result= Constants.CheckSign("1",Sign1);
-                Tuple<string, int, int, string, string> result = Constants.CheckSign("6", "3", Sign6, Empn6);
-                if (result.Item3 == 1)
-                {
-                    Pic_Sign6.Image = Image.FromFile(@result.Item1);
-                    FlagSign6 = result.Item2;
-                    FlagEmpn6 = Empn6;
-                }
-                else
-                {
-                    FlagSign6 = 0;
-                    FlagEmpn6 = "";
-                }
-            }
-        }
-        #endregion
-
         private void BTN_Search_Click(object sender, EventArgs e)
         {
             if (!IsValidCase(VALIDATION_TYPES.SEARCH))
@@ -2821,5 +2630,178 @@ namespace ANRPC_Inventory
         {
             DeleteLogic();
         }
+
+
+
+
+
+        //------------------------------------------ Signature Handler ---------------------------------
+        #region Signature Handler
+        private void BTN_Sigm1_Click(object sender, EventArgs e)
+        {
+
+            Empn1 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل  رقم القيد الخاص بك", "توقيع الاعدداد", "");
+
+            Sign1 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع الاعدادس", "");
+
+            if (Sign1 != "" && Empn1 != "")
+            {
+                //  MessageBox.Show("done");
+                // string result= Constants.CheckSign("1",Sign1);
+                Tuple<string, int, int, string, string> result = Constants.CheckSign("1", "3", Sign1, Empn1);
+                if (result.Item3 == 1)
+                {
+                    Pic_Sign1.Image = Image.FromFile(@result.Item1);
+
+                    FlagSign1 = result.Item2;
+                    FlagEmpn1 = Empn1;
+                }
+                else
+                {
+                    FlagSign1 = 0;
+                    FlagEmpn1 = "";
+
+                }
+
+
+            }
+        }
+
+        private void BTN_Sign2_Click(object sender, EventArgs e)
+        {
+            Empn7 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد الخاص بك", "توقيع الحسابات", "");
+
+            Sign7 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع الحسابات", "");
+
+            if (Sign7 != "" && Empn7 != "")
+            {
+                Tuple<string, int, int, string, string> result = Constants.CheckSign("7", "3", Sign7, Empn7);
+                if (result.Item3 == 1)
+                {
+                    Pic_Sign7.Image = Image.FromFile(@result.Item1);
+
+                    FlagSign7 = result.Item2;
+                    FlagEmpn7 = Empn7;
+                }
+                else
+                {
+                    FlagSign7 = 0;
+                    FlagEmpn7 = "";
+                }
+            }
+        }
+
+        private void BTN_Sigm12_Click(object sender, EventArgs e)
+        {
+            Empn2 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد سالخاص بك", "توقيع التصديق", "");
+
+            Sign2 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع التصديق", "");
+
+            if (Sign2 != "" && Empn2 != "")
+            {
+                //  MessageBox.Show("done");
+                // string result= Constants.CheckSign("1",Sign1);
+                Tuple<string, int, int, string, string> result = Constants.CheckSign("2", "3", Sign2, Empn2);
+                if (result.Item3 == 1)
+                {
+                    Pic_Sign2.Image = Image.FromFile(@result.Item1);
+
+                    FlagSign2 = result.Item2;
+                    FlagEmpn2 = Empn2;
+                }
+                else
+                {
+                    FlagSign2 = 0;
+                    FlagEmpn2 = "";
+                }
+                // result.Item1;
+                // result.Item2;
+
+
+            }
+            else
+            {
+                //cancel
+            }
+        }
+
+        private void BTN_Sigm13_Click(object sender, EventArgs e)
+        {
+            Empn3 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد سالخاص بك", "توقيع مدير عام مساعد", "");
+
+            Sign3 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع مدير عام مساعد", "");
+
+            if (Sign3 != "" && Empn3 != "")
+            {
+                //  MessageBox.Show("done");
+                // string result= Constants.CheckSign("1",Sign1);
+                Tuple<string, int, int, string, string> result = Constants.CheckSign("3", "3", Sign3, Empn3);
+                if (result.Item3 == 1)
+                {
+                    Pic_Sign3.Image = Image.FromFile(@result.Item1);
+
+                    FlagSign3 = result.Item2;
+                    FlagEmpn3 = Empn3;
+                }
+                else
+                {
+                    FlagSign3 = 0;
+                    FlagEmpn3 = "";
+                }
+            }
+        }
+
+        private void BTN_Sigm14_Click(object sender, EventArgs e)
+        {
+            Empn4 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد سالخاص بك", "توقيع مدير عام ", "");
+
+            Sign4 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع مدير عام ", "");
+
+            if (Sign4 != "" && Empn4 != "")
+            {
+                //  MessageBox.Show("done");
+                // string result= Constants.CheckSign("1",Sign1);
+                Tuple<string, int, int, string, string> result = Constants.CheckSign("4", "3", Sign4, Empn4);
+                if (result.Item3 == 1)
+                {
+                    Pic_Sign4.Image = Image.FromFile(@result.Item1);
+
+                    FlagSign4 = result.Item2;
+                    FlagEmpn4 = Empn4;
+                }
+                else
+                {
+                    FlagSign4 = 0;
+                    FlagEmpn4 = "";
+                }
+            }
+        }
+
+        private void BTN_Sign6_Click(object sender, EventArgs e)
+        {
+            Empn6 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد الخاص بك", "اعتماد مدير عام الادارة الطالبة", "");
+
+            Sign6 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "  اعتماد مدير عام الادارة الطالبة", "");
+
+            if (Sign6 != "" && Empn6 != "")
+            {
+                //  MessageBox.Show("done");
+                // string result= Constants.CheckSign("1",Sign1);
+                Tuple<string, int, int, string, string> result = Constants.CheckSign("6", "3", Sign6, Empn6);
+                if (result.Item3 == 1)
+                {
+                    Pic_Sign6.Image = Image.FromFile(@result.Item1);
+                    FlagSign6 = result.Item2;
+                    FlagEmpn6 = Empn6;
+                }
+                else
+                {
+                    FlagSign6 = 0;
+                    FlagEmpn6 = "";
+                }
+            }
+        }
+        #endregion
+
     }
 }
