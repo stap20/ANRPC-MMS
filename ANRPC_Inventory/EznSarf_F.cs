@@ -134,6 +134,38 @@ namespace ANRPC_Inventory
 
         //------------------------------------------ Helper ---------------------------------
         #region Helpers
+        private PictureBox CheckSignatures(Panel panel, int signNumber)
+        {
+            try
+            {
+                foreach (Control control in panel.Controls)
+                {
+                    if (control.GetType() == typeof(Panel))
+                    {
+                        PictureBox signControl = CheckSignatures((Panel)control, signNumber);
+
+                        if (signControl != null)
+                        {
+                            return signControl;
+                        }
+                    }
+                    else
+                    {
+                        if (control.Name == "Pic_Sign" + signNumber && ((PictureBox)control).Image == null)
+                        {
+                            return (PictureBox)control;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return null;
+        }
+
         private void errorProviderHandler(List<(ErrorProvider, Control, string)> errosList)
         {
             alertProvider.Clear();
@@ -692,6 +724,11 @@ namespace ANRPC_Inventory
 
             dataGridView1.AllowUserToAddRows = true;
             dataGridView1.AllowUserToDeleteRows = true;
+
+            Pic_Sign1.Image = null;
+            FlagSign1 = 0;
+            Pic_Sign1.BackColor = Color.Green;
+            currentSignNumber = 1;
         }
 
         public void PrepareEditState()
@@ -719,10 +756,12 @@ namespace ANRPC_Inventory
                 {
                     BTN_Sign2.Enabled = true;
                     DeleteBtn.Enabled = true;
+                    currentSignNumber = 2;
                 }
                 else if(FlagSign4 != 1 && FlagSign3 == 1)
                 {
                     BTN_Sign4.Enabled = true;
+                    currentSignNumber = 4;
                 }
             }
             else if (Constants.User_Type == "B")
@@ -732,6 +771,7 @@ namespace ANRPC_Inventory
                     BTN_Sign3.Enabled = true;
                     //dataGridView1.ReadOnly = false;
                     dataGridView1.Columns["Quan2"].ReadOnly = false;
+                    currentSignNumber = 3;
                 }
                 else if (Constants.UserTypeB == "Tkalif" || Constants.UserTypeB == "Finance")
                 {
@@ -1471,44 +1511,45 @@ namespace ANRPC_Inventory
         {
             List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
 
-            //#region Cmb_FYear
-            //if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
-            //{
-            //    errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
-            //}
-            //#endregion
+            #region Cmb_FYear
+            if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
+            {
+                errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
+            }
+            #endregion
 
-            //#region RadioBTN_Tammen1 || RadioBTN_Taamen2
-            //if (RadioBTN_Tammen1.Checked == false && RadioBTN_Taamen2.Checked == false)
-            //{
-            //    errorsList.Add((errorProvider, RadioBTN_Tammen1, "تاكد من  اختيار نوع تأمين"));
-            //}
-            //#endregion
+            #region Cmb_CType
+            if (string.IsNullOrWhiteSpace(Cmb_CType.Text) || Cmb_CType.SelectedIndex == -1)
+            {
+                errorsList.Add((errorProvider, Cmb_CType, "تاكد من  اختيار نوع إذن الصرف"));
+            }
+            #endregion
 
-            //#region Buy Method
-            //if (GetCurrentActivatedBuyMethod(panel8) == -1)
-            //{
-            //    errorsList.Add((errorProvider, panel8, "تاكد من  اختيار طريقة شراء"));
-            //}
-            //#endregion
+            #region TXT_EznNo
+            if (string.IsNullOrWhiteSpace(TXT_EznNo.Text))
+            {
+                errorsList.Add((errorProvider, TXT_EznNo, "يجب اختيار رقم إذن الصرف"));
+            }
+            #endregion
 
-            //#region dataGridView1
-            //if (dataGridView1.Rows.Count <= 0)
-            //{
-            //    //errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
-            //    MessageBox.Show("لايمكن ان يتكون طلب توريد بدون بنود");
-            //}
-            //else if (dataGridView1.Rows.Count == 1 && dataGridView1.Rows[0].IsNewRow == true)
-            //{
-            //    //errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
-            //    MessageBox.Show("لايمكن ان يتكون طلب توريد بدون بنود");
-            //}
-            //#endregion
+            #region dataGridView1
+            if (dataGridView1.Rows.Count <= 0)
+            {
+                //errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
+                MessageBox.Show("لايمكن ان يتكون طلب توريد بدون بنود");
+            }
+            else if (dataGridView1.Rows.Count == 1 && dataGridView1.Rows[0].IsNewRow == true)
+            {
+                //errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
+                MessageBox.Show("لايمكن ان يتكون طلب توريد بدون بنود");
+            }
+            #endregion
 
-            //if (((PictureBox)this.panel13.Controls["Pic_Sign" + currentSignNumber]).Image == null)
-            //{
-            //    errorsList.Add((errorProvider, ((PictureBox)this.panel13.Controls["Pic_Sign" + currentSignNumber]), "تاكد من التوقيع"));
-            //}
+            PictureBox signControl = CheckSignatures(signatureTable, currentSignNumber);
+            if (signControl != null)
+            {
+                errorsList.Add((errorProvider, signControl, "تاكد من التوقيع"));
+            }
 
             return errorsList;
         }

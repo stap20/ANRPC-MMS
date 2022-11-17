@@ -134,6 +134,38 @@ namespace ANRPC_Inventory
 
         //------------------------------------------ Helper ---------------------------------
         #region Helpers
+        private PictureBox CheckSignatures(Panel panel, int signNumber)
+        {
+            try
+            {
+                foreach (Control control in panel.Controls)
+                {
+                    if (control.GetType() == typeof(Panel))
+                    {
+                        PictureBox signControl = CheckSignatures((Panel)control, signNumber);
+
+                        if (signControl != null)
+                        {
+                            return signControl;
+                        }
+                    }
+                    else
+                    {
+                        if (control.Name == "Pic_Sign" + signNumber && ((PictureBox)control).Image == null)
+                        {
+                            return (PictureBox)control;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return null;
+        }
+
         private void errorProviderHandler(List<(ErrorProvider, Control, string)> errosList)
         {
             alertProvider.Clear();
@@ -675,6 +707,9 @@ namespace ANRPC_Inventory
             dataGridView1.AllowUserToAddRows = true;
             dataGridView1.AllowUserToDeleteRows = true;
 
+            Pic_Sign1.Image = null;
+            FlagSign1 = 0;
+            Pic_Sign1.BackColor = Color.Green;
             currentSignNumber = 1;
         }
 
@@ -1394,10 +1429,12 @@ namespace ANRPC_Inventory
                 }
                 #endregion
 
-                if (((PictureBox)this.signatureTable.Controls["panel15"].Controls["Pic_Sign" + currentSignNumber]).Image == null)
+                PictureBox signControl = CheckSignatures(signatureTable, currentSignNumber);
+                if (signControl != null)
                 {
-                    errorsList.Add((errorProvider, ((PictureBox)this.signatureTable.Controls["panel15"].Controls["Pic_Sign" + currentSignNumber]), "تاكد من التوقيع"));
+                    errorsList.Add((errorProvider, signControl, "تاكد من التوقيع"));
                 }
+
 
                 return errorsList;
             }
@@ -1558,15 +1595,18 @@ namespace ANRPC_Inventory
                 }
             }
             dr3.Close();
-          CMB_Sadr.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-          CMB_Sadr.AutoCompleteSource = AutoCompleteSource.CustomSource;
-          CMB_Sadr.AutoCompleteCustomSource = TasnifColl;
+              CMB_Sadr.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+              CMB_Sadr.AutoCompleteSource = AutoCompleteSource.CustomSource;
+              CMB_Sadr.AutoCompleteCustomSource = TasnifColl;
       
             TXT_AmrNo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             TXT_AmrNo.AutoCompleteSource = AutoCompleteSource.CustomSource;
             TXT_AmrNo.AutoCompleteCustomSource = TalbColl;
 
             con.Close();
+
+            Cmb_FY.SelectedIndex = -1;
+            Cmb_FYear2.SelectedIndex = -1;
 
             reset();
         }
@@ -1637,10 +1677,7 @@ namespace ANRPC_Inventory
             if (AddEditFlag == 2)//add
             {
                 //call sp that get last num that eentered for this MM and this YYYY
-                if (con != null && con.State == ConnectionState.Closed)
-                {
-                    con.Open();
-                }
+                Constants.opencon();
 
                 // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
                 string cmdstring = "select ( COALESCE(MAX( Amrshraa_No), 0)) from  T_Awamershraa where AmrSheraa_sanamalia=@FY ";
@@ -1653,10 +1690,7 @@ namespace ANRPC_Inventory
 
                 try
                 {
-                    if (con != null && con.State == ConnectionState.Closed)
-                    {
-                        con.Open();
-                    }
+                    Constants.opencon();
                     // cmd.ExecuteNonQuery();
                     var count = cmd.ExecuteScalar();
                     executemsg = true;
@@ -1675,7 +1709,7 @@ namespace ANRPC_Inventory
                 catch (SqlException sqlEx)
                 {
                     executemsg = false;
-                    MessageBox.Show(sqlEx.ToString());
+                    Console.WriteLine(sqlEx);
                     // flag = (int)cmd.Parameters["@Num"].Value;
                 }
             }

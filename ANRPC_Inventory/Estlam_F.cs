@@ -116,6 +116,39 @@ namespace ANRPC_Inventory
 
         //------------------------------------------ Helper ---------------------------------
         #region Helpers
+        private PictureBox CheckSignatures(Panel panel, int signNumber)
+        {
+            try
+            {
+                foreach (Control control in panel.Controls)
+                {
+                    if (control.GetType() == typeof(Panel))
+                    {
+                        PictureBox signControl = CheckSignatures((Panel)control, signNumber);
+
+                        if (signControl != null)
+                        {
+                            return signControl;
+                        }
+                    }
+                    else
+                    {
+                        if (control.Name == "Pic_Sign" + signNumber && ((PictureBox)control).Image == null)
+                        {
+                            return (PictureBox)control;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return null;
+        }
+
+
         private void errorProviderHandler(List<(ErrorProvider, Control, string)> errosList)
         {
             alertProvider.Clear();
@@ -141,7 +174,7 @@ namespace ANRPC_Inventory
             string cmdstring = "Exec  SP_UpdateSignDatesEstlam  @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
             SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
 
-            cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(Cmb_AmrNo.SelectedValue.ToString()));
+            cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(Cmb_AmrNo.Text));
             cmd.Parameters.AddWithValue("@TNO2", DBNull.Value);
             if (Cmb_FY.Text.ToString() == "")
             {
@@ -510,6 +543,9 @@ namespace ANRPC_Inventory
 
             changeDataGridViewColumnState(dataGridView1, true);
 
+            Pic_Sign1.Image = null;
+            FlagSign1 = 0;
+            Pic_Sign1.BackColor = Color.Green;
             currentSignNumber = 1;
         }
 
@@ -1151,7 +1187,7 @@ namespace ANRPC_Inventory
             #endregion
 
             #region Cmb_AmrNo
-            if (string.IsNullOrWhiteSpace(Cmb_AmrNo.Text) || Cmb_AmrNo.SelectedIndex == -1)
+            if (AddEditFlag == 2 && (string.IsNullOrWhiteSpace(Cmb_AmrNo.Text) || Cmb_AmrNo.SelectedIndex == -1))
             {
                 errorsList.Add((errorProvider, Cmb_AmrNo, "تاكد من اختيار رقم أمر الشراء"));
             }
@@ -1170,10 +1206,11 @@ namespace ANRPC_Inventory
             }
             #endregion
 
-            //if (((PictureBox)this.signatureTable.Controls["Pic_Sign" + currentSignNumber]).Image == null)
-            //{
-            //    errorsList.Add((errorProvider, ((PictureBox)this.signatureTable.Controls["Pic_Sign" + currentSignNumber]), "تاكد من التوقيع"));
-            //}
+            PictureBox signControl = CheckSignatures(signatureTable, currentSignNumber);
+            if (signControl != null)
+            {
+                errorsList.Add((errorProvider, signControl, "تاكد من التوقيع"));
+            }
 
             return errorsList;
         }
@@ -1852,7 +1889,7 @@ namespace ANRPC_Inventory
 
         private void BTN_Print2_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(Cmb_AmrNo2.Text) || string.IsNullOrEmpty(Cmb_FYear2.Text))
+            if (string.IsNullOrEmpty(Cmb_AmrNo.Text) || string.IsNullOrEmpty(Cmb_FY.Text))
             {
                 MessageBox.Show("يجب اختيار طلب الاستلام المراد طباعتها اولا");
                 return;
@@ -1860,8 +1897,8 @@ namespace ANRPC_Inventory
             else
             {
                 Constants.Date_E = TXT_Date.Text;
-                Constants.AmrNo = Cmb_AmrNo2.SelectedValue.ToString();
-                Constants.AmrSanaMalya = Cmb_FYear2.Text;
+                Constants.AmrNo = Cmb_AmrNo.SelectedValue.ToString();
+                Constants.AmrSanaMalya = Cmb_FY.Text;
                 Constants.MwardName = TXT_NameMward.Text;
 
                 Constants.No_Tard = TXT_QuanTard.Text;

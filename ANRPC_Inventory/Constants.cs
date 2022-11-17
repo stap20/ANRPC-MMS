@@ -63,6 +63,7 @@ namespace ANRPC_Inventory
         public static bool EznSarf_FF;
         public static bool Amrshera_F;
         public static bool Estlam_F;
+        public static bool Edafa_F;
         public static int EdafaNo;
         public static string EdafaFY;
 

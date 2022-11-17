@@ -846,6 +846,7 @@ namespace ANRPC_Inventory
                 Constants.currentOpened.Close();
             }
             //----------------------
+            Constants.Edafa_F = true;
             FEdafaMakhzania_F F = new FEdafaMakhzania_F();
             Constants.currentOpened = F;
             F.Show();
@@ -1132,6 +1133,26 @@ namespace ANRPC_Inventory
             //----------------------
             Constants.Estlam_F = false;
             Estlam_F F = new Estlam_F();
+            Constants.currentOpened = F;
+            F.Show();
+            this.IsMdiContainer = true;
+            F.MdiParent = this;
+            F.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Visible = false;
+            button11.Visible = false;
+            button10.Visible = false;
+            BTN_Redirect.Visible = false;
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            if (Constants.currentOpened != null)
+            {
+                Constants.currentOpened.Close();
+            }
+            //----------------------
+            Constants.Edafa_F = false;
+            FEdafaMakhzania_F F = new FEdafaMakhzania_F();
             Constants.currentOpened = F;
             F.Show();
             this.IsMdiContainer = true;
