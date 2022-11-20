@@ -246,7 +246,6 @@
             this.TXT_Enfak.Size = new System.Drawing.Size(157, 22);
             this.TXT_Enfak.TabIndex = 274;
             this.TXT_Enfak.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TXT_Enfak.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
             // 
             // label41
             // 
@@ -271,7 +270,6 @@
             this.TXT_Morakba.Size = new System.Drawing.Size(157, 22);
             this.TXT_Morakba.TabIndex = 271;
             this.TXT_Morakba.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TXT_Morakba.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
             // 
             // label35
             // 
@@ -296,7 +294,6 @@
             this.TXT_Masrof.Size = new System.Drawing.Size(157, 22);
             this.TXT_Masrof.TabIndex = 272;
             this.TXT_Masrof.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TXT_Masrof.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
             // 
             // TXT_MResp
             // 
@@ -309,7 +306,6 @@
             this.TXT_MResp.Size = new System.Drawing.Size(157, 22);
             this.TXT_MResp.TabIndex = 273;
             this.TXT_MResp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TXT_MResp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
             // 
             // label42
             // 
@@ -370,7 +366,6 @@
             this.TXT_AccNo.Size = new System.Drawing.Size(158, 22);
             this.TXT_AccNo.TabIndex = 261;
             this.TXT_AccNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TXT_AccNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
             // 
             // label37
             // 
@@ -395,7 +390,6 @@
             this.TXT_MTaklif.Size = new System.Drawing.Size(157, 22);
             this.TXT_MTaklif.TabIndex = 270;
             this.TXT_MTaklif.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TXT_MTaklif.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
             // 
             // label22
             // 
@@ -492,7 +486,6 @@
             this.TXT_PaccNo.Size = new System.Drawing.Size(157, 22);
             this.TXT_PaccNo.TabIndex = 269;
             this.TXT_PaccNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TXT_PaccNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
             // 
             // signatureTable
             // 
@@ -1086,7 +1079,6 @@
             this.TXT_Momayz.Name = "TXT_Momayz";
             this.TXT_Momayz.Size = new System.Drawing.Size(159, 66);
             this.TXT_Momayz.TabIndex = 14;
-            this.TXT_Momayz.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
             // 
             // label12
             // 
@@ -1295,7 +1287,6 @@
             this.Cmb_AmrNo.Name = "Cmb_AmrNo";
             this.Cmb_AmrNo.Size = new System.Drawing.Size(149, 27);
             this.Cmb_AmrNo.TabIndex = 239;
-            this.Cmb_AmrNo.SelectedIndexChanged += new System.EventHandler(this.Cmb_AmrNo_SelectedIndexChanged);
             this.Cmb_AmrNo.SelectionChangeCommitted += new System.EventHandler(this.Cmb_AmrNo_SelectionChangeCommitted);
             // 
             // BTN_Print
@@ -1399,8 +1390,6 @@
             this.TXT_EdafaNo.Name = "TXT_EdafaNo";
             this.TXT_EdafaNo.Size = new System.Drawing.Size(75, 26);
             this.TXT_EdafaNo.TabIndex = 1;
-            this.TXT_EdafaNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TXT_EdafaNo_KeyDown);
-            this.TXT_EdafaNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_EdafaNo_KeyPress);
             // 
             // Cmb_FY
             // 

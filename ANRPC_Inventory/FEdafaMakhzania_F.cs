@@ -164,6 +164,300 @@ namespace ANRPC_Inventory
             cmd.ExecuteNonQuery();
         }
 
+        private void GetEdafaBnod(string amrNo, string fyear)
+        {
+            table.Clear();
+
+            string TableQuery = @"SELECT *  FROM [T_BnodAwamershraa] Where Estlamflag=1 and 
+                                Amrshraa_No = " + amrNo + " and AmrSheraa_sanamalia='" + fyear + "'";
+
+            dataadapter = new SqlDataAdapter(TableQuery, Constants.con);
+            table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+            dataadapter.Fill(table);
+            dataGridView1.DataSource = table;
+
+            dataGridView1.Columns["Bnd_No"].HeaderText = "رقم البند";//col6
+            dataGridView1.Columns["BndMwazna"].HeaderText = "بند موازنة";//col9
+            dataGridView1.Columns["Quan"].HeaderText = "الكمية";//col10
+
+            dataGridView1.Columns["Quan2"].HeaderText = "الكمية الواردة";//col11
+            dataGridView1.Columns["Quan2"].DefaultCellStyle.BackColor = Color.SandyBrown;
+
+            dataGridView1.Columns["Unit"].HeaderText = "الوحدة";//col12
+            dataGridView1.Columns["Bayan"].HeaderText = "بيان المهمات";//col13
+            dataGridView1.Columns["Rakm_Tasnif"].HeaderText = "رقم التصنيف";//col15
+            dataGridView1.Columns["Rased_After"].HeaderText = "رصيد بعد";//col16
+            dataGridView1.Columns["UnitPrice"].HeaderText = "سعر الوحدة";//col17
+            dataGridView1.Columns["TotalPrice"].HeaderText = "الثمن الاجمالى";//col18
+            dataGridView1.Columns["ApplyDareba"].HeaderText = "تطبق الضريبة";//col19
+            dataGridView1.Columns["Darebapercent"].HeaderText = "نسبة الضريبة";//col20
+            dataGridView1.Columns["TotalPriceAfter"].HeaderText = "السعر الاجمالى ";//col21
+            dataGridView1.Columns["NotIdenticalFlag"].HeaderText = "مطابق/غير مطابق ";
+            
+
+
+            dataGridView1.Columns["ExpirationDate"].HeaderText = "تاريخ انتهاء الصلاحية ";//col28
+            dataGridView1.Columns["ExpirationDate"].Visible = true;//col2
+
+            dataGridView1.Columns["Amrshraa_No"].HeaderText = "رقم أمر الشراء";//col0
+            dataGridView1.Columns["Amrshraa_No"].Visible = false;
+
+            dataGridView1.Columns["Monaksa_No"].HeaderText = " رقم المناقصة";//col1
+            dataGridView1.Columns["Monaksa_No"].Visible = false;
+
+            dataGridView1.Columns["monaksa_sanamalia"].HeaderText = "مناقصةسنةمالية";//col2
+            dataGridView1.Columns["monaksa_sanamalia"].Visible = false;
+
+            dataGridView1.Columns["AmrSheraa_sanamalia"].HeaderText = "امر الشراء سنةمالية";//col3
+            dataGridView1.Columns["AmrSheraa_sanamalia"].Visible = false;
+
+            dataGridView1.Columns["TalbTwareed_No"].HeaderText = "رقم طلب التوريد";//col4
+            dataGridView1.Columns["TalbTwareed_No"].Visible = false;
+
+            dataGridView1.Columns["FYear"].HeaderText = "سنة مالية طلب التوريد";//col5
+            dataGridView1.Columns["FYear"].Visible = false;
+
+            dataGridView1.Columns["CodeEdara"].HeaderText = "كود ادارة";//col7
+            dataGridView1.Columns["CodeEdara"].Visible = false;
+
+            dataGridView1.Columns["NameEdara"].HeaderText = "الادارة الطالبة";//col8
+            dataGridView1.Columns["NameEdara"].Visible = false;
+
+            dataGridView1.Columns["Makhzn"].HeaderText = "مخزن";//col14
+            dataGridView1.Columns["Makhzn"].Visible = false;
+
+            dataGridView1.Columns["EstlamFlag"].HeaderText = "تم الاستلام ";//col22
+            dataGridView1.Columns["EstlamFlag"].Visible = false;
+
+            dataGridView1.Columns["EstlamDate"].HeaderText = "تاريخ الاستلام ";//col23
+            dataGridView1.Columns["EstlamDate"].Visible = false;
+
+            dataGridView1.Columns["LessQuanFlag"].HeaderText = "يوجد عجز ";//col24
+            dataGridView1.Columns["LessQuanFlag"].Visible = false;
+            dataGridView1.Columns["LessQuanFlag"].DefaultCellStyle.BackColor = Color.Aqua;
+
+            dataGridView1.Columns["TalbEsdarShickNo"].HeaderText = "رقم طلب الاصدار ";//col26
+            dataGridView1.Columns["TalbEsdarShickNo"].Visible = false;
+
+            dataGridView1.Columns["ShickNo"].HeaderText = "رقم الشيك ";//col27
+            dataGridView1.Columns["ShickNo"].Visible = false;
+
+            dataGridView1.Columns["ShickDate"].HeaderText = "تاريخ الشيك ";//col28
+            dataGridView1.Columns["ShickDate"].Visible = false;//col28
+
+
+            if (Constants.User_Type == "B")
+            {
+                dataGridView1.Columns["LessQuanFlag"].ReadOnly = true;
+                dataGridView1.Columns["NotIdenticalFlag"].ReadOnly = true;//col25
+            }
+
+        }
+
+        public bool SearchEdafa(string edafaNo, string fyear, string momayz)
+        {
+            //call sp that get last num that eentered for this MM and this YYYY
+            Constants.opencon();
+
+            string cmdstring;
+            SqlCommand cmd;
+
+            cmdstring = "select * from   T_Edafa where Edafa_No=@TN and Edafa_FY=@FY  and TR_NO=@TRNO";
+
+            cmd = new SqlCommand(cmdstring, Constants.con);
+
+            cmd.Parameters.AddWithValue("@TN", edafaNo);
+            cmd.Parameters.AddWithValue("@FY", fyear);
+            cmd.Parameters.AddWithValue("@TRNO", momayz);
+
+            SqlDataReader dr = cmd.ExecuteReader();
+            string amrno = "";
+            string amrsana = "";
+            if (dr.HasRows == true)
+            {
+                while (dr.Read())
+                {
+
+                    amrsana = dr["AmrSheraa_sanamalia"].ToString();
+
+                    amrno = dr["Amrshraa_No"].ToString();
+                    TXT_TRNO.Text = dr["TR_NO"].ToString();
+
+                    if (TXT_TRNO.Text.ToString() != "")
+                    {
+                        Cmb_CType.SelectedValue = TXT_TRNO.Text.ToString();
+                    }
+
+                    string s1 = dr["Sign1"].ToString();
+                    string s2 = dr["Sign2"].ToString();
+                    string s3 = dr["Sign3"].ToString();
+                    string s4 = dr["Sign4"].ToString();
+
+                    if (s1 != "")
+                    {
+                        string p = Constants.RetrieveSignature("1", "5", s1);
+                        if (p != "")
+                        {
+                            //   Pic_Sign1
+                            //	"Pic_Sign1"	string
+
+                            Ename1 = p.Split(':')[1];
+                            wazifa1 = p.Split(':')[2];
+                            pp = p.Split(':')[0];
+
+                            ((PictureBox)this.signatureTable.Controls["panel15"].Controls["Pic_Sign" + "1"]).Image = Image.FromFile(@pp);
+
+                            FlagSign1 = 1;
+                            FlagEmpn1 = s1;
+                            ((PictureBox)this.signatureTable.Controls["panel15"].Controls["Pic_Sign" + "1"]).BackColor = Color.Green;
+                            toolTip1.SetToolTip(Pic_Sign1, Ename1 + Environment.NewLine + wazifa1);
+                        }
+
+                    }
+                    else
+                    {
+                        ((PictureBox)this.signatureTable.Controls["panel15"].Controls["Pic_Sign" + "1"]).BackColor = Color.Red;
+                    }
+                    if (s2 != "")
+                    {
+                        string p = Constants.RetrieveSignature("2", "5", s2);
+                        if (p != "")
+                        {
+                            //   Pic_Sign1
+                            //	"Pic_Sign1"	string
+
+                            Ename2 = p.Split(':')[1];
+                            wazifa2 = p.Split(':')[2];
+                            pp = p.Split(':')[0];
+
+                            ((PictureBox)this.signatureTable.Controls["panel16"].Controls["Pic_Sign" + "2"]).Image = Image.FromFile(@pp);
+
+                            FlagSign2 = 1;
+                            FlagEmpn2 = s2;
+                            ((PictureBox)this.signatureTable.Controls["panel16"].Controls["Pic_Sign" + "2"]).BackColor = Color.Green;
+                            toolTip1.SetToolTip(Pic_Sign2, Ename2 + Environment.NewLine + wazifa2);
+                        }
+
+                    }
+                    else
+                    {
+                        ((PictureBox)this.signatureTable.Controls["panel16"].Controls["Pic_Sign" + "2"]).BackColor = Color.Red;
+                    }
+                    if (s3 != "")
+                    {
+                        string p = Constants.RetrieveSignature("3", "5", s3);
+                        if (p != "")
+                        {
+                            //   Pic_Sign1
+                            //	"Pic_Sign1"	string
+                            Ename3 = p.Split(':')[1];
+                            wazifa3 = p.Split(':')[2];
+                            pp = p.Split(':')[0];
+
+                            ((PictureBox)this.signatureTable.Controls["panel17"].Controls["Pic_Sign" + "3"]).Image = Image.FromFile(@pp);
+
+                            FlagSign3 = 1;
+                            FlagEmpn3 = s3;
+                            ((PictureBox)this.signatureTable.Controls["panel17"].Controls["Pic_Sign" + "3"]).BackColor = Color.Green;
+                            toolTip1.SetToolTip(Pic_Sign3, Ename3 + Environment.NewLine + wazifa3);
+                        }
+
+                    }
+                    else
+                    {
+                        ((PictureBox)this.signatureTable.Controls["panel17"].Controls["Pic_Sign" + "3"]).BackColor = Color.Red;
+                    }
+                    if (s4 != "")
+                    {
+                        string p = Constants.RetrieveSignature("3", "1", s4);
+                        if (p != "")
+                        {
+                            //   Pic_Sign1
+                            //	"Pic_Sign1"	string
+                            Ename4 = p.Split(':')[1];
+                            wazifa4 = p.Split(':')[2];
+                            pp = p.Split(':')[0];
+
+                            ((PictureBox)this.signatureTable.Controls["panel18"].Controls["Pic_Sign" + "4"]).Image = Image.FromFile(@pp);
+
+                            FlagSign4 = 1;
+                            FlagEmpn4 = s4;
+                            ((PictureBox)this.signatureTable.Controls["panel18"].Controls["Pic_Sign" + "4"]).BackColor = Color.Green;
+                            toolTip1.SetToolTip(Pic_Sign4, Ename4 + Environment.NewLine + wazifa4);
+                        }
+
+                    }
+                    else
+                    {
+                        ((PictureBox)this.signatureTable.Controls["panel18"].Controls["Pic_Sign" + "4"]).BackColor = Color.Red;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("من فضلك تاكد من رقم الاضافة المخزنية");
+                reset();
+                return false ;
+            }
+
+            dr.Close();
+
+            cmdstring = "select * from  T_Awamershraa where  Amrshraa_No=@TN and AmrSheraa_sanamalia=@FY";
+            cmd = new SqlCommand(cmdstring, Constants.con);
+
+            cmd.Parameters.AddWithValue("@TN", amrno);
+            cmd.Parameters.AddWithValue("@FY", amrsana);
+
+            DataTable dtTalabTawreed = new DataTable();
+
+            SqlConnection sqlConnction = new SqlConnection(Constants.constring);
+            SqlDataAdapter daTalabTawreed = new SqlDataAdapter(@"select * from  T_Awamershraa where  Amrshraa_No=" + amrno + " and AmrSheraa_sanamalia='" + amrsana + "'", sqlConnction);
+            sqlConnction.Open();
+            daTalabTawreed.Fill(dtTalabTawreed);
+            sqlConnction.Close();
+
+            dr = cmd.ExecuteReader();
+
+            if (dtTalabTawreed.Rows.Count > 0)
+            {
+                DataRow row = dtTalabTawreed.Rows[0];
+
+                Cmb_FY.Text = row["AmrSheraa_sanamalia"].ToString();
+                TXT_AmrNo.Text = row["Amrshraa_No"].ToString();
+                Cmb_AmrNo.Text = row["Amrshraa_No"].ToString();
+
+                TXT_Momayz.Text = row["Momayz"].ToString();
+
+                TXT_Edara.Text = row["NameEdara"].ToString();
+                TXT_Date.Text = row["Date_amrshraa"].ToString();
+                TXT_BndMwazna.Text = row["Bnd_Mwazna"].ToString();
+                TXT_Payment.Text = row["Payment_Method"].ToString();
+                TXT_TaslemDate.Text = row["Date_Tslem"].ToString();
+                TXT_TaslemPlace.Text = row["Mkan_Tslem"].ToString();
+                TXT_Name.Text = row["Shick_Name"].ToString();
+                TXT_HesabMward1.Text = row["Hesab_Mward"].ToString();
+                TXT_HesabMward2.Text = row["Hesab_Mward"].ToString();
+                TXT_Egmali.Text = row["Egmali"].ToString();           
+            }
+            else
+            {
+                MessageBox.Show("من فضلك تاكد من رقم الاضافة المخزنية");
+                reset();
+
+                return false;
+            }
+            dr.Close();
+
+            Cmb_FY2.Text = fyear;
+            TXT_EdafaNo.Text = edafaNo;
+
+            GetEdafaBnod(amrno, amrsana);
+
+            Constants.closecon();
+
+            return true;
+        }
+
         #endregion
 
         //------------------------------------------ State Handler ---------------------------------
@@ -1472,240 +1766,6 @@ namespace ANRPC_Inventory
 
             reset();
         }
-        private void Getdata(string cmd)
-        {
-            dataadapter = new SqlDataAdapter(cmd, Constants.con);
-            table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-            dataadapter.Fill(table);
-            dataGridView1.DataSource = table;
-
-            dataGridView1.Columns["Amrshraa_No"].HeaderText = "رقم أمر الشراء";//col0
-            dataGridView1.Columns["Amrshraa_No"].Visible = false;
-            dataGridView1.Columns["Amrshraa_No"].Width = 60;
-            dataGridView1.Columns["Monaksa_No"].HeaderText = " رقم المناقصة";//col1
-            dataGridView1.Columns["Monaksa_No"].Visible = false;
-            dataGridView1.Columns["monaksa_sanamalia"].HeaderText = "مناقصةسنةمالية";//col2
-            dataGridView1.Columns["monaksa_sanamalia"].Visible = false;
-            dataGridView1.Columns["AmrSheraa_sanamalia"].HeaderText = "امر الشراء سنةمالية";//col3
-
-            dataGridView1.Columns["AmrSheraa_sanamalia"].Visible = false;
-
-            dataGridView1.Columns["TalbTwareed_No"].HeaderText = "رقم طلب التوريد";//col4
-            dataGridView1.Columns["TalbTwareed_No"].Visible = false;
-            dataGridView1.Columns["FYear"].HeaderText = "سنة مالية طلب التوريد";//col5
-            dataGridView1.Columns["FYear"].Visible = false;
-
-            dataGridView1.Columns["Bnd_No"].HeaderText = "رقم البند";//col6
-            dataGridView1.Columns["Bnd_No"].ReadOnly = true;
-
-            dataGridView1.Columns["Bnd_No"].Width = 50;
-            dataGridView1.Columns["CodeEdara"].HeaderText = "كود ادارة";//col7
-            dataGridView1.Columns["CodeEdara"].Visible = false;
-            dataGridView1.Columns["NameEdara"].HeaderText = "الادارة الطالبة";//col8
-            dataGridView1.Columns["NameEdara"].Visible = false;
-            dataGridView1.Columns["BndMwazna"].HeaderText = "بند موازنة";//col9
-            dataGridView1.Columns["BndMwazna"].ReadOnly = true;
-            dataGridView1.Columns["BndMwazna"].Width = 50;
-            dataGridView1.Columns["Quan"].HeaderText = "الكمية";//col10
-            dataGridView1.Columns["Quan"].ReadOnly = true;
-            dataGridView1.Columns["Quan"].Width = 50;
-          dataGridView1.Columns["Quan2"].HeaderText = "الكمية الواردة";//col11
-          dataGridView1.Columns["Quan2"].DefaultCellStyle.BackColor =Color.SandyBrown;
-        //  dataGridView1.Columns["Quan2"].DefaultHeaderCellType.b
-
-            dataGridView1.Columns["Quan2"].ReadOnly =false;
-       
-            dataGridView1.Columns["Unit"].HeaderText = "الوحدة";//col12
-            dataGridView1.Columns["Unit"].ReadOnly = true;
-            dataGridView1.Columns["Unit"].Width = 50;
-
-            dataGridView1.Columns["Bayan"].HeaderText = "بيان المهمات";//col13
-            dataGridView1.Columns["Bayan"].ReadOnly = true;
-            dataGridView1.Columns["Makhzn"].HeaderText = "مخزن";//col14
-            dataGridView1.Columns["Makhzn"].ReadOnly = true;
-            dataGridView1.Columns["Makhzn"].Visible = false;
-            dataGridView1.Columns["Rakm_Tasnif"].HeaderText = "رقم التصنيف";//col15
-            dataGridView1.Columns["Rakm_Tasnif"].ReadOnly = true;
-            dataGridView1.Columns["Rased_After"].HeaderText = "رصيد بعد";//col16
-            dataGridView1.Columns["Rased_After"].ReadOnly = true;
-            dataGridView1.Columns["Rased_After"].Width = 50;
-            dataGridView1.Columns["UnitPrice"].HeaderText = "سعر الوحدة";//col17
-            dataGridView1.Columns["UnitPrice"].ReadOnly = true;
-           dataGridView1.Columns["TotalPrice"].HeaderText = "الثمن الاجمالى";//col18
-           dataGridView1.Columns["TotalPrice"].ReadOnly = true;
-           dataGridView1.Columns["ApplyDareba"].HeaderText = "تطبق الضريبة";//col19
-           dataGridView1.Columns["ApplyDareba"].ReadOnly = true;
-         //    DataColumn  dc = new DataColumn("ApplyDareba", typeof(bool));
-
-            // dataGridView1.Columns[dc].HeaderText = "";
-
-           dataGridView1.Columns["Darebapercent"].HeaderText = "نسبة الضريبة";//col20
-           dataGridView1.Columns["Darebapercent"].ReadOnly = true;
-
-           //    dataGridView1.Columns["Darebapercent"].Type = DataGridViewCheckBoxCell;
-
-
-           dataGridView1.Columns["TotalPriceAfter"].HeaderText = "السعر الاجمالى ";//col21
-           dataGridView1.Columns["TotalPriceAfter"].ReadOnly = true;
-           dataGridView1.Columns["EstlamFlag"].HeaderText ="تم الاستلام ";//col22
-           dataGridView1.Columns["EstlamFlag"].Visible = false;
-
-           dataGridView1.Columns["EstlamDate"].HeaderText = "تاريخ الاستلام ";//col23
-           dataGridView1.Columns["EstlamDate"].Visible= false;
-
-
-           dataGridView1.Columns["LessQuanFlag"].HeaderText = "يوجد عجز ";//col24
-           dataGridView1.Columns["LessQuanFlag"].Visible = false;
-           dataGridView1.Columns["LessQuanFlag"].DefaultCellStyle.BackColor = Color.Aqua;
-           dataGridView1.Columns["NotIdenticalFlag"].HeaderText = "مطابق/غير مطابق ";
-     
-           dataGridView1.Columns["LessQuanFlag"].DefaultCellStyle.BackColor = Color.BlueViolet;
-           if (Constants.User_Type == "B")
-           {
-               dataGridView1.Columns["LessQuanFlag"].ReadOnly = true;
-               dataGridView1.Columns["NotIdenticalFlag"].ReadOnly = true;//col25
-           }
-
-           dataGridView1.Columns["TalbEsdarShickNo"].HeaderText = "رقم طلب الاصدار ";//col26
-
-           // dataGridView1.Columns["TalbEsdarShickNo"].ReadOnly = true ;
-
-           dataGridView1.Columns["ShickNo"].HeaderText = "رقم الشيك ";//col27
-           // dataGridView1.Columns["ShickNo"].ReadOnly = true;
-
-           dataGridView1.Columns["ShickDate"].HeaderText = "تاريخ الشيك ";//col28
-           // dataGridView1.Columns["ShickDate"].ReadOnly = true;
-           dataGridView1.Columns["TalbEsdarShickNo"].Visible = false;
-           dataGridView1.Columns["ShickNo"].Visible = false;
-           dataGridView1.Columns["ShickDate"].Visible = false;//col28
-
-           dataGridView1.Columns["ExpirationDate"].HeaderText = "تاريخ انتهاء الصلاحية ";//col28
-           dataGridView1.Columns["ExpirationDate"].Visible = true;//col2
-            dataGridView1.AllowUserToAddRows = true;
-          //  decimal total = table.AsEnumerable().Sum(row => row.Field<decimal>("TotalPriceAfter"));
-                //    dataGridView1.FooterRow.Cells[1].Text = "Total";
-                 //   dataGridView1.FooterRow.Cells[1].HorizontalAlign = HorizontalAlign.Right;
-                   // TXT_Egmali.Text = total.ToString("N2");
-        }
-        ///
-        private void Getdata2(string cmd)
-        {
-            dataadapter = new SqlDataAdapter(cmd, Constants.con);
-            table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-            dataadapter.Fill(table);
-            dataGridView1.DataSource = table;
-
-            dataGridView1.Columns["Amrshraa_No"].HeaderText = "رقم أمر الشراء";//col0
-            dataGridView1.Columns["Amrshraa_No"].Visible = false;
-            // dataGridView1.Columns["TalbTwareed_No"].Width = 60;
-          
-           
-            dataGridView1.Columns["AmrSheraa_sanamalia"].HeaderText = "امر الشراء سنةمالية";//col3
-
-            dataGridView1.Columns["AmrSheraa_sanamalia"].Visible = false;
-
-            dataGridView1.Columns["TalbTwareed_No"].HeaderText = "رقم طلب التوريد";//col4
-            dataGridView1.Columns["TalbTwareed_No"].Visible = false;
-            dataGridView1.Columns["FYear"].HeaderText = "سنة مالية طلب التوريد";//col5
-            dataGridView1.Columns["FYear"].Visible = false;
-
-            dataGridView1.Columns["Bnd_No"].HeaderText = "رقم البند";//col6
-            dataGridView1.Columns["Bnd_No"].ReadOnly = true;
-
-            dataGridView1.Columns["Quan"].HeaderText = "الكمية";//col10
-            dataGridView1.Columns["Quan"].ReadOnly = true;
-            dataGridView1.Columns["Quan2"].HeaderText = "الكمية الواردة";//col11
-            dataGridView1.Columns["Quan2"].DefaultCellStyle.BackColor = Color.SandyBrown;
-            //  dataGridView1.Columns["Quan2"].DefaultHeaderCellType.b
-
-            dataGridView1.Columns["Quan2"].ReadOnly = false;
-
-            dataGridView1.Columns["Unit"].HeaderText = "الوحدة";//col12
-            dataGridView1.Columns["Unit"].ReadOnly = true;
-
-
-            dataGridView1.Columns["Bayan"].HeaderText = "بيان المهمات";//col13
-            dataGridView1.Columns["Bayan"].ReadOnly = true;
-            dataGridView1.Columns["Makhzn"].HeaderText = "مخزن";//col14
-            dataGridView1.Columns["Makhzn"].ReadOnly = true;
-            dataGridView1.Columns["Rakm_Tasnif"].HeaderText = "رقم التصنيف";//col15
-            dataGridView1.Columns["Rakm_Tasnif"].ReadOnly = true;
-            dataGridView1.Columns["Rased_After"].HeaderText = "رصيد بعد";//col16
-            dataGridView1.Columns["Rased_After"].ReadOnly = true;
-            dataGridView1.Columns["UnitPrice"].HeaderText = "سعر الوحدة";//col17
-            dataGridView1.Columns["UnitPrice"].ReadOnly = true;
-            dataGridView1.Columns["TotalPrice"].HeaderText = "الثمن الاجمالى";//col18
-            dataGridView1.Columns["TotalPrice"].ReadOnly = true;
-            dataGridView1.Columns["ApplyDareba"].HeaderText = "تطبق الضريبة";//col19
-            dataGridView1.Columns["ApplyDareba"].ReadOnly = true;
-            //    DataColumn  dc = new DataColumn("ApplyDareba", typeof(bool));
-
-            // dataGridView1.Columns[dc].HeaderText = "";
-
-            dataGridView1.Columns["Darebapercent"].HeaderText = "نسبة الضريبة";//col20
-            dataGridView1.Columns["Darebapercent"].ReadOnly = true;
-
-            //    dataGridView1.Columns["Darebapercent"].Type = DataGridViewCheckBoxCell;
-
-
-            dataGridView1.Columns["TotalPriceAfter"].HeaderText = "السعر الاجمالى ";//col21
-            dataGridView1.Columns["TotalPriceAfter"].ReadOnly = true;
-            dataGridView1.Columns["EstlamFlag"].HeaderText = "تم الاستلام ";//col22
-            dataGridView1.Columns["EstlamFlag"].Visible = false;
-
-            dataGridView1.Columns["EstlamDate"].HeaderText = "تاريخ الاستلام ";//col23
-            dataGridView1.Columns["EstlamDate"].Visible = false;
-
-
-            dataGridView1.Columns["LessQuanFlag"].HeaderText = "يوجد عجز ";//col24
-
-            dataGridView1.Columns["LessQuanFlag"].DefaultCellStyle.BackColor = Color.Aqua;
-            dataGridView1.Columns["NotIdenticalFlag"].HeaderText = "مطابق/غير مطابق ";
-
-            dataGridView1.Columns["LessQuanFlag"].DefaultCellStyle.BackColor = Color.BlueViolet;
-            if (Constants.User_Type == "B")
-            {
-                dataGridView1.Columns["LessQuanFlag"].ReadOnly = true;
-                dataGridView1.Columns["NotIdenticalFlag"].ReadOnly = true;//col25
-            }
-
-            dataGridView1.Columns["TalbEsdarShickNo"].HeaderText = "رقم طلب الاصدار ";//col26
-
-            // dataGridView1.Columns["TalbEsdarShickNo"].ReadOnly = true ;
-
-            dataGridView1.Columns["ShickNo"].HeaderText = "رقم الشيك ";//col27
-            // dataGridView1.Columns["ShickNo"].ReadOnly = true;
-
-            dataGridView1.Columns["ShickDate"].HeaderText = "تاريخ الشيك ";//col28
-            // dataGridView1.Columns["ShickDate"].ReadOnly = true;
-            dataGridView1.Columns["TalbEsdarShickNo"].Visible = false;
-            dataGridView1.Columns["ShickNo"].Visible = false;
-            dataGridView1.Columns["ShickDate"].Visible = false;//col28
-
-            dataGridView1.AllowUserToAddRows = true;
-            //  decimal total = table.AsEnumerable().Sum(row => row.Field<decimal>("TotalPriceAfter"));
-            //    dataGridView1.FooterRow.Cells[1].Text = "Total";
-            //   dataGridView1.FooterRow.Cells[1].HorizontalAlign = HorizontalAlign.Right;
-            // TXT_Egmali.Text = total.ToString("N2");
-        }
-        ///////////
-                private void GetData(int x,string y)
-          {
-              if (string.IsNullOrWhiteSpace(Cmb_AmrNo.Text))
-              {
-                  // MessageBox.Show("ادخل رقم التصريح");
-                  //  PermNo_text.Focus();
-                  return;
-              }
-              else
-              {
-                  table.Clear();
-                  TableQuery = "SELECT *  FROM [T_BnodAwamershraa] Where Estlamflag=1 and Amrshraa_No = " + x + " and AmrSheraa_sanamalia='" + y + "'";
-                  Getdata(TableQuery);
-              }
-
-          }
-        
                
         private void button1_Click(object sender, EventArgs e)
         {
@@ -1815,7 +1875,6 @@ namespace ANRPC_Inventory
 
             ///////////////////////////////////////
             Constants.opencon();
-            Cmb_AmrNo.SelectedIndexChanged -= new EventHandler(Cmb_AmrNo_SelectedIndexChanged);
             Cmb_AmrNo.DataSource = null;
             Cmb_AmrNo.Items.Clear();
             //string cmdstring3 = "SELECT  Amrshraa_No from T_Awamershraa  where  Sign3 is not null and AmrSheraa_sanamalia='" + Cmb_FY.Text + "' order by  Amrshraa_No";
@@ -1856,7 +1915,6 @@ namespace ANRPC_Inventory
                 Cmb_AmrNo.ValueMember = "Amrshraa_No";
                 Cmb_AmrNo.DisplayMember = "Amrshraa_No";
                 Cmb_AmrNo.SelectedIndex = -1;
-                Cmb_AmrNo.SelectedIndexChanged += new EventHandler(Cmb_AmrNo_SelectedIndexChanged);
             
 
 
@@ -1951,139 +2009,6 @@ namespace ANRPC_Inventory
             }*/
         
         }
-        
-        public void SearchTalb(int x)
-        {
-            //call sp that get last num that eentered for this MM and this YYYY
-            Constants.opencon();
-            // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
-            string cmdstring = "select * from T_Awamershraa where Amrshraa_No=@TN and AmrSheraa_sanamalia=@FY";
-            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-            if (x == 1)
-            {
-                cmd.Parameters.AddWithValue("@TN", Cmb_AmrNo.SelectedValue);
-                cmd.Parameters.AddWithValue("@FY", Cmb_FY.Text);
-            }
-            else
-            {
-            //    cmd.Parameters.AddWithValue("@TN", Cmb_AmrNo2.Text);
-             //   cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
-            }
-            // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
-
-
-            SqlDataReader dr = cmd.ExecuteReader();
-           
-            if (dr.HasRows == true)
-            {
-                while (dr.Read())
-                {
-
-                    Cmb_FY.Text = dr["AmrSheraa_sanamalia"].ToString();
-                   // Cmb_FY2.Text = dr["monaksa_sanamalia"].ToString();
-                    Cmb_AmrNo.Text = dr["Amrshraa_No"].ToString(); 
-                 //   TXT_EdafaNo.Text = dr["Monaksa_No"].ToString();
-                    TXT_Momayz.Text = dr["Momayz"].ToString();
-                   
-                    TXT_Edara.Text = dr["NameEdara"].ToString();
-                    TXT_Date.Text = dr["Date_amrshraa"].ToString();
-                   // CMB_Sadr.Text = dr["Sadr_To"].ToString();
-                    TXT_BndMwazna.Text = dr["Bnd_Mwazna"].ToString();
-                    TXT_Payment.Text = dr["Payment_Method"].ToString();
-                    TXT_TaslemDate.Text = dr["Date_Tslem"].ToString();
-                    TXT_TaslemPlace.Text = dr["Mkan_Tslem"].ToString();
-                    TXT_Name.Text = dr["Shick_Name"].ToString();
-                    TXT_HesabMward1.Text = dr["Hesab_Mward"].ToString();
-                    TXT_HesabMward2.Text = dr["Hesab_Mward"].ToString();
-                    TXT_Egmali.Text = dr["Egmali"].ToString();
-
-               /*     string s1 = dr["Sign1"].ToString();
-                    string s2 = dr["Sign2"].ToString();
-                    string s3 = dr["Sign3"].ToString();
-
-                    //dr.Close();
-
-
-                    if (s1 == "1")
-                    {
-                        string p = Constants.RetrieveSignature("1", "3");
-                        if (p != "")
-                        {
-                            //   Pic_Sign1
-                            //	"Pic_Sign1"	string
-
-                            ((PictureBox)this.panel1.Controls["Pic_Sign" + "1"]).Image = Image.FromFile(@p);
-                            FlagSign1 = 1;
-
-                        }
-                    }
-                    if (s2 == "1")
-                    {
-                        string p = Constants.RetrieveSignature("2", "3");
-                        if (p != "")
-                        {
-                            //   Pic_Sign1
-                            //	"Pic_Sign1"	string
-
-                            ((PictureBox)this.panel1.Controls["Pic_Sign" + "2"]).Image = Image.FromFile(@p);
-                            FlagSign2 = 1;
-
-                        }
-                    }
-                    if (s3 == "1")
-                    {
-                        string p = Constants.RetrieveSignature("3", "3");
-                        if (p != "")
-                        {
-                            //   Pic_Sign1
-                            //	"Pic_Sign1"	string
-
-                            ((PictureBox)this.panel1.Controls["Pic_Sign" + "3"]).Image = Image.FromFile(@p);
-                            FlagSign3 = 1;
-
-                        }
-                    }*/
-                }
-            }
-            else
-            {
-                MessageBox.Show("من فضلك تاكد من رقم امر الشراء المراد اضافته");
-
-            }
-            dr.Close();
-
-
-            //  string query1 = "SELECT  [TalbTwareed_No] ,[FYear] ,[Bnd_No],[RequestedQuan],[Unit],[BIAN_TSNIF] ,[STOCK_NO_ALL],[Quan] ,[ArrivalDate] FROM [T_TalbTawreed_Benod] where  [TalbTwareed_No]=@T and [FYear]=@F ";
-            //  SqlCommand cmd1 = new SqlCommand(query1, Constants.con);
-            //  cmd1.Parameters.AddWithValue("@T",Cmb_TalbNo2.Text);
-            //  cmd1.Parameters.AddWithValue("@F", Cmb_FYear2.Text);
-
-
-            // DT.Clear();بلثف
-            // DT.Load(cmd1.ExecuteReader());
-            // cleargridview();
-            GetData(Convert.ToInt32(Cmb_AmrNo.SelectedValue), Cmb_FY.Text);
-            if (DT.Rows.Count == 0)
-            {
-                //  MessageBox.Show("لا يوجد حركات لهذا الموظف");
-                // Input_Reset();
-                //   label11.Visible = false;
-                // label12.Visible = false;
-                // BTN_Save.Visible = false;
-                // panel2.Visible = false;
-
-            }
-            else
-            {
-
-
-            }
-            // searchbtn1 = false;
-            //  DataGridViewReset();
-
-            Constants.closecon();
-        }
-
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
@@ -2426,323 +2351,8 @@ namespace ANRPC_Inventory
         }
 
 
-        private void TXT_EdafaNo_KeyDown(object sender, KeyEventArgs e)
-        {
-        
-            if (e.KeyCode == Keys.Enter && AddEditFlag == 0)
-            {
-                if (string.IsNullOrEmpty(TXT_TRNO.Text))
-                {
-                    MessageBox.Show("برجاء اختيار نوع الاضافة المخزنية");
-                    return;
-                }
-                cleargridview();
-                SearchEdafa(1);
-            }
-        }
         ////////////////////
-        public void SearchEdafa(int x)
-        {
-            //call sp that get last num that eentered for this MM and this YYYY
-            Constants.opencon();
-            // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
-            string cmdstring = "select * from   T_Edafa where Edafa_No=@TN and Edafa_FY=@FY  and TR_NO=@TRNO";
-            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-            if (x == 1)
-            {
-                cmd.Parameters.AddWithValue("@TN", TXT_EdafaNo.Text);
-                cmd.Parameters.AddWithValue("@FY", Cmb_FY2.Text);
-                cmd.Parameters.AddWithValue("@TRNO", TXT_TRNO.Text);
-            }
-            else
-            {
-                //    cmd.Parameters.AddWithValue("@TN", Cmb_AmrNo2.Text);
-                //   cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
-            }
-            // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
 
-
-            SqlDataReader dr = cmd.ExecuteReader();
-            string amrno="";
-            string amrsana="";
-            if (dr.HasRows == true)
-            {
-                while (dr.Read())
-                {
-
-                    amrsana= dr["AmrSheraa_sanamalia"].ToString();
-           
-                  amrno = dr["Amrshraa_No"].ToString();
-                  TXT_TRNO.Text = dr["TR_NO"].ToString();
-                  if (TXT_TRNO.Text.ToString() == "")
-                  {
-
-                  }
-                  else
-                  {
-                      Cmb_CType.SelectedValue = TXT_TRNO.Text.ToString();
-                  }
-
-                  string s1 = dr["Sign1"].ToString();
-                  string s2 = dr["Sign2"].ToString();
-                  string s3 = dr["Sign3"].ToString();
-                  string s4 = dr["Sign4"].ToString();
-
-                  //dr.Close();
-
-
-                  if (s1 != "")
-                  {
-                      string p = Constants.RetrieveSignature("1", "5",s1);
-                      if (p != "")
-                      {
-                          //   Pic_Sign1
-                          //	"Pic_Sign1"	string
-
-                          Ename1 = p.Split(':')[1];
-                          wazifa1 = p.Split(':')[2];
-                          pp = p.Split(':')[0];
-
-                            ((PictureBox)this.signatureTable.Controls["panel15"].Controls["Pic_Sign" + "1"]).Image = Image.FromFile(@pp);
-
-                          FlagSign1 = 1;
-                          FlagEmpn1 = s1;
-                            ((PictureBox)this.signatureTable.Controls["panel15"].Controls["Pic_Sign" + "1"]).BackColor = Color.Green;
-                          toolTip1.SetToolTip(Pic_Sign1, Ename1 + Environment.NewLine + wazifa1);
-                      }
-
-                  }
-                  else
-                  {
-                        ((PictureBox)this.signatureTable.Controls["panel15"].Controls["Pic_Sign" + "1"]).BackColor = Color.Red;
-                  }
-                  if (s2 != "")
-                  {
-                      string p = Constants.RetrieveSignature("2", "5",s2);
-                      if (p != "")
-                      {
-                          //   Pic_Sign1
-                          //	"Pic_Sign1"	string
-
-                          Ename2 = p.Split(':')[1];
-                          wazifa2 = p.Split(':')[2];
-                          pp = p.Split(':')[0];
-
-                            ((PictureBox)this.signatureTable.Controls["panel16"].Controls["Pic_Sign" + "2"]).Image = Image.FromFile(@pp);
-
-                          FlagSign2 = 1;
-                          FlagEmpn2 = s2;
-                            ((PictureBox)this.signatureTable.Controls["panel16"].Controls["Pic_Sign" + "2"]).BackColor = Color.Green;
-                          toolTip1.SetToolTip(Pic_Sign2, Ename2 + Environment.NewLine + wazifa2);
-                      }
-
-                  }
-                  else
-                  {
-                        ((PictureBox)this.signatureTable.Controls["panel16"].Controls["Pic_Sign" + "2"]).BackColor = Color.Red;
-                  }
-                  if (s3 != "")
-                  {
-                      string p = Constants.RetrieveSignature("3", "5",s3);
-                      if (p != "")
-                      {
-                          //   Pic_Sign1
-                          //	"Pic_Sign1"	string
-                          Ename3 = p.Split(':')[1];
-                          wazifa3 = p.Split(':')[2];
-                          pp = p.Split(':')[0];
-
-                            ((PictureBox)this.signatureTable.Controls["panel17"].Controls["Pic_Sign" + "3"]).Image = Image.FromFile(@pp);
-
-                          FlagSign3 = 1;
-                          FlagEmpn3 = s3;
-                            ((PictureBox)this.signatureTable.Controls["panel17"].Controls["Pic_Sign" + "3"]).BackColor = Color.Green;
-                          toolTip1.SetToolTip(Pic_Sign3, Ename3 + Environment.NewLine + wazifa3);
-                      }
-
-                  }
-                  else
-                  {
-                        ((PictureBox)this.signatureTable.Controls["panel17"].Controls["Pic_Sign" + "3"]).BackColor = Color.Red;
-                  }
-                  if (s4 != "")
-                  {
-                      string p = Constants.RetrieveSignature("3", "1",s4);
-                      if (p != "")
-                      {
-                          //   Pic_Sign1
-                          //	"Pic_Sign1"	string
-                          Ename4 = p.Split(':')[1];
-                          wazifa4 = p.Split(':')[2];
-                          pp = p.Split(':')[0];
-
-                            ((PictureBox)this.signatureTable.Controls["panel18"].Controls["Pic_Sign" + "4"]).Image = Image.FromFile(@pp);
-
-                          FlagSign4 = 1;
-                          FlagEmpn4 = s4;
-                            ((PictureBox)this.signatureTable.Controls["panel18"].Controls["Pic_Sign" + "4"]).BackColor = Color.Green;
-                          toolTip1.SetToolTip(Pic_Sign4, Ename4 + Environment.NewLine + wazifa4);
-                      }
-
-                  }
-                  else
-                  {
-                        ((PictureBox)this.signatureTable.Controls["panel18"].Controls["Pic_Sign" + "4"]).BackColor = Color.Red;
-                  }
-
-
-                }
-            }
-            else
-            {
-                MessageBox.Show("من فضلك تاكد من رقم الاضافة المخزنية");
-                return;
-
-            }
-            dr.Close();
-            //////////////////////////////////
-
-            cmdstring = "select * from  T_Awamershraa where  Amrshraa_No=@TN and AmrSheraa_sanamalia=@FY";
-            cmd = new SqlCommand(cmdstring, Constants.con);
-            if (x == 1)
-            {
-                cmd.Parameters.AddWithValue("@TN", amrno);
-                cmd.Parameters.AddWithValue("@FY", amrsana);
-            }
-            else
-            {
-                //    cmd.Parameters.AddWithValue("@TN", Cmb_AmrNo2.Text);
-                //   cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
-            }
-            // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
-
-
-            DataTable dtTalabTawreed = new DataTable();
-
-
-
-
-
-            SqlConnection sqlConnction = new SqlConnection(Constants.constring);
-            SqlDataAdapter daTalabTawreed = new SqlDataAdapter(@"select * from  T_Awamershraa where  Amrshraa_No="+ amrno + " and AmrSheraa_sanamalia='"+ amrsana + "'", sqlConnction);
-            sqlConnction.Open();
-            daTalabTawreed.Fill(dtTalabTawreed);
-            sqlConnction.Close();
-
-
-
-            dr = cmd.ExecuteReader();
-
-            if (dtTalabTawreed.Rows.Count > 0)
-            {
-                DataRow row = dtTalabTawreed.Rows[0];
-                //while (dr.Read())
-                //{
-
-                    Cmb_FY.Text = row["AmrSheraa_sanamalia"].ToString();
-                    //   Cmb_FY2.Text = dr["monaksa_sanamalia"].ToString();
-                    TXT_AmrNo.Text = row["Amrshraa_No"].ToString();
-                    Cmb_AmrNo.Text = row["Amrshraa_No"].ToString();
-
-
-                    //  TXT_EdafaNo.Text = dr["Monaksa_No"].ToString();
-                    TXT_Momayz.Text = row["Momayz"].ToString();
-
-                    TXT_Edara.Text = row["NameEdara"].ToString();
-                    TXT_Date.Text = row["Date_amrshraa"].ToString();
-                    // CMB_Sadr.Text = dr["Sadr_To"].ToString();
-                    TXT_BndMwazna.Text = row["Bnd_Mwazna"].ToString();
-                    TXT_Payment.Text = row["Payment_Method"].ToString();
-                    TXT_TaslemDate.Text = row["Date_Tslem"].ToString();
-                    TXT_TaslemPlace.Text = row["Mkan_Tslem"].ToString();
-                    TXT_Name.Text = row["Shick_Name"].ToString();
-                    TXT_HesabMward1.Text = row["Hesab_Mward"].ToString();
-                    TXT_HesabMward2.Text = row["Hesab_Mward"].ToString();
-                    TXT_Egmali.Text = row["Egmali"].ToString();
-
-                    /*     string s1 = dr["Sign1"].ToString();
-                         string s2 = dr["Sign2"].ToString();
-                         string s3 = dr["Sign3"].ToString();
-
-                         //dr.Close();
-
-
-                         if (s1 == "1")
-                         {
-                             string p = Constants.RetrieveSignature("1", "3");
-                             if (p != "")
-                             {
-                                 //   Pic_Sign1
-                                 //	"Pic_Sign1"	string
-
-                                 ((PictureBox)this.panel1.Controls["Pic_Sign" + "1"]).Image = Image.FromFile(@p);
-                                 FlagSign1 = 1;
-
-                             }
-                         }
-                         if (s2 == "1")
-                         {
-                             string p = Constants.RetrieveSignature("2", "3");
-                             if (p != "")
-                             {
-                                 //   Pic_Sign1
-                                 //	"Pic_Sign1"	string
-
-                                 ((PictureBox)this.panel1.Controls["Pic_Sign" + "2"]).Image = Image.FromFile(@p);
-                                 FlagSign2 = 1;
-
-                             }
-                         }
-                         if (s3 == "1")
-                         {
-                             string p = Constants.RetrieveSignature("3", "3");
-                             if (p != "")
-                             {
-                                 //   Pic_Sign1
-                                 //	"Pic_Sign1"	string
-
-                                 ((PictureBox)this.panel1.Controls["Pic_Sign" + "3"]).Image = Image.FromFile(@p);
-                                 FlagSign3 = 1;
-
-                             }
-                         }*/
-
-                    BTN_Print.Enabled = true;
-                //}
-            }
-            else
-            {
-                MessageBox.Show("من فضلك تاكد من رقم الاضافة المخزنية");
-
-                BTN_Print.Enabled = false;
-
-
-
-            }
-            dr.Close();
-
-
-            //  string query1 = "SELECT  [TalbTwareed_No] ,[FYear] ,[Bnd_No],[RequestedQuan],[Unit],[BIAN_TSNIF] ,[STOCK_NO_ALL],[Quan] ,[ArrivalDate] FROM [T_TalbTawreed_Benod] where  [TalbTwareed_No]=@T and [FYear]=@F ";
-            //  Sq
-
-            //////////////////////////////////////
-            GetData(Convert.ToInt32(Cmb_AmrNo.Text), Cmb_FY.Text);
-            if (DT.Rows.Count == 0)
-            {
-
-
-            }
-            else
-            {
-
-
-            }
-            // searchbtn1 = false;
-            //  DataGridViewReset();
-
-            Constants.closecon();
-        }
-        
         private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             if (e.ColumnIndex == 1)
@@ -2819,10 +2429,6 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void TXT_EdafaNo_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            Constants.validatenumberkeypress(sender, e);
-        }
 
         private void BTN_Print_Click(object sender, EventArgs e)
         {
@@ -2844,6 +2450,7 @@ namespace ANRPC_Inventory
                 }
             }
         }
+
         private void Cmb_AmrNo_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -2887,8 +2494,6 @@ namespace ANRPC_Inventory
         {
             if (AddEditFlag == 2 && Cmb_AmrNo.SelectedValue.ToString() != "")
             {
-
-
                 if (directflag == 1)
                 {
                     int x = CheckDirect70();
@@ -2899,11 +2504,10 @@ namespace ANRPC_Inventory
                     }
                 }
                 cleargridview();
-//
-             //   GetData(Convert.ToInt32(Cmb_AmrNo.SelectedValue), Cmb_FY.Text);
-                cleargridview();
+
                 SearchTalb(1);
 
+                //SearchEdafa(TXT_EdafaNo.Text, Cmb_FY, momayz)
             }
        
         }
@@ -3194,22 +2798,23 @@ namespace ANRPC_Inventory
             //    return;
             //}
 
-            //string amr_no = Cmb_AmrNo.Text;
-            //string fyear = Cmb_FY.Text;
+            string amr_no = TXT_EdafaNo.Text;
+            string fyear = Cmb_FY2.Text;
+            string momayz = TXT_TRNO.Text;
 
-            //reset();
+            reset();
 
-            //if (SearchEstlam(amr_no, fyear, false))
-            //{
-            //    if (FlagSign2 != 1 && FlagSign1 != 1)
-            //    {
-            //        EditBtn.Enabled = true;
-            //    }
-            //    else
-            //    {
-            //        EditBtn.Enabled = false;
-            //    }
-            //}
+            if (SearchEdafa(amr_no, fyear, momayz))
+            {
+                if (FlagSign2 != 1 && FlagSign1 != 1)
+                {
+                    EditBtn.Enabled = true;
+                }
+                else
+                {
+                    EditBtn.Enabled = false;
+                }
+            }
         }
 
         private void BTN_Search_Motab3a_Click(object sender, EventArgs e)
@@ -3219,25 +2824,21 @@ namespace ANRPC_Inventory
             //    return;
             //}
 
-            //string amr_no = Cmb_AmrNo2.SelectedValue.ToString();
-            //string fyear = Cmb_FYear2.Text;
+            string edafa_no = Cmb_EdafaNo2.Text;
+            string fyear = Cmb_FYear2.Text;
+            string momayz = TXT_TRNO2.Text;
 
+            reset();
 
-            //string x = Cmb_AmrNo2.GetItemText(Cmb_AmrNo2.SelectedItem);
-            //string xx = x.Substring(x.Length - 10, 10);
+            if (SearchEdafa(edafa_no, fyear, momayz))
+            {
+                EditBtn.Enabled = true;
+                BTN_Print2.Enabled = true;
+            }
 
-            //reset();
-
-            //TXT_Date.Text = xx;
-
-            //if (SearchEstlam(amr_no, fyear, true))
-            //{
-            //    EditBtn2.Enabled = true;
-            //    BTN_Print2.Enabled = true;
-            //}
-
-            //Cmb_AmrNo.Enabled = false;
-            //Cmb_FY.Enabled = false;
+            TXT_EdafaNo.Enabled = false;
+            Cmb_FY2.Enabled = false;
+            Cmb_CType.Enabled = false;
         }
 
         private void EditBtn2_Click(object sender, EventArgs e)
