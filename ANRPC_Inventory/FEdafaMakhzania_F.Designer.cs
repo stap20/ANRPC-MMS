@@ -1286,8 +1286,6 @@
             this.Cmb_AmrNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Cmb_AmrNo.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Cmb_AmrNo.FormattingEnabled = true;
-            this.Cmb_AmrNo.Items.AddRange(new object[] {
-            "2020_2021"});
             this.Cmb_AmrNo.Location = new System.Drawing.Point(3, 33);
             this.Cmb_AmrNo.Name = "Cmb_AmrNo";
             this.Cmb_AmrNo.Size = new System.Drawing.Size(149, 27);
@@ -1344,8 +1342,6 @@
             this.Cmb_FY2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Cmb_FY2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Cmb_FY2.FormattingEnabled = true;
-            this.Cmb_FY2.Items.AddRange(new object[] {
-            "2020_2021"});
             this.Cmb_FY2.Location = new System.Drawing.Point(61, 35);
             this.Cmb_FY2.Name = "Cmb_FY2";
             this.Cmb_FY2.Size = new System.Drawing.Size(121, 27);
@@ -1401,8 +1397,6 @@
             this.Cmb_FY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Cmb_FY.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Cmb_FY.FormattingEnabled = true;
-            this.Cmb_FY.Items.AddRange(new object[] {
-            "2020_2021"});
             this.Cmb_FY.Location = new System.Drawing.Point(3, 3);
             this.Cmb_FY.Name = "Cmb_FY";
             this.Cmb_FY.Size = new System.Drawing.Size(148, 27);
@@ -1556,9 +1550,6 @@
             this.Cmb_EdafaNo2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.Cmb_EdafaNo2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Cmb_EdafaNo2.FormattingEnabled = true;
-            this.Cmb_EdafaNo2.Items.AddRange(new object[] {
-            "2019_2020",
-            "2020_2021"});
             this.Cmb_EdafaNo2.Location = new System.Drawing.Point(133, 6);
             this.Cmb_EdafaNo2.Name = "Cmb_EdafaNo2";
             this.Cmb_EdafaNo2.Size = new System.Drawing.Size(110, 27);
@@ -1583,9 +1574,6 @@
             this.Cmb_FYear2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Cmb_FYear2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Cmb_FYear2.FormattingEnabled = true;
-            this.Cmb_FYear2.Items.AddRange(new object[] {
-            "2019_2020",
-            "2020_2021"});
             this.Cmb_FYear2.Location = new System.Drawing.Point(246, 6);
             this.Cmb_FYear2.Name = "Cmb_FYear2";
             this.Cmb_FYear2.Size = new System.Drawing.Size(110, 27);

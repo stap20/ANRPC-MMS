@@ -68,6 +68,20 @@
             this.label55 = new System.Windows.Forms.Label();
             this.BTN_Sign6 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.signatureTable = new System.Windows.Forms.TableLayoutPanel();
+            this.panel15 = new System.Windows.Forms.Panel();
+            this.Pic_Sign5 = new System.Windows.Forms.PictureBox();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.Pic_Sign6 = new System.Windows.Forms.PictureBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.Pic_Sign1 = new System.Windows.Forms.PictureBox();
+            this.panel14 = new System.Windows.Forms.Panel();
+            this.Pic_Sign2 = new System.Windows.Forms.PictureBox();
+            this.DeleteBtn = new System.Windows.Forms.Button();
+            this.panel16 = new System.Windows.Forms.Panel();
+            this.Pic_Sign4 = new System.Windows.Forms.PictureBox();
+            this.panel17 = new System.Windows.Forms.Panel();
+            this.Pic_Sign3 = new System.Windows.Forms.PictureBox();
             this.takalefTable = new System.Windows.Forms.TableLayoutPanel();
             this.TXT_Enfak = new System.Windows.Forms.TextBox();
             this.label41 = new System.Windows.Forms.Label();
@@ -90,21 +104,20 @@
             this.label40 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.TXT_PaccNo = new System.Windows.Forms.TextBox();
-            this.Pic_Sign6 = new System.Windows.Forms.PictureBox();
             this.BTN_Print = new System.Windows.Forms.Button();
-            this.Pic_Sign5 = new System.Windows.Forms.PictureBox();
-            this.Pic_Sign4 = new System.Windows.Forms.PictureBox();
-            this.Pic_Sign3 = new System.Windows.Forms.PictureBox();
-            this.Pic_Sign2 = new System.Windows.Forms.PictureBox();
-            this.Pic_Sign1 = new System.Windows.Forms.PictureBox();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.BTN_Print2 = new System.Windows.Forms.Button();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.TXT_TRNO2 = new System.Windows.Forms.TextBox();
+            this.label54 = new System.Windows.Forms.Label();
             this.Cmb_CType2 = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.Cmb_FYear2 = new System.Windows.Forms.ComboBox();
+            this.Cmb_TRansferNo2 = new System.Windows.Forms.ComboBox();
             this.Editbtn = new System.Windows.Forms.Button();
             this.BTN_Search_Motab3a = new System.Windows.Forms.Button();
             this.BTN_Save2 = new System.Windows.Forms.Button();
-            this.Cmb_TalbNo2 = new System.Windows.Forms.ComboBox();
-            this.Cmb_FYear2 = new System.Windows.Forms.ComboBox();
-            this.label25 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.BTN_SearchEzn = new System.Windows.Forms.Button();
             this.BTN_Cancel = new System.Windows.Forms.Button();
@@ -142,7 +155,6 @@
             this.label49 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Addbtn2 = new System.Windows.Forms.Button();
-            this.DeleteBtn = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -150,26 +162,27 @@
             this.BTN_PDF = new System.Windows.Forms.Button();
             this.browseBTN = new System.Windows.Forms.Button();
             this.panel11 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.panel15 = new System.Windows.Forms.Panel();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.panel16 = new System.Windows.Forms.Panel();
-            this.panel17 = new System.Windows.Forms.Panel();
-            this.signatureTable = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.tBnodAwamershraaBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aNRPC_InventoryDataSet)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
-            this.takalefTable.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign6)).BeginInit();
+            this.signatureTable.SuspendLayout();
+            this.panel15.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign2)).BeginInit();
+            this.panel13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign6)).BeginInit();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign1)).BeginInit();
+            this.panel14.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign2)).BeginInit();
+            this.panel16.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign4)).BeginInit();
+            this.panel17.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign3)).BeginInit();
+            this.takalefTable.SuspendLayout();
             this.panel7.SuspendLayout();
+            this.panel12.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -182,13 +195,6 @@
             this.panel9.SuspendLayout();
             this.panel10.SuspendLayout();
             this.panel11.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel13.SuspendLayout();
-            this.panel15.SuspendLayout();
-            this.panel14.SuspendLayout();
-            this.panel16.SuspendLayout();
-            this.panel17.SuspendLayout();
-            this.signatureTable.SuspendLayout();
             this.SuspendLayout();
             // 
             // tBnodAwamershraaBindingSource
@@ -231,7 +237,6 @@
             this.label17.TabIndex = 18;
             this.label17.Text = ":توقيع الراسل";
             this.label17.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label17.Click += new System.EventHandler(this.label17_Click);
             // 
             // label20
             // 
@@ -245,7 +250,6 @@
             this.label20.TabIndex = 22;
             this.label20.Text = ":إعتماد المدير العام";
             this.label20.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label20.Click += new System.EventHandler(this.label20_Click);
             // 
             // label21
             // 
@@ -259,7 +263,6 @@
             this.label21.TabIndex = 23;
             this.label21.Text = ":المستلم";
             this.label21.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label21.Click += new System.EventHandler(this.label21_Click);
             // 
             // label22
             // 
@@ -286,7 +289,6 @@
             this.label23.TabIndex = 25;
             this.label23.Text = ":اعتماد مدير قطاع المخازن";
             this.label23.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label23.Click += new System.EventHandler(this.label23_Click);
             // 
             // BTN_Sign1
             // 
@@ -365,11 +367,10 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.dataGridView1.Size = new System.Drawing.Size(1251, 151);
+            this.dataGridView1.Size = new System.Drawing.Size(1251, 157);
             this.dataGridView1.TabIndex = 42;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
-            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
             this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowEnter_1);
             // 
@@ -460,8 +461,6 @@
             this.Cmb_FYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Cmb_FYear.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Cmb_FYear.FormattingEnabled = true;
-            this.Cmb_FYear.Items.AddRange(new object[] {
-            "2020_2021"});
             this.Cmb_FYear.Location = new System.Drawing.Point(76, 30);
             this.Cmb_FYear.Name = "Cmb_FYear";
             this.Cmb_FYear.Size = new System.Drawing.Size(154, 27);
@@ -536,7 +535,6 @@
             this.label53.Size = new System.Drawing.Size(99, 19);
             this.label53.TabIndex = 280;
             this.label53.Text = ":نوع اذن التحويل";
-            this.label53.Click += new System.EventHandler(this.label53_Click);
             // 
             // Cmb_CType
             // 
@@ -560,7 +558,6 @@
             this.Cmb_From.Name = "Cmb_From";
             this.Cmb_From.Size = new System.Drawing.Size(348, 24);
             this.Cmb_From.TabIndex = 282;
-            this.Cmb_From.SelectedIndexChanged += new System.EventHandler(this.Cmb_From_SelectedIndexChanged);
             // 
             // Cmb_To
             // 
@@ -613,6 +610,197 @@
             this.panel1.Size = new System.Drawing.Size(1251, 222);
             this.panel1.TabIndex = 5;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // signatureTable
+            // 
+            this.signatureTable.AutoSize = true;
+            this.signatureTable.ColumnCount = 3;
+            this.signatureTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.signatureTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.signatureTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.signatureTable.Controls.Add(this.panel15, 1, 1);
+            this.signatureTable.Controls.Add(this.panel13, 0, 1);
+            this.signatureTable.Controls.Add(this.panel3, 2, 0);
+            this.signatureTable.Controls.Add(this.panel14, 1, 0);
+            this.signatureTable.Controls.Add(this.panel16, 0, 0);
+            this.signatureTable.Controls.Add(this.panel17, 2, 1);
+            this.signatureTable.Dock = System.Windows.Forms.DockStyle.Top;
+            this.signatureTable.Location = new System.Drawing.Point(0, 0);
+            this.signatureTable.Name = "signatureTable";
+            this.signatureTable.RowCount = 2;
+            this.signatureTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.signatureTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.signatureTable.Size = new System.Drawing.Size(1251, 122);
+            this.signatureTable.TabIndex = 292;
+            // 
+            // panel15
+            // 
+            this.panel15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel15.Controls.Add(this.label22);
+            this.panel15.Controls.Add(this.Pic_Sign5);
+            this.panel15.Controls.Add(this.BTN_Sign5);
+            this.panel15.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel15.Location = new System.Drawing.Point(420, 64);
+            this.panel15.Name = "panel15";
+            this.panel15.Size = new System.Drawing.Size(411, 55);
+            this.panel15.TabIndex = 293;
+            // 
+            // Pic_Sign5
+            // 
+            this.Pic_Sign5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Pic_Sign5.Enabled = false;
+            this.Pic_Sign5.Location = new System.Drawing.Point(3, 3);
+            this.Pic_Sign5.Name = "Pic_Sign5";
+            this.Pic_Sign5.Size = new System.Drawing.Size(200, 46);
+            this.Pic_Sign5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Pic_Sign5.TabIndex = 37;
+            this.Pic_Sign5.TabStop = false;
+            // 
+            // panel13
+            // 
+            this.panel13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel13.Controls.Add(this.label23);
+            this.panel13.Controls.Add(this.Pic_Sign6);
+            this.panel13.Controls.Add(this.BTN_Sign6);
+            this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel13.Location = new System.Drawing.Point(3, 64);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(411, 55);
+            this.panel13.TabIndex = 292;
+            // 
+            // Pic_Sign6
+            // 
+            this.Pic_Sign6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Pic_Sign6.Enabled = false;
+            this.Pic_Sign6.Location = new System.Drawing.Point(3, 3);
+            this.Pic_Sign6.Name = "Pic_Sign6";
+            this.Pic_Sign6.Size = new System.Drawing.Size(193, 46);
+            this.Pic_Sign6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Pic_Sign6.TabIndex = 289;
+            this.Pic_Sign6.TabStop = false;
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.label17);
+            this.panel3.Controls.Add(this.Pic_Sign1);
+            this.panel3.Controls.Add(this.BTN_Sign1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(837, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(411, 55);
+            this.panel3.TabIndex = 291;
+            // 
+            // Pic_Sign1
+            // 
+            this.Pic_Sign1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Pic_Sign1.Enabled = false;
+            this.Pic_Sign1.Location = new System.Drawing.Point(3, 3);
+            this.Pic_Sign1.Name = "Pic_Sign1";
+            this.Pic_Sign1.Size = new System.Drawing.Size(260, 46);
+            this.Pic_Sign1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Pic_Sign1.TabIndex = 27;
+            this.Pic_Sign1.TabStop = false;
+            // 
+            // panel14
+            // 
+            this.panel14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel14.Controls.Add(this.label20);
+            this.panel14.Controls.Add(this.Pic_Sign2);
+            this.panel14.Controls.Add(this.BTN_Sign2);
+            this.panel14.Controls.Add(this.DeleteBtn);
+            this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel14.Location = new System.Drawing.Point(420, 3);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(411, 55);
+            this.panel14.TabIndex = 293;
+            // 
+            // Pic_Sign2
+            // 
+            this.Pic_Sign2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Pic_Sign2.Enabled = false;
+            this.Pic_Sign2.Location = new System.Drawing.Point(3, 3);
+            this.Pic_Sign2.Name = "Pic_Sign2";
+            this.Pic_Sign2.Size = new System.Drawing.Size(238, 46);
+            this.Pic_Sign2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Pic_Sign2.TabIndex = 29;
+            this.Pic_Sign2.TabStop = false;
+            // 
+            // DeleteBtn
+            // 
+            this.DeleteBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DeleteBtn.BackColor = System.Drawing.Color.OrangeRed;
+            this.DeleteBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DeleteBtn.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
+            this.DeleteBtn.FlatAppearance.BorderSize = 3;
+            this.DeleteBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.DeleteBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.DeleteBtn.Location = new System.Drawing.Point(247, 27);
+            this.DeleteBtn.Name = "DeleteBtn";
+            this.DeleteBtn.Size = new System.Drawing.Size(53, 22);
+            this.DeleteBtn.TabIndex = 19;
+            this.DeleteBtn.Text = "حذف";
+            this.DeleteBtn.UseVisualStyleBackColor = false;
+            this.DeleteBtn.Visible = false;
+            this.DeleteBtn.Click += new System.EventHandler(this.DeleteBtn_Click);
+            // 
+            // panel16
+            // 
+            this.panel16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel16.Controls.Add(this.label21);
+            this.panel16.Controls.Add(this.Pic_Sign4);
+            this.panel16.Controls.Add(this.BTN_Sign4);
+            this.panel16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel16.Location = new System.Drawing.Point(3, 3);
+            this.panel16.Name = "panel16";
+            this.panel16.Size = new System.Drawing.Size(411, 55);
+            this.panel16.TabIndex = 293;
+            // 
+            // Pic_Sign4
+            // 
+            this.Pic_Sign4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Pic_Sign4.Enabled = false;
+            this.Pic_Sign4.Location = new System.Drawing.Point(3, 3);
+            this.Pic_Sign4.Name = "Pic_Sign4";
+            this.Pic_Sign4.Size = new System.Drawing.Size(289, 46);
+            this.Pic_Sign4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Pic_Sign4.TabIndex = 35;
+            this.Pic_Sign4.TabStop = false;
+            // 
+            // panel17
+            // 
+            this.panel17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel17.Controls.Add(this.label55);
+            this.panel17.Controls.Add(this.Pic_Sign3);
+            this.panel17.Controls.Add(this.BTN_Sign3);
+            this.panel17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel17.Location = new System.Drawing.Point(837, 64);
+            this.panel17.Name = "panel17";
+            this.panel17.Size = new System.Drawing.Size(411, 55);
+            this.panel17.TabIndex = 293;
+            // 
+            // Pic_Sign3
+            // 
+            this.Pic_Sign3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Pic_Sign3.Enabled = false;
+            this.Pic_Sign3.Location = new System.Drawing.Point(3, 3);
+            this.Pic_Sign3.Name = "Pic_Sign3";
+            this.Pic_Sign3.Size = new System.Drawing.Size(220, 46);
+            this.Pic_Sign3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Pic_Sign3.TabIndex = 31;
+            this.Pic_Sign3.TabStop = false;
             // 
             // takalefTable
             // 
@@ -909,19 +1097,6 @@
             this.TXT_PaccNo.TabIndex = 269;
             this.TXT_PaccNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // Pic_Sign6
-            // 
-            this.Pic_Sign6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Pic_Sign6.Enabled = false;
-            this.Pic_Sign6.Location = new System.Drawing.Point(3, 3);
-            this.Pic_Sign6.Name = "Pic_Sign6";
-            this.Pic_Sign6.Size = new System.Drawing.Size(193, 46);
-            this.Pic_Sign6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Pic_Sign6.TabIndex = 289;
-            this.Pic_Sign6.TabStop = false;
-            // 
             // BTN_Print
             // 
             this.BTN_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -936,102 +1111,133 @@
             this.BTN_Print.UseVisualStyleBackColor = true;
             this.BTN_Print.Click += new System.EventHandler(this.BTN_Print_Click);
             // 
-            // Pic_Sign5
-            // 
-            this.Pic_Sign5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Pic_Sign5.Enabled = false;
-            this.Pic_Sign5.Location = new System.Drawing.Point(3, 3);
-            this.Pic_Sign5.Name = "Pic_Sign5";
-            this.Pic_Sign5.Size = new System.Drawing.Size(200, 46);
-            this.Pic_Sign5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Pic_Sign5.TabIndex = 37;
-            this.Pic_Sign5.TabStop = false;
-            // 
-            // Pic_Sign4
-            // 
-            this.Pic_Sign4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Pic_Sign4.Enabled = false;
-            this.Pic_Sign4.Location = new System.Drawing.Point(3, 3);
-            this.Pic_Sign4.Name = "Pic_Sign4";
-            this.Pic_Sign4.Size = new System.Drawing.Size(289, 46);
-            this.Pic_Sign4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Pic_Sign4.TabIndex = 35;
-            this.Pic_Sign4.TabStop = false;
-            // 
-            // Pic_Sign3
-            // 
-            this.Pic_Sign3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Pic_Sign3.Enabled = false;
-            this.Pic_Sign3.Location = new System.Drawing.Point(3, 3);
-            this.Pic_Sign3.Name = "Pic_Sign3";
-            this.Pic_Sign3.Size = new System.Drawing.Size(220, 46);
-            this.Pic_Sign3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Pic_Sign3.TabIndex = 31;
-            this.Pic_Sign3.TabStop = false;
-            this.Pic_Sign3.Click += new System.EventHandler(this.Pic_Sign3_Click);
-            // 
-            // Pic_Sign2
-            // 
-            this.Pic_Sign2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Pic_Sign2.Enabled = false;
-            this.Pic_Sign2.Location = new System.Drawing.Point(3, 3);
-            this.Pic_Sign2.Name = "Pic_Sign2";
-            this.Pic_Sign2.Size = new System.Drawing.Size(238, 46);
-            this.Pic_Sign2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Pic_Sign2.TabIndex = 29;
-            this.Pic_Sign2.TabStop = false;
-            this.Pic_Sign2.Click += new System.EventHandler(this.Pic_Sign2_Click);
-            // 
-            // Pic_Sign1
-            // 
-            this.Pic_Sign1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Pic_Sign1.Enabled = false;
-            this.Pic_Sign1.Location = new System.Drawing.Point(3, 3);
-            this.Pic_Sign1.Name = "Pic_Sign1";
-            this.Pic_Sign1.Size = new System.Drawing.Size(260, 46);
-            this.Pic_Sign1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Pic_Sign1.TabIndex = 27;
-            this.Pic_Sign1.TabStop = false;
-            this.Pic_Sign1.Click += new System.EventHandler(this.Pic_Sign1_Click);
-            // 
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panel7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel7.BackgroundImage")));
             this.panel7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel7.Controls.Add(this.Cmb_CType2);
+            this.panel7.Controls.Add(this.BTN_Print2);
+            this.panel7.Controls.Add(this.panel12);
             this.panel7.Controls.Add(this.Editbtn);
             this.panel7.Controls.Add(this.BTN_Search_Motab3a);
             this.panel7.Controls.Add(this.BTN_Save2);
-            this.panel7.Controls.Add(this.Cmb_TalbNo2);
-            this.panel7.Controls.Add(this.Cmb_FYear2);
-            this.panel7.Controls.Add(this.label25);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(1, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(1251, 61);
+            this.panel7.Size = new System.Drawing.Size(1251, 55);
             this.panel7.TabIndex = 27;
+            // 
+            // BTN_Print2
+            // 
+            this.BTN_Print2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Print2.Font = new System.Drawing.Font("Arabic Typesetting", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_Print2.ForeColor = System.Drawing.Color.DarkSalmon;
+            this.BTN_Print2.Image = ((System.Drawing.Image)(resources.GetObject("BTN_Print2.Image")));
+            this.BTN_Print2.Location = new System.Drawing.Point(192, 4);
+            this.BTN_Print2.Name = "BTN_Print2";
+            this.BTN_Print2.Size = new System.Drawing.Size(53, 47);
+            this.BTN_Print2.TabIndex = 339;
+            this.BTN_Print2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BTN_Print2.UseVisualStyleBackColor = true;
+            // 
+            // panel12
+            // 
+            this.panel12.BackColor = System.Drawing.Color.Transparent;
+            this.panel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel12.Controls.Add(this.TXT_TRNO2);
+            this.panel12.Controls.Add(this.label54);
+            this.panel12.Controls.Add(this.Cmb_CType2);
+            this.panel12.Controls.Add(this.label10);
+            this.panel12.Controls.Add(this.label25);
+            this.panel12.Controls.Add(this.Cmb_FYear2);
+            this.panel12.Controls.Add(this.Cmb_TRansferNo2);
+            this.panel12.Location = new System.Drawing.Point(475, 8);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(772, 42);
+            this.panel12.TabIndex = 338;
+            // 
+            // TXT_TRNO2
+            // 
+            this.TXT_TRNO2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TXT_TRNO2.Enabled = false;
+            this.TXT_TRNO2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_TRNO2.Location = new System.Drawing.Point(4, 6);
+            this.TXT_TRNO2.Name = "TXT_TRNO2";
+            this.TXT_TRNO2.Size = new System.Drawing.Size(44, 26);
+            this.TXT_TRNO2.TabIndex = 339;
+            // 
+            // label54
+            // 
+            this.label54.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label54.AutoSize = true;
+            this.label54.BackColor = System.Drawing.Color.Transparent;
+            this.label54.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold);
+            this.label54.ForeColor = System.Drawing.Color.MintCream;
+            this.label54.Location = new System.Drawing.Point(645, 9);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(122, 24);
+            this.label54.TabIndex = 286;
+            this.label54.Text = "نوع اذن التحويل";
             // 
             // Cmb_CType2
             // 
             this.Cmb_CType2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Cmb_CType2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.Cmb_CType2.FormattingEnabled = true;
-            this.Cmb_CType2.Location = new System.Drawing.Point(868, 20);
+            this.Cmb_CType2.Location = new System.Drawing.Point(499, 8);
             this.Cmb_CType2.Name = "Cmb_CType2";
-            this.Cmb_CType2.Size = new System.Drawing.Size(161, 24);
+            this.Cmb_CType2.Size = new System.Drawing.Size(142, 24);
             this.Cmb_CType2.TabIndex = 282;
-            this.Cmb_CType2.SelectedIndexChanged += new System.EventHandler(this.Cmb_CType2_SelectedIndexChanged);
+            // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold);
+            this.label10.ForeColor = System.Drawing.Color.MintCream;
+            this.label10.Location = new System.Drawing.Point(53, 9);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(76, 21);
+            this.label10.TabIndex = 287;
+            this.label10.Text = "مميز مستند";
+            // 
+            // label25
+            // 
+            this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label25.AutoSize = true;
+            this.label25.BackColor = System.Drawing.Color.Transparent;
+            this.label25.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label25.ForeColor = System.Drawing.Color.MintCream;
+            this.label25.Location = new System.Drawing.Point(361, 7);
+            this.label25.Name = "label25";
+            this.label25.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label25.Size = new System.Drawing.Size(136, 24);
+            this.label25.TabIndex = 5;
+            this.label25.Text = "بحث اذون التحويل";
+            // 
+            // Cmb_FYear2
+            // 
+            this.Cmb_FYear2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cmb_FYear2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Cmb_FYear2.FormattingEnabled = true;
+            this.Cmb_FYear2.Location = new System.Drawing.Point(246, 6);
+            this.Cmb_FYear2.Name = "Cmb_FYear2";
+            this.Cmb_FYear2.Size = new System.Drawing.Size(110, 27);
+            this.Cmb_FYear2.TabIndex = 25;
+            this.Cmb_FYear2.SelectedIndexChanged += new System.EventHandler(this.Cmb_FYear2_SelectedIndexChanged);
+            // 
+            // Cmb_TRansferNo2
+            // 
+            this.Cmb_TRansferNo2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cmb_TRansferNo2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.Cmb_TRansferNo2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Cmb_TRansferNo2.FormattingEnabled = true;
+            this.Cmb_TRansferNo2.Location = new System.Drawing.Point(131, 6);
+            this.Cmb_TRansferNo2.Name = "Cmb_TRansferNo2";
+            this.Cmb_TRansferNo2.Size = new System.Drawing.Size(110, 27);
+            this.Cmb_TRansferNo2.TabIndex = 26;
+            this.Cmb_TRansferNo2.TextChanged += new System.EventHandler(this.Cmb_TRansferNo2_TextChanged);
             // 
             // Editbtn
             // 
@@ -1043,9 +1249,9 @@
             this.Editbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Editbtn.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.Editbtn.ForeColor = System.Drawing.Color.Maroon;
-            this.Editbtn.Location = new System.Drawing.Point(458, 16);
+            this.Editbtn.Location = new System.Drawing.Point(323, 12);
             this.Editbtn.Name = "Editbtn";
-            this.Editbtn.Size = new System.Drawing.Size(72, 32);
+            this.Editbtn.Size = new System.Drawing.Size(72, 33);
             this.Editbtn.TabIndex = 47;
             this.Editbtn.Text = "تعديل";
             this.Editbtn.UseVisualStyleBackColor = false;
@@ -1061,9 +1267,9 @@
             this.BTN_Search_Motab3a.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_Search_Motab3a.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.BTN_Search_Motab3a.ForeColor = System.Drawing.Color.Maroon;
-            this.BTN_Search_Motab3a.Location = new System.Drawing.Point(261, 15);
+            this.BTN_Search_Motab3a.Location = new System.Drawing.Point(397, 12);
             this.BTN_Search_Motab3a.Name = "BTN_Search_Motab3a";
-            this.BTN_Search_Motab3a.Size = new System.Drawing.Size(72, 32);
+            this.BTN_Search_Motab3a.Size = new System.Drawing.Size(72, 33);
             this.BTN_Search_Motab3a.TabIndex = 337;
             this.BTN_Search_Motab3a.Text = "بحث";
             this.BTN_Search_Motab3a.UseVisualStyleBackColor = false;
@@ -1078,60 +1284,13 @@
             this.BTN_Save2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_Save2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.BTN_Save2.ForeColor = System.Drawing.Color.Maroon;
-            this.BTN_Save2.Location = new System.Drawing.Point(378, 16);
+            this.BTN_Save2.Location = new System.Drawing.Point(249, 12);
             this.BTN_Save2.Name = "BTN_Save2";
-            this.BTN_Save2.Size = new System.Drawing.Size(72, 32);
+            this.BTN_Save2.Size = new System.Drawing.Size(72, 33);
             this.BTN_Save2.TabIndex = 49;
             this.BTN_Save2.Text = "حفظ";
             this.BTN_Save2.UseVisualStyleBackColor = false;
             this.BTN_Save2.Click += new System.EventHandler(this.BTN_Save2_Click);
-            // 
-            // Cmb_TalbNo2
-            // 
-            this.Cmb_TalbNo2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cmb_TalbNo2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.Cmb_TalbNo2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Cmb_TalbNo2.FormattingEnabled = true;
-            this.Cmb_TalbNo2.Items.AddRange(new object[] {
-            "2019_2020",
-            "2020_2021"});
-            this.Cmb_TalbNo2.Location = new System.Drawing.Point(609, 20);
-            this.Cmb_TalbNo2.Name = "Cmb_TalbNo2";
-            this.Cmb_TalbNo2.Size = new System.Drawing.Size(110, 27);
-            this.Cmb_TalbNo2.TabIndex = 26;
-            this.Cmb_TalbNo2.SelectionChangeCommitted += new System.EventHandler(this.Cmb_TalbNo2_SelectionChangeCommitted);
-            this.Cmb_TalbNo2.DropDownClosed += new System.EventHandler(this.Cmb_TalbNo2_DropDownClosed);
-            this.Cmb_TalbNo2.SelectedValueChanged += new System.EventHandler(this.Cmb_TalbNo2_SelectedValueChanged);
-            this.Cmb_TalbNo2.TabStopChanged += new System.EventHandler(this.Cmb_TalbNo2_TabStopChanged);
-            this.Cmb_TalbNo2.TextChanged += new System.EventHandler(this.Cmb_TalbNo2_TextChanged);
-            // 
-            // Cmb_FYear2
-            // 
-            this.Cmb_FYear2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cmb_FYear2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Cmb_FYear2.FormattingEnabled = true;
-            this.Cmb_FYear2.Items.AddRange(new object[] {
-            "2019_2020",
-            "2020_2021"});
-            this.Cmb_FYear2.Location = new System.Drawing.Point(735, 20);
-            this.Cmb_FYear2.Name = "Cmb_FYear2";
-            this.Cmb_FYear2.Size = new System.Drawing.Size(110, 27);
-            this.Cmb_FYear2.TabIndex = 25;
-            this.Cmb_FYear2.SelectedIndexChanged += new System.EventHandler(this.Cmb_FYear2_SelectedIndexChanged);
-            // 
-            // label25
-            // 
-            this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label25.AutoSize = true;
-            this.label25.BackColor = System.Drawing.Color.Transparent;
-            this.label25.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label25.ForeColor = System.Drawing.Color.MintCream;
-            this.label25.Location = new System.Drawing.Point(1034, 18);
-            this.label25.Name = "label25";
-            this.label25.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label25.Size = new System.Drawing.Size(136, 24);
-            this.label25.TabIndex = 5;
-            this.label25.Text = "بحث اذون التحويل";
             // 
             // panel2
             // 
@@ -1154,12 +1313,11 @@
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.Addbtn2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(1, 61);
+            this.panel2.Location = new System.Drawing.Point(1, 55);
             this.panel2.Name = "panel2";
             this.panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.panel2.Size = new System.Drawing.Size(1251, 152);
             this.panel2.TabIndex = 19;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // BTN_SearchEzn
             // 
@@ -1220,7 +1378,6 @@
             this.label3.Size = new System.Drawing.Size(81, 19);
             this.label3.TabIndex = 7;
             this.label3.Text = "رقم التصنيف";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // TXT_StockNoAll
             // 
@@ -1437,7 +1594,6 @@
             this.label5.Size = new System.Drawing.Size(41, 18);
             this.label5.TabIndex = 9;
             this.label5.Text = "الوحدة";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label47
             // 
@@ -1461,7 +1617,6 @@
             this.TXT_StockBian.Size = new System.Drawing.Size(595, 39);
             this.TXT_StockBian.TabIndex = 12;
             this.TXT_StockBian.Text = "";
-            this.TXT_StockBian.TextChanged += new System.EventHandler(this.TXT_StockBian_TextChanged);
             // 
             // label4
             // 
@@ -1635,7 +1790,8 @@
             // 
             // Addbtn2
             // 
-            this.Addbtn2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Addbtn2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.Addbtn2.BackColor = System.Drawing.Color.LightGray;
             this.Addbtn2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Addbtn2.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -1645,31 +1801,13 @@
             this.Addbtn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Addbtn2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.Addbtn2.ForeColor = System.Drawing.Color.DarkSalmon;
-            this.Addbtn2.Location = new System.Drawing.Point(215, 103);
+            this.Addbtn2.Location = new System.Drawing.Point(121, 111);
             this.Addbtn2.Name = "Addbtn2";
-            this.Addbtn2.Size = new System.Drawing.Size(226, 37);
+            this.Addbtn2.Size = new System.Drawing.Size(338, 35);
             this.Addbtn2.TabIndex = 17;
             this.Addbtn2.Text = "اضافة تصنيف الى اذن التحويل";
             this.Addbtn2.UseVisualStyleBackColor = false;
             this.Addbtn2.Click += new System.EventHandler(this.Addbtn2_Click);
-            // 
-            // DeleteBtn
-            // 
-            this.DeleteBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DeleteBtn.BackColor = System.Drawing.Color.OrangeRed;
-            this.DeleteBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.DeleteBtn.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
-            this.DeleteBtn.FlatAppearance.BorderSize = 3;
-            this.DeleteBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.DeleteBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.DeleteBtn.Location = new System.Drawing.Point(247, 27);
-            this.DeleteBtn.Name = "DeleteBtn";
-            this.DeleteBtn.Size = new System.Drawing.Size(53, 22);
-            this.DeleteBtn.TabIndex = 19;
-            this.DeleteBtn.Text = "حذف";
-            this.DeleteBtn.UseVisualStyleBackColor = false;
-            this.DeleteBtn.Visible = false;
-            this.DeleteBtn.Click += new System.EventHandler(this.DeleteBtn_Click);
             // 
             // panel6
             // 
@@ -1713,7 +1851,7 @@
             this.panel9.Controls.Add(this.panel6);
             this.panel9.Controls.Add(this.panel8);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel9.Location = new System.Drawing.Point(1, 213);
+            this.panel9.Location = new System.Drawing.Point(1, 207);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(1251, 129);
             this.panel9.TabIndex = 31;
@@ -1770,105 +1908,10 @@
             // 
             this.panel11.Controls.Add(this.dataGridView1);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel11.Location = new System.Drawing.Point(1, 342);
+            this.panel11.Location = new System.Drawing.Point(1, 336);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(1251, 151);
+            this.panel11.Size = new System.Drawing.Size(1251, 157);
             this.panel11.TabIndex = 32;
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.label17);
-            this.panel3.Controls.Add(this.Pic_Sign1);
-            this.panel3.Controls.Add(this.BTN_Sign1);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(837, 3);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(411, 55);
-            this.panel3.TabIndex = 291;
-            // 
-            // panel13
-            // 
-            this.panel13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel13.Controls.Add(this.label23);
-            this.panel13.Controls.Add(this.Pic_Sign6);
-            this.panel13.Controls.Add(this.BTN_Sign6);
-            this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel13.Location = new System.Drawing.Point(3, 64);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(411, 55);
-            this.panel13.TabIndex = 292;
-            // 
-            // panel15
-            // 
-            this.panel15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel15.Controls.Add(this.label22);
-            this.panel15.Controls.Add(this.Pic_Sign5);
-            this.panel15.Controls.Add(this.BTN_Sign5);
-            this.panel15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel15.Location = new System.Drawing.Point(420, 64);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(411, 55);
-            this.panel15.TabIndex = 293;
-            // 
-            // panel14
-            // 
-            this.panel14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel14.Controls.Add(this.label20);
-            this.panel14.Controls.Add(this.Pic_Sign2);
-            this.panel14.Controls.Add(this.BTN_Sign2);
-            this.panel14.Controls.Add(this.DeleteBtn);
-            this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel14.Location = new System.Drawing.Point(420, 3);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(411, 55);
-            this.panel14.TabIndex = 293;
-            // 
-            // panel16
-            // 
-            this.panel16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel16.Controls.Add(this.label21);
-            this.panel16.Controls.Add(this.Pic_Sign4);
-            this.panel16.Controls.Add(this.BTN_Sign4);
-            this.panel16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel16.Location = new System.Drawing.Point(3, 3);
-            this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(411, 55);
-            this.panel16.TabIndex = 293;
-            // 
-            // panel17
-            // 
-            this.panel17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel17.Controls.Add(this.label55);
-            this.panel17.Controls.Add(this.Pic_Sign3);
-            this.panel17.Controls.Add(this.BTN_Sign3);
-            this.panel17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel17.Location = new System.Drawing.Point(837, 64);
-            this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(411, 55);
-            this.panel17.TabIndex = 293;
-            // 
-            // signatureTable
-            // 
-            this.signatureTable.AutoSize = true;
-            this.signatureTable.ColumnCount = 3;
-            this.signatureTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.signatureTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.signatureTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.signatureTable.Controls.Add(this.panel15, 1, 1);
-            this.signatureTable.Controls.Add(this.panel13, 0, 1);
-            this.signatureTable.Controls.Add(this.panel3, 2, 0);
-            this.signatureTable.Controls.Add(this.panel14, 1, 0);
-            this.signatureTable.Controls.Add(this.panel16, 0, 0);
-            this.signatureTable.Controls.Add(this.panel17, 2, 1);
-            this.signatureTable.Dock = System.Windows.Forms.DockStyle.Top;
-            this.signatureTable.Location = new System.Drawing.Point(0, 0);
-            this.signatureTable.Name = "signatureTable";
-            this.signatureTable.RowCount = 2;
-            this.signatureTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.signatureTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.signatureTable.Size = new System.Drawing.Size(1251, 122);
-            this.signatureTable.TabIndex = 292;
             // 
             // FTransfer_M
             // 
@@ -1886,23 +1929,37 @@
             this.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "TalbTawred";
-            this.Load += new System.EventHandler(this.TalbTawred_Load);
+            this.Load += new System.EventHandler(this.FTransfer_M_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tBnodAwamershraaBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.aNRPC_InventoryDataSet)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.signatureTable.ResumeLayout(false);
+            this.panel15.ResumeLayout(false);
+            this.panel15.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign5)).EndInit();
+            this.panel13.ResumeLayout(false);
+            this.panel13.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign6)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign1)).EndInit();
+            this.panel14.ResumeLayout(false);
+            this.panel14.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign2)).EndInit();
+            this.panel16.ResumeLayout(false);
+            this.panel16.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign4)).EndInit();
+            this.panel17.ResumeLayout(false);
+            this.panel17.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign3)).EndInit();
             this.takalefTable.ResumeLayout(false);
             this.takalefTable.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign1)).EndInit();
             this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
+            this.panel12.ResumeLayout(false);
+            this.panel12.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -1920,19 +1977,6 @@
             this.panel9.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel13.ResumeLayout(false);
-            this.panel13.PerformLayout();
-            this.panel15.ResumeLayout(false);
-            this.panel15.PerformLayout();
-            this.panel14.ResumeLayout(false);
-            this.panel14.PerformLayout();
-            this.panel16.ResumeLayout(false);
-            this.panel16.PerformLayout();
-            this.panel17.ResumeLayout(false);
-            this.panel17.PerformLayout();
-            this.signatureTable.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1961,7 +2005,7 @@
         private ANRPC_InventoryDataSetTableAdapters.T_BnodAwamershraaTableAdapter t_BnodAwamershraaTableAdapter;
         private System.Windows.Forms.Button Editbtn;
         private System.Windows.Forms.ComboBox Cmb_FYear2;
-        private System.Windows.Forms.ComboBox Cmb_TalbNo2;
+        private System.Windows.Forms.ComboBox Cmb_TRansferNo2;
         private System.Windows.Forms.Button BTN_Save2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button Editbtn2;
@@ -2066,5 +2110,10 @@
         private System.Windows.Forms.Panel panel17;
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.TableLayoutPanel signatureTable;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox TXT_TRNO2;
+        private System.Windows.Forms.Button BTN_Print2;
     }
 }

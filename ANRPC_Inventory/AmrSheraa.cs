@@ -1310,18 +1310,19 @@ namespace ANRPC_Inventory
                 {
                     cmd.ExecuteNonQuery();
                     executemsg = true;
-                    flag = (int)cmd.Parameters["@aot"].Value;
                 }
                 catch (SqlException sqlEx)
                 {
                     executemsg = false;
-                    MessageBox.Show(sqlEx.ToString());
-                    flag = (int)cmd.Parameters["@aot"].Value;
+                    Console.WriteLine(sqlEx);                   
                 }
+
+                flag = (int)cmd.Parameters["@aot"].Value;
+
                 if (executemsg == true && flag == 1)
                 {
                     MessageBox.Show("تم الحذف بنجاح");
-                    Input_Reset();
+                    reset();
                 }
                 Constants.closecon();
             }

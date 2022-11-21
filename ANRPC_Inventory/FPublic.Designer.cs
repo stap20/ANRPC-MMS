@@ -326,7 +326,6 @@
             this.label18.Size = new System.Drawing.Size(21, 22);
             this.label18.TabIndex = 37;
             this.label18.Text = "0";
-            this.label18.Visible = false;
             // 
             // label19
             // 
@@ -338,7 +337,6 @@
             this.label19.Size = new System.Drawing.Size(21, 22);
             this.label19.TabIndex = 36;
             this.label19.Text = "0";
-            this.label19.Visible = false;
             // 
             // label20
             // 
@@ -350,7 +348,6 @@
             this.label20.Size = new System.Drawing.Size(25, 22);
             this.label20.TabIndex = 35;
             this.label20.Text = "G";
-            this.label20.Visible = false;
             // 
             // button9
             // 
@@ -368,7 +365,6 @@
             this.button9.Text = "متابعة اذن التحويل";
             this.button9.UseMnemonic = false;
             this.button9.UseVisualStyleBackColor = true;
-            this.button9.Visible = false;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // label21
@@ -381,7 +377,6 @@
             this.label21.Size = new System.Drawing.Size(23, 22);
             this.label21.TabIndex = 34;
             this.label21.Text = "R";
-            this.label21.Visible = false;
             // 
             // label22
             // 
@@ -393,7 +388,6 @@
             this.label22.Size = new System.Drawing.Size(25, 22);
             this.label22.TabIndex = 33;
             this.label22.Text = "G";
-            this.label22.Visible = false;
             // 
             // button3
             // 
@@ -429,7 +423,6 @@
             this.button6.Text = "إدخال جديد";
             this.button6.UseMnemonic = false;
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Visible = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // label23
@@ -442,7 +435,6 @@
             this.label23.Size = new System.Drawing.Size(104, 18);
             this.label23.TabIndex = 29;
             this.label23.Text = "اذون التحويل محلى";
-            this.label23.Visible = false;
             // 
             // C3
             // 

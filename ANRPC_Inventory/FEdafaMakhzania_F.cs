@@ -101,12 +101,8 @@ namespace ANRPC_Inventory
         //  public string TableQuery;
 
         AutoCompleteStringCollection TasnifColl = new AutoCompleteStringCollection(); //empn
-        AutoCompleteStringCollection TasnifNameColl = new AutoCompleteStringCollection(); //empn
-
         AutoCompleteStringCollection UnitColl = new AutoCompleteStringCollection(); //empn
-        AutoCompleteStringCollection TalbColl = new AutoCompleteStringCollection(); //empn
-              AutoCompleteStringCollection EdafaColl = new AutoCompleteStringCollection(); //empn
-              AutoCompleteStringCollection TypeColl = new AutoCompleteStringCollection(); //empn
+        AutoCompleteStringCollection TypeColl = new AutoCompleteStringCollection(); //empn
 
         #endregion
 
@@ -1695,6 +1691,50 @@ namespace ANRPC_Inventory
             UpdateEdafa();
         }
 
+        private void DeleteLogic()
+        {
+            if ((MessageBox.Show("هل تريد حذف الاضافة المخزنية؟", "", MessageBoxButtons.YesNo)) == DialogResult.Yes)
+            {
+                if (string.IsNullOrWhiteSpace(TXT_EdafaNo.Text))
+                {
+                    MessageBox.Show("يجب اختيار الاضافة المخزنية  اولا");
+                    return;
+                }
+                Constants.opencon();
+                string cmdstring = "Exec SP_DeleteEdafa @TNO,@FY,@TRNO,@aot output";
+
+                SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+
+                cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_EdafaNo.Text));
+                cmd.Parameters.AddWithValue("@FY", Cmb_FY2.Text.ToString());
+                cmd.Parameters.AddWithValue("@TRNO", TXT_TRNO.Text.ToString());
+                cmd.Parameters.Add("@aot", SqlDbType.Int, 32);  //-------> output parameter
+                cmd.Parameters["@aot"].Direction = ParameterDirection.Output;
+
+                int flag;
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    executemsg = true;
+                }
+                catch (SqlException sqlEx)
+                {
+                    executemsg = false;
+                    Console.WriteLine(sqlEx);                  
+                }
+
+                flag = (int)cmd.Parameters["@aot"].Value;
+
+                if (executemsg == true && flag == 1)
+                {
+                    MessageBox.Show("تم الحذف بنجاح");
+                    reset();
+                }
+
+                Constants.closecon();
+            }
+        }
         #endregion
 
 
@@ -1907,23 +1947,8 @@ namespace ANRPC_Inventory
             //*******************************************
             // ******    AUTO COMPLETE
             //*******************************************
-          //
-          //  string cmdstring = "select Amrshraa_No from   T_Awamershraa where  AmrSheraa_sanamalia='" +Cmb_FY+"'";
-            string cmdstring = "select distinct(Amrshraa_No) from   T_Estlam where  (Sign3 is not null )and AmrSheraa_sanamalia='" + Cmb_FY + "'";
-            
-            SqlCommand cmd = new SqlCommand(cmdstring, con);
-            SqlDataReader dr = cmd.ExecuteReader();
-            //---------------------------------
-            if (dr.HasRows == true)
-            {
-                while (dr.Read())
-                {
-                    TalbColl.Add(dr["Amrshraa_No"].ToString());
-                    //TasnifNameColl.Add(dr["Stock_No_Nam"].ToString());
-
-                }
-            }
-            dr.Close();
+            string cmdstring;
+            SqlCommand cmd;
 
             ///////////////////////////////////////
             string cmdstring2 = "SELECT [arab_unit] ,[eng_unit] ,[cod_unit] from Tunit";
@@ -2108,86 +2133,28 @@ namespace ANRPC_Inventory
 
         private void Cmb_FY_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            ///////////////////////////////////////
-            Constants.opencon();
-            Cmb_AmrNo.DataSource = null;
-            Cmb_AmrNo.Items.Clear();
-            //string cmdstring3 = "SELECT  Amrshraa_No from T_Awamershraa  where  Sign3 is not null and AmrSheraa_sanamalia='" + Cmb_FY.Text + "' order by  Amrshraa_No";
-            string cmdstring3 = "select  Amrshraa_No from T_estlam where sign3 is not null and AmrSheraa_sanamalia='" + Cmb_FY.Text + "' and amrshraa_no not in(select Amrshraa_No from T_Edafa group by Amrshraa_No, AmrSheraa_sanamalia)group by Amrshraa_No,AmrSheraa_sanamalia";
-            SqlCommand cmd3 = new SqlCommand(cmdstring3, Constants.con);
-            SqlDataReader dr3 = cmd3.ExecuteReader();
-            //---------------------------------
-            if (dr3.HasRows == true)
-            {
-                while (dr3.Read())
-                {
-                    TalbColl.Add(dr3["Amrshraa_No"].ToString());
-
-                }
-            }
-
-            ////////////////////////////////////////////////////////
-
-
             //call sp that get last num that eentered for this MM and this YYYY
             Constants.opencon();
+
             // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
-            string cmdstring = "";
+            string cmdstring = @"select T_Estlam.Amrshraa_No from T_Estlam left join T_Edafa on T_Estlam.Amrshraa_No = T_Edafa.Amrshraa_No
+                                where(T_Estlam.Sign3 is not null) and T_Estlam.AmrSheraa_sanamalia =@FY and(T_Edafa.Amrshraa_No is null)
+                                group by T_Estlam.Amrshraa_No order by T_Estlam.Amrshraa_No";
+
             SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-    
-              //  cmdstring = "select (Amrshraa_No) from  T_Awamershraa where (Sign3 is not null) and AmrSheraa_sanamalia=@FY   order by  Amrshraa_No";
 
-                 cmdstring = "select distinct(Amrshraa_No) from  T_Estlam   where (Sign3 is not null)  order by  Amrshraa_No";//will use cmdstring3
+            // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
+            cmd.Parameters.AddWithValue("@FY", Cmb_FY.Text);
+            ///   cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
 
+            DataTable dts = new DataTable();
 
-                cmd = new SqlCommand(cmdstring3, Constants.con);
-
-                cmd.Parameters.AddWithValue("@FY", Cmb_FY.Text);
-                DataTable dts = new DataTable();
-
-                dts.Load(cmd.ExecuteReader());
-                Cmb_AmrNo.DataSource = dts;
-                Cmb_AmrNo.ValueMember = "Amrshraa_No";
-                Cmb_AmrNo.DisplayMember = "Amrshraa_No";
-                Cmb_AmrNo.SelectedIndex = -1;
-            
-
-
-
-            ////////////////////////////////////////////////
+            dts.Load(cmd.ExecuteReader());
+            Cmb_AmrNo.DataSource = dts;
+            Cmb_AmrNo.ValueMember = "Amrshraa_No";
+            Cmb_AmrNo.DisplayMember = "Amrshraa_No";
+            Cmb_AmrNo.SelectedIndex = -1;
             Constants.closecon();
-
-
-            ////////////////////////////////////////////
-             if (AddEditFlag == 2)
-            {
-
-                if (string.IsNullOrEmpty(TXT_TRNO.Text))
-                {
-                    MessageBox.Show("برجاء اختيار نوع الاضافة  اولا");
-                    return;
-                }
-                Constants.opencon();
-               
-                 //get only finished amrsheraa
-                string cmdstring4 = "SELECT  Amrshraa_No from T_Awamershraa  where (Sign3 is not null) and AmrSheraa_sanamalia='" + Cmb_FY.Text + "' order by  Amrshraa_No";
-                SqlCommand cmd4 = new SqlCommand(cmdstring4, Constants.con);
-                SqlDataReader dr4= cmd4.ExecuteReader();
-                //---------------------------------
-                if (dr4.HasRows == true)
-                {
-                    while (dr4.Read())
-                    {
-                        TalbColl.Add(dr4["Amrshraa_No"].ToString());
-
-                    }
-                }
-
-                Constants.closecon();
-
-            }
-        
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
@@ -2220,7 +2187,7 @@ namespace ANRPC_Inventory
         private void Cmb_FY2_SelectedIndexChanged(object sender, EventArgs e)
         {
             //go and get talbTawreed_no for this FYear
-            if (AddEditFlag == 2)//add
+            if (AddEditFlag == 2 && Cmb_FY2.SelectedIndex != -1)//add
             {
                 //call sp that get last num that eentered for this MM and this YYYY
                 Constants.opencon();
@@ -2642,14 +2609,16 @@ namespace ANRPC_Inventory
             {
                 cmd.ExecuteNonQuery();
                 executemsg = true;
-                flag = (int)cmd.Parameters["@aot"].Value;
             }
             catch (SqlException sqlEx)
             {
                 executemsg = false;
-                MessageBox.Show(sqlEx.ToString());
-                flag = (int)cmd.Parameters["@aot"].Value;
+                Console.WriteLine(sqlEx);
+                
             }
+
+            flag = (int)cmd.Parameters["@aot"].Value;
+
             if (executemsg == true && flag == 1)
             {
                 // MessageBox.Show("تم الحذف بنجاح");
@@ -2658,9 +2627,10 @@ namespace ANRPC_Inventory
             return flag;
          
         }
+
         private void Cmb_AmrNo_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            if (AddEditFlag == 2 && Cmb_AmrNo.SelectedValue.ToString() != "")
+            if (AddEditFlag == 2 && Cmb_AmrNo.SelectedIndex != -1)
             {
                 if (directflag == 1)
                 {
@@ -2673,9 +2643,8 @@ namespace ANRPC_Inventory
                 }
                 cleargridview();
 
-                GetAmrSheraaData(Cmb_AmrNo.Text, Cmb_FY.Text);
+                GetAmrSheraaData(Cmb_AmrNo.SelectedValue.ToString(), Cmb_FY.Text);
             }
-       
         }
 
         private void dataGridView1_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
@@ -2909,45 +2878,7 @@ namespace ANRPC_Inventory
         }
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
-            if ((MessageBox.Show("هل تريد حذف الاضافة المخزنية؟", "", MessageBoxButtons.YesNo)) == DialogResult.Yes)
-            {
-                if (string.IsNullOrWhiteSpace(TXT_EdafaNo.Text))
-                {
-                    MessageBox.Show("يجب اختيار الاضافة المخزنية  اولا");
-                    return;
-                }
-                Constants.opencon();
-                string cmdstring = "Exec SP_DeleteEdafa @TNO,@FY,@TRNO,@aot output";
-
-                SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-
-                cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_EdafaNo.Text));
-                cmd.Parameters.AddWithValue("@FY", Cmb_FY2.Text.ToString());
-                cmd.Parameters.AddWithValue("@TRNO", TXT_TRNO.Text.ToString());
-                cmd.Parameters.Add("@aot", SqlDbType.Int, 32);  //-------> output parameter
-                cmd.Parameters["@aot"].Direction = ParameterDirection.Output;
-
-                int flag;
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                    executemsg = true;
-                    flag = (int)cmd.Parameters["@aot"].Value;
-                }
-                catch (SqlException sqlEx)
-                {
-                    executemsg = false;
-                    MessageBox.Show(sqlEx.ToString());
-                    flag = (int)cmd.Parameters["@aot"].Value;
-                }
-                if (executemsg == true && flag == 1)
-                {
-                    MessageBox.Show("تم الحذف بنجاح");
-                    Input_Reset();
-                }
-                Constants.closecon();
-            }
+            DeleteLogic();
         }
         #endregion
 
@@ -3167,6 +3098,5 @@ namespace ANRPC_Inventory
 
             popup.Dispose();
         }
-
     }
 }

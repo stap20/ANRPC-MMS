@@ -14,7 +14,8 @@ namespace ANRPC_Inventory
 {
     public partial class FTransfer_M : Form
     {
-        List<CurrencyInfo> currencies = new List<CurrencyInfo>();
+        //------------------------------------------ Define Variables ---------------------------------
+        #region Def Variables
         public SqlConnection con;//sql conn for anrpc_sms db
         Image DefaulteImg;
         Image image1;
@@ -107,7 +108,6 @@ namespace ANRPC_Inventory
         public string FY;
         public int r;
         public int rowflag = 0;
-        public decimal sum = 0;
         public int MaxFlag;
         //  public string TableQuery;
 
@@ -117,6 +117,343 @@ namespace ANRPC_Inventory
         AutoCompleteStringCollection UnitColl = new AutoCompleteStringCollection(); //empn
         AutoCompleteStringCollection EznColl = new AutoCompleteStringCollection(); //empn
         AutoCompleteStringCollection PartColl = new AutoCompleteStringCollection(); //empn
+        #endregion
+
+        #region myDefVariable
+        enum VALIDATION_TYPES
+        {
+            ATTACH_FILE,
+            SEARCH,
+            CONFIRM_SEARCH,
+            SAVE,
+        }
+        int currentSignNumber = 0;
+        #endregion
+
+
+        //------------------------------------------ State Handler ---------------------------------
+        #region State Handler
+        private void changePanelState(Panel panel, bool state)
+        {
+            try
+            {
+                foreach (Control control in panel.Controls)
+                {
+                    if (control.GetType() == typeof(Panel))
+                    {
+                        changePanelState((Panel)control, state);
+                    }
+                    else
+                    {
+                        control.Enabled = state;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        private void changeDataGridViewColumnState(DataGridView dataGridView, bool state)
+        {
+            try
+            {
+                foreach (DataGridViewColumn column in dataGridView.Columns)
+                {
+                    dataGridView.Columns[column.Index].ReadOnly = state;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        public void PrepareAddState()
+        {
+            //Search sec
+            changePanelState(panel5, true);
+
+            //dataViewre sec
+            changePanelState(panel6, false);
+            Txt_ReqQuan.Enabled = true;
+
+            //fyear sec
+            changePanelState(panel8, false);
+            Cmb_FYear.Enabled = true;
+            Cmb_CType.Enabled = true;
+
+            //bian edara sec
+            changePanelState(panel9, true);
+            TXT_Edara.Enabled = false;
+
+            //arabic value
+            changePanelState(panel11, true);
+            TXT_ArabicValue.Enabled = false;
+
+
+            //btn Section
+            //generalBtn
+            BTN_SearchEzn.Enabled = true;
+            BTN_Search_Motab3a.Enabled = true;
+
+            SaveBtn.Enabled = true;
+            BTN_Cancel.Enabled = true;
+            Addbtn2.Enabled = true;
+            Addbtn.Enabled = false;
+            Editbtn2.Enabled = false;
+            BTN_SearchEzn.Enabled = false;
+            BTN_Print.Enabled = false;
+            browseBTN.Enabled = true;
+            BTN_PDF.Enabled = true;
+
+            //signature btn
+            changePanelState(signatureTable, false);
+            BTN_Sign1.Enabled = true;
+
+            //takalid types
+            DisableTakalef();
+
+            changeDataGridViewColumnState(dataGridView1, true);
+
+            dataGridView1.AllowUserToAddRows = true;
+            dataGridView1.AllowUserToDeleteRows = true;
+
+            Pic_Sign1.Image = null;
+            FlagSign1 = 0;
+            Pic_Sign1.BackColor = Color.Green;
+            currentSignNumber = 1;
+        }
+
+        public void PrepareEditState()
+        {
+            PrepareAddState();
+            panel8.Enabled = false;
+            BTN_Print.Enabled = true;
+
+            Pic_Sign1.Image = null;
+            Pic_Sign2.Image = null;
+            FlagSign1 = 0;
+            FlagSign2 = 0;
+            Pic_Sign1.BackColor = Color.White;
+            Pic_Sign2.BackColor = Color.White;
+        }
+
+        public void PrepareConfirmState()
+        {
+            DisableControls();
+            BTN_Save2.Enabled = true;
+
+            if (Constants.User_Type == "A")
+            {
+                if (FlagSign2 != 1 && FlagSign1 == 1)
+                {
+                    BTN_Sign2.Enabled = true;
+                    DeleteBtn.Enabled = true;
+                    currentSignNumber = 2;
+                }
+                else if (FlagSign4 != 1 && FlagSign3 == 1)
+                {
+                    BTN_Sign4.Enabled = true;
+                    currentSignNumber = 4;
+                }
+            }
+            else if (Constants.User_Type == "B")
+            {
+                if (Constants.UserTypeB == "Sarf")
+                {
+                    BTN_Sign3.Enabled = true;
+                    //dataGridView1.ReadOnly = false;
+                    dataGridView1.Columns["Quan2"].ReadOnly = false;
+                    currentSignNumber = 3;
+                }
+                else if (Constants.UserTypeB == "Tkalif" || Constants.UserTypeB == "Finance")
+                {
+                    EnableTakalef();
+                }
+            }
+
+            AddEditFlag = 1;
+            TNO = TXT_EznNo.Text;
+            FY = Cmb_FYear.Text;
+        }
+
+        public void prepareSearchState()
+        {
+            DisableControls();
+            Input_Reset();
+
+            if (Constants.EznSarf_FF)
+            {
+                Cmb_FYear.Enabled = true;
+                Cmb_CType.Enabled = true;
+                TXT_EznNo.Enabled = true;
+                BTN_Print.Enabled = true;
+            }
+        }
+
+        public void EnableTakalef()
+        {
+            changePanelState(takalefTable, true);
+        }
+
+        public void DisableTakalef()
+        {
+            changePanelState(takalefTable, false);
+        }
+
+        public void reset()
+        {
+            prepareSearchState();
+        }
+
+        public void DisableControls()
+        {
+            //Search sec
+            changePanelState(panel5, false);
+
+            //dataViewre sec
+            changePanelState(panel6, false);
+
+            //fyear sec
+            changePanelState(panel8, false);
+
+            //bian edara sec
+            changePanelState(panel9, false);
+
+            //arabic value
+            changePanelState(panel11, false);
+
+            //btn Section
+            //generalBtn
+            Addbtn.Enabled = true;
+            BTN_SearchEzn.Enabled = true;
+            SaveBtn.Enabled = false;
+            BTN_Save2.Enabled = false;
+            Editbtn.Enabled = false;
+            BTN_Cancel.Enabled = false;
+            Addbtn2.Enabled = false;
+            Editbtn2.Enabled = false;
+            BTN_Print.Enabled = false;
+            browseBTN.Enabled = false;
+            BTN_PDF.Enabled = false;
+
+            //signature btn
+            changePanelState(signatureTable, false);
+
+            changeDataGridViewColumnState(dataGridView1, true);
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+
+            //takalif
+            DisableTakalef();
+        }
+
+        public void resetSignature()
+        {
+            //btn Section
+            //signature btn
+            Pic_Sign1.Image = null;
+            FlagSign1 = 0;
+            Pic_Sign1.BackColor = Color.White;
+
+            Pic_Sign2.Image = null;
+            FlagSign2 = 0;
+            Pic_Sign2.BackColor = Color.White;
+
+            Pic_Sign3.Image = null;
+            FlagSign3 = 0;
+            Pic_Sign3.BackColor = Color.White;
+
+            Pic_Sign4.Image = null;
+            FlagSign4 = 0;
+            Pic_Sign4.BackColor = Color.White;
+
+            Pic_Sign5.Image = null;
+            FlagSign5 = 0;
+            Pic_Sign5.BackColor = Color.White;
+
+            Pic_Sign6.Image = null;
+            FlagSign6 = 0;
+            Pic_Sign6.BackColor = Color.White;
+        }
+
+        public void Input_Reset()
+        {
+            //Search sec
+            TXT_StockNoAll.Text = "";
+            TXT_StockName.Text = "";
+            TXT_PartNo.Text = "";
+
+            //dataViewre sec
+            TXT_StockBian.Text = "";
+            Txt_Quan.Text = "";
+            Txt_ReqQuan.Text = "";
+            TXT_Unit.Text = "";
+            Quan_Min.Value = 0;
+            Quan_Max.Value = 0;
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+
+
+            //fyear sec
+            Cmb_CType.Text = "";
+            Cmb_CType.SelectedIndex = -1;
+
+            Cmb_FYear.Text = "";
+            Cmb_FYear.SelectedIndex = -1;
+
+            TXT_TRansferNo.Text = "";
+            TXT_TRNO.Text = "";
+
+
+            //tahweel sec
+            TXT_Date.Value = DateTime.Today;
+            TXT_MomayzHarka.Text = "";
+
+            Cmb_From.Text = "";
+            Cmb_From.SelectedIndex = -1;
+
+            Cmb_To.Text = "";
+            Cmb_To.SelectedIndex = -1;
+
+
+
+            //search sec
+            Cmb_CType2.Text = "";
+            Cmb_CType2.SelectedIndex = -1;
+
+            Cmb_FYear2.Text = "";
+            Cmb_FYear2.SelectedIndex = -1;
+
+            Cmb_TRansferNo2.Text = "";
+            Cmb_TRansferNo2.SelectedIndex = -1;
+
+            resetSignature();
+
+            //tkalifData types
+            TXT_AccNo.Text = "";
+            TXT_PaccNo.Text = "";
+            TXT_MTaklif.Text = "";
+            TXT_MResp.Text = "";
+            TXT_Masrof.Text = "";
+            TXT_Morakba.Text = "";
+            TXT_Enfak.Text = "";
+
+            cleargridview();
+
+            Image1 = "";
+            Image2 = "";
+            pictureBox2.Image = null;
+
+            oldvalue = 0;
+            picflag = 0;
+            MaxFlag = 0;
+            AddEditFlag = 0;
+        }
+        #endregion
+
 
         public FTransfer_M()
         {
@@ -125,18 +462,16 @@ namespace ANRPC_Inventory
             this.SetStyle(ControlStyles.UserPaint, true);
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
         }
+
         //======================================
-        private void TalbTawred_Load(object sender, EventArgs e)
+        private void FTransfer_M_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'aNRPC_InventoryDataSet.T_BnodAwamershraa' table. You can move, or remove it, as needed.
             // this.t_BnodAwamershraaTableAdapter.Fill(this.aNRPC_InventoryDataSet.T_BnodAwamershraa);
 
-            currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.Egypt));
-            currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.Syria));
-            currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.UAE));
-            currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia));
-            currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.Tunisia));
-            currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.Gold));
+            HelperClass.comboBoxFiller(Cmb_FYear, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
+            HelperClass.comboBoxFiller(Cmb_FYear2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
+
             MaxFlag = 0;
 
             AddEditFlag = 0;
@@ -144,13 +479,11 @@ namespace ANRPC_Inventory
             {
                 panel7.Visible = true;
                 panel2.Visible = false;
-                panel7.Dock = DockStyle.Top;
             }
             else if (Constants.EzonTahwel_FF == true)
             {
                 panel2.Visible = true;
                 panel7.Visible = false;
-                panel2.Dock = DockStyle.Top;
             }
             else { }
             //    if (Constants.User_Type != "A")
@@ -239,7 +572,6 @@ namespace ANRPC_Inventory
             Cmb_CType2.ValueMember = "CCode";
             Cmb_CType2.DisplayMember = "CName";
             Cmb_CType2.SelectedIndex = -1;
-            Cmb_CType2.SelectedIndexChanged += new EventHandler(Cmb_CType2_SelectedIndexChanged);
             //   TXT_Momayz.Text = Cmb_CType.SelectedValue.ToString();
             ////////////////////////////////////////////////
             ///
@@ -451,15 +783,7 @@ namespace ANRPC_Inventory
             surface.Dispose();
         }
 
-        private void label8_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void TXT_StockName_KeyDown(object sender, KeyEventArgs e)
         {
@@ -563,61 +887,7 @@ namespace ANRPC_Inventory
         }
 
 
-        public void Input_Reset()
-        {
-            Image1 = "";
-            Image2 = "";
-            picflag = 0;
-            MaxFlag = 0;
-            pictureBox2.Image = null;
-            cleargridview();
-            TXT_TRansferNo.Text = "";
-            Cmb_FYear.Text = "";
-            Cmb_CType.Text = "";
-            Cmb_To.Text = "";
-            Cmb_From.Text = "";
-            TXT_TRNO.Text = "";
-            TXT_MomayzHarka.Text = "";
 
-            checkBox1.Checked = false;
-            checkBox2.Checked = false;
-            MaxFlag = 0;
-            //    TXT_Date.Enabled = true;
-            TXT_TRNO.Text = "";
-
-            TXT_AccNo.Text = "";
-            TXT_PaccNo.Text = "";
-            TXT_MTaklif.Text = "";
-            TXT_MResp.Text = "";
-            TXT_Masrof.Text = "";
-            TXT_Enfak.Text = "";
-            TXT_Morakba.Text = "";
-            TXT_StockBian.Text = "";
-            TXT_StockNoAll.Text = "";
-            TXT_StockName.Text = "";
-            Txt_Quan.Text = "";
-            Txt_ReqQuan.Text = "";
-            sum = 0;
-            oldvalue = 0;
-            TXT_Unit.Text = "";
-            Pic_Sign1.Image = null;
-            Pic_Sign2.Image = null;
-            Pic_Sign3.Image = null;
-            Pic_Sign4.Image = null;
-            Pic_Sign5.Image = null;
-
-            FlagSign1 = 0;
-            FlagSign2 = 0;
-            FlagSign3 = 0;
-            FlagSign4 = 0;
-            FlagSign5 = 0;
-
-            Pic_Sign1.BackColor = Color.White;
-            Pic_Sign2.BackColor = Color.White;
-            Pic_Sign3.BackColor = Color.White;
-            Pic_Sign4.BackColor = Color.White;
-            Pic_Sign5.BackColor = Color.White;
-        }
         public void DisableControls()
         {
             // TXT_TalbNo.Enabled = false;
@@ -1567,45 +1837,6 @@ namespace ANRPC_Inventory
         }
 
 
-        private void label17_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BTN_Sign1_Click(object sender, EventArgs e)
-        {
-
-
-            Empn1 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد الخاص بك", "توقيع على انشاء اذن تحويل", "");
-
-            Sign1 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع على انشاء اذن تحويل", "");
-            if (Sign1 != "" && Empn1 != "")
-            {
-                //  MessageBox.Show("done");
-                // string result= Constants.CheckSign("1",Sign1);
-                Tuple<string, int, int, string, string> result = Constants.CheckSign("1", "7", Sign1, Empn1);
-                if (result.Item3 == 1)
-                {
-                    Pic_Sign1.Image = Image.FromFile(@result.Item1);
-
-                    FlagSign1 = result.Item2;
-                    FlagEmpn1 = Empn1;
-                }
-                else
-                {
-                    FlagSign1 = 0;
-                    FlagEmpn1 = "";
-                }
-                // result.Item1;
-                // result.Item2;
-
-
-            }
-            else
-            {
-                //cancel
-            }
-        }
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -1659,49 +1890,7 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void BTN_Sign2_Click(object sender, EventArgs e)
-        {
-            if (FlagSign1 != 1)
-            {
-                MessageBox.Show("من فضلك تاكد من التوقيعات السابقة");
-                return;
-            }
-            Empn2 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد الخاص بك", "توقيع على اعتماد اذن تحويل", "");
 
-            Sign2 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع على اعتماد اذن تحويل", "");
-
-            if (Sign2 != "" && Empn2 != "")
-            {
-                //  MessageBox.Show("done");
-                // string result= Constants.CheckSign("1",Sign1);
-                Tuple<string, int, int, string, string> result = Constants.CheckSign("2", "7", Sign2, Empn2);
-                if (result.Item3 == 1)
-                {
-                    Pic_Sign2.Image = Image.FromFile(@result.Item1);
-
-                    FlagSign2 = result.Item2;
-                    FlagEmpn2 = Empn2;
-                }
-                else
-                {
-                    FlagSign2 = 0;
-                    FlagEmpn2 = "";
-                }
-                // result.Item1;
-                // result.Item2;
-
-
-            }
-            else
-            {
-                //cancel
-            }
-        }
-
-        private void Num_ReqQuan_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void Editbtn_Click_1(object sender, EventArgs e)
         {
@@ -1928,10 +2117,6 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void panel7_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void Cmb_FYear2_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1991,18 +2176,18 @@ namespace ANRPC_Inventory
             DataTable dts = new DataTable();
 
             dts.Load(cmd.ExecuteReader());
-            Cmb_TalbNo2.DataSource = dts;
-            Cmb_TalbNo2.ValueMember = "TransNo";
-            Cmb_TalbNo2.DisplayMember = "TransNo";
-            Cmb_TalbNo2.SelectedIndex = -1;
-            Cmb_TalbNo2.SelectedIndexChanged += new EventHandler(Cmb_TalbNo2_SelectedIndexChanged);
+            Cmb_TRansferNo2.DataSource = dts;
+            Cmb_TRansferNo2.ValueMember = "TransNo";
+            Cmb_TRansferNo2.DisplayMember = "TransNo";
+            Cmb_TRansferNo2.SelectedIndex = -1;
+            Cmb_TRansferNo2.SelectedIndexChanged += new EventHandler(Cmb_TalbNo2_SelectedIndexChanged);
             Constants.closecon();
 
         }
 
         private void Cmb_TalbNo2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Cmb_TalbNo2.SelectedIndex != -1)
+            if (Cmb_TRansferNo2.SelectedIndex != -1)
             {
                 SearchTalb(2);
             }
@@ -2032,7 +2217,7 @@ namespace ANRPC_Inventory
                 //  cmd = new SqlCommand(cmdstring, Constants.con);
                 cmdstring = "select * from  T_EzonTahwel where TransNo=@TN and FYear=@FY and FromEdaraCode=@EC and TR_NO=@TR";
                 cmd = new SqlCommand(cmdstring, Constants.con);
-                cmd.Parameters.AddWithValue("@TN", Cmb_TalbNo2.Text);
+                cmd.Parameters.AddWithValue("@TN", Cmb_TRansferNo2.Text);
                 cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
                 cmd.Parameters.AddWithValue("@EC", Constants.CodeEdara);
                 cmd.Parameters.AddWithValue("@TR", TXT_TRNO.Text);
@@ -2043,7 +2228,7 @@ namespace ANRPC_Inventory
                 //   cmd = new SqlCommand(cmdstring, Constants.con);
                 cmdstring = "select * from  T_EzonTahwel where TransNo=@TN and FYear=@FY and TR_NO=@TR";
                 cmd = new SqlCommand(cmdstring, Constants.con);
-                cmd.Parameters.AddWithValue("@TN", Cmb_TalbNo2.Text);
+                cmd.Parameters.AddWithValue("@TN", Cmb_TRansferNo2.Text);
                 cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
                 cmd.Parameters.AddWithValue("@TR", TXT_TRNO.Text);
             }
@@ -2343,10 +2528,7 @@ namespace ANRPC_Inventory
             Constants.closecon();
         }
 
-        private void Cmb_TalbNo2_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            //SearchTalb();
-        }
+
 
         private void BTN_Save2_Click(object sender, EventArgs e)
         {
@@ -2403,8 +2585,8 @@ namespace ANRPC_Inventory
                 UpdateEznSarf();
                 Input_Reset();
                 Cmb_FYear2.SelectedIndex = -1;
-                Cmb_TalbNo2.SelectedIndex = -1;
-                Cmb_TalbNo2.Text = "";
+                Cmb_TRansferNo2.SelectedIndex = -1;
+                Cmb_TRansferNo2.Text = "";
             }
         }
         public void UpdateEznSarf()
@@ -2867,105 +3049,7 @@ namespace ANRPC_Inventory
             }
         }
 
-
-
-        private void DeleteBtn_Click(object sender, EventArgs e)
-        {
-            if ((MessageBox.Show("هل تريد حذف اذن التحويل ؟", "", MessageBoxButtons.YesNo)) == DialogResult.Yes)
-            {
-                if (string.IsNullOrWhiteSpace(TXT_TRansferNo.Text) || string.IsNullOrWhiteSpace(TXT_TRNO.Text))
-                {
-                    MessageBox.Show("يجب اختياراذن التحويل  اولا");
-                    return;
-                }
-                Constants.opencon();
-
-                /*
-                string cmdstring1 = "select STOCK_NO_ALL,quan1,quan2 from T_EznSarf_Benod where FYear=@FY and EznSarf_No=@TNO";
-                SqlCommand cmd1 = new SqlCommand(cmdstring1, con);
-
-
-                cmd1.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_TRansferNo.Text));
-                cmd1.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
-                SqlDataReader dr = cmd1.ExecuteReader();
-
-                //---------------------------------
-                if (dr.HasRows == true)
-                {
-                    while (dr.Read())
-                    {
-                        if (dr["quan1"].ToString() == "")
-                        {
-
-                        }
-                        else
-                        {
-                            string cmdstring2 = "Exec SP_UndoVirtualQuan2 @TNO,@FY";
-
-                            SqlCommand cmd2 = new SqlCommand(cmdstring2, con);
-
-                            cmd2.Parameters.AddWithValue("@TNO", (dr["STOCK_NO_ALL"].ToString()));
-                            if (dr["quan2"].ToString() == "")
-                            {
-
-                                cmd2.Parameters.AddWithValue("@FY", Convert.ToDouble(dr["quan1"].ToString()));
-                            }
-                            else
-                            {
-                                cmd2.Parameters.AddWithValue("@FY", Convert.ToDouble(dr["quan2"].ToString()));
-                            }
-                            //  cmd2.Parameters.AddWithValue("@BN", (dr["Bnd_No"].ToString()));
-                            cmd2.ExecuteNonQuery();
-                        }
-
-                    }
-                }
-                dr.Close();
-
-              */
-                /////////////////////////////
-
-                /////////////////////////////////////////////////////////////////////////
-                string cmdstring = "Exec SP_DeleteEznTahwel @TNO,@FY,@TR,@aot output";
-
-                SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-
-                cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_TRansferNo.Text));
-                cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
-                cmd.Parameters.AddWithValue("@TR", TXT_TRNO.Text.ToString());
-                cmd.Parameters.Add("@aot", SqlDbType.Int, 32);  //-------> output parameter
-                cmd.Parameters["@aot"].Direction = ParameterDirection.Output;
-
-                int flag;
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                    executemsg = true;
-                    flag = (int)cmd.Parameters["@aot"].Value;
-                }
-                catch (SqlException sqlEx)
-                {
-                    executemsg = false;
-                    MessageBox.Show(sqlEx.ToString());
-                    flag = (int)cmd.Parameters["@aot"].Value;
-                }
-                if (executemsg == true && flag == 1)
-                {
-                    MessageBox.Show("تم الحذف بنجاح");
-                    Input_Reset();
-                }
-                Constants.closecon();
-            }
-        }
-
-        private void TXT_TalbNo_TextChanged(object sender, EventArgs e)
-        {
-            // GetData(Convert.ToInt32(TXT_TalbNo.Text), Cmb_FYear.Text);
-
-        }
-
-        private void Cmb_TalbNo2_TextChanged(object sender, EventArgs e)
+        private void Cmb_TRansferNo2_TextChanged(object sender, EventArgs e)
         {
             Pic_Sign1.Image = null;
             Pic_Sign2.Image = null;
@@ -2984,12 +3068,6 @@ namespace ANRPC_Inventory
             Pic_Sign3.BackColor = Color.White;
             Pic_Sign4.BackColor = Color.White;
             Pic_Sign5.BackColor = Color.White;
-        }
-
-        private void Cmb_TalbNo2_DropDownClosed(object sender, EventArgs e)
-        {
-            //
-            //SearchTalb(2);
         }
 
         private void dataGridView1_RowEnter_1(object sender, DataGridViewCellEventArgs e)
@@ -3026,11 +3104,6 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void TXT_TalbNo_Leave(object sender, EventArgs e)
-        {
-
-        }
-
         private void TXT_TalbNo_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter && AddEditFlag == 2)
@@ -3046,10 +3119,6 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void Cmb_TalbNo2_SelectedValueChanged(object sender, EventArgs e)
-        {
-            //    SearchTalb(2);
-        }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -3061,11 +3130,6 @@ namespace ANRPC_Inventory
                     //oldvalue = Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
                 }
             }
-
-        }
-
-        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
 
         }
 
@@ -3266,15 +3330,6 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void Pic_Sign1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TXT_StockBian_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -3304,15 +3359,6 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void label21_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label20_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void TXT_StockNoAll_TextChanged(object sender, EventArgs e)
         {
@@ -3391,15 +3437,7 @@ namespace ANRPC_Inventory
             }
 
         }
-        private void label5_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void BTN_Print_Click(object sender, EventArgs e)
         {
@@ -3440,21 +3478,6 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void TXT_Total_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                // ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Total.Text), currencies[0]);
-                //   txt_englishword.Text = toWord.ConvertToEnglish();
-                //  TXT_ArabicValue.Text = toWord.ConvertToArabic();
-            }
-            catch (Exception ex)
-            {
-                //   txt_englishword.Text = String.Empty;
-                //  TXT_ArabicValue.Text = String.Empty;
-            }
-        }
-
         private void TXT_EznNo_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(TXT_TRansferNo.Text) == false)
@@ -3462,21 +3485,6 @@ namespace ANRPC_Inventory
                 GetData((TXT_TRansferNo.Text), Cmb_FYear.Text, TXT_TRNO.Text);
 
             }
-        }
-
-        private void label23_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Cmb_TalbNo2_TabStopChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label53_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void Cmb_CType_SelectedIndexChanged(object sender, EventArgs e)
@@ -3496,7 +3504,6 @@ namespace ANRPC_Inventory
                 {
 
                     Cmb_From.Enabled = false;
-                    Cmb_From.SelectedIndexChanged -= new EventHandler(Cmb_From_SelectedIndexChanged);
                     string cmdstring = "SELECT  CodeEdara,NameEdara FROM Edarat ";//will use cmdstring3
 
 
@@ -3510,7 +3517,6 @@ namespace ANRPC_Inventory
                     Cmb_From.ValueMember = "CodeEdara";
                     Cmb_From.DisplayMember = "NameEdara";
                     Cmb_From.SelectedIndex = -1;
-                    Cmb_From.SelectedIndexChanged += new EventHandler(Cmb_From_SelectedIndexChanged);
                     ///////
                     ///        Cmb_To.SelectedIndexChanged -= new EventHandler(Cmb_To_SelectedIndexChanged);
                     cmdstring = "SELECT  [CCode],[CName] FROM T_InventoryNames";//will use cmdstring3
@@ -3533,7 +3539,6 @@ namespace ANRPC_Inventory
                 {
 
                     Cmb_From.Enabled = true;
-                    Cmb_From.SelectedIndexChanged -= new EventHandler(Cmb_From_SelectedIndexChanged);
                     string cmdstring = "SELECT  [CCode],[CName] FROM T_InventoryNames";//will use cmdstring3
 
 
@@ -3547,7 +3552,6 @@ namespace ANRPC_Inventory
                     Cmb_From.ValueMember = "CCode";
                     Cmb_From.DisplayMember = "CName";
                     Cmb_From.SelectedIndex = -1;
-                    Cmb_From.SelectedIndexChanged += new EventHandler(Cmb_From_SelectedIndexChanged);
 
                     ///////////////////////
                     ///
@@ -3609,11 +3613,6 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void Cmb_From_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void Cmb_To_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Cmb_To.SelectedIndex >= 0 && Cmb_From.SelectedIndex == Cmb_To.SelectedIndex)
@@ -3626,35 +3625,6 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel4_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void Pic_Sign3_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
@@ -3757,14 +3727,102 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void Cmb_CType2_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
+        //------------------------------------------ Signature Handler ---------------------------------
+        #region Signature Handler
+        private void BTN_Sign1_Click(object sender, EventArgs e)
+        {
+            Empn1 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد الخاص بك", "توقيع على انشاء اذن تحويل", "");
+
+            Sign1 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع على انشاء اذن تحويل", "");
+            if (Sign1 != "" && Empn1 != "")
+            {
+                Tuple<string, int, int, string, string> result = Constants.CheckSign("1", "7", Sign1, Empn1);
+                if (result.Item3 == 1)
+                {
+                    Pic_Sign1.Image = Image.FromFile(@result.Item1);
+
+                    FlagSign1 = result.Item2;
+                    FlagEmpn1 = Empn1;
+                }
+                else
+                {
+                    FlagSign1 = 0;
+                    FlagEmpn1 = "";
+                }
+            }
         }
 
-        private void Pic_Sign2_Click(object sender, EventArgs e)
+        private void BTN_Sign2_Click(object sender, EventArgs e)
         {
+            Empn2 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد الخاص بك", "توقيع على اعتماد اذن تحويل", "");
 
+            Sign2 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع على اعتماد اذن تحويل", "");
+
+            if (Sign2 != "" && Empn2 != "")
+            {
+                Tuple<string, int, int, string, string> result = Constants.CheckSign("2", "7", Sign2, Empn2);
+                if (result.Item3 == 1)
+                {
+                    Pic_Sign2.Image = Image.FromFile(@result.Item1);
+
+                    FlagSign2 = result.Item2;
+                    FlagEmpn2 = Empn2;
+                }
+                else
+                {
+                    FlagSign2 = 0;
+                    FlagEmpn2 = "";
+                }
+            }
         }
+
+        private void DeleteBtn_Click(object sender, EventArgs e)
+        {
+            if ((MessageBox.Show("هل تريد حذف اذن التحويل ؟", "", MessageBoxButtons.YesNo)) == DialogResult.Yes)
+            {
+                if (string.IsNullOrWhiteSpace(TXT_TRansferNo.Text) || string.IsNullOrWhiteSpace(TXT_TRNO.Text))
+                {
+                    MessageBox.Show("يجب اختياراذن التحويل  اولا");
+                    return;
+                }
+                Constants.opencon();
+
+                string cmdstring = "Exec SP_DeleteEznTahwel @TNO,@FY,@TR,@aot output";
+
+                SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+
+                cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_TRansferNo.Text));
+                cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
+                cmd.Parameters.AddWithValue("@TR", TXT_TRNO.Text.ToString());
+                cmd.Parameters.Add("@aot", SqlDbType.Int, 32);  //-------> output parameter
+                cmd.Parameters["@aot"].Direction = ParameterDirection.Output;
+
+                int flag;
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    executemsg = true;
+                }
+                catch (SqlException sqlEx)
+                {
+                    executemsg = false;
+                    Console.WriteLine(sqlEx);              
+                }
+
+                flag = (int)cmd.Parameters["@aot"].Value;
+
+                if (executemsg == true && flag == 1)
+                {
+                    MessageBox.Show("تم الحذف بنجاح");
+                    //reset();
+                }
+                Constants.closecon();
+            }
+        }
+
+        #endregion
+
     }
 }
