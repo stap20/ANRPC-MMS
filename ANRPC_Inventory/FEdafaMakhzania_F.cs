@@ -254,6 +254,60 @@ namespace ANRPC_Inventory
 
         }
 
+        public bool GetAmrSheraaData(string amrNo, string fyear)
+        {
+            //call sp that get last num that eentered for this MM and this YYYY
+            Constants.opencon();
+            // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
+            string cmdstring = "select * from T_Awamershraa where Amrshraa_No=@TN and AmrSheraa_sanamalia=@FY";
+
+            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+
+            cmd.Parameters.AddWithValue("@TN", amrNo);
+            cmd.Parameters.AddWithValue("@FY", fyear);
+
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            if (dr.HasRows == true)
+            {
+                while (dr.Read())
+                {
+                    TXT_AmrNo.Text = dr["Amrshraa_No"].ToString();
+                   
+                    TXT_Momayz.Text = dr["Momayz"].ToString();
+
+                    TXT_Edara.Text = dr["NameEdara"].ToString();
+                    TXT_Date.Text = dr["Date_amrshraa"].ToString();
+                    TXT_BndMwazna.Text = dr["Bnd_Mwazna"].ToString();
+                    TXT_Payment.Text = dr["Payment_Method"].ToString();
+                    TXT_TaslemDate.Text = dr["Date_Tslem"].ToString();
+                    TXT_TaslemPlace.Text = dr["Mkan_Tslem"].ToString();
+                    TXT_Name.Text = dr["Shick_Name"].ToString();
+                    TXT_HesabMward1.Text = dr["Hesab_Mward"].ToString();
+                    TXT_HesabMward2.Text = dr["Hesab_Mward"].ToString();
+                    TXT_Egmali.Text = dr["Egmali"].ToString();
+                }
+            }
+            else
+            {
+                MessageBox.Show("من فضلك تاكد من رقم امر الشراء المراد اضافته");
+                reset();
+
+                return false;
+            }
+            dr.Close();
+
+            GetEdafaBnod(amrNo, fyear);
+
+            Cmb_FY.Text = fyear;
+            Cmb_AmrNo.Text = amrNo;
+
+            Constants.closecon();
+
+            return true;
+        }
+
+
         public bool SearchEdafa(string edafaNo, string fyear, string momayz)
         {
             //call sp that get last num that eentered for this MM and this YYYY
@@ -402,61 +456,19 @@ namespace ANRPC_Inventory
 
             dr.Close();
 
-            cmdstring = "select * from  T_Awamershraa where  Amrshraa_No=@TN and AmrSheraa_sanamalia=@FY";
-            cmd = new SqlCommand(cmdstring, Constants.con);
-
-            cmd.Parameters.AddWithValue("@TN", amrno);
-            cmd.Parameters.AddWithValue("@FY", amrsana);
-
-            DataTable dtTalabTawreed = new DataTable();
-
-            SqlConnection sqlConnction = new SqlConnection(Constants.constring);
-            SqlDataAdapter daTalabTawreed = new SqlDataAdapter(@"select * from  T_Awamershraa where  Amrshraa_No=" + amrno + " and AmrSheraa_sanamalia='" + amrsana + "'", sqlConnction);
-            sqlConnction.Open();
-            daTalabTawreed.Fill(dtTalabTawreed);
-            sqlConnction.Close();
-
-            dr = cmd.ExecuteReader();
-
-            if (dtTalabTawreed.Rows.Count > 0)
+            if (!GetAmrSheraaData(amrno, amrsana))
             {
-                DataRow row = dtTalabTawreed.Rows[0];
-
-                Cmb_FY.Text = row["AmrSheraa_sanamalia"].ToString();
-                TXT_AmrNo.Text = row["Amrshraa_No"].ToString();
-                Cmb_AmrNo.Text = row["Amrshraa_No"].ToString();
-
-                TXT_Momayz.Text = row["Momayz"].ToString();
-
-                TXT_Edara.Text = row["NameEdara"].ToString();
-                TXT_Date.Text = row["Date_amrshraa"].ToString();
-                TXT_BndMwazna.Text = row["Bnd_Mwazna"].ToString();
-                TXT_Payment.Text = row["Payment_Method"].ToString();
-                TXT_TaslemDate.Text = row["Date_Tslem"].ToString();
-                TXT_TaslemPlace.Text = row["Mkan_Tslem"].ToString();
-                TXT_Name.Text = row["Shick_Name"].ToString();
-                TXT_HesabMward1.Text = row["Hesab_Mward"].ToString();
-                TXT_HesabMward2.Text = row["Hesab_Mward"].ToString();
-                TXT_Egmali.Text = row["Egmali"].ToString();           
+                return false ;
             }
-            else
-            {
-                MessageBox.Show("من فضلك تاكد من رقم الاضافة المخزنية");
-                reset();
-
-                return false;
-            }
-            dr.Close();
 
             Cmb_FY2.Text = fyear;
             TXT_EdafaNo.Text = edafaNo;
-
-            GetEdafaBnod(amrno, amrsana);
 
             Constants.closecon();
 
             return true;
         }
+
 
         #endregion
 
@@ -553,35 +565,36 @@ namespace ANRPC_Inventory
 
         public void PrepareConfirmState()
         {
-            //DisableControls();
-            //BTN_Save2.Enabled = true;
+            DisableControls();
+            BTN_Save2.Enabled = true;
 
 
-            //if (Constants.User_Type == "B")
-            //{
-            //    if (Constants.UserTypeB == "Estlam")
-            //    {
-            //        if (FlagSign2 != 1 && FlagSign1 == 1)
-            //        {
-            //            BTN_Sign2.Enabled = true;
+            if (Constants.User_Type == "B")
+            {
+                if (Constants.UserTypeB == "Edafa")
+                {
+                    if (FlagSign2 != 1 && FlagSign1 == 1)
+                    {
+                        BTN_Sign2.Enabled = true;
 
-            //            Pic_Sign2.BackColor = Color.Green;
-            //            currentSignNumber = 2;
-            //        }
-            //        else if (FlagSign3 != 1 && FlagSign2 == 1)
-            //        {
-            //            BTN_Sign3.Enabled = true;
+                        Pic_Sign2.BackColor = Color.Green;
+                        currentSignNumber = 2;
+                    }
+                    else if (FlagSign3 != 1 && FlagSign2 == 1)
+                    {
+                        BTN_Sign3.Enabled = true;
 
-            //            Pic_Sign3.BackColor = Color.Green;
-            //            currentSignNumber = 3;
-            //        }
-            //    }
-            //}
+                        Pic_Sign3.BackColor = Color.Green;
+                        currentSignNumber = 3;
+                    }
+                }
+            }
 
-            //AddEditFlag = 1;
-            //TNO = Cmb_AmrNo.Text;
-            //FY = Cmb_FY.Text;
-
+            AddEditFlag = 1;
+            TNO = Cmb_AmrNo.Text;
+            FY = Cmb_FY.Text;
+            FY2 = Cmb_FY2.Text;
+            MNO = TXT_EdafaNo.Text;
         }
 
         public void prepareSearchState()
@@ -1648,6 +1661,7 @@ namespace ANRPC_Inventory
 
             HelperClass.comboBoxFiller(Cmb_FY, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
             HelperClass.comboBoxFiller(Cmb_FY2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
+            HelperClass.comboBoxFiller(Cmb_FYear2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
 
 
             if (Constants.Edafa_F == false)
@@ -1744,6 +1758,8 @@ namespace ANRPC_Inventory
             Constants.opencon();
 
             Cmb_CType.SelectedIndexChanged -= new EventHandler(Cmb_CType_SelectedIndexChanged);
+            Cmb_CType2.SelectedIndexChanged -= new EventHandler(Cmb_CType2_SelectedIndexChanged);
+
             cmdstring = "SELECT  [CCode],[CName] FROM [T_TransferTypes] where CType=1 and CFlag=1";//will use cmdstring3
 
 
@@ -1758,6 +1774,12 @@ namespace ANRPC_Inventory
             Cmb_CType.DisplayMember = "CName";
             Cmb_CType.SelectedIndex = -1;
             Cmb_CType.SelectedIndexChanged += new EventHandler(Cmb_CType_SelectedIndexChanged);
+
+            Cmb_CType2.DataSource = dts;
+            Cmb_CType2.ValueMember = "CCode";
+            Cmb_CType2.DisplayMember = "CName";
+            Cmb_CType2.SelectedIndex = -1;
+            Cmb_CType2.SelectedIndexChanged += new EventHandler(Cmb_CType2_SelectedIndexChanged);
 
             Constants.closecon();
 
@@ -2034,33 +2056,6 @@ namespace ANRPC_Inventory
 
         private void Cmb_FY2_SelectedIndexChanged(object sender, EventArgs e)
         {
-             if (AddEditFlag == 0)
-            {
-               
-                Constants.opencon();
-              
-               TXT_EdafaNo.AutoCompleteMode = AutoCompleteMode.None;
-                TXT_EdafaNo.AutoCompleteSource = AutoCompleteSource.None; ;
-                //////////   string cmdstring3 = "SELECT [Edafa_No] from T_Edafa where Edafa_FY='" + Cmb_FY2.Text + "'";
-                  string cmdstring3 = "SELECT [Edafa_No] from T_Edafa where Edafa_FY='" + Cmb_FY2.Text + "'and TR_NO='" +TXT_TRNO.Text + "'";
-                SqlCommand cmd3 = new SqlCommand(cmdstring3, Constants.con);
-                SqlDataReader dr3 = cmd3.ExecuteReader();
-                //---------------------------------
-                if (dr3.HasRows == true)
-                {
-                    while (dr3.Read())
-                    {
-                        EdafaColl.Add(dr3["Edafa_No"].ToString());
-
-                    }
-                }
-              
-                TXT_EdafaNo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                TXT_EdafaNo.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                TXT_EdafaNo.AutoCompleteCustomSource = EdafaColl;
-                Constants.closecon();
-
-            }
             //go and get talbTawreed_no for this FYear
             if (AddEditFlag == 2)//add
             {
@@ -2111,26 +2106,34 @@ namespace ANRPC_Inventory
 
         private void Cmb_FYear2_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            if (string.IsNullOrEmpty(TXT_TRNO2.Text))
+            {
+                return;
+            }
+
             //call sp that get last num that eentered for this MM and this YYYY
             Constants.opencon();
-            // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
-            string cmdstring = "select (Amrshraa_No) from  T_Awamershraa where AmrSheraa_sanamalia=@FY  order by  Amrshraa_No";
+            string cmdstring = "SELECT [Edafa_No] from T_Edafa where Edafa_FY=@FY and TR_NO=@TRNO and ( Sign1 is not null ) and (Sign4 is not null) and (Sign3 is null) group by Edafa_No";
+
+
             SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
 
             // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
-         //   cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
-         ///   cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
-
+            cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
+            cmd.Parameters.AddWithValue("@TRNO", TXT_TRNO2.Text);
 
             DataTable dts = new DataTable();
 
             dts.Load(cmd.ExecuteReader());
-         ///   Cmb_AmrNo2.DataSource = dts;
-          //  Cmb_AmrNo2.ValueMember = "Amrshraa_No";
-          //  Cmb_AmrNo2.DisplayMember = "Amrshraa_No";
-          ///  Cmb_AmrNo2.SelectedIndex = -1;
-           /// Cmb_AmrNo2.SelectedIndexChanged += new EventHandler(Cmb_ِAmrNo2_SelectedIndexChanged);
+            Cmb_EdafaNo2.DataSource = dts;
+            Cmb_EdafaNo2.ValueMember = "Edafa_No";
+            Cmb_EdafaNo2.DisplayMember = "Edafa_No";
+            Cmb_EdafaNo2.SelectedIndex = -1;
             Constants.closecon();
+
+
+
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -2505,9 +2508,7 @@ namespace ANRPC_Inventory
                 }
                 cleargridview();
 
-                SearchTalb(1);
-
-                //SearchEdafa(TXT_EdafaNo.Text, Cmb_FY, momayz)
+                GetAmrSheraaData(Cmb_AmrNo.Text, Cmb_FY.Text);
             }
        
         }
@@ -2832,7 +2833,7 @@ namespace ANRPC_Inventory
 
             if (SearchEdafa(edafa_no, fyear, momayz))
             {
-                EditBtn.Enabled = true;
+                EditBtn2.Enabled = true;
                 BTN_Print2.Enabled = true;
             }
 
@@ -2857,20 +2858,23 @@ namespace ANRPC_Inventory
 
         private void BTN_Save2_Click(object sender, EventArgs e)
         {
+
             //if (!IsValidCase(VALIDATION_TYPES.SAVE))
             //{
             //    return;
             //}
 
-            //EditLogic();
+            EditLogic();
 
-            //reset();
+            reset();
 
-            //Cmb_AmrNo2.SelectedIndex = -1;
-            //Cmb_FYear2.SelectedIndex = -1;
+            Cmb_CType2.SelectedIndex = -1;
+            Cmb_EdafaNo2.SelectedIndex = -1;
+            Cmb_FYear2.SelectedIndex = -1;
 
-            //Cmb_AmrNo.Enabled = false;
-            //Cmb_FY.Enabled = false;
+            TXT_EdafaNo.Enabled = false;
+            Cmb_FY2.Enabled = false;
+            Cmb_CType.Enabled = false;
         }
 
         private void BTN_Print2_Click(object sender, EventArgs e)
@@ -2891,6 +2895,14 @@ namespace ANRPC_Inventory
                     FReports F = new FReports();
                     F.Show();
                 }
+            }
+        }
+
+        private void Cmb_CType2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!(string.IsNullOrEmpty(Cmb_CType2.Text) || string.IsNullOrWhiteSpace(Cmb_CType2.Text) || Cmb_CType2.SelectedIndex == -1))
+            {
+                TXT_TRNO2.Text = Cmb_CType2.SelectedValue.ToString();
             }
         }
     }

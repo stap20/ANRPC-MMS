@@ -1585,6 +1585,7 @@
             this.Cmb_FYear2.Name = "Cmb_FYear2";
             this.Cmb_FYear2.Size = new System.Drawing.Size(110, 27);
             this.Cmb_FYear2.TabIndex = 25;
+            this.Cmb_FYear2.SelectedIndexChanged += new System.EventHandler(this.Cmb_FYear2_SelectedIndexChanged);
             // 
             // EditBtn2
             // 

@@ -2905,5 +2905,6 @@ namespace ANRPC_Inventory
                 TXT_TRNO2.Text = Cmb_CType2.SelectedValue.ToString();
             }
         }
+
     }
 }

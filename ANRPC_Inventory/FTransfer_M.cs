@@ -348,7 +348,7 @@ namespace ANRPC_Inventory
 
                     }
 
-                    Num_Quan.Text = dr["VirtualQuan"].ToString();
+                    Txt_Quan.Text = dr["VirtualQuan"].ToString();
 
                 }
 
@@ -595,8 +595,8 @@ namespace ANRPC_Inventory
             TXT_StockBian.Text = "";
             TXT_StockNoAll.Text = "";
             TXT_StockName.Text = "";
-            Num_Quan.Value = 0;
-            Num_ReqQuan.Value = 0;
+            Txt_Quan.Text = "";
+            Txt_ReqQuan.Text = "";
             sum = 0;
             oldvalue = 0;
             TXT_Unit.Text = "";
@@ -680,13 +680,13 @@ namespace ANRPC_Inventory
                     MessageBox.Show("يجب اختيار من و الى");
                     return;
                 }
-                if (TXT_TRNO.Text != "62" && (Num_ReqQuan.Value > Num_Quan.Value))
+                if (TXT_TRNO.Text != "62" && (Convert.ToDouble(Txt_ReqQuan.Text) > Convert.ToDouble(Txt_Quan.Text)))
                 {
                     MessageBox.Show("الكمية المطلوبة اكتر من المتاحة");
                     return;
 
                 }
-                if (TXT_TRNO.Text != "62" &&  Num_Quan.Value == 0)
+                if (TXT_TRNO.Text != "62" && Convert.ToDouble(Txt_Quan.Text) == 0)
                 {
                     MessageBox.Show("لا يوجد رصيد من هذا الصنف");
                     return;
@@ -695,7 +695,7 @@ namespace ANRPC_Inventory
 
 
 
-                if ((Num_ReqQuan.Value == 0))
+                if ((Convert.ToDouble(Txt_ReqQuan.Text) == 0))
                 {
                     MessageBox.Show("يجب ادخال الكمية المطلوبة");
                     return;
@@ -717,7 +717,7 @@ namespace ANRPC_Inventory
 
                 if (checkBox1.Checked == true || checkBox2.Checked == true)
                 {
-                    if ((Num_Quan.Value) - (Num_ReqQuan.Value) < Quan_Min.Value)
+                    if (Convert.ToDouble(Txt_Quan.Text) - Convert.ToDouble(Txt_ReqQuan.Text) < Convert.ToDouble(Quan_Min.Value))
                     {
                         MessageBox.Show("بعد صرف الكمية المطلوبة الكمية المتاحة ستكون اقل من الحد الادنى ");
                         MaxFlag = MaxFlag + 1;
@@ -728,7 +728,7 @@ namespace ANRPC_Inventory
                         array1[MaxFlag - 1, 1] = TXT_TRansferNo.Text;
 
                         array1[MaxFlag - 1, 2] = Cmb_FYear.Text;
-                        array1[MaxFlag - 1, 4] = Num_ReqQuan.Text;
+                        array1[MaxFlag - 1, 4] = Txt_ReqQuan.Text;
                         array1[MaxFlag - 1, 5] = Quan_Min.Text;
 
                     }
@@ -757,7 +757,7 @@ namespace ANRPC_Inventory
                 table.Rows.InsertAt(newRow, r);
                 dataGridView1.DataSource = table;
 
-                dataGridView1.Rows[r].Cells[4].Value = Num_ReqQuan.Text.ToString();
+                dataGridView1.Rows[r].Cells[4].Value = Txt_ReqQuan.Text.ToString();
                 // dataGridView1.Rows[r].Cells[4].Value = TXT_Unit.Text.ToString();
                 dataGridView1.Rows[r].Cells[5].Value = Cmb_From.Text;
                 //  dataGridView1.Rows[r].Cells[3].Value = TXT_StockBian.Text;
@@ -769,14 +769,14 @@ namespace ANRPC_Inventory
 
 
 
-                if (string.IsNullOrEmpty(Num_Quan.Text))
+                if (string.IsNullOrEmpty(Txt_Quan.Text))
                 {
                     dataGridView1.Rows[r].Cells[9].Value = DBNull.Value;
 
                 }
                 else
                 {
-                    dataGridView1.Rows[r].Cells[9].Value = Num_Quan.Text;
+                    dataGridView1.Rows[r].Cells[9].Value = Txt_Quan.Text;
 
                 }
                 dataGridView1.Rows[r].Cells[12].Value = Cmb_To.Text;
@@ -3316,7 +3316,7 @@ namespace ANRPC_Inventory
 
         private void TXT_StockNoAll_TextChanged(object sender, EventArgs e)
         {
-            Num_ReqQuan.Value = 0;
+            Txt_ReqQuan.Text = "";
         }
 
         private void TXT_EznNo_TextChanged(object sender, EventArgs e)

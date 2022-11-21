@@ -976,7 +976,7 @@ namespace ANRPC_Inventory
 
                         // cmd.Parameters.AddWithValue("@p6", (Convert.ToDateTime(TXT_Date.Value.ToShortDateString())));
 
-                        cmd.Parameters.AddWithValue("@p6", Convert.ToInt32(Cmb_AmrNo.SelectedValue));
+                        cmd.Parameters.AddWithValue("@p6", Convert.ToInt32(Cmb_AmrNo.Text));
                         cmd.Parameters.AddWithValue("@p7", (Cmb_FY.Text));
                         cmd.Parameters.AddWithValue("@p77", row.Cells[2].Value);
 

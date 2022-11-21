@@ -544,7 +544,7 @@
             this.Pic_Sign4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Pic_Sign4.Enabled = false;
-            this.Pic_Sign4.Location = new System.Drawing.Point(3, 4);
+            this.Pic_Sign4.Location = new System.Drawing.Point(3, 3);
             this.Pic_Sign4.Name = "Pic_Sign4";
             this.Pic_Sign4.Size = new System.Drawing.Size(471, 46);
             this.Pic_Sign4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -622,7 +622,7 @@
             this.Pic_Sign3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Pic_Sign3.Enabled = false;
-            this.Pic_Sign3.Location = new System.Drawing.Point(3, 4);
+            this.Pic_Sign3.Location = new System.Drawing.Point(3, 3);
             this.Pic_Sign3.Name = "Pic_Sign3";
             this.Pic_Sign3.Size = new System.Drawing.Size(442, 46);
             this.Pic_Sign3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -756,7 +756,7 @@
             this.Cmb_CType.FormattingEnabled = true;
             this.Cmb_CType.Location = new System.Drawing.Point(3, 4);
             this.Cmb_CType.Name = "Cmb_CType";
-            this.Cmb_CType.Size = new System.Drawing.Size(237, 27);
+            this.Cmb_CType.Size = new System.Drawing.Size(229, 27);
             this.Cmb_CType.TabIndex = 281;
             this.Cmb_CType.SelectedIndexChanged += new System.EventHandler(this.Cmb_CType_SelectedIndexChanged);
             // 
@@ -766,11 +766,11 @@
             this.label53.AutoSize = true;
             this.label53.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label53.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label53.Location = new System.Drawing.Point(239, 8);
+            this.label53.Location = new System.Drawing.Point(233, 8);
             this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(94, 19);
+            this.label53.Size = new System.Drawing.Size(100, 19);
             this.label53.TabIndex = 280;
-            this.label53.Text = "نوع اذن الصرف";
+            this.label53.Text = ":نوع اذن الصرف";
             // 
             // label50
             // 
@@ -848,11 +848,11 @@
             this.label44.AutoSize = true;
             this.label44.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label44.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label44.Location = new System.Drawing.Point(257, 37);
+            this.label44.Location = new System.Drawing.Point(251, 37);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(76, 19);
+            this.label44.Size = new System.Drawing.Size(82, 19);
             this.label44.TabIndex = 273;
-            this.label44.Text = "السنة المالية";
+            this.label44.Text = ":السنة المالية";
             // 
             // TXT_RespCentre
             // 
@@ -879,7 +879,7 @@
             this.TXT_TRNO.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_TRNO.Location = new System.Drawing.Point(77, 93);
             this.TXT_TRNO.Name = "TXT_TRNO";
-            this.TXT_TRNO.Size = new System.Drawing.Size(163, 26);
+            this.TXT_TRNO.Size = new System.Drawing.Size(155, 26);
             this.TXT_TRNO.TabIndex = 251;
             // 
             // label8
@@ -888,11 +888,11 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
             this.label8.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label8.Location = new System.Drawing.Point(271, 97);
+            this.label8.Location = new System.Drawing.Point(267, 97);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(62, 18);
+            this.label8.Size = new System.Drawing.Size(66, 18);
             this.label8.TabIndex = 250;
-            this.label8.Text = "مميز مستند";
+            this.label8.Text = ":مميز مستند";
             // 
             // Cmb_FYear
             // 
@@ -903,7 +903,7 @@
             "2020_2021"});
             this.Cmb_FYear.Location = new System.Drawing.Point(77, 34);
             this.Cmb_FYear.Name = "Cmb_FYear";
-            this.Cmb_FYear.Size = new System.Drawing.Size(163, 27);
+            this.Cmb_FYear.Size = new System.Drawing.Size(155, 27);
             this.Cmb_FYear.TabIndex = 248;
             this.Cmb_FYear.SelectedIndexChanged += new System.EventHandler(this.Cmb_FYear_SelectedIndexChanged);
             // 
@@ -947,7 +947,7 @@
             this.TXT_EznNo.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_EznNo.Location = new System.Drawing.Point(77, 64);
             this.TXT_EznNo.Name = "TXT_EznNo";
-            this.TXT_EznNo.Size = new System.Drawing.Size(163, 26);
+            this.TXT_EznNo.Size = new System.Drawing.Size(155, 26);
             this.TXT_EznNo.TabIndex = 245;
             // 
             // TXT_RequestedFor
@@ -978,11 +978,11 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
             this.label11.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label11.Location = new System.Drawing.Point(247, 69);
+            this.label11.Location = new System.Drawing.Point(243, 69);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(86, 18);
+            this.label11.Size = new System.Drawing.Size(90, 18);
             this.label11.TabIndex = 240;
-            this.label11.Text = "رقم أذن الصرف";
+            this.label11.Text = ":رقم أذن الصرف";
             // 
             // label12
             // 
