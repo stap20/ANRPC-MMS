@@ -124,6 +124,50 @@ namespace ANRPC_Inventory
 
         //------------------------------------------ Helper ---------------------------------
         #region Helpers
+        private PictureBox CheckSignatures(Panel panel, int signNumber)
+        {
+            try
+            {
+                foreach (Control control in panel.Controls)
+                {
+                    if (control.GetType() == typeof(Panel))
+                    {
+                        PictureBox signControl = CheckSignatures((Panel)control, signNumber);
+
+                        if (signControl != null)
+                        {
+                            return signControl;
+                        }
+                    }
+                    else
+                    {
+                        if (control.Name == "Pic_Sign" + signNumber && ((PictureBox)control).Image == null)
+                        {
+                            return (PictureBox)control;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return null;
+        }
+
+        private void errorProviderHandler(List<(ErrorProvider, Control, string)> errosList)
+        {
+            alertProvider.Clear();
+            errorProvider.Clear();
+            foreach (var error in errosList)
+            {
+                ////Txt_ReqQuan.Location = new Point(Txt_ReqQuan.Location.X + errorProvider.Icon.Width, Txt_ReqQuan.Location.Y);
+                //error.Item2.Width = error.Item2.Width - error.Item1.Icon.Width;
+                error.Item1.SetError(error.Item2, error.Item3);
+            }
+        }
+
         private void cleargridview()
         {
             this.dataGridView1.DataSource = null;
@@ -193,11 +237,7 @@ namespace ANRPC_Inventory
             dataGridView1.Columns["Darebapercent"].HeaderText = "نسبة الضريبة";//col20
             dataGridView1.Columns["TotalPriceAfter"].HeaderText = "السعر الاجمالى ";//col21
             dataGridView1.Columns["NotIdenticalFlag"].HeaderText = "مطابق/غير مطابق ";
-            
-
-
             dataGridView1.Columns["ExpirationDate"].HeaderText = "تاريخ انتهاء الصلاحية ";//col28
-            dataGridView1.Columns["ExpirationDate"].Visible = true;//col2
 
             dataGridView1.Columns["Amrshraa_No"].HeaderText = "رقم أمر الشراء";//col0
             dataGridView1.Columns["Amrshraa_No"].Visible = false;
@@ -244,14 +284,6 @@ namespace ANRPC_Inventory
 
             dataGridView1.Columns["ShickDate"].HeaderText = "تاريخ الشيك ";//col28
             dataGridView1.Columns["ShickDate"].Visible = false;//col28
-
-
-            if (Constants.User_Type == "B")
-            {
-                dataGridView1.Columns["LessQuanFlag"].ReadOnly = true;
-                dataGridView1.Columns["NotIdenticalFlag"].ReadOnly = true;//col25
-            }
-
         }
 
         public bool GetAmrSheraaData(string amrNo, string fyear)
@@ -568,8 +600,18 @@ namespace ANRPC_Inventory
             DisableControls();
             BTN_Save2.Enabled = true;
 
+            if (Constants.User_Type == "A")
+            {
+                BTN_Sign4.Enabled = true;
+                DeleteBtn.Enabled=true;
 
-            if (Constants.User_Type == "B")
+                Pic_Sign4.BackColor = Color.Green;
+                currentSignNumber = 4;
+
+                dataGridView1.Columns["LessQuanFlag"].ReadOnly = false;
+                dataGridView1.Columns["NotIdenticalFlag"].ReadOnly = false;//col25
+            }
+            else if (Constants.User_Type == "B")
             {
                 if (Constants.UserTypeB == "Edafa")
                 {
@@ -587,6 +629,9 @@ namespace ANRPC_Inventory
                         Pic_Sign3.BackColor = Color.Green;
                         currentSignNumber = 3;
                     }
+
+                    dataGridView1.Columns["LessQuanFlag"].ReadOnly = true;
+                    dataGridView1.Columns["NotIdenticalFlag"].ReadOnly = true;//col25
                 }
             }
 
@@ -1535,24 +1580,19 @@ namespace ANRPC_Inventory
                     try
                     {
                         cmd.ExecuteNonQuery();
-                        executemsg = true;
-                        flag = (int)cmd.Parameters["@p34"].Value;
+                        executemsg = true;                     
                     }
                     catch (SqlException sqlEx)
                     {
                         executemsg = false;
-                        MessageBox.Show(sqlEx.ToString());
-                        flag = (int)cmd.Parameters["@p34"].Value;
+                        Console.WriteLine(sqlEx);
                     }
 
-
+                    flag = (int)cmd.Parameters["@p34"].Value;
                 }
             }
             if (FlagSign3 == 1)
             {
-
-                // InsertTrans();
-                // UpdateQuan();
 
                 if (TXT_TRNO.Text.ToString() == "70")/////mobashr
                 {
@@ -1573,54 +1613,65 @@ namespace ANRPC_Inventory
             }
             if (executemsg == true && flag == 1)
             {
-
-                if (FlagSign4 != 1 && Constants.UserTypeB != "Finance")
+                if(Constants.User_Type == "A")
                 {
-                    string st = "exec SP_DeleteEdaraAlarm @p2,@p3,@p4";
+                    string st = "exec  SP_UpdateEdaraNotfication @p1,@p2,@p3,@p4";
                     SqlCommand cmd1 = new SqlCommand(st, Constants.con);
 
-                    // cmd1.Parameters.AddWithValue("@p1", row.Cells[7].Value);
+                    cmd1.Parameters.AddWithValue("@p1", TXT_EdafaNo.Text);
+                    cmd1.Parameters.AddWithValue("@p2", Cmb_FY2.Text);
+                    cmd1.Parameters.AddWithValue("@p3", Constants.CodeEdara);
+                    cmd1.Parameters.AddWithValue("@p4", TXT_TRNO.Text);
 
-
-                    cmd1.Parameters.AddWithValue("@p2", Convert.ToInt32(TXT_EdafaNo.Text));
-
-                    cmd1.Parameters.AddWithValue("@p3", (Cmb_FY2.Text));
-                    cmd1.Parameters.AddWithValue("@p4", (TXT_TRNO.Text));
-                    //  cmd1.ExecuteNonQuery();
-
-                    foreach (DataGridViewRow row in dataGridView1.Rows)
+                    cmd1.ExecuteNonQuery();
+                }
+                else if (Constants.User_Type == "B")
+                {
+                    if (FlagSign4 != 1 && Constants.UserTypeB != "Finance")
                     {
-                        if (!row.IsNewRow)
+                        string st = "exec SP_DeleteEdaraAlarm @p2,@p3,@p4";
+                        SqlCommand cmd1 = new SqlCommand(st, Constants.con);
+
+                        // cmd1.Parameters.AddWithValue("@p1", row.Cells[7].Value);
+
+
+                        cmd1.Parameters.AddWithValue("@p2", Convert.ToInt32(TXT_EdafaNo.Text));
+
+                        cmd1.Parameters.AddWithValue("@p3", (Cmb_FY2.Text));
+                        cmd1.Parameters.AddWithValue("@p4", (TXT_TRNO.Text));
+                        //  cmd1.ExecuteNonQuery();
+
+                        foreach (DataGridViewRow row in dataGridView1.Rows)
                         {
-                            st = "exec SP_SendEdaraAlarm @p1,@p11,@p111,@p2,@p3,@p33,@p4,@p5,@p6,@p7";
-                            cmd1 = new SqlCommand(st, Constants.con);
+                            if (!row.IsNewRow)
+                            {
+                                st = "exec SP_SendEdaraAlarm @p1,@p11,@p111,@p2,@p3,@p33,@p4,@p5,@p6,@p7";
+                                cmd1 = new SqlCommand(st, Constants.con);
 
-                            cmd1.Parameters.AddWithValue("@p1", row.Cells[7].Value);
-                            cmd1.Parameters.AddWithValue("@p11", row.Cells[8].Value);
-                            cmd1.Parameters.AddWithValue("@p111", row.Cells[6].Value);
+                                cmd1.Parameters.AddWithValue("@p1", row.Cells[7].Value);
+                                cmd1.Parameters.AddWithValue("@p11", row.Cells[8].Value);
+                                cmd1.Parameters.AddWithValue("@p111", row.Cells[6].Value);
 
-                            cmd1.Parameters.AddWithValue("@p2", Convert.ToInt32(TXT_EdafaNo.Text));
-                            cmd1.Parameters.AddWithValue("@p4", Convert.ToInt32(Cmb_AmrNo.Text));
-                            cmd1.Parameters.AddWithValue("@p3", (Cmb_FY2.Text));
-                            cmd1.Parameters.AddWithValue("@p33", (TXT_TRNO.Text));// cmd1.Parameters.AddWithValue("@p3", (Cmb_FY2.Text));
-                            cmd1.Parameters.AddWithValue("@p5", (Cmb_FY.Text));
-                            // cmd.Parameters.AddWithValue("@p5", Convert.ToInt32(row.Cells[6].Value));
+                                cmd1.Parameters.AddWithValue("@p2", Convert.ToInt32(TXT_EdafaNo.Text));
+                                cmd1.Parameters.AddWithValue("@p4", Convert.ToInt32(Cmb_AmrNo.Text));
+                                cmd1.Parameters.AddWithValue("@p3", (Cmb_FY2.Text));
+                                cmd1.Parameters.AddWithValue("@p33", (TXT_TRNO.Text));// cmd1.Parameters.AddWithValue("@p3", (Cmb_FY2.Text));
+                                cmd1.Parameters.AddWithValue("@p5", (Cmb_FY.Text));
+                                // cmd.Parameters.AddWithValue("@p5", Convert.ToInt32(row.Cells[6].Value));
 
-                            //  cmd.Parameters.AddWithValue("@p6", (Convert.ToDateTime(TXT_Date.Value.ToShortDateString())));
-                            cmd1.Parameters.AddWithValue("@p6", Constants.User_Name.ToString());
-                            cmd1.Parameters.AddWithValue("@p7", Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                                //  cmd.Parameters.AddWithValue("@p6", (Convert.ToDateTime(TXT_Date.Value.ToShortDateString())));
+                                cmd1.Parameters.AddWithValue("@p6", Constants.User_Name.ToString());
+                                cmd1.Parameters.AddWithValue("@p7", Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
-                            cmd1.ExecuteNonQuery();
+                                cmd1.ExecuteNonQuery();
+                            }
                         }
                     }
+
                 }
-                
-                
+
+
                 UpdateEdafaSignatureCycle();
-
-
-
-
 
                 MessageBox.Show("تم التعديل بنجاح  ! ");
 
@@ -1647,6 +1698,173 @@ namespace ANRPC_Inventory
         #endregion
 
 
+        //------------------------------------------ Validation Handler ---------------------------------
+        #region Validation Handler
+        private List<(ErrorProvider, Control, string)> ValidateAttachFile()
+        {
+            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+            #region Cmb_FY2
+            if (string.IsNullOrWhiteSpace(Cmb_FY2.Text) || Cmb_FY2.SelectedIndex == -1)
+            {
+                errorsList.Add((errorProvider, Cmb_FY2, "تاكد من  اختيار السنة المالية"));
+            }
+            #endregion
+
+            #region Cmb_CType
+            if (string.IsNullOrWhiteSpace(Cmb_CType.Text) || Cmb_CType.SelectedIndex == -1)
+            {
+                errorsList.Add((errorProvider, Cmb_CType, "تاكد من  اختيار نوع إذن الصرف"));
+            }
+            #endregion
+
+            #region TXT_EdafaNo
+            if (string.IsNullOrWhiteSpace(TXT_EdafaNo.Text))
+            {
+                errorsList.Add((errorProvider, TXT_EdafaNo, "يجب اختيار رقم إذن الصرف"));
+            }
+            #endregion
+
+            return errorsList;
+        }
+
+        private List<(ErrorProvider, Control, string)> ValidateSearch(bool isConfirm = false)
+        {
+            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+            if (isConfirm)
+            {
+                #region Cmb_CType2
+                if (string.IsNullOrWhiteSpace(Cmb_CType2.Text) || Cmb_CType2.SelectedIndex == -1)
+                {
+                    errorsList.Add((errorProvider, Cmb_CType2, "تاكد من  اختيار نوع إذن الصرف"));
+                }
+                #endregion
+
+                #region Cmb_FYear2
+                if (string.IsNullOrWhiteSpace(Cmb_FYear2.Text) || Cmb_FYear2.SelectedIndex == -1)
+                {
+                    errorsList.Add((errorProvider, Cmb_FYear2, "تاكد من  اختيار السنة المالية"));
+                }
+                #endregion
+
+                #region Cmb_EdafaNo2
+                if (string.IsNullOrWhiteSpace(Cmb_EdafaNo2.Text) || Cmb_EdafaNo2.SelectedIndex == -1)
+                {
+                    errorsList.Add((errorProvider, Cmb_EdafaNo2, "يجب اختيار رقم إذن الصرف"));
+                }
+                #endregion
+            }
+            else
+            {
+                #region Cmb_CType
+                if (string.IsNullOrWhiteSpace(Cmb_CType.Text) || Cmb_CType.SelectedIndex == -1)
+                {
+                    errorsList.Add((errorProvider, Cmb_CType, "تاكد من  اختيار نوع إذن الصرف"));
+                }
+                #endregion
+
+                #region Cmb_FY2
+                if (string.IsNullOrWhiteSpace(Cmb_FY2.Text) || Cmb_FY2.SelectedIndex == -1)
+                {
+                    errorsList.Add((errorProvider, Cmb_FY2, "تاكد من  اختيار السنة المالية"));
+                }
+                #endregion
+
+                #region TXT_EdafaNo
+                if (string.IsNullOrWhiteSpace(TXT_EdafaNo.Text))
+                {
+                    errorsList.Add((errorProvider, TXT_EdafaNo, "يجب اختيار رقم إذن الصرف"));
+                }
+                #endregion
+            }
+
+            return errorsList;
+        }
+
+        private List<(ErrorProvider, Control, string)> ValidateSave()
+        {
+            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+            #region Cmb_FY2
+            if (string.IsNullOrWhiteSpace(Cmb_FY2.Text) || Cmb_FY2.SelectedIndex == -1)
+            {
+                errorsList.Add((errorProvider, Cmb_FY2, "تاكد من  اختيار السنة المالية"));
+            }
+            #endregion
+
+            #region Cmb_CType
+            if (string.IsNullOrWhiteSpace(Cmb_CType.Text) || Cmb_CType.SelectedIndex == -1)
+            {
+                errorsList.Add((errorProvider, Cmb_CType, "تاكد من  اختيار نوع إذن الصرف"));
+            }
+            #endregion
+
+            #region TXT_EdafaNo
+            if (string.IsNullOrWhiteSpace(TXT_EdafaNo.Text))
+            {
+                errorsList.Add((errorProvider, TXT_EdafaNo, "يجب اختيار رقم إذن الصرف"));
+            }
+            #endregion
+
+            #region dataGridView1
+            if (dataGridView1.Rows.Count <= 0)
+            {
+                //errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
+                MessageBox.Show("لايمكن ان يتكون طلب توريد بدون بنود");
+            }
+            else if (dataGridView1.Rows.Count == 1 && dataGridView1.Rows[0].IsNewRow == true)
+            {
+                //errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
+                MessageBox.Show("لايمكن ان يتكون طلب توريد بدون بنود");
+            }
+            #endregion
+
+            PictureBox signControl = CheckSignatures(signatureTable, currentSignNumber);
+            if (signControl != null)
+            {
+                errorsList.Add((errorProvider, signControl, "تاكد من التوقيع"));
+            }
+
+            return errorsList;
+        }
+
+        private bool IsValidCase(VALIDATION_TYPES type)
+        {
+            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+            if (type == VALIDATION_TYPES.ATTACH_FILE)
+            {
+                errorsList = ValidateAttachFile();
+            }
+            else if (type == VALIDATION_TYPES.SEARCH)
+            {
+                errorsList = ValidateSearch(false);
+            }
+            else if (type == VALIDATION_TYPES.CONFIRM_SEARCH)
+            {
+                errorsList = ValidateSearch(true);
+            }
+            else if (type == VALIDATION_TYPES.SAVE)
+            {
+                errorsList = ValidateSave();
+            }
+
+
+            errorProviderHandler(errorsList);
+
+            if (errorsList.Count > 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        #endregion
+
+
+
+
         public FEdafaMakhzania_F()
         {
             InitializeComponent();
@@ -1658,7 +1876,7 @@ namespace ANRPC_Inventory
         private void EdafaMakhzania_Load(object sender, EventArgs e)
         {
 
-
+            alertProvider.Icon = SystemIcons.Warning;
             HelperClass.comboBoxFiller(Cmb_FY, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
             HelperClass.comboBoxFiller(Cmb_FY2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
             HelperClass.comboBoxFiller(Cmb_FYear2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
@@ -1789,17 +2007,12 @@ namespace ANRPC_Inventory
             reset();
         }
                
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Graphics surface = CreateGraphics();
-            Pen pen1 = new Pen(Color.Black, 2);
-            surface.DrawLine(pen1, 0, 185, 1000, 185);
-        }
         private void Column2_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = false;
             return;
         }
+        
         private void Column_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar)
@@ -1827,6 +2040,7 @@ namespace ANRPC_Inventory
             }
 
         }
+        
         private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             if (dataGridView1.CurrentCell.ColumnIndex == 11 ){
@@ -1945,15 +2159,6 @@ namespace ANRPC_Inventory
             Constants.closecon();
 
 
-
-
-
-
-
-
-
-
-
             ////////////////////////////////////////////
              if (AddEditFlag == 2)
             {
@@ -1982,58 +2187,16 @@ namespace ANRPC_Inventory
                 Constants.closecon();
 
             }
-            //go and get talbTawreed_no for this FYear
-            /*
-            if (AddEditFlag == 2)//add
-            {
-                //call sp that get last num that eentered for this MM and this YYYY
-                if (con != null && con.State == ConnectionState.Closed)
-                {
-                    con.Open();
-                }
-
-                // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
-                string cmdstring = "select max(Amrshraa_No) from  T_Awamershraa where AmrSheraa_sanamalia=@FY ";
-                SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-
-                // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
-                cmd.Parameters.AddWithValue("@FY", Cmb_FY.Text);
-                
-                int flag;
-
-                try
-                {
-                    if (con != null && con.State == ConnectionState.Closed)
-                    {
-                        con.Open();
-                    }
-                    // cmd.ExecuteNonQuery();
-                    var count = cmd.ExecuteScalar();
-                    executemsg = true;
-                    //  if (cmd.Parameters["@Num"].Value != null && cmd.Parameters["@Num"].Value != DBNull.Value)
-                    if (count != null && count != DBNull.Value)
-                    {
-                        //  flag = (int)cmd.Parameters["@Num"].Value;
-
-                        flag = (int)count;
-                        flag = flag + 1;
-                        TXT_AmrNo.Text = flag.ToString();//el rakm el new
-
-                    }
-
-                }
-                catch (SqlException sqlEx)
-                {
-                    executemsg = false;
-                    MessageBox.Show(sqlEx.ToString());
-                    // flag = (int)cmd.Parameters["@Num"].Value;
-                }
-            }*/
         
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
+            if (!IsValidCase(VALIDATION_TYPES.SAVE))
+            {
+                return;
+            }
+
             if (AddEditFlag == 2)
             {
                 if (FlagSign1 != 1)
@@ -2114,8 +2277,20 @@ namespace ANRPC_Inventory
 
             //call sp that get last num that eentered for this MM and this YYYY
             Constants.opencon();
-            string cmdstring = "SELECT [Edafa_No] from T_Edafa where Edafa_FY=@FY and TR_NO=@TRNO and ( Sign1 is not null ) and (Sign4 is not null) and (Sign3 is null) group by Edafa_No";
 
+            string cmdstring = "";
+
+            if (Constants.User_Type == "A")
+            {
+                cmdstring = "SELECT [Edafa_No] from T_EdaraNotfication where Edafa_FY=@FY and TR_NO=@TRNO and EdaraCode = '" + Constants.CodeEdara + "' and (Sign4 is null) group by Edafa_No order by  Edafa_No";
+            }
+            else if (Constants.User_Type == "B")
+            {
+                if (Constants.UserTypeB == "Edafa")
+                { 
+                    cmdstring = "SELECT [Edafa_No] from T_Edafa where Edafa_FY=@FY and TR_NO=@TRNO and ( Sign1 is not null ) and (Sign4 is not null) and (Sign3 is null) group by Edafa_No order by  Edafa_No";
+                }
+            }
 
             SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
 
@@ -2131,11 +2306,9 @@ namespace ANRPC_Inventory
             Cmb_EdafaNo2.DisplayMember = "Edafa_No";
             Cmb_EdafaNo2.SelectedIndex = -1;
             Constants.closecon();
-
-
-
         }
 
+        
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 11 ||e.ColumnIndex==15) //if second cell
@@ -2365,6 +2538,7 @@ namespace ANRPC_Inventory
             }
         }
 
+
         private void button1_Click_1(object sender, EventArgs e)
         {
             if ((MessageBox.Show("هل تريد طباعة اخطار مهمات غير مطابقة /عجز ؟", "", MessageBoxButtons.YesNo)) == DialogResult.Yes)
@@ -2377,11 +2551,6 @@ namespace ANRPC_Inventory
                 FReports F = new FReports();
                 F.Show();
 
-            }
-
-            else
-            { //No
-                //----
             }
         }
 
@@ -2409,14 +2578,19 @@ namespace ANRPC_Inventory
                 {
                     cmd.ExecuteNonQuery();
                     executemsg = true;
-                    Constants.MangerName = (string)cmd.Parameters["@aot"].Value;
+                   
                 }
                 catch (SqlException sqlEx)
                 {
                     executemsg = false;
-                    MessageBox.Show(sqlEx.ToString());
-  Constants.MangerName =(string)cmd.Parameters["@aot"].Value;
+                    Console.WriteLine(sqlEx);
                 }
+
+                if (executemsg)
+                {
+                    Constants.MangerName = (string)cmd.Parameters["@aot"].Value;
+                }
+
                 Constants.closecon();
                 //GET NAME MODER 3AM
 
@@ -2424,11 +2598,6 @@ namespace ANRPC_Inventory
                 FReports F = new FReports();
                 F.Show();
 
-            }
-
-            else
-            { //No
-                //----
             }
         }
 
@@ -2454,10 +2623,6 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void Cmb_AmrNo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
         
         public int CheckDirect70()
         {
@@ -2794,10 +2959,10 @@ namespace ANRPC_Inventory
 
         private void BTN_Search_Click(object sender, EventArgs e)
         {
-            //if (!IsValidCase(VALIDATION_TYPES.SEARCH))
-            //{
-            //    return;
-            //}
+            if (!IsValidCase(VALIDATION_TYPES.SEARCH))
+            {
+                return;
+            }
 
             string amr_no = TXT_EdafaNo.Text;
             string fyear = Cmb_FY2.Text;
@@ -2820,10 +2985,10 @@ namespace ANRPC_Inventory
 
         private void BTN_Search_Motab3a_Click(object sender, EventArgs e)
         {
-            //if (!IsValidCase(VALIDATION_TYPES.CONFIRM_SEARCH))
-            //{
-            //    return;
-            //}
+            if (!IsValidCase(VALIDATION_TYPES.CONFIRM_SEARCH))
+            {
+                return;
+            }
 
             string edafa_no = Cmb_EdafaNo2.Text;
             string fyear = Cmb_FYear2.Text;
@@ -2859,10 +3024,10 @@ namespace ANRPC_Inventory
         private void BTN_Save2_Click(object sender, EventArgs e)
         {
 
-            //if (!IsValidCase(VALIDATION_TYPES.SAVE))
-            //{
-            //    return;
-            //}
+            if (!IsValidCase(VALIDATION_TYPES.SAVE))
+            {
+                return;
+            }
 
             EditLogic();
 
@@ -2905,5 +3070,103 @@ namespace ANRPC_Inventory
                 TXT_TRNO2.Text = Cmb_CType2.SelectedValue.ToString();
             }
         }
+
+
+        private void browseBTN_Click(object sender, EventArgs e)
+        {
+            if (!IsValidCase(VALIDATION_TYPES.ATTACH_FILE))
+            {
+                return;
+            }
+
+            openFileDialog1.Filter = "PDF(*.pdf)|*.pdf";
+            DialogResult dialogRes = openFileDialog1.ShowDialog();
+            string ConstantPath = @"\\172.18.8.83\MaterialAPP\PDF\";//////////////////change it to server path
+
+            foreach (String file in openFileDialog1.FileNames)
+            {
+                if (dialogRes == DialogResult.OK)
+                {
+                    string VariablePath = string.Concat(Constants.CodeEdara, @"\");
+                    string path = ConstantPath + VariablePath;
+
+                    if (!Directory.Exists(path))
+                    {
+                        MessageBox.Show("عفوا لايمكنك ارفاق مرفقات برجاء الرجوع إلي إدارة نظم المعلومات");
+                        return;
+                    }
+
+                    path += Cmb_FY2.Text + @"\";
+
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+
+                    path += "EDAFA_MAKHZANIA" + @"\";
+
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+
+
+                    path += TXT_TRNO.Text + @"\";
+
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+
+                    path += TXT_EdafaNo.Text + @"\";
+
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+
+                    string filename = Path.GetFileName(file);
+                    path += filename;
+
+                    if (!File.Exists(path))
+                    {
+                        File.Copy(file, path);
+                    }
+                }
+            }
+
+            if (dialogRes == DialogResult.OK)
+            {
+                MessageBox.Show("تم إرفاق المرفقات");
+            }
+            else
+            {
+                MessageBox.Show("لم يتم إرفاق المرفقات");
+            }
+        }
+
+        private void BTN_PDF_Click(object sender, EventArgs e)
+        {
+
+            if (!IsValidCase(VALIDATION_TYPES.ATTACH_FILE))
+            {
+                return;
+            }
+
+            PDF_PopUp popup = new PDF_PopUp();
+
+            popup.WholePath = @"\\172.18.8.83\MaterialAPP\PDF\" + Constants.CodeEdara + @"\" + Cmb_FY2.Text + @"\EDAFA_MAKHZANIA\" + TXT_TRNO.Text + @"\" + TXT_EdafaNo.Text + @"\";
+            try
+            {
+                popup.ShowDialog(this);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            popup.Dispose();
+        }
+
     }
 }

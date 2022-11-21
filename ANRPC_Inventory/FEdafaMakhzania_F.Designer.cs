@@ -152,6 +152,9 @@
             this.BTN_PDF = new System.Windows.Forms.Button();
             this.browseBTN = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.alertProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             this.takalefTable.SuspendLayout();
             this.signatureTable.SuspendLayout();
@@ -178,6 +181,8 @@
             this.panel12.SuspendLayout();
             this.panel13.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.alertProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -1728,6 +1733,7 @@
             this.BTN_PDF.TabIndex = 337;
             this.BTN_PDF.Text = "عرض المرفقات";
             this.BTN_PDF.UseVisualStyleBackColor = false;
+            this.BTN_PDF.Click += new System.EventHandler(this.BTN_PDF_Click);
             // 
             // browseBTN
             // 
@@ -1747,6 +1753,7 @@
             this.browseBTN.TabIndex = 340;
             this.browseBTN.Text = "إرفاق مرفقات";
             this.browseBTN.UseVisualStyleBackColor = false;
+            this.browseBTN.Click += new System.EventHandler(this.browseBTN_Click);
             // 
             // panel3
             // 
@@ -1756,6 +1763,20 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1150, 258);
             this.panel3.TabIndex = 246;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider.ContainerControl = this;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // alertProvider
+            // 
+            this.alertProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.alertProvider.ContainerControl = this;
             // 
             // FEdafaMakhzania_F
             // 
@@ -1815,6 +1836,8 @@
             this.panel12.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.alertProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1943,5 +1966,8 @@
         private System.Windows.Forms.TextBox TXT_PaccNo;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox TXT_AmrNo;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ErrorProvider alertProvider;
     }
 }

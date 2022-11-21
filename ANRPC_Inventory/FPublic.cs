@@ -544,9 +544,12 @@ namespace ANRPC_Inventory
                 Constants.currentOpened.Close();
             }
             //----------------------
-        //    Constants.EznSarf_FF = true; //--> panel7 --> visible - panel2 --> Invisible
+            //    Constants.EznSarf_FF = true; //--> panel7 --> visible - panel2 --> Invisible
+
             pictureBox2.Visible = false;
-          FEdafaMakhzania_F_Edara F = new FEdafaMakhzania_F_Edara();
+            Constants.Edafa_F = false;
+            FEdafaMakhzania_F F = new FEdafaMakhzania_F();
+
             Constants.currentOpened = F;
             F.Show();
             F.MdiParent = this;
