@@ -399,6 +399,38 @@ namespace ANRPC_Inventory
 
         }
 
+        private void HandleDataGridViewStyle()
+        {
+
+            if (Constants.User_Type == "A")
+            {
+                //dataGridView1.Columns["Quan2"].ReadOnly = true;
+                //dataGridView1.Columns["TotalPrice"].ReadOnly = true;
+            }
+            else if (Constants.User_Type == "B")
+            {
+                if (Constants.UserTypeB == "Sarf")
+                {
+                    dataGridView1.Columns["Quan2"].DefaultCellStyle.BackColor = Color.Salmon;
+                }
+                else
+                {
+                    //dataGridView1.Columns["Quan2"].ReadOnly = false;
+                }
+
+                if (Constants.UserTypeB == "Finance")
+                {
+                    dataGridView1.Columns["TotalPrice"].DefaultCellStyle.BackColor = Color.Salmon;
+                }
+                else
+                {
+                    //dataGridView1.Columns["TotalPrice"].ReadOnly = true;
+                }
+            }
+
+        }
+
+
         private void GetEznBnod(string eznNo, string fyear, string momayz)
         {
             table.Clear();
@@ -700,18 +732,16 @@ namespace ANRPC_Inventory
 
             //btn Section
             //generalBtn
-            BTN_SearchEzn.Enabled = true;
-            BTN_Search_Motab3a.Enabled = true;
-
             SaveBtn.Enabled = true;
             BTN_Cancel.Enabled = true;
             Addbtn2.Enabled = true;
+            browseBTN.Enabled = true;
+            BTN_PDF.Enabled = true;
+
             Addbtn.Enabled = false;
             Editbtn2.Enabled = false;
             BTN_SearchEzn.Enabled = false;
             BTN_Print.Enabled = false;
-            browseBTN.Enabled = true;
-            BTN_PDF.Enabled = true;
 
             //signature btn
             changePanelState(signatureTable, false);
@@ -734,7 +764,7 @@ namespace ANRPC_Inventory
         public void PrepareEditState()
         {
             PrepareAddState();
-            panel8.Enabled = false;
+            changePanelState(panel8, false);
             BTN_Print.Enabled = true;
 
             Pic_Sign1.Image = null;
@@ -1946,20 +1976,19 @@ namespace ANRPC_Inventory
             {
                 Constants.opencon();
                
-               TXT_EznNo.AutoCompleteMode = AutoCompleteMode.None;
+                TXT_EznNo.AutoCompleteMode = AutoCompleteMode.None;
                 TXT_EznNo.AutoCompleteSource = AutoCompleteSource.None; ;
-               // string cmdstring3 = "SELECT [EznSarf_No] from T_EznSarf where FYear='" + Cmb_FYear.Text + "'";
+
                 string cmdstring3 = "";
                 if (Constants.User_Type == "A")
                 {
                     cmdstring3 = "SELECT [EznSarf_No] from T_EznSarf where CodeEdara=" + Constants.CodeEdara + " and  FYear='" + Cmb_FYear.Text + "'";
-
                 }
                 else
                 {
                     cmdstring3 = "SELECT [EznSarf_No] from T_EznSarf where  FYear='" + Cmb_FYear.Text + "'";
-
                 }
+
                 SqlCommand cmd3 = new SqlCommand(cmdstring3, Constants.con);
                 SqlDataReader dr3 = cmd3.ExecuteReader();
                 //---------------------------------
@@ -1986,17 +2015,13 @@ namespace ANRPC_Inventory
                 {
                     return;
                 }
-                //call sp that get last num that eentered for this MM and this YYYY
+
                 Constants.opencon();
-
-                // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
                 string cmdstring = "select ( COALESCE(MAX(EznSarf_No), 0)) from  T_EznSarf where FYear=@FY and TR_NO=@TRNO ";
-
-               // string cmdstring = "select ( COALESCE(MAX(EznSarf_No), 0)) from  T_EznSarf where FYear='"+ Cmb_FYear.Text.ToString()+"'and Momayz='" + TXT_TRNO.Text.ToString()+"'";// and TR_NO='68' ";
+                
                 SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
                 
-                // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
-               cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
+                cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
                 cmd.Parameters.AddWithValue("@TRNO", TXT_TRNO.Text.ToString());
                 int flag;
 
@@ -2004,10 +2029,9 @@ namespace ANRPC_Inventory
                 {
                     Constants.opencon();
 
-                    // cmd.ExecuteNonQuery();
                     var count = cmd.ExecuteScalar();
                     executemsg = true;
-                    //  if (cmd.Parameters["@Num"].Value != null && cmd.Parameters["@Num"].Value != DBNull.Value)
+
                     if (count != null && count != DBNull.Value)
                     {
                         //  flag = (int)cmd.Parameters["@Num"].Value;
@@ -2027,14 +2051,9 @@ namespace ANRPC_Inventory
                         //-----------------------------------
                         var count2 = cmd2.ExecuteScalar();
                         executemsg = true;
-                        //  if (cmd.Parameters["@Num"].Value != null && cmd.Parameters["@Num"].Value != DBNull.Value)
+
                         if (count2 != null && count2 != DBNull.Value)
                         {
-                            //  flag = (int)cmd.Parameters["@Num"].Value;
-                            //if((int)count2>0)
-                            //{
-                            //    flag = (int)count2 + 1;
-                            //}
                             if (flag <= (int)count2)
                             {
                                 flag = (int)count2 + 1;
@@ -2048,32 +2067,15 @@ namespace ANRPC_Inventory
                         cmd1.Parameters.AddWithValue("@p2", Cmb_FYear.Text);
                         cmd1.Parameters.AddWithValue("@p3", TXT_TRNO.Text);
 
-
-
-
                         cmd1.ExecuteNonQuery();
 
-                        ///////////////////////////end by nouran///////////////////////
-
-
-
-                        //////////////////////////////////////////////////
-
-
-
-
-
-
                         TXT_EznNo.Text = flag.ToString();//el rakm el new
-                    //    TXT_EznNo.Focus();
                         if (AddEditFlag == 2)
                         {
-
                             if (!(string.IsNullOrWhiteSpace(TXT_TRNO.Text) || string.IsNullOrEmpty(TXT_TRNO.Text)))
                             {
                                 GetEznBnod(TXT_EznNo.Text, Cmb_FYear.Text, TXT_TRNO.Text);
                             }
-
                         }
 
                     }
@@ -2082,8 +2084,7 @@ namespace ANRPC_Inventory
                 catch (SqlException sqlEx)
                 {
                     executemsg = false;
-                    MessageBox.Show(sqlEx.ToString());
-                    // flag = (int)cmd.Parameters["@Num"].Value;
+                    Console.WriteLine(sqlEx);
                 }
             }
         }
@@ -2112,38 +2113,6 @@ namespace ANRPC_Inventory
             }
 
             reset();
-        }
-
-
-
-        private void HandleDataGridViewStyle()
-        {
-
-            if(Constants.User_Type == "A")
-            {
-                //dataGridView1.Columns["Quan2"].ReadOnly = true;
-                //dataGridView1.Columns["TotalPrice"].ReadOnly = true;
-            }
-            else if(Constants.User_Type == "B")
-            {
-                if(Constants.UserTypeB == "Sarf")
-                {
-                    dataGridView1.Columns["Quan2"].DefaultCellStyle.BackColor = Color.Salmon;
-                }
-                else{
-                    //dataGridView1.Columns["Quan2"].ReadOnly = false;
-                }
-                
-                if (Constants.UserTypeB == "Finance")
-                {
-                    dataGridView1.Columns["TotalPrice"].DefaultCellStyle.BackColor = Color.Salmon;
-                }
-                else
-                {
-                    //dataGridView1.Columns["TotalPrice"].ReadOnly = true;
-                }
-            }
-
         }
 
         private void Editbtn_Click_1(object sender, EventArgs e)

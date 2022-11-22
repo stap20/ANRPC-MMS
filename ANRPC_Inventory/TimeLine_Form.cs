@@ -28,7 +28,7 @@ namespace ANRPC_Inventory
         private void queryData()
         {
             string codeEdara = "850";
-            int TalbTwareed_No =  19 ;
+            int TalbTwareed_No =  8 ;
             string FYear = "2022_2023";
             string formNo = "1";
             SqlConnection sqlConnction = new SqlConnection(Constants.constring);

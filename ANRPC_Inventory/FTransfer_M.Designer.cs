@@ -119,7 +119,7 @@
             this.BTN_Search_Motab3a = new System.Windows.Forms.Button();
             this.BTN_Save2 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.BTN_SearchEzn = new System.Windows.Forms.Button();
+            this.BTN_Search = new System.Windows.Forms.Button();
             this.BTN_Cancel = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
@@ -330,7 +330,7 @@
             this.BTN_Sign3.TabIndex = 32;
             this.BTN_Sign3.Text = "توقيع";
             this.BTN_Sign3.UseVisualStyleBackColor = false;
-            this.BTN_Sign3.Click += new System.EventHandler(this.button4_Click);
+            this.BTN_Sign3.Click += new System.EventHandler(this.BTN_Sign3_Click);
             // 
             // BTN_Sign4
             // 
@@ -1255,7 +1255,7 @@
             this.Editbtn.TabIndex = 47;
             this.Editbtn.Text = "تعديل";
             this.Editbtn.UseVisualStyleBackColor = false;
-            this.Editbtn.Click += new System.EventHandler(this.Editbtn_Click_1);
+            this.Editbtn.Click += new System.EventHandler(this.Editbtn_Click);
             // 
             // BTN_Search_Motab3a
             // 
@@ -1273,6 +1273,7 @@
             this.BTN_Search_Motab3a.TabIndex = 337;
             this.BTN_Search_Motab3a.Text = "بحث";
             this.BTN_Search_Motab3a.UseVisualStyleBackColor = false;
+            this.BTN_Search_Motab3a.Click += new System.EventHandler(this.BTN_Search_Motab3a_Click);
             // 
             // BTN_Save2
             // 
@@ -1297,7 +1298,7 @@
             this.panel2.BackColor = System.Drawing.Color.Transparent;
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel2.Controls.Add(this.BTN_SearchEzn);
+            this.panel2.Controls.Add(this.BTN_Search);
             this.panel2.Controls.Add(this.BTN_Cancel);
             this.panel2.Controls.Add(this.TXT_CodeEdara);
             this.panel2.Controls.Add(this.panel4);
@@ -1319,22 +1320,23 @@
             this.panel2.Size = new System.Drawing.Size(1251, 152);
             this.panel2.TabIndex = 19;
             // 
-            // BTN_SearchEzn
+            // BTN_Search
             // 
-            this.BTN_SearchEzn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_SearchEzn.BackColor = System.Drawing.Color.LightGray;
-            this.BTN_SearchEzn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_SearchEzn.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
-            this.BTN_SearchEzn.FlatAppearance.BorderSize = 3;
-            this.BTN_SearchEzn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_SearchEzn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.BTN_SearchEzn.ForeColor = System.Drawing.Color.Blue;
-            this.BTN_SearchEzn.Location = new System.Drawing.Point(887, 2);
-            this.BTN_SearchEzn.Name = "BTN_SearchEzn";
-            this.BTN_SearchEzn.Size = new System.Drawing.Size(70, 31);
-            this.BTN_SearchEzn.TabIndex = 339;
-            this.BTN_SearchEzn.Text = "بحث";
-            this.BTN_SearchEzn.UseVisualStyleBackColor = false;
+            this.BTN_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Search.BackColor = System.Drawing.Color.LightGray;
+            this.BTN_Search.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Search.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
+            this.BTN_Search.FlatAppearance.BorderSize = 3;
+            this.BTN_Search.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_Search.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.BTN_Search.ForeColor = System.Drawing.Color.Blue;
+            this.BTN_Search.Location = new System.Drawing.Point(887, 2);
+            this.BTN_Search.Name = "BTN_Search";
+            this.BTN_Search.Size = new System.Drawing.Size(70, 31);
+            this.BTN_Search.TabIndex = 339;
+            this.BTN_Search.Text = "بحث";
+            this.BTN_Search.UseVisualStyleBackColor = false;
+            this.BTN_Search.Click += new System.EventHandler(this.BTN_Search_Click);
             // 
             // BTN_Cancel
             // 
@@ -1352,9 +1354,11 @@
             this.BTN_Cancel.TabIndex = 338;
             this.BTN_Cancel.Text = "إلغاء";
             this.BTN_Cancel.UseVisualStyleBackColor = false;
+            this.BTN_Cancel.Click += new System.EventHandler(this.BTN_Cancel_Click);
             // 
             // panel4
             // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.label3);
             this.panel4.Controls.Add(this.TXT_StockNoAll);
@@ -1436,6 +1440,7 @@
             // 
             // panel5
             // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel5.Controls.Add(this.label52);
             this.panel5.Controls.Add(this.Txt_ReqQuan);
@@ -1713,7 +1718,6 @@
             this.SaveBtn.TabIndex = 20;
             this.SaveBtn.Text = "حفظ";
             this.SaveBtn.UseVisualStyleBackColor = false;
-            this.SaveBtn.Visible = false;
             this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
             // Editbtn2
@@ -1732,7 +1736,7 @@
             this.Editbtn2.TabIndex = 50;
             this.Editbtn2.Text = "تعديل";
             this.Editbtn2.UseVisualStyleBackColor = false;
-            this.Editbtn2.Click += new System.EventHandler(this.Editbtn_Click_1);
+            this.Editbtn2.Click += new System.EventHandler(this.Editbtn2_Click);
             // 
             // Addbtn
             // 
@@ -2072,7 +2076,7 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Button BTN_Search_Motab3a;
-        private System.Windows.Forms.Button BTN_SearchEzn;
+        private System.Windows.Forms.Button BTN_Search;
         private System.Windows.Forms.Button BTN_Cancel;
         private System.Windows.Forms.TextBox Txt_Quan;
         private System.Windows.Forms.TextBox Txt_ReqQuan;
