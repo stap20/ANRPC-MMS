@@ -2425,17 +2425,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1150, 720);
             this.Controls.Add(this.panel16);
             this.Controls.Add(this.panel15);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel13);
             this.Controls.Add(this.panel7);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TalbTawred";
             this.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "TalbTawred";
             this.Load += new System.EventHandler(this.TalbTawred_Load);
             this.panel13.ResumeLayout(false);

@@ -42,8 +42,8 @@ namespace ANRPC_Inventory
             tabButton.IconFont = iconFont;
 
             tabButton.FlatAppearance.BorderSize = 0;
-            tabButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(43, 19, 114);
-            tabButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(43, 19, 114);
+            tabButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(2, 163, 123);
+            tabButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(2, 163, 123);
 
             tabButton.AutoSize = true;
 
@@ -55,6 +55,8 @@ namespace ANRPC_Inventory
             
             tabButton.FlatStyle = FlatStyle.Flat;            
             tabButton.TextImageRelation = TextImageRelation.ImageBeforeText;
+            tabButton.TextAlign = ContentAlignment.MiddleLeft;
+
             tabButton.Dock = dockStyle;
 
 

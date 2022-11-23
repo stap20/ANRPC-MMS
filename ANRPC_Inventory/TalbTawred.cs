@@ -2667,26 +2667,9 @@ namespace ANRPC_Inventory
             }
         #endregion
 
-        public TalbTawred()
+        private void init()
         {
-            InitializeComponent();
-            this.SetStyle(ControlStyles.DoubleBuffer, true);
-            this.SetStyle(ControlStyles.UserPaint, true);
-            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-        }
-        public TalbTawred(string x, string y)
-        {
-            InitializeComponent();
-            Cmb_FYear.Text = x;
-            TXT_TalbNo.Text = y;
-            TXT_TalbNo2.Focus();
-
-            ActiveControl = TXT_TalbNo2;
-        }
-        //======================================
-        private void TalbTawred_Load(object sender, EventArgs e)
-        {
-            //////////////////////////load financial year into any combobox///////////////////
+            ////////////////////////////load financial year into any combobox///////////////////
             alertProvider.Icon = SystemIcons.Warning;
             HelperClass.comboBoxFiller(Cmb_FYear, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
             HelperClass.comboBoxFiller(Cmb_FYear2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
@@ -2714,19 +2697,7 @@ namespace ANRPC_Inventory
             // TODO: This line of code loads data into the 'aNRPC_InventoryDataSet.T_BnodAwamershraa' table. You can move, or remove it, as needed.
             // this.t_BnodAwamershraaTableAdapter.Fill(this.aNRPC_InventoryDataSet.T_BnodAwamershraa);
             AddEditFlag = 0;
-            if (Constants.talbtawred_F == false)
-            {
-                panel7.Visible = true;
-                panel2.Visible = false;
-                panel7.Dock = DockStyle.Top;
-            }
-            else if (Constants.talbtawred_F == true)
-            {
-                panel2.Visible = true;
-                panel7.Visible = false;
-                panel2.Dock = DockStyle.Top;
-            }
-            else { }
+
             //------------------------------------------
 
             Constants.opencon();
@@ -2847,8 +2818,41 @@ namespace ANRPC_Inventory
             if (Constants.talbtawred_F == false)
             {
                 TXT_TalbNo.Enabled = false;
-                Cmb_FYear.Enabled=false;
+                Cmb_FYear.Enabled = false;
             }
+        }
+        public TalbTawred()
+        {
+            InitializeComponent();
+
+            if (Constants.talbtawred_F == false)
+            {
+                panel7.Visible = true;
+                panel2.Visible = false;
+                panel7.Dock = DockStyle.Top;
+            }
+            else if (Constants.talbtawred_F == true)
+            {
+                panel2.Visible = true;
+                panel7.Visible = false;
+                panel2.Dock = DockStyle.Top;
+            }
+
+            init();
+        }
+        public TalbTawred(string x, string y)
+        {
+            InitializeComponent();
+            Cmb_FYear.Text = x;
+            TXT_TalbNo.Text = y;
+            TXT_TalbNo2.Focus();
+
+            ActiveControl = TXT_TalbNo2;
+        }
+        //======================================
+        private void TalbTawred_Load(object sender, EventArgs e)
+        {
+
         }
         //===========================================================================
 
@@ -4699,5 +4703,6 @@ namespace ANRPC_Inventory
             AppValueOriginal = sum;
             TXT_AppValue.Text = sum.ToString();
         }
+
     }
 }

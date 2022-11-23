@@ -354,8 +354,15 @@
       <DependentUpon>Search.cs</DependentUpon>
     </Compile>
     <Compile Include="Signature.cs" />
+    <Compile Include="SideBarHandler.cs" />
     <Compile Include="SubTabsHandler.cs" />
     <Compile Include="Tab.cs" />
+    <Compile Include="TalbTawreedTabsHandler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TalbTawreedTabsHandler.Designer.cs">
+      <DependentUpon>TalbTawreedTabsHandler.cs</DependentUpon>
+    </Compile>
     <Compile Include="TasnifTrans.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -452,6 +459,9 @@
     <EmbeddedResource Include="EznSarf_R1.rdlc" />
     <EmbeddedResource Include="Search.resx">
       <DependentUpon>Search.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TalbTawreedTabsHandler.resx">
+      <DependentUpon>TalbTawreedTabsHandler.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TalbTawreed_R1.rdlc" />
     <EmbeddedResource Include="Edafa_R1.rdlc" />

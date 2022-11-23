@@ -162,6 +162,9 @@
             this.BTN_PDF = new System.Windows.Forms.Button();
             this.browseBTN = new System.Windows.Forms.Button();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.alertProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.tBnodAwamershraaBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aNRPC_InventoryDataSet)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -195,6 +198,8 @@
             this.panel9.SuspendLayout();
             this.panel10.SuspendLayout();
             this.panel11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.alertProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // tBnodAwamershraaBindingSource
@@ -362,6 +367,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
@@ -427,9 +433,6 @@
             this.TXT_TRansferNo.Name = "TXT_TRansferNo";
             this.TXT_TRansferNo.Size = new System.Drawing.Size(154, 26);
             this.TXT_TRansferNo.TabIndex = 245;
-            this.TXT_TRansferNo.TextChanged += new System.EventHandler(this.TXT_EznNo_TextChanged);
-            this.TXT_TRansferNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TXT_TalbNo_KeyDown);
-            this.TXT_TRansferNo.Leave += new System.EventHandler(this.TXT_EznNo_Leave);
             // 
             // label7
             // 
@@ -1237,7 +1240,6 @@
             this.Cmb_TRansferNo2.Name = "Cmb_TRansferNo2";
             this.Cmb_TRansferNo2.Size = new System.Drawing.Size(110, 27);
             this.Cmb_TRansferNo2.TabIndex = 26;
-            this.Cmb_TRansferNo2.TextChanged += new System.EventHandler(this.Cmb_TRansferNo2_TextChanged);
             // 
             // Editbtn
             // 
@@ -1888,6 +1890,7 @@
             this.BTN_PDF.TabIndex = 337;
             this.BTN_PDF.Text = "عرض المرفقات";
             this.BTN_PDF.UseVisualStyleBackColor = false;
+            this.BTN_PDF.Click += new System.EventHandler(this.BTN_PDF_Click);
             // 
             // browseBTN
             // 
@@ -1907,6 +1910,7 @@
             this.browseBTN.TabIndex = 340;
             this.browseBTN.Text = "إرفاق مرفقات";
             this.browseBTN.UseVisualStyleBackColor = false;
+            this.browseBTN.Click += new System.EventHandler(this.browseBTN_Click);
             // 
             // panel11
             // 
@@ -1916,6 +1920,20 @@
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(1251, 157);
             this.panel11.TabIndex = 32;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider.ContainerControl = this;
+            // 
+            // alertProvider
+            // 
+            this.alertProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.alertProvider.ContainerControl = this;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // FTransfer_M
             // 
@@ -1981,6 +1999,8 @@
             this.panel9.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.alertProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2119,5 +2139,8 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox TXT_TRNO2;
         private System.Windows.Forms.Button BTN_Print2;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ErrorProvider alertProvider;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

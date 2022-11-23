@@ -35,9 +35,9 @@ namespace ANRPC_Inventory
             this.main = new System.Windows.Forms.Panel();
             this.formwraper = new System.Windows.Forms.Panel();
             this.appbar = new System.Windows.Forms.Panel();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.btnMin = new FontAwesome.Sharp.IconButton();
             this.btnClose = new FontAwesome.Sharp.IconButton();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.btnWindowReset = new FontAwesome.Sharp.IconButton();
             this.btn_max = new FontAwesome.Sharp.IconButton();
             this.sidebar = new System.Windows.Forms.Panel();
@@ -67,10 +67,10 @@ namespace ANRPC_Inventory
             // 
             // main
             // 
-            this.main.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(7)))), ((int)(((byte)(66)))));
+            this.main.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
             this.main.Controls.Add(this.formwraper);
             this.main.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.main.Location = new System.Drawing.Point(250, 60);
+            this.main.Location = new System.Drawing.Point(0, 60);
             this.main.Name = "main";
             this.main.Padding = new System.Windows.Forms.Padding(17, 0, 17, 17);
             this.main.Size = new System.Drawing.Size(679, 530);
@@ -78,6 +78,7 @@ namespace ANRPC_Inventory
             // 
             // formwraper
             // 
+            this.formwraper.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
             this.formwraper.Dock = System.Windows.Forms.DockStyle.Fill;
             this.formwraper.Location = new System.Drawing.Point(17, 0);
             this.formwraper.Name = "formwraper";
@@ -86,32 +87,58 @@ namespace ANRPC_Inventory
             // 
             // appbar
             // 
-            this.appbar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(7)))), ((int)(((byte)(66)))));
+            this.appbar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
+            this.appbar.Controls.Add(this.iconButton1);
             this.appbar.Controls.Add(this.btnMin);
             this.appbar.Controls.Add(this.btnClose);
-            this.appbar.Controls.Add(this.iconButton1);
             this.appbar.Controls.Add(this.btnWindowReset);
             this.appbar.Controls.Add(this.btn_max);
             this.appbar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.appbar.Location = new System.Drawing.Point(250, 0);
+            this.appbar.Location = new System.Drawing.Point(0, 0);
             this.appbar.Name = "appbar";
             this.appbar.Padding = new System.Windows.Forms.Padding(5, 0, 0, 9);
             this.appbar.Size = new System.Drawing.Size(679, 60);
             this.appbar.TabIndex = 0;
             // 
+            // iconButton1
+            // 
+            this.iconButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconButton1.BackColor = System.Drawing.Color.Transparent;
+            this.iconButton1.FlatAppearance.BorderSize = 0;
+            this.iconButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.iconButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.5F, System.Drawing.FontStyle.Bold);
+            this.iconButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.Home;
+            this.iconButton1.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(86)))));
+            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton1.IconSize = 32;
+            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.Location = new System.Drawing.Point(427, 3);
+            this.iconButton1.Name = "iconButton1";
+            this.iconButton1.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
+            this.iconButton1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.iconButton1.Size = new System.Drawing.Size(250, 54);
+            this.iconButton1.TabIndex = 1;
+            this.iconButton1.Text = "   Dashboard";
+            this.iconButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.iconButton1.UseVisualStyleBackColor = false;
+            // 
             // btnMin
             // 
-            this.btnMin.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnMin.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnMin.FlatAppearance.BorderSize = 0;
-            this.btnMin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
-            this.btnMin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
+            this.btnMin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnMin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMin.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.btnMin.IconChar = FontAwesome.Sharp.IconChar.WindowMinimize;
-            this.btnMin.IconColor = System.Drawing.Color.WhiteSmoke;
+            this.btnMin.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
             this.btnMin.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnMin.IconSize = 15;
-            this.btnMin.Location = new System.Drawing.Point(569, 0);
+            this.btnMin.Location = new System.Drawing.Point(60, 0);
             this.btnMin.Name = "btnMin";
             this.btnMin.Size = new System.Drawing.Size(55, 51);
             this.btnMin.TabIndex = 7;
@@ -120,49 +147,24 @@ namespace ANRPC_Inventory
             // 
             // btnClose
             // 
-            this.btnClose.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnClose.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.btnClose.IconChar = FontAwesome.Sharp.IconChar.Multiply;
-            this.btnClose.IconColor = System.Drawing.Color.WhiteSmoke;
+            this.btnClose.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
             this.btnClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnClose.IconSize = 20;
-            this.btnClose.Location = new System.Drawing.Point(624, 0);
+            this.btnClose.Location = new System.Drawing.Point(5, 0);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(55, 51);
             this.btnClose.TabIndex = 4;
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // iconButton1
-            // 
-            this.iconButton1.BackColor = System.Drawing.Color.Transparent;
-            this.iconButton1.FlatAppearance.BorderSize = 0;
-            this.iconButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.iconButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.5F, System.Drawing.FontStyle.Bold);
-            this.iconButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(115)))), ((int)(((byte)(118)))), ((int)(((byte)(189)))));
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.Home;
-            this.iconButton1.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(133)))), ((int)(((byte)(222)))));
-            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.IconSize = 32;
-            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton1.Location = new System.Drawing.Point(2, 3);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
-            this.iconButton1.Size = new System.Drawing.Size(250, 54);
-            this.iconButton1.TabIndex = 1;
-            this.iconButton1.Text = "   Dashboard";
-            this.iconButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton1.UseVisualStyleBackColor = false;
-            // 
             // btnWindowReset
             // 
-            this.btnWindowReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnWindowReset.FlatAppearance.BorderSize = 0;
             this.btnWindowReset.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
             this.btnWindowReset.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
@@ -172,7 +174,7 @@ namespace ANRPC_Inventory
             this.btnWindowReset.IconColor = System.Drawing.Color.WhiteSmoke;
             this.btnWindowReset.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnWindowReset.IconSize = 15;
-            this.btnWindowReset.Location = new System.Drawing.Point(454, 3);
+            this.btnWindowReset.Location = new System.Drawing.Point(125, 3);
             this.btnWindowReset.Name = "btnWindowReset";
             this.btnWindowReset.Size = new System.Drawing.Size(55, 43);
             this.btnWindowReset.TabIndex = 6;
@@ -192,7 +194,7 @@ namespace ANRPC_Inventory
             this.btn_max.IconColor = System.Drawing.Color.WhiteSmoke;
             this.btn_max.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_max.IconSize = 15;
-            this.btn_max.Location = new System.Drawing.Point(458, 0);
+            this.btn_max.Location = new System.Drawing.Point(136, 0);
             this.btn_max.Name = "btn_max";
             this.btn_max.Size = new System.Drawing.Size(55, 43);
             this.btn_max.TabIndex = 5;
@@ -202,24 +204,24 @@ namespace ANRPC_Inventory
             // 
             // sidebar
             // 
-            this.sidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(7)))), ((int)(((byte)(66)))));
+            this.sidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
             this.sidebar.Controls.Add(this.guna2GradientPanel1);
-            this.sidebar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.sidebar.Location = new System.Drawing.Point(0, 0);
+            this.sidebar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.sidebar.Location = new System.Drawing.Point(679, 0);
             this.sidebar.Name = "sidebar";
-            this.sidebar.Padding = new System.Windows.Forms.Padding(15, 17, 3, 17);
+            this.sidebar.Padding = new System.Windows.Forms.Padding(3, 17, 15, 17);
             this.sidebar.Size = new System.Drawing.Size(250, 590);
             this.sidebar.TabIndex = 0;
             // 
             // guna2GradientPanel1
             // 
-            this.guna2GradientPanel1.BorderRadius = 7;
+            this.guna2GradientPanel1.BorderRadius = 20;
             this.guna2GradientPanel1.Controls.Add(this.panelButtons);
             this.guna2GradientPanel1.Controls.Add(this.panelLogo);
             this.guna2GradientPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.guna2GradientPanel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(16)))), ((int)(((byte)(90)))));
-            this.guna2GradientPanel1.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(16)))), ((int)(((byte)(90)))));
-            this.guna2GradientPanel1.Location = new System.Drawing.Point(15, 17);
+            this.guna2GradientPanel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(115)))), ((int)(((byte)(86)))));
+            this.guna2GradientPanel1.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(115)))), ((int)(((byte)(86)))));
+            this.guna2GradientPanel1.Location = new System.Drawing.Point(3, 17);
             this.guna2GradientPanel1.Name = "guna2GradientPanel1";
             this.guna2GradientPanel1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
             this.guna2GradientPanel1.ShadowDecoration.Parent = this.guna2GradientPanel1;
@@ -229,7 +231,7 @@ namespace ANRPC_Inventory
             // panelButtons
             // 
             this.panelButtons.AutoScroll = true;
-            this.panelButtons.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(16)))), ((int)(((byte)(90)))));
+            this.panelButtons.BackColor = System.Drawing.Color.Transparent;
             this.panelButtons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelButtons.Location = new System.Drawing.Point(0, 159);
             this.panelButtons.Name = "panelButtons";
@@ -238,7 +240,7 @@ namespace ANRPC_Inventory
             // 
             // panelLogo
             // 
-            this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(16)))), ((int)(((byte)(90)))));
+            this.panelLogo.BackColor = System.Drawing.Color.Transparent;
             this.panelLogo.Controls.Add(this.pictureBox1);
             this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelLogo.Location = new System.Drawing.Point(0, 5);
@@ -249,6 +251,7 @@ namespace ANRPC_Inventory
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
@@ -268,7 +271,6 @@ namespace ANRPC_Inventory
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainAppForm";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.container.ResumeLayout(false);
             this.main.ResumeLayout(false);
             this.appbar.ResumeLayout(false);

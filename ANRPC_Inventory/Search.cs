@@ -30,27 +30,27 @@ namespace ANRPC_Inventory
         private void prepareSecondBarTabsList()
         {
             Font font = new Font("Calibri", 11, FontStyle.Bold);
-            Color color = Color.FromArgb(155, 170, 192);
+            Color color = Color.FromArgb(227, 232, 234);
 
-            secondBarList.Add(new Tab(font, "   دورة مستندية", color, 32, IconFont.Solid, IconChar.ChartSimple,
-                              DockStyle.Left, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e); },
-                              width: 172));
+            secondBarList.Add(new Tab(font, "دورة مستندية", color, 32, IconFont.Solid, IconChar.ChartSimple,
+                              DockStyle.Right, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e); },
+                              width: 172,isRL:true));
 
-            secondBarList.Add(new Tab(font, "   2دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour,
-                            DockStyle.Left, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e); },
-                            width: 172));
+            secondBarList.Add(new Tab(font, "2دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour,
+                            DockStyle.Right, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e); },
+                            width: 172, isRL: true));
 
-            secondBarList.Add(new Tab(font, "   3دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour,
-                            DockStyle.Left, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e); },
-                            width: 172));
+            secondBarList.Add(new Tab(font, "3دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour,
+                            DockStyle.Right, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e); },
+                            width: 172, isRL: true));
 
-            secondBarList.Add(new Tab(font, "   4دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour,
-                            DockStyle.Left, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e); },
-                            width: 172));
+            secondBarList.Add(new Tab(font, "4دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour,
+                            DockStyle.Right, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e); },
+                            width: 172, isRL: true));
 
-            secondBarList.Add(new Tab(font, "   5دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour,
-                            DockStyle.Left, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e); },
-                            width: 172));
+            secondBarList.Add(new Tab(font, "5دورة مستندية", color, 25, IconFont.Solid, IconChar.ClockFour,
+                            DockStyle.Right, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e); },
+                            width: 172, isRL: true));
         }
 
         public Search()
@@ -115,7 +115,7 @@ namespace ANRPC_Inventory
             //{
             //    openChildForm(childForm);
             //}
-
+            
             formWraper.Visible = true;
         }
 

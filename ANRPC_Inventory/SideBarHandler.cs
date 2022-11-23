@@ -13,12 +13,11 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace ANRPC_Inventory
 {
-    public class SubTabsHandler
+    public class SideBarHandler
     {
         private IconButton currentActiveTab;
-        private IconButton indecatorTitleSection;
         private Panel tabsActiveBorder;
-        private Panel subTabPanel = new Panel();
+        private Panel sideBarPanel = new Panel();
 
         private List<Tab> tabsList;
 
@@ -30,7 +29,7 @@ namespace ANRPC_Inventory
         }
 
 
-        public SubTabsHandler(List<Tab> tabsList,Panel container)
+        public SideBarHandler(List<Tab> tabsList,Panel container)
         {
 
             foreach(Tab tab in tabsList)
@@ -48,69 +47,28 @@ namespace ANRPC_Inventory
 
             this.prepareSubTabsActiveIndecator();
 
-            this.subTabPanel = getSubTabsPanel(40, 10);
+            this.sideBarPanel = getSideBarPanel();
 
-            this.subTabPanel.Controls.Add(this.tabsActiveBorder);
+            this.sideBarPanel.Controls.Add(this.tabsActiveBorder);
 
             this.currentActiveTab = this.tabsList[0].getTab(); //default tab
-           
-            container.Controls.Add(this.subTabPanel);
-            this.subTabPanel.BringToFront();
-            this.subTabPanel.Visible = false;
+
+            this.currentActiveTab.PerformClick();
+
+            container.Controls.Add(this.sideBarPanel);
+            this.sideBarPanel.BringToFront();
         }
 
         private void prepareSubTabsActiveIndecator()
         {
 
             this.tabsActiveBorder = new Panel();
-            this.subTabPanel.Controls.Add(this.tabsActiveBorder);
+            this.sideBarPanel.Controls.Add(this.tabsActiveBorder);
             this.tabsActiveBorder.Visible = false;
         }
 
-        private IconButton getIndecatiorSection()
+        private Panel getSideBarPanel()
         {
-            IconButton indecator = new IconButton();
-            indecator.Font = new Font("Calibri", 11, FontStyle.Bold);
-            indecator.ForeColor = Color.FromArgb(227, 232, 234);
-            indecator.TextImageRelation = TextImageRelation.TextBeforeImage;
-            indecator.IconChar = IconChar.AngleLeft;
-            indecator.IconSize = 18;
-            indecator.IconColor = Color.FromArgb(227, 232, 234);
-            indecator.IconFont = IconFont.Solid;
-            indecator.Dock = DockStyle.Right;
-
-            indecator.FlatAppearance.BorderSize = 0;
-            indecator.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            indecator.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            indecator.FlatStyle = FlatStyle.Flat;
-
-            indecator.AutoSize = true;
-
-            indecator.RightToLeft = RightToLeft.Yes;
-
-            return indecator;
-
-        }
-
-        private Panel getSubTabsPanel(int height,int subTabs_spacing)
-        {
-            int secondBardHeight = height;
-            int spacing = subTabs_spacing;
-
-            Panel secondBarContainer = new Panel();
-            secondBarContainer.Dock = DockStyle.Top;
-            secondBarContainer.BackColor = Color.Transparent;
-
-            Guna2GradientPanel secondBar = new Guna2GradientPanel();
-            secondBar.Dock = DockStyle.Top;
-            secondBar.FillColor = Color.FromArgb(0, 115, 86);
-            secondBar.FillColor2 = Color.FromArgb(0, 115, 86);
-            secondBar.BorderRadius = 7;
-            secondBar.Size = new Size(secondBar.Width, secondBardHeight);
-
-
-            secondBarContainer.Size = new Size(secondBarContainer.Width, secondBardHeight + spacing);
-
             Panel tabsContainer = new Panel();
             tabsContainer.Dock = DockStyle.Fill;
             tabsContainer.BackColor = Color.Transparent;
@@ -121,15 +79,8 @@ namespace ANRPC_Inventory
                 tabsContainer.Controls.Add(this.tabsList[i].getTab());
             }
 
-            secondBar.Controls.Add(tabsContainer);
 
-            this.indecatorTitleSection = getIndecatiorSection();
-            secondBar.Controls.Add(this.indecatorTitleSection);
-
-            secondBarContainer.Controls.Add(secondBar);
-
-
-            return secondBarContainer;
+            return tabsContainer;
         }
 
         private void DisableButton()
@@ -161,30 +112,25 @@ namespace ANRPC_Inventory
                 this.currentActiveTab.ForeColor = color;
                 this.currentActiveTab.TextAlign = ContentAlignment.MiddleCenter;
                 this.currentActiveTab.IconColor = color;
-                this.currentActiveTab.ImageAlign = ContentAlignment.MiddleRight;
+                this.currentActiveTab.TextImageRelation = TextImageRelation.TextBeforeImage;
+                this.currentActiveTab.ImageAlign = ContentAlignment.MiddleLeft;
 
-                //Buttom border button
+                //left border button
                 this.tabsActiveBorder.BackColor = RGBColors.color1;
 
-                this.indecatorTitleSection.Text = this.currentActiveTab.Text;
 
-                this.tabsActiveBorder.Size = new Size(this.currentActiveTab.Size.Width, 4);
+                this.tabsActiveBorder.Size = new Size(8, this.currentActiveTab.Size.Height);
 
                 int activeBorderX, activeBorderY;
 
-                activeBorderX = this.currentActiveTab.Location.X;
-                activeBorderY = this.currentActiveTab.Location.Y + this.currentActiveTab.Size.Height - this.tabsActiveBorder.Size.Height;
+
+                activeBorderX = this.currentActiveTab.Location.X+ 232 - 8;
+                activeBorderY = this.currentActiveTab.Location.Y;
+
                 this.tabsActiveBorder.Location = new Point(activeBorderX, activeBorderY);
 
                 this.tabsActiveBorder.Visible = true;
                 this.tabsActiveBorder.BringToFront();
-
-                //iconAppBar
-                //iconButton1.Visible = true;
-                //iconButton1.IconChar = currentBtn.IconChar;
-                //iconButton1.IconColor = color;
-                //iconButton1.Text = currentBtn.Text;
-                //iconButton1.ForeColor = color;
 
             }
         }
@@ -192,17 +138,17 @@ namespace ANRPC_Inventory
 
         public Panel getSubTabPanel()
         {
-            return this.subTabPanel;
+            return this.sideBarPanel;
         }
 
         public bool getSubTabsVisibleState()
         {
-            return this.subTabPanel.Visible;
+            return this.sideBarPanel.Visible;
         }
 
         public void setSubTabsVisible(bool state)
         {
-            this.subTabPanel.Visible = state;
+            this.sideBarPanel.Visible = state;
 
             if (state == true)
             {

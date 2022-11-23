@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.IO;
+using Microsoft.Win32;
 
 namespace ANRPC_Inventory
 {
@@ -119,19 +120,67 @@ namespace ANRPC_Inventory
         AutoCompleteStringCollection PartColl = new AutoCompleteStringCollection(); //empn
         #endregion
 
+
         #region myDefVariable
         enum VALIDATION_TYPES
         {
+            ADD_TASNIF,
+            ADD_NEW_TASNIF,
             ATTACH_FILE,
             SEARCH,
             CONFIRM_SEARCH,
             SAVE,
+
         }
         int currentSignNumber = 0;
         #endregion
 
         //------------------------------------------ Helper ---------------------------------
         #region Helpers
+        private PictureBox CheckSignatures(Panel panel, int signNumber)
+        {
+            try
+            {
+                foreach (Control control in panel.Controls)
+                {
+                    if (control.GetType() == typeof(Panel))
+                    {
+                        PictureBox signControl = CheckSignatures((Panel)control, signNumber);
+
+                        if (signControl != null)
+                        {
+                            return signControl;
+                        }
+                    }
+                    else
+                    {
+                        if (control.Name == "Pic_Sign" + signNumber && ((PictureBox)control).Image == null)
+                        {
+                            return (PictureBox)control;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return null;
+        }
+
+        private void errorProviderHandler(List<(ErrorProvider, Control, string)> errosList)
+        {
+            alertProvider.Clear();
+            errorProvider.Clear();
+            foreach (var error in errosList)
+            {
+                ////Txt_ReqQuan.Location = new Point(Txt_ReqQuan.Location.X + errorProvider.Icon.Width, Txt_ReqQuan.Location.Y);
+                //error.Item2.Width = error.Item2.Width - error.Item1.Icon.Width;
+                error.Item1.SetError(error.Item2, error.Item3);
+            }
+        }
+
         private void cleargridview()
         {
             this.dataGridView1.DataSource = null;
@@ -472,36 +521,23 @@ namespace ANRPC_Inventory
             dataGridView1.DataSource = table;
 
 
-            dataGridView1.Columns["BndNo"].HeaderText = "19/18";//col3
-            dataGridView1.Columns["Quan"].HeaderText = "27/20";//col4
-            dataGridView1.Columns["FStockName"].HeaderText = "21/20";//col5
-            dataGridView1.Columns["FStockNoALL"].HeaderText = "41/33";//col6
-            dataGridView1.Columns["FUnit"].HeaderText = "29/28";//col7
-            dataGridView1.Columns["FBayan"].HeaderText = "البيان";//col8
-            dataGridView1.Columns["FRased"].HeaderText = "49/3";//col9
-            dataGridView1.Columns["Fprice"].HeaderText = "59/50";//col10
-            dataGridView1.Columns["FNsbetSalhia"].HeaderText = "29/28";//col11
-            dataGridView1.Columns["TStockName"].HeaderText = "61/60";//col12
+            dataGridView1.Columns["BndNo"].HeaderText = "رقم البند";//col3
+            dataGridView1.Columns["Quan"].HeaderText = "الكمية المطلوب تحويلها";//col4
+            dataGridView1.Columns["FStockName"].HeaderText = "من مخزن";//col5
+            dataGridView1.Columns["FStockNoALL"].HeaderText = "رقم التصنيف قبل";//col6
+            dataGridView1.Columns["FUnit"].HeaderText = "الوحدة قبل";//col7
+            dataGridView1.Columns["FBayan"].HeaderText = "بيان قبل";//col8
+            dataGridView1.Columns["FRased"].HeaderText = "رصيد قبل";//col9
+            dataGridView1.Columns["Fprice"].HeaderText = "القيمة";//col10
+            dataGridView1.Columns["FNsbetSalhia"].HeaderText = "نسبة الصلاحية";//col11
+            dataGridView1.Columns["TStockName"].HeaderText = "الي مخزن";//col12
 
 
-            dataGridView1.Columns["TStockNoALL"].HeaderText = "71/62";//col13
-            dataGridView1.Columns["TStockNoALL"].Width = 83;
-            dataGridView1.Columns["TStockNoALL"].ContextMenuStrip = contextMenuStrip1;
+            dataGridView1.Columns["TStockNoALL"].HeaderText = "رقم التصنيف بعد";//col13
+            dataGridView1.Columns["TUnit"].HeaderText = "الوحدة بعد";//col14
+            dataGridView1.Columns["TBayan"].HeaderText = "البيان بعد";//col15
+            dataGridView1.Columns["TRased"].HeaderText = "رصيد بعد";//col16
 
-            dataGridView1.Columns["TUnit"].HeaderText = "الوحدة";//col14
-            dataGridView1.Columns["TUnit"].Width = 59;
-            dataGridView1.Columns["TUnit"].ContextMenuStrip = contextMenuStrip1;
-            dataGridView1.Columns["TUnit"].ReadOnly = true;
-
-            dataGridView1.Columns["TBayan"].HeaderText = "البيان";//col15
-            dataGridView1.Columns["TBayan"].Width = 120;
-            dataGridView1.Columns["TBayan"].ContextMenuStrip = contextMenuStrip1;
-            dataGridView1.Columns["TBayan"].ReadOnly = true;
-
-            dataGridView1.Columns["TRased"].HeaderText = "79/72";//col16
-            dataGridView1.Columns["TRased"].Width = 58;
-            dataGridView1.Columns["TRased"].ContextMenuStrip = contextMenuStrip1;
-            dataGridView1.Columns["TRased"].ReadOnly = true;
 
 
             dataGridView1.Columns["TransNo"].HeaderText = "رقم اذن التحويل";//col0
@@ -518,28 +554,7 @@ namespace ANRPC_Inventory
             if (Constants.User_Type == "B" && Constants.UserTypeB == "NewTasnif")
             {
                 dataGridView1.Columns["TStockNoALL"].DefaultCellStyle.BackColor = Color.Salmon;
-                dataGridView1.Columns["TStockNoALL"].ReadOnly = false;
             }
-
-            if (Constants.User_Type == "B")
-            {
-                //dataGridView1.Columns["TStockNoALL"].DefaultCellStyle.BackColor = Color.Salmon;
-                dataGridView1.Columns["FNsbetSalhia"].ReadOnly = false;
-            }
-            if (Constants.User_Type == "A")
-            {
-                //dataGridView1.Columns["TStockNoALL"].DefaultCellStyle.BackColor = Color.Salmon;
-                dataGridView1.Columns["TStockName"].ReadOnly = true;
-                dataGridView1.Columns["TStockNoALL"].ReadOnly = true;
-                dataGridView1.Columns["TBayan"].ReadOnly = true;
-                dataGridView1.Columns["TRased"].ReadOnly = true;
-
-            }
-            dataGridView1.AllowUserToAddRows = true;
-
-
-
-
         }
 
         public bool SearchEznTahweel(string transNo, string fyear, string momayz)
@@ -762,7 +777,7 @@ namespace ANRPC_Inventory
 
             dr.Close();
 
-            GetData((TXT_TRansferNo.Text), Cmb_FYear.Text, TXT_TRNO.Text);
+            GetEznTahweelBnod(transNo, fyear, momayz);
 
             Constants.closecon();
 
@@ -1491,9 +1506,253 @@ namespace ANRPC_Inventory
                 Constants.closecon();
             }
         }
-      
+
         #endregion
 
+        //------------------------------------------ Validation Handler ---------------------------------
+        #region Validation Handler
+        private List<(ErrorProvider, Control, string)> ValidateAddTasnif()
+        {
+            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+            #region TXT_StockNoAll
+            if (string.IsNullOrWhiteSpace(TXT_StockNoAll.Text))
+            {
+                errorsList.Add((errorProvider, TXT_StockNoAll, "يجب اختيار التصنيف المراد اضافته"));
+            }
+            else if (TXT_StockNoAll.Text.Length != 8)
+            {
+                errorsList.Add((alertProvider, TXT_StockNoAll, "رقم التصنيف يجب ان يتكون من 8"));
+            }
+            else if (Txt_Quan.Text == "")
+            {
+                errorsList.Add((alertProvider, TXT_StockNoAll, "هذا التصنيف غير موجود"));
+            }
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    if (row.Cells[6].Value.ToString().ToLower() == TXT_StockNoAll.Text.ToLower() && TXT_StockNoAll.Text != "")
+                    {
+                        errorsList.Add((alertProvider, TXT_StockNoAll, "تم ادخال رقم هذا التصنيف من قبل"));
+
+                        break;
+                    }
+                }
+            }
+            #endregion
+
+            #region Txt_ReqQuan
+            if (string.IsNullOrWhiteSpace(Txt_ReqQuan.Text))
+            {
+                errorsList.Add((errorProvider, Txt_ReqQuan, "يجب ادخال الكمية المطلوبة"));
+            }
+            else if (!string.IsNullOrWhiteSpace(Txt_ReqQuan.Text) && Convert.ToDecimal(Txt_ReqQuan.Text) <= 0)
+            {
+                errorsList.Add((alertProvider, Txt_ReqQuan, "يجب ان تكون الكمية المطلوبة اكبر من صفر"));
+            }
+            else if (!string.IsNullOrWhiteSpace(Txt_Quan.Text) && Txt_Quan.Text != "" && Convert.ToDouble(Txt_Quan.Text) >= 0 && Convert.ToDouble(Txt_ReqQuan.Text) > Convert.ToDouble(Txt_Quan.Text))
+            {
+                errorsList.Add((alertProvider, Txt_ReqQuan, "الكمية المطلوبة اكبر من المتاحة فى المخزن"));
+            }
+            #endregion
+
+            #region Cmb_FYear
+            if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
+            {
+                errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
+            }
+            #endregion
+
+            #region Cmb_CType
+            if (string.IsNullOrWhiteSpace(Cmb_CType.Text) || Cmb_CType.SelectedIndex == -1)
+            {
+                errorsList.Add((errorProvider, Cmb_CType, "تاكد من  اختيار نوع إذن الصرف"));
+            }
+            #endregion
+
+            return errorsList;
+        }
+
+        private List<(ErrorProvider, Control, string)> ValidateAttachFile()
+        {
+            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+            #region Cmb_FYear
+            if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
+            {
+                errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
+            }
+            #endregion
+
+            #region Cmb_CType
+            if (string.IsNullOrWhiteSpace(Cmb_CType.Text) || Cmb_CType.SelectedIndex == -1)
+            {
+                errorsList.Add((errorProvider, Cmb_CType, "تاكد من  اختيار نوع إذن الصرف"));
+            }
+            #endregion
+
+            #region TXT_EznNo
+            if (string.IsNullOrWhiteSpace(TXT_TRansferNo.Text))
+            {
+                errorsList.Add((errorProvider, TXT_TRansferNo, "يجب اختيار رقم إذن الصرف"));
+            }
+            #endregion
+
+            return errorsList;
+        }
+
+        private List<(ErrorProvider, Control, string)> ValidateSearch(bool isConfirm = false)
+        {
+            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+            if (isConfirm)
+            {
+                #region Cmb_CType2
+                if (string.IsNullOrWhiteSpace(Cmb_CType2.Text) || Cmb_CType2.SelectedIndex == -1)
+                {
+                    errorsList.Add((errorProvider, Cmb_CType2, "تاكد من  اختيار نوع إذن الصرف"));
+                }
+                #endregion
+
+                #region Cmb_FYear2
+                if (string.IsNullOrWhiteSpace(Cmb_FYear2.Text) || Cmb_FYear2.SelectedIndex == -1)
+                {
+                    errorsList.Add((errorProvider, Cmb_FYear2, "تاكد من  اختيار السنة المالية"));
+                }
+                #endregion
+
+                #region Cmb_EznNo2
+                if (string.IsNullOrWhiteSpace(Cmb_TRansferNo2.Text) || Cmb_TRansferNo2.SelectedIndex == -1)
+                {
+                    errorsList.Add((errorProvider, Cmb_TRansferNo2, "يجب اختيار رقم إذن الصرف"));
+                }
+                #endregion
+            }
+            else
+            {
+                #region Cmb_CType
+                if (string.IsNullOrWhiteSpace(Cmb_CType.Text) || Cmb_CType.SelectedIndex == -1)
+                {
+                    errorsList.Add((errorProvider, Cmb_CType, "تاكد من  اختيار نوع إذن الصرف"));
+                }
+                #endregion
+
+                #region Cmb_FYear
+                if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
+                {
+                    errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
+                }
+                #endregion
+
+                #region TXT_EznNo
+                if (string.IsNullOrWhiteSpace(TXT_TRansferNo.Text))
+                {
+                    errorsList.Add((errorProvider, TXT_TRansferNo, "يجب اختيار رقم إذن الصرف"));
+                }
+                #endregion
+            }
+
+            return errorsList;
+        }
+
+        private List<(ErrorProvider, Control, string)> ValidateSave()
+        {
+            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+            #region Cmb_FYear
+            if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
+            {
+                errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
+            }
+            #endregion
+
+            #region Cmb_CType
+            if (string.IsNullOrWhiteSpace(Cmb_CType.Text) || Cmb_CType.SelectedIndex == -1)
+            {
+                errorsList.Add((errorProvider, Cmb_CType, "تاكد من  اختيار نوع إذن الصرف"));
+            }
+            #endregion
+
+            #region TXT_EznNo
+            if (string.IsNullOrWhiteSpace(TXT_TRansferNo.Text))
+            {
+                errorsList.Add((errorProvider, TXT_TRansferNo, "يجب اختيار رقم إذن الصرف"));
+            }
+            #endregion
+
+            #region dataGridView1
+            if (dataGridView1.Rows.Count <= 0)
+            {
+                errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
+                MessageBox.Show("لايمكن ان يتكون طلب توريد بدون بنود");
+            }
+            else if (dataGridView1.Rows.Count == 1 && dataGridView1.Rows[0].IsNewRow == true)
+            {
+                errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
+                MessageBox.Show("لايمكن ان يتكون طلب توريد بدون بنود");
+            }
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    if (row.Cells[11].Value.ToString() == "")
+                    {
+                        MessageBox.Show("من فضلك تاكد من ادخال نسبة الصلاحية لجميع البنود");
+                        errorsList.Add((alertProvider, TXT_StockNoAll, "من فضلك تاكد من ادخال نسبة الصلاحية لجميع البنود"));
+                        break;
+
+                    }
+                }
+            }
+            #endregion
+
+            PictureBox signControl = CheckSignatures(signatureTable, currentSignNumber);
+            if (signControl != null)
+            {
+                errorsList.Add((errorProvider, signControl, "تاكد من التوقيع"));
+            }
+
+            return errorsList;
+        }
+
+        private bool IsValidCase(VALIDATION_TYPES type)
+        {
+            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+            if (type == VALIDATION_TYPES.ADD_TASNIF)
+            {
+                errorsList = ValidateAddTasnif();
+            }
+
+            else if (type == VALIDATION_TYPES.ATTACH_FILE)
+            {
+                errorsList = ValidateAttachFile();
+            }
+            else if (type == VALIDATION_TYPES.SEARCH)
+            {
+                errorsList = ValidateSearch(false);
+            }
+            else if (type == VALIDATION_TYPES.CONFIRM_SEARCH)
+            {
+                errorsList = ValidateSearch(true);
+            }
+            else if (type == VALIDATION_TYPES.SAVE)
+            {
+                errorsList = ValidateSave();
+            }
+
+
+            errorProviderHandler(errorsList);
+
+            if (errorsList.Count > 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        #endregion
 
         public FTransfer_M()
         {
@@ -1509,6 +1768,7 @@ namespace ANRPC_Inventory
             // TODO: This line of code loads data into the 'aNRPC_InventoryDataSet.T_BnodAwamershraa' table. You can move, or remove it, as needed.
             // this.t_BnodAwamershraaTableAdapter.Fill(this.aNRPC_InventoryDataSet.T_BnodAwamershraa);
 
+            alertProvider.Icon = SystemIcons.Warning;
             HelperClass.comboBoxFiller(Cmb_FYear, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
             HelperClass.comboBoxFiller(Cmb_FYear2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
 
@@ -1860,10 +2120,10 @@ namespace ANRPC_Inventory
         private void Addbtn2_Click(object sender, EventArgs e)
         {
 
-            //if (!IsValidCase(VALIDATION_TYPES.ADD_TASNIF))
-            //{
-            //    return;
-            //}
+            if (!IsValidCase(VALIDATION_TYPES.ADD_TASNIF))
+            {
+                return;
+            }
 
 
             if (checkBox1.Checked == true || checkBox2.Checked == true)
@@ -1888,6 +2148,7 @@ namespace ANRPC_Inventory
 
             AddNewTasnifInDataGridView();
         }
+
 
         private void Cmb_FYear_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1994,7 +2255,7 @@ namespace ANRPC_Inventory
                             // GetData(Convert.ToInt32(TXT_TalbNo.Text), Cmb_FYear.Text);
                             if (string.IsNullOrEmpty(TXT_TRansferNo.Text) == false)
                             {
-                                GetData((TXT_TRansferNo.Text), Cmb_FYear.Text, TXT_TRNO.Text);
+                                GetEznTahweelBnod(TXT_TRansferNo.Text, Cmb_FYear.Text, TXT_TRNO.Text);
 
                             }
 
@@ -2013,6 +2274,10 @@ namespace ANRPC_Inventory
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
+            if (!IsValidCase(VALIDATION_TYPES.SAVE))
+            {
+                return;
+            }
 
             if (AddEditFlag == 2)
             {
@@ -2020,20 +2285,6 @@ namespace ANRPC_Inventory
                 {
                     MessageBox.Show("من فضلك تاكد من توقيع اذن الصرف");
                     return;
-                }
-
-                foreach (DataGridViewRow row in dataGridView1.Rows)
-                {
-                    if (!row.IsNewRow)
-                    {
-                        if (row.Cells[11].Value.ToString() == "")
-                        {
-                            MessageBox.Show("من فضلك تاكد من ادخال نسبة الصلاحية لجميع البنود");
-                            return;
-                        }
-                    }
-                    //  dataGridView1.ReadOnly = true;
-                    row.Cells[6].ReadOnly = false;//in perm
                 }
 
                 AddLogic();
@@ -2107,26 +2358,16 @@ namespace ANRPC_Inventory
             Cmb_TRansferNo2.ValueMember = "TransNo";
             Cmb_TRansferNo2.DisplayMember = "TransNo";
             Cmb_TRansferNo2.SelectedIndex = -1;
-            Cmb_TRansferNo2.SelectedIndexChanged += new EventHandler(Cmb_TalbNo2_SelectedIndexChanged);
             Constants.closecon();
 
         }
 
-        private void Cmb_TalbNo2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (Cmb_TRansferNo2.SelectedIndex != -1)
-            {
-                SearchTalb(2);
-            }
-        }
-
-
         private void BTN_Save2_Click(object sender, EventArgs e)
         {
-            //if (!IsValidCase(VALIDATION_TYPES.SAVE))
-            //{
-            //    return;
-            //}
+            if (!IsValidCase(VALIDATION_TYPES.SAVE))
+            {
+                return;
+            }
 
             EditLogic();
 
@@ -2139,28 +2380,6 @@ namespace ANRPC_Inventory
             TXT_TRansferNo.Enabled = false;
             Cmb_FYear.Enabled = false;
             Cmb_CType.Enabled = false;
-        }
-
-
-        private void Cmb_TRansferNo2_TextChanged(object sender, EventArgs e)
-        {
-            Pic_Sign1.Image = null;
-            Pic_Sign2.Image = null;
-            Pic_Sign3.Image = null;
-            Pic_Sign4.Image = null;
-            Pic_Sign5.Image = null;
-
-            FlagSign1 = 0;
-            FlagSign2 = 0;
-            FlagSign3 = 0;
-            FlagSign4 = 0;
-            FlagSign5 = 0;
-
-            Pic_Sign1.BackColor = Color.White;
-            Pic_Sign2.BackColor = Color.White;
-            Pic_Sign3.BackColor = Color.White;
-            Pic_Sign4.BackColor = Color.White;
-            Pic_Sign5.BackColor = Color.White;
         }
 
         private void dataGridView1_RowEnter_1(object sender, DataGridViewCellEventArgs e)
@@ -2193,21 +2412,6 @@ namespace ANRPC_Inventory
                 //  dataGridView1.Rows[e.RowIndex].Cells[5].ReadOnly = false;
                 dataGridView1.AllowUserToAddRows = true;
                 dataGridView1.AllowUserToDeleteRows = true;
-
-            }
-        }
-
-        private void TXT_TalbNo_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter && AddEditFlag == 2)
-            {
-                GetData((TXT_TRansferNo.Text), Cmb_FYear.Text, TXT_TRNO.Text);
-
-            }
-            else if (e.KeyCode == Keys.Enter && AddEditFlag == 0)
-            {
-                cleargridview();
-                SearchTalb(1);
 
             }
         }
@@ -2261,10 +2465,6 @@ namespace ANRPC_Inventory
             Txt_ReqQuan.Text = "";
         }
 
-        private void TXT_EznNo_TextChanged(object sender, EventArgs e)
-        {
-            Constants.validateTextboxNumbersonly(sender);
-        }
 
         private void TXT_Momayz_TextChanged(object sender, EventArgs e)
         {
@@ -2374,14 +2574,6 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void TXT_EznNo_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(TXT_TRansferNo.Text) == false)
-            {
-                GetData((TXT_TRansferNo.Text), Cmb_FYear.Text, TXT_TRNO.Text);
-
-            }
-        }
 
         private void Cmb_CType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -2718,52 +2910,52 @@ namespace ANRPC_Inventory
 
         private void BTN_Search_Click(object sender, EventArgs e)
         {
-            //if (!IsValidCase(VALIDATION_TYPES.SEARCH))
-            //{
-            //    return;
-            //}
+            if (!IsValidCase(VALIDATION_TYPES.SEARCH))
+            {
+                return;
+            }
 
-            //string ezn_no = TXT_EznNo.Text;
-            //string fyear = Cmb_FYear.Text;
-            //string momayz = TXT_TRNO.Text;
+            string trans_no = TXT_TRansferNo.Text;
+            string fyear = Cmb_FYear.Text;
+            string momayz = TXT_TRNO.Text;
 
-            //reset();
+            reset();
 
-            //if (SearchEznSarf(ezn_no, fyear, momayz))
-            //{
-            //    if (FlagSign2 != 1 && FlagSign1 != 1)
-            //    {
-            //        Editbtn2.Enabled = true;
-            //    }
-            //    else
-            //    {
-            //        Editbtn2.Enabled = false;
-            //    }
-            //}
+            if (SearchEznTahweel(trans_no, fyear, momayz))
+            {
+                if (FlagSign2 != 1 && FlagSign1 != 1)
+                {
+                    Editbtn2.Enabled = true;
+                }
+                else
+                {
+                    Editbtn2.Enabled = false;
+                }
+            }
         }
 
         private void BTN_Search_Motab3a_Click(object sender, EventArgs e)
         {
-            //if (!IsValidCase(VALIDATION_TYPES.CONFIRM_SEARCH))
-            //{
-            //    return;
-            //}
+            if (!IsValidCase(VALIDATION_TYPES.CONFIRM_SEARCH))
+            {
+                return;
+            }
 
-            //string ezn_no = Cmb_EznNo2.Text;
-            //string fyear = Cmb_FYear2.Text;
-            //string momayz = TXT_TRNO2.Text;
+            string trans_no = Cmb_TRansferNo2.Text;
+            string fyear = Cmb_FYear2.Text;
+            string momayz = TXT_TRNO2.Text;
 
-            //reset();
+            reset();
 
-            //if (SearchEznSarf(ezn_no, fyear, momayz))
-            //{
-            //    Editbtn.Enabled = true;
-            //    BTN_Print2.Enabled = true;
-            //}
+            if (SearchEznTahweel(trans_no, fyear, momayz))
+            {
+                Editbtn.Enabled = true;
+                BTN_Print2.Enabled = true;
+            }
 
-            //TXT_EznNo.Enabled = false;
-            //Cmb_FYear.Enabled = false;
-            //Cmb_CType.Enabled = false;
+            TXT_TRansferNo.Enabled = false;
+            Cmb_FYear.Enabled = false;
+            Cmb_CType.Enabled = false;
         }
 
         private void Editbtn2_Click(object sender, EventArgs e)
@@ -2792,6 +2984,102 @@ namespace ANRPC_Inventory
 
                 PrepareConfirmState();
             }
+        }
+
+
+        private void browseBTN_Click(object sender, EventArgs e)
+        {
+            if (!IsValidCase(VALIDATION_TYPES.ATTACH_FILE))
+            {
+                return;
+            }
+
+            openFileDialog1.Filter = "PDF(*.pdf)|*.pdf";
+            DialogResult dialogRes = openFileDialog1.ShowDialog();
+            string ConstantPath = @"\\172.18.8.83\MaterialAPP\PDF\";//////////////////change it to server path
+
+            foreach (String file in openFileDialog1.FileNames)
+            {
+                if (dialogRes == DialogResult.OK)
+                {
+                    string VariablePath = string.Concat(Constants.CodeEdara, @"\");
+                    string path = ConstantPath + VariablePath;
+
+                    if (!Directory.Exists(path))
+                    {
+                        MessageBox.Show("عفوا لايمكنك ارفاق مرفقات برجاء الرجوع إلي إدارة نظم المعلومات");
+                        return;
+                    }
+
+                    path += Cmb_FYear.Text + @"\";
+
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+
+                    path += "TAHWEEL" + @"\";
+
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+
+
+                    path += TXT_TRNO.Text + @"\";
+
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+
+                    path += TXT_TRansferNo.Text + @"\";
+
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+
+                    string filename = Path.GetFileName(file);
+                    path += filename;
+
+                    if (!File.Exists(path))
+                    {
+                        File.Copy(file, path);
+                    }
+                }
+            }
+
+            if (dialogRes == DialogResult.OK)
+            {
+                MessageBox.Show("تم إرفاق المرفقات");
+            }
+            else
+            {
+                MessageBox.Show("لم يتم إرفاق المرفقات");
+            }
+        }
+
+        private void BTN_PDF_Click(object sender, EventArgs e)
+        {
+            if (!IsValidCase(VALIDATION_TYPES.ATTACH_FILE))
+            {
+                return;
+            }
+
+            PDF_PopUp popup = new PDF_PopUp();
+
+            popup.WholePath = @"\\172.18.8.83\MaterialAPP\PDF\" + Constants.CodeEdara + @"\" + Cmb_FYear.Text + @"\TAHWEEL\" + TXT_TRNO.Text + @"\" + TXT_TRansferNo.Text + @"\";
+            try
+            {
+                popup.ShowDialog(this);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            popup.Dispose();
         }
     }
 }

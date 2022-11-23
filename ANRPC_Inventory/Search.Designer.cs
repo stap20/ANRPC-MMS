@@ -58,8 +58,8 @@
             this.tabsBar.Controls.Add(this.btnDocumentCycle);
             this.tabsBar.Controls.Add(this.btnTasnif);
             this.tabsBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tabsBar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(15)))), ((int)(((byte)(83)))));
-            this.tabsBar.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(15)))), ((int)(((byte)(83)))));
+            this.tabsBar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(115)))), ((int)(((byte)(86)))));
+            this.tabsBar.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(115)))), ((int)(((byte)(86)))));
             this.tabsBar.Location = new System.Drawing.Point(0, 0);
             this.tabsBar.Margin = new System.Windows.Forms.Padding(0);
             this.tabsBar.Name = "tabsBar";
@@ -71,19 +71,19 @@
             // 
             this.btnDocumentCycle.AutoSize = true;
             this.btnDocumentCycle.BackColor = System.Drawing.Color.Transparent;
-            this.btnDocumentCycle.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnDocumentCycle.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnDocumentCycle.FlatAppearance.BorderSize = 0;
-            this.btnDocumentCycle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
-            this.btnDocumentCycle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
+            this.btnDocumentCycle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(163)))), ((int)(((byte)(123)))));
+            this.btnDocumentCycle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(163)))), ((int)(((byte)(123)))));
             this.btnDocumentCycle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDocumentCycle.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold);
-            this.btnDocumentCycle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(170)))), ((int)(((byte)(192)))));
+            this.btnDocumentCycle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(232)))), ((int)(((byte)(234)))));
             this.btnDocumentCycle.IconChar = FontAwesome.Sharp.IconChar.ClockFour;
-            this.btnDocumentCycle.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(170)))), ((int)(((byte)(192)))));
+            this.btnDocumentCycle.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(232)))), ((int)(((byte)(234)))));
             this.btnDocumentCycle.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.btnDocumentCycle.IconSize = 30;
             this.btnDocumentCycle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDocumentCycle.Location = new System.Drawing.Point(140, 0);
+            this.btnDocumentCycle.Location = new System.Drawing.Point(488, 0);
             this.btnDocumentCycle.Name = "btnDocumentCycle";
             this.btnDocumentCycle.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.btnDocumentCycle.Size = new System.Drawing.Size(172, 52);
@@ -97,19 +97,19 @@
             // 
             this.btnTasnif.AutoSize = true;
             this.btnTasnif.BackColor = System.Drawing.Color.Transparent;
-            this.btnTasnif.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnTasnif.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnTasnif.FlatAppearance.BorderSize = 0;
-            this.btnTasnif.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
-            this.btnTasnif.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
+            this.btnTasnif.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(163)))), ((int)(((byte)(123)))));
+            this.btnTasnif.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(163)))), ((int)(((byte)(123)))));
             this.btnTasnif.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTasnif.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold);
-            this.btnTasnif.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(170)))), ((int)(((byte)(192)))));
+            this.btnTasnif.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(232)))), ((int)(((byte)(234)))));
             this.btnTasnif.IconChar = FontAwesome.Sharp.IconChar.Book;
-            this.btnTasnif.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(170)))), ((int)(((byte)(192)))));
+            this.btnTasnif.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(232)))), ((int)(((byte)(234)))));
             this.btnTasnif.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.btnTasnif.IconSize = 30;
             this.btnTasnif.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTasnif.Location = new System.Drawing.Point(0, 0);
+            this.btnTasnif.Location = new System.Drawing.Point(660, 0);
             this.btnTasnif.Name = "btnTasnif";
             this.btnTasnif.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnTasnif.Size = new System.Drawing.Size(140, 52);
@@ -133,8 +133,8 @@
             // 
             this.formWraper.BorderRadius = 7;
             this.formWraper.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formWraper.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(15)))), ((int)(((byte)(83)))));
-            this.formWraper.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(15)))), ((int)(((byte)(83)))));
+            this.formWraper.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
+            this.formWraper.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
             this.formWraper.Location = new System.Drawing.Point(0, 0);
             this.formWraper.Margin = new System.Windows.Forms.Padding(0, 0, 20, 15);
             this.formWraper.Name = "formWraper";
@@ -144,6 +144,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
