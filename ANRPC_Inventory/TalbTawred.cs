@@ -152,11 +152,12 @@ namespace ANRPC_Inventory
                
             }
             int currentSignNumber = 0;
+            bool isComeFromSearch = false;
         #endregion
 
         //------------------------------------------ Helper ---------------------------------
         #region Helpers
-            private decimal getApproxValue()
+        private decimal getApproxValue()
             {
                 decimal result;
 
@@ -2698,6 +2699,19 @@ namespace ANRPC_Inventory
             // this.t_BnodAwamershraaTableAdapter.Fill(this.aNRPC_InventoryDataSet.T_BnodAwamershraa);
             AddEditFlag = 0;
 
+            if (Constants.talbtawred_F == false)
+            {
+                panel7.Visible = true;
+                panel2.Visible = false;
+                panel7.Dock = DockStyle.Top;
+            }
+            else if (Constants.talbtawred_F == true)
+            {
+                panel2.Visible = true;
+                panel7.Visible = false;
+                panel2.Dock = DockStyle.Top;
+            }
+
             //------------------------------------------
 
             Constants.opencon();
@@ -2825,19 +2839,6 @@ namespace ANRPC_Inventory
         {
             InitializeComponent();
 
-            if (Constants.talbtawred_F == false)
-            {
-                panel7.Visible = true;
-                panel2.Visible = false;
-                panel7.Dock = DockStyle.Top;
-            }
-            else if (Constants.talbtawred_F == true)
-            {
-                panel2.Visible = true;
-                panel7.Visible = false;
-                panel2.Dock = DockStyle.Top;
-            }
-
             init();
         }
         public TalbTawred(string x, string y)
@@ -2845,14 +2846,22 @@ namespace ANRPC_Inventory
             InitializeComponent();
             Cmb_FYear.Text = x;
             TXT_TalbNo.Text = y;
-            TXT_TalbNo2.Focus();
+            
 
-            ActiveControl = TXT_TalbNo2;
+            panel7.Visible = false;
+            panel2.Visible = false;
+
+            isComeFromSearch = true;
+
         }
         //======================================
         private void TalbTawred_Load(object sender, EventArgs e)
         {
 
+            if (isComeFromSearch)
+            {
+                BTN_SearchTalb_Click(BTN_SearchTalb, e);
+            }
         }
         //===========================================================================
 
@@ -4622,7 +4631,7 @@ namespace ANRPC_Inventory
 
         private void BTN_SearchTalb_Click(object sender, EventArgs e)
         {
-            if (!IsValidCase(VALIDATION_TYPES.SEARCH))
+            if (isComeFromSearch == false && !IsValidCase(VALIDATION_TYPES.SEARCH))
             {
                 return;
             }

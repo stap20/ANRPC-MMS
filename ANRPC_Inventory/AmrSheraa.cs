@@ -1478,17 +1478,7 @@ namespace ANRPC_Inventory
             }
         #endregion
 
-
-
-        public AmrSheraa()
-        {
-            InitializeComponent();
-            this.SetStyle(ControlStyles.DoubleBuffer, true);
-            this.SetStyle(ControlStyles.UserPaint, true);
-            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-        }
-
-        private void AmrSheraa_Load(object sender, EventArgs e)
+        private void init()
         {
             alertProvider.Icon = SystemIcons.Warning;
 
@@ -1519,7 +1509,7 @@ namespace ANRPC_Inventory
             else if (Constants.Amrshera_F == true)
             {
                 panel2.Visible = true;
-               panel7.Visible = false;
+                panel7.Visible = false;
                 panel2.Dock = DockStyle.Top;
             }
             else { }
@@ -1543,15 +1533,15 @@ namespace ANRPC_Inventory
             if (Constants.User_Type == "B")
             {
 
-            
-            cmdstring = "select Amrshraa_No from   T_Awamershraa where  AmrSheraa_sanamalia='" + Cmb_FY.Text + "'";
-           }
+
+                cmdstring = "select Amrshraa_No from   T_Awamershraa where  AmrSheraa_sanamalia='" + Cmb_FY.Text + "'";
+            }
             else
             {
-               cmdstring = "select Amrshraa_No from   T_Awamershraa where  AmrSheraa_sanamalia='" + Cmb_FY.Text + "'" +" and CodeEdara='"+codeedara+"'";
+                cmdstring = "select Amrshraa_No from   T_Awamershraa where  AmrSheraa_sanamalia='" + Cmb_FY.Text + "'" + " and CodeEdara='" + codeedara + "'";
 
             }
-         
+
             SqlCommand cmd = new SqlCommand(cmdstring, con);
             SqlDataReader dr = cmd.ExecuteReader();
             //---------------------------------
@@ -1596,10 +1586,10 @@ namespace ANRPC_Inventory
                 }
             }
             dr3.Close();
-              CMB_Sadr.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-              CMB_Sadr.AutoCompleteSource = AutoCompleteSource.CustomSource;
-              CMB_Sadr.AutoCompleteCustomSource = TasnifColl;
-      
+            CMB_Sadr.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            CMB_Sadr.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            CMB_Sadr.AutoCompleteCustomSource = TasnifColl;
+
             TXT_AmrNo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             TXT_AmrNo.AutoCompleteSource = AutoCompleteSource.CustomSource;
             TXT_AmrNo.AutoCompleteCustomSource = TalbColl;
@@ -1610,6 +1600,20 @@ namespace ANRPC_Inventory
             Cmb_FYear2.SelectedIndex = -1;
 
             reset();
+        }
+
+        public AmrSheraa()
+        {
+            InitializeComponent();
+            //this.SetStyle(ControlStyles.DoubleBuffer, true);
+            //this.SetStyle(ControlStyles.UserPaint, true);
+            //this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            init();
+        }
+
+        private void AmrSheraa_Load(object sender, EventArgs e)
+        {
+
         }
                  
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

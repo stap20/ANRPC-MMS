@@ -226,8 +226,10 @@ namespace ANRPC_Inventory
                     this.Hide();
                 }
                 else if(Constants.User_Type=="B"){
-                    Fmain AF = new Fmain();
-                    AF.Show();
+                    //Fmain AF = new Fmain();
+                    //AF.Show();
+                    MainAppForm mainForm = new MainAppForm();
+                    mainForm.Show();
                     this.Hide();
                 }
                

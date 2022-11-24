@@ -1754,16 +1754,7 @@ namespace ANRPC_Inventory
         }
         #endregion
 
-        public FTransfer_M()
-        {
-            InitializeComponent();
-            this.SetStyle(ControlStyles.DoubleBuffer, true);
-            this.SetStyle(ControlStyles.UserPaint, true);
-            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-        }
-
-        //======================================
-        private void FTransfer_M_Load(object sender, EventArgs e)
+        private void init()
         {
             // TODO: This line of code loads data into the 'aNRPC_InventoryDataSet.T_BnodAwamershraa' table. You can move, or remove it, as needed.
             // this.t_BnodAwamershraaTableAdapter.Fill(this.aNRPC_InventoryDataSet.T_BnodAwamershraa);
@@ -1885,6 +1876,16 @@ namespace ANRPC_Inventory
             con.Close();
 
             reset();
+        }
+
+        public FTransfer_M()
+        {
+            InitializeComponent();
+            //this.SetStyle(ControlStyles.DoubleBuffer, true);
+            //this.SetStyle(ControlStyles.UserPaint, true);
+            //this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+
+            init();
         }
         //===========================================================================
 

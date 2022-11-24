@@ -10,9 +10,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace ANRPC_Inventory
 {
-    public partial class TalbTawreedTabsHandler : Form
+    public partial class EznTahweelTabsHandler : Form
     {
         private IconButton currentActiveTab;
         private Panel tabsActiveBorder;
@@ -27,7 +28,7 @@ namespace ANRPC_Inventory
         }
 
 
-        public TalbTawreedTabsHandler()
+        public EznTahweelTabsHandler()
         {
             InitializeComponent();
             prepareSubTabsActiveIndecator();
@@ -116,9 +117,9 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void SideBarBtnCLicked(object sender, EventArgs e,Color color ,Form childForm = null)
+        private void SideBarBtnCLicked(object sender, EventArgs e, Color color, Form childForm = null)
         {
-            ActivateButton(sender,color);
+            ActivateButton(sender, color);
 
             if (childForm != null)
             {
@@ -135,16 +136,16 @@ namespace ANRPC_Inventory
 
         private void btnAddEdit_Click(object sender, EventArgs e)
         {
-            Constants.talbtawred_F = true;
+            Constants.EzonTahwel_FF = true;
 
-            SideBarBtnCLicked(sender, e, RGBColors.color1, new TalbTawred());
+            SideBarBtnCLicked(sender, e, RGBColors.color1, new FTransfer_M());
         }
 
         private void btnFollowSignature_Click(object sender, EventArgs e)
         {
-            Constants.talbtawred_F = false;
+            Constants.EzonTahwel_FF = false;
 
-            SideBarBtnCLicked(sender, e, RGBColors.color1, new TalbTawred());
+            SideBarBtnCLicked(sender, e, RGBColors.color1, new FTransfer_M());
         }
 
         protected override CreateParams CreateParams

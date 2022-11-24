@@ -170,6 +170,7 @@ namespace ANRPC_Inventory
                 e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 
                 Color color;
+                Color textColor = Color.FromArgb(18, 18, 18); ;
                 Color symbolColor;
 
                 if (isActiveCircle == true)
@@ -189,8 +190,8 @@ namespace ANRPC_Inventory
                 DrawCircle(e, center_x, center_y, r - 5, W);
                 DrawSymbol(e, center_x, center_y, symbolColor);
 
-                DrawText(e, center_x, center_y, r, color,-(Convert.ToInt32(r*2.5)), details.mainText,true);
-                DrawText(e, center_x, center_y, r, Color.WhiteSmoke, (Convert.ToInt32(r*1.5)), details.circleDetailsText, false);
+                DrawText(e, center_x, center_y, r, color, -(Convert.ToInt32(r*2.5)), details.mainText,true);
+                DrawText(e, center_x, center_y, r, textColor, (Convert.ToInt32(r*1.5)), details.circleDetailsText, false);
             }
 
             public static void DrawShape(PaintEventArgs e, int x, int y, int length, int r, int SuccessSeqPercent,TimeLineCircleDetails details)

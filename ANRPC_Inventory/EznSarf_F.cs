@@ -1622,19 +1622,11 @@ namespace ANRPC_Inventory
         }
         #endregion
 
-        public EznSarf_F()
-        {
-            InitializeComponent();
-            this.SetStyle(ControlStyles.DoubleBuffer, true);
-            this.SetStyle(ControlStyles.UserPaint, true);
-            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-        }
-        //======================================
-        private void EznSarf_F_Load(object sender, EventArgs e)
+        private void init()
         {
             // TODO: This line of code loads data into the 'aNRPC_InventoryDataSet.T_BnodAwamershraa' table. You can move, or remove it, as needed.
             // this.t_BnodAwamershraaTableAdapter.Fill(this.aNRPC_InventoryDataSet.T_BnodAwamershraa);
-            
+
             alertProvider.Icon = SystemIcons.Warning;
             HelperClass.comboBoxFiller(Cmb_FYear, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
             HelperClass.comboBoxFiller(Cmb_FYear2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
@@ -1664,7 +1656,7 @@ namespace ANRPC_Inventory
             else { }
             //    if (Constants.User_Type != "A")
             //  {
-           // DisableControls();
+            // DisableControls();
             // }
             //------------------------------------------
 
@@ -1769,6 +1761,15 @@ namespace ANRPC_Inventory
             Constants.closecon();
 
             reset();
+        }
+        public EznSarf_F()
+        {
+            InitializeComponent();
+            //this.SetStyle(ControlStyles.DoubleBuffer, true);
+            //this.SetStyle(ControlStyles.UserPaint, true);
+            //this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+
+            init();
         }
         //===========================================================================
 

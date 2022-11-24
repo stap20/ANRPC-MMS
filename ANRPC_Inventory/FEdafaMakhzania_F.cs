@@ -1902,20 +1902,8 @@ namespace ANRPC_Inventory
         }
         #endregion
 
-
-
-
-        public FEdafaMakhzania_F()
+        private void init()
         {
-            InitializeComponent();
-            this.SetStyle(ControlStyles.DoubleBuffer, true);
-            this.SetStyle(ControlStyles.UserPaint, true);
-            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-        }
-
-        private void EdafaMakhzania_Load(object sender, EventArgs e)
-        {
-
             alertProvider.Icon = SystemIcons.Warning;
             HelperClass.comboBoxFiller(Cmb_FY, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
             HelperClass.comboBoxFiller(Cmb_FY2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
@@ -2030,6 +2018,17 @@ namespace ANRPC_Inventory
             con.Close();
 
             reset();
+        }
+
+
+        public FEdafaMakhzania_F()
+        {
+            InitializeComponent();
+            //this.SetStyle(ControlStyles.DoubleBuffer, true);
+            //this.SetStyle(ControlStyles.UserPaint, true);
+            //this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+
+            init();
         }
                
         private void Column2_KeyPress(object sender, KeyPressEventArgs e)

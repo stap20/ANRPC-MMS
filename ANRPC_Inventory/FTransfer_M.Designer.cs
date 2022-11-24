@@ -1145,6 +1145,7 @@
             // 
             // panel12
             // 
+            this.panel12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel12.BackColor = System.Drawing.Color.Transparent;
             this.panel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel12.Controls.Add(this.TXT_TRNO2);
@@ -1951,7 +1952,6 @@
             this.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "TalbTawred";
-            this.Load += new System.EventHandler(this.FTransfer_M_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tBnodAwamershraaBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.aNRPC_InventoryDataSet)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);

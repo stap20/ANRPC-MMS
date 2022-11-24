@@ -12,11 +12,12 @@ using System.Windows.Forms;
 
 namespace ANRPC_Inventory
 {
-    public partial class TalbTawreedTabsHandler : Form
+    public partial class SearchMostandTabsHandler : Form
     {
         private IconButton currentActiveTab;
         private Panel tabsActiveBorder;
         private Form currentChildForm;
+
 
         private void prepareSubTabsActiveIndecator()
         {
@@ -27,16 +28,12 @@ namespace ANRPC_Inventory
         }
 
 
-        public TalbTawreedTabsHandler()
+
+        public SearchMostandTabsHandler()
         {
             InitializeComponent();
             prepareSubTabsActiveIndecator();
-            btnAddEdit.PerformClick();
-
-            if (Constants.User_Type == "B")
-            {
-                btnAddEdit.Visible = false;
-            }
+            btnDocumentDetails.PerformClick();
         }
 
         private struct RGBColors
@@ -45,7 +42,6 @@ namespace ANRPC_Inventory
             public static Color color2 = Color.FromArgb(2, 163, 123);
             public static Color color3 = Color.FromArgb(184, 224, 103);
         }
-
 
         private void openChildForm(Form childForm)
         {
@@ -68,7 +64,6 @@ namespace ANRPC_Inventory
             childForm.Show();
         }
 
-
         private void DisableButton()
         {
             if (this.currentActiveTab != null)
@@ -82,7 +77,6 @@ namespace ANRPC_Inventory
                 currentActiveTab.TextAlign = ContentAlignment.MiddleLeft;
             }
         }
-
 
         private void ActivateButton(object senderBtn, Color color)
         {
@@ -116,9 +110,9 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void SideBarBtnCLicked(object sender, EventArgs e,Color color ,Form childForm = null)
+        private void SideBarBtnCLicked(object sender, EventArgs e, Color color, Form childForm = null)
         {
-            ActivateButton(sender,color);
+            ActivateButton(sender, color);
 
             if (childForm != null)
             {
@@ -129,22 +123,15 @@ namespace ANRPC_Inventory
             formWraper.Visible = true;
         }
 
-
-
-
-
-        private void btnAddEdit_Click(object sender, EventArgs e)
+        private void btnDocumentDetails_Click(object sender, EventArgs e)
         {
-            Constants.talbtawred_F = true;
-
-            SideBarBtnCLicked(sender, e, RGBColors.color1, new TalbTawred());
+            SideBarBtnCLicked(sender, e, RGBColors.color1, new TalbTawred("2022_2023", "8"));
         }
 
-        private void btnFollowSignature_Click(object sender, EventArgs e)
+        private void btnDocumentTimeLine_Click(object sender, EventArgs e)
         {
-            Constants.talbtawred_F = false;
 
-            SideBarBtnCLicked(sender, e, RGBColors.color1, new TalbTawred());
+            SideBarBtnCLicked(sender, e, RGBColors.color1, new TimeLineDrawerForm());
         }
 
         protected override CreateParams CreateParams

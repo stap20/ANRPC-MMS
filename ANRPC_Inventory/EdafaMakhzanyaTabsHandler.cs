@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace ANRPC_Inventory
 {
-    public partial class TalbTawreedTabsHandler : Form
+    public partial class EdafaMakhzanyaTabsHandler : Form
     {
         private IconButton currentActiveTab;
         private Panel tabsActiveBorder;
@@ -27,13 +27,13 @@ namespace ANRPC_Inventory
         }
 
 
-        public TalbTawreedTabsHandler()
+        public EdafaMakhzanyaTabsHandler()
         {
             InitializeComponent();
             prepareSubTabsActiveIndecator();
             btnAddEdit.PerformClick();
 
-            if (Constants.User_Type == "B")
+            if (Constants.User_Type == "A")
             {
                 btnAddEdit.Visible = false;
             }
@@ -116,9 +116,9 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void SideBarBtnCLicked(object sender, EventArgs e,Color color ,Form childForm = null)
+        private void SideBarBtnCLicked(object sender, EventArgs e, Color color, Form childForm = null)
         {
-            ActivateButton(sender,color);
+            ActivateButton(sender, color);
 
             if (childForm != null)
             {
@@ -135,16 +135,16 @@ namespace ANRPC_Inventory
 
         private void btnAddEdit_Click(object sender, EventArgs e)
         {
-            Constants.talbtawred_F = true;
+            Constants.Edafa_F = true;
 
-            SideBarBtnCLicked(sender, e, RGBColors.color1, new TalbTawred());
+            SideBarBtnCLicked(sender, e, RGBColors.color1, new FEdafaMakhzania_F());
         }
 
         private void btnFollowSignature_Click(object sender, EventArgs e)
         {
-            Constants.talbtawred_F = false;
+            Constants.Edafa_F = false;
 
-            SideBarBtnCLicked(sender, e, RGBColors.color1, new TalbTawred());
+            SideBarBtnCLicked(sender, e, RGBColors.color1, new FEdafaMakhzania_F());
         }
 
         protected override CreateParams CreateParams

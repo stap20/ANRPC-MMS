@@ -42,24 +42,46 @@ namespace ANRPC_Inventory
                             height: 54, padding: padd, appearance: appearance, isRL: true));
 
             sideBarTabsList.Add(new Tab(font, "  إذن الصرف    ", color, 35, IconFont.Auto, IconChar.CartFlatbed,
-                    DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new conForm()); },
+                    DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new EznSarfTabsHandler()); },
                     height: 54, padding: padd, appearance: appearance, isRL: true));
 
-            sideBarTabsList.Add(new Tab(font, "  المطابقة الفنية    ", color, 32, IconFont.Auto, IconChar.ClipboardCheck,
-                    DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new conForm()); },
-                    height: 54, padding: padd, appearance: appearance, isRL: true));
+
+            if (Constants.User_Type == "B")
+            {
+                sideBarTabsList.Add(new Tab(font, "  أمر شراء    ", color, 35, IconFont.Auto, IconChar.MoneyCheckDollar,
+                      DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new AmrSheraaTabsHandler()); },
+                      height: 54, padding: padd, appearance: appearance, isRL: true));
+            }
+
+            if (Constants.User_Type == "B")
+            {
+                sideBarTabsList.Add(new Tab(font, "  إضافة مخزنية    ", color, 32, IconFont.Auto, IconChar.ClipboardCheck,
+                                DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new EdafaMakhzanyaTabsHandler()); },
+                                height: 54, padding: padd, appearance: appearance, isRL: true));
+            }
+            else
+            {
+                sideBarTabsList.Add(new Tab(font, "  المطابقة الفنية    ", color, 32, IconFont.Auto, IconChar.ClipboardCheck,
+                                DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new EdafaMakhzanyaTabsHandler()); },
+                                height: 54, padding: padd, appearance: appearance, isRL: true));
+
+            }
+
+
 
             sideBarTabsList.Add(new Tab(font, "  إذون التحويل    ", color, 32, IconFont.Auto, IconChar.DiagramPredecessor,
-                    DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new conForm()); },
+                    DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new EznTahweelTabsHandler()); },
                     height: 54, padding: padd, appearance: appearance, isRL: true));
 
             sideBarTabsList.Add(new Tab(font, "  البـــــحــــث    ", color, 32, IconFont.Auto, IconChar.Search,
-                    DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new Search()); },
+                    DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new SearchMostandTabsHandler()); },
                     height: 54, padding: padd, appearance: appearance, isRL: true));
 
-            sideBarTabsList.Add(new Tab(font, "  الإعدادت    ", color, 32, IconFont.Auto, IconChar.Cog,
-                DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new conForm()); },
-                height: 54, padding: padd, appearance: appearance, isRL: true));
+
+
+            //sideBarTabsList.Add(new Tab(font, "  الإعدادت    ", color, 32, IconFont.Auto, IconChar.Cog,
+            //    DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new conForm()); },
+            //    height: 54, padding: padd, appearance: appearance, isRL: true));
         }
 
 
