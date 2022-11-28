@@ -110,7 +110,7 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void SideBarBtnCLicked(object sender, EventArgs e, Color color, Form childForm = null)
+        private void TabBarBtnCLicked(object sender, EventArgs e, Color color, Form childForm = null)
         {
             ActivateButton(sender, color);
 
@@ -125,13 +125,13 @@ namespace ANRPC_Inventory
 
         private void btnDocumentDetails_Click(object sender, EventArgs e)
         {
-            SideBarBtnCLicked(sender, e, RGBColors.color1, new TalbTawred("2022_2023", "8"));
+            TabBarBtnCLicked(sender, e, RGBColors.color1, new TalbTawred("2022_2023", "8"));
         }
 
         private void btnDocumentTimeLine_Click(object sender, EventArgs e)
         {
 
-            SideBarBtnCLicked(sender, e, RGBColors.color1, new TimeLineDrawerForm());
+            TabBarBtnCLicked(sender, e, RGBColors.color1, new TimeLineDrawerForm());
         }
 
         protected override CreateParams CreateParams

@@ -23,11 +23,25 @@ namespace ANRPC_Inventory
             string FYear = "2022_2023";
             string formNo = "1";
             SqlConnection sqlConnction = new SqlConnection(Constants.constring);
-            SqlDataAdapter daTalabTawreed = new SqlDataAdapter(@"select *,cast(iif(Date2 is NULL ,0,1) as bit) as isDone, 
-                                                                FORMAT([Date2], 'd MMM', 'en-US') as signDate, DATEDIFF(day, 
-                                                                [Date1], [Date2]) AS Duration FROM T_SignaturesDates 
+            SqlDataAdapter daTalabTawreed = new SqlDataAdapter(@"select *, 
+                                                                  cast(
+                                                                    iif(Date2 is NULL, 0, 1) as bit
+                                                                  ) as isDone, 
+                                                                  FORMAT([Date2], 'd MMM', 'en-US') as signDate, 
+                                                                  iif(
+                                                                    [Date1] is not null 
+                                                                    and [Date2] is not null, 
+                                                                    DATEDIFF(day, [Date1], [Date2]), 
+                                                                    iif(
+                                                                      [Date1] is not null 
+                                                                      and [Date2] is null, 
+                                                                      DATEDIFF(day, [Date1], GETDATE()), 
+                                                                      -1
+                                                                    )
+                                                                  ) AS Duration 
+                                                                FROM 
+                                                                  T_SignaturesDates 
                                                                 where TalbTwareed_No = " + TalbTwareed_No + " and FormNo=" + formNo + " AND FYear='" + FYear + "'", sqlConnction);
-
 
             sqlConnction.Open();
             daTalabTawreed.Fill(dtTalabTawreed);
@@ -80,6 +94,7 @@ namespace ANRPC_Inventory
             details.mainText = new DrawedCircleText(Convert.ToString(row["signDate"]), new Font("Calibri", 16, FontStyle.Bold));
             details.circleDetailsText = new DrawedCircleText(getSignatureDescription(formNo, signNo), new Font("Calibri", 14, FontStyle.Bold));
             details.donePercent = 0;
+            details.duration = Convert.ToInt32(row["Duration"]);
 
             if (details.isDone)
             {

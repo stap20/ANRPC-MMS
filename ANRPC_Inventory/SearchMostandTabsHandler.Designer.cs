@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.formWraper = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabsBar = new Guna.UI2.WinForms.Guna2GradientPanel();
@@ -35,6 +36,8 @@
             this.btnDocumentDetails = new FontAwesome.Sharp.IconButton();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnDocumentDetailsElipse = new Guna.UI2.WinForms.Guna2Elipse(this.components);
+            this.gunabtnDocumentTimeLineElipse = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.panel2.SuspendLayout();
             this.tabsBar.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -156,6 +159,16 @@
             this.panel1.Size = new System.Drawing.Size(800, 450);
             this.panel1.TabIndex = 3;
             // 
+            // btnDocumentDetailsElipse
+            // 
+            this.btnDocumentDetailsElipse.BorderRadius = 12;
+            this.btnDocumentDetailsElipse.TargetControl = this.btnDocumentDetails;
+            // 
+            // gunabtnDocumentTimeLineElipse
+            // 
+            this.gunabtnDocumentTimeLineElipse.BorderRadius = 12;
+            this.gunabtnDocumentTimeLineElipse.TargetControl = this.btnDocumentTimeLine;
+            // 
             // SearchMostandTabsHandler
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -183,5 +196,7 @@
         private FontAwesome.Sharp.IconButton btnDocumentDetails;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel1;
+        private Guna.UI2.WinForms.Guna2Elipse btnDocumentDetailsElipse;
+        private Guna.UI2.WinForms.Guna2Elipse gunabtnDocumentTimeLineElipse;
     }
 }

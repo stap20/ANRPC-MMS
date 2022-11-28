@@ -116,7 +116,7 @@ namespace ANRPC_Inventory
             this.btnTimeline.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTimeline.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold);
             this.btnTimeline.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(170)))), ((int)(((byte)(192)))));
-            this.btnTimeline.IconChar = FontAwesome.Sharp.IconChar.ClockFour;
+            this.btnTimeline.IconChar = FontAwesome.Sharp.IconChar.CheckCircle;
             this.btnTimeline.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(170)))), ((int)(((byte)(192)))));
             this.btnTimeline.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.btnTimeline.IconSize = 23;

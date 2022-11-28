@@ -16,5 +16,7 @@ namespace ANRPC_Inventory
 
         public bool isDone { get; set; }
 
+        public int duration { get; set; }
+
     }
 }

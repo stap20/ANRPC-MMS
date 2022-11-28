@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,14 +60,110 @@ namespace ANRPC_Inventory
 
         private static class TimeLineHelper
         {
-            public static void DrawPoint(PaintEventArgs e, int x, int y, Color c)
+            enum IndecatorBarType
+            {
+                NORMAL,
+                MEDUIM,
+                DANGER,
+
+            }
+
+            private static void DrawPoint(PaintEventArgs e, int x, int y, Color c)
             {
                 e.Graphics.FillRectangle(new SolidBrush(c), x, y, 5, 5);
             }
 
-            public static void DrawLine(PaintEventArgs e, int x, int y, int length, bool isActiveLine = false, bool isEndCurved = false)
+            private static void DrawIndecatorSymbol(PaintEventArgs e,string indecatorSymbol, int center_x, int center_y, Color color)
             {
-                e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                // Create font and brush.
+                PrivateFontCollection f = new PrivateFontCollection();
+                f.AddFontFile("fa-solid-900.ttf");
+
+                Font drawFont1 = new Font(f.Families[0], 18);
+
+                SizeF s = e.Graphics.MeasureString(indecatorSymbol, drawFont1);
+
+                int start_x, start_y;
+                start_x = center_x - Convert.ToInt32(s.Width) / 2 + 1;
+                start_y = center_y - Convert.ToInt32(s.Height) / 2 - 1;
+
+                SolidBrush drawBrush1 = new SolidBrush(color);
+
+                // Set format of string.
+                StringFormat drawFormat1 = new StringFormat();
+
+                // Draw string to screen.
+                e.Graphics.DrawString(indecatorSymbol, drawFont1, drawBrush1, start_x, start_y, drawFormat1);
+
+            }
+
+            private static void DrawIndecatorBarSection(PaintEventArgs e, int x, int y, int length,Color color, IndecatorBarType type)
+            {
+                int start_pos_x, start_pos_y, end_pos_x, end_pos_y;
+
+                start_pos_x = x;
+                start_pos_y = y;
+                end_pos_x = x + length;
+                end_pos_y = y;
+
+                //Draw_Line_Pending
+                Pen bluepen = new Pen(color, 10);
+                Point p3 = new Point(start_pos_x, start_pos_y);
+                Point p4 = new Point(end_pos_x, end_pos_y);
+
+                if (type == IndecatorBarType.NORMAL)
+                {
+                    bluepen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+                }
+                else if(type == IndecatorBarType.DANGER)
+                {
+                    bluepen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+                }
+                e.Graphics.DrawLine(bluepen, p3, p4);
+            }
+
+            private static void DrawDurationIndecator(PaintEventArgs e,int duration ,int start_x, int start_y, int lenght, TimeLineCircleDetails details)
+            {
+                Color normal_color,meduim_color,danger_color;
+
+                normal_color = Color.FromArgb(80, 176, 46);
+                meduim_color = Color.FromArgb(252, 216, 35);
+                danger_color = Color.FromArgb(225, 26, 34);
+
+
+
+                //string indecatorSymbol = "";
+                //Color indecatorSymbolColor = new Color();
+                //if(details.duration >= 0  && details.duration <= 3)
+                //{
+                //    indecatorSymbol = "";
+                //    indecatorSymbolColor = Color.FromArgb(53, 178, 136);
+                //}
+                //else if(details.duration > 3 && details.duration <= 5)
+                //{
+                //    indecatorSymbol = "";
+                //    indecatorSymbolColor = Color.FromArgb(255, 212, 59);
+                //}
+                //else if(details.duration >= 6)
+                //{
+                //    indecatorSymbol = "";
+                //    indecatorSymbolColor = Color.FromArgb(235, 50, 35);
+                //}
+
+                //if (details.duration >= 0)
+                //{
+                //    DrawIndecatorSymbol(e, indecatorSymbol, center_x, center_y, indecatorSymbolColor);
+                //}
+
+
+                DrawIndecatorBarSection(e, start_x, start_y, lenght/3, normal_color, IndecatorBarType.NORMAL);
+                DrawIndecatorBarSection(e, start_x+40, start_y, lenght / 3, meduim_color, IndecatorBarType.MEDUIM);
+                DrawIndecatorBarSection(e, start_x+80, start_y, lenght / 3, danger_color, IndecatorBarType.DANGER);
+
+            }
+
+            private static void DrawLine(PaintEventArgs e, int x, int y, int length, TimeLineCircleDetails details, bool isActiveLine = false, bool isEndCurved = false)
+            {
                 Color line_color;
 
                 if (isActiveLine == true)
@@ -98,9 +196,8 @@ namespace ANRPC_Inventory
                 e.Graphics.DrawLine(bluepen, p3, p4);
             }
 
-            public static void DrawCircle(PaintEventArgs e, int center_x, int center_y, int r, Color color)
+            private static void DrawCircle(PaintEventArgs e, int center_x, int center_y, int r, Color color)
             {
-                e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
                 int start_x, start_y, diameter;
                 start_x = center_x - r;
                 start_y = center_y - r;
@@ -110,7 +207,7 @@ namespace ANRPC_Inventory
 
             }
 
-            public static void DrawSymbol(PaintEventArgs e, int center_x, int center_y, Color color)
+            private static void DrawSymbol(PaintEventArgs e, int center_x, int center_y, Color color)
             {
 
                 String drawString1 = "";
@@ -167,8 +264,6 @@ namespace ANRPC_Inventory
             
             public static void DrawCompletedCircle(PaintEventArgs e, int center_x, int center_y, int r, TimeLineCircleDetails details, bool isActiveCircle = false)
             {
-                e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-
                 Color color;
                 Color textColor = Color.FromArgb(18, 18, 18); ;
                 Color symbolColor;
@@ -196,7 +291,9 @@ namespace ANRPC_Inventory
 
             public static void DrawShape(PaintEventArgs e, int x, int y, int length, int r, int SuccessSeqPercent,TimeLineCircleDetails details)
             {
-                e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+                e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+
                 int center_x, center_y;
                 bool isActive = false;
 
@@ -207,11 +304,15 @@ namespace ANRPC_Inventory
 
                 if (SuccessSeqPercent < 100)
                 {
-                    DrawLine(e, x, y, length + ((SuccessSeqPercent * (length - r)) / 100), isActive, true);
+                    DrawLine(e, x, y, length + ((SuccessSeqPercent * (length - r)) / 100), details,isActive, true);
+
+                    DrawDurationIndecator(e, 5, x + r +20, y - 50,120, details);
                 }
                 else
                 {
-                    DrawLine(e, x, y, length, isActive);
+                    DrawLine(e, x, y, length, details,isActive);
+
+                    DrawDurationIndecator(e, 5, x + r + 10, y - 23,120, details);
                 }
 
                 center_x = x + length;

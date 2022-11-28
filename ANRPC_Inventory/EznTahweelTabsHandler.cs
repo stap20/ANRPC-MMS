@@ -117,7 +117,7 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void SideBarBtnCLicked(object sender, EventArgs e, Color color, Form childForm = null)
+        private void TabBarBtnCLicked(object sender, EventArgs e, Color color, Form childForm = null)
         {
             ActivateButton(sender, color);
 
@@ -138,14 +138,14 @@ namespace ANRPC_Inventory
         {
             Constants.EzonTahwel_FF = true;
 
-            SideBarBtnCLicked(sender, e, RGBColors.color1, new FTransfer_M());
+            TabBarBtnCLicked(sender, e, RGBColors.color1, new FTransfer_M());
         }
 
         private void btnFollowSignature_Click(object sender, EventArgs e)
         {
             Constants.EzonTahwel_FF = false;
 
-            SideBarBtnCLicked(sender, e, RGBColors.color1, new FTransfer_M());
+            TabBarBtnCLicked(sender, e, RGBColors.color1, new FTransfer_M());
         }
 
         protected override CreateParams CreateParams
