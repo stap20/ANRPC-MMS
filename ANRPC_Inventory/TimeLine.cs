@@ -23,7 +23,7 @@ namespace ANRPC_Inventory
             this.timeLineList = timeLineList;
         }
 
-        public void DarwSequance(int circleRaduis = 25, int offsetX = 40, int offsetY = 160)
+        public void DarwSequance(int circleRaduis = 25, int offsetX = 40, int offsetY = 160, bool isRL = true)
         {
 
             int length, r, start_x, start_y, numberOfDrawedShapesCircles;
@@ -35,27 +35,24 @@ namespace ANRPC_Inventory
 
             length = (this.containerWidth - 15 - (start_x * 2)) / numberOfDrawedShapesCircles;
 
+            int circleDetailsPointer = isRL == true ? 0 : numberOfDrawedShapesCircles;
 
 
-            for (int i = numberOfDrawedShapesCircles; i > 0; i--)
+            for (int i = numberOfDrawedShapesCircles; i >= 0 ; i--)
             {
+                TimeLineCircleDetails details = this.timeLineList[circleDetailsPointer];
 
-                TimeLineCircleDetails details = this.timeLineList[i];
-
-                if (details.isDone)
+                if (i == 0) //last circle
                 {
-                   TimeLineHelper.DrawShape(this.paintEvent, start_x + ((i - 1) * (length)), start_y, length, r, details.donePercent, this.timeLineList[i]);
+                    TimeLineHelper.DrawCompletedCircle(this.paintEvent, start_x, start_y, r, details, details.isDone);
                 }
-
                 else
                 {
-                    TimeLineHelper.DrawShape(this.paintEvent, start_x + ((i - 1) * (length)), start_y, length, r,details.donePercent, this.timeLineList[i]);
+                    TimeLineHelper.DrawShape(this.paintEvent, start_x + ((i - 1) * (length)), start_y, length, r, details, isRL: isRL);
                 }
+
+                circleDetailsPointer = isRL == true ? circleDetailsPointer+1 : i-1;  
             }
-
-
-            TimeLineHelper.DrawCompletedCircle(this.paintEvent, start_x, start_y, r, this.timeLineList[0], true);
-
         }
 
         private static class TimeLineHelper
@@ -162,7 +159,7 @@ namespace ANRPC_Inventory
 
             }
 
-            private static void DrawLine(PaintEventArgs e, int x, int y, int length, TimeLineCircleDetails details, bool isActiveLine = false, bool isEndCurved = false)
+            private static void DrawLine(PaintEventArgs e, int x, int y, int length, TimeLineCircleDetails details, bool isActiveLine = false, bool isEndCurved = false,bool isRL=false)
             {
                 Color line_color;
 
@@ -180,6 +177,7 @@ namespace ANRPC_Inventory
 
                 start_pos_x = x;
                 start_pos_y = y;
+
                 end_pos_x = x + length;
                 end_pos_y = y;
 
@@ -190,7 +188,14 @@ namespace ANRPC_Inventory
 
                 if (isEndCurved == true)
                 {
-                    bluepen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+                    if (!isRL)
+                    {
+                        bluepen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+                    }
+                    else
+                    {
+                        bluepen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+                    }
                 }
 
                 e.Graphics.DrawLine(bluepen, p3, p4);
@@ -289,7 +294,7 @@ namespace ANRPC_Inventory
                 DrawText(e, center_x, center_y, r, textColor, (Convert.ToInt32(r*1.5)), details.circleDetailsText, false);
             }
 
-            public static void DrawShape(PaintEventArgs e, int x, int y, int length, int r, int SuccessSeqPercent,TimeLineCircleDetails details)
+            public static void DrawShape(PaintEventArgs e, int x, int y, int length, int r,TimeLineCircleDetails details,bool isRL = true)
             {
                 e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
                 e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
@@ -297,22 +302,22 @@ namespace ANRPC_Inventory
                 int center_x, center_y;
                 bool isActive = false;
 
-                if(SuccessSeqPercent > 0)
+                if(details.donePercent > 0)
                 {
                     isActive = true;
                 }
 
-                if (SuccessSeqPercent < 100)
+                if (details.donePercent > 0 && details.donePercent < 100)
                 {
-                    DrawLine(e, x, y, length + ((SuccessSeqPercent * (length - r)) / 100), details,isActive, true);
+                    DrawLine(e, x, y, length + ((details.donePercent * (length - r)) / 100), details,isActive, true, isRL: isRL);
 
-                    DrawDurationIndecator(e, 5, x + r +20, y - 50,120, details);
+                   // DrawDurationIndecator(e, 5, x + r +20, y - 50,120, details);
                 }
                 else
                 {
-                    DrawLine(e, x, y, length, details,isActive);
+                    DrawLine(e, x, y, length, details,isActive,isRL: isRL);
 
-                    DrawDurationIndecator(e, 5, x + r + 10, y - 23,120, details);
+                   // DrawDurationIndecator(e, 5, x + r + 10, y - 23,120, details);
                 }
 
                 center_x = x + length;
