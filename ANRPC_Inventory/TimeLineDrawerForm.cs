@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,15 @@ namespace ANRPC_Inventory
     {
         List<TimeLineCircleDetails> list = new List<TimeLineCircleDetails>();
         private DataTable dtTalabTawreed = new DataTable();
+        int totalDone, totalCircles;
+
+        enum CircleType
+        {
+            NORMAL,
+            START,
+            LAST,
+            LASTDONE
+        }
 
         private void queryData()
         {
@@ -64,7 +74,7 @@ namespace ANRPC_Inventory
             signatureDictionary[0].Add("مدير قطاع المشتريات");
             signatureDictionary[0].Add("مدير عام المهمات");
             signatureDictionary[0].Add("إعتماد رئيس مجلس الإدارة");
-            signatureDictionary[0].Add("إدارة التصنيفات");
+            signatureDictionary[0].Add("مدير إدارة التصنيفات");
             signatureDictionary[0].Add("المتابعة الفنية");
 
             signatureDictionary[0].Add("");
@@ -81,30 +91,95 @@ namespace ANRPC_Inventory
             return getCurrentListOfSignaturesDescription(formNo, SignNo);
         }
 
-        private TimeLineCircleDetails circleDetailsFiller(DataRow row, bool isLastDone)
+        private TimeLineCircleDetails circleDetailsFiller(DataRow row, CircleType type)
         {
+            #region temp variables for selection
+            int formNo, signNo;
+
+            (int, int) symbolOffset;
+
+            string symbol;
+
+            Color mainTextColor, detailsTextColor, symbolColor, circleBackColor, circleColor;
+            Font textFont, symbolFont;
+            #endregion
+
             TimeLineCircleDetails details = new TimeLineCircleDetails();
 
-            int formNo, signNo;
+            symbol = "";
 
             formNo = Convert.ToInt32(row["FormNo"]);
             signNo = Convert.ToInt32(row["SignatureNo"]);
 
             details.isDone = Convert.ToBoolean(row["isDone"]);
-            details.mainText = new DrawedCircleText(Convert.ToString(row["signDate"]), new Font("Calibri", 16, FontStyle.Bold));
-            details.circleDetailsText = new DrawedCircleText(getSignatureDescription(formNo, signNo), new Font("Calibri", 14, FontStyle.Bold));
             details.donePercent = 0;
+
             details.duration = Convert.ToInt32(row["Duration"]);
+
+            symbolOffset = (0, 0);
+            circleColor = Color.FromArgb(255, 255, 255);
+            PrivateFontCollection f = new PrivateFontCollection();
+            f.AddFontFile("fa-solid-900.ttf");
 
             if (details.isDone)
             {
                 details.donePercent = 100;
+
+                circleBackColor = Color.FromArgb(53, 178, 136);
+
+                mainTextColor = Color.FromArgb(53, 178, 136);
+                detailsTextColor = Color.FromArgb(84, 84, 84);
+                textFont = new Font("Calibri", 13, FontStyle.Bold);
+
+                symbolFont = new Font(f.Families[0], 15);
+                symbolColor = Color.FromArgb(53, 178, 136);
+                totalDone++;
+            }
+            else
+            {
+                circleBackColor = Color.FromArgb(233, 241, 252);
+
+                mainTextColor = Color.FromArgb(204, 204, 204);
+                detailsTextColor = Color.FromArgb(204, 204, 204);
+                textFont = new Font("Calibri", 13, FontStyle.Bold);
+
+                symbolFont = new Font(f.Families[0], 15);
+                symbolColor = Color.FromArgb(188, 215, 246);
             }
 
-            if (isLastDone)
+
+            if (type == CircleType.START)
             {
-                details.donePercent = 45;
+                symbol = "";
+                symbolColor = Color.FromArgb(53, 178, 136);
+                symbolOffset = (1, 1);
             }
+            else if(type == CircleType.LAST)
+            {
+                symbol = Convert.ToString (Convert.ToInt32((totalDone/(totalCircles*1.0))*100)) + "%";
+                symbolFont = new Font("Calibri", 12, FontStyle.Bold);
+                symbolColor = Color.FromArgb(53, 178, 136);
+                symbolOffset = (1, 1);
+            }
+            else if(type == CircleType.LASTDONE)
+            {
+                details.donePercent = 70;
+
+                symbol = "";
+                symbolColor = Color.FromArgb(53, 178, 136);
+                symbolOffset = (1, -1);
+            }
+            else if(type == CircleType.NORMAL)
+            {
+                symbol = "";
+                symbolOffset = (1, 1);
+            }
+
+
+            details.mainText = new DrawedCircleText(Convert.ToString(row["signDate"]), textFont, mainTextColor);
+            details.circleDetailsText = new DrawedCircleText(getSignatureDescription(formNo, signNo), textFont, detailsTextColor);
+            details.circleSymbol = new CircleSymbol(symbol, symbolFont, symbolColor,symbolOffset);
+            details.circleStyle = new CircleStyle(circleBackColor,circleColor);
 
             return details;
         }
@@ -113,16 +188,30 @@ namespace ANRPC_Inventory
         {
             //queryData
             queryData();
+            totalCircles = dtTalabTawreed.Rows.Count;
+            totalDone = 0;
             for (int i = 0; i < dtTalabTawreed.Rows.Count; i++)
             {
-                bool isLastDone = false;
+                CircleType type;
 
-                if (i + 1 < dtTalabTawreed.Rows.Count && Convert.ToBoolean(dtTalabTawreed.Rows[i]["isDone"]) && !Convert.ToBoolean(dtTalabTawreed.Rows[i + 1]["isDone"]))
+                if (i == 0)
                 {
-                    isLastDone = true;
+                    type = CircleType.START;
+                }
+                else if(i+1 == dtTalabTawreed.Rows.Count)
+                {
+                    type = CircleType.LAST;
+                }
+                else if (i + 1 < dtTalabTawreed.Rows.Count && Convert.ToBoolean(dtTalabTawreed.Rows[i]["isDone"]) && !Convert.ToBoolean(dtTalabTawreed.Rows[i + 1]["isDone"]))
+                {
+                    type = CircleType.LASTDONE;
+                }
+                else
+                {
+                    type = CircleType.NORMAL;
                 }
 
-                TimeLineCircleDetails details = circleDetailsFiller(dtTalabTawreed.Rows[i], isLastDone);
+                TimeLineCircleDetails details = circleDetailsFiller(dtTalabTawreed.Rows[i], type);
 
 
                 list.Add(details);
@@ -139,7 +228,7 @@ namespace ANRPC_Inventory
         private void formWraper_Paint(object sender, PaintEventArgs e)
         {
             TimeLine timeLineGraph = new TimeLine(e, formWraper.Width, list);
-            timeLineGraph.DarwSequance(offsetX: 60);
+            timeLineGraph.DarwSequance(offsetX: 60,isRL:true);
         }
     }
 }

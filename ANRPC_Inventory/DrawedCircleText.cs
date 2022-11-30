@@ -11,12 +11,15 @@ namespace ANRPC_Inventory
     {
         public string Text { get; }
 
-        public System.Drawing.Font Font { get;}
+        public Font Font { get;}
 
-        public DrawedCircleText(string text, Font font)
+        public Color Color { get; }
+
+        public DrawedCircleText(string text, Font font, Color color)
         {
             Text = text;
             Font = font;
+            Color = color;
         }
     }
 }

@@ -87,8 +87,8 @@ namespace ANRPC_Inventory
             signNo = Convert.ToInt32(row["SignatureNo"]);
 
             details.isDone = Convert.ToBoolean(row["isDone"]);
-            details.mainText = new DrawedCircleText(Convert.ToString(row["signDate"]), new Font("Arial", 16, FontStyle.Bold));
-            details.circleDetailsText = new DrawedCircleText(getSignatureDescription(formNo, signNo), new Font("Arial", 10, FontStyle.Bold));
+            //details.mainText = new DrawedCircleText(Convert.ToString(row["signDate"]), new Font("Arial", 16, FontStyle.Bold));
+            //details.circleDetailsText = new DrawedCircleText(getSignatureDescription(formNo, signNo), new Font("Arial", 10, FontStyle.Bold));
             details.donePercent = 0;
 
             if (details.isDone)
