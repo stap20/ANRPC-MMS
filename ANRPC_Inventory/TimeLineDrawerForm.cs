@@ -151,13 +151,14 @@ namespace ANRPC_Inventory
             if (type == CircleType.START)
             {
                 symbol = "";
+                symbolFont = new Font(f.Families[0], 13);
                 symbolColor = Color.FromArgb(53, 178, 136);
                 symbolOffset = (1, 1);
             }
             else if(type == CircleType.LAST)
             {
                 symbol = Convert.ToString (Convert.ToInt32((totalDone/(totalCircles*1.0))*100)) + "%";
-                symbolFont = new Font("Calibri", 12, FontStyle.Bold);
+                symbolFont = new Font("Calibri", 11, FontStyle.Bold);
                 symbolColor = Color.FromArgb(53, 178, 136);
                 symbolOffset = (1, 1);
             }

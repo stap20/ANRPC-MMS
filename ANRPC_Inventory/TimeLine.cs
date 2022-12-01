@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
@@ -155,6 +156,10 @@ namespace ANRPC_Inventory
                 return path;
             }
 
+            public static void fillTriangle(PaintEventArgs e, Brush varbrush, Point[] points)
+            {
+                e.Graphics.FillPolygon(varbrush, points);
+            }
             private static void DrawSymbol(PaintEventArgs e, int center_x, int center_y, TimeLineCircleDetails details)
             {
                 Font font = details.circleSymbol.Font;
@@ -180,31 +185,11 @@ namespace ANRPC_Inventory
 
             private static void DrawIndecatorBarSection(PaintEventArgs e, int x, int y, int length,Color color)
             {
-                //int start_pos_x, start_pos_y, end_pos_x, end_pos_y;
-
-                //start_pos_x = x;
-                //start_pos_y = y;
-                //end_pos_x = x + length;
-                //end_pos_y = y;
-
-                ////Draw_Line_Pending
-                //Pen bluepen = new Pen(color, 10);
-                //Point p3 = new Point(start_pos_x, start_pos_y);
-                //Point p4 = new Point(end_pos_x, end_pos_y);
-
-                //if (type == IndecatorBarType.NORMAL)
-                //{
-                //    bluepen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
-                //}
-                //else if(type == IndecatorBarType.DANGER)
-                //{
-                //    bluepen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
-                //}
-                //e.Graphics.DrawLine(bluepen, p3, p4);
             }
 
             private static void DrawDurationIndecator(PaintEventArgs e,int duration ,int center_x, int center_y, int lenght, TimeLineCircleDetails details)
             {
+              
                 Color normal_color,meduim_color,danger_color;
 
                 normal_color = Color.FromArgb(80, 176, 46);
@@ -242,36 +227,29 @@ namespace ANRPC_Inventory
                 //DrawIndecatorBarSection(e, start_x+80, start_y, lenght / 3, danger_color, IndecatorBarType.DANGER);
 
 
-                PrivateFontCollection f = new PrivateFontCollection();
-                f.AddFontFile("fa-solid-900.ttf");
-
-                Font font = new Font(f.Families[0], 40);
-                Font font1 = new Font(f.Families[0], 10);
-                string symbol = "";
-                Color color = Color.Red;
-
-                // Create font and brush.
-                SizeF s = e.Graphics.MeasureString(symbol, font);
-
                 int start_x, start_y;
-                start_x = center_x - (Convert.ToInt32(36) / 2);
-                start_y = center_y - (Convert.ToInt32(25) / 2) - 50;
+                start_x = center_x - (Convert.ToInt32(40) / 2);
+                start_y = center_y - (Convert.ToInt32(20) / 2) - 70;
 
-                SolidBrush drawBrush1 = new SolidBrush(color);
+                const float xradius = 1;
+                const float yradius = 1;
 
-                // Set format of string.
-                StringFormat drawFormat1 = new StringFormat();
-
-                const float xradius = 3;
-                const float yradius = 3;
-
-                RectangleF rect = new RectangleF(start_x, start_y, 36,25);
+                RectangleF rect = new RectangleF(start_x, start_y, 40,20);
 
                 GraphicsPath path = MakeRoundedRect(rect, xradius, yradius, true, true, true, true);
 
                 e.Graphics.FillPath(Brushes.Red, path);
-                e.Graphics.DrawPath(new Pen(Color.Red, 1), path);
+                e.Graphics.DrawPath(new Pen(Color.Red, 5), path);
 
+                int tr_x,tr_y;
+                tr_x = center_x - 8;
+                tr_y = start_y + 20;
+
+                Point[] points = { new Point(tr_x,tr_y ), new Point(tr_x + 16, tr_y), new Point(center_x, tr_y+12) };
+
+                SolidBrush varbrush = new SolidBrush(Color.Red);
+
+                fillTriangle(e, varbrush, points);
             }
 
             private static void DrawLine(PaintEventArgs e, int x, int y, int length, TimeLineCircleDetails details, bool isActiveLine = false, bool isEndCurved = false,bool isRL=false)
