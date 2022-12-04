@@ -102,6 +102,8 @@ namespace ANRPC_Inventory
 
             Color mainTextColor, detailsTextColor, symbolColor, circleBackColor, circleColor;
             Font textFont, symbolFont;
+
+            DurationIndecator indecator;
             #endregion
 
             TimeLineCircleDetails details = new TimeLineCircleDetails();
@@ -114,8 +116,9 @@ namespace ANRPC_Inventory
             details.isDone = Convert.ToBoolean(row["isDone"]);
             details.donePercent = 0;
 
-            details.duration = Convert.ToInt32(row["Duration"]);
+            int duration = Convert.ToInt32(row["Duration"]);
 
+            indecator = null;
             symbolOffset = (0, 0);
             circleColor = Color.FromArgb(255, 255, 255);
             PrivateFontCollection f = new PrivateFontCollection();
@@ -177,10 +180,58 @@ namespace ANRPC_Inventory
             }
 
 
+
+            if (duration > 3 && duration < 5)
+            {
+                Color backColor = Color.FromArgb(252, 216, 35);
+
+                Font detailsFont = new Font("Calibri", 13, FontStyle.Bold);
+                Color detailsColor = Color.FromArgb(255, 255, 255);
+
+                DurationIndecatorSymbol symbolStyle = null;
+
+                if(type == CircleType.LASTDONE) 
+                {
+                    string durationSymbol = "";
+                    Font durationSymboltFont = new Font(f.Families[0], 13);
+
+                    Color durationSymbolColor = Color.FromArgb(255, 255, 255);
+                    (int, int) durationSymbolOffset = (0, 0);
+
+                    symbolStyle = new DurationIndecatorSymbol(durationSymbolOffset, durationSymbol, durationSymboltFont, durationSymbolColor);
+                }
+
+
+                indecator = new DurationIndecator(40,20,backColor, detailsFont, detailsColor, duration,symbolStyle);
+            }
+            else if (duration >= 5)
+            {
+                Color backColor = Color.FromArgb(225, 26, 34);
+
+                Font detailsFont = new Font("Calibri", 13, FontStyle.Bold);
+                Color detailsColor = Color.FromArgb(255, 255, 255);
+
+                DurationIndecatorSymbol symbolStyle = null;
+
+                if (type == CircleType.LASTDONE)
+                {
+                    string durationSymbol = "";
+                    Font durationSymboltFont = new Font(f.Families[0], 13);
+
+                    Color durationSymbolColor = Color.FromArgb(255, 255, 255);
+                    (int, int) durationSymbolOffset = (0, 0);
+
+                    symbolStyle = new DurationIndecatorSymbol(durationSymbolOffset, durationSymbol, durationSymboltFont, durationSymbolColor);
+                }
+
+                indecator = new DurationIndecator(40, 20, backColor, detailsFont, detailsColor, duration, symbolStyle);
+            }
+
             details.mainText = new DrawedCircleText(Convert.ToString(row["signDate"]), textFont, mainTextColor);
             details.circleDetailsText = new DrawedCircleText(getSignatureDescription(formNo, signNo), textFont, detailsTextColor);
             details.circleSymbol = new CircleSymbol(symbol, symbolFont, symbolColor,symbolOffset);
             details.circleStyle = new CircleStyle(circleBackColor,circleColor);
+            details.durationIndecator = indecator;
 
             return details;
         }

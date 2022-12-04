@@ -183,73 +183,49 @@ namespace ANRPC_Inventory
 
             }
 
-            private static void DrawIndecatorBarSection(PaintEventArgs e, int x, int y, int length,Color color)
+            private static void DurationIndecationSymbol(PaintEventArgs e, int start_x, int start_y, TimeLineCircleDetails details)
             {
-            }
-
-            private static void DrawDurationIndecator(PaintEventArgs e,int duration ,int center_x, int center_y, int lenght, TimeLineCircleDetails details)
-            {
-              
-                Color normal_color,meduim_color,danger_color;
-
-                normal_color = Color.FromArgb(80, 176, 46);
-                meduim_color = Color.FromArgb(252, 216, 35);
-                danger_color = Color.FromArgb(225, 26, 34);
-
-
-
-                //string indecatorSymbol = "";
-                //Color indecatorSymbolColor = new Color();
-                //if(details.duration >= 0  && details.duration <= 3)
-                //{
-                //    indecatorSymbol = "";
-                //    indecatorSymbolColor = Color.FromArgb(53, 178, 136);
-                //}
-                //else if(details.duration > 3 && details.duration <= 5)
-                //{
-                //    indecatorSymbol = "";
-                //    indecatorSymbolColor = Color.FromArgb(255, 212, 59);
-                //}
-                //else if(details.duration >= 6)
-                //{
-                //    indecatorSymbol = "";
-                //    indecatorSymbolColor = Color.FromArgb(235, 50, 35);
-                //}
-
-                //if (details.duration >= 0)
-                //{
-                //    DrawIndecatorSymbol(e, indecatorSymbol, center_x, center_y, indecatorSymbolColor);
-                //}
-
-
-                //DrawIndecatorBarSection(e, start_x, start_y, lenght/3, normal_color, IndecatorBarType.NORMAL);
-                //DrawIndecatorBarSection(e, start_x+40, start_y, lenght / 3, meduim_color, IndecatorBarType.MEDUIM);
-                //DrawIndecatorBarSection(e, start_x+80, start_y, lenght / 3, danger_color, IndecatorBarType.DANGER);
-
-
-                int start_x, start_y;
-                start_x = center_x - (Convert.ToInt32(40) / 2);
-                start_y = center_y - (Convert.ToInt32(20) / 2) - 70;
-
                 const float xradius = 1;
                 const float yradius = 1;
-
-                RectangleF rect = new RectangleF(start_x, start_y, 40,20);
+                 
+                RectangleF rect = new RectangleF(start_x, start_y, details.durationIndecator.width, details.durationIndecator.height);
 
                 GraphicsPath path = MakeRoundedRect(rect, xradius, yradius, true, true, true, true);
 
-                e.Graphics.FillPath(Brushes.Red, path);
-                e.Graphics.DrawPath(new Pen(Color.Red, 5), path);
+                SolidBrush brush = new SolidBrush(details.durationIndecator.backColor);
 
-                int tr_x,tr_y;
-                tr_x = center_x - 8;
-                tr_y = start_y + 20;
+                e.Graphics.FillPath(brush, path);
 
-                Point[] points = { new Point(tr_x,tr_y ), new Point(tr_x + 16, tr_y), new Point(center_x, tr_y+12) };
+                e.Graphics.DrawPath(new Pen(details.durationIndecator.backColor, 5), path);
 
-                SolidBrush varbrush = new SolidBrush(Color.Red);
+
+
+                int tr_x, tr_y,center_point,triangle_width,triangle_height;
+
+                triangle_width = 16;
+                triangle_height = 12;
+
+                center_point = start_x + Convert.ToInt32(details.durationIndecator.width / 2);
+                tr_x = center_point  - Convert.ToInt32(triangle_width);
+                tr_y = start_y + details.durationIndecator.height;
+
+                Point[] points = { new Point(tr_x, tr_y), new Point(tr_x + triangle_width, tr_y), new Point(center_point, tr_y + triangle_height) };
+
+                SolidBrush varbrush = new SolidBrush(details.durationIndecator.backColor);
 
                 fillTriangle(e, varbrush, points);
+            }
+
+            private static void DrawDurationIndecator(PaintEventArgs e ,int center_x, int center_y,TimeLineCircleDetails details)
+            {
+                int start_X, start_y;
+
+                start_X = center_x - Convert.ToInt32(details.durationIndecator.width / 2);
+
+                if (details.durationIndecator != null)
+                {
+                    DurationIndecationSymbol(e, center_x, center_y, details);   
+                }
             }
 
             private static void DrawLine(PaintEventArgs e, int x, int y, int length, TimeLineCircleDetails details, bool isActiveLine = false, bool isEndCurved = false,bool isRL=false)
@@ -387,7 +363,7 @@ namespace ANRPC_Inventory
                     }
 
 
-                    DrawDurationIndecator(e, 5, center_x, center_y,120, details);
+                    DrawDurationIndecator(e, center_x, center_y, details);
                 }
                 else
                 {

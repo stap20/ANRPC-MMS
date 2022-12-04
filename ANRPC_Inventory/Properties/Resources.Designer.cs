@@ -406,6 +406,16 @@ namespace ANRPC_Inventory.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap paper1 {
+            get {
+                object obj = ResourceManager.GetObject("paper1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pngtree_wooden_board_empty_table_with_blur_background_image_311163 {
             get {
                 object obj = ResourceManager.GetObject("pngtree-wooden-board-empty-table-with-blur-background-image_311163", resourceCulture);
@@ -429,6 +439,16 @@ namespace ANRPC_Inventory.Properties {
         internal static System.Drawing.Bitmap proflog {
             get {
                 object obj = ResourceManager.GetObject("proflog", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap search_img {
+            get {
+                object obj = ResourceManager.GetObject("search_img", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
