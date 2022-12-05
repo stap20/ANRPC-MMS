@@ -73,6 +73,7 @@ namespace ANRPC_Inventory
         public int rowflag = 0;
         double quan;
         double dareba;
+        double discount;
         decimal price;
         decimal totalprice;
         int changedflag = 0;
@@ -194,7 +195,7 @@ namespace ANRPC_Inventory
             {
                 if (!row.IsNewRow)
                 {
-                    string q = "exec SP_InsertBnodAwamershraa @p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@P111,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24 ";
+                    string q = "exec SP_InsertBnodAwamershraa @p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@P111,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27 ";
                     cmd = new SqlCommand(q, Constants.con);
 
                     cmd.Parameters.AddWithValue("@p1", Convert.ToInt32(row.Cells[0].Value));
@@ -216,12 +217,17 @@ namespace ANRPC_Inventory
                     cmd.Parameters.AddWithValue("@p16", row.Cells[16].Value ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@p17", row.Cells[17].Value ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@p18", row.Cells[18].Value ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@p19", row.Cells[19].Value ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@p20", row.Cells[20].Value ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@p21", row.Cells[21].Value ?? DBNull.Value);
+
+                    cmd.Parameters.AddWithValue("@p19", row.Cells[22].Value ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@p20", row.Cells[23].Value ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@p21", row.Cells[24].Value ?? DBNull.Value);
+
                     cmd.Parameters.AddWithValue("@p22", row.Cells[22].Value ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@p23", row.Cells[23].Value ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@p24", row.Cells[24].Value ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@p25", row.Cells[25].Value ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@p26", row.Cells[26].Value ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@p27", row.Cells[27].Value ?? DBNull.Value);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -293,19 +299,25 @@ namespace ANRPC_Inventory
 
             dataGridView1.Columns["UnitPrice"].HeaderText = "سعر الوحدة غير شامل الضريبة";//col17
 
-            dataGridView1.Columns["TotalPrice"].HeaderText = "الاجمالى غير شامل الضريبة";//col18
+            dataGridView1.Columns["TotalPrice"].HeaderText = "الاجمالى غير شامل الضريبة و الخصم";//col18
 
-            dataGridView1.Columns["ApplyDareba"].HeaderText = "تطبق الضريبة";//col19
+            dataGridView1.Columns["ApplyDiscount"].HeaderText = "تطبق الخصم";//col19
 
-            dataGridView1.Columns["Darebapercent"].HeaderText = "نسبة الضريبة";//col20
+            dataGridView1.Columns["Discountpercent"].HeaderText = "نسبة الخصم";//col20
 
-            dataGridView1.Columns["TotalPriceAfter"].HeaderText = "الاجمالى شامل الضريبة ";//col21
+            dataGridView1.Columns["TotalPriceAfterDiscount"].HeaderText = "الاجمالى شامل الخصم ";//col21
 
-            dataGridView1.Columns["TalbEsdarShickNo"].HeaderText = "رقم طلب الاصدار ";//col26
+            dataGridView1.Columns["ApplyDareba"].HeaderText = "تطبق الضريبة";//col22
 
-            dataGridView1.Columns["ShickNo"].HeaderText = "رقم الشيك ";//col27
+            dataGridView1.Columns["Darebapercent"].HeaderText = "نسبة الضريبة";//col23
 
-            dataGridView1.Columns["ShickDate"].HeaderText = "تاريخ الشيك ";//col28
+            dataGridView1.Columns["TotalPriceAfter"].HeaderText = "الاجمالى شامل الخصم و الضريبة ";//col24
+
+            dataGridView1.Columns["TalbEsdarShickNo"].HeaderText = "رقم طلب الاصدار ";//col29
+
+            dataGridView1.Columns["ShickNo"].HeaderText = "رقم الشيك ";//col30
+
+            dataGridView1.Columns["ShickDate"].HeaderText = "تاريخ الشيك ";//col31
 
 
 
@@ -336,16 +348,16 @@ namespace ANRPC_Inventory
             dataGridView1.Columns["Rased_After"].HeaderText = "رصيد بعد";//col16
             dataGridView1.Columns["Rased_After"].Visible = false;
 
-            dataGridView1.Columns["EstlamFlag"].HeaderText = "تم الاستلام ";//col22
+            dataGridView1.Columns["EstlamFlag"].HeaderText = "تم الاستلام ";//col25
             dataGridView1.Columns["EstlamFlag"].Visible = false;
 
-            dataGridView1.Columns["EstlamDate"].HeaderText = "تاريخ الاستلام ";//col23
+            dataGridView1.Columns["EstlamDate"].HeaderText = "تاريخ الاستلام ";//col26
             dataGridView1.Columns["EstlamDate"].Visible = false;
 
-            dataGridView1.Columns["LessQuanFlag"].HeaderText = "يوجد عجز ";//col24
+            dataGridView1.Columns["LessQuanFlag"].HeaderText = "يوجد عجز ";//col27
             dataGridView1.Columns["LessQuanFlag"].Visible = false;
 
-            dataGridView1.Columns["NotIdenticalFlag"].HeaderText = "مطابق/غير مطابق ";//col25
+            dataGridView1.Columns["NotIdenticalFlag"].HeaderText = "مطابق/غير مطابق ";//col28
             dataGridView1.Columns["NotIdenticalFlag"].Visible = false;
 
             dataGridView1.Columns["TalbEsdarShickNo"].Visible = false;
@@ -2083,7 +2095,7 @@ namespace ANRPC_Inventory
 
         private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            if (dataGridView1.CurrentCell.ColumnIndex == 21 ||dataGridView1.CurrentCell.ColumnIndex == 17 ||dataGridView1.CurrentCell.ColumnIndex == 18|dataGridView1.CurrentCell.ColumnIndex == 20 )//reqQuan
+            if (dataGridView1.CurrentCell.ColumnIndex == 24 ||dataGridView1.CurrentCell.ColumnIndex == 17 ||dataGridView1.CurrentCell.ColumnIndex == 18|dataGridView1.CurrentCell.ColumnIndex == 23 )//reqQuan
             {
                 e.Control.KeyPress -= new KeyPressEventHandler(Column_KeyPress);
 
@@ -2123,7 +2135,7 @@ namespace ANRPC_Inventory
                 {
 
 
-                    if (e.ColumnIndex == 17 || e.ColumnIndex == 19 || e.ColumnIndex == 20)
+                    if (e.ColumnIndex == 17 || e.ColumnIndex == 22 || e.ColumnIndex == 23 || e.ColumnIndex == 19 || e.ColumnIndex == 20)
                     {
                         if (e.RowIndex >= 0)
                         {
@@ -2131,16 +2143,16 @@ namespace ANRPC_Inventory
                             quan = Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString());
 
                             price = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[17].Value.ToString());
-                            totalprice = ((decimal)quan * price);
+
+                            if (dataGridView1.Rows[e.RowIndex].Cells[21].Value.ToString() == "")
+                            {
+                                totalprice = ((decimal)quan * price);
+                            }
 
                             dataGridView1.Rows[e.RowIndex].Cells[18].Value = totalprice;
-                            dataGridView1.Rows[e.RowIndex].Cells[21].Value = totalprice;
-
-
+                            dataGridView1.Rows[e.RowIndex].Cells[24].Value = totalprice;
                         }
                     }
-
-
 
                     if (e.ColumnIndex == 19)
                     {
@@ -2148,28 +2160,66 @@ namespace ANRPC_Inventory
                         {
                             if ((dataGridView1.Rows[e.RowIndex].Cells[19].Value.ToString() == "False") && dataGridView1.Rows[e.RowIndex].Cells[20].Value != null)
                             {
-                                dareba = 0;
+                                discount = 0;
+
                                 //  dareba = (Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[20].Value)) / 100;
                                 //dataGridView1.Rows[e.RowIndex].Cells[21].Value = totalprice + ((decimal)dareba * totalprice);
+
                                 dataGridView1.Rows[e.RowIndex].Cells[20].Value = 0;
                                 dataGridView1.Rows[e.RowIndex].Cells[21].Value = totalprice;
                             }
 
                         }
                     }
+
+                    if (e.ColumnIndex == 22)
+                    {
+                        if (e.RowIndex >= 0)
+                        {
+                            if ((dataGridView1.Rows[e.RowIndex].Cells[22].Value.ToString() == "False") && dataGridView1.Rows[e.RowIndex].Cells[23].Value != null)
+                            {
+                                dareba = 0;
+
+                                //  dareba = (Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[20].Value)) / 100;
+                                //dataGridView1.Rows[e.RowIndex].Cells[21].Value = totalprice + ((decimal)dareba * totalprice);
+
+                                dataGridView1.Rows[e.RowIndex].Cells[23].Value = 0;
+                                dataGridView1.Rows[e.RowIndex].Cells[24].Value = totalprice;
+                            }
+
+                        }
+                    }
+
+
+
                     if (e.ColumnIndex == 20)
                     {
                         if (e.RowIndex >= 0)
                         {
                             if ((dataGridView1.Rows[e.RowIndex].Cells[19].Value.ToString() == "True") && dataGridView1.Rows[e.RowIndex].Cells[20].Value != null)
                             {
-                                dareba = (Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[20].Value)) / 100;
-                                dataGridView1.Rows[e.RowIndex].Cells[21].Value = totalprice + ((decimal)dareba * totalprice);
+                                discount = (Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[20].Value)) / 100;
+                                dataGridView1.Rows[e.RowIndex].Cells[21].Value = totalprice - ((decimal)discount * totalprice);
                             }
                         }
                     }
+
+                    if (e.ColumnIndex == 23)
+                    {
+                        if (e.RowIndex >= 0)
+                        {
+                            if ((dataGridView1.Rows[e.RowIndex].Cells[22].Value.ToString() == "True") && dataGridView1.Rows[e.RowIndex].Cells[23].Value != null)
+                            {
+                                dareba = (Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[23].Value)) / 100;
+                                dataGridView1.Rows[e.RowIndex].Cells[24].Value = totalprice + ((decimal)dareba * totalprice);
+                            }
+                        }
+                    }
+
+
+
                     // if (e.ColumnIndex ==21 || e.ColumnIndex ==20 ||e.ColumnIndex ==19 ||e.ColumnIndex ==18)
-                    if (e.ColumnIndex == 21)
+                    if (e.ColumnIndex == 24)
                     {
                         changedflag = 1;
 
@@ -2177,19 +2227,20 @@ namespace ANRPC_Inventory
 
                         decimal sumDareba = 0;
                         decimal sumBefore = 0;
+
                         foreach (DataGridViewRow row in dataGridView1.Rows)
                         {
                             if (!(row.Cells[e.ColumnIndex].Value == null || row.Cells[e.ColumnIndex].Value == DBNull.Value))
                             {
 
-                                sum = sum + Convert.ToDecimal(row.Cells[21].Value.ToString());
-                                if (row.Cells[20].Value.ToString() == "")
+                                sum = sum + Convert.ToDecimal(row.Cells[24].Value.ToString());
+                                if (row.Cells[23].Value.ToString() == "")
                                 {
                                     sumDareba = sumDareba + 0;
                                 }
                                 else
                                 {
-                                    sumDareba = sumDareba + Convert.ToDecimal(row.Cells[20].Value.ToString());
+                                    sumDareba = sumDareba + Convert.ToDecimal(row.Cells[23].Value.ToString());
 
                                 }
 

@@ -256,6 +256,7 @@ namespace ANRPC_Inventory
                 }
                 else if (i + 1 < dtTalabTawreed.Rows.Count && Convert.ToBoolean(dtTalabTawreed.Rows[i]["isDone"]) && !Convert.ToBoolean(dtTalabTawreed.Rows[i + 1]["isDone"]))
                 {
+                    MessageBox.Show(dtTalabTawreed.Rows[i]["SignatureNo"].ToString());
                     type = CircleType.LASTDONE;
                 }
                 else

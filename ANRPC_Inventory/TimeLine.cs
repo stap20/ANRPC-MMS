@@ -218,14 +218,12 @@ namespace ANRPC_Inventory
 
             private static void DrawDurationIndecator(PaintEventArgs e ,int center_x, int center_y,TimeLineCircleDetails details)
             {
-                //int start_X, start_y;
+                int start_x, start_y;
 
-                //start_X = center_x - Convert.ToInt32(details.durationIndecator.width / 2);
+                start_x = center_x - Convert.ToInt32(details.durationIndecator.width / 2);
+                start_y = center_y - details.durationIndecator.height - 12 -1;
 
-                //if (details.durationIndecator != null)
-                //{
-                //    DurationIndecationSymbol(e, center_x, center_y, details);   
-                //}
+                DurationIndecationSymbol(e, start_x, start_y, details);
             }
 
             private static void DrawLine(PaintEventArgs e, int x, int y, int length, TimeLineCircleDetails details, bool isActiveLine = false, bool isEndCurved = false,bool isRL=false)
@@ -362,8 +360,10 @@ namespace ANRPC_Inventory
                         DrawLine(e, x, y, length + percentExtend, details, isActive, true, isRL: isRL);
                     }
 
-
-                    DrawDurationIndecator(e, center_x, center_y, details);
+                    if (details.durationIndecator != null)
+                    {
+                        DrawDurationIndecator(e, center_x, center_y, details);
+                    }
                 }
                 else
                 {
