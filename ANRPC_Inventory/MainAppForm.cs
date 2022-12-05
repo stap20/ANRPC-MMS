@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Media3D;
+using ANRPC_Inventory.Resources;
 using FontAwesome.Sharp;
 using Guna.UI2.WinForms;
 using Guna.UI2.WinForms.Suite;
@@ -41,9 +42,31 @@ namespace ANRPC_Inventory
                                 },
                             height: 54, padding: padd, appearance: appearance, isRL: true));
 
+            sideBarTabsList.Add(new Tab(font, "  طلب تنفيذ الأعمال    ", color, 32, IconFont.Auto, IconChar.ClipboardList,
+                                DockStyle.Top, (object sender, EventArgs e) => {
+                                    SideBarBtnCLicked(sender, e, new TalbTnfizTabsHandler());
+                                },
+                            height: 54, padding: padd, appearance: appearance, isRL: true));
+
+
+            sideBarTabsList.Add(new Tab(font, "  طلب المعايرة    ", color, 32, IconFont.Auto, IconChar.ClipboardList,
+                                DockStyle.Top, (object sender, EventArgs e) => {
+                                    SideBarBtnCLicked(sender, e, new TalbMoaeraTabsHandler());
+                                },
+                            height: 54, padding: padd, appearance: appearance, isRL: true));
+
+            sideBarTabsList.Add(new Tab(font, "  طلب الاصلاح    ", color, 32, IconFont.Auto, IconChar.ClipboardList,
+                                DockStyle.Top, (object sender, EventArgs e) => {
+                                    SideBarBtnCLicked(sender, e, new TalbMoaeraTabsHandler());
+                                },
+                            height: 54, padding: padd, appearance: appearance, isRL: true));
+
+
             sideBarTabsList.Add(new Tab(font, "  إذن الصرف    ", color, 35, IconFont.Auto, IconChar.CartFlatbed,
                     DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new EznSarfTabsHandler()); },
                     height: 54, padding: padd, appearance: appearance, isRL: true));
+
+
 
 
             if (Constants.User_Type == "B")
@@ -78,6 +101,9 @@ namespace ANRPC_Inventory
                     height: 54, padding: padd, appearance: appearance, isRL: true));
 
 
+            sideBarTabsList.Add(new Tab(font, "  الكيماويات    ", color, 32, IconFont.Auto, IconChar.Search,
+            DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new FChemical()); },
+            height: 54, padding: padd, appearance: appearance, isRL: true));
 
             //sideBarTabsList.Add(new Tab(font, "  الإعدادت    ", color, 32, IconFont.Auto, IconChar.Cog,
             //    DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new conForm()); },

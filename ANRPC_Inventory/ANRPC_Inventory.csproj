@@ -121,6 +121,30 @@
     <Compile Include="EdafaMakhzanyaTabsHandler.Designer.cs">
       <DependentUpon>EdafaMakhzanyaTabsHandler.cs</DependentUpon>
     </Compile>
+    <Compile Include="SearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchForm.designer.cs">
+      <DependentUpon>SearchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TalbEslahTabsHandler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TalbEslahTabsHandler.Designer.cs">
+      <DependentUpon>TalbEslahTabsHandler.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TalbMoaeraTabsHandler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TalbMoaeraTabsHandler.Designer.cs">
+      <DependentUpon>TalbMoaeraTabsHandler.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TalbTnfizTabsHandler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TalbTnfizTabsHandler.Designer.cs">
+      <DependentUpon>TalbTnfizTabsHandler.cs</DependentUpon>
+    </Compile>
     <Compile Include="EznSarfTabsHandler.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -393,11 +417,29 @@
     <Compile Include="SideBarHandler.cs" />
     <Compile Include="SubTabsHandler.cs" />
     <Compile Include="Tab.cs" />
+    <Compile Include="TalbEslah.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TalbEslah.Designer.cs">
+      <DependentUpon>TalbEslah.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TalbMoaera.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TalbMoaera.Designer.cs">
+      <DependentUpon>TalbMoaera.cs</DependentUpon>
+    </Compile>
     <Compile Include="TalbTawreedTabsHandler.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TalbTawreedTabsHandler.Designer.cs">
       <DependentUpon>TalbTawreedTabsHandler.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TalbTnfiz.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TalbTnfiz.Designer.cs">
+      <DependentUpon>TalbTnfiz.cs</DependentUpon>
     </Compile>
     <Compile Include="TasnifTrans.cs">
       <SubType>Form</SubType>
@@ -447,6 +489,8 @@
     <Compile Include="Track_TalbTawreed.Designer.cs">
       <DependentUpon>Track_TalbTawreed.cs</DependentUpon>
     </Compile>
+    <Compile Include="TransHandler.cs" />
+    <Compile Include="UnitsHandler.cs" />
     <EmbeddedResource Include="AmrSheraaTabsHandler.resx">
       <DependentUpon>AmrSheraaTabsHandler.cs</DependentUpon>
     </EmbeddedResource>
@@ -458,6 +502,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EdafaMakhzanyaTabsHandler.resx">
       <DependentUpon>EdafaMakhzanyaTabsHandler.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchForm.resx">
+      <DependentUpon>SearchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TalbEslahTabsHandler.resx">
+      <DependentUpon>TalbEslahTabsHandler.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TalbMoaeraTabsHandler.resx">
+      <DependentUpon>TalbMoaeraTabsHandler.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TalbTnfizTabsHandler.resx">
+      <DependentUpon>TalbTnfizTabsHandler.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EznSarfTabsHandler.resx">
       <DependentUpon>EznSarfTabsHandler.cs</DependentUpon>
@@ -519,6 +575,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SearchMostandTabsHandler.resx">
       <DependentUpon>SearchMostandTabsHandler.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TalbEslah.resx">
+      <DependentUpon>TalbEslah.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TalbMoaera.resx">
+      <DependentUpon>TalbMoaera.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TalbTawreedTabsHandler.resx">
       <DependentUpon>TalbTawreedTabsHandler.cs</DependentUpon>
@@ -586,6 +648,9 @@
     <EmbeddedResource Include="R_TasnifCard.rdlc" />
     <EmbeddedResource Include="InsertTasnifTrans.resx">
       <DependentUpon>InsertTasnifTrans.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TalbTnfiz.resx">
+      <DependentUpon>TalbTnfiz.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TasnifTrans.resx">
       <DependentUpon>TasnifTrans.cs</DependentUpon>

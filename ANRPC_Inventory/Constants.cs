@@ -64,6 +64,9 @@ namespace ANRPC_Inventory
         public static bool Amrshera_F;
         public static bool Estlam_F;
         public static bool Edafa_F;
+        public static bool talbEslah_F;
+        public static bool TalbMoaera_F;
+        public static bool TalbTanfiz_F;
         public static int EdafaNo;
         public static string EdafaFY;
 

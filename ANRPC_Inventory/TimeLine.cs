@@ -218,14 +218,14 @@ namespace ANRPC_Inventory
 
             private static void DrawDurationIndecator(PaintEventArgs e ,int center_x, int center_y,TimeLineCircleDetails details)
             {
-                int start_X, start_y;
+                //int start_X, start_y;
 
-                start_X = center_x - Convert.ToInt32(details.durationIndecator.width / 2);
+                //start_X = center_x - Convert.ToInt32(details.durationIndecator.width / 2);
 
-                if (details.durationIndecator != null)
-                {
-                    DurationIndecationSymbol(e, center_x, center_y, details);   
-                }
+                //if (details.durationIndecator != null)
+                //{
+                //    DurationIndecationSymbol(e, center_x, center_y, details);   
+                //}
             }
 
             private static void DrawLine(PaintEventArgs e, int x, int y, int length, TimeLineCircleDetails details, bool isActiveLine = false, bool isEndCurved = false,bool isRL=false)
