@@ -68,7 +68,7 @@ namespace ANRPC_Inventory
         {
             private static void DrawPoint(PaintEventArgs e, int x, int y, Color c)
             {
-                e.Graphics.FillRectangle(new SolidBrush(c), x, y, 1, 1);
+                e.Graphics.FillRectangle(new SolidBrush(c), x, y, 3, 3);
             }
 
             private static GraphicsPath MakeRoundedRect(RectangleF rect, float xradius, float yradius, bool round_ul, bool round_ur, bool round_lr, bool round_ll)
@@ -160,6 +160,7 @@ namespace ANRPC_Inventory
             {
                 e.Graphics.FillPolygon(varbrush, points);
             }
+            
             private static void DrawSymbol(PaintEventArgs e, int center_x, int center_y, TimeLineCircleDetails details)
             {
                 Font font = details.circleSymbol.Font;
@@ -183,20 +184,20 @@ namespace ANRPC_Inventory
 
             }
 
-            private static void DurationIndecationSymbol(PaintEventArgs e, int start_x, int start_y, TimeLineCircleDetails details)
+            private static void DurationIndecationShape(PaintEventArgs e, int start_x, int start_y, DurationIndecator indecator,int boxWidth,int boxHeight)
             {
                 const float xradius = 1;
                 const float yradius = 1;
                  
-                RectangleF rect = new RectangleF(start_x, start_y, details.durationIndecator.width, details.durationIndecator.height);
+                RectangleF rect = new RectangleF(start_x, start_y, boxWidth, boxHeight);
 
                 GraphicsPath path = MakeRoundedRect(rect, xradius, yradius, true, true, true, true);
 
-                SolidBrush brush = new SolidBrush(details.durationIndecator.backColor);
+                SolidBrush brush = new SolidBrush(indecator.backColor);
 
                 e.Graphics.FillPath(brush, path);
 
-                e.Graphics.DrawPath(new Pen(details.durationIndecator.backColor, 5), path);
+                e.Graphics.DrawPath(new Pen(indecator.backColor, 5), path);
 
 
 
@@ -205,25 +206,112 @@ namespace ANRPC_Inventory
                 triangle_width = 16;
                 triangle_height = 12;
 
-                center_point = start_x + Convert.ToInt32(details.durationIndecator.width / 2);
-                tr_x = center_point  - Convert.ToInt32(triangle_width);
-                tr_y = start_y + details.durationIndecator.height;
+                center_point = start_x + Convert.ToInt32(boxWidth / 2);
+                tr_x = center_point  - Convert.ToInt32(triangle_width/2);
+                tr_y = start_y + boxHeight;
 
                 Point[] points = { new Point(tr_x, tr_y), new Point(tr_x + triangle_width, tr_y), new Point(center_point, tr_y + triangle_height) };
 
-                SolidBrush varbrush = new SolidBrush(details.durationIndecator.backColor);
+                SolidBrush varbrush = new SolidBrush(indecator.backColor);
 
                 fillTriangle(e, varbrush, points);
             }
 
-            private static void DrawDurationIndecator(PaintEventArgs e ,int center_x, int center_y,TimeLineCircleDetails details)
+            private static void DurationIndecationText(PaintEventArgs e, int center_x, int center_y,(int,int) offset, DurationIndecator indecator)
             {
+                SizeF s;
+
+                s = e.Graphics.MeasureString(indecator.Text, indecator.Font);
+
                 int start_x, start_y;
 
-                start_x = center_x - Convert.ToInt32(details.durationIndecator.width / 2);
-                start_y = center_y - details.durationIndecator.height - 12 -1;
+                start_x = center_x - Convert.ToInt32(s.Width/2) + offset.Item1;
+                start_y = center_y - Convert.ToInt32(s.Height/2) + offset.Item2;
 
-                DurationIndecationSymbol(e, start_x, start_y, details);
+                SolidBrush drawBrush1 = new SolidBrush(indecator.Color);
+         
+                // Set format of string.
+                StringFormat drawFormat1 = new StringFormat();
+
+                RectangleF textWrapper;
+                textWrapper = new RectangleF(start_x, start_y, s.Width, s.Height);
+
+
+                // Draw string to screen.
+                e.Graphics.DrawString(indecator.Text, indecator.Font, drawBrush1, textWrapper, drawFormat1);
+            }
+
+            private static void DurationIndecationSymbol(PaintEventArgs e, int center_x, int center_y, DurationIndecatorSymbol indecatorSymbol)
+            {
+                Font font = indecatorSymbol.Font;
+                string symbol = indecatorSymbol.symbol;
+                Color color = indecatorSymbol.Color;
+
+                // Create font and brush.
+                SizeF s = e.Graphics.MeasureString(symbol, font);
+
+
+                int start_x, start_y;
+                start_x = center_x - Convert.ToInt32(s.Width/2) + indecatorSymbol.symbolOffset.Item1;
+                start_y = center_y - Convert.ToInt32(s.Height/2) + indecatorSymbol.symbolOffset.Item2;
+
+
+                SolidBrush drawBrush1 = new SolidBrush(color);
+
+                // Set format of string.
+                StringFormat drawFormat1 = new StringFormat();
+
+                RectangleF textWrapper;
+                textWrapper = new RectangleF(start_x, start_y, s.Width, s.Height);
+
+
+                // Draw string to screen.
+                e.Graphics.DrawString(symbol, font, drawBrush1, textWrapper, drawFormat1);
+            }
+
+
+            private static void DrawDurationIndecator(PaintEventArgs e ,int center_x, int center_y, DurationIndecator indecator)
+            {
+                int start_x, start_y,text_x,text_y,boxWidth,boxHeight;
+                SizeF s;
+                SizeF symb = new SizeF();
+
+                s = e.Graphics.MeasureString(indecator.Text, indecator.Font);
+
+                boxWidth = Convert.ToInt32(s.Width) + indecator.marginX.Item1 + indecator.marginX.Item2;
+                boxHeight = Convert.ToInt32(s.Height) + indecator.marginY.Item1 + indecator.marginY.Item2;
+
+                if(indecator.symbol != null)
+                {              
+                    symb = e.Graphics.MeasureString(indecator.symbol.symbol, indecator.symbol.Font);
+                    boxWidth = boxWidth + Convert.ToInt32(symb.Width);
+                   
+                    boxHeight = Math.Max(Convert.ToInt32(s.Height), Convert.ToInt32(symb.Height)) + indecator.marginY.Item1 + indecator.marginY.Item2;
+                }
+
+                start_x = center_x - Convert.ToInt32(boxWidth / 2);
+                start_y = center_y - boxHeight - 12 - 2;
+
+                DurationIndecationShape(e, start_x, start_y, indecator,boxWidth,boxHeight);
+
+                text_x = center_x;
+                text_y = center_y - Convert.ToInt32(boxHeight / 2) - 12 - 2;
+
+                (int, int) offset = (1,1);
+
+                if (indecator.symbol != null)
+                {
+                    int symbol_start_x = start_x + indecator.marginX.Item1 + Convert.ToInt32(symb.Width/2);
+                    DurationIndecationSymbol(e, symbol_start_x, text_y+1, indecator.symbol);
+
+                    int l = indecator.marginX.Item1 + Convert.ToInt32(symb.Width);
+
+                    offset = (Convert.ToInt32(l/2),1);
+                }
+
+                
+
+                DurationIndecationText(e, text_x, text_y, offset, indecator);
             }
 
             private static void DrawLine(PaintEventArgs e, int x, int y, int length, TimeLineCircleDetails details, bool isActiveLine = false, bool isEndCurved = false,bool isRL=false)
@@ -359,17 +447,15 @@ namespace ANRPC_Inventory
                     {
                         DrawLine(e, x, y, length + percentExtend, details, isActive, true, isRL: isRL);
                     }
-
-                    if (details.durationIndecator != null)
-                    {
-                        DrawDurationIndecator(e, center_x, center_y, details);
-                    }
                 }
                 else
                 {
                     DrawLine(e, x, y, length, details,isActive,isRL: isRL);
+                }
 
-                   // DrawDurationIndecator(e, 5, x + r + 10, y - 23,120, details);
+                if (details.durationIndecator != null)
+                {
+                    DrawDurationIndecator(e, center_x, center_y-r, details.durationIndecator);
                 }
 
                 DrawCompletedCircle(e, center_x, center_y, r, details);

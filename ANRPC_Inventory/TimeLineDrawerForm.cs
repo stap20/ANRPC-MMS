@@ -23,7 +23,8 @@ namespace ANRPC_Inventory
             NORMAL,
             START,
             LAST,
-            LASTDONE
+            LASTDONE,
+            LASTINPROGRESS,
         }
 
         private void queryData()
@@ -183,17 +184,20 @@ namespace ANRPC_Inventory
 
             if (duration > 3 && duration < 5)
             {
-                Color backColor = Color.FromArgb(252, 216, 35);
+                Color backColor = Color.FromArgb(255, 193, 7);
 
-                Font detailsFont = new Font("Calibri", 13, FontStyle.Bold);
+                Font detailsFont = new Font("Calibri", (float)12, FontStyle.Bold);
                 Color detailsColor = Color.FromArgb(255, 255, 255);
 
                 DurationIndecatorSymbol symbolStyle = null;
 
-                if(type == CircleType.LASTDONE) 
+                (int, int) marginX = (2, 2);
+                (int, int) marginY = (1, 1);
+
+                if (type == CircleType.LASTINPROGRESS) 
                 {
                     string durationSymbol = "";
-                    Font durationSymboltFont = new Font(f.Families[0], 13);
+                    Font durationSymboltFont = new Font(f.Families[0], 11);
 
                     Color durationSymbolColor = Color.FromArgb(255, 255, 255);
                     (int, int) durationSymbolOffset = (0, 0);
@@ -201,19 +205,22 @@ namespace ANRPC_Inventory
                     symbolStyle = new DurationIndecatorSymbol(durationSymbolOffset, durationSymbol, durationSymboltFont, durationSymbolColor);
                 }
 
-
-                indecator = new DurationIndecator(40,20,backColor, detailsFont, detailsColor, duration,symbolStyle);
+                string indecateDuration = duration > 99 ? "99+ Days" : duration + " Days";
+                indecator = new DurationIndecator(marginX, marginY, backColor, detailsFont, detailsColor, indecateDuration, symbolStyle);
             }
             else if (duration >= 5)
             {
-                Color backColor = Color.FromArgb(225, 26, 34);
+                Color backColor = Color.FromArgb(220, 53, 69);
 
-                Font detailsFont = new Font("Calibri", 13, FontStyle.Bold);
+                Font detailsFont = new Font("Calibri", (float)12, FontStyle.Bold);
                 Color detailsColor = Color.FromArgb(255, 255, 255);
 
                 DurationIndecatorSymbol symbolStyle = null;
 
-                if (type == CircleType.LASTDONE)
+                (int, int) marginX = (2, 2);
+                (int, int) marginY = (1, 1);
+
+                if (type == CircleType.LASTINPROGRESS)
                 {
                     string durationSymbol = "";
                     Font durationSymboltFont = new Font(f.Families[0], 13);
@@ -224,7 +231,8 @@ namespace ANRPC_Inventory
                     symbolStyle = new DurationIndecatorSymbol(durationSymbolOffset, durationSymbol, durationSymboltFont, durationSymbolColor);
                 }
 
-                indecator = new DurationIndecator(40, 20, backColor, detailsFont, detailsColor, duration, symbolStyle);
+                string indecateDuration = duration > 99 ? "99+ Days" : duration + " Days";
+                indecator = new DurationIndecator(marginX, marginY, backColor, detailsFont, detailsColor, indecateDuration, symbolStyle);
             }
 
             details.mainText = new DrawedCircleText(Convert.ToString(row["signDate"]), textFont, mainTextColor);
@@ -256,8 +264,11 @@ namespace ANRPC_Inventory
                 }
                 else if (i + 1 < dtTalabTawreed.Rows.Count && Convert.ToBoolean(dtTalabTawreed.Rows[i]["isDone"]) && !Convert.ToBoolean(dtTalabTawreed.Rows[i + 1]["isDone"]))
                 {
-                    MessageBox.Show(dtTalabTawreed.Rows[i]["SignatureNo"].ToString());
                     type = CircleType.LASTDONE;
+                }
+                else if (i > 0 && !Convert.ToBoolean(dtTalabTawreed.Rows[i]["isDone"]) && Convert.ToBoolean(dtTalabTawreed.Rows[i - 1]["isDone"]))
+                {
+                    type = CircleType.LASTINPROGRESS;
                 }
                 else
                 {

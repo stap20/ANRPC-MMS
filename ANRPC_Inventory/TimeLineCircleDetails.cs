@@ -67,21 +67,21 @@ namespace ANRPC_Inventory
 
         public Color backColor { get; }
 
-        public int duration { get; }
+        public string Text { get; }
 
-        public int width { get; }
-        public int height { get; }
+        public (int, int) marginX { get; }
+        public (int, int) marginY { get; }
 
         public DurationIndecatorSymbol symbol { set; get; }
 
-        public DurationIndecator(int width,int height,Color backColor,Font font, Color color, int duration, DurationIndecatorSymbol symbol)
+        public DurationIndecator((int, int) marginX, (int, int) marginY, Color backColor,Font font, Color color, string text, DurationIndecatorSymbol symbol)
         {
-            this.width = width;
-            this.height = height;
+            this.marginX = marginX;
+            this.marginY = marginY;
             this.backColor = backColor;
             Font = font;
             Color = color;
-            this.duration = duration;
+            this.Text = text;
             this.symbol = symbol;
         }
 
