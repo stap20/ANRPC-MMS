@@ -447,42 +447,42 @@ namespace ANRPC_Inventory
             }
             
             private void GetTalbTawreedBnod(string talbNo, string fyear)
-        {
-            table.Clear();
+            {
+                table.Clear();
 
-            string TableQuery = @"SELECT  [TalbTwareed_No] ,[FYear],[Bnd_No],[RequestedQuan],Unit,[BIAN_TSNIF] ,STOCK_NO_ALL,Quan,[ArrivalDate] ,
-                                ApproxValue,AdditionStockFlag,NewTasnifFlag ,TalbTwareed_No2 FROM [T_TalbTawreed_Benod] 
-                                Where TalbTwareed_No = " + talbNo + " and Fyear='" + fyear + "'";
+                string TableQuery = @"SELECT  [TalbTwareed_No] ,[FYear],[Bnd_No],[RequestedQuan],Unit,[BIAN_TSNIF] ,STOCK_NO_ALL,Quan,[ArrivalDate] ,
+                                    ApproxValue,AdditionStockFlag,NewTasnifFlag ,TalbTwareed_No2 FROM [T_TalbTawreed_Benod] 
+                                    Where TalbTwareed_No = " + talbNo + " and Fyear='" + fyear + "'";
 
-            dataadapter = new SqlDataAdapter(TableQuery, Constants.con);
-            table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-            dataadapter.Fill(table);
-            dataGridView1.DataSource = table;
+                dataadapter = new SqlDataAdapter(TableQuery, Constants.con);
+                table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+                dataadapter.Fill(table);
+                dataGridView1.DataSource = table;
 
-            dataGridView1.Columns["TalbTwareed_No"].HeaderText = "رقم طلب التوريد";//col0
-            dataGridView1.Columns["FYear"].HeaderText = "السنة المالية";//col1
-            dataGridView1.Columns["Bnd_No"].HeaderText = "رقم البند";//col2
-            dataGridView1.Columns["RequestedQuan"].HeaderText = "الكمية";//col3
-            dataGridView1.Columns["Unit"].HeaderText = "الوحدة";//col4
-            dataGridView1.Columns["BIAN_TSNIF"].HeaderText = "بيان الموصفات";//col5
-            dataGridView1.Columns["STOCK_NO_ALL"].HeaderText = "الدليل الرقمى";//col6
-            dataGridView1.Columns["Quan"].HeaderText = "رصيد المخزن";//col7
+                dataGridView1.Columns["TalbTwareed_No"].HeaderText = "رقم طلب التوريد";//col0
+                dataGridView1.Columns["FYear"].HeaderText = "السنة المالية";//col1
+                dataGridView1.Columns["Bnd_No"].HeaderText = "رقم البند";//col2
+                dataGridView1.Columns["RequestedQuan"].HeaderText = "الكمية";//col3
+                dataGridView1.Columns["Unit"].HeaderText = "الوحدة";//col4
+                dataGridView1.Columns["BIAN_TSNIF"].HeaderText = "بيان الموصفات";//col5
+                dataGridView1.Columns["STOCK_NO_ALL"].HeaderText = "الدليل الرقمى";//col6
+                dataGridView1.Columns["Quan"].HeaderText = "رصيد المخزن";//col7
 
-            dataGridView1.Columns["ArrivalDate"].HeaderText = "تاريخ وروده";//col8
-            dataGridView1.Columns["ArrivalDate"].Visible = false;
+                dataGridView1.Columns["ArrivalDate"].HeaderText = "تاريخ وروده";//col8
+                dataGridView1.Columns["ArrivalDate"].Visible = false;
 
-            dataGridView1.Columns["ApproxValue"].HeaderText = "القيمة التقديرية";//col9
-            dataGridView1.Columns["AdditionStockFlag"].HeaderText = "بالاضافة الى رصيد";//col10
-            dataGridView1.Columns["NewTasnifFlag"].HeaderText = "تصنيف جديد";//col11
+                dataGridView1.Columns["ApproxValue"].HeaderText = "القيمة التقديرية";//col9
+                dataGridView1.Columns["AdditionStockFlag"].HeaderText = "بالاضافة الى رصيد";//col10
+                dataGridView1.Columns["NewTasnifFlag"].HeaderText = "تصنيف جديد";//col11
 
-            dataGridView1.Columns["TalbTwareed_No2"].HeaderText = "رقم طلب التوريد";//col12
-            dataGridView1.Columns["TalbTwareed_No2"].Visible = false;
+                dataGridView1.Columns["TalbTwareed_No2"].HeaderText = "رقم طلب التوريد";//col12
+                dataGridView1.Columns["TalbTwareed_No2"].Visible = false;
 
-            //if (Constants.User_Type == "A")
-            //{
-            //    dataGridView1.Columns["ArrivalDate"].ReadOnly = true;
-            //}
-        }
+                //if (Constants.User_Type == "A")
+                //{
+                //    dataGridView1.Columns["ArrivalDate"].ReadOnly = true;
+                //}
+            }
 
             public bool SearchTalb(string talbNo, string fyear, bool isCompleted = false)
             {
@@ -1050,12 +1050,14 @@ namespace ANRPC_Inventory
             {
                 if (Constants.UserTypeB == "ChangeTasnif" || Constants.UserTypeB == "NewTasnif")
                 {
-                    dataGridView1.ReadOnly = false;
                     foreach (DataGridViewRow row in dataGridView1.Rows)
                     {
                         for (int i = 0; i < row.Cells.Count; i++)
                         {
-                            row.Cells[i].ReadOnly = true;
+                            if ((bool)row.Cells[11].Value == true)
+                            {
+                                row.Cells[6].ReadOnly = false;
+                            }
                         }
                     }
 
@@ -1206,7 +1208,6 @@ namespace ANRPC_Inventory
             //signature btn
             changePanelState(panel13, false);
 
-            dataGridView1.ReadOnly = true;
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
 
@@ -1214,6 +1215,15 @@ namespace ANRPC_Inventory
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                for (int i = 0; i < row.Cells.Count; i++)
+                {
+                    row.Cells[i].ReadOnly = true;
+                }
+            }
+
 
             //moshtrayat types
             DisableMoshtryat();
@@ -3576,11 +3586,12 @@ namespace ANRPC_Inventory
                 {
 
                     if (e.FormattedValue != DBNull.Value && e.FormattedValue != "")// && dataGridView1.Rows[e.RowIndex].Cells[11].Value != "true")
-
                     {
-                        string query = "exec Sp_CheckTasnif @a,@p1 out,@p2 out,@p3 out,@flag out ";
+                        string query = "exec Sp_CheckTasnif @a,@code_edara,@p1 out,@p2 out,@p3 out,@flag out ";
                         SqlCommand cmd = new SqlCommand(query, Constants.con);
                         cmd.Parameters.AddWithValue("@a", (e.FormattedValue));
+                        cmd.Parameters.AddWithValue("@code_edara",850);
+
                         cmd.Parameters.Add("@flag", SqlDbType.Int, 32);  //-------> output parameter
                         cmd.Parameters["@flag"].Direction = ParameterDirection.Output;
                         cmd.Parameters.Add("@p1", SqlDbType.NVarChar, 500);  //-------> output parameter
@@ -3616,12 +3627,6 @@ namespace ANRPC_Inventory
                             if (flag1 != 2)
                             {
 
-                                //if (Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value) >= Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[3].Value))
-                                //{
-                                //    MessageBox.Show("كمية المطلوبة اقل من كمية المخزن لا نحناج الى طلب توريد");
-                                //    return;
-                                //}
-
                                 if ((Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value) < Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[3].Value)) && Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value) != 0)
                                 {
                                     dataGridView1.Rows[e.RowIndex].Cells[3].Value = Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[3].Value) - Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value);
@@ -3640,7 +3645,7 @@ namespace ANRPC_Inventory
                         catch (SqlException sqlEx)
                         {
                             executemsg = false;
-                            MessageBox.Show(sqlEx.ToString());
+                            Console.WriteLine(sqlEx.ToString());
                             flag1 = (int)cmd.Parameters["@flag"].Value;
                         }
                         if (flag1 == 2)
@@ -4675,21 +4680,6 @@ namespace ANRPC_Inventory
 
             TXT_TalbNo.Enabled = false;
             Cmb_FYear.Enabled = false;
-        }
-
-        private void dataGridView1_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && !dataGridView1.Rows[e.RowIndex].IsNewRow)
-            {
-                if (e.ColumnIndex == 6 && (bool)dataGridView1.Rows[e.RowIndex].Cells[11].Value == true) // 1 should be your column index
-                {
-                    dataGridView1.Rows[e.RowIndex].Cells[6].ReadOnly = false;
-                }
-                else
-                {
-                    dataGridView1.Rows[e.RowIndex].Cells[6].ReadOnly = true;
-                }
-            }
         }
 
         private void Editbtn2_Click(object sender, EventArgs e)

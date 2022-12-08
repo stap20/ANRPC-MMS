@@ -1,20 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Media3D;
 using ANRPC_Inventory.Resources;
 using FontAwesome.Sharp;
-using Guna.UI2.WinForms;
-using Guna.UI2.WinForms.Suite;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace ANRPC_Inventory
 {
@@ -172,24 +161,20 @@ namespace ANRPC_Inventory
 
 
 
-
-
-
-
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams handleParam = base.CreateParams;
-                handleParam.ExStyle |= 0x02000000;   // WS_EX_COMPOSITED       
-                return handleParam;
-            }
-        }
+        //protected override CreateParams CreateParams
+        //{
+        //    get
+        //    {
+        //        CreateParams handleParam = base.CreateParams;
+        //        handleParam.ExStyle |= 0x02000000;   // WS_EX_COMPOSITED       
+        //        return handleParam;
+        //    }
+        //}
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
+        } 
 
         private void btn_max_Click(object sender, EventArgs e)
         {
@@ -208,7 +193,7 @@ namespace ANRPC_Inventory
             btnWindowReset.SendToBack();
         }
 
-        private void panelLogo_Paint(object sender, PaintEventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }

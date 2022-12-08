@@ -26,9 +26,18 @@ namespace ANRPC_Inventory
 
             List<(NOTIFICATION_TYPES, PANEL_TYPES)> list = getNotificationList();
             generateNotificationControls(list);
+
         }
 
-
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams handleParam = base.CreateParams;
+                handleParam.ExStyle |= 0x02000000;   // WS_EX_COMPOSITED       
+                return handleParam;
+            }
+        }
 
         private List<(NOTIFICATION_TYPES, PANEL_TYPES)> getNotificationList()
         {
@@ -66,10 +75,6 @@ namespace ANRPC_Inventory
             ROUNDED,
             SHARP,
         }
-
-
-
-
 
 
 

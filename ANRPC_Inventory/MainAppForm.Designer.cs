@@ -37,21 +37,21 @@ namespace ANRPC_Inventory
             this.appbar = new System.Windows.Forms.Panel();
             this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.btnMin = new FontAwesome.Sharp.IconButton();
-            this.btnClose = new FontAwesome.Sharp.IconButton();
             this.btnWindowReset = new FontAwesome.Sharp.IconButton();
+            this.btnClose = new FontAwesome.Sharp.IconButton();
             this.btn_max = new FontAwesome.Sharp.IconButton();
             this.sidebar = new System.Windows.Forms.Panel();
-            this.guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.panelButtons = new System.Windows.Forms.Panel();
             this.panelLogo = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.container.SuspendLayout();
             this.main.SuspendLayout();
             this.appbar.SuspendLayout();
             this.sidebar.SuspendLayout();
-            this.guna2GradientPanel1.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // container
@@ -90,8 +90,8 @@ namespace ANRPC_Inventory
             this.appbar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
             this.appbar.Controls.Add(this.iconButton1);
             this.appbar.Controls.Add(this.btnMin);
-            this.appbar.Controls.Add(this.btnClose);
             this.appbar.Controls.Add(this.btnWindowReset);
+            this.appbar.Controls.Add(this.btnClose);
             this.appbar.Controls.Add(this.btn_max);
             this.appbar.Dock = System.Windows.Forms.DockStyle.Top;
             this.appbar.Location = new System.Drawing.Point(0, 0);
@@ -145,24 +145,6 @@ namespace ANRPC_Inventory
             this.btnMin.UseVisualStyleBackColor = true;
             this.btnMin.Click += new System.EventHandler(this.btnMin_Click);
             // 
-            // btnClose
-            // 
-            this.btnClose.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.btnClose.IconChar = FontAwesome.Sharp.IconChar.Multiply;
-            this.btnClose.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.btnClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnClose.IconSize = 20;
-            this.btnClose.Location = new System.Drawing.Point(5, 0);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(55, 51);
-            this.btnClose.TabIndex = 4;
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
             // btnWindowReset
             // 
             this.btnWindowReset.FlatAppearance.BorderSize = 0;
@@ -182,9 +164,26 @@ namespace ANRPC_Inventory
             this.btnWindowReset.Visible = false;
             this.btnWindowReset.Click += new System.EventHandler(this.btnWindowReset_Click);
             // 
+            // btnClose
+            // 
+            this.btnClose.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.btnClose.IconChar = FontAwesome.Sharp.IconChar.Multiply;
+            this.btnClose.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.btnClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnClose.IconSize = 20;
+            this.btnClose.Location = new System.Drawing.Point(5, 0);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(55, 51);
+            this.btnClose.TabIndex = 4;
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // btn_max
             // 
-            this.btn_max.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_max.FlatAppearance.BorderSize = 0;
             this.btn_max.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
             this.btn_max.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(19)))), ((int)(((byte)(114)))));
@@ -194,7 +193,7 @@ namespace ANRPC_Inventory
             this.btn_max.IconColor = System.Drawing.Color.WhiteSmoke;
             this.btn_max.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_max.IconSize = 15;
-            this.btn_max.Location = new System.Drawing.Point(136, 0);
+            this.btn_max.Location = new System.Drawing.Point(90, 0);
             this.btn_max.Name = "btn_max";
             this.btn_max.Size = new System.Drawing.Size(55, 43);
             this.btn_max.TabIndex = 5;
@@ -205,28 +204,13 @@ namespace ANRPC_Inventory
             // sidebar
             // 
             this.sidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
-            this.sidebar.Controls.Add(this.guna2GradientPanel1);
+            this.sidebar.Controls.Add(this.guna2Panel1);
             this.sidebar.Dock = System.Windows.Forms.DockStyle.Right;
             this.sidebar.Location = new System.Drawing.Point(679, 0);
             this.sidebar.Name = "sidebar";
             this.sidebar.Padding = new System.Windows.Forms.Padding(3, 17, 15, 17);
             this.sidebar.Size = new System.Drawing.Size(250, 590);
             this.sidebar.TabIndex = 0;
-            // 
-            // guna2GradientPanel1
-            // 
-            this.guna2GradientPanel1.BorderRadius = 20;
-            this.guna2GradientPanel1.Controls.Add(this.panelButtons);
-            this.guna2GradientPanel1.Controls.Add(this.panelLogo);
-            this.guna2GradientPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.guna2GradientPanel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(115)))), ((int)(((byte)(86)))));
-            this.guna2GradientPanel1.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(115)))), ((int)(((byte)(86)))));
-            this.guna2GradientPanel1.Location = new System.Drawing.Point(3, 17);
-            this.guna2GradientPanel1.Name = "guna2GradientPanel1";
-            this.guna2GradientPanel1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.guna2GradientPanel1.ShadowDecoration.Parent = this.guna2GradientPanel1;
-            this.guna2GradientPanel1.Size = new System.Drawing.Size(232, 556);
-            this.guna2GradientPanel1.TabIndex = 0;
             // 
             // panelButtons
             // 
@@ -247,7 +231,6 @@ namespace ANRPC_Inventory
             this.panelLogo.Name = "panelLogo";
             this.panelLogo.Size = new System.Drawing.Size(232, 154);
             this.panelLogo.TabIndex = 0;
-            this.panelLogo.Paint += new System.Windows.Forms.PaintEventHandler(this.panelLogo_Paint);
             // 
             // pictureBox1
             // 
@@ -261,6 +244,21 @@ namespace ANRPC_Inventory
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // guna2Panel1
+            // 
+            this.guna2Panel1.BorderRadius = 20;
+            this.guna2Panel1.Controls.Add(this.panelButtons);
+            this.guna2Panel1.Controls.Add(this.panelLogo);
+            this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(115)))), ((int)(((byte)(86)))));
+            this.guna2Panel1.Location = new System.Drawing.Point(3, 17);
+            this.guna2Panel1.Name = "guna2Panel1";
+            this.guna2Panel1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.guna2Panel1.ShadowDecoration.Parent = this.guna2Panel1;
+            this.guna2Panel1.Size = new System.Drawing.Size(232, 556);
+            this.guna2Panel1.TabIndex = 0;
             // 
             // MainAppForm
             // 
@@ -275,9 +273,9 @@ namespace ANRPC_Inventory
             this.main.ResumeLayout(false);
             this.appbar.ResumeLayout(false);
             this.sidebar.ResumeLayout(false);
-            this.guna2GradientPanel1.ResumeLayout(false);
             this.panelLogo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.guna2Panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -292,11 +290,11 @@ namespace ANRPC_Inventory
         private Panel panelButtons;
         private Panel panelLogo;
         private FontAwesome.Sharp.IconButton iconButton1;
-        private PictureBox pictureBox1;
         private FontAwesome.Sharp.IconButton btnMin;
         private FontAwesome.Sharp.IconButton btn_max;
         private FontAwesome.Sharp.IconButton btnClose;
         private FontAwesome.Sharp.IconButton btnWindowReset;
-        private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel1;
+        private PictureBox pictureBox1;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
     }
 }

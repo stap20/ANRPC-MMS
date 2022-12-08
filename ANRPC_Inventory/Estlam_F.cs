@@ -1462,6 +1462,7 @@ namespace ANRPC_Inventory
 
             // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
             string cmdstring = @"select T_Awamershraa.Amrshraa_No from  T_Awamershraa left join T_Estlam on T_Awamershraa.Amrshraa_No = T_Estlam.Amrshraa_No
+                                and T_Awamershraa.AmrSheraa_sanamalia = T_Estlam.AmrSheraa_sanamalia
                                 where (T_Awamershraa.Sign14 is not null) and T_Awamershraa.AmrSheraa_sanamalia=@FY and (T_Estlam.Amrshraa_No is null) 
                                 group by T_Awamershraa.Amrshraa_No  order by  T_Awamershraa.Amrshraa_No";
 
