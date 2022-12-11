@@ -2709,13 +2709,13 @@ namespace ANRPC_Inventory
             // this.t_BnodAwamershraaTableAdapter.Fill(this.aNRPC_InventoryDataSet.T_BnodAwamershraa);
             AddEditFlag = 0;
 
-            if (Constants.talbtawred_F == false)
+            if (Constants.isConfirmForm)
             {
                 panel7.Visible = true;
                 panel2.Visible = false;
                 panel7.Dock = DockStyle.Top;
             }
-            else if (Constants.talbtawred_F == true)
+            else
             {
                 panel2.Visible = true;
                 panel7.Visible = false;
@@ -2839,7 +2839,7 @@ namespace ANRPC_Inventory
             Cmb_FYear.SelectedIndex = -1;
             reset();
 
-            if (Constants.talbtawred_F == false)
+            if (Constants.isConfirmForm)
             {
                 TXT_TalbNo.Enabled = false;
                 Cmb_FYear.Enabled = false;

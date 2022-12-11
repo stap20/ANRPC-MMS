@@ -819,7 +819,7 @@ namespace ANRPC_Inventory
             DisableControls();
             Input_Reset();
 
-            if (Constants.EznSarf_FF)
+            if (Constants.isConfirmForm)
             {
                 Cmb_FYear.Enabled = true;
                 Cmb_CType.Enabled = true;
@@ -1641,19 +1641,19 @@ namespace ANRPC_Inventory
             MaxFlag = 0;
 
             AddEditFlag = 0;
-            if (Constants.EznSarf_FF == false)
+
+            if (Constants.isConfirmForm)
             {
                 panel7.Visible = true;
                 eznSarfDataPanel.Visible = false;
                 panel7.Dock = DockStyle.Top;
             }
-            else if (Constants.EznSarf_FF == true)
+            else
             {
                 eznSarfDataPanel.Visible = true;
                 panel7.Visible = false;
                 eznSarfDataPanel.Dock = DockStyle.Top;
             }
-            else { }
             //    if (Constants.User_Type != "A")
             //  {
             // DisableControls();

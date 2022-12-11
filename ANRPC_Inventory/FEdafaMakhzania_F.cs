@@ -643,7 +643,7 @@ namespace ANRPC_Inventory
             DisableControls();
             Input_Reset();
 
-            if (Constants.Edafa_F)
+            if (Constants.isConfirmForm)
             {
                 Cmb_CType.Enabled = true;
                 Cmb_FY2.Enabled = true;
@@ -1910,12 +1910,12 @@ namespace ANRPC_Inventory
             HelperClass.comboBoxFiller(Cmb_FYear2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
 
 
-            if (Constants.Edafa_F == false)
+            if (Constants.isConfirmForm)
             {
                 panel7.Visible = true;
                 panel2.Visible = false;
             }
-            else if (Constants.Edafa_F == true)
+            else
             {
                 panel2.Visible = true;
                 panel7.Visible = false;

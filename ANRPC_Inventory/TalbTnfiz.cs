@@ -2538,19 +2538,18 @@ namespace ANRPC_Inventory
             // TODO: This line of code loads data into the 'aNRPC_InventoryDataSet.T_BnodAwamershraa' table. You can move, or remove it, as needed.
             // this.t_BnodAwamershraaTableAdapter.Fill(this.aNRPC_InventoryDataSet.T_BnodAwamershraa);
             AddEditFlag = 0;
-            if (Constants.TalbTanfiz_F == false)
+            if (Constants.isConfirmForm)
             {
                 panel7.Visible = true;
                 panel2.Visible = false;
                 panel7.Dock = DockStyle.Top;
             }
-            else if (Constants.TalbTanfiz_F == true)
+            else
             {
                 panel2.Visible = true;
                 panel7.Visible = false;
                 panel2.Dock = DockStyle.Top;
             }
-            else { }
             //------------------------------------------
 
             Constants.opencon();
@@ -2656,10 +2655,10 @@ namespace ANRPC_Inventory
             Cmb_FYear.SelectedIndex = -1;
             reset();
 
-            if (Constants.talbtawred_F == false)
+            if (Constants.isConfirmForm)
             {
                 TXT_TalbNo.Enabled = false;
-                Cmb_FYear.Enabled=false;
+                Cmb_FYear.Enabled = false;
             }
         }
         //===========================================================================

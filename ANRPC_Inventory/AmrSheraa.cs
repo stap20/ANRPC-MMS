@@ -782,7 +782,7 @@ namespace ANRPC_Inventory
             DisableControls();
             Input_Reset();
 
-            if (Constants.Amrshera_F)
+            if (Constants.isConfirmForm)
             {
                 Cmb_FY.Enabled = true;
                 TXT_AmrNo.Enabled = true;
@@ -1512,19 +1512,18 @@ namespace ANRPC_Inventory
 
             cboCurrency_DropDownClosed(null, null);
             AddEditFlag = 0;
-            if (Constants.Amrshera_F == false)
+            if (Constants.isConfirmForm)
             {
                 panel7.Visible = true;
                 panel2.Visible = false;
                 panel7.Dock = DockStyle.Top;
             }
-            else if (Constants.Amrshera_F == true)
+            else
             {
                 panel2.Visible = true;
                 panel7.Visible = false;
                 panel2.Dock = DockStyle.Top;
             }
-            else { }
 
             UserB = Constants.User_Name.Substring(Constants.User_Name.LastIndexOf('_') + 1);
 

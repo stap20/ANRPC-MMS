@@ -59,14 +59,7 @@ namespace ANRPC_Inventory
         public static string Sign4;
         public static int FormNo;
         public static Form currentOpened;
-        public static bool talbtawred_F;
-        public static bool EznSarf_FF;
-        public static bool Amrshera_F;
-        public static bool Estlam_F;
-        public static bool Edafa_F;
-        public static bool talbEslah_F;
-        public static bool TalbMoaera_F;
-        public static bool TalbTanfiz_F;
+        public static bool isConfirmForm;
         public static int EdafaNo;
         public static string EdafaFY;
 

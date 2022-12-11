@@ -260,7 +260,6 @@
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(1148, 196);
             this.panel13.TabIndex = 0;
-            this.panel13.Paint += new System.Windows.Forms.PaintEventHandler(this.panel13_Paint);
             // 
             // BTN_Sign9
             // 
@@ -285,7 +284,6 @@
             this.Pic_Sign9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign9.TabIndex = 360;
             this.Pic_Sign9.TabStop = false;
-            this.Pic_Sign9.Click += new System.EventHandler(this.Pic_Sign9_Click);
             // 
             // label31
             // 
@@ -299,7 +297,6 @@
             this.label31.TabIndex = 359;
             this.label31.Text = ":المكتب الفنى لرئيس مجلس الادارة";
             this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label31.Click += new System.EventHandler(this.label31_Click);
             // 
             // BTN_Sign11
             // 
@@ -324,7 +321,6 @@
             this.Pic_Sign11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign11.TabIndex = 357;
             this.Pic_Sign11.TabStop = false;
-            this.Pic_Sign11.Click += new System.EventHandler(this.Pic_Sign11_Click);
             // 
             // BTN_Sign4
             // 
@@ -349,7 +345,6 @@
             this.Pic_Sign4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign4.TabIndex = 354;
             this.Pic_Sign4.TabStop = false;
-            this.Pic_Sign4.Click += new System.EventHandler(this.Pic_Sign4_Click);
             // 
             // label35
             // 
@@ -363,7 +358,6 @@
             this.label35.TabIndex = 356;
             this.label35.Text = ":ادارة الموازنة";
             this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label35.Click += new System.EventHandler(this.label35_Click);
             // 
             // Pic_Sign12
             // 
@@ -375,7 +369,6 @@
             this.Pic_Sign12.TabIndex = 353;
             this.Pic_Sign12.TabStop = false;
             this.Pic_Sign12.Visible = false;
-            this.Pic_Sign12.Click += new System.EventHandler(this.Pic_Sign12_Click);
             // 
             // BTN_Sign12
             // 
@@ -405,7 +398,6 @@
             this.label22.Text = ":قطاع مراقبة المخزون وتتخطيط الاحتياجات";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.label22.Visible = false;
-            this.label22.Click += new System.EventHandler(this.label22_Click);
             // 
             // BTN_Sign10
             // 
@@ -445,7 +437,6 @@
             this.Pic_Sign7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign7.TabIndex = 348;
             this.Pic_Sign7.TabStop = false;
-            this.Pic_Sign7.Click += new System.EventHandler(this.Pic_Sign7_Click);
             // 
             // label24
             // 
@@ -460,7 +451,6 @@
             this.label24.TabIndex = 347;
             this.label24.Text = "يعتمد رئيس مجلس الإدارة و العضو المنتدب";
             this.label24.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label24.Click += new System.EventHandler(this.label24_Click);
             // 
             // Pic_Sign13
             // 
@@ -472,7 +462,6 @@
             this.Pic_Sign13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign13.TabIndex = 346;
             this.Pic_Sign13.TabStop = false;
-            this.Pic_Sign13.Click += new System.EventHandler(this.Pic_Sign13_Click);
             // 
             // BTN_Sign13
             // 
@@ -501,7 +490,6 @@
             this.label41.TabIndex = 344;
             this.label41.Text = "يعتمد مساعد رئيس الشركة";
             this.label41.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label41.Click += new System.EventHandler(this.label41_Click);
             // 
             // panel8
             // 
@@ -517,7 +505,6 @@
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(343, 50);
             this.panel8.TabIndex = 253;
-            this.panel8.Paint += new System.Windows.Forms.PaintEventHandler(this.panel8_Paint);
             // 
             // radioButton5
             // 
@@ -526,12 +513,11 @@
             this.radioButton5.ForeColor = System.Drawing.Color.DarkBlue;
             this.radioButton5.Location = new System.Drawing.Point(20, 6);
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(71, 17);
+            this.radioButton5.Size = new System.Drawing.Size(68, 17);
             this.radioButton5.TabIndex = 48;
             this.radioButton5.TabStop = true;
             this.radioButton5.Text = "امر مباشر";
             this.radioButton5.UseVisualStyleBackColor = true;
-            this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton5_CheckedChanged);
             // 
             // radioButton4
             // 
@@ -542,12 +528,11 @@
             this.radioButton4.ForeColor = System.Drawing.Color.DarkBlue;
             this.radioButton4.Location = new System.Drawing.Point(110, 28);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(94, 17);
+            this.radioButton4.Size = new System.Drawing.Size(89, 17);
             this.radioButton4.TabIndex = 47;
             this.radioButton4.TabStop = true;
             this.radioButton4.Text = "ممارسة محددة";
             this.radioButton4.UseVisualStyleBackColor = true;
-            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
             // 
             // radioButton3
             // 
@@ -558,12 +543,11 @@
             this.radioButton3.ForeColor = System.Drawing.Color.DarkBlue;
             this.radioButton3.Location = new System.Drawing.Point(117, 6);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(87, 17);
+            this.radioButton3.Size = new System.Drawing.Size(82, 17);
             this.radioButton3.TabIndex = 46;
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "ممارسة عامة";
             this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
             // 
             // radioButton6
             // 
@@ -572,12 +556,11 @@
             this.radioButton6.ForeColor = System.Drawing.Color.DarkBlue;
             this.radioButton6.Location = new System.Drawing.Point(4, 28);
             this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(85, 17);
+            this.radioButton6.Size = new System.Drawing.Size(84, 17);
             this.radioButton6.TabIndex = 45;
             this.radioButton6.TabStop = true;
             this.radioButton6.Text = "عروض اسعار";
             this.radioButton6.UseVisualStyleBackColor = true;
-            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
             // 
             // radioButton2
             // 
@@ -585,14 +568,13 @@
             this.radioButton2.AutoSize = true;
             this.radioButton2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radioButton2.ForeColor = System.Drawing.Color.DarkBlue;
-            this.radioButton2.Location = new System.Drawing.Point(246, 28);
+            this.radioButton2.Location = new System.Drawing.Point(247, 28);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(90, 17);
+            this.radioButton2.Size = new System.Drawing.Size(89, 17);
             this.radioButton2.TabIndex = 44;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "مناقصة محددة";
             this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // radioButton1
             // 
@@ -600,14 +582,13 @@
             this.radioButton1.AutoSize = true;
             this.radioButton1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radioButton1.ForeColor = System.Drawing.Color.DarkBlue;
-            this.radioButton1.Location = new System.Drawing.Point(253, 6);
+            this.radioButton1.Location = new System.Drawing.Point(254, 6);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(83, 17);
+            this.radioButton1.Size = new System.Drawing.Size(82, 17);
             this.radioButton1.TabIndex = 43;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "مناقصة عامة";
             this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // Pic_Sign5
             // 
@@ -618,7 +599,6 @@
             this.Pic_Sign5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign5.TabIndex = 250;
             this.Pic_Sign5.TabStop = false;
-            this.Pic_Sign5.Click += new System.EventHandler(this.Pic_Sign5_Click);
             // 
             // BTN_Sign5
             // 
@@ -657,7 +637,6 @@
             this.Pic_Sign6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign6.TabIndex = 248;
             this.Pic_Sign6.TabStop = false;
-            this.Pic_Sign6.Click += new System.EventHandler(this.Pic_Sign6_Click);
             // 
             // label23
             // 
@@ -671,7 +650,6 @@
             this.label23.TabIndex = 247;
             this.label23.Text = ":مدير قطاع المشتريات";
             this.label23.TextAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.label23.Click += new System.EventHandler(this.label23_Click);
             // 
             // label28
             // 
@@ -685,7 +663,6 @@
             this.label28.TabIndex = 252;
             this.label28.Text = ":مدير عام المهمات";
             this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label28.Click += new System.EventHandler(this.label28_Click);
             // 
             // BTN_Sign8
             // 
@@ -712,7 +689,6 @@
             this.Pic_Sign8.TabIndex = 245;
             this.Pic_Sign8.TabStop = false;
             this.Pic_Sign8.Visible = false;
-            this.Pic_Sign8.Click += new System.EventHandler(this.Pic_Sign8_Click);
             // 
             // label32
             // 
@@ -727,7 +703,6 @@
             this.label32.Text = "مدير ادارة التصنيف";
             this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.label32.Visible = false;
-            this.label32.Click += new System.EventHandler(this.label32_Click);
             // 
             // DeleteBtn2
             // 
@@ -767,7 +742,6 @@
             this.Pic_Sign3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign3.TabIndex = 241;
             this.Pic_Sign3.TabStop = false;
-            this.Pic_Sign3.Click += new System.EventHandler(this.Pic_Sign3_Click);
             // 
             // label21
             // 
@@ -782,7 +756,6 @@
             this.label21.TabIndex = 240;
             this.label21.Text = ":إعتماد المدير العام";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label21.Click += new System.EventHandler(this.label21_Click);
             // 
             // BTN_Sign2
             // 
@@ -807,7 +780,6 @@
             this.Pic_Sign2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign2.TabIndex = 33;
             this.Pic_Sign2.TabStop = false;
-            this.Pic_Sign2.Click += new System.EventHandler(this.Pic_Sign2_Click);
             // 
             // label20
             // 
@@ -821,7 +793,6 @@
             this.label20.TabIndex = 32;
             this.label20.Text = ":تصديق";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label20.Click += new System.EventHandler(this.label20_Click);
             // 
             // BTN_Sign1
             // 
@@ -846,7 +817,6 @@
             this.Pic_Sign1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign1.TabIndex = 30;
             this.Pic_Sign1.TabStop = false;
-            this.Pic_Sign1.Click += new System.EventHandler(this.Pic_Sign1_Click);
             // 
             // label17
             // 
@@ -860,7 +830,6 @@
             this.label17.TabIndex = 29;
             this.label17.Text = ":توقيع الطالب";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label17.Click += new System.EventHandler(this.label17_Click);
             // 
             // panel10
             // 
@@ -871,7 +840,6 @@
             this.panel10.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.panel10.Size = new System.Drawing.Size(220, 111);
             this.panel10.TabIndex = 22;
-            this.panel10.Paint += new System.Windows.Forms.PaintEventHandler(this.panel10_Paint);
             // 
             // panel14
             // 
@@ -885,7 +853,6 @@
             this.panel14.Name = "panel14";
             this.panel14.Size = new System.Drawing.Size(212, 107);
             this.panel14.TabIndex = 2;
-            this.panel14.Paint += new System.Windows.Forms.PaintEventHandler(this.panel14_Paint);
             // 
             // label2
             // 
@@ -908,7 +875,6 @@
             this.TXT_RecommendedCompanies.Size = new System.Drawing.Size(171, 43);
             this.TXT_RecommendedCompanies.TabIndex = 333;
             this.TXT_RecommendedCompanies.Text = "";
-            this.TXT_RecommendedCompanies.TextChanged += new System.EventHandler(this.TXT_RecommendedCompanies_TextChanged);
             // 
             // RadioBTN_Taamen2
             // 
@@ -951,7 +917,6 @@
             this.label40.TabIndex = 18;
             this.label40.Text = "طريقة الشراء";
             this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label40.Click += new System.EventHandler(this.label40_Click);
             // 
             // panel9
             // 
@@ -967,7 +932,6 @@
             this.panel9.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.panel9.Size = new System.Drawing.Size(131, 146);
             this.panel9.TabIndex = 22;
-            this.panel9.Paint += new System.Windows.Forms.PaintEventHandler(this.panel9_Paint);
             // 
             // browseBTN
             // 
@@ -997,7 +961,6 @@
             this.TXT_RedirectedDate.ReadOnly = true;
             this.TXT_RedirectedDate.Size = new System.Drawing.Size(122, 26);
             this.TXT_RedirectedDate.TabIndex = 339;
-            this.TXT_RedirectedDate.TextChanged += new System.EventHandler(this.TXT_RedirectedDate_TextChanged);
             // 
             // TXT_RedirectedFor
             // 
@@ -1008,7 +971,6 @@
             this.TXT_RedirectedFor.ReadOnly = true;
             this.TXT_RedirectedFor.Size = new System.Drawing.Size(122, 26);
             this.TXT_RedirectedFor.TabIndex = 338;
-            this.TXT_RedirectedFor.TextChanged += new System.EventHandler(this.TXT_RedirectedFor_TextChanged);
             // 
             // label39
             // 
@@ -1021,7 +983,6 @@
             this.label39.TabIndex = 18;
             this.label39.Text = "تم توجيه الى";
             this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label39.Click += new System.EventHandler(this.label39_Click);
             // 
             // BTN_PDF
             // 
@@ -1051,7 +1012,6 @@
             this.PDF_box.Size = new System.Drawing.Size(72, 32);
             this.PDF_box.TabIndex = 338;
             this.PDF_box.Visible = false;
-            this.PDF_box.SelectedIndexChanged += new System.EventHandler(this.PDF_box_SelectedIndexChanged);
             // 
             // dataGridView1
             // 
@@ -1059,14 +1019,13 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.errorProvider.SetIconAlignment(this.dataGridView1, System.Windows.Forms.ErrorIconAlignment.TopRight);
             this.alertProvider.SetIconAlignment(this.dataGridView1, System.Windows.Forms.ErrorIconAlignment.TopRight);
+            this.errorProvider.SetIconAlignment(this.dataGridView1, System.Windows.Forms.ErrorIconAlignment.TopRight);
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dataGridView1.Size = new System.Drawing.Size(1142, 127);
             this.dataGridView1.TabIndex = 42;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellMouseEnter);
             this.dataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
             this.dataGridView1.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView1_UserDeletedRow);
@@ -1083,7 +1042,6 @@
             this.panel6.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.panel6.Size = new System.Drawing.Size(220, 34);
             this.panel6.TabIndex = 21;
-            this.panel6.Paint += new System.Windows.Forms.PaintEventHandler(this.panel6_Paint);
             // 
             // label18
             // 
@@ -1097,7 +1055,6 @@
             this.label18.TabIndex = 17;
             this.label18.Text = "بند الموازنة";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label18.Click += new System.EventHandler(this.label18_Click);
             // 
             // TXT_BndMwazna
             // 
@@ -1129,7 +1086,6 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(316, 146);
             this.panel5.TabIndex = 20;
-            this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
             // 
             // TXT_CurrencyTotal
             // 
@@ -1140,7 +1096,6 @@
             this.TXT_CurrencyTotal.Size = new System.Drawing.Size(48, 26);
             this.TXT_CurrencyTotal.TabIndex = 330;
             this.TXT_CurrencyTotal.Text = "EGP";
-            this.TXT_CurrencyTotal.TextChanged += new System.EventHandler(this.TXT_CurrencyTotal_TextChanged);
             // 
             // button1
             // 
@@ -1172,7 +1127,6 @@
             this.label37.Size = new System.Drawing.Size(69, 18);
             this.label37.TabIndex = 329;
             this.label37.Text = "سعر الصرف";
-            this.label37.Click += new System.EventHandler(this.label37_Click);
             // 
             // TXT_PriceSarf
             // 
@@ -1182,7 +1136,6 @@
             this.TXT_PriceSarf.Name = "TXT_PriceSarf";
             this.TXT_PriceSarf.Size = new System.Drawing.Size(97, 26);
             this.TXT_PriceSarf.TabIndex = 330;
-            this.TXT_PriceSarf.TextChanged += new System.EventHandler(this.TXT_PriceSarf_TextChanged);
             // 
             // BTN_ConvertToEG
             // 
@@ -1214,7 +1167,6 @@
             this.TXT_ArabicValue.Size = new System.Drawing.Size(271, 38);
             this.TXT_ArabicValue.TabIndex = 19;
             this.TXT_ArabicValue.Text = "";
-            this.TXT_ArabicValue.TextChanged += new System.EventHandler(this.TXT_ArabicValue_TextChanged);
             // 
             // TXT_AppValue
             // 
@@ -1240,7 +1192,6 @@
             this.label14.TabIndex = 17;
             this.label14.Text = ":القيمة التقديرية";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label14.Click += new System.EventHandler(this.label14_Click);
             // 
             // label11
             // 
@@ -1252,7 +1203,6 @@
             this.label11.TabIndex = 5;
             this.label11.Text = ":فقط";
             this.label11.TextAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // TXT_Tamen
             // 
@@ -1263,7 +1213,6 @@
             this.TXT_Tamen.Name = "TXT_Tamen";
             this.TXT_Tamen.Size = new System.Drawing.Size(191, 26);
             this.TXT_Tamen.TabIndex = 14;
-            this.TXT_Tamen.TextChanged += new System.EventHandler(this.TXT_Tamen_TextChanged);
             // 
             // label16
             // 
@@ -1275,7 +1224,6 @@
             this.label16.Size = new System.Drawing.Size(89, 18);
             this.label16.TabIndex = 6;
             this.label16.Text = ":التأمين الإبتدائى";
-            this.label16.Click += new System.EventHandler(this.label16_Click);
             // 
             // panel4
             // 
@@ -1294,7 +1242,6 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(251, 115);
             this.panel4.TabIndex = 20;
-            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
             // comboBox4
             // 
@@ -1305,7 +1252,6 @@
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(105, 27);
             this.comboBox4.TabIndex = 18;
-            this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
             // 
             // TXT_Date
             // 
@@ -1319,7 +1265,6 @@
             this.TXT_Date.ShowUpDown = true;
             this.TXT_Date.Size = new System.Drawing.Size(126, 26);
             this.TXT_Date.TabIndex = 230;
-            this.TXT_Date.ValueChanged += new System.EventHandler(this.TXT_Date_ValueChanged);
             // 
             // label15
             // 
@@ -1334,7 +1279,6 @@
             this.label15.TabIndex = 17;
             this.label15.Text = "بيان الإدارة الطالبة";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
             // label9
             // 
@@ -1346,7 +1290,6 @@
             this.label9.Size = new System.Drawing.Size(81, 18);
             this.label9.TabIndex = 7;
             this.label9.Text = ":الإدارة الطالبة";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label10
             // 
@@ -1358,7 +1301,6 @@
             this.label10.Size = new System.Drawing.Size(109, 18);
             this.label10.TabIndex = 8;
             this.label10.Text = ":تاريخ تحرير الطلب";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // TXT_ReqFor
             // 
@@ -1370,7 +1312,6 @@
             this.TXT_ReqFor.Name = "TXT_ReqFor";
             this.TXT_ReqFor.Size = new System.Drawing.Size(173, 26);
             this.TXT_ReqFor.TabIndex = 16;
-            this.TXT_ReqFor.TextChanged += new System.EventHandler(this.TXT_ReqFor_TextChanged);
             // 
             // label12
             // 
@@ -1382,7 +1323,6 @@
             this.label12.Size = new System.Drawing.Size(60, 18);
             this.label12.TabIndex = 10;
             this.label12.Text = ":مطلوب ل";
-            this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
             // TXT_Edara
             // 
@@ -1394,7 +1334,6 @@
             this.TXT_Edara.Name = "TXT_Edara";
             this.TXT_Edara.Size = new System.Drawing.Size(152, 26);
             this.TXT_Edara.TabIndex = 15;
-            this.TXT_Edara.TextChanged += new System.EventHandler(this.TXT_Edara_TextChanged);
             // 
             // panel3
             // 
@@ -1414,7 +1353,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(212, 146);
             this.panel3.TabIndex = 19;
-            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // Cmb_Currency
             // 
@@ -1442,7 +1380,6 @@
             this.label38.Size = new System.Drawing.Size(39, 18);
             this.label38.TabIndex = 329;
             this.label38.Text = ":العملة";
-            this.label38.Click += new System.EventHandler(this.label38_Click);
             // 
             // TXT_TalbNo2
             // 
@@ -1453,7 +1390,6 @@
             this.TXT_TalbNo2.Name = "TXT_TalbNo2";
             this.TXT_TalbNo2.Size = new System.Drawing.Size(61, 26);
             this.TXT_TalbNo2.TabIndex = 242;
-            this.TXT_TalbNo2.TextChanged += new System.EventHandler(this.TXT_TalbNo2_TextChanged);
             // 
             // label34
             // 
@@ -1462,10 +1398,9 @@
             this.label34.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label34.Location = new System.Drawing.Point(114, 92);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(92, 16);
+            this.label34.Size = new System.Drawing.Size(91, 16);
             this.label34.TabIndex = 241;
             this.label34.Text = ":رقم الطلب النهائى";
-            this.label34.Click += new System.EventHandler(this.label34_Click);
             // 
             // BTN_Print
             // 
@@ -1506,7 +1441,6 @@
             this.TXT_TalbNo.Name = "TXT_TalbNo";
             this.TXT_TalbNo.Size = new System.Drawing.Size(61, 26);
             this.TXT_TalbNo.TabIndex = 13;
-            this.TXT_TalbNo.TextChanged += new System.EventHandler(this.TXT_TalbNo_TextChanged);
             // 
             // label7
             // 
@@ -1515,10 +1449,9 @@
             this.label7.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label7.Location = new System.Drawing.Point(113, 64);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(94, 16);
+            this.label7.Size = new System.Drawing.Size(93, 16);
             this.label7.TabIndex = 5;
             this.label7.Text = ":رقم الطلب المبدئى";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label13
             // 
@@ -1532,7 +1465,6 @@
             this.label13.TabIndex = 17;
             this.label13.Text = "بيان إدارة المهمات";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label13.Click += new System.EventHandler(this.label13_Click);
             // 
             // label8
             // 
@@ -1544,21 +1476,11 @@
             this.label8.Size = new System.Drawing.Size(70, 18);
             this.label8.TabIndex = 6;
             this.label8.Text = ":السنة المالية";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
-            // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            // 
-            // toolTip1
-            // 
-            this.toolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
             // 
             // tBnodAwamershraaBindingSource
             // 
             this.tBnodAwamershraaBindingSource.DataMember = "T_BnodAwamershraa";
             this.tBnodAwamershraaBindingSource.DataSource = this.aNRPC_InventoryDataSet;
-            this.tBnodAwamershraaBindingSource.CurrentChanged += new System.EventHandler(this.tBnodAwamershraaBindingSource_CurrentChanged);
             // 
             // aNRPC_InventoryDataSet
             // 
@@ -1575,7 +1497,6 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Multiselect = true;
             this.openFileDialog1.Title = "اختر المرفقات الطلوبة";
-            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // panel15
             // 
@@ -1593,7 +1514,6 @@
             this.panel15.Name = "panel15";
             this.panel15.Size = new System.Drawing.Size(1148, 153);
             this.panel15.TabIndex = 43;
-            this.panel15.Paint += new System.Windows.Forms.PaintEventHandler(this.panel15_Paint);
             // 
             // label42
             // 
@@ -1606,7 +1526,6 @@
             this.label42.Size = new System.Drawing.Size(125, 19);
             this.label42.TabIndex = 336;
             this.label42.Text = ":تاريخ وروده للمهمات";
-            this.label42.Click += new System.EventHandler(this.label42_Click);
             // 
             // TXT_DateMohmat
             // 
@@ -1618,7 +1537,6 @@
             this.TXT_DateMohmat.ShowUpDown = true;
             this.TXT_DateMohmat.Size = new System.Drawing.Size(120, 20);
             this.TXT_DateMohmat.TabIndex = 335;
-            this.TXT_DateMohmat.ValueChanged += new System.EventHandler(this.TXT_DateMohmat_ValueChanged);
             // 
             // panel1
             // 
@@ -1636,7 +1554,6 @@
             this.panel16.Padding = new System.Windows.Forms.Padding(3);
             this.panel16.Size = new System.Drawing.Size(1148, 133);
             this.panel16.TabIndex = 44;
-            this.panel16.Paint += new System.Windows.Forms.PaintEventHandler(this.panel16_Paint);
             // 
             // errorProvider
             // 
@@ -1666,7 +1583,6 @@
             this.panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.panel2.Size = new System.Drawing.Size(1148, 150);
             this.panel2.TabIndex = 19;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // BTN_SearchTalb
             // 
@@ -1700,7 +1616,6 @@
             this.panel17.Name = "panel17";
             this.panel17.Size = new System.Drawing.Size(1148, 87);
             this.panel17.TabIndex = 306;
-            this.panel17.Paint += new System.Windows.Forms.PaintEventHandler(this.panel17_Paint);
             // 
             // label19
             // 
@@ -1714,7 +1629,6 @@
             this.label19.TabIndex = 335;
             this.label19.Text = "إضغط لإضافة تصنيف جديد";
             this.label19.Visible = false;
-            this.label19.Click += new System.EventHandler(this.label19_Click);
             // 
             // CHK_NewTasnif
             // 
@@ -1748,7 +1662,6 @@
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(905, 73);
             this.panel11.TabIndex = 333;
-            this.panel11.Paint += new System.Windows.Forms.PaintEventHandler(this.panel11_Paint);
             // 
             // CMB_Unit
             // 
@@ -1771,7 +1684,6 @@
             this.TXT_StockBian.Size = new System.Drawing.Size(788, 39);
             this.TXT_StockBian.TabIndex = 12;
             this.TXT_StockBian.Text = "";
-            this.TXT_StockBian.TextChanged += new System.EventHandler(this.TXT_StockBian_TextChanged);
             // 
             // Txt_ReqQuan
             // 
@@ -1783,7 +1695,6 @@
             this.Txt_ReqQuan.Size = new System.Drawing.Size(127, 26);
             this.Txt_ReqQuan.TabIndex = 330;
             this.Txt_ReqQuan.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Txt_ReqQuan.TextChanged += new System.EventHandler(this.Txt_ReqQuan_TextChanged);
             this.Txt_ReqQuan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Txt_ReqQuan_KeyPress);
             // 
             // label4
@@ -1797,7 +1708,6 @@
             this.label4.Size = new System.Drawing.Size(88, 18);
             this.label4.TabIndex = 8;
             this.label4.Text = "بيان المواصفات";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // TXT_Currency
             // 
@@ -1808,7 +1718,6 @@
             this.TXT_Currency.ReadOnly = true;
             this.TXT_Currency.Size = new System.Drawing.Size(49, 26);
             this.TXT_Currency.TabIndex = 329;
-            this.TXT_Currency.TextChanged += new System.EventHandler(this.TXT_Currency_TextChanged);
             // 
             // TXT_Unit
             // 
@@ -1819,7 +1728,6 @@
             this.TXT_Unit.Name = "TXT_Unit";
             this.TXT_Unit.Size = new System.Drawing.Size(62, 22);
             this.TXT_Unit.TabIndex = 15;
-            this.TXT_Unit.TextChanged += new System.EventHandler(this.TXT_Unit_TextChanged);
             // 
             // CMB_ApproxValue
             // 
@@ -1831,7 +1739,6 @@
             this.CMB_ApproxValue.Name = "CMB_ApproxValue";
             this.CMB_ApproxValue.Size = new System.Drawing.Size(155, 27);
             this.CMB_ApproxValue.TabIndex = 301;
-            this.CMB_ApproxValue.SelectedIndexChanged += new System.EventHandler(this.CMB_ApproxValue_SelectedIndexChanged);
             this.CMB_ApproxValue.TextChanged += new System.EventHandler(this.CMB_ApproxValue_TextChanged);
             this.CMB_ApproxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CMB_ApproxValue_KeyPress);
             // 
@@ -1846,7 +1753,6 @@
             this.label6.Size = new System.Drawing.Size(84, 18);
             this.label6.TabIndex = 16;
             this.label6.Text = "الكمية المطلوبة";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label5
             // 
@@ -1859,7 +1765,6 @@
             this.label5.Size = new System.Drawing.Size(41, 18);
             this.label5.TabIndex = 9;
             this.label5.Text = "الوحدة";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label33
             // 
@@ -1874,7 +1779,6 @@
             this.label33.TabIndex = 20;
             this.label33.Text = ":القيمة التقديرية";
             this.label33.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.label33.Click += new System.EventHandler(this.label33_Click);
             // 
             // pictureBox2
             // 
@@ -1887,7 +1791,6 @@
             this.pictureBox2.TabIndex = 302;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Visible = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // prev_btn
             // 
@@ -1970,7 +1873,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 233;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // Editbtn2
             // 
@@ -2053,7 +1955,6 @@
             this.panel7.Size = new System.Drawing.Size(1148, 88);
             this.panel7.TabIndex = 27;
             this.panel7.Visible = false;
-            this.panel7.Paint += new System.Windows.Forms.PaintEventHandler(this.panel7_Paint);
             // 
             // BTN_Search_Motab3a
             // 
@@ -2176,7 +2077,6 @@
             this.Cmb_TalbNo2.Name = "Cmb_TalbNo2";
             this.Cmb_TalbNo2.Size = new System.Drawing.Size(110, 27);
             this.Cmb_TalbNo2.TabIndex = 26;
-            this.Cmb_TalbNo2.SelectedIndexChanged += new System.EventHandler(this.Cmb_TalbNo2_SelectedIndexChanged);
             // 
             // Cmb_FYear2
             // 
@@ -2206,7 +2106,6 @@
             this.label27.TabIndex = 23;
             this.label27.Text = ":إمضاء المدير العام";
             this.label27.Visible = false;
-            this.label27.Click += new System.EventHandler(this.label27_Click);
             // 
             // label26
             // 
@@ -2222,7 +2121,6 @@
             this.label26.TabIndex = 22;
             this.label26.Text = ":إمضاء التصديق";
             this.label26.Visible = false;
-            this.label26.Click += new System.EventHandler(this.label26_Click);
             // 
             // textBox9
             // 
@@ -2232,7 +2130,6 @@
             this.textBox9.Size = new System.Drawing.Size(196, 29);
             this.textBox9.TabIndex = 21;
             this.textBox9.Visible = false;
-            this.textBox9.TextChanged += new System.EventHandler(this.textBox9_TextChanged);
             // 
             // textBox7
             // 
@@ -2242,7 +2139,6 @@
             this.textBox7.Size = new System.Drawing.Size(196, 29);
             this.textBox7.TabIndex = 20;
             this.textBox7.Visible = false;
-            this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
             // 
             // button3
             // 
@@ -2261,7 +2157,6 @@
             this.button3.Text = "إعتماد المدير العام";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Visible = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -2280,7 +2175,6 @@
             this.button2.Text = "تصديق";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Visible = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label25
             // 
@@ -2295,7 +2189,6 @@
             this.label25.Size = new System.Drawing.Size(148, 24);
             this.label25.TabIndex = 5;
             this.label25.Text = "بحث طلبات الإصلاح";
-            this.label25.Click += new System.EventHandler(this.label25_Click);
             // 
             // TalbEslah
             // 
@@ -2312,8 +2205,8 @@
             this.Name = "TalbEslah";
             this.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "TalbTawred";
-            this.Load += new System.EventHandler(this.TalbTawred_Load);
+            this.Text = "TalbEslah";
+            this.Load += new System.EventHandler(this.TalbEslah_Load);
             this.panel13.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign11)).EndInit();

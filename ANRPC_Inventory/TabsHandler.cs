@@ -12,28 +12,36 @@ using System.Windows.Forms;
 
 namespace ANRPC_Inventory
 {
-    public partial class EdafaMakhzanyaTabsHandler : Form
+    public partial class TabsHandler : Form
     {
         private IconButton currentActiveTab;
         private Panel tabsActiveBorder;
         private Form currentChildForm;
-
-        private void prepareSubTabsActiveIndecator()
+        private Form currForm;
+        private void prepareTabsActiveIndecator()
         {
-
             tabsActiveBorder = new Panel();
             tabsBar.Controls.Add(tabsActiveBorder);
             tabsActiveBorder.Visible = false;
         }
 
-
-        public EdafaMakhzanyaTabsHandler()
+        public TabsHandler()
         {
             InitializeComponent();
-            prepareSubTabsActiveIndecator();
-            btnAddEdit.PerformClick();
+            prepareTabsActiveIndecator();
+        }
 
-            if (Constants.User_Type == "A")
+        public TabsHandler(Form frm,bool isConfirm = false)
+        {
+            InitializeComponent();
+            prepareTabsActiveIndecator();
+            //btnAddEdit.PerformClick();
+
+            this.currForm = frm;
+
+            Constants.isConfirmForm = isConfirm;
+
+            if (Constants.isConfirmForm)
             {
                 btnAddEdit.Visible = false;
             }
@@ -56,6 +64,7 @@ namespace ANRPC_Inventory
 
             //End
             currentChildForm = childForm;
+
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.Dock = DockStyle.Fill;
@@ -130,21 +139,16 @@ namespace ANRPC_Inventory
         }
 
 
-
-
-
         private void btnAddEdit_Click(object sender, EventArgs e)
         {
-            Constants.Edafa_F = true;
-
-            TabBarBtnCLicked(sender, e, RGBColors.color1, new FEdafaMakhzania_F());
+            object instance = Activator.CreateInstance("TalbTawred", "TalbTawred");
+            TabBarBtnCLicked(sender, e, RGBColors.color1, (Form)instance);
         }
 
         private void btnFollowSignature_Click(object sender, EventArgs e)
         {
-            Constants.Edafa_F = false;
-
-            TabBarBtnCLicked(sender, e, RGBColors.color1, new FEdafaMakhzania_F());
+            object instance = Activator.CreateInstance("myform", "TalbTawred");
+            TabBarBtnCLicked(sender, e, RGBColors.color1, (Form)instance);
         }
 
         protected override CreateParams CreateParams

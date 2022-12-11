@@ -1,6 +1,6 @@
 ﻿namespace ANRPC_Inventory
 {
-    partial class TalbEslahTabsHandler
+    partial class TabsHandler
     {
         /// <summary>
         /// Required designer variable.
@@ -169,15 +169,15 @@
             this.btnFollowSignatureElipse.BorderRadius = 12;
             this.btnFollowSignatureElipse.TargetControl = this.btnFollowSignature;
             // 
-            // TalbEslahTabsHandler
+            // TalbTnfizTabsHandler
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel1);
-            this.Name = "TalbEslahTabsHandler";
-            this.Text = "TalbEslahTabsHandler";
+            this.Name = "TalbTnfizTabsHandler";
+            this.Text = "TalbTnfizTabsHandler";
             this.panel2.ResumeLayout(false);
             this.tabsBar.ResumeLayout(false);
             this.tabsBar.PerformLayout();

@@ -96,12 +96,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AmrSheraaTabsHandler.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AmrSheraaTabsHandler.Designer.cs">
-      <DependentUpon>AmrSheraaTabsHandler.cs</DependentUpon>
-    </Compile>
     <Compile Include="conForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,47 +109,17 @@
       <DependentUpon>Cycledetails_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="DrawedCircleText.cs" />
-    <Compile Include="EdafaMakhzanyaTabsHandler.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EdafaMakhzanyaTabsHandler.Designer.cs">
-      <DependentUpon>EdafaMakhzanyaTabsHandler.cs</DependentUpon>
-    </Compile>
     <Compile Include="SearchForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SearchForm.designer.cs">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TalbEslahTabsHandler.cs">
+    <Compile Include="TabsHandler.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TalbEslahTabsHandler.Designer.cs">
-      <DependentUpon>TalbEslahTabsHandler.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TalbMoaeraTabsHandler.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TalbMoaeraTabsHandler.Designer.cs">
-      <DependentUpon>TalbMoaeraTabsHandler.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TalbTnfizTabsHandler.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TalbTnfizTabsHandler.Designer.cs">
-      <DependentUpon>TalbTnfizTabsHandler.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EznSarfTabsHandler.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EznSarfTabsHandler.Designer.cs">
-      <DependentUpon>EznSarfTabsHandler.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EznTahweelTabsHandler.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EznTahweelTabsHandler.Designer.cs">
-      <DependentUpon>EznTahweelTabsHandler.cs</DependentUpon>
+    <Compile Include="TabsHandler.Designer.cs">
+      <DependentUpon>TabsHandler.cs</DependentUpon>
     </Compile>
     <Compile Include="EzonTahwel_PopUp.cs">
       <SubType>Form</SubType>
@@ -337,18 +301,6 @@
     <Compile Include="FLogin.Designer.cs">
       <DependentUpon>FLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fmain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Fmain.Designer.cs">
-      <DependentUpon>Fmain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FPublic.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FPublic.Designer.cs">
-      <DependentUpon>FPublic.cs</DependentUpon>
-    </Compile>
     <Compile Include="FReports.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -429,12 +381,6 @@
     <Compile Include="TalbMoaera.Designer.cs">
       <DependentUpon>TalbMoaera.cs</DependentUpon>
     </Compile>
-    <Compile Include="TalbTawreedTabsHandler.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TalbTawreedTabsHandler.Designer.cs">
-      <DependentUpon>TalbTawreedTabsHandler.cs</DependentUpon>
-    </Compile>
     <Compile Include="TalbTnfiz.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -491,35 +437,17 @@
     </Compile>
     <Compile Include="TransHandler.cs" />
     <Compile Include="UnitsHandler.cs" />
-    <EmbeddedResource Include="AmrSheraaTabsHandler.resx">
-      <DependentUpon>AmrSheraaTabsHandler.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="conForm.resx">
       <DependentUpon>conForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Cycledetails_Form.resx">
       <DependentUpon>Cycledetails_Form.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EdafaMakhzanyaTabsHandler.resx">
-      <DependentUpon>EdafaMakhzanyaTabsHandler.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SearchForm.resx">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TalbEslahTabsHandler.resx">
-      <DependentUpon>TalbEslahTabsHandler.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TalbMoaeraTabsHandler.resx">
-      <DependentUpon>TalbMoaeraTabsHandler.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TalbTnfizTabsHandler.resx">
-      <DependentUpon>TalbTnfizTabsHandler.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EznSarfTabsHandler.resx">
-      <DependentUpon>EznSarfTabsHandler.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EznTahweelTabsHandler.resx">
-      <DependentUpon>EznTahweelTabsHandler.cs</DependentUpon>
+    <EmbeddedResource Include="TabsHandler.resx">
+      <DependentUpon>TabsHandler.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EzonTahwel_PopUp.resx">
       <DependentUpon>EzonTahwel_PopUp.cs</DependentUpon>
@@ -582,9 +510,6 @@
     <EmbeddedResource Include="TalbMoaera.resx">
       <DependentUpon>TalbMoaera.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TalbTawreedTabsHandler.resx">
-      <DependentUpon>TalbTawreedTabsHandler.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="TalbTawreed_R1.rdlc" />
     <EmbeddedResource Include="Edafa_R1.rdlc" />
     <EmbeddedResource Include="FEdafaMakhzania_F_Edara.resx">
@@ -607,12 +532,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FLogin.resx">
       <DependentUpon>FLogin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Fmain.resx">
-      <DependentUpon>Fmain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FPublic.resx">
-      <DependentUpon>FPublic.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FReports.resx">
       <DependentUpon>FReports.cs</DependentUpon>

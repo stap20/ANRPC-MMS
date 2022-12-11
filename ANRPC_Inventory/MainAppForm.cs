@@ -27,32 +27,39 @@ namespace ANRPC_Inventory
 
             sideBarTabsList.Add(new Tab(font, "  طلب التوريد    ", color, 32, IconFont.Auto, IconChar.ClipboardList,
                                 DockStyle.Top, (object sender, EventArgs e) => { 
-                                SideBarBtnCLicked(sender, e, new TalbTawreedTabsHandler()); 
+                                    bool isConfirm = Constants.User_Type == "A" ? false : true;
+                                    SideBarBtnCLicked(sender, e, new TabsHandler(new TalbTawred(), isConfirm)); 
                                 },
                             height: 54, padding: padd, appearance: appearance, isRL: true));
 
             sideBarTabsList.Add(new Tab(font, "  طلب تنفيذ الأعمال    ", color, 32, IconFont.Auto, IconChar.ClipboardList,
                                 DockStyle.Top, (object sender, EventArgs e) => {
-                                    SideBarBtnCLicked(sender, e, new TalbTnfizTabsHandler());
+                                    bool isConfirm = Constants.User_Type == "A" ? false : true;
+                                    SideBarBtnCLicked(sender, e, new TabsHandler(new TalbTnfiz(), isConfirm));
                                 },
                             height: 54, padding: padd, appearance: appearance, isRL: true));
 
 
             sideBarTabsList.Add(new Tab(font, "  طلب المعايرة    ", color, 32, IconFont.Auto, IconChar.ClipboardList,
                                 DockStyle.Top, (object sender, EventArgs e) => {
-                                    SideBarBtnCLicked(sender, e, new TalbMoaeraTabsHandler());
+                                    bool isConfirm = Constants.User_Type == "A" ? false : true;
+                                    SideBarBtnCLicked(sender, e, new TabsHandler(new TalbMoaera(), isConfirm));
                                 },
                             height: 54, padding: padd, appearance: appearance, isRL: true));
 
             sideBarTabsList.Add(new Tab(font, "  طلب الاصلاح    ", color, 32, IconFont.Auto, IconChar.ClipboardList,
                                 DockStyle.Top, (object sender, EventArgs e) => {
-                                    SideBarBtnCLicked(sender, e, new TalbMoaeraTabsHandler());
+                                    bool isConfirm = Constants.User_Type == "A" ? false : true;
+                                    SideBarBtnCLicked(sender, e, new TabsHandler(new TalbEslah(), isConfirm));
                                 },
                             height: 54, padding: padd, appearance: appearance, isRL: true));
 
 
             sideBarTabsList.Add(new Tab(font, "  إذن الصرف    ", color, 35, IconFont.Auto, IconChar.CartFlatbed,
-                    DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new EznSarfTabsHandler()); },
+                    DockStyle.Top, (object sender, EventArgs e) => {
+                        bool isConfirm = Constants.User_Type == "A" ? false : true;
+                        SideBarBtnCLicked(sender, e, new TabsHandler(new EznSarf_F(), isConfirm)); 
+                    },
                     height: 54, padding: padd, appearance: appearance, isRL: true));
 
 
@@ -61,20 +68,29 @@ namespace ANRPC_Inventory
             if (Constants.User_Type == "B")
             {
                 sideBarTabsList.Add(new Tab(font, "  أمر شراء    ", color, 35, IconFont.Auto, IconChar.MoneyCheckDollar,
-                      DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new AmrSheraaTabsHandler()); },
+                      DockStyle.Top, (object sender, EventArgs e) => {
+                          bool isConfirm = Constants.User_Type == "A" ? false : true;
+                          SideBarBtnCLicked(sender, e, new TabsHandler(new AmrSheraa(), isConfirm));               
+                      },
                       height: 54, padding: padd, appearance: appearance, isRL: true));
             }
 
             if (Constants.User_Type == "B")
             {
                 sideBarTabsList.Add(new Tab(font, "  إضافة مخزنية    ", color, 32, IconFont.Auto, IconChar.ClipboardCheck,
-                                DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new EdafaMakhzanyaTabsHandler()); },
+                                DockStyle.Top, (object sender, EventArgs e) => {
+                                    bool isConfirm = Constants.User_Type == "A" ? false : true;
+                                    SideBarBtnCLicked(sender, e, new TabsHandler(new FEdafaMakhzania_F(), isConfirm)); 
+                                },
                                 height: 54, padding: padd, appearance: appearance, isRL: true));
             }
             else
             {
                 sideBarTabsList.Add(new Tab(font, "  المطابقة الفنية    ", color, 32, IconFont.Auto, IconChar.ClipboardCheck,
-                                DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new EdafaMakhzanyaTabsHandler()); },
+                                DockStyle.Top, (object sender, EventArgs e) => {
+                                    bool isConfirm = Constants.User_Type == "A" ? false : true;
+                                    SideBarBtnCLicked(sender, e, new TabsHandler(new FEdafaMakhzania_F(), isConfirm)); 
+                                },
                                 height: 54, padding: padd, appearance: appearance, isRL: true));
 
             }
@@ -82,16 +98,19 @@ namespace ANRPC_Inventory
 
 
             sideBarTabsList.Add(new Tab(font, "  إذون التحويل    ", color, 32, IconFont.Auto, IconChar.DiagramPredecessor,
-                    DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new EznTahweelTabsHandler()); },
+                    DockStyle.Top, (object sender, EventArgs e) => {
+                        bool isConfirm = Constants.User_Type == "A" ? false : true;
+                        SideBarBtnCLicked(sender, e, new TabsHandler(new FTransfer_M(), isConfirm)); 
+                    },
                     height: 54, padding: padd, appearance: appearance, isRL: true));
 
             sideBarTabsList.Add(new Tab(font, "  البـــــحــــث    ", color, 32, IconFont.Auto, IconChar.Search,
-                    DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new SearchMostandTabsHandler()); },
+                    DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new Search()); },
                     height: 54, padding: padd, appearance: appearance, isRL: true));
 
 
             sideBarTabsList.Add(new Tab(font, "  الكيماويات    ", color, 32, IconFont.Auto, IconChar.Search,
-            DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new FChemical()); },
+            DockStyle.Top, (object sender, EventArgs e) => { SideBarBtnCLicked(sender, e, new TabsHandler(new FChemical())); },
             height: 54, padding: padd, appearance: appearance, isRL: true));
 
             //sideBarTabsList.Add(new Tab(font, "  الإعدادت    ", color, 32, IconFont.Auto, IconChar.Cog,
@@ -159,17 +178,6 @@ namespace ANRPC_Inventory
             formwraper.Visible = true;
         }
 
-
-
-        //protected override CreateParams CreateParams
-        //{
-        //    get
-        //    {
-        //        CreateParams handleParam = base.CreateParams;
-        //        handleParam.ExStyle |= 0x02000000;   // WS_EX_COMPOSITED       
-        //        return handleParam;
-        //    }
-        //}
 
         private void btnClose_Click(object sender, EventArgs e)
         {
