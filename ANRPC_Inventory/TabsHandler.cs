@@ -1,4 +1,5 @@
-﻿using FontAwesome.Sharp;
+﻿using ANRPC_Inventory.Resources;
+using FontAwesome.Sharp;
 using Guna.UI2.WinForms;
 using System;
 using System.Collections.Generic;
@@ -14,15 +15,32 @@ namespace ANRPC_Inventory
 {
     public partial class TabsHandler : Form
     {
+        IDictionary<string, Func<Form>> formGetter = new Dictionary<string, Func<Form>>();
         private IconButton currentActiveTab;
         private Panel tabsActiveBorder;
         private Form currentChildForm;
-        private Form currForm;
+
+        private string currentChildFormName;
         private void prepareTabsActiveIndecator()
         {
             tabsActiveBorder = new Panel();
             tabsBar.Controls.Add(tabsActiveBorder);
             tabsActiveBorder.Visible = false;
+        }
+
+        private void prepareFormGetter()
+        {
+            formGetter.Add("TalbTawred", () => { return new TalbTawred(); });
+            formGetter.Add("TalbTnfiz", () => { return new TalbTnfiz(); });
+            formGetter.Add("TalbMoaera", () => { return new TalbMoaera(); });
+
+            formGetter.Add("TalbEslah", () => { return new TalbEslah(); });
+            formGetter.Add("EznSarf_F", () => { return new EznSarf_F(); });
+            formGetter.Add("AmrSheraa", () => { return new AmrSheraa(); });
+
+            formGetter.Add("FEdafaMakhzania_F", () => { return new FEdafaMakhzania_F(); });
+            formGetter.Add("FTransfer_M", () => { return new FTransfer_M(); });
+            formGetter.Add("FChemical", () => { return new FChemical(); });
         }
 
         public TabsHandler()
@@ -31,17 +49,17 @@ namespace ANRPC_Inventory
             prepareTabsActiveIndecator();
         }
 
-        public TabsHandler(Form frm,bool isConfirm = false)
+        public TabsHandler(string frmName,bool isOnlyConfirm = false)
         {
             InitializeComponent();
             prepareTabsActiveIndecator();
+            prepareFormGetter();
+
             //btnAddEdit.PerformClick();
 
-            this.currForm = frm;
+            this.currentChildFormName = frmName;
 
-            Constants.isConfirmForm = isConfirm;
-
-            if (Constants.isConfirmForm)
+            if (isOnlyConfirm)
             {
                 btnAddEdit.Visible = false;
             }
@@ -141,14 +159,14 @@ namespace ANRPC_Inventory
 
         private void btnAddEdit_Click(object sender, EventArgs e)
         {
-            object instance = Activator.CreateInstance("TalbTawred", "TalbTawred");
-            TabBarBtnCLicked(sender, e, RGBColors.color1, (Form)instance);
+            Constants.isConfirmForm = false;
+            TabBarBtnCLicked(sender, e, RGBColors.color1, formGetter[currentChildFormName]());
         }
 
         private void btnFollowSignature_Click(object sender, EventArgs e)
         {
-            object instance = Activator.CreateInstance("myform", "TalbTawred");
-            TabBarBtnCLicked(sender, e, RGBColors.color1, (Form)instance);
+            Constants.isConfirmForm = true;
+            TabBarBtnCLicked(sender, e, RGBColors.color1, formGetter[currentChildFormName]());
         }
 
         protected override CreateParams CreateParams
