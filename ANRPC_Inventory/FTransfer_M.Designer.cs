@@ -552,8 +552,7 @@
             // 
             // Cmb_From
             // 
-            this.Cmb_From.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cmb_From.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Cmb_From.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.Cmb_From.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(1)))));
             this.Cmb_From.FormattingEnabled = true;
@@ -1192,6 +1191,7 @@
             this.Cmb_CType2.Name = "Cmb_CType2";
             this.Cmb_CType2.Size = new System.Drawing.Size(142, 24);
             this.Cmb_CType2.TabIndex = 282;
+            this.Cmb_CType2.SelectedIndexChanged += new System.EventHandler(this.Cmb_CType2_SelectedIndexChanged);
             // 
             // label10
             // 

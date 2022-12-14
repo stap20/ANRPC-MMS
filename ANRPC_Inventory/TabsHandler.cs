@@ -38,6 +38,8 @@ namespace ANRPC_Inventory
             formGetter.Add("EznSarf_F", () => { return new EznSarf_F(); });
             formGetter.Add("AmrSheraa", () => { return new AmrSheraa(); });
 
+            formGetter.Add("Estlam_F", () => { return new Estlam_F(); });
+
             formGetter.Add("FEdafaMakhzania_F", () => { return new FEdafaMakhzania_F(); });
             formGetter.Add("FTransfer_M", () => { return new FTransfer_M(); });
             formGetter.Add("FChemical", () => { return new FChemical(); });

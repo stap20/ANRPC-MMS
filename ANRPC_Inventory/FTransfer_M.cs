@@ -890,41 +890,41 @@ namespace ANRPC_Inventory
 
         public void PrepareConfirmState()
         {
-            //DisableControls();
-            //BTN_Save2.Enabled = true;
+            DisableControls();
+            BTN_Save2.Enabled = true;
 
-            //if (Constants.User_Type == "A")
-            //{
-            //    if (FlagSign2 != 1 && FlagSign1 == 1)
-            //    {
-            //        BTN_Sign2.Enabled = true;
-            //        DeleteBtn.Enabled = true;
-            //        currentSignNumber = 2;
-            //    }
-            //    else if (FlagSign4 != 1 && FlagSign3 == 1)
-            //    {
-            //        BTN_Sign4.Enabled = true;
-            //        currentSignNumber = 4;
-            //    }
-            //}
-            //else if (Constants.User_Type == "B")
-            //{
-            //    if (Constants.UserTypeB == "Sarf")
-            //    {
-            //        BTN_Sign3.Enabled = true;
-            //        //dataGridView1.ReadOnly = false;
-            //        dataGridView1.Columns["Quan2"].ReadOnly = false;
-            //        currentSignNumber = 3;
-            //    }
-            //    else if (Constants.UserTypeB == "Tkalif" || Constants.UserTypeB == "Finance")
-            //    {
-            //        EnableTakalef();
-            //    }
-            //}
+            if (Constants.User_Type == "A")
+            {
+                if (FlagSign2 != 1 && FlagSign1 == 1)
+                {
+                    BTN_Sign2.Enabled = true;
+                    DeleteBtn.Enabled = true;
+                    currentSignNumber = 2;
+                }
+                else if (FlagSign4 != 1 && FlagSign3 == 1)
+                {
+                    BTN_Sign4.Enabled = true;
+                    currentSignNumber = 4;
+                }
+            }
+            else if (Constants.User_Type == "B")
+            {
+                if (Constants.UserTypeB == "Sarf")
+                {
+                    BTN_Sign3.Enabled = true;
+                    //dataGridView1.ReadOnly = false;
+                    dataGridView1.Columns["Quan2"].ReadOnly = false;
+                    currentSignNumber = 3;
+                }
+                else if (Constants.UserTypeB == "Tkalif" || Constants.UserTypeB == "Finance")
+                {
+                    EnableTakalef();
+                }
+            }
 
-            //AddEditFlag = 1;
+            AddEditFlag = 1;
             //TNO = TXT_EznNo.Text;
-            //FY = Cmb_FYear.Text;
+            FY = Cmb_FYear.Text;
         }
 
         public void prepareSearchState()
@@ -932,7 +932,7 @@ namespace ANRPC_Inventory
             DisableControls();
             Input_Reset();
 
-            if (Constants.EzonTahwel_FF)
+            if (!Constants.isConfirmForm)
             {
                 Cmb_FYear.Enabled = true;
                 Cmb_CType.Enabled = true;
@@ -1763,12 +1763,12 @@ namespace ANRPC_Inventory
             HelperClass.comboBoxFiller(Cmb_FYear, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
             HelperClass.comboBoxFiller(Cmb_FYear2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
 
-            if (Constants.EzonTahwel_FF == false)
+            if (Constants.isConfirmForm)
             {
                 panel7.Visible = true;
                 panel2.Visible = false;
             }
-            else if (Constants.EzonTahwel_FF == true)
+            else
             {
                 panel2.Visible = true;
                 panel7.Visible = false;
@@ -3081,6 +3081,19 @@ namespace ANRPC_Inventory
             }
 
             popup.Dispose();
+        }
+
+        private void Cmb_CType2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (!(string.IsNullOrEmpty(Cmb_CType2.Text) || string.IsNullOrWhiteSpace(Cmb_CType2.Text) || Cmb_CType2.SelectedIndex == -1))
+            {
+                TXT_TRNO2.Text = Cmb_CType2.SelectedValue.ToString();
+            }
+            else
+            {
+                return;
+            }
         }
     }
 }
