@@ -165,8 +165,6 @@
             this.SaveBtn = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
             this.BTN_Search_Motab3a = new System.Windows.Forms.Button();
-            this.BTN_Search = new System.Windows.Forms.Button();
-            this.BTN_Tracking = new System.Windows.Forms.Button();
             this.BTN_Print2 = new System.Windows.Forms.Button();
             this.Editbtn = new System.Windows.Forms.Button();
             this.BTN_Save2 = new System.Windows.Forms.Button();
@@ -1935,8 +1933,6 @@
             this.panel7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel7.BackgroundImage")));
             this.panel7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel7.Controls.Add(this.BTN_Search_Motab3a);
-            this.panel7.Controls.Add(this.BTN_Search);
-            this.panel7.Controls.Add(this.BTN_Tracking);
             this.panel7.Controls.Add(this.BTN_Print2);
             this.panel7.Controls.Add(this.Editbtn);
             this.panel7.Controls.Add(this.BTN_Save2);
@@ -1973,49 +1969,6 @@
             this.BTN_Search_Motab3a.Text = "بحث";
             this.BTN_Search_Motab3a.UseVisualStyleBackColor = false;
             this.BTN_Search_Motab3a.Click += new System.EventHandler(this.BTN_Search_Motab3a_Click);
-            // 
-            // BTN_Search
-            // 
-            this.BTN_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Search.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.BTN_Search.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_Search.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
-            this.BTN_Search.FlatAppearance.BorderSize = 3;
-            this.BTN_Search.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_Search.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.BTN_Search.ForeColor = System.Drawing.Color.Maroon;
-            this.BTN_Search.Image = ((System.Drawing.Image)(resources.GetObject("BTN_Search.Image")));
-            this.BTN_Search.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BTN_Search.Location = new System.Drawing.Point(166, 13);
-            this.BTN_Search.Name = "BTN_Search";
-            this.BTN_Search.Size = new System.Drawing.Size(205, 68);
-            this.BTN_Search.TabIndex = 305;
-            this.BTN_Search.Text = "بحث طلبات الإصلاح";
-            this.BTN_Search.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BTN_Search.UseVisualStyleBackColor = false;
-            this.BTN_Search.Click += new System.EventHandler(this.BTN_Search_Click);
-            // 
-            // BTN_Tracking
-            // 
-            this.BTN_Tracking.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Tracking.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.BTN_Tracking.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_Tracking.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
-            this.BTN_Tracking.FlatAppearance.BorderSize = 3;
-            this.BTN_Tracking.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_Tracking.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.BTN_Tracking.ForeColor = System.Drawing.Color.Maroon;
-            this.BTN_Tracking.Image = ((System.Drawing.Image)(resources.GetObject("BTN_Tracking.Image")));
-            this.BTN_Tracking.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BTN_Tracking.Location = new System.Drawing.Point(3, 13);
-            this.BTN_Tracking.Name = "BTN_Tracking";
-            this.BTN_Tracking.Size = new System.Drawing.Size(141, 68);
-            this.BTN_Tracking.TabIndex = 304;
-            this.BTN_Tracking.Text = "تتبع طلبات الإصلاح";
-            this.BTN_Tracking.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BTN_Tracking.UseVisualStyleBackColor = false;
-            this.BTN_Tracking.Visible = false;
-            this.BTN_Tracking.Click += new System.EventHandler(this.BTN_Tracking_Click);
             // 
             // BTN_Print2
             // 
@@ -2302,9 +2255,7 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox TXT_TalbNo2;
         private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.Button BTN_Tracking;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button BTN_Search;
         private System.Windows.Forms.ComboBox Cmb_Currency;
         private System.Windows.Forms.TextBox TXT_PriceSarf;
         private System.Windows.Forms.Label label37;

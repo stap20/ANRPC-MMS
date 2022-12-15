@@ -561,23 +561,23 @@ namespace ANRPC_Inventory
 
         private void BTN_Cycle_Click(object sender, EventArgs e)
         {
-            if (Cmb_FYear2.SelectedIndex == -1 || Cmb_TalbNo2.SelectedIndex == -1)
-            {
-                MessageBox.Show("يجب اختيار السنة المالية و رقم الطلب التوريد اولا");
-                return;
+          //  if (Cmb_FYear2.SelectedIndex == -1 || Cmb_TalbNo2.SelectedIndex == -1)
+          //  {
+          //      MessageBox.Show("يجب اختيار السنة المالية و رقم الطلب التوريد اولا");
+          //      return;
 
-            }
-            Track_TalbTawreed F = new Track_TalbTawreed(Cmb_FYear2.Text, Cmb_TalbNo2.Text);
-            // main Ff = new Main();
-            Constants.currentOpened = F;
-            F.MdiParent = this.MdiParent;
-            F.Show();
-            // this.IsMdiContainer = true;
-            // 
-            F.Dock = DockStyle.Fill;
-          //  Track_TalbTawreed AF = new Track_TalbTawreed(Cmb_FYear2.Text,Cmb_TalbNo2.Text);
-           // AF.Show();
-           // this.Hide();
+          //  }
+          //  Track_TalbTawreed F = new Track_TalbTawreed(Cmb_FYear2.Text, Cmb_TalbNo2.Text);
+          //  // main Ff = new Main();
+          //  Constants.currentOpened = F;
+          //  F.MdiParent = this.MdiParent;
+          //  F.Show();
+          //  // this.IsMdiContainer = true;
+          //  // 
+          //  F.Dock = DockStyle.Fill;
+          ////  Track_TalbTawreed AF = new Track_TalbTawreed(Cmb_FYear2.Text,Cmb_TalbNo2.Text);
+          // // AF.Show();
+          // // this.Hide();
         }
 
         private void BTN_Report_Click(object sender, EventArgs e)

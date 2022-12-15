@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using System.Windows.Media.Media3D;
 
 namespace ANRPC_Inventory
 {
@@ -30,6 +31,7 @@ namespace ANRPC_Inventory
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainAppForm));
             this.container = new System.Windows.Forms.Panel();
             this.main = new System.Windows.Forms.Panel();
@@ -41,17 +43,23 @@ namespace ANRPC_Inventory
             this.btnClose = new FontAwesome.Sharp.IconButton();
             this.btn_max = new FontAwesome.Sharp.IconButton();
             this.sidebar = new System.Windows.Forms.Panel();
+            this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.logOutBtn = new FontAwesome.Sharp.IconButton();
             this.panelButtons = new System.Windows.Forms.Panel();
             this.panelLogo = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.container.SuspendLayout();
             this.main.SuspendLayout();
             this.appbar.SuspendLayout();
             this.sidebar.SuspendLayout();
+            this.guna2Panel1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.guna2Panel2.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // container
@@ -212,6 +220,68 @@ namespace ANRPC_Inventory
             this.sidebar.Size = new System.Drawing.Size(250, 590);
             this.sidebar.TabIndex = 0;
             // 
+            // guna2Panel1
+            // 
+            this.guna2Panel1.BorderRadius = 20;
+            this.guna2Panel1.Controls.Add(this.panel1);
+            this.guna2Panel1.Controls.Add(this.panelButtons);
+            this.guna2Panel1.Controls.Add(this.panelLogo);
+            this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(115)))), ((int)(((byte)(86)))));
+            this.guna2Panel1.Location = new System.Drawing.Point(3, 17);
+            this.guna2Panel1.Name = "guna2Panel1";
+            this.guna2Panel1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.guna2Panel1.ShadowDecoration.Parent = this.guna2Panel1;
+            this.guna2Panel1.Size = new System.Drawing.Size(232, 556);
+            this.guna2Panel1.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.guna2Panel2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 474);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(232, 77);
+            this.panel1.TabIndex = 2;
+            // 
+            // guna2Panel2
+            // 
+            this.guna2Panel2.BackColor = System.Drawing.Color.Transparent;
+            this.guna2Panel2.BorderColor = System.Drawing.Color.Transparent;
+            this.guna2Panel2.BorderRadius = 10;
+            this.guna2Panel2.Controls.Add(this.logOutBtn);
+            this.guna2Panel2.Location = new System.Drawing.Point(12, 12);
+            this.guna2Panel2.Name = "guna2Panel2";
+            this.guna2Panel2.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.guna2Panel2.ShadowDecoration.Parent = this.guna2Panel2;
+            this.guna2Panel2.Size = new System.Drawing.Size(212, 55);
+            this.guna2Panel2.TabIndex = 1;
+            // 
+            // logOutBtn
+            // 
+            this.logOutBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logOutBtn.FlatAppearance.BorderSize = 0;
+            this.logOutBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(163)))), ((int)(((byte)(123)))));
+            this.logOutBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(163)))), ((int)(((byte)(123)))));
+            this.logOutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.logOutBtn.Flip = FontAwesome.Sharp.FlipOrientation.Vertical;
+            this.logOutBtn.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.logOutBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(232)))), ((int)(((byte)(234)))));
+            this.logOutBtn.IconChar = FontAwesome.Sharp.IconChar.SignOut;
+            this.logOutBtn.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(232)))), ((int)(((byte)(234)))));
+            this.logOutBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.logOutBtn.IconSize = 30;
+            this.logOutBtn.Location = new System.Drawing.Point(5, 0);
+            this.logOutBtn.Name = "logOutBtn";
+            this.logOutBtn.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.logOutBtn.Size = new System.Drawing.Size(202, 55);
+            this.logOutBtn.TabIndex = 0;
+            this.logOutBtn.Text = " تسجيل الخروج   ";
+            this.logOutBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.logOutBtn.UseVisualStyleBackColor = true;
+            this.logOutBtn.Click += new System.EventHandler(this.logOutBtn_Click);
+            // 
             // panelButtons
             // 
             this.panelButtons.AutoScroll = true;
@@ -246,19 +316,10 @@ namespace ANRPC_Inventory
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // guna2Panel1
+            // guna2Elipse1
             // 
-            this.guna2Panel1.BorderRadius = 20;
-            this.guna2Panel1.Controls.Add(this.panelButtons);
-            this.guna2Panel1.Controls.Add(this.panelLogo);
-            this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(115)))), ((int)(((byte)(86)))));
-            this.guna2Panel1.Location = new System.Drawing.Point(3, 17);
-            this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.guna2Panel1.ShadowDecoration.Parent = this.guna2Panel1;
-            this.guna2Panel1.Size = new System.Drawing.Size(232, 556);
-            this.guna2Panel1.TabIndex = 0;
+            this.guna2Elipse1.BorderRadius = 20;
+            this.guna2Elipse1.TargetControl = this.logOutBtn;
             // 
             // MainAppForm
             // 
@@ -273,9 +334,11 @@ namespace ANRPC_Inventory
             this.main.ResumeLayout(false);
             this.appbar.ResumeLayout(false);
             this.sidebar.ResumeLayout(false);
+            this.guna2Panel1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.guna2Panel2.ResumeLayout(false);
             this.panelLogo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.guna2Panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -296,5 +359,9 @@ namespace ANRPC_Inventory
         private FontAwesome.Sharp.IconButton btnWindowReset;
         private PictureBox pictureBox1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
+        private FontAwesome.Sharp.IconButton logOutBtn;
+        private Panel panel1;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
+        private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
     }
 }

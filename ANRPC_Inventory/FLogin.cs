@@ -155,9 +155,14 @@ namespace ANRPC_Inventory
                 Constants.CodeEdara = dr["CodeEdara"].ToString();
                 Constants.NameEdara = dr["NameEdara"].ToString();
                 Constants.User_Type = dr["UserType"].ToString();
+
                 if (Constants.User_Type == "B")
                 {
                     Constants.UserTypeB =username.Substring(username.IndexOf("_") + 1);
+                }
+                else
+                {
+                    Constants.UserTypeB = "Edara";
                 }
 
             }

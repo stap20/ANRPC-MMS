@@ -165,8 +165,6 @@
             this.SaveBtn = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
             this.BTN_Search_Motab3a = new System.Windows.Forms.Button();
-            this.BTN_Search = new System.Windows.Forms.Button();
-            this.BTN_Tracking = new System.Windows.Forms.Button();
             this.BTN_Print2 = new System.Windows.Forms.Button();
             this.Editbtn = new System.Windows.Forms.Button();
             this.BTN_Save2 = new System.Windows.Forms.Button();
@@ -526,7 +524,7 @@
             this.radioButton5.ForeColor = System.Drawing.Color.DarkBlue;
             this.radioButton5.Location = new System.Drawing.Point(20, 6);
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(71, 17);
+            this.radioButton5.Size = new System.Drawing.Size(68, 17);
             this.radioButton5.TabIndex = 48;
             this.radioButton5.TabStop = true;
             this.radioButton5.Text = "امر مباشر";
@@ -542,7 +540,7 @@
             this.radioButton4.ForeColor = System.Drawing.Color.DarkBlue;
             this.radioButton4.Location = new System.Drawing.Point(110, 28);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(94, 17);
+            this.radioButton4.Size = new System.Drawing.Size(89, 17);
             this.radioButton4.TabIndex = 47;
             this.radioButton4.TabStop = true;
             this.radioButton4.Text = "ممارسة محددة";
@@ -558,7 +556,7 @@
             this.radioButton3.ForeColor = System.Drawing.Color.DarkBlue;
             this.radioButton3.Location = new System.Drawing.Point(117, 6);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(87, 17);
+            this.radioButton3.Size = new System.Drawing.Size(82, 17);
             this.radioButton3.TabIndex = 46;
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "ممارسة عامة";
@@ -572,7 +570,7 @@
             this.radioButton6.ForeColor = System.Drawing.Color.DarkBlue;
             this.radioButton6.Location = new System.Drawing.Point(4, 28);
             this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(85, 17);
+            this.radioButton6.Size = new System.Drawing.Size(84, 17);
             this.radioButton6.TabIndex = 45;
             this.radioButton6.TabStop = true;
             this.radioButton6.Text = "عروض اسعار";
@@ -585,9 +583,9 @@
             this.radioButton2.AutoSize = true;
             this.radioButton2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radioButton2.ForeColor = System.Drawing.Color.DarkBlue;
-            this.radioButton2.Location = new System.Drawing.Point(246, 28);
+            this.radioButton2.Location = new System.Drawing.Point(247, 28);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(90, 17);
+            this.radioButton2.Size = new System.Drawing.Size(89, 17);
             this.radioButton2.TabIndex = 44;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "مناقصة محددة";
@@ -600,9 +598,9 @@
             this.radioButton1.AutoSize = true;
             this.radioButton1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radioButton1.ForeColor = System.Drawing.Color.DarkBlue;
-            this.radioButton1.Location = new System.Drawing.Point(253, 6);
+            this.radioButton1.Location = new System.Drawing.Point(254, 6);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(83, 17);
+            this.radioButton1.Size = new System.Drawing.Size(82, 17);
             this.radioButton1.TabIndex = 43;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "مناقصة عامة";
@@ -1059,8 +1057,8 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.errorProvider.SetIconAlignment(this.dataGridView1, System.Windows.Forms.ErrorIconAlignment.TopRight);
             this.alertProvider.SetIconAlignment(this.dataGridView1, System.Windows.Forms.ErrorIconAlignment.TopRight);
+            this.errorProvider.SetIconAlignment(this.dataGridView1, System.Windows.Forms.ErrorIconAlignment.TopRight);
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -1462,7 +1460,7 @@
             this.label34.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label34.Location = new System.Drawing.Point(114, 92);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(92, 16);
+            this.label34.Size = new System.Drawing.Size(91, 16);
             this.label34.TabIndex = 241;
             this.label34.Text = ":رقم الطلب النهائى";
             this.label34.Click += new System.EventHandler(this.label34_Click);
@@ -1515,7 +1513,7 @@
             this.label7.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label7.Location = new System.Drawing.Point(113, 64);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(94, 16);
+            this.label7.Size = new System.Drawing.Size(93, 16);
             this.label7.TabIndex = 5;
             this.label7.Text = ":رقم الطلب المبدئى";
             this.label7.Click += new System.EventHandler(this.label7_Click);
@@ -2033,8 +2031,6 @@
             this.panel7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel7.BackgroundImage")));
             this.panel7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel7.Controls.Add(this.BTN_Search_Motab3a);
-            this.panel7.Controls.Add(this.BTN_Search);
-            this.panel7.Controls.Add(this.BTN_Tracking);
             this.panel7.Controls.Add(this.BTN_Print2);
             this.panel7.Controls.Add(this.Editbtn);
             this.panel7.Controls.Add(this.BTN_Save2);
@@ -2072,49 +2068,6 @@
             this.BTN_Search_Motab3a.Text = "بحث";
             this.BTN_Search_Motab3a.UseVisualStyleBackColor = false;
             this.BTN_Search_Motab3a.Click += new System.EventHandler(this.BTN_Search_Motab3a_Click);
-            // 
-            // BTN_Search
-            // 
-            this.BTN_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Search.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.BTN_Search.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_Search.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
-            this.BTN_Search.FlatAppearance.BorderSize = 3;
-            this.BTN_Search.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_Search.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.BTN_Search.ForeColor = System.Drawing.Color.Maroon;
-            this.BTN_Search.Image = ((System.Drawing.Image)(resources.GetObject("BTN_Search.Image")));
-            this.BTN_Search.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BTN_Search.Location = new System.Drawing.Point(166, 13);
-            this.BTN_Search.Name = "BTN_Search";
-            this.BTN_Search.Size = new System.Drawing.Size(205, 68);
-            this.BTN_Search.TabIndex = 305;
-            this.BTN_Search.Text = "بحث طلبات المعايرة";
-            this.BTN_Search.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BTN_Search.UseVisualStyleBackColor = false;
-            this.BTN_Search.Click += new System.EventHandler(this.BTN_Search_Click);
-            // 
-            // BTN_Tracking
-            // 
-            this.BTN_Tracking.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Tracking.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.BTN_Tracking.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_Tracking.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
-            this.BTN_Tracking.FlatAppearance.BorderSize = 3;
-            this.BTN_Tracking.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_Tracking.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.BTN_Tracking.ForeColor = System.Drawing.Color.Maroon;
-            this.BTN_Tracking.Image = ((System.Drawing.Image)(resources.GetObject("BTN_Tracking.Image")));
-            this.BTN_Tracking.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BTN_Tracking.Location = new System.Drawing.Point(3, 13);
-            this.BTN_Tracking.Name = "BTN_Tracking";
-            this.BTN_Tracking.Size = new System.Drawing.Size(141, 68);
-            this.BTN_Tracking.TabIndex = 304;
-            this.BTN_Tracking.Text = "تتبع طلبات المعايرة";
-            this.BTN_Tracking.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BTN_Tracking.UseVisualStyleBackColor = false;
-            this.BTN_Tracking.Visible = false;
-            this.BTN_Tracking.Click += new System.EventHandler(this.BTN_Tracking_Click);
             // 
             // BTN_Print2
             // 
@@ -2409,9 +2362,7 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox TXT_TalbNo2;
         private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.Button BTN_Tracking;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button BTN_Search;
         private System.Windows.Forms.ComboBox Cmb_Currency;
         private System.Windows.Forms.TextBox TXT_PriceSarf;
         private System.Windows.Forms.Label label37;

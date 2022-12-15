@@ -102,12 +102,6 @@
     <Compile Include="conForm.Designer.cs">
       <DependentUpon>conForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Cycledetails_Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Cycledetails_Form.Designer.cs">
-      <DependentUpon>Cycledetails_Form.cs</DependentUpon>
-    </Compile>
     <Compile Include="DrawedCircleText.cs" />
     <Compile Include="SearchForm.cs">
       <SubType>Form</SubType>
@@ -135,22 +129,6 @@
     </Compile>
     <Compile Include="FinancialYearHandler.cs" />
     <Compile Include="Fonts.cs" />
-    <Compile Include="FTransfer_A.cs">
-      <SubType>Form</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="FTransfer_A.Designer.cs">
-      <DependentUpon>FTransfer_A.cs</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="FTransfer_AA.cs">
-      <SubType>Form</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="FTransfer_AA.Designer.cs">
-      <DependentUpon>FTransfer_AA.cs</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
     <Compile Include="FTransfer_M.cs">
       <SubType>Form</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -158,12 +136,6 @@
     <Compile Include="FTransfer_M.Designer.cs">
       <DependentUpon>FTransfer_M.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="FTransfer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FTransfer.Designer.cs">
-      <DependentUpon>FTransfer.cs</DependentUpon>
     </Compile>
     <Compile Include="HelperClass.cs" />
     <Compile Include="MainAppForm.cs">
@@ -259,12 +231,6 @@
     <Compile Include="CurrencyConverter3.cs" />
     <Compile Include="CurrencyData3.cs" />
     <Compile Include="CurrencyInfo.cs" />
-    <Compile Include="FEdafaMakhzania_F_Edara.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FEdafaMakhzania_F_Edara.Designer.cs">
-      <DependentUpon>FEdafaMakhzania_F_Edara.cs</DependentUpon>
-    </Compile>
     <Compile Include="FEdafaMakhzania_F.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -282,19 +248,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ANRPC_InventoryDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Estlam.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Estlam.Designer.cs">
-      <DependentUpon>Estlam.cs</DependentUpon>
-    </Compile>
     <Compile Include="Constants.cs" />
-    <Compile Include="FEdafaMakhzania.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FEdafaMakhzania.Designer.cs">
-      <DependentUpon>FEdafaMakhzania.cs</DependentUpon>
-    </Compile>
     <Compile Include="FLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -321,12 +275,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EznSarf.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EznSarf.Designer.cs">
-      <DependentUpon>EznSarf.cs</DependentUpon>
-    </Compile>
     <Compile Include="AmrSheraa.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -409,33 +357,12 @@
     <Compile Include="TimeLineDrawerForm.Designer.cs">
       <DependentUpon>TimeLineDrawerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TimeLine_Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TimeLine_Form.Designer.cs">
-      <DependentUpon>TimeLine_Form.cs</DependentUpon>
-    </Compile>
     <Compile Include="ToastConfigration.cs" />
     <Compile Include="ToWord.cs" />
-    <Compile Include="Search_TalbTawreed.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Search_TalbTawreed.Designer.cs">
-      <DependentUpon>Search_TalbTawreed.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Track_TalbTawreed.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Track_TalbTawreed.Designer.cs">
-      <DependentUpon>Track_TalbTawreed.cs</DependentUpon>
-    </Compile>
     <Compile Include="TransHandler.cs" />
     <Compile Include="UnitsHandler.cs" />
     <EmbeddedResource Include="conForm.resx">
       <DependentUpon>conForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Cycledetails_Form.resx">
-      <DependentUpon>Cycledetails_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SearchForm.resx">
       <DependentUpon>SearchForm.cs</DependentUpon>
@@ -450,21 +377,9 @@
     <EmbeddedResource Include="FChemical.resx">
       <DependentUpon>FChemical.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FTransfer_A.resx">
-      <DependentUpon>FTransfer_A.cs</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FTransfer_AA.resx">
-      <DependentUpon>FTransfer_AA.cs</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="FTransfer_M.resx">
       <DependentUpon>FTransfer_M.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FTransfer.resx">
-      <DependentUpon>FTransfer.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainAppForm.resx">
       <DependentUpon>MainAppForm.cs</DependentUpon>
@@ -503,10 +418,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TalbTawreed_R1.rdlc" />
     <EmbeddedResource Include="Edafa_R1.rdlc" />
-    <EmbeddedResource Include="FEdafaMakhzania_F_Edara.resx">
-      <DependentUpon>FEdafaMakhzania_F_Edara.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="FEdafaMakhzania_F.resx">
       <DependentUpon>FEdafaMakhzania_F.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -514,12 +425,6 @@
     <EmbeddedResource Include="Estlam_F.resx">
       <DependentUpon>Estlam_F.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Estlam.resx">
-      <DependentUpon>Estlam.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FEdafaMakhzania.resx">
-      <DependentUpon>FEdafaMakhzania.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FLogin.resx">
       <DependentUpon>FLogin.cs</DependentUpon>
@@ -537,9 +442,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="EznSarf.resx">
-      <DependentUpon>EznSarf.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AmrSheraa.resx">
       <DependentUpon>AmrSheraa.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -572,17 +474,8 @@
       <DependentUpon>TalbTawred.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Search_TalbTawreed.resx">
-      <DependentUpon>Search_TalbTawreed.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="TimeLineDrawerForm.resx">
       <DependentUpon>TimeLineDrawerForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TimeLine_Form.resx">
-      <DependentUpon>TimeLine_Form.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Track_TalbTawreed.resx">
-      <DependentUpon>Track_TalbTawreed.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ANRPC_InventoryDataSet.xsc">
       <DependentUpon>ANRPC_InventoryDataSet.xsd</DependentUpon>

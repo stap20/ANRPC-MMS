@@ -3335,41 +3335,6 @@ namespace ANRPC_Inventory
             Constants.validateTextboxNumbersonly(sender);
         }
 
-        private void BTN_Tracking_Click(object sender, EventArgs e)
-        {
-            if (Constants.currentOpened != null)
-            {
-             //   Constants.currentOpened.Close();
-            }
-            //----------------------
-            Track_TalbTawreed F = new Track_TalbTawreed(); 
-            // main Ff = new Main();
-            Constants.currentOpened = F;
-            F.MdiParent = this.MdiParent;
-            F.Show();
-         // this.IsMdiContainer = true;
-         // 
-         F.Dock = DockStyle.Fill;
-          //  tableLayoutPanel1.Visible = false;
-        }
-
-        private void BTN_Search_Click(object sender, EventArgs e)
-        {
-            if (Constants.currentOpened != null)
-            {
-                //   Constants.currentOpened.Close();
-            }
-            //----------------------
-            Search_TalbTawreed F = new Search_TalbTawreed();
-            // main Ff = new Main();
-            Constants.currentOpened = F;
-            F.MdiParent = this.MdiParent;
-            F.Show();
-            // this.IsMdiContainer = true;
-            // 
-            F.Dock = DockStyle.Fill;
-            //  tableLayoutPanel1.Visible = false;
-        }
 
         private void next_btn_Click(object sender, EventArgs e)
         {

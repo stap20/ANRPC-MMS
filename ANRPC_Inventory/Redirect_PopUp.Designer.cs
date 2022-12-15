@@ -32,16 +32,16 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.BTN_Redirect = new System.Windows.Forms.Button();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.TXT_CodeEdara = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.BTN_Redirect = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.TXT_CodeEdara = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -67,11 +67,11 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arabic Transparent", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label5.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label5.ForeColor = System.Drawing.Color.Maroon;
             this.label5.Location = new System.Drawing.Point(544, 128);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(89, 25);
+            this.label5.Size = new System.Drawing.Size(86, 24);
             this.label5.TabIndex = 235;
             this.label5.Text = "توجيه الى:";
             // 
@@ -92,6 +92,27 @@
             this.panel8.Size = new System.Drawing.Size(418, 144);
             this.panel8.TabIndex = 234;
             this.panel8.Paint += new System.Windows.Forms.PaintEventHandler(this.panel8_Paint);
+            // 
+            // button1
+            // 
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button1.Location = new System.Drawing.Point(83, 102);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 50;
+            this.button1.Text = "الغاء";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // BTN_Redirect
+            // 
+            this.BTN_Redirect.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.BTN_Redirect.Location = new System.Drawing.Point(266, 102);
+            this.BTN_Redirect.Name = "BTN_Redirect";
+            this.BTN_Redirect.Size = new System.Drawing.Size(75, 23);
+            this.BTN_Redirect.TabIndex = 49;
+            this.BTN_Redirect.Text = "توجيه";
+            this.BTN_Redirect.UseVisualStyleBackColor = true;
+            this.BTN_Redirect.Click += new System.EventHandler(this.BTN_Redirect_Click);
             // 
             // radioButton5
             // 
@@ -132,7 +153,7 @@
             this.radioButton3.Size = new System.Drawing.Size(79, 17);
             this.radioButton3.TabIndex = 46;
             this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "شوقى معا\\";
+            this.radioButton3.Text = "شوقى معاز";
             this.radioButton3.UseVisualStyleBackColor = true;
             this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
             // 
@@ -179,15 +200,6 @@
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
-            // TXT_CodeEdara
-            // 
-            this.TXT_CodeEdara.Font = new System.Drawing.Font("Arabic Transparent", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_CodeEdara.Location = new System.Drawing.Point(213, 250);
-            this.TXT_CodeEdara.Name = "TXT_CodeEdara";
-            this.TXT_CodeEdara.Size = new System.Drawing.Size(240, 26);
-            this.TXT_CodeEdara.TabIndex = 233;
-            this.TXT_CodeEdara.Visible = false;
-            // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
@@ -199,26 +211,14 @@
             this.pictureBox1.TabIndex = 232;
             this.pictureBox1.TabStop = false;
             // 
-            // BTN_Redirect
+            // TXT_CodeEdara
             // 
-            this.BTN_Redirect.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.BTN_Redirect.Location = new System.Drawing.Point(266, 102);
-            this.BTN_Redirect.Name = "BTN_Redirect";
-            this.BTN_Redirect.Size = new System.Drawing.Size(75, 23);
-            this.BTN_Redirect.TabIndex = 49;
-            this.BTN_Redirect.Text = "توجيه";
-            this.BTN_Redirect.UseVisualStyleBackColor = true;
-            this.BTN_Redirect.Click += new System.EventHandler(this.BTN_Redirect_Click);
-            // 
-            // button1
-            // 
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.Location = new System.Drawing.Point(83, 102);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 50;
-            this.button1.Text = "الغاء";
-            this.button1.UseVisualStyleBackColor = true;
+            this.TXT_CodeEdara.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_CodeEdara.Location = new System.Drawing.Point(213, 250);
+            this.TXT_CodeEdara.Name = "TXT_CodeEdara";
+            this.TXT_CodeEdara.Size = new System.Drawing.Size(240, 26);
+            this.TXT_CodeEdara.TabIndex = 233;
+            this.TXT_CodeEdara.Visible = false;
             // 
             // Redirect_PopUp
             // 
