@@ -153,6 +153,7 @@ namespace ANRPC_Inventory
             }
             int currentSignNumber = 0;
             bool isComeFromSearch = false;
+            int selectedTalbNo;
         #endregion
 
         //------------------------------------------ Helper ---------------------------------
@@ -176,700 +177,702 @@ namespace ANRPC_Inventory
                 return result;
             }
             
-            private int GetCurrentActivatedBuyMethod(Panel panel)
+        private int GetCurrentActivatedBuyMethod(Panel panel)
+        {
+            int current_active = -1;
+            try
             {
-                int current_active = -1;
-                try
+                foreach (RadioButton radio in panel.Controls)
                 {
-                    foreach (RadioButton radio in panel.Controls)
-                    {
-                        if(radio.Checked == true)
-                        {
-                            string s = radio.Name;
-
-                            current_active = s[s.Length - 1]-48;
-
-                            return current_active;
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                }
-                return current_active;
-            }
-
-            private void SetCurrentActivatedBuyMethod(Panel panel,string bum)
-            {
-                try
-                {
-                    foreach (RadioButton radio in panel.Controls)
+                    if(radio.Checked == true)
                     {
                         string s = radio.Name;
-                        if (Convert.ToString(s[s.Length - 1]) == bum)
-                        {
-                            radio.Checked = true;
-                        }
+
+                        current_active = s[s.Length - 1]-48;
+
+                        return current_active;
                     }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                }
             }
-
-            private void errorProviderHandler(List<(ErrorProvider, Control, string)> errosList)
+            catch (Exception e)
             {
-                alertProvider.Clear();
-                errorProvider.Clear();
-                foreach (var error in errosList)
-                {
-                    ////Txt_ReqQuan.Location = new Point(Txt_ReqQuan.Location.X + errorProvider.Icon.Width, Txt_ReqQuan.Location.Y);
-                    //error.Item2.Width = error.Item2.Width - error.Item1.Icon.Width;
-                    error.Item1.SetError(error.Item2, error.Item3);
-                }
+                Console.WriteLine(e);
             }
-            
-            private bool isNumber(string s)
+            return current_active;
+        }
+
+        private void SetCurrentActivatedBuyMethod(Panel panel,string bum)
+        {
+            try
             {
-                int t;
-                decimal f;
-
-                if (!(int.TryParse(s, out t) || decimal.TryParse(s, out f)))
+                foreach (RadioButton radio in panel.Controls)
                 {
-                    return false;
-                }
-
-                return true;
-            }
-
-            private string GetActiveRegions()
-            {
-                string regions = "";
-
-                for (int i = 0; i < checkedListBox1.Items.Count; i++)
-                {
-                    if (checkedListBox1.GetItemChecked(i))
+                    string s = radio.Name;
+                    if (Convert.ToString(s[s.Length - 1]) == bum)
                     {
-                        if(i < checkedListBox1.Items.Count-1)
+                        radio.Checked = true;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        private void errorProviderHandler(List<(ErrorProvider, Control, string)> errosList)
+        {
+            alertProvider.Clear();
+            errorProvider.Clear();
+            foreach (var error in errosList)
+            {
+                ////Txt_ReqQuan.Location = new Point(Txt_ReqQuan.Location.X + errorProvider.Icon.Width, Txt_ReqQuan.Location.Y);
+                //error.Item2.Width = error.Item2.Width - error.Item1.Icon.Width;
+                error.Item1.SetError(error.Item2, error.Item3);
+            }
+        }
+            
+        private bool isNumber(string s)
+        {
+            int t;
+            decimal f;
+
+            if (!(int.TryParse(s, out t) || decimal.TryParse(s, out f)))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private string GetActiveRegions()
+        {
+            string regions = "";
+
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                if (checkedListBox1.GetItemChecked(i))
+                {
+                    if(i < checkedListBox1.Items.Count-1)
+                    {
+                        regions = regions + checkedListBox1.Items[i].ToString() + ",";
+                    }
+                    else
+                    {
+                        regions = regions + checkedListBox1.Items[i].ToString();
+                    }
+                    
+                }
+            }
+
+            return regions;
+        }
+
+        public void SP_UpdateSignatures(int x, DateTime D1, DateTime? D2 = null)
+        {
+            Constants.opencon();
+            string cmdstring = "Exec  SP_UpdateSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
+            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+
+            cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_TalbNo.Text));
+            cmd.Parameters.AddWithValue("@TNO2", DBNull.Value);
+
+            cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
+            cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
+            cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
+            cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
+
+            cmd.Parameters.AddWithValue("@FN", 1);
+
+            cmd.Parameters.AddWithValue("@SN", x);
+
+            cmd.Parameters.AddWithValue("@D1", D1);
+            if (D2 == null)
+            {
+                cmd.Parameters.AddWithValue("@D2", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@D2", D2);
+            }
+
+            cmd.ExecuteNonQuery();
+            Constants.closecon();
+    }
+
+        public void SP_InsertSignatures(int signNumber,int formNumber,int talbNo,string fyear,DateTime creationDate,string codeEdara,string nameEdara)
+        {
+            string cmdstring = @"Exec  SP_InsertSignDates @TalbTwareed_No,@TalbTwareed_No2,@FYear,@CreationDate,@CodeEdara,
+                                    @NameEdara,@FormNo,@SignatureNo,@Date1,@Date2";
+
+            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+
+            cmd.Parameters.AddWithValue("@TalbTwareed_No", talbNo);
+            cmd.Parameters.AddWithValue("@TalbTwareed_No2", DBNull.Value);
+
+            cmd.Parameters.AddWithValue("@FYear", fyear);
+            cmd.Parameters.AddWithValue("@CreationDate", creationDate);
+            cmd.Parameters.AddWithValue("@CodeEdara", codeEdara);
+            cmd.Parameters.AddWithValue("@NameEdara", nameEdara);
+
+            cmd.Parameters.AddWithValue("@FormNo", formNumber);
+
+            cmd.Parameters.AddWithValue("@SignatureNo", signNumber);
+
+            cmd.Parameters.AddWithValue("@Date1", DBNull.Value);
+
+            cmd.Parameters.AddWithValue("@Date2", DBNull.Value);
+            cmd.ExecuteNonQuery();
+        }
+
+        public void LoopGridview()
+        {
+            newtasnifcount = 0;
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    if (row.Cells[11].Value.ToString() == "True")
+                    {
+                        newtasnifcount = newtasnifcount + 1;
+                        NewTasnifFlag = 1;
+                    }
+                }
+            }
+        }
+
+        private void InsertTalbTawreedBnood()
+        {
+            SqlCommand cmd;
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    string q = @"exec SP_InsertBnodTalbTawreed @TalbTwareed_No,@FYear,@Bnd_No,@RequestedQuan,
+                                    @Unit,@BIAN_TSNIF,@STOCK_NO_ALL,@Quan,@ApproxValue,@AdditionStockFlag,@NewTasnifFlag";
+                    cmd = new SqlCommand(q, Constants.con);
+                    cmd.Parameters.AddWithValue("@TalbTwareed_No", row.Cells[0].Value);
+                    cmd.Parameters.AddWithValue("@FYear", row.Cells[1].Value);
+                    cmd.Parameters.AddWithValue("@Bnd_No", row.Cells[2].Value);
+                    cmd.Parameters.AddWithValue("@RequestedQuan", row.Cells[3].Value ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Unit", row.Cells[4].Value);
+                    cmd.Parameters.AddWithValue("@BIAN_TSNIF", row.Cells[5].Value);
+                    cmd.Parameters.AddWithValue("@STOCK_NO_ALL", row.Cells[6].Value);
+                    cmd.Parameters.AddWithValue("@Quan", row.Cells[7].Value ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ApproxValue", row.Cells[9].Value ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@AdditionStockFlag", row.Cells[10].Value ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@NewTasnifFlag", row.Cells[11].Value ?? DBNull.Value);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    string q = "exec SP_UpdateVirtualQuan @stockall,@additionstock,@p3";
+                    cmd = new SqlCommand(q, Constants.con);
+                    cmd.Parameters.AddWithValue("@stockall", row.Cells[10].Value);
+                    cmd.Parameters.AddWithValue("@additionstock", row.Cells[6].Value);
+                    cmd.Parameters.AddWithValue("@p3", 2);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+        }
+
+        private void AddNewTasnifInDataGridView(int isNewTasnif = 0)
+        {
+            #region Add row to dataGridView
+                r = dataGridView1.Rows.Count - 1;
+
+                rowflag = 1;
+                DataRow newRow = table.NewRow();
+
+                // Add the row to the rows collection.
+                //   table.Rows.Add(newRow);
+                table.Rows.InsertAt(newRow, r);
+
+                dataGridView1.DataSource = table;
+                dataGridView1.Rows[r].Cells[4].Value = TXT_Unit.Text.ToString();
+                dataGridView1.Rows[r].Cells[5].Value = TXT_StockBian.Text;
+                //  dataGridView1.Rows[r].Cells[3].Value = TXT_StockBian.Text;
+                dataGridView1.Rows[r].Cells[6].Value = TXT_StockNoAll.Text;
+                if (string.IsNullOrWhiteSpace(Txt_Quan.Text))
+                {
+                    dataGridView1.Rows[r].Cells[7].Value = DBNull.Value;
+
+                }
+                else
+                {
+                    dataGridView1.Rows[r].Cells[7].Value = Convert.ToDouble(Txt_Quan.Text);
+                }
+                //////////////////////newpart///////////////////
+                if (AdditionFlag == 1)
+                {
+                    dataGridView1.Rows[r].Cells[10].Value = Convert.ToDouble(Txt_Quan.Text);
+                    dataGridView1.Rows[r].Cells[3].Value = AdditionQuan;
+                }
+                else
+                {
+                    dataGridView1.Rows[r].Cells[3].Value = Convert.ToDouble(Txt_ReqQuan.Text);
+                    dataGridView1.Rows[r].Cells[10].Value = 0;
+                }
+
+
+                dataGridView1.Rows[r].Cells[9].Value = Convert.ToDouble(Convert.ToDouble(getApproxValue()) * Convert.ToDouble(dataGridView1.Rows[r].Cells[3].Value));
+                dataGridView1.Rows[r].Cells[9].Value = Convert.ToDouble(dataGridView1.Rows[r].Cells[9].Value) * ExchangeRate;
+
+                dataGridView1.Rows[r].Cells[11].Value = isNewTasnif;//not new tasnif
+
+                ///////////////////////////////////////////////
+
+                dataGridView1.Rows[r].Cells[0].Value = TXT_TalbNo.Text;
+                dataGridView1.Rows[r].Cells[1].Value = Cmb_FYear.Text;
+
+
+                sum = sum + (decimal)dataGridView1.Rows[r].Cells[9].Value;
+                AppValueOriginal = sum;
+                TXT_AppValue.Text = sum.ToString();
+
+
+
+                dataGridView1.Rows[r].Cells[2].Value = r + 1;
+                //  dataGridView1.Rows[r].Cells[3].Value = Txt_ReqQuan.Value;
+
+
+                dataGridView1.DataSource = table;
+            #endregion
+        }
+            
+        private void GetTalbTawreedBnod(string talbNo, string fyear)
+        {
+            table.Clear();
+
+            string TableQuery = @"SELECT  [TalbTwareed_No] ,[FYear],[Bnd_No],[RequestedQuan],Unit,[BIAN_TSNIF] ,STOCK_NO_ALL,Quan,[ArrivalDate] ,
+                                ApproxValue,AdditionStockFlag,NewTasnifFlag ,TalbTwareed_No2 FROM [T_TalbTawreed_Benod] 
+                                Where TalbTwareed_No = " + talbNo + " and Fyear='" + fyear + "'";
+
+            dataadapter = new SqlDataAdapter(TableQuery, Constants.con);
+            table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+            dataadapter.Fill(table);
+            dataGridView1.DataSource = table;
+
+            dataGridView1.Columns["TalbTwareed_No"].HeaderText = "رقم طلب التوريد";//col0
+            dataGridView1.Columns["FYear"].HeaderText = "السنة المالية";//col1
+            dataGridView1.Columns["Bnd_No"].HeaderText = "رقم البند";//col2
+            dataGridView1.Columns["RequestedQuan"].HeaderText = "الكمية";//col3
+            dataGridView1.Columns["Unit"].HeaderText = "الوحدة";//col4
+            dataGridView1.Columns["BIAN_TSNIF"].HeaderText = "بيان الموصفات";//col5
+            dataGridView1.Columns["STOCK_NO_ALL"].HeaderText = "الدليل الرقمى";//col6
+            dataGridView1.Columns["Quan"].HeaderText = "رصيد المخزن";//col7
+
+            dataGridView1.Columns["ArrivalDate"].HeaderText = "تاريخ وروده";//col8
+            dataGridView1.Columns["ArrivalDate"].Visible = false;
+
+            dataGridView1.Columns["ApproxValue"].HeaderText = "القيمة التقديرية";//col9
+            dataGridView1.Columns["AdditionStockFlag"].HeaderText = "بالاضافة الى رصيد";//col10
+            dataGridView1.Columns["NewTasnifFlag"].HeaderText = "تصنيف جديد";//col11
+
+            dataGridView1.Columns["TalbTwareed_No2"].HeaderText = "رقم طلب التوريد";//col12
+            dataGridView1.Columns["TalbTwareed_No2"].Visible = false;
+
+            //if (Constants.User_Type == "A")
+            //{
+            //    dataGridView1.Columns["ArrivalDate"].ReadOnly = true;
+            //}
+        }
+
+        public bool SearchTalb(string talbNo, string fyear, bool isCompleted = false)
+        {
+            //call sp that get last num that eentered for this MM and this YYYY
+            Constants.opencon();
+
+            // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
+            string cmdstring;
+            SqlCommand cmd;
+
+            if (isCompleted)
+            {
+                cmdstring = "select * from  T_TalbTawreed where TalbTwareed_No2=@TN and FYear=@FY";
+            }
+            else
+            {
+                cmdstring = "select * from  T_TalbTawreed where TalbTwareed_No=@TN and FYear=@FY";
+            }
+
+            cmd = new SqlCommand(cmdstring, Constants.con);
+            cmd.Parameters.AddWithValue("@TN", talbNo);
+            cmd.Parameters.AddWithValue("@FY", fyear);
+
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            if (dr.HasRows == true)
+            {
+                try
+                {
+                    while (dr.Read())
+                    {
+
+                        TXT_TalbNo.Text = dr["TalbTwareed_No"].ToString();
+                        TXT_TalbNo2.Text = dr["TalbTwareed_No2"].ToString();
+                        TXT_DateTaamen.Text = dr["TaamenDate"].ToString();
+
+                        if (Convert.ToBoolean(dr["TaamenFlag"].ToString()) == true)
                         {
-                            regions = regions + checkedListBox1.Items[i].ToString() + ",";
+                            RadioBTN_Tammen1.Checked = true;
+                            RadioBTN_Taamen2.Checked = false;
+                        }
+                        else if (Convert.ToBoolean(dr["TaamenFlag"].ToString()) == false)
+                        {
+                            RadioBTN_Tammen1.Checked = false;
+                            RadioBTN_Taamen2.Checked = true;
+                            TXT_DateTaamen.Text = (dr["TaamenDate"].ToString());
+
+                        }
+
+                        ChBTN_Analysis.Checked = Convert.ToBoolean(dr["NeedAnalysisFlag"].ToString());
+                        ChBTN_Origin.Checked = Convert.ToBoolean(dr["OriginFlag"].ToString());
+                        ChBTN_Tests.Checked = Convert.ToBoolean(dr["NeedTestsFlag"].ToString());
+                        string country = dr["Country"].ToString();
+                        string[] countryinfo = country.Split(',');
+
+                        for (int count = 0; count < checkedListBox1.Items.Count; count++)
+                        {
+                            if (countryinfo.Contains(checkedListBox1.Items[count].ToString()))
+                            {
+                                checkedListBox1.SetItemChecked(count, true);
+                            }
+                        }
+                        //   checkedListBox1.Checked= dr["Country1"].ToString();
+
+
+                        ///////////////////////////////////////////
+                        TXT_Edara.Text = dr["NameEdara"].ToString();
+                        currentcodeedara = dr["CodeEdara"].ToString();
+                        TXT_Date.Text = dr["CreationDate"].ToString();
+                        TXT_ReqFor.Text = dr["RequiredFor"].ToString();
+                        TXT_AppValue.Text = dr["ApproxAmount"].ToString();
+                        TXT_ArabicValue.Text = dr["ArabicAmount"].ToString();
+                        TXT_Tamen.Text = dr["Taamen"].ToString();
+                        TXT_BndMwazna.Text = dr["BndMwazna"].ToString();
+                        Cmb_Currency.Text = dr["CurrencyBefore"].ToString();
+                        TXT_PriceSarf.Text = dr["ExchangeRate"].ToString();
+                        TXT_RedirectedFor.Text = dr["RedirectedFor"].ToString();
+                        TXT_RedirectedDate.Text = dr["RedirectedForDate"].ToString();
+                        
+                        selectedTalbNo = Convert.ToInt32(dr["CodeEdara"].ToString());
+
+                        string s1 = dr["Req_Signature"].ToString();
+                        string s2 = dr["Confirm_Sign1"].ToString();
+                        string s3 = dr["Confirm_Sign2"].ToString();
+                        string s4 = dr["Stock_Sign"].ToString();
+                        string s5 = dr["Audit_Sign"].ToString();
+                        string s6 = dr["Mohmat_Sign"].ToString();
+                        string s7 = dr["CH_Sign"].ToString();
+                        string s8 = dr["Sign8"].ToString();
+                        string s9 = dr["Sign9"].ToString();
+                        string s10 = dr["Sign10"].ToString();
+                        string s11 = dr["Sign11"].ToString();
+                        string s12 = dr["Sign12"].ToString();
+
+                        string BUM = dr["BuyMethod"].ToString();
+
+                        SetCurrentActivatedBuyMethod(panel8, BUM);
+                        Cmb_FYear.Text = dr["FYear"].ToString();
+
+                        //talbstatus = Constants.GetTalbStatus(TXT_TalbNo.Text, Cmb_FYear.Text);
+                        ////MessageBox.Show("talb status is" + talbstatus.ToString());
+                        ///////////////////////////////////////
+
+                        if (s1 != "")
+                        {
+                            string p = Constants.RetrieveSignature("1", "1", s1);
+
+                            if (p != "")
+                            {
+                                //   Pic_Sign1
+                                //	"Pic_Sign1"	string
+                                Ename1 = p.Split(':')[1];
+                                wazifa1 = p.Split(':')[2];
+                                pp = p.Split(':')[0];
+
+                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "1"]).Image = Image.FromFile(@pp);
+
+                                FlagSign1 = 1;
+                                FlagEmpn1 = s1;
+                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "1"]).BackColor = Color.Green;
+                                toolTip1.SetToolTip(Pic_Sign1, Ename1 + Environment.NewLine + wazifa1);
+                            }
+
                         }
                         else
                         {
-                            regions = regions + checkedListBox1.Items[i].ToString();
+                            ((PictureBox)this.panel13.Controls["Pic_Sign" + "1"]).BackColor = Color.Red;
                         }
-                    
+
+                        if (s2 != "")
+                        {
+                            string p = Constants.RetrieveSignature("2", "1", s2);
+                            if (p != "")
+                            {
+                                //   Pic_Sign1
+                                //	"Pic_Sign1"	string
+                                Ename2 = p.Split(':')[1];
+                                wazifa2 = p.Split(':')[2];
+                                pp = p.Split(':')[0];
+                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "2"]).Image = Image.FromFile(@pp);
+                                FlagSign2 = 1;
+                                FlagEmpn2 = s2;
+                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "2"]).BackColor = Color.Green;
+                                toolTip1.SetToolTip(Pic_Sign2, Ename2 + Environment.NewLine + wazifa2);
+                            }
+
+                        }
+                        else
+                        {
+                            ((PictureBox)this.panel13.Controls["Pic_Sign" + "2"]).BackColor = Color.Red;
+                        }
+
+                        if (s3 != "")
+                        {
+                            string p = Constants.RetrieveSignature("3", "1", s3);
+                            if (p != "")
+                            {
+                                //   Pic_Sign1
+                                //	"Pic_Sign1"	string
+                                Ename3 = p.Split(':')[1];
+                                wazifa3 = p.Split(':')[2];
+                                pp = p.Split(':')[0];
+                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "3"]).Image = Image.FromFile(@pp);
+                                FlagSign3 = 1;
+                                FlagEmpn3 = s3;
+                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "3"]).BackColor = Color.Green;
+                                toolTip1.SetToolTip(Pic_Sign3, Ename3 + Environment.NewLine + wazifa3);
+
+                            }
+
+
+                        }
+                        else
+                        {
+                            ((PictureBox)this.panel13.Controls["Pic_Sign" + "3"]).BackColor = Color.Red;
+                        }
+
+                        if (s4 != "")
+                        {
+                            string p = Constants.RetrieveSignature("4", "1", s4);
+                            if (p != "")
+                            {
+                                //   Pic_Sign1
+                                //	"Pic_Sign1"	string
+                                Ename4 = p.Split(':')[1];
+                                wazifa4 = p.Split(':')[2];
+                                pp = p.Split(':')[0];
+                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "4"]).Image = Image.FromFile(@pp);
+                                FlagSign4 = 1;
+                                FlagEmpn4 = s4;
+                                toolTip1.SetToolTip(Pic_Sign4, Ename4 + Environment.NewLine + wazifa4);
+
+                            }
+                        }
+                        else
+                        {
+                            ((PictureBox)this.panel13.Controls["Pic_Sign" + "4"]).BackColor = Color.Red;
+                        }
+
+                        if (s5 != "")
+                        {
+                            string p = Constants.RetrieveSignature("5", "1", s5);
+                            if (p != "")
+                            {
+                                //   Pic_Sign1
+                                //	"Pic_Sign1"	string
+                                Ename5 = p.Split(':')[1];
+                                wazifa5 = p.Split(':')[2];
+                                pp = p.Split(':')[0];
+
+                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "5"]).Image = Image.FromFile(@pp);
+                                FlagSign5 = 1;
+                                FlagEmpn5 = s5;
+                                toolTip1.SetToolTip(Pic_Sign5, Ename5 + Environment.NewLine + wazifa5);
+
+                            }
+
+
+                        }
+                        else
+                        {
+                            ((PictureBox)this.panel13.Controls["Pic_Sign" + "5"]).BackColor = Color.Red;
+                        }
+
+                        if (s6 != "")
+                        {
+                            string p = Constants.RetrieveSignature("6", "1", s6);
+                            if (p != "")
+                            {
+                                //   Pic_Sign1
+                                //	"Pic_Sign1"	string
+                                Ename6 = p.Split(':')[1];
+                                wazifa6 = p.Split(':')[2];
+                                pp = p.Split(':')[0];
+                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "6"]).Image = Image.FromFile(@pp);
+                                FlagSign6 = 1;
+                                FlagEmpn6 = s6;
+                                toolTip1.SetToolTip(Pic_Sign6, Ename6 + Environment.NewLine + wazifa6);
+
+                            }
+
+
+                        }
+                        else
+                        {
+                            ((PictureBox)this.panel13.Controls["Pic_Sign" + "6"]).BackColor = Color.Red;
+                        }
+
+                        if (s7 != "")
+                        {
+                            string p = Constants.RetrieveSignature("7", "1", s7);
+                            if (p != "")
+                            {
+                                //   Pic_Sign1
+                                //	"Pic_Sign1"	string
+                                Ename7 = p.Split(':')[1];
+                                wazifa7 = p.Split(':')[2];
+                                pp = p.Split(':')[0];
+                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "7"]).Image = Image.FromFile(@pp);
+                                FlagSign7 = 1;
+                                FlagEmpn7 = s7;
+                                toolTip1.SetToolTip(Pic_Sign7, Ename7 + Environment.NewLine + wazifa7);
+                            }
+
+                        }
+                        else
+                        {
+                            ((PictureBox)this.panel13.Controls["Pic_Sign" + "7"]).BackColor = Color.Red;
+                        }
+
+                        if (s8 != "")
+                        {
+                            string p = Constants.RetrieveSignature("8", "1", s8);
+                            if (p != "")
+                            {
+                                //   Pic_Sign1
+                                //	"Pic_Sign1"	string
+                                Ename8 = p.Split(':')[1];
+                                wazifa8 = p.Split(':')[2];
+                                pp = p.Split(':')[0];
+                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "8"]).Image = Image.FromFile(@pp);
+                                FlagSign8 = 1;
+                                FlagEmpn8 = s8;
+                                toolTip1.SetToolTip(Pic_Sign8, Ename8 + Environment.NewLine + wazifa8);
+
+                            }
+
+
+                        }
+                        else
+                        {
+                            ((PictureBox)this.panel13.Controls["Pic_Sign" + "8"]).BackColor = Color.Red;
+                        }
+
+                        if (s9 != "")
+                        {
+                            string p = Constants.RetrieveSignature("9", "1", s9);
+                            if (p != "")
+                            {
+                                //   Pic_Sign1
+                                //	"Pic_Sign1"	string
+                                Ename9 = p.Split(':')[1];
+                                wazifa9 = p.Split(':')[2];
+                                pp = p.Split(':')[0];
+                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "9"]).Image = Image.FromFile(@pp);
+                                FlagSign9 = 1;
+                                FlagEmpn9 = s9;
+                                toolTip1.SetToolTip(Pic_Sign9, Ename9 + Environment.NewLine + wazifa9);
+                            }
+
+
+                        }
+                        else
+                        {
+                            ((PictureBox)this.panel13.Controls["Pic_Sign" + "9"]).BackColor = Color.Red;
+                        }
+
+                        if (s11 != "")
+                        {
+                            string p = Constants.RetrieveSignature("11", "1", s11);
+                            if (p != "")
+                            {
+                                //   Pic_Sign1
+                                //	"Pic_Sign1"	string
+                                Ename11 = p.Split(':')[1];
+                                wazifa11 = p.Split(':')[2];
+                                pp = p.Split(':')[0];
+                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "11"]).Image = Image.FromFile(@pp);
+                                FlagSign11 = 1;
+                                FlagEmpn11 = s11;
+                                toolTip1.SetToolTip(Pic_Sign11, Ename11 + Environment.NewLine + wazifa11);
+
+                            }
+
+
+                        }
+                        else
+                        {
+                            ((PictureBox)this.panel13.Controls["Pic_Sign" + "11"]).BackColor = Color.Red;
+                        }
+
+                        if (s12 != "")
+                        {
+                            string p = Constants.RetrieveSignature("12", "1", s12);
+                            if (p != "")
+                            {
+                                //   Pic_Sign1
+                                //	"Pic_Sign1"	string
+                                Ename12 = p.Split(':')[1];
+                                wazifa12 = p.Split(':')[2];
+                                pp = p.Split(':')[0];
+                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "12"]).Image = Image.FromFile(@pp);
+                                FlagSign12 = 1;
+                                FlagEmpn12 = s12;
+                                toolTip1.SetToolTip(Pic_Sign12, Ename12 + Environment.NewLine + wazifa12);
+
+                            }
+
+
+                        }
+                        else
+                        {
+                            ((PictureBox)this.panel13.Controls["Pic_Sign" + "12"]).BackColor = Color.Red;
+                        }
+
                     }
                 }
-
-                return regions;
+                finally
+                {
+                    if (dr != null)
+                    {
+                        dr.Dispose();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("من فضلك تاكد من رقم طلب التوريد");
+                reset();
+                return false;
             }
 
-            public void SP_UpdateSignatures(int x, DateTime D1, DateTime? D2 = null)
-            {
-                Constants.opencon();
-                string cmdstring = "Exec  SP_UpdateSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
-                SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+            dr.Close();
 
-                cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_TalbNo.Text));
-                cmd.Parameters.AddWithValue("@TNO2", DBNull.Value);
+            GetTalbTawreedBnod(talbNo, fyear);
+            Constants.closecon();
 
-                cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
-                cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
-                cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
-                cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
-
-                cmd.Parameters.AddWithValue("@FN", 1);
-
-                cmd.Parameters.AddWithValue("@SN", x);
-
-                cmd.Parameters.AddWithValue("@D1", D1);
-                if (D2 == null)
-                {
-                    cmd.Parameters.AddWithValue("@D2", DBNull.Value);
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@D2", D2);
-                }
-
-                cmd.ExecuteNonQuery();
-                Constants.closecon();
+            return true;
         }
-
-            public void SP_InsertSignatures(int signNumber,int formNumber,int talbNo,string fyear,DateTime creationDate,string codeEdara,string nameEdara)
-            {
-                string cmdstring = @"Exec  SP_InsertSignDates @TalbTwareed_No,@TalbTwareed_No2,@FYear,@CreationDate,@CodeEdara,
-                                     @NameEdara,@FormNo,@SignatureNo,@Date1,@Date2";
-
-                SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-
-                cmd.Parameters.AddWithValue("@TalbTwareed_No", talbNo);
-                cmd.Parameters.AddWithValue("@TalbTwareed_No2", DBNull.Value);
-
-                cmd.Parameters.AddWithValue("@FYear", fyear);
-                cmd.Parameters.AddWithValue("@CreationDate", creationDate);
-                cmd.Parameters.AddWithValue("@CodeEdara", codeEdara);
-                cmd.Parameters.AddWithValue("@NameEdara", nameEdara);
-
-                cmd.Parameters.AddWithValue("@FormNo", formNumber);
-
-                cmd.Parameters.AddWithValue("@SignatureNo", signNumber);
-
-                cmd.Parameters.AddWithValue("@Date1", DBNull.Value);
-
-                cmd.Parameters.AddWithValue("@Date2", DBNull.Value);
-                cmd.ExecuteNonQuery();
-            }
-
-            public void LoopGridview()
-            {
-                newtasnifcount = 0;
-                foreach (DataGridViewRow row in dataGridView1.Rows)
-                {
-                    if (!row.IsNewRow)
-                    {
-                        if (row.Cells[11].Value.ToString() == "True")
-                        {
-                            newtasnifcount = newtasnifcount + 1;
-                            NewTasnifFlag = 1;
-                        }
-                    }
-                }
-            }
-
-            private void InsertTalbTawreedBnood()
-            {
-                SqlCommand cmd;
-
-                foreach (DataGridViewRow row in dataGridView1.Rows)
-                {
-                    if (!row.IsNewRow)
-                    {
-                        string q = @"exec SP_InsertBnodTalbTawreed @TalbTwareed_No,@FYear,@Bnd_No,@RequestedQuan,
-                                        @Unit,@BIAN_TSNIF,@STOCK_NO_ALL,@Quan,@ApproxValue,@AdditionStockFlag,@NewTasnifFlag";
-                        cmd = new SqlCommand(q, Constants.con);
-                        cmd.Parameters.AddWithValue("@TalbTwareed_No", row.Cells[0].Value);
-                        cmd.Parameters.AddWithValue("@FYear", row.Cells[1].Value);
-                        cmd.Parameters.AddWithValue("@Bnd_No", row.Cells[2].Value);
-                        cmd.Parameters.AddWithValue("@RequestedQuan", row.Cells[3].Value ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@Unit", row.Cells[4].Value);
-                        cmd.Parameters.AddWithValue("@BIAN_TSNIF", row.Cells[5].Value);
-                        cmd.Parameters.AddWithValue("@STOCK_NO_ALL", row.Cells[6].Value);
-                        cmd.Parameters.AddWithValue("@Quan", row.Cells[7].Value ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@ApproxValue", row.Cells[9].Value ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@AdditionStockFlag", row.Cells[10].Value ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@NewTasnifFlag", row.Cells[11].Value ?? DBNull.Value);
-
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-
-                foreach (DataGridViewRow row in dataGridView1.Rows)
-                {
-                    if (!row.IsNewRow)
-                    {
-                        string q = "exec SP_UpdateVirtualQuan @stockall,@additionstock,@p3";
-                        cmd = new SqlCommand(q, Constants.con);
-                        cmd.Parameters.AddWithValue("@stockall", row.Cells[10].Value);
-                        cmd.Parameters.AddWithValue("@additionstock", row.Cells[6].Value);
-                        cmd.Parameters.AddWithValue("@p3", 2);
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-
-            }
-
-            private void AddNewTasnifInDataGridView(int isNewTasnif = 0)
-            {
-                #region Add row to dataGridView
-                    r = dataGridView1.Rows.Count - 1;
-
-                    rowflag = 1;
-                    DataRow newRow = table.NewRow();
-
-                    // Add the row to the rows collection.
-                    //   table.Rows.Add(newRow);
-                    table.Rows.InsertAt(newRow, r);
-
-                    dataGridView1.DataSource = table;
-                    dataGridView1.Rows[r].Cells[4].Value = TXT_Unit.Text.ToString();
-                    dataGridView1.Rows[r].Cells[5].Value = TXT_StockBian.Text;
-                    //  dataGridView1.Rows[r].Cells[3].Value = TXT_StockBian.Text;
-                    dataGridView1.Rows[r].Cells[6].Value = TXT_StockNoAll.Text;
-                    if (string.IsNullOrWhiteSpace(Txt_Quan.Text))
-                    {
-                        dataGridView1.Rows[r].Cells[7].Value = DBNull.Value;
-
-                    }
-                    else
-                    {
-                        dataGridView1.Rows[r].Cells[7].Value = Convert.ToDouble(Txt_Quan.Text);
-                    }
-                    //////////////////////newpart///////////////////
-                    if (AdditionFlag == 1)
-                    {
-                        dataGridView1.Rows[r].Cells[10].Value = Convert.ToDouble(Txt_Quan.Text);
-                        dataGridView1.Rows[r].Cells[3].Value = AdditionQuan;
-                    }
-                    else
-                    {
-                        dataGridView1.Rows[r].Cells[3].Value = Convert.ToDouble(Txt_ReqQuan.Text);
-                        dataGridView1.Rows[r].Cells[10].Value = 0;
-                    }
-
-
-                    dataGridView1.Rows[r].Cells[9].Value = Convert.ToDouble(Convert.ToDouble(getApproxValue()) * Convert.ToDouble(dataGridView1.Rows[r].Cells[3].Value));
-                    dataGridView1.Rows[r].Cells[9].Value = Convert.ToDouble(dataGridView1.Rows[r].Cells[9].Value) * ExchangeRate;
-
-                    dataGridView1.Rows[r].Cells[11].Value = isNewTasnif;//not new tasnif
-
-                    ///////////////////////////////////////////////
-
-                    dataGridView1.Rows[r].Cells[0].Value = TXT_TalbNo.Text;
-                    dataGridView1.Rows[r].Cells[1].Value = Cmb_FYear.Text;
-
-
-                    sum = sum + (decimal)dataGridView1.Rows[r].Cells[9].Value;
-                    AppValueOriginal = sum;
-                    TXT_AppValue.Text = sum.ToString();
-
-
-
-                    dataGridView1.Rows[r].Cells[2].Value = r + 1;
-                    //  dataGridView1.Rows[r].Cells[3].Value = Txt_ReqQuan.Value;
-
-
-                    dataGridView1.DataSource = table;
-                #endregion
-            }
-            
-            private void GetTalbTawreedBnod(string talbNo, string fyear)
-            {
-                table.Clear();
-
-                string TableQuery = @"SELECT  [TalbTwareed_No] ,[FYear],[Bnd_No],[RequestedQuan],Unit,[BIAN_TSNIF] ,STOCK_NO_ALL,Quan,[ArrivalDate] ,
-                                    ApproxValue,AdditionStockFlag,NewTasnifFlag ,TalbTwareed_No2 FROM [T_TalbTawreed_Benod] 
-                                    Where TalbTwareed_No = " + talbNo + " and Fyear='" + fyear + "'";
-
-                dataadapter = new SqlDataAdapter(TableQuery, Constants.con);
-                table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-                dataadapter.Fill(table);
-                dataGridView1.DataSource = table;
-
-                dataGridView1.Columns["TalbTwareed_No"].HeaderText = "رقم طلب التوريد";//col0
-                dataGridView1.Columns["FYear"].HeaderText = "السنة المالية";//col1
-                dataGridView1.Columns["Bnd_No"].HeaderText = "رقم البند";//col2
-                dataGridView1.Columns["RequestedQuan"].HeaderText = "الكمية";//col3
-                dataGridView1.Columns["Unit"].HeaderText = "الوحدة";//col4
-                dataGridView1.Columns["BIAN_TSNIF"].HeaderText = "بيان الموصفات";//col5
-                dataGridView1.Columns["STOCK_NO_ALL"].HeaderText = "الدليل الرقمى";//col6
-                dataGridView1.Columns["Quan"].HeaderText = "رصيد المخزن";//col7
-
-                dataGridView1.Columns["ArrivalDate"].HeaderText = "تاريخ وروده";//col8
-                dataGridView1.Columns["ArrivalDate"].Visible = false;
-
-                dataGridView1.Columns["ApproxValue"].HeaderText = "القيمة التقديرية";//col9
-                dataGridView1.Columns["AdditionStockFlag"].HeaderText = "بالاضافة الى رصيد";//col10
-                dataGridView1.Columns["NewTasnifFlag"].HeaderText = "تصنيف جديد";//col11
-
-                dataGridView1.Columns["TalbTwareed_No2"].HeaderText = "رقم طلب التوريد";//col12
-                dataGridView1.Columns["TalbTwareed_No2"].Visible = false;
-
-                //if (Constants.User_Type == "A")
-                //{
-                //    dataGridView1.Columns["ArrivalDate"].ReadOnly = true;
-                //}
-            }
-
-            public bool SearchTalb(string talbNo, string fyear, bool isCompleted = false)
-            {
-                //call sp that get last num that eentered for this MM and this YYYY
-                Constants.opencon();
-
-                // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
-                string cmdstring;
-                SqlCommand cmd;
-
-                if (isCompleted)
-                {
-                    cmdstring = "select * from  T_TalbTawreed where TalbTwareed_No2=@TN and FYear=@FY";
-                }
-                else
-                {
-                    cmdstring = "select * from  T_TalbTawreed where TalbTwareed_No=@TN and FYear=@FY";
-                }
-
-                cmd = new SqlCommand(cmdstring, Constants.con);
-                cmd.Parameters.AddWithValue("@TN", talbNo);
-                cmd.Parameters.AddWithValue("@FY", fyear);
-
-                SqlDataReader dr = cmd.ExecuteReader();
-
-                if (dr.HasRows == true)
-                {
-                    try
-                    {
-                        while (dr.Read())
-                        {
-
-                            TXT_TalbNo.Text = dr["TalbTwareed_No"].ToString();
-                            TXT_TalbNo2.Text = dr["TalbTwareed_No2"].ToString();
-                            TXT_DateTaamen.Text = dr["TaamenDate"].ToString();
-
-                            if (Convert.ToBoolean(dr["TaamenFlag"].ToString()) == true)
-                            {
-                                RadioBTN_Tammen1.Checked = true;
-                                RadioBTN_Taamen2.Checked = false;
-                            }
-                            else if (Convert.ToBoolean(dr["TaamenFlag"].ToString()) == false)
-                            {
-                                RadioBTN_Tammen1.Checked = false;
-                                RadioBTN_Taamen2.Checked = true;
-                                TXT_DateTaamen.Text = (dr["TaamenDate"].ToString());
-
-                            }
-
-                            ChBTN_Analysis.Checked = Convert.ToBoolean(dr["NeedAnalysisFlag"].ToString());
-                            ChBTN_Origin.Checked = Convert.ToBoolean(dr["OriginFlag"].ToString());
-                            ChBTN_Tests.Checked = Convert.ToBoolean(dr["NeedTestsFlag"].ToString());
-                            string country = dr["Country"].ToString();
-                            string[] countryinfo = country.Split(',');
-
-                            for (int count = 0; count < checkedListBox1.Items.Count; count++)
-                            {
-                                if (countryinfo.Contains(checkedListBox1.Items[count].ToString()))
-                                {
-                                    checkedListBox1.SetItemChecked(count, true);
-                                }
-                            }
-                            //   checkedListBox1.Checked= dr["Country1"].ToString();
-
-
-                            ///////////////////////////////////////////
-                            TXT_Edara.Text = dr["NameEdara"].ToString();
-                            currentcodeedara = dr["CodeEdara"].ToString();
-                            TXT_Date.Text = dr["CreationDate"].ToString();
-                            TXT_ReqFor.Text = dr["RequiredFor"].ToString();
-                            TXT_AppValue.Text = dr["ApproxAmount"].ToString();
-                            TXT_ArabicValue.Text = dr["ArabicAmount"].ToString();
-                            TXT_Tamen.Text = dr["Taamen"].ToString();
-                            TXT_BndMwazna.Text = dr["BndMwazna"].ToString();
-                            Cmb_Currency.Text = dr["CurrencyBefore"].ToString();
-                            TXT_PriceSarf.Text = dr["ExchangeRate"].ToString();
-                            TXT_RedirectedFor.Text = dr["RedirectedFor"].ToString();
-                            TXT_RedirectedDate.Text = dr["RedirectedForDate"].ToString();
-
-                            string s1 = dr["Req_Signature"].ToString();
-                            string s2 = dr["Confirm_Sign1"].ToString();
-                            string s3 = dr["Confirm_Sign2"].ToString();
-                            string s4 = dr["Stock_Sign"].ToString();
-                            string s5 = dr["Audit_Sign"].ToString();
-                            string s6 = dr["Mohmat_Sign"].ToString();
-                            string s7 = dr["CH_Sign"].ToString();
-                            string s8 = dr["Sign8"].ToString();
-                            string s9 = dr["Sign9"].ToString();
-                            string s10 = dr["Sign10"].ToString();
-                            string s11 = dr["Sign11"].ToString();
-                            string s12 = dr["Sign12"].ToString();
-
-                            string BUM = dr["BuyMethod"].ToString();
-
-                            SetCurrentActivatedBuyMethod(panel8, BUM);
-                            Cmb_FYear.Text = dr["FYear"].ToString();
-
-                            //talbstatus = Constants.GetTalbStatus(TXT_TalbNo.Text, Cmb_FYear.Text);
-                            ////MessageBox.Show("talb status is" + talbstatus.ToString());
-                            ///////////////////////////////////////
-
-                            if (s1 != "")
-                            {
-                                string p = Constants.RetrieveSignature("1", "1", s1);
-
-                                if (p != "")
-                                {
-                                    //   Pic_Sign1
-                                    //	"Pic_Sign1"	string
-                                    Ename1 = p.Split(':')[1];
-                                    wazifa1 = p.Split(':')[2];
-                                    pp = p.Split(':')[0];
-
-                                    ((PictureBox)this.panel13.Controls["Pic_Sign" + "1"]).Image = Image.FromFile(@pp);
-
-                                    FlagSign1 = 1;
-                                    FlagEmpn1 = s1;
-                                    ((PictureBox)this.panel13.Controls["Pic_Sign" + "1"]).BackColor = Color.Green;
-                                    toolTip1.SetToolTip(Pic_Sign1, Ename1 + Environment.NewLine + wazifa1);
-                                }
-
-                            }
-                            else
-                            {
-                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "1"]).BackColor = Color.Red;
-                            }
-
-                            if (s2 != "")
-                            {
-                                string p = Constants.RetrieveSignature("2", "1", s2);
-                                if (p != "")
-                                {
-                                    //   Pic_Sign1
-                                    //	"Pic_Sign1"	string
-                                    Ename2 = p.Split(':')[1];
-                                    wazifa2 = p.Split(':')[2];
-                                    pp = p.Split(':')[0];
-                                    ((PictureBox)this.panel13.Controls["Pic_Sign" + "2"]).Image = Image.FromFile(@pp);
-                                    FlagSign2 = 1;
-                                    FlagEmpn2 = s2;
-                                    ((PictureBox)this.panel13.Controls["Pic_Sign" + "2"]).BackColor = Color.Green;
-                                    toolTip1.SetToolTip(Pic_Sign2, Ename2 + Environment.NewLine + wazifa2);
-                                }
-
-                            }
-                            else
-                            {
-                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "2"]).BackColor = Color.Red;
-                            }
-
-                            if (s3 != "")
-                            {
-                                string p = Constants.RetrieveSignature("3", "1", s3);
-                                if (p != "")
-                                {
-                                    //   Pic_Sign1
-                                    //	"Pic_Sign1"	string
-                                    Ename3 = p.Split(':')[1];
-                                    wazifa3 = p.Split(':')[2];
-                                    pp = p.Split(':')[0];
-                                    ((PictureBox)this.panel13.Controls["Pic_Sign" + "3"]).Image = Image.FromFile(@pp);
-                                    FlagSign3 = 1;
-                                    FlagEmpn3 = s3;
-                                    ((PictureBox)this.panel13.Controls["Pic_Sign" + "3"]).BackColor = Color.Green;
-                                    toolTip1.SetToolTip(Pic_Sign3, Ename3 + Environment.NewLine + wazifa3);
-
-                                }
-
-
-                            }
-                            else
-                            {
-                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "3"]).BackColor = Color.Red;
-                            }
-
-                            if (s4 != "")
-                            {
-                                string p = Constants.RetrieveSignature("4", "1", s4);
-                                if (p != "")
-                                {
-                                    //   Pic_Sign1
-                                    //	"Pic_Sign1"	string
-                                    Ename4 = p.Split(':')[1];
-                                    wazifa4 = p.Split(':')[2];
-                                    pp = p.Split(':')[0];
-                                    ((PictureBox)this.panel13.Controls["Pic_Sign" + "4"]).Image = Image.FromFile(@pp);
-                                    FlagSign4 = 1;
-                                    FlagEmpn4 = s4;
-                                    toolTip1.SetToolTip(Pic_Sign4, Ename4 + Environment.NewLine + wazifa4);
-
-                                }
-                            }
-                            else
-                            {
-                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "4"]).BackColor = Color.Red;
-                            }
-
-                            if (s5 != "")
-                            {
-                                string p = Constants.RetrieveSignature("5", "1", s5);
-                                if (p != "")
-                                {
-                                    //   Pic_Sign1
-                                    //	"Pic_Sign1"	string
-                                    Ename5 = p.Split(':')[1];
-                                    wazifa5 = p.Split(':')[2];
-                                    pp = p.Split(':')[0];
-
-                                    ((PictureBox)this.panel13.Controls["Pic_Sign" + "5"]).Image = Image.FromFile(@pp);
-                                    FlagSign5 = 1;
-                                    FlagEmpn5 = s5;
-                                    toolTip1.SetToolTip(Pic_Sign5, Ename5 + Environment.NewLine + wazifa5);
-
-                                }
-
-
-                            }
-                            else
-                            {
-                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "5"]).BackColor = Color.Red;
-                            }
-
-                            if (s6 != "")
-                            {
-                                string p = Constants.RetrieveSignature("6", "1", s6);
-                                if (p != "")
-                                {
-                                    //   Pic_Sign1
-                                    //	"Pic_Sign1"	string
-                                    Ename6 = p.Split(':')[1];
-                                    wazifa6 = p.Split(':')[2];
-                                    pp = p.Split(':')[0];
-                                    ((PictureBox)this.panel13.Controls["Pic_Sign" + "6"]).Image = Image.FromFile(@pp);
-                                    FlagSign6 = 1;
-                                    FlagEmpn6 = s6;
-                                    toolTip1.SetToolTip(Pic_Sign6, Ename6 + Environment.NewLine + wazifa6);
-
-                                }
-
-
-                            }
-                            else
-                            {
-                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "6"]).BackColor = Color.Red;
-                            }
-
-                            if (s7 != "")
-                            {
-                                string p = Constants.RetrieveSignature("7", "1", s7);
-                                if (p != "")
-                                {
-                                    //   Pic_Sign1
-                                    //	"Pic_Sign1"	string
-                                    Ename7 = p.Split(':')[1];
-                                    wazifa7 = p.Split(':')[2];
-                                    pp = p.Split(':')[0];
-                                    ((PictureBox)this.panel13.Controls["Pic_Sign" + "7"]).Image = Image.FromFile(@pp);
-                                    FlagSign7 = 1;
-                                    FlagEmpn7 = s7;
-                                    toolTip1.SetToolTip(Pic_Sign7, Ename7 + Environment.NewLine + wazifa7);
-                                }
-
-                            }
-                            else
-                            {
-                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "7"]).BackColor = Color.Red;
-                            }
-
-                            if (s8 != "")
-                            {
-                                string p = Constants.RetrieveSignature("8", "1", s8);
-                                if (p != "")
-                                {
-                                    //   Pic_Sign1
-                                    //	"Pic_Sign1"	string
-                                    Ename8 = p.Split(':')[1];
-                                    wazifa8 = p.Split(':')[2];
-                                    pp = p.Split(':')[0];
-                                    ((PictureBox)this.panel13.Controls["Pic_Sign" + "8"]).Image = Image.FromFile(@pp);
-                                    FlagSign8 = 1;
-                                    FlagEmpn8 = s8;
-                                    toolTip1.SetToolTip(Pic_Sign8, Ename8 + Environment.NewLine + wazifa8);
-
-                                }
-
-
-                            }
-                            else
-                            {
-                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "8"]).BackColor = Color.Red;
-                            }
-
-                            if (s9 != "")
-                            {
-                                string p = Constants.RetrieveSignature("9", "1", s9);
-                                if (p != "")
-                                {
-                                    //   Pic_Sign1
-                                    //	"Pic_Sign1"	string
-                                    Ename9 = p.Split(':')[1];
-                                    wazifa9 = p.Split(':')[2];
-                                    pp = p.Split(':')[0];
-                                    ((PictureBox)this.panel13.Controls["Pic_Sign" + "9"]).Image = Image.FromFile(@pp);
-                                    FlagSign9 = 1;
-                                    FlagEmpn9 = s9;
-                                    toolTip1.SetToolTip(Pic_Sign9, Ename9 + Environment.NewLine + wazifa9);
-                                }
-
-
-                            }
-                            else
-                            {
-                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "9"]).BackColor = Color.Red;
-                            }
-
-                            if (s11 != "")
-                            {
-                                string p = Constants.RetrieveSignature("11", "1", s11);
-                                if (p != "")
-                                {
-                                    //   Pic_Sign1
-                                    //	"Pic_Sign1"	string
-                                    Ename11 = p.Split(':')[1];
-                                    wazifa11 = p.Split(':')[2];
-                                    pp = p.Split(':')[0];
-                                    ((PictureBox)this.panel13.Controls["Pic_Sign" + "11"]).Image = Image.FromFile(@pp);
-                                    FlagSign11 = 1;
-                                    FlagEmpn11 = s11;
-                                    toolTip1.SetToolTip(Pic_Sign11, Ename11 + Environment.NewLine + wazifa11);
-
-                                }
-
-
-                            }
-                            else
-                            {
-                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "11"]).BackColor = Color.Red;
-                            }
-
-                            if (s12 != "")
-                            {
-                                string p = Constants.RetrieveSignature("12", "1", s12);
-                                if (p != "")
-                                {
-                                    //   Pic_Sign1
-                                    //	"Pic_Sign1"	string
-                                    Ename12 = p.Split(':')[1];
-                                    wazifa12 = p.Split(':')[2];
-                                    pp = p.Split(':')[0];
-                                    ((PictureBox)this.panel13.Controls["Pic_Sign" + "12"]).Image = Image.FromFile(@pp);
-                                    FlagSign12 = 1;
-                                    FlagEmpn12 = s12;
-                                    toolTip1.SetToolTip(Pic_Sign12, Ename12 + Environment.NewLine + wazifa12);
-
-                                }
-
-
-                            }
-                            else
-                            {
-                                ((PictureBox)this.panel13.Controls["Pic_Sign" + "12"]).BackColor = Color.Red;
-                            }
-
-                        }
-                    }
-                    finally
-                    {
-                        if (dr != null)
-                        {
-                            dr.Dispose();
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("من فضلك تاكد من رقم طلب التوريد");
-                    reset();
-                    return false;
-                }
-
-                dr.Close();
-
-                GetTalbTawreedBnod(talbNo, fyear);
-                Constants.closecon();
-
-                return true;
-            }
 
         #endregion
 
@@ -1057,6 +1060,7 @@ namespace ANRPC_Inventory
                             if ((bool)row.Cells[11].Value == true)
                             {
                                 row.Cells[6].ReadOnly = false;
+                                row.Cells[6].Style.BackColor = Color.LightGreen;
                             }
                         }
                     }
@@ -1141,10 +1145,15 @@ namespace ANRPC_Inventory
             FY = Cmb_FYear.Text;        
         }
 
-        public void prepareSearchState()
+        public void prepareSearchState(bool isReset = true)
         {
             DisableControls();
-            Input_Reset();
+
+            if (isReset)
+            {
+                Input_Reset();
+            }
+
             Cmb_FYear.Enabled = true;
             TXT_TalbNo.Enabled = true;
             BTN_Print.Enabled=true;
@@ -2620,14 +2629,29 @@ namespace ANRPC_Inventory
             #region dataGridView1
             if (dataGridView1.Rows.Count <=0)
             {
-                //errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
+                errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
                 MessageBox.Show("لايمكن ان يتكون طلب توريد بدون بنود");
             }
             else if (dataGridView1.Rows.Count == 1 && dataGridView1.Rows[0].IsNewRow == true)
             {
-                //errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
+                errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
                 MessageBox.Show("لايمكن ان يتكون طلب توريد بدون بنود");
             }
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    for(int j =0; j < row.Cells.Count; j++)
+                    {
+                        if(row.Cells[j].ErrorText != "")
+                        {
+                            errorsList.Add((alertProvider, dataGridView1, "يوجد خطاء"));
+                        }
+                    }
+                }
+            }
+
             #endregion
 
             if (((PictureBox)this.panel13.Controls["Pic_Sign" + currentSignNumber]).Image == null)
@@ -3585,12 +3609,26 @@ namespace ANRPC_Inventory
                 if (e.ColumnIndex == 6 && (bool)dataGridView1.Rows[e.RowIndex].Cells[11].Value == true) // 1 should be your column index
                 {
 
+                    DataGridViewRow row = new DataGridViewRow();
+                    
+                    row = (DataGridViewRow)dataGridView1.Rows[e.RowIndex].Clone();
+
+                    for (int i = 0; i < dataGridView1.Rows[e.RowIndex].Cells.Count; i++)
+                    {
+                        row.Cells[i].Value = dataGridView1.Rows[e.RowIndex].Cells[i].Value;
+                    }
+
+                    //string bian = .Cells[BIAN_TSNIF].Value = cmd.Parameters["@p1"].Value;
+                    //dataGridView1.Rows[e.RowIndex].Cells[Unit].Value = cmd.Parameters["@p2"].Value;
+                    //dataGridView1.Rows[e.RowIndex].Cells[Quan].Value = cmd.Parameters["@p3"].Value;
+                    //dataGridView1.Rows[e.RowIndex].Cells[NewTasnifFlag].Value = false;
+
                     if (e.FormattedValue != DBNull.Value && e.FormattedValue != "")// && dataGridView1.Rows[e.RowIndex].Cells[11].Value != "true")
                     {
                         string query = "exec Sp_CheckTasnif @a,@code_edara,@p1 out,@p2 out,@p3 out,@flag out ";
                         SqlCommand cmd = new SqlCommand(query, Constants.con);
                         cmd.Parameters.AddWithValue("@a", (e.FormattedValue));
-                        cmd.Parameters.AddWithValue("@code_edara",850);
+                        cmd.Parameters.AddWithValue("@code_edara", selectedTalbNo);
 
                         cmd.Parameters.Add("@flag", SqlDbType.Int, 32);  //-------> output parameter
                         cmd.Parameters["@flag"].Direction = ParameterDirection.Output;
@@ -3619,12 +3657,25 @@ namespace ANRPC_Inventory
 
                             flag1 = (int)cmd.Parameters["@flag"].Value;
 
+                            foreach (DataGridViewRow drow in dataGridView1.Rows)
+                            {
+                                if (!drow.IsNewRow)
+                                {
+                                    if (drow.Cells[6].Value.ToString().ToLower() == (e.FormattedValue.ToString()).ToLower())
+                                    {
+                                        flag1 = 3;
+                                        break;
+                                    }
+                                }
+                            }
+
                             dataGridView1.Rows[e.RowIndex].Cells[5].Value = cmd.Parameters["@p1"].Value;
                             dataGridView1.Rows[e.RowIndex].Cells[4].Value = cmd.Parameters["@p2"].Value;
                             dataGridView1.Rows[e.RowIndex].Cells[7].Value = cmd.Parameters["@p3"].Value;
                             dataGridView1.Rows[e.RowIndex].Cells[11].Value = false;
+                            dataGridView1.Rows[e.RowIndex].Cells[6].ErrorText = "";
 
-                            if (flag1 != 2)
+                            if (flag1 != 2 && flag1 != 3)
                             {
 
                                 if ((Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value) < Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[3].Value)) && Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[7].Value) != 0)
@@ -3641,6 +3692,7 @@ namespace ANRPC_Inventory
                                 }
 
                             }
+
                         }
                         catch (SqlException sqlEx)
                         {
@@ -3648,9 +3700,27 @@ namespace ANRPC_Inventory
                             Console.WriteLine(sqlEx.ToString());
                             flag1 = (int)cmd.Parameters["@flag"].Value;
                         }
-                        if (flag1 == 2)
+
+                        if (flag1 == 2 || flag1 == 3)
                         {
-                            MessageBox.Show("لا يوجد رقم تصنييف بهذا الرقم");
+                            if (flag1 == 2)
+                            {
+                                dataGridView1.Rows[e.RowIndex].Cells[6].ErrorText = "لا يوجد رقم تصنييف بهذا الرقم";
+                            }
+                            else if(flag1 == 3)
+                            {
+
+                                dataGridView1.Rows[e.RowIndex].Cells[6].ErrorText  = "تم ادخال رقم هذا التصنيف من قبل";
+                            }
+
+                            for(int i = 0; i < dataGridView1.Rows[e.RowIndex].Cells.Count; i++)
+                            {
+                                if (i != 6)
+                                {
+                                    dataGridView1.Rows[e.RowIndex].Cells[i].Value = row.Cells[i].Value;
+                                }
+                            }
+
                             e.Cancel = true;
                         }
                     }
@@ -4108,19 +4178,6 @@ namespace ANRPC_Inventory
 
         private void BTN_Sign8_Click(object sender, EventArgs e)
         {
-            if (FlagSign1 != 1 || FlagSign2 != 1 || FlagSign3 != 1)
-            {
-                MessageBox.Show("من فضلك تاكد من التوقيعات السابقة");
-                return;
-            }
-            LoopGridview();
-            if (NewTasnifFlag == 1)
-            {
-
-                MessageBox.Show(" يجب ادخال التصنييفات الجديدة");
-                return;
-            }
-
             string Empn8 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل رقم القيد الخاص بك", "توقيع مدير ادارة التصنيف", "");
 
             string Sign8 = Microsoft.VisualBasic.Interaction.InputBox("من فضلك ادخل الرقم السرى الخاص بك", "توقيع مدير ادارة التصنيف", "");
@@ -4612,6 +4669,8 @@ namespace ANRPC_Inventory
 
             if (SearchTalb(talb_no, fyear, false))
             {
+                prepareSearchState(false);
+
                 if (FlagSign3 != 1 && FlagSign2 != 1)
                 {
                     Editbtn2.Enabled = true;
@@ -4638,6 +4697,8 @@ namespace ANRPC_Inventory
 
             if (SearchTalb(talb_no, fyear, false))
             {
+                prepareSearchState(false);
+
                 Editbtn.Enabled = true;
                 BTN_Print2.Enabled = true;
             }
