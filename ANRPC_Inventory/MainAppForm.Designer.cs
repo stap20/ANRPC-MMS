@@ -81,7 +81,7 @@ namespace ANRPC_Inventory
             this.main.Location = new System.Drawing.Point(0, 60);
             this.main.Name = "main";
             this.main.Padding = new System.Windows.Forms.Padding(17, 0, 17, 17);
-            this.main.Size = new System.Drawing.Size(679, 530);
+            this.main.Size = new System.Drawing.Size(658, 530);
             this.main.TabIndex = 1;
             // 
             // formwraper
@@ -90,7 +90,7 @@ namespace ANRPC_Inventory
             this.formwraper.Dock = System.Windows.Forms.DockStyle.Fill;
             this.formwraper.Location = new System.Drawing.Point(17, 0);
             this.formwraper.Name = "formwraper";
-            this.formwraper.Size = new System.Drawing.Size(645, 513);
+            this.formwraper.Size = new System.Drawing.Size(624, 513);
             this.formwraper.TabIndex = 1;
             // 
             // appbar
@@ -105,7 +105,7 @@ namespace ANRPC_Inventory
             this.appbar.Location = new System.Drawing.Point(0, 0);
             this.appbar.Name = "appbar";
             this.appbar.Padding = new System.Windows.Forms.Padding(5, 0, 0, 9);
-            this.appbar.Size = new System.Drawing.Size(679, 60);
+            this.appbar.Size = new System.Drawing.Size(658, 60);
             this.appbar.TabIndex = 0;
             // 
             // iconButton1
@@ -123,7 +123,7 @@ namespace ANRPC_Inventory
             this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton1.IconSize = 32;
             this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton1.Location = new System.Drawing.Point(427, 3);
+            this.iconButton1.Location = new System.Drawing.Point(406, 3);
             this.iconButton1.Name = "iconButton1";
             this.iconButton1.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.iconButton1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -214,10 +214,10 @@ namespace ANRPC_Inventory
             this.sidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
             this.sidebar.Controls.Add(this.guna2Panel1);
             this.sidebar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.sidebar.Location = new System.Drawing.Point(679, 0);
+            this.sidebar.Location = new System.Drawing.Point(658, 0);
             this.sidebar.Name = "sidebar";
             this.sidebar.Padding = new System.Windows.Forms.Padding(3, 17, 15, 17);
-            this.sidebar.Size = new System.Drawing.Size(250, 590);
+            this.sidebar.Size = new System.Drawing.Size(271, 590);
             this.sidebar.TabIndex = 0;
             // 
             // guna2Panel1
@@ -232,7 +232,7 @@ namespace ANRPC_Inventory
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
             this.guna2Panel1.ShadowDecoration.Parent = this.guna2Panel1;
-            this.guna2Panel1.Size = new System.Drawing.Size(232, 556);
+            this.guna2Panel1.Size = new System.Drawing.Size(253, 556);
             this.guna2Panel1.TabIndex = 0;
             // 
             // panel1
@@ -242,7 +242,7 @@ namespace ANRPC_Inventory
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 474);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(232, 77);
+            this.panel1.Size = new System.Drawing.Size(253, 77);
             this.panel1.TabIndex = 2;
             // 
             // guna2Panel2
@@ -289,7 +289,7 @@ namespace ANRPC_Inventory
             this.panelButtons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelButtons.Location = new System.Drawing.Point(0, 159);
             this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(232, 392);
+            this.panelButtons.Size = new System.Drawing.Size(253, 392);
             this.panelButtons.TabIndex = 1;
             // 
             // panelLogo
@@ -299,7 +299,7 @@ namespace ANRPC_Inventory
             this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelLogo.Location = new System.Drawing.Point(0, 5);
             this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(232, 154);
+            this.panelLogo.Size = new System.Drawing.Size(253, 154);
             this.panelLogo.TabIndex = 0;
             // 
             // pictureBox1
@@ -310,11 +310,10 @@ namespace ANRPC_Inventory
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(232, 154);
+            this.pictureBox1.Size = new System.Drawing.Size(253, 154);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // guna2Elipse1
             // 

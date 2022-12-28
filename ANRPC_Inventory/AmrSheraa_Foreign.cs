@@ -14,12 +14,15 @@ using Microsoft.Win32;
 namespace ANRPC_Inventory
 {
 
-    public partial class AmrSheraa : Form
+    public partial class AmrSheraa_Foreign : Form
     {
 
         //------------------------------------------ Define Variables ---------------------------------
         #region Def Variables
         List<CurrencyInfo> currencies = new List<CurrencyInfo>();
+        public double ExchangeRate;
+        public string Currency = "";
+        private int lastCurrencySelectedIdx = 0;
         public SqlConnection con;//sql conn for anrpc_sms db
         public string UserB = "";
         public DataTable DT = new DataTable();
@@ -27,7 +30,7 @@ namespace ANRPC_Inventory
         private string TableQuery;
         private int AddEditFlag;
         public Boolean executemsg;
-       // public double totalprice;
+        // public double totalprice;
         //  private string TableQuery;
         public string stockallold;
         DataTable table = new DataTable();
@@ -73,7 +76,6 @@ namespace ANRPC_Inventory
         public int rowflag = 0;
         double quan;
         double dareba;
-        double discount;
         decimal price;
         decimal totalprice;
         int changedflag = 0;
@@ -106,10 +108,10 @@ namespace ANRPC_Inventory
         public string Ename11;
 
         public string pp;
-        public  string FinancialTypeText;
+        public string FinancialTypeText;
         public int FinancialType;
         public string BuyMethod;
-        public   int AmrsheraaType = 1;//محلى
+        public int AmrsheraaType = 1;//محلى
         //  public string TableQuery;
 
         AutoCompleteStringCollection TasnifColl = new AutoCompleteStringCollection(); //empn
@@ -133,66 +135,96 @@ namespace ANRPC_Inventory
         int currentSignNumber = 0;
         double sumOfAmrsheraa = 0;
         double sumOfAmrsheraaBeforeDareba = 0;
+        Dictionary<int, int> signatureOrder;
         #endregion
 
         //------------------------------------------ Helper ---------------------------------
         #region Helpers
-        private void HandleRecalculateDarebaSection (int rowNumber,string currentColumnName,bool isApplyDareba = true,bool isApplyDiscount = true, bool isDelete = false)
+
+        private void HandleRecalculateDarebaSection(int rowNumber, string currentColumnName, bool isApplyDareba = true, bool isDelete = false)
         {
             #region Dareba and Percent Sec
             double quan = Convert.ToDouble(dataGridView1.Rows[rowNumber].Cells["Quan"].Value.ToString());
             double price = Convert.ToDouble(dataGridView1.Rows[rowNumber].Cells["UnitPrice"].Value.ToString());
 
             double totalPriceValue = Convert.ToDouble(dataGridView1.Rows[rowNumber].Cells["TotalPrice"].Value.ToString());
-            double totalPriceAfterDiscount = Convert.ToDouble(dataGridView1.Rows[rowNumber].Cells["TotalPriceAfterDiscount"].Value.ToString());
             double totalPriceAfterDarebaAndPercent = Convert.ToDouble(dataGridView1.Rows[rowNumber].Cells["TotalPriceAfter"].Value.ToString());
 
             if (isDelete)
             {
                 sumOfAmrsheraa = sumOfAmrsheraa - totalPriceAfterDarebaAndPercent;
-                sumOfAmrsheraaBeforeDareba = sumOfAmrsheraaBeforeDareba - totalPriceAfterDiscount;
+                sumOfAmrsheraaBeforeDareba = sumOfAmrsheraaBeforeDareba - totalPriceValue;
             }
             else
             {
                 totalPriceValue = quan * price;
-                totalPriceAfterDiscount = quan * price;
 
-                double discountPercent = (double)dataGridView1.Rows[rowNumber].Cells["Discountpercent"].Value;
                 double darebaPercent = (double)dataGridView1.Rows[rowNumber].Cells["Darebapercent"].Value;
 
-                if (isApplyDiscount)
-                {
-                    totalPriceAfterDiscount = totalPriceValue - ((discountPercent * totalPriceValue) / 100.0);
-                }
 
-                totalPriceAfterDarebaAndPercent = totalPriceAfterDiscount;
-                
+                totalPriceAfterDarebaAndPercent = totalPriceValue;
+
                 if (isApplyDareba)
                 {
-                    totalPriceAfterDarebaAndPercent = totalPriceAfterDiscount + ((darebaPercent * totalPriceValue) / 100.0);
+                    totalPriceAfterDarebaAndPercent = totalPriceValue + ((darebaPercent * totalPriceValue) / 100.0);
                 }
 
                 sumOfAmrsheraa = sumOfAmrsheraa - Convert.ToDouble(dataGridView1.Rows[rowNumber].Cells["TotalPriceAfter"].Value);
-                sumOfAmrsheraaBeforeDareba = sumOfAmrsheraaBeforeDareba - Convert.ToDouble(dataGridView1.Rows[rowNumber].Cells["TotalPriceAfterDiscount"].Value);
+                sumOfAmrsheraaBeforeDareba = sumOfAmrsheraaBeforeDareba - Convert.ToDouble(dataGridView1.Rows[rowNumber].Cells["TotalPrice"].Value);
 
                 dataGridView1.Rows[rowNumber].Cells["TotalPrice"].Value = totalPriceValue;
-                dataGridView1.Rows[rowNumber].Cells["TotalPriceAfterDiscount"].Value = totalPriceAfterDiscount;
                 dataGridView1.Rows[rowNumber].Cells["TotalPriceAfter"].Value = totalPriceAfterDarebaAndPercent;
 
                 sumOfAmrsheraa = sumOfAmrsheraa + totalPriceAfterDarebaAndPercent;
-                sumOfAmrsheraaBeforeDareba = sumOfAmrsheraaBeforeDareba + totalPriceAfterDiscount;
+                sumOfAmrsheraaBeforeDareba = sumOfAmrsheraaBeforeDareba + totalPriceValue;
             }
 
             TXT_Egmali.Text = sumOfAmrsheraa.ToString("N2");
             TXT_EgmaliBefore.Text = sumOfAmrsheraaBeforeDareba.ToString("N2");
             TXT_EgmaliAfter.Text = sumOfAmrsheraa.ToString("N2");
-            TXT_EgmaliDareba.Text = (sumOfAmrsheraa-sumOfAmrsheraaBeforeDareba).ToString("N2");
+            TXT_EgmaliDareba.Text = (sumOfAmrsheraa - sumOfAmrsheraaBeforeDareba).ToString("N2");
 
             ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Egmali.Text), currencies[0]);
             txt_arabicword.Text = toWord.ConvertToArabic();
 
             #endregion
         }
+
+        private void initiateSignatureOrder()
+        {
+            //Dictionary to get values of signature (sign1 or sign2 ...) according to thier order in table
+            signatureOrder = new Dictionary<int, int>();
+            signatureOrder.Add(1, 1);
+            signatureOrder.Add(2, 2);
+            signatureOrder.Add(3, 3);
+            signatureOrder.Add(4, 4);
+        }
+
+        public void SP_InsertSignatures(int signNumber, int signOrder)
+        {
+            string cmdstring =  "Exec  SP_InsertSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2,@SignOrder";
+            SqlCommand cmd = new SqlCommand(cmdstring, Constants.foreignCon);
+            cmd.Parameters.AddWithValue("@TNO", (TXT_AmrNo.Text));
+            cmd.Parameters.AddWithValue("@TNO2", DBNull.Value);
+            if (Cmb_FY2.Text.ToString() == "")
+            {
+                cmd.Parameters.AddWithValue("@FY", Cmb_FY.Text.ToString());
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@FY", Cmb_FY2.Text.ToString());
+            }
+            cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
+            cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
+            cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
+            cmd.Parameters.AddWithValue("@FN", 3);
+            cmd.Parameters.AddWithValue("@SN", signNumber);
+            cmd.Parameters.AddWithValue("@D1", DBNull.Value);
+            cmd.Parameters.AddWithValue("@D2", DBNull.Value);
+            cmd.Parameters.AddWithValue("@SignOrder", signOrder);
+            cmd.ExecuteNonQuery();
+        }
+
         private PictureBox CheckSignatures(Panel panel, int signNumber)
         {
             try
@@ -244,7 +276,7 @@ namespace ANRPC_Inventory
             dataGridView1.Refresh();
 
         }
-        
+
         private void InsertAmrSheraaBnood()
         {
             SqlCommand cmd;
@@ -253,18 +285,20 @@ namespace ANRPC_Inventory
             {
                 if (!row.IsNewRow)
                 {
-                    string q = "exec SP_InsertBnodAwamershraa @p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@P111,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27 ";
-                    cmd = new SqlCommand(q, Constants.con);
 
-                    cmd.Parameters.AddWithValue("@p1", Convert.ToInt32(row.Cells[0].Value));
+                    string q = "exec SP_InsertBnodAwamershraa @p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@P111,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24 ";
+                    cmd = new SqlCommand(q, Constants.foreignCon);
+                    cmd.Parameters.AddWithValue("@p1", (row.Cells[0].Value));
+                    //     cmd.Parameters.AddWithValue("@p2",Convert.ToInt32(  row.Cells[1].Value));
                     cmd.Parameters.AddWithValue("@p2", DBNull.Value);
                     cmd.Parameters.AddWithValue("@p3", row.Cells[2].Value ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@p4", row.Cells[3].Value ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@p5", Convert.ToInt32(row.Cells[4].Value));
+                    cmd.Parameters.AddWithValue("@p5", (row.Cells[4].Value));
                     cmd.Parameters.AddWithValue("@p6", row.Cells[5].Value ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@p7", row.Cells[6].Value ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@p8", row.Cells[7].Value ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@p9", row.Cells[8].Value ?? DBNull.Value);
+                    //cmd.Parameters.AddWithValue("@p9", row.Cells[9].Value ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@p10", row.Cells[9].Value ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@p11", row.Cells[10].Value ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@p111", DBNull.Value);
@@ -275,18 +309,12 @@ namespace ANRPC_Inventory
                     cmd.Parameters.AddWithValue("@p16", row.Cells[16].Value ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@p17", row.Cells[17].Value ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@p18", row.Cells[18].Value ?? DBNull.Value);
-
-                    cmd.Parameters.AddWithValue("@p19", row.Cells[22].Value ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@p20", row.Cells[23].Value ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@p21", row.Cells[24].Value ?? DBNull.Value);
-
+                    cmd.Parameters.AddWithValue("@p19", row.Cells[19].Value ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@p20", row.Cells[20].Value ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@p21", row.Cells[21].Value ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@p22", row.Cells[22].Value ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@p23", row.Cells[23].Value ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@p24", row.Cells[24].Value ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@p25", row.Cells[25].Value ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@p26", row.Cells[26].Value ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@p27", row.Cells[27].Value ?? DBNull.Value);
-
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -295,14 +323,14 @@ namespace ANRPC_Inventory
         public void SP_UpdateSignatures(int x, DateTime D1, DateTime? D2 = null)
         {
             string cmdstring = "Exec  SP_UpdateSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
-            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+            SqlCommand cmd = new SqlCommand(cmdstring, Constants.foreignCon);
 
-            cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_AmrNo.Text));
+            cmd.Parameters.AddWithValue("@TNO", Convert.ToString(TXT_AmrNo.Text));
             cmd.Parameters.AddWithValue("@TNO2", DBNull.Value);
-            
+
             if (Cmb_FY2.Text.ToString() == "")
             {
-                cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text.ToString());
+                cmd.Parameters.AddWithValue("@FY", Cmb_FY.Text.ToString());
             }
             else
             {
@@ -330,11 +358,11 @@ namespace ANRPC_Inventory
 
         private void GetAmrBnod(string amrNo, string fyear)
         {
-            //table.Clear();
+            table.Clear();
 
-            string TableQuery = "SELECT *  FROM [T_BnodAwamershraa] Where Amrshraa_No = " + amrNo + " and AmrSheraa_sanamalia='" + fyear + "'";
+            string TableQuery = "SELECT *  FROM [T_BnodAwamershraa] Where Amrshraa_No = '" + amrNo + "' and AmrSheraa_sanamalia='" + fyear + "'";
 
-            dataadapter = new SqlDataAdapter(TableQuery, Constants.con);
+            dataadapter = new SqlDataAdapter(TableQuery, Constants.foreignCon);
             table.Locale = System.Globalization.CultureInfo.InvariantCulture;
             dataadapter.Fill(table);
             dataGridView1.DataSource = table;
@@ -357,25 +385,19 @@ namespace ANRPC_Inventory
 
             dataGridView1.Columns["UnitPrice"].HeaderText = "سعر الوحدة غير شامل الضريبة";//col17
 
-            dataGridView1.Columns["TotalPrice"].HeaderText = "الاجمالى غير شامل الضريبة و الخصم";//col18
+            dataGridView1.Columns["TotalPrice"].HeaderText = "الاجمالى غير شامل الضريبة";//col18
 
-            dataGridView1.Columns["ApplyDiscount"].HeaderText = "تطبق الخصم";//col19
+            dataGridView1.Columns["ApplyDareba"].HeaderText = "تطبق الضريبة";//col19
 
-            dataGridView1.Columns["Discountpercent"].HeaderText = "نسبة الخصم";//col20
+            dataGridView1.Columns["Darebapercent"].HeaderText = "نسبة الضريبة";//col20
 
-            dataGridView1.Columns["TotalPriceAfterDiscount"].HeaderText = "الاجمالى شامل الخصم ";//col21
+            dataGridView1.Columns["TotalPriceAfter"].HeaderText = "الاجمالى شامل الضريبة ";//col21
 
-            dataGridView1.Columns["ApplyDareba"].HeaderText = "تطبق الضريبة";//col22
+            dataGridView1.Columns["TalbEsdarShickNo"].HeaderText = "رقم طلب الاصدار ";//col26
 
-            dataGridView1.Columns["Darebapercent"].HeaderText = "نسبة الضريبة";//col23
+            dataGridView1.Columns["ShickNo"].HeaderText = "رقم الشيك ";//col27
 
-            dataGridView1.Columns["TotalPriceAfter"].HeaderText = "الاجمالى شامل الخصم و الضريبة ";//col24
-
-            dataGridView1.Columns["TalbEsdarShickNo"].HeaderText = "رقم طلب الاصدار ";//col29
-
-            dataGridView1.Columns["ShickNo"].HeaderText = "رقم الشيك ";//col30
-
-            dataGridView1.Columns["ShickDate"].HeaderText = "تاريخ الشيك ";//col31
+            dataGridView1.Columns["ShickDate"].HeaderText = "تاريخ الشيك ";//col28
 
 
 
@@ -406,33 +428,32 @@ namespace ANRPC_Inventory
             dataGridView1.Columns["Rased_After"].HeaderText = "رصيد بعد";//col16
             dataGridView1.Columns["Rased_After"].Visible = false;
 
-            dataGridView1.Columns["EstlamFlag"].HeaderText = "تم الاستلام ";//col25
+            dataGridView1.Columns["EstlamFlag"].HeaderText = "تم الاستلام ";//col22
             dataGridView1.Columns["EstlamFlag"].Visible = false;
 
-            dataGridView1.Columns["EstlamDate"].HeaderText = "تاريخ الاستلام ";//col26
+            dataGridView1.Columns["EstlamDate"].HeaderText = "تاريخ الاستلام ";//col23
             dataGridView1.Columns["EstlamDate"].Visible = false;
 
-            dataGridView1.Columns["LessQuanFlag"].HeaderText = "يوجد عجز ";//col27
+            dataGridView1.Columns["LessQuanFlag"].HeaderText = "يوجد عجز ";//col24
             dataGridView1.Columns["LessQuanFlag"].Visible = false;
 
-            dataGridView1.Columns["NotIdenticalFlag"].HeaderText = "مطابق/غير مطابق ";//col28
+            dataGridView1.Columns["NotIdenticalFlag"].HeaderText = "مطابق/غير مطابق ";//col25
             dataGridView1.Columns["NotIdenticalFlag"].Visible = false;
 
             dataGridView1.Columns["TalbEsdarShickNo"].Visible = false;
             dataGridView1.Columns["ShickNo"].Visible = false;
             dataGridView1.Columns["ShickDate"].Visible = false;
-
         }
 
         public bool SearchAmrSheraa(string amrNo, string fyear)
         {
-            Constants.opencon();
+            Constants.openForeignCon();
 
             string cmdstring;
             SqlCommand cmd;
 
             cmdstring = "select * from T_Awamershraa where Amrshraa_No=@TN and AmrSheraa_sanamalia=@FY";
-            cmd = new SqlCommand(cmdstring, Constants.con);
+            cmd = new SqlCommand(cmdstring, Constants.foreignCon);
 
             cmd.Parameters.AddWithValue("@TN", amrNo);
             cmd.Parameters.AddWithValue("@FY", fyear);
@@ -462,8 +483,17 @@ namespace ANRPC_Inventory
                         TXT_EgmaliAfter.Text = dr["Egmali"].ToString();
                         TXT_EgmaliBefore.Text = dr["EgmaliBefore"].ToString();
                         TXT_EgmaliDareba.Text = dr["EgmaliDareba"].ToString();
+                        cboCurrency.Text = dr["Currency"].ToString();
+                        TXT_Origin.Text = dr["Origin"].ToString();
+                        TXT_Cert.Text = dr["Certificates"].ToString();
+                        TXT_ShelfLife.Text = dr["ShelfLife"].ToString();
+                        TXT_Penalties.Text = dr["Penalties"].ToString();
+                        TXT_ShippingMarks.Text = dr["ShippingMarks"].ToString();
+                        TXT_RefNo.Text = dr["RefNo"].ToString();
+                        TXT_Egmali2.Text = dr["Egmali2"].ToString();//ArabicAmount2
+                        txt_arabicword2.Text = dr["ArabicAmount2"].ToString();
+                        txt_arabicword.Text = dr["ArabicAmount"].ToString();
                         BuyMethod = dr["BuyMethod"].ToString();
-
 
                         if (BuyMethod == "1")
                         {
@@ -681,9 +711,9 @@ namespace ANRPC_Inventory
 
             dr.Close();
 
-            GetAmrBnod(amrNo,fyear);
+            GetAmrBnod(amrNo, fyear);
 
-            Constants.closecon();
+            Constants.closeForeignCon();
             return true;
         }
 
@@ -732,20 +762,30 @@ namespace ANRPC_Inventory
         {
 
             //fyear sec
-            changePanelState(panel5, false);
-            Cmb_FY.Enabled = true;
-            CMB_Sadr.Enabled = true;
+            changePanelState(panel5, true);
+            TXT_AmrNo.Enabled = false;
 
             //moward sec
             changePanelState(panel6, true);
 
             //bian edara sec
-            changePanelState(panel10, true);
-            TXT_Egmali.Enabled = false;
+            changePanelState(panel19, false);
+            TXT_TaslemPlace.Enabled = true;
 
             //mowazna value
             changePanelState(panel11, false);
+            TXT_RefNo.Enabled = true;
             TXT_Payment.Enabled = true;
+
+            //penalties sec
+            changePanelState(panel21, true);
+
+            //shelf life sec
+            changePanelState(panel10, true);
+
+            //dareba sec
+            changePanelState(panel10, false);
+            TXT_ExchangeRate.Enabled = true;
 
 
             //btn Section
@@ -755,12 +795,12 @@ namespace ANRPC_Inventory
             BTN_ChooseTalb.Enabled = true;
             browseBTN.Enabled = true;
             BTN_PDF.Enabled = true;
+            BTN_ConvertEG.Enabled = true;
 
             Addbtn.Enabled = false;
             EditBtn.Enabled = false;
             BTN_Search.Enabled = false;
             BTN_Print.Enabled = false;
-
 
             //signature btn
             changePanelState(signatureTable, false);
@@ -794,7 +834,8 @@ namespace ANRPC_Inventory
         {
             DisableControls();
             BTN_Save2.Enabled = true;
-
+            browseBTN.Enabled = true;
+            BTN_PDF.Enabled = true;
 
             if (Constants.User_Type == "B")
             {
@@ -860,16 +901,23 @@ namespace ANRPC_Inventory
             changePanelState(panel6, false);
 
             //bian edara sec
-            changePanelState(panel10, false);
+            changePanelState(panel19, false);
 
             //mowazna value
             changePanelState(panel11, false);
+
+            //penalties sec
+            changePanelState(panel21, false);
+
+            //shelf life sec
+            changePanelState(panel10, false);
 
             //dareba sec
             changePanelState(panel14, false);
 
             //sheek sec
             changePanelState(panel20, false);
+
 
             //btn Section
             //generalBtn
@@ -887,6 +935,7 @@ namespace ANRPC_Inventory
             BTN_Print2.Enabled = false;
             browseBTN.Enabled = false;
             BTN_PDF.Enabled = false;
+            BTN_ConvertEG.Enabled = false;  
 
             //signature btn
             changePanelState(signatureTable, false);
@@ -938,30 +987,50 @@ namespace ANRPC_Inventory
             CMB_Sadr.Text = "";
             CMB_Sadr.SelectedIndex = -1;
 
+            cboCurrency.Text = "";
+            cboCurrency.SelectedIndex = -1;
+
 
             //moward sec
             TXT_Name.Text = "";
             TXT_HesabMward1.Text = "";
             TXT_HesabMward2.Text = "";
             TXT_TaslemDate.Text = "";
+            TXT_Date.Value = DateTime.Today;
 
 
             //bian edara sec
             TXT_Egmali.Text = "";
+            TXT_Egmali2.Text = "";
             TXT_TaslemPlace.Text = "";
-            TXT_Date.Value = DateTime.Today;
+
 
             //mowazna value
+            TXT_RefNo.Text = "";
             TXT_Momayz.Text = "";
             TXT_Payment.Text = "";
+
+            //penalties sec
+            TXT_Penalties.Text = "";
+            TXT_Cert.Text = "";
+
+            //shelf life sec
+            TXT_ShelfLife.Text = "";
+            TXT_Origin.Text = "";
+            TXT_ShippingMarks.Text = "";
 
             //egamle dareba
             TXT_EgmaliBefore.Text = "";
             TXT_EgmaliAfter.Text = "";
             TXT_EgmaliDareba.Text = "";
             txt_arabicword.Text = "";
+            txt_arabicword2.Text = "";
+            TXT_ExchangeRate.Text = "";
 
             //search sec
+            Cmb_FYear2.Text = "";
+            Cmb_FYear2.SelectedIndex = -1;
+
             Cmb_FY2.Text = "";
             Cmb_FY2.SelectedIndex = -1;
 
@@ -983,12 +1052,11 @@ namespace ANRPC_Inventory
         #region Logic Handler
         private void AddLogic()
         {
-            Constants.opencon();
-
-            string cmdstring = "exec SP_InsertAwamershraa @p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29,@p30,@p31,@p311,@p3111,@p31111,@p311111,@p32,@p33,@p333,@p3333,@p33333,@p38,@p39,@p40,@p41,@p34 out";
-            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-
-            cmd.Parameters.AddWithValue("@p1", Convert.ToInt32(TXT_AmrNo.Text));
+            Constants.openForeignCon();
+            string cmdstring = "exec SP_InsertAwamershraa @p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29,@p30,@p31,@p311,@p3111,@p31111,@p311111,@p32,@p33,@p333,@p3333,@p33333,@p38,@p39,@p40,@p41,@p42,@p43,@p44,@p45,@p46,@p47,@p48,@p49,@p50,@p51,@p34 out";
+            SqlCommand cmd = new SqlCommand(cmdstring, Constants.foreignCon);
+            cmd.Parameters.AddWithValue("@p1", (TXT_AmrNo.Text));
+            //  cmd.Parameters.AddWithValue("@p2", Convert.ToInt32(TXT_MonksaNo.Text));
             cmd.Parameters.AddWithValue("@p2", DBNull.Value);
             cmd.Parameters.AddWithValue("@p3", (Cmb_FY2.Text));
             cmd.Parameters.AddWithValue("@p4", (Cmb_FY.Text));
@@ -1004,17 +1072,15 @@ namespace ANRPC_Inventory
             cmd.Parameters.AddWithValue("@p14", "");
             cmd.Parameters.AddWithValue("@p15", "");
             cmd.Parameters.AddWithValue("@p16", (TXT_HesabMward1.Text));
-
             if (TXT_Egmali.Text.ToString() == "")
             {
                 cmd.Parameters.AddWithValue("@p17", DBNull.Value);
             }
-
             else
             {
                 cmd.Parameters.AddWithValue("@p17", Convert.ToDecimal(TXT_Egmali.Text));
             }
-
+            //    cmd.Parameters.AddWithValue("@p17", DBNull.Value);
             cmd.Parameters.AddWithValue("@p18", DBNull.Value);//taamen
             cmd.Parameters.AddWithValue("@p19", DBNull.Value);//dman
             cmd.Parameters.AddWithValue("@p20", DBNull.Value);//dareba
@@ -1036,7 +1102,6 @@ namespace ANRPC_Inventory
             cmd.Parameters.AddWithValue("@p32", Constants.User_Name.ToString());
             cmd.Parameters.AddWithValue("@p33", Convert.ToDateTime(DateTime.Now.ToShortDateString()));
             cmd.Parameters.AddWithValue("@p333", txt_arabicword.Text);
-
             if (TXT_EgmaliDareba.Text.ToString() == "")
             {
                 cmd.Parameters.AddWithValue("@p3333", DBNull.Value);
@@ -1053,59 +1118,55 @@ namespace ANRPC_Inventory
             {
                 cmd.Parameters.AddWithValue("@p33333", Convert.ToDecimal(TXT_EgmaliBefore.Text));
             }
-
             cmd.Parameters.AddWithValue("@p38", BuyMethod);
-
             cmd.Parameters.AddWithValue("@p39", FinancialType.ToString());
-
             cmd.Parameters.AddWithValue("@p40", 1);
             cmd.Parameters.AddWithValue("@p41", TXT_ShickNo.Text);
-
+            ////////////////////////////////////////////////
+            cmd.Parameters.AddWithValue("@p42", TXT_Origin.Text);
+            cmd.Parameters.AddWithValue("@p43", TXT_Cert.Text);
+            cmd.Parameters.AddWithValue("@p44", TXT_ShelfLife.Text);
+            cmd.Parameters.AddWithValue("@p45", TXT_Penalties.Text);
+            cmd.Parameters.AddWithValue("@p46", TXT_ShippingMarks.Text);
+            cmd.Parameters.AddWithValue("@p47", cboCurrency.Text);
+            cmd.Parameters.AddWithValue("@p48", TXT_RefNo.Text);
+            if (TXT_Egmali2.Text.ToString() == "")
+            {
+                cmd.Parameters.AddWithValue("@p49", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@p49", TXT_Egmali2.Text);
+            }
+            cmd.Parameters.AddWithValue("@p50", txt_arabicword2.Text);
+            cmd.Parameters.AddWithValue("@p51", TXT_ExchangeRate.Text);
             cmd.Parameters.Add("@p34", SqlDbType.Int, 32);  //-------> output parameter
             cmd.Parameters["@p34"].Direction = ParameterDirection.Output;
-
             int flag;
-
             try
             {
                 cmd.ExecuteNonQuery();
-                executemsg = true;              
+                executemsg = true;
             }
             catch (SqlException sqlEx)
             {
                 executemsg = false;
-                Console.WriteLine(sqlEx);
+                MessageBox.Show(sqlEx.ToString());
             }
-
             flag = (int)cmd.Parameters["@p34"].Value;
-
             if (executemsg == true && flag == 1)
             {
-
                 InsertAmrSheraaBnood();
-                
-                for (int i = 1; i <= 7; i++)
+
+                //insert signatures in T_SignatureDate according to thier order
+                foreach (KeyValuePair<int, int> entry in signatureOrder)
                 {
-                    cmdstring = "Exec  SP_InsertSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
-                    cmd = new SqlCommand(cmdstring, Constants.con);
-                    cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_AmrNo.Text));
-                    cmd.Parameters.AddWithValue("@TNO2", DBNull.Value);
-                    cmd.Parameters.AddWithValue("@FY", Cmb_FY2.Text.ToString());
-                    cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
-                    cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
-                    cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
-                    cmd.Parameters.AddWithValue("@FN", 3);
-                    cmd.Parameters.AddWithValue("@SN", i);
-                    cmd.Parameters.AddWithValue("@D1", DBNull.Value);
-                    cmd.Parameters.AddWithValue("@D2", DBNull.Value);
-                    cmd.ExecuteNonQuery();
+                    SP_InsertSignatures(entry.Key, entry.Value);
                 }
 
                 SP_UpdateSignatures(1, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
                 SP_UpdateSignatures(2, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
-
-                ///////////////////////////////////////////////////
+                /////////////////////////////////////////////////
                 MessageBox.Show("تم الإضافة بنجاح  ! ");
                 reset();
             }
@@ -1115,10 +1176,10 @@ namespace ANRPC_Inventory
             }
             else if (executemsg == false)
             {
-                MessageBox.Show("لم يتم إدخال إذن الصرف بنجاج!!");
+                MessageBox.Show("لم يتم إدخال رقم امر الشراء بنجاج!!");
             }
 
-            Constants.closecon();
+            Constants.closeForeignCon();
         }
 
         private void UpdateAmrSheraaSignatureCycle()
@@ -1157,16 +1218,18 @@ namespace ANRPC_Inventory
 
         public void UpdateAmrsheraa()
         {
-            Constants.opencon();
-
-            string cmdstring = "Exec SP_UpdateAwamershraa @TNOold,@FYold,@Mold,@FY2old,@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29,@p30,@p31,@p311,@p3111,@p31111,@p311111,@p32,@p33,@p333,@p3333,@p33333,@p38,@p39,@p40,@p41,@p34 out";
-
-            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-            cmd.Parameters.AddWithValue("@TNOold", Convert.ToInt32(TNO));
+            Constants.openForeignCon();
+            string cmdstring = "Exec SP_UpdateAwamershraa @TNOold,@FYold,@Mold,@FY2old,@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29,@p30,@p31,@p311,@p3111,@p31111,@p311111,@p32,@p33,@p333,@p3333,@p33333,@p38,@p39,@p40,@p41,@p42,@p43,@p44,@p45,@p46,@p47,@p48,@p49,@p50,@p51,@p34 out";
+            //  SqlCommand cmd = new SqlCommand(cmdstring, con);
+            SqlCommand cmd = new SqlCommand(cmdstring, Constants.foreignCon);
+            cmd.Parameters.AddWithValue("@TNOold", (TNO));
             cmd.Parameters.AddWithValue("@FYold", FY);
+            //       cmd.Parameters.AddWithValue("@Mold",Convert.ToInt32( MNO));
+            //    cmd.Parameters.AddWithValue("@FY2old", FY2);
             cmd.Parameters.AddWithValue("@Mold", DBNull.Value);
             cmd.Parameters.AddWithValue("@FY2old", DBNull.Value);
-            cmd.Parameters.AddWithValue("@p1", Convert.ToInt32(TXT_AmrNo.Text));
+            cmd.Parameters.AddWithValue("@p1", (TXT_AmrNo.Text));
+            // cmd.Parameters.AddWithValue("@p2", Convert.ToInt32(TXT_MonksaNo.Text));
             cmd.Parameters.AddWithValue("@p2", DBNull.Value);
             cmd.Parameters.AddWithValue("@p3", (Cmb_FY2.Text));
             cmd.Parameters.AddWithValue("@p4", (Cmb_FY.Text));
@@ -1182,7 +1245,7 @@ namespace ANRPC_Inventory
             cmd.Parameters.AddWithValue("@p14", "");
             cmd.Parameters.AddWithValue("@p15", "");
             cmd.Parameters.AddWithValue("@p16", (TXT_HesabMward1.Text));
-
+            //  cmd.Parameters.AddWithValue("@p17",Convert.ToDecimal(TXT_Egmali.Text)??DBNull.Value);
             if (TXT_Egmali.Text.ToString() == "")
             {
                 cmd.Parameters.AddWithValue("@p17", DBNull.Value);
@@ -1191,7 +1254,6 @@ namespace ANRPC_Inventory
             {
                 cmd.Parameters.AddWithValue("@p17", Convert.ToDecimal(TXT_Egmali.Text));
             }
-
             cmd.Parameters.AddWithValue("@p18", DBNull.Value);//taamen
             cmd.Parameters.AddWithValue("@p19", DBNull.Value);//dman
             cmd.Parameters.AddWithValue("@p20", DBNull.Value);//dareba
@@ -1203,57 +1265,45 @@ namespace ANRPC_Inventory
             cmd.Parameters.AddWithValue("@p26", DBNull.Value);//ww
             cmd.Parameters.AddWithValue("@p27", TXT_Date.Value.Month.ToString());//mm
             cmd.Parameters.AddWithValue("@p28", TXT_Date.Value.Year.ToString());//yy
-
             if (FlagSign1 == 1)
             {
                 cmd.Parameters.AddWithValue("@p29", FlagEmpn1);
-
             }
             else
             {
                 cmd.Parameters.AddWithValue("@p29", DBNull.Value);
-
             }
             if (FlagSign2 == 1)
             {
                 cmd.Parameters.AddWithValue("@p30", FlagEmpn2);
-
             }
             else
             {
                 cmd.Parameters.AddWithValue("@p30", DBNull.Value);
-
             }
             if (FlagSign3 == 1)
             {
                 cmd.Parameters.AddWithValue("@p31", FlagEmpn3);
-
             }
             else
             {
                 cmd.Parameters.AddWithValue("@p31", DBNull.Value);
-
             }
-
             if (FlagSign4 == 1)
             {
                 cmd.Parameters.AddWithValue("@p311", FlagEmpn4);
-
             }
             else
             {
                 cmd.Parameters.AddWithValue("@p311", DBNull.Value);
-
             }
             if (FlagSign7 == 1)
             {
                 cmd.Parameters.AddWithValue("@p3111", FlagEmpn7);
-
             }
             else
             {
                 cmd.Parameters.AddWithValue("@p3111", DBNull.Value);
-
             }
             if (FlagSign5 == 1)
             {
@@ -1263,7 +1313,6 @@ namespace ANRPC_Inventory
             else
             {
                 cmd.Parameters.AddWithValue("@p31111", DBNull.Value);
-
             }
             if (FlagSign6 == 1)
             {
@@ -1275,10 +1324,8 @@ namespace ANRPC_Inventory
                 cmd.Parameters.AddWithValue("@p311111", DBNull.Value);
 
             }
-
             cmd.Parameters.AddWithValue("@p32", Constants.User_Name.ToString());
             cmd.Parameters.AddWithValue("@p33", Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-
             cmd.Parameters.AddWithValue("@p333", txt_arabicword.Text);
             if (TXT_EgmaliDareba.Text.ToString() == "")
             {
@@ -1296,26 +1343,41 @@ namespace ANRPC_Inventory
             {
                 cmd.Parameters.AddWithValue("@p33333", Convert.ToDecimal(TXT_EgmaliBefore.Text));
             }
-
             cmd.Parameters.AddWithValue("@p38", BuyMethod);
             cmd.Parameters.AddWithValue("@p39", FinancialType.ToString());
             cmd.Parameters.AddWithValue("@p40", 1);
             cmd.Parameters.AddWithValue("@p41", TXT_ShickNo.Text);
+            cmd.Parameters.AddWithValue("@p42", TXT_Origin.Text);
+            cmd.Parameters.AddWithValue("@p43", TXT_Cert.Text);
+            cmd.Parameters.AddWithValue("@p44", TXT_ShelfLife.Text);
+            cmd.Parameters.AddWithValue("@p45", TXT_Penalties.Text);
+            cmd.Parameters.AddWithValue("@p46", TXT_ShippingMarks.Text);
+            cmd.Parameters.AddWithValue("@p47", cboCurrency.Text);
+            cmd.Parameters.AddWithValue("@p48", TXT_RefNo.Text);
+            if (TXT_Egmali2.Text.ToString() == "")
+            {
+                cmd.Parameters.AddWithValue("@p49", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@p49", TXT_Egmali2.Text);
+            }
+            cmd.Parameters.AddWithValue("@p50", txt_arabicword2.Text);
+            cmd.Parameters.AddWithValue("@p51", TXT_ExchangeRate.Text);
             cmd.Parameters.Add("@p34", SqlDbType.Int, 32);  //-------> output parameter
             cmd.Parameters["@p34"].Direction = ParameterDirection.Output;
-
             int flag;
-
             try
             {
                 cmd.ExecuteNonQuery();
-                executemsg = true;            
+                executemsg = true;
             }
             catch (SqlException sqlEx)
             {
                 executemsg = false;
-                Console.WriteLine(sqlEx);
+                //MessageBox.Show(sqlEx.ToString());
             }
+
 
             flag = (int)cmd.Parameters["@p34"].Value;
 
@@ -1337,14 +1399,14 @@ namespace ANRPC_Inventory
                 MessageBox.Show("لم يتم تعديل امر الشراء بنجاج!!");
             }
 
-            Constants.closecon();
+            Constants.closeForeignCon();
         }
 
         private void EditLogic()
         {
             UpdateAmrsheraa();
         }
-        
+
         private void DeleteLogic()
         {
             if ((MessageBox.Show("هل تريد حذف امر الشراء ؟", "", MessageBoxButtons.YesNo)) == DialogResult.Yes)
@@ -1354,10 +1416,10 @@ namespace ANRPC_Inventory
                     MessageBox.Show("يجب اختيار امر الشراء  اولا");
                     return;
                 }
-                Constants.opencon();
+                Constants.openForeignCon();
                 string cmdstring = "Exec SP_DeleteAmrshera @TNO,@FY,@aot output";
 
-                SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+                SqlCommand cmd = new SqlCommand(cmdstring, Constants.foreignCon);
 
                 cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_AmrNo.Text));
                 cmd.Parameters.AddWithValue("@FY", Cmb_FY.Text.ToString());
@@ -1374,7 +1436,7 @@ namespace ANRPC_Inventory
                 catch (SqlException sqlEx)
                 {
                     executemsg = false;
-                    Console.WriteLine(sqlEx);                   
+                    Console.WriteLine(sqlEx);
                 }
 
                 flag = (int)cmd.Parameters["@aot"].Value;
@@ -1384,31 +1446,70 @@ namespace ANRPC_Inventory
                     MessageBox.Show("تم الحذف بنجاح");
                     reset();
                 }
-                Constants.closecon();
+                Constants.closeForeignCon();
             }
         }
         #endregion
 
         //------------------------------------------ Validation Handler ---------------------------------
         #region Validation Handler
-            private List<(ErrorProvider, Control, string)> ValidateAddBnodAmrSheraa()
+        private List<(ErrorProvider, Control, string)> ValidateAddBnodAmrSheraa()
+        {
+            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+            #region Cmb_FYear
+            if (string.IsNullOrWhiteSpace(Cmb_FY.Text) || Cmb_FY.SelectedIndex == -1)
             {
-                List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
-
-                #region Cmb_FYear
-                if (string.IsNullOrWhiteSpace(Cmb_FY.Text) || Cmb_FY.SelectedIndex == -1)
-                {
-                    errorsList.Add((errorProvider, Cmb_FY, "تاكد من  اختيار السنة المالية"));
-                }
-                #endregion
-
-                return errorsList;
+                errorsList.Add((errorProvider, Cmb_FY, "تاكد من  اختيار السنة المالية"));
             }
+            #endregion
 
-            private List<(ErrorProvider, Control, string)> ValidateAttachFile()
+            return errorsList;
+        }
+
+        private List<(ErrorProvider, Control, string)> ValidateAttachFile()
+        {
+            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+            #region Cmb_FYear
+            if (string.IsNullOrWhiteSpace(Cmb_FY.Text) || Cmb_FY.SelectedIndex == -1)
             {
-                List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+                errorsList.Add((errorProvider, Cmb_FY, "تاكد من  اختيار السنة المالية"));
+            }
+            #endregion
 
+            #region TXT_EznNo
+            if (string.IsNullOrWhiteSpace(TXT_AmrNo.Text))
+            {
+                errorsList.Add((errorProvider, TXT_AmrNo, "يجب اختيار رقم أمر الشراء"));
+            }
+            #endregion
+
+            return errorsList;
+        }
+
+        private List<(ErrorProvider, Control, string)> ValidateSearch(bool isConfirm = false)
+        {
+            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+            if (isConfirm)
+            {
+                #region Cmb_FYear2
+                if (string.IsNullOrWhiteSpace(Cmb_FYear2.Text) || Cmb_FYear2.SelectedIndex == -1)
+                {
+                    errorsList.Add((errorProvider, Cmb_FYear2, "تاكد من  اختيار السنة المالية"));
+                }
+                #endregion
+
+                #region Cmb_AmrNo2
+                if (string.IsNullOrWhiteSpace(Cmb_AmrNo2.Text) || Cmb_AmrNo2.SelectedIndex == -1)
+                {
+                    errorsList.Add((errorProvider, Cmb_AmrNo2, "يجب اختيار رقم أمر الشراء"));
+                }
+                #endregion
+            }
+            else
+            {
                 #region Cmb_FYear
                 if (string.IsNullOrWhiteSpace(Cmb_FY.Text) || Cmb_FY.SelectedIndex == -1)
                 {
@@ -1416,126 +1517,108 @@ namespace ANRPC_Inventory
                 }
                 #endregion
 
-                #region TXT_EznNo
+                #region TXT_AmrNo
                 if (string.IsNullOrWhiteSpace(TXT_AmrNo.Text))
                 {
                     errorsList.Add((errorProvider, TXT_AmrNo, "يجب اختيار رقم أمر الشراء"));
                 }
                 #endregion
-
-                return errorsList;
             }
 
-            private List<(ErrorProvider, Control, string)> ValidateSearch(bool isConfirm = false)
+            return errorsList;
+        }
+
+        private List<(ErrorProvider, Control, string)> ValidateSave()
+        {
+            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+            #region Cmb_FYear
+            if (string.IsNullOrWhiteSpace(Cmb_FY.Text) || Cmb_FY.SelectedIndex == -1)
             {
-                List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
-
-                if (isConfirm)
-                {
-                    #region Cmb_FYear2
-                    if (string.IsNullOrWhiteSpace(Cmb_FYear2.Text) || Cmb_FYear2.SelectedIndex == -1)
-                    {
-                        errorsList.Add((errorProvider, Cmb_FYear2, "تاكد من  اختيار السنة المالية"));
-                    }
-                    #endregion
-
-                    #region Cmb_AmrNo2
-                    if (string.IsNullOrWhiteSpace(Cmb_AmrNo2.Text) || Cmb_AmrNo2.SelectedIndex == -1)
-                    {
-                        errorsList.Add((errorProvider, Cmb_AmrNo2, "يجب اختيار رقم أمر الشراء"));
-                    }
-                    #endregion
-                }
-                else
-                {
-                    #region Cmb_FYear
-                    if (string.IsNullOrWhiteSpace(Cmb_FY.Text) || Cmb_FY.SelectedIndex == -1)
-                    {
-                        errorsList.Add((errorProvider, Cmb_FY, "تاكد من  اختيار السنة المالية"));
-                    }
-                    #endregion
-
-                    #region TXT_AmrNo
-                    if (string.IsNullOrWhiteSpace(TXT_AmrNo.Text))
-                    {
-                        errorsList.Add((errorProvider, TXT_AmrNo, "يجب اختيار رقم أمر الشراء"));
-                    }
-                    #endregion
-                }
-
-                return errorsList;
+                errorsList.Add((errorProvider, Cmb_FY, "تاكد من  اختيار السنة المالية"));
             }
+            #endregion
 
-            private List<(ErrorProvider, Control, string)> ValidateSave()
+            #region TXT_Name
+            if (string.IsNullOrWhiteSpace(TXT_Name.Text))
             {
-                List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
-
-                #region Cmb_FYear
-                if (string.IsNullOrWhiteSpace(Cmb_FY.Text) || Cmb_FY.SelectedIndex == -1)
-                {
-                    errorsList.Add((errorProvider, Cmb_FY, "تاكد من  اختيار السنة المالية"));
-                }
-                #endregion
-
-                #region dataGridView1
-                if (dataGridView1.Rows.Count <= 0)
-                {
-                    //errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
-                    MessageBox.Show("لايمكن ان يتكون طلب توريد بدون بنود");
-                }
-                else if (dataGridView1.Rows.Count == 1 && dataGridView1.Rows[0].IsNewRow == true)
-                {
-                    //errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
-                    MessageBox.Show("لايمكن ان يتكون طلب توريد بدون بنود");
-                }
-                #endregion
-
-                PictureBox signControl = CheckSignatures(signatureTable, currentSignNumber);
-                if (signControl != null)
-                {
-                    errorsList.Add((errorProvider, signControl, "تاكد من التوقيع"));
-                }
-
-
-                return errorsList;
+                errorsList.Add((errorProvider, TXT_Name, "تاكد من  كتابة اسم المورد"));
             }
+            #endregion
 
-            private bool IsValidCase(VALIDATION_TYPES type)
+            #region dataGridView1
+            if (dataGridView1.Rows.Count <= 0)
             {
-                List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
-
-                if (type == VALIDATION_TYPES.ADD_AMRSHERAA_BNOD)
-                {
-                    errorsList = ValidateAddBnodAmrSheraa();
-                }
-
-                else if (type == VALIDATION_TYPES.ATTACH_FILE)
-                {
-                    errorsList = ValidateAttachFile();
-                }
-                else if (type == VALIDATION_TYPES.SEARCH)
-                {
-                    errorsList = ValidateSearch(false);
-                }
-                else if (type == VALIDATION_TYPES.CONFIRM_SEARCH)
-                {
-                    errorsList = ValidateSearch(true);
-                }
-                else if (type == VALIDATION_TYPES.SAVE)
-                {
-                    errorsList = ValidateSave();
-                }
-
-
-                errorProviderHandler(errorsList);
-
-                if (errorsList.Count > 0)
-                {
-                    return false;
-                }
-
-                return true;
+                //errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
+                MessageBox.Show("لايمكن ان يتكون أمر الشراء بدون بنود");
             }
+            else if (dataGridView1.Rows.Count == 1 && dataGridView1.Rows[0].IsNewRow == true)
+            {
+                //errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
+                MessageBox.Show("لايمكن ان يتكون أمر الشراء بدون بنود");
+            }
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    if (row.Cells[17].Value.ToString()=="")
+                    {
+                        row.Cells[17].ErrorText= "يجب كتابة سعر الوحدة ";
+
+                        //errorsList.Add((alertProvider, row.Cells[10], "تم ادخال مواصفة هذا التصنيف من قبل"));
+
+                        break;
+                    }
+                }
+            }
+            #endregion
+
+            PictureBox signControl = CheckSignatures(signatureTable, currentSignNumber);
+            if (signControl != null)
+            {
+                errorsList.Add((errorProvider, signControl, "تاكد من التوقيع"));
+            }
+
+
+            return errorsList;
+        }
+
+        private bool IsValidCase(VALIDATION_TYPES type)
+        {
+            List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
+
+            if (type == VALIDATION_TYPES.ADD_AMRSHERAA_BNOD)
+            {
+                errorsList = ValidateAddBnodAmrSheraa();
+            }
+
+            else if (type == VALIDATION_TYPES.ATTACH_FILE)
+            {
+                errorsList = ValidateAttachFile();
+            }
+            else if (type == VALIDATION_TYPES.SEARCH)
+            {
+                errorsList = ValidateSearch(false);
+            }
+            else if (type == VALIDATION_TYPES.CONFIRM_SEARCH)
+            {
+                errorsList = ValidateSearch(true);
+            }
+            else if (type == VALIDATION_TYPES.SAVE)
+            {
+                errorsList = ValidateSave();
+            }
+
+            errorProviderHandler(errorsList);
+
+            if (errorsList.Count > 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
         #endregion
 
         private void init()
@@ -1545,7 +1628,7 @@ namespace ANRPC_Inventory
             HelperClass.comboBoxFiller(Cmb_FY2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
             HelperClass.comboBoxFiller(Cmb_FY, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
             HelperClass.comboBoxFiller(Cmb_FYear2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
-
+            initiateSignatureOrder();
 
             // dataGridView1.Parent = panel1;
             //dataGridView1.Dock = DockStyle.Bottom;
@@ -1555,11 +1638,14 @@ namespace ANRPC_Inventory
             currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia));
             currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.Tunisia));
             currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.Gold));
-
-            cboCurrency.DataSource = currencies;
+            currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.USA));
+            currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.EUR));
+            //currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.GBP));
+            //  cboCurrency.DataSource = currencies;
 
             cboCurrency_DropDownClosed(null, null);
             AddEditFlag = 0;
+
             if (Constants.isConfirmForm)
             {
                 panel7.Visible = true;
@@ -1575,12 +1661,8 @@ namespace ANRPC_Inventory
 
             UserB = Constants.User_Name.Substring(Constants.User_Name.LastIndexOf('_') + 1);
 
-            con = new SqlConnection(Constants.constring);
+            Constants.openForeignCon();
 
-            if (con != null && con.State == ConnectionState.Closed)
-            {
-                con.Open();
-            }
             this.dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
@@ -1591,8 +1673,6 @@ namespace ANRPC_Inventory
             string cmdstring = "";
             if (Constants.User_Type == "B")
             {
-
-
                 cmdstring = "select Amrshraa_No from   T_Awamershraa where  AmrSheraa_sanamalia='" + Cmb_FY.Text + "'";
             }
             else
@@ -1600,8 +1680,7 @@ namespace ANRPC_Inventory
                 cmdstring = "select Amrshraa_No from   T_Awamershraa where  AmrSheraa_sanamalia='" + Cmb_FY.Text + "'" + " and CodeEdara='" + codeedara + "'";
 
             }
-
-            SqlCommand cmd = new SqlCommand(cmdstring, con);
+            SqlCommand cmd = new SqlCommand(cmdstring, Constants.foreignCon);
             SqlDataReader dr = cmd.ExecuteReader();
             //---------------------------------
             if (dr.HasRows == true)
@@ -1614,10 +1693,9 @@ namespace ANRPC_Inventory
                 }
             }
             dr.Close();
-
             ///////////////////////////////////////
             string cmdstring2 = "SELECT [arab_unit] ,[eng_unit] ,[cod_unit] from Tunit";
-            SqlCommand cmd2 = new SqlCommand(cmdstring2, con);
+            SqlCommand cmd2 = new SqlCommand(cmdstring2, Constants.foreignCon);
             SqlDataReader dr2 = cmd2.ExecuteReader();
             //---------------------------------
             if (dr2.HasRows == true)
@@ -1625,7 +1703,6 @@ namespace ANRPC_Inventory
                 while (dr2.Read())
                 {
                     UnitColl.Add(dr2["arab_unit"].ToString());
-
                 }
             }
             dr2.Close();
@@ -1633,7 +1710,7 @@ namespace ANRPC_Inventory
             Cmb_FY.SelectedIndex = 0;
             Cmb_FY2.SelectedIndex = 0;
             string cmdstring3 = "SELECT DISTINCT [Sadr_To] FROM T_Awamershraa ORDER BY [Sadr_To]";
-            SqlCommand cmd3 = new SqlCommand(cmdstring3, con);
+            SqlCommand cmd3 = new SqlCommand(cmdstring3, Constants.foreignCon);
             SqlDataReader dr3 = cmd3.ExecuteReader();
             //---------------------------------
             if (dr3.HasRows == true)
@@ -1641,19 +1718,17 @@ namespace ANRPC_Inventory
                 while (dr3.Read())
                 {
                     TasnifColl.Add(dr3["Sadr_To"].ToString());
-
                 }
             }
             dr3.Close();
             CMB_Sadr.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             CMB_Sadr.AutoCompleteSource = AutoCompleteSource.CustomSource;
             CMB_Sadr.AutoCompleteCustomSource = TasnifColl;
-
             TXT_AmrNo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             TXT_AmrNo.AutoCompleteSource = AutoCompleteSource.CustomSource;
             TXT_AmrNo.AutoCompleteCustomSource = TalbColl;
 
-            con.Close();
+            Constants.closeForeignCon();
 
             Cmb_FY.SelectedIndex = -1;
             Cmb_FYear2.SelectedIndex = -1;
@@ -1661,12 +1736,9 @@ namespace ANRPC_Inventory
             reset();
         }
 
-        public AmrSheraa()
+        public AmrSheraa_Foreign()
         {
             InitializeComponent();
-            //this.SetStyle(ControlStyles.DoubleBuffer, true);
-            //this.SetStyle(ControlStyles.UserPaint, true);
-            //this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             init();
         }
 
@@ -1676,6 +1748,12 @@ namespace ANRPC_Inventory
             {
                 reset();
                 PrepareAddState();
+
+                TXT_Penalties.Text = "in case of Delays in suppling the materials:" + Environment.NewLine + 
+                    "Supplier will bear a penalty as 1% of the total value of suppling goods for every delayed week or part of it & max 4% from the total value of suppling goods." + Environment.NewLine + 
+                    "Bearing in mind ,any demurrage caused due to delay from supplier side ,supplier will bear any extra costs concerning demurrage";
+
+                TXT_ShippingMarks.Text = "Aleandria national Refining & petrochemicals company (Anrpc)";
 
                 AddEditFlag = 2;
 
@@ -1698,14 +1776,13 @@ namespace ANRPC_Inventory
 
         private void Cmb_FY_SelectedIndexChanged(object sender, EventArgs e)
         {
-             if (AddEditFlag == 0)
+            if (AddEditFlag == 0)
             {
-                Constants.opencon();
-               
-               TXT_AmrNo.AutoCompleteMode = AutoCompleteMode.None;
+                Constants.openForeignCon();
+                TXT_AmrNo.AutoCompleteMode = AutoCompleteMode.None;
                 TXT_AmrNo.AutoCompleteSource = AutoCompleteSource.None; ;
                 string cmdstring3 = "SELECT  Amrshraa_No from T_Awamershraa  where AmrSheraa_sanamalia='" + Cmb_FY.Text + "' order by  Amrshraa_No";
-                SqlCommand cmd3 = new SqlCommand(cmdstring3, Constants.con);
+                SqlCommand cmd3 = new SqlCommand(cmdstring3, Constants.foreignCon);
                 SqlDataReader dr3 = cmd3.ExecuteReader();
                 //---------------------------------
                 if (dr3.HasRows == true)
@@ -1716,31 +1793,26 @@ namespace ANRPC_Inventory
 
                     }
                 }
-              
+
                 TXT_AmrNo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 TXT_AmrNo.AutoCompleteSource = AutoCompleteSource.CustomSource;
                 TXT_AmrNo.AutoCompleteCustomSource = TalbColl;
-                Constants.closecon();
+                Constants.closeForeignCon();
 
             }
             //go and get talbTawreed_no for this FYear
             if (AddEditFlag == 2)//add
             {
-                //call sp that get last num that eentered for this MM and this YYYY
-                Constants.opencon();
-
                 // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
-                string cmdstring = "select ( COALESCE(MAX( Amrshraa_No), 0)) from  T_Awamershraa where AmrSheraa_sanamalia=@FY ";
-                SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-
+                //select ( COALESCE( MAX( CAST(SUBSTRING(TalbTwareed_No, 1,LEN( Amrshraa_No)-1) AS int)),0))  from  T_TalbTawreed where FYear=@FY ";
+                string cmdstring = "select ( COALESCE( MAX( CAST(SUBSTRING(Amrshraa_No, 1,LEN( Amrshraa_No)-1) AS int)),0))  from  T_Awamershraa where AmrSheraa_sanamalia=@FY ";
+                SqlCommand cmd = new SqlCommand(cmdstring, Constants.foreignCon);
                 // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
                 cmd.Parameters.AddWithValue("@FY", Cmb_FY.Text);
-                
                 int flag;
-
                 try
                 {
-                    Constants.opencon();
+                    Constants.openForeignCon();
                     // cmd.ExecuteNonQuery();
                     var count = cmd.ExecuteScalar();
                     executemsg = true;
@@ -1748,13 +1820,11 @@ namespace ANRPC_Inventory
                     if (count != null && count != DBNull.Value)
                     {
                         //  flag = (int)cmd.Parameters["@Num"].Value;
-
                         flag = (int)count;
                         flag = flag + 1;
-                        TXT_AmrNo.Text = flag.ToString();//el rakm el new
+                        TXT_AmrNo.Text = flag.ToString() + "R";//el rakm el new
 
                     }
-
                 }
                 catch (SqlException sqlEx)
                 {
@@ -1763,7 +1833,6 @@ namespace ANRPC_Inventory
                     // flag = (int)cmd.Parameters["@Num"].Value;
                 }
             }
-        
         }
 
         private void BTN_ChooseTalb_Click(object sender, EventArgs e)
@@ -1775,76 +1844,76 @@ namespace ANRPC_Inventory
 
             GetAmrBnod(TXT_AmrNo.Text, Cmb_FY.Text);
 
-            Amrsheraa_PopUp popup = new Amrsheraa_PopUp();
-          // popup.Show();
-       
+            Amrsheraa_PopUp_Foreign popup = new Amrsheraa_PopUp_Foreign();
+            // popup.Show();
 
-           // Show testDialog as a modal dialog and determine if DialogResult = OK.
-           if (popup.ShowDialog(this) == DialogResult.OK)
-           {
-               TXT_Type.Text = popup.BM2;
-               BuyMethod = popup.BM;
-               if (popup.BM == "1")
-               {
 
-                   radioButton1.Checked = true;
-                   radioButton2.Checked = false;
-                   radioButton3.Checked = false;
-                   radioButton4.Checked = false;
-                   radioButton5.Checked = false;
-                   radioButton6.Checked = false;
-               }
-               else if (popup.BM == "2")
-               {
-                   radioButton1.Checked = false;
-                   radioButton2.Checked = true;
-                   radioButton3.Checked = false;
-                   radioButton4.Checked = false;
-                   radioButton5.Checked = false;
-                   radioButton6.Checked = false;
-               }
-               else if (popup.BM == "3")
-               {
-                   radioButton1.Checked = false;
-                   radioButton2.Checked = false;
-                   radioButton3.Checked =true;
-                   radioButton4.Checked = false;
-                   radioButton5.Checked = false;
-                   radioButton6.Checked = false;
-               }
-               else if (popup.BM == "4")
-               {
-                   radioButton1.Checked = false;
-                   radioButton2.Checked =false;
-                   radioButton3.Checked = false;
-                   radioButton4.Checked = true;
-                   radioButton5.Checked = false;
-                   radioButton6.Checked = false;
-               }
-               else if (popup.BM == "5")
-               {
-                   radioButton1.Checked = false;
-                   radioButton2.Checked = false;
-                   radioButton3.Checked = false;
-                   radioButton4.Checked = false;
-                   radioButton5.Checked = true;
-                   radioButton6.Checked = false;
-               }
-               else if (popup.BM == "6")
-               {
-                   radioButton1.Checked = false;
-                   radioButton2.Checked = false;
-                   radioButton3.Checked = false;
-                   radioButton4.Checked = false;
-                   radioButton5.Checked = false;
-                   radioButton6.Checked = true;
-               }
-               if (popup.dataGridView1.SelectedRows.Count > 0)
-               {
-                 //  foreach (DataGridViewRow row in popup.dataGridView1.SelectedRows)
-                 //  {
-                   foreach (DataGridViewRow row in popup.dataGridView1.Rows)
-                   {
+            // Show testDialog as a modal dialog and determine if DialogResult = OK.
+            if (popup.ShowDialog(this) == DialogResult.OK)
+            {
+                TXT_Type.Text = popup.BM2;
+                BuyMethod = popup.BM;
+                if (popup.BM == "1")
+                {
+
+                    radioButton1.Checked = true;
+                    radioButton2.Checked = false;
+                    radioButton3.Checked = false;
+                    radioButton4.Checked = false;
+                    radioButton5.Checked = false;
+                    radioButton6.Checked = false;
+                }
+                else if (popup.BM == "2")
+                {
+                    radioButton1.Checked = false;
+                    radioButton2.Checked = true;
+                    radioButton3.Checked = false;
+                    radioButton4.Checked = false;
+                    radioButton5.Checked = false;
+                    radioButton6.Checked = false;
+                }
+                else if (popup.BM == "3")
+                {
+                    radioButton1.Checked = false;
+                    radioButton2.Checked = false;
+                    radioButton3.Checked = true;
+                    radioButton4.Checked = false;
+                    radioButton5.Checked = false;
+                    radioButton6.Checked = false;
+                }
+                else if (popup.BM == "4")
+                {
+                    radioButton1.Checked = false;
+                    radioButton2.Checked = false;
+                    radioButton3.Checked = false;
+                    radioButton4.Checked = true;
+                    radioButton5.Checked = false;
+                    radioButton6.Checked = false;
+                }
+                else if (popup.BM == "5")
+                {
+                    radioButton1.Checked = false;
+                    radioButton2.Checked = false;
+                    radioButton3.Checked = false;
+                    radioButton4.Checked = false;
+                    radioButton5.Checked = true;
+                    radioButton6.Checked = false;
+                }
+                else if (popup.BM == "6")
+                {
+                    radioButton1.Checked = false;
+                    radioButton2.Checked = false;
+                    radioButton3.Checked = false;
+                    radioButton4.Checked = false;
+                    radioButton5.Checked = false;
+                    radioButton6.Checked = true;
+                }
+                if (popup.dataGridView1.SelectedRows.Count > 0)
+                {
+                    //  foreach (DataGridViewRow row in popup.dataGridView1.SelectedRows)
+                    //  {
+                    foreach (DataGridViewRow row in popup.dataGridView1.Rows)
+                    {
 
                         if (!row.IsNewRow && row.Selected)
                         {
@@ -1855,6 +1924,7 @@ namespace ANRPC_Inventory
 
                             rowflag = 1;
                             DataRow newRow = table.NewRow();
+
 
                             newRow[0] = TXT_AmrNo.Text.ToString();
                             // dataGridView1.Rows[r].Cells[1].Value = TXT_MonksaNo.Text.ToString();
@@ -1873,62 +1943,59 @@ namespace ANRPC_Inventory
                             newRow[13] = row.Cells[5].Value;
                             newRow[15] = row.Cells[6].Value;
 
-                            newRow["ApplyDiscount"] = false;
                             newRow["ApplyDareba"] = false;
 
-                            newRow["Discountpercent"] = 0;
                             newRow["Darebapercent"] = 0;
 
                             newRow["UnitPrice"] = 0;
                             newRow["TotalPrice"] = 0;
-                            newRow["TotalPriceAfterDiscount"] = 0;
                             newRow["TotalPriceAfter"] = 0;
 
-
                             // Add the row to the rows collection.
+                            //   table.Rows.Add(newRow);
                             table.Rows.InsertAt(newRow, r);
-
                             dataGridView1.DataSource = table;
+
+                            // MessageBox.Show(row.Index.ToString());
+                            /////////////////////   //   table.ImportRow(((DataTable)popup.dataGridView1.DataSource).Rows[row.Index]);
+                            // /////////////////////////////  {
 
                             //  table.Rows.InsertAt(newRow, r+1);
                             /*
-                            dataGridView1.Rows[r+1].Cells[0].Value = DBNull.Value;
-                            dataGridView1.Rows[r + 1].Cells[1].Value = DBNull.Value;
-                            dataGridView1.Rows[r + 1].Cells[2].Value = DBNull.Value;
-                            dataGridView1.Rows[r + 1].Cells[3].Value = DBNull.Value;
+                           dataGridView1.Rows[r+1].Cells[0].Value = DBNull.Value;
+                           dataGridView1.Rows[r + 1].Cells[1].Value = DBNull.Value;
+                           dataGridView1.Rows[r + 1].Cells[2].Value = DBNull.Value;
+                           dataGridView1.Rows[r + 1].Cells[3].Value = DBNull.Value;
 
-                            dataGridView1.Rows[r + 1].Cells[4].Value = DBNull.Value;
-                            dataGridView1.Rows[r + 1].Cells[5].Value = DBNull.Value;
-                            dataGridView1.Rows[r + 1].Cells[6].Value = DBNull.Value;
-                            dataGridView1.Rows[r + 1].Cells[7].Value = DBNull.Value;
+                           dataGridView1.Rows[r + 1].Cells[4].Value = DBNull.Value;
+                           dataGridView1.Rows[r + 1].Cells[5].Value = DBNull.Value;
+                           dataGridView1.Rows[r + 1].Cells[6].Value = DBNull.Value;
+                           dataGridView1.Rows[r + 1].Cells[7].Value = DBNull.Value;
 
-                            dataGridView1.Rows[r + 1].Cells[8].Value = DBNull.Value;
-                            dataGridView1.Rows[r + 1].Cells[9].Value = DBNull.Value;
-                            dataGridView1.Rows[r + 1].Cells[10].Value = DBNull.Value;
-                            dataGridView1.Rows[r + 1].Cells[11].Value = DBNull.Value;
-                            dataGridView1.Rows[r + 1].Cells[12].Value = DBNull.Value;
-                            dataGridView1.Rows[r + 1].Cells[14].Value = DBNull.Value;*/
-
+                           dataGridView1.Rows[r + 1].Cells[8].Value = DBNull.Value;
+                           dataGridView1.Rows[r + 1].Cells[9].Value = DBNull.Value;
+                           dataGridView1.Rows[r + 1].Cells[10].Value = DBNull.Value;
+                           dataGridView1.Rows[r + 1].Cells[11].Value = DBNull.Value;
+                           dataGridView1.Rows[r + 1].Cells[12].Value = DBNull.Value;
+                           dataGridView1.Rows[r + 1].Cells[14].Value = DBNull.Value;*/
 
                             //  dataGridView1.Rows[r].Cells[3].Value = TXT_StockBian.Text;
                             //  dataGridView1.Rows[r].Cells[6].Value = TXT_StockNoAll.Text;
-                        } 
-                   }
-                  table.AcceptChanges();
-               }
-               dataGridView1.DataSource = table;
-               // Read the contents of testDialog's TextBox.سس
-              // this.txtResult.Text = popup.TextBox1.Text;
-           }
-           else
-           {
-             //  this.txtResult.Text = "Cancelled";
-           }
-          popup.Dispose();
 
 
-
-
+                        }
+                    }
+                    table.AcceptChanges();
+                }
+                dataGridView1.DataSource = table;
+                // Read the contents of testDialog's TextBox.سس
+                // this.txtResult.Text = popup.TextBox1.Text;
+            }
+            else
+            {
+                //  this.txtResult.Text = "Cancelled";
+            }
+            popup.Dispose();
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
@@ -1962,13 +2029,33 @@ namespace ANRPC_Inventory
         {
             try
             {
-                ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Egmali.Text), currencies[0]);
-             //   txt_englishword.Text = toWord.ConvertToEnglish();
-                txt_arabicword.Text = toWord.ConvertToArabic();
+                //  ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Egmali.Text), currencies[0]);
+                //   txt_englishword.Text = toWord.ConvertToEnglish();
+                // txt_arabicword.Text = toWord.ConvertToArabic();
+                //
+
+                if (cboCurrency.SelectedIndex == 0)//USD
+                {
+                    ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Egmali.Text), currencies[6]);
+                    //   txt_englishword.Text = toWord.ConvertToEnglish();
+                    txt_arabicword.Text = toWord.ConvertToArabic();
+                }
+                else if (cboCurrency.SelectedIndex == 1)//EUR
+                {
+                    ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Egmali.Text), currencies[7]);
+                    //   txt_englishword.Text = toWord.ConvertToEnglish();
+                    txt_arabicword.Text = toWord.ConvertToArabic();
+                }
+                else if (cboCurrency.SelectedIndex == 2)//GBP
+                {
+                    ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Egmali.Text), currencies[8]);
+                    //   txt_englishword.Text = toWord.ConvertToEnglish();
+                    txt_arabicword.Text = toWord.ConvertToArabic();
+                }
             }
             catch (Exception ex)
             {
-             //   txt_englishword.Text = String.Empty;
+                //   txt_englishword.Text = String.Empty;
                 txt_arabicword.Text = String.Empty;
             }
         }
@@ -1984,47 +2071,41 @@ namespace ANRPC_Inventory
         private void Cmb_FYear2_SelectedIndexChanged(object sender, EventArgs e)
         {
             //call sp that get last num that eentered for this MM and this YYYY
-            Constants.opencon();
-            
+            Constants.openForeignCon();
             // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
             string cmdstring = "";
             if (UserB == "Stock")
             {
                 cmdstring = "select (Amrshraa_No) from  T_Awamershraa where AmrSheraa_sanamalia=@FY  and (Sign12 is null or Sign13  is null or Sign14 is null) order by  Amrshraa_No";
             }
-            else if (UserB=="Finance")
+            else if (UserB == "Finance")
             {
-            cmdstring = "select (Amrshraa_No) from  T_Awamershraa where AmrSheraa_sanamalia=@FY  and (Sign3 is not null) order by  Amrshraa_No";
-             }
+                cmdstring = "select (Amrshraa_No) from  T_Awamershraa where AmrSheraa_sanamalia=@FY  and (Sign3 is not null) order by  Amrshraa_No";
+            }
             else if (UserB == "Chairman" || UserB == "ViceChairman")
             {
                 cmdstring = "select (Amrshraa_No) from  T_Awamershraa where AmrSheraa_sanamalia=@FY and (Sign3 is not null)  order by  Amrshraa_No";
-          
+
             }
             else if (Constants.User_Type == "A")
             {
                 cmdstring = "select (Amrshraa_No) from  T_Awamershraa where AmrSheraa_sanamalia=@FY and (Sign14 is not null) and( Sign3 is null) and CodeEdara=@C  order by  Amrshraa_No";
-          
-            }
 
+            }
             if (cmdstring != "")
             {
-
-                SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-
+                SqlCommand cmd = new SqlCommand(cmdstring, Constants.foreignCon);
                 // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
                 cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
                 cmd.Parameters.AddWithValue("@C", Constants.CodeEdara);
                 ///   cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
-
                 DataTable dts = new DataTable();
-
                 dts.Load(cmd.ExecuteReader());
                 Cmb_AmrNo2.DataSource = dts;
                 Cmb_AmrNo2.ValueMember = "Amrshraa_No";
                 Cmb_AmrNo2.DisplayMember = "Amrshraa_No";
                 Cmb_AmrNo2.SelectedIndex = -1;
-                Constants.closecon();
+                Constants.closeForeignCon();
             }
         }
 
@@ -2064,7 +2145,7 @@ namespace ANRPC_Inventory
 
         private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            if (dataGridView1.CurrentCell.ColumnIndex == 24 ||dataGridView1.CurrentCell.ColumnIndex == 17 ||dataGridView1.CurrentCell.ColumnIndex == 18|dataGridView1.CurrentCell.ColumnIndex == 23 )//reqQuan
+            if (dataGridView1.CurrentCell.ColumnIndex == 21 || dataGridView1.CurrentCell.ColumnIndex == 17 || dataGridView1.CurrentCell.ColumnIndex == 18 | dataGridView1.CurrentCell.ColumnIndex == 20)//reqQuan
             {
                 e.Control.KeyPress -= new KeyPressEventHandler(Column_KeyPress);
 
@@ -2096,21 +2177,12 @@ namespace ANRPC_Inventory
         {
             string currentColumnName = dataGridView1.Columns[e.ColumnIndex].Name;
 
-            if (e.RowIndex >= 0 && e.RowIndex != dataGridView1.NewRowIndex && 
-                currentColumnName != "TotalPrice" && currentColumnName != "TotalPriceAfterDiscount" && 
-                currentColumnName != "TotalPriceAfter")
+            if (e.RowIndex >= 0 && e.RowIndex != dataGridView1.NewRowIndex &&
+                currentColumnName != "TotalPrice" && currentColumnName != "TotalPriceAfter")
             {
                 bool isApplyDareba = Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells["ApplyDareba"].Value.ToString());
-                bool isApplyDiscount = Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells["ApplyDiscount"].Value.ToString());
 
-                if (currentColumnName == "ApplyDiscount")
-                {
-                    if (!isApplyDiscount)
-                    {
-                        dataGridView1.Rows[e.RowIndex].Cells["Discountpercent"].Value = 0;
-                    }
-                }
-                else if (currentColumnName == "ApplyDareba")
+                if (currentColumnName == "ApplyDareba")
                 {
                     if (!isApplyDareba)
                     {
@@ -2119,8 +2191,8 @@ namespace ANRPC_Inventory
                 }
                 else
                 {
-                    HandleRecalculateDarebaSection(e.RowIndex, currentColumnName,isApplyDareba,isApplyDiscount);
-                }           
+                    HandleRecalculateDarebaSection(e.RowIndex, currentColumnName, isApplyDareba);
+                }
             }
         }
 
@@ -2128,10 +2200,48 @@ namespace ANRPC_Inventory
         {
             TXT_Egmali_TextChanged(null, null);
         }
-       
+
+        private void cboCurrency_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.Rows.Count > 1 && lastCurrencySelectedIdx != cboCurrency.SelectedIndex && AddEditFlag != 0) //because deafault is one
+            {
+                DialogResult dialogResult = MessageBox.Show("إذا قمت بالضغط علي نعم سوف يتم محو البيانات", "تحذير", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    ///////////////// Getdata(table);
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    cboCurrency.SelectedIndex = lastCurrencySelectedIdx;
+                    //do something else
+                }
+            }
+
+            // TXT_Currency.Text = cboCurrency.Text;
+            // TXT_CurrencyTotal.Text = cboCurrency.Text;
+
+            if (cboCurrency.Text != "EGP" && cboCurrency.Text != "")
+            {
+
+
+                TXT_ExchangeRate.Text = ((CurrencyData3)CurrencyConverter3.getCurrencyData(cboCurrency.SelectedItem.ToString())).getExchangeRate().ToString();
+
+
+                ExchangeRate = ((CurrencyData3)CurrencyConverter3.getCurrencyData(cboCurrency.SelectedItem.ToString())).getExchangeRate();
+
+            }
+            else
+            {
+                ExchangeRate = 1;
+                TXT_ExchangeRate.Text = "";
+            }
+
+            lastCurrencySelectedIdx = cboCurrency.SelectedIndex;
+        }
+
         private void TXT_AmrNo_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
         {
-           // Constants.validatenukeypress(sender, e);
+            // Constants.validatenukeypress(sender, e);
         }
 
         private void TXT_MonksaNo_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
@@ -2168,25 +2278,25 @@ namespace ANRPC_Inventory
             {
 
                 Constants.AmrSanaMalya = Cmb_FY2.Text;
-                Constants.AmrNo =Cmb_AmrNo2.Text;
+                Constants.AmrNo = Cmb_AmrNo2.Text;
                 Constants.FormNo = 6;
                 FReports f = new FReports();
                 f.Show();
-            }            
+            }
         }
 
         public int CheckFinancialStatus(decimal T, string BM, int AT)
         {
-            Constants.opencon();
+            Constants.openForeignCon();
             string query = "exec SP_CheckFinancial @T,@BM,@AT,@F out";
-            SqlCommand cmd = new SqlCommand(query,Constants.con);
+            SqlCommand cmd = new SqlCommand(query, Constants.con);
             cmd.Parameters.AddWithValue("@T", T);
             cmd.Parameters.AddWithValue("@BM", BM);
             cmd.Parameters.AddWithValue("@AT", AT);
             cmd.Parameters.Add("@F", SqlDbType.Int, 32);  //-------> output parameter
             cmd.Parameters["@F"].Direction = ParameterDirection.Output;
 
-       
+
 
             try
             {
@@ -2198,14 +2308,14 @@ namespace ANRPC_Inventory
             {
                 executemsg = false;
                 MessageBox.Show(sqlEx.ToString());
-            //  FinancialType = (int)cmd.Parameters["@F"].Value;
+                //  FinancialType = (int)cmd.Parameters["@F"].Value;
             }
             if (executemsg == true && FinancialType == 1)
             {
                 FinancialTypeText = "مدير عام";
 
             }
-            else  if (executemsg == true && FinancialType == 2)
+            else if (executemsg == true && FinancialType == 2)
             {
                 FinancialTypeText = "مساعد رئيس الشركة";
 
@@ -2221,9 +2331,9 @@ namespace ANRPC_Inventory
                 FinancialTypeText = "مجلس الادارة";
 
             }
-        
 
-            Constants.closecon();
+
+            Constants.closeForeignCon();
 
             return FinancialType;
 
@@ -2313,7 +2423,7 @@ namespace ANRPC_Inventory
                         Directory.CreateDirectory(path);
                     }
 
-                    path += "AMR_SHERAA" + @"\";
+                    path += "AMR_SHERAA_FOREIGN" + @"\";
 
                     if (!Directory.Exists(path))
                     {
@@ -2356,7 +2466,7 @@ namespace ANRPC_Inventory
 
             PDF_PopUp popup = new PDF_PopUp();
 
-            popup.WholePath = @"\\172.18.8.83\MaterialAPP\PDF\" + Constants.CodeEdara + @"\" + Cmb_FY.Text + @"\AMR_SHERAA\" + TXT_AmrNo.Text + @"\";
+            popup.WholePath = @"\\172.18.8.83\MaterialAPP\PDF\" + Constants.CodeEdara + @"\" + Cmb_FY.Text + @"\AMR_SHERAA_FOREIGN\" + TXT_AmrNo.Text + @"\";
             try
             {
                 popup.ShowDialog(this);
@@ -2387,6 +2497,64 @@ namespace ANRPC_Inventory
         {
             DeleteLogic();
         }
+
+
+
+        /*private void BTN_ConvertToEG_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cboCurrency.Text) == false)
+            {
+                TXT_ExchangeRate.Text = ((CurrencyData3)CurrencyConverter3.getCurrencyData(cboCurrency.Text)).getExchangeRate().ToString();
+            }
+        }*/
+
+        private void BTN_ConvertEG_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(TXT_ExchangeRate.Text) == false && string.IsNullOrEmpty(TXT_Egmali.Text) == false)
+            //TXT_AppValue.Text * 
+            {
+                if ((MessageBox.Show("هل تريد تحويل الاجمالى الى الجنيه المصرى؟", "", MessageBoxButtons.YesNo)) == DialogResult.Yes)
+                {
+                    TXT_Egmali2.Text = (Convert.ToDecimal(TXT_Egmali.Text) * Convert.ToDecimal(TXT_ExchangeRate.Text)).ToString();
+                }
+            }
+            else
+            {
+                MessageBox.Show("يرجي إضافة البنود اولا", "", MessageBoxButtons.OK);
+            }
+        }
+
+        private void TXT_Egmali2_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ///////////////////////////regardless the currency convert to EG
+                if (cboCurrency.SelectedIndex == 0)//USD
+                {
+                    ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Egmali2.Text), currencies[0]);
+                    //   txt_englishword.Text = toWord.ConvertToEnglish();
+                    txt_arabicword2.Text = toWord.ConvertToArabic();
+                }
+                else if (cboCurrency.SelectedIndex == 1)//EUR
+                {
+                    ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Egmali2.Text), currencies[0]);
+                    //   txt_englishword.Text = toWord.ConvertToEnglish();
+                    txt_arabicword2.Text = toWord.ConvertToArabic();
+                }
+                else if (cboCurrency.SelectedIndex == 2)//GBP
+                {
+                    ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Egmali2.Text), currencies[0]);
+                    //   txt_englishword.Text = toWord.ConvertToEnglish();
+                    txt_arabicword2.Text = toWord.ConvertToArabic();
+                }
+            }
+            catch (Exception ex)
+            {
+                //   txt_englishword.Text = String.Empty;
+                txt_arabicword2.Text = String.Empty;
+            }
+        }
+
 
         //------------------------------------------ Signature Handler ---------------------------------
         #region Signature Handler
@@ -2558,7 +2726,7 @@ namespace ANRPC_Inventory
 
         private void dataGridView1_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
-            HandleRecalculateDarebaSection(e.Row.Index, "", isDelete:true);
+            HandleRecalculateDarebaSection(e.Row.Index, "", isDelete: true);
         }
     }
 }

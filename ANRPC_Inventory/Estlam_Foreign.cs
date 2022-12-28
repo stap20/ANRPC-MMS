@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 using System.IO;
 namespace ANRPC_Inventory
 {
-    public partial class Estlam_F : Form
+    public partial class Estlam_Foreign : Form
     {
         //------------------------------------------ Define Variables ---------------------------------
         #region Def Variables
@@ -112,10 +112,37 @@ namespace ANRPC_Inventory
             SAVE,
         }
         int currentSignNumber = 0;
+        Dictionary<int, int> signatureOrder;
         #endregion
 
         //------------------------------------------ Helper ---------------------------------
         #region Helpers
+        private void initiateSignatureOrder()
+        {
+            //Dictionary to get values of signature (sign1 or sign2 ...) according to thier order in table
+            signatureOrder = new Dictionary<int, int>();
+            signatureOrder.Add(1, 1);
+            signatureOrder.Add(2, 2);
+            signatureOrder.Add(3, 3);
+        }
+
+        public void SP_InsertSignatures(int signNumber, int signOrder)
+        {
+            string cmdstring = "Exec  SP_InsertSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2,@SignOrder";
+            SqlCommand cmd = new SqlCommand(cmdstring, Constants.foreignCon);
+            cmd.Parameters.AddWithValue("@TNO", Cmb_AmrNo.Text);
+            cmd.Parameters.AddWithValue("@TNO2", DBNull.Value);
+            cmd.Parameters.AddWithValue("@FY", Cmb_FY.Text.ToString());
+            cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
+            cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
+            cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
+            cmd.Parameters.AddWithValue("@FN", 4);
+            cmd.Parameters.AddWithValue("@SN", signNumber);
+            cmd.Parameters.AddWithValue("@D1", DBNull.Value);
+            cmd.Parameters.AddWithValue("@D2", DBNull.Value);
+            cmd.Parameters.AddWithValue("@SignOrder", signOrder);
+            cmd.ExecuteNonQuery();
+        }
         private PictureBox CheckSignatures(Panel panel, int signNumber)
         {
             try
@@ -172,9 +199,9 @@ namespace ANRPC_Inventory
         public void SP_UpdateSignatures(int x, DateTime D1, DateTime? D2 = null)
         {
             string cmdstring = "Exec  SP_UpdateSignDatesEstlam  @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
-            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+            SqlCommand cmd = new SqlCommand(cmdstring, Constants.foreignCon);
 
-            cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(Cmb_AmrNo.Text));
+            cmd.Parameters.AddWithValue("@TNO", Cmb_AmrNo.Text);
             cmd.Parameters.AddWithValue("@TNO2", DBNull.Value);
             if (Cmb_FY.Text.ToString() == "")
             {
@@ -215,17 +242,15 @@ namespace ANRPC_Inventory
 
             if (isConfirm)
             {
-                TableQuery = "select  Amrshraa_No,AmrSheraa_sanamalia,TalbTwareed_No,FYear,Bnd_No,Quan,QuanArrived,BayanBnd,EstlamFlag,EstlamDate from T_Estlam Where  Amrshraa_No = " + amrNo + " and AmrSheraa_sanamalia='" + fyear + "' and date='" + Convert.ToDateTime(TXT_Date.Value.ToShortDateString()) + "'";
+                TableQuery = "select  Amrshraa_No,AmrSheraa_sanamalia,TalbTwareed_No,FYear,Bnd_No,Quan,QuanArrived,BayanBnd,EstlamFlag,EstlamDate from T_Estlam Where  Amrshraa_No = '" + amrNo + "' and AmrSheraa_sanamalia='" + fyear + "' and date='" + Convert.ToDateTime(TXT_Date.Value.ToShortDateString()) + "'";
             }
             else
             {
-                TableQuery = "SELECT *  FROM [T_BnodAwamershraa] Where (quan2 is null or quan2<quan) and Amrshraa_No = " + amrNo + " and AmrSheraa_sanamalia='" + fyear + "'";
+                TableQuery = "SELECT *  FROM [T_BnodAwamershraa] Where (quan2 is null or quan2<quan) and Amrshraa_No = '" + amrNo + "' and AmrSheraa_sanamalia='" + fyear + "'";
             }
-
-
             table.Clear();
 
-            dataadapter = new SqlDataAdapter(TableQuery, Constants.con);
+            dataadapter = new SqlDataAdapter(TableQuery, Constants.foreignCon);
             table.Locale = System.Globalization.CultureInfo.InvariantCulture;
             dataadapter.Fill(table);
             dataGridView1.DataSource = table;
@@ -340,13 +365,13 @@ namespace ANRPC_Inventory
 
         public bool SearchEstlam(string amrNo, string fyear,bool isConfirm = true)
         {
-            Constants.opencon();
+            Constants.openForeignCon();
 
             string cmdstring;
             SqlCommand cmd;
 
             cmdstring = "select * from T_Estlam where Amrshraa_No=@TN and AmrSheraa_sanamalia=@FY and date=@D";
-            cmd = new SqlCommand(cmdstring, Constants.con);
+            cmd = new SqlCommand(cmdstring, Constants.foreignCon);
 
 
             cmd.Parameters.AddWithValue("@TN", amrNo);
@@ -470,7 +495,7 @@ namespace ANRPC_Inventory
 
             GetEstlamBnod(amrNo, fyear, isConfirm);
 
-            Constants.closecon();
+            Constants.closeForeignCon();
             return true;
         }
         #endregion
@@ -606,7 +631,7 @@ namespace ANRPC_Inventory
                 Cmb_AmrNo.Enabled = true;
                 BTN_Print.Enabled = true;
             }
-            
+
         }
 
         public void reset()
@@ -637,6 +662,8 @@ namespace ANRPC_Inventory
             DeleteBtn.Enabled = false;
             BTN_Print.Enabled = false;
             BTN_Print2.Enabled = false;
+           
+            
             browseBTN.Enabled = false;
             BTN_PDF.Enabled = false;
 
@@ -704,7 +731,7 @@ namespace ANRPC_Inventory
         #region Logic Handler
         private void AddLogic()
         {
-            Constants.opencon();
+            Constants.openForeignCon();
 
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -717,7 +744,7 @@ namespace ANRPC_Inventory
 
                         string cmdstring = "exec SP_InsertEstlam @p1,@p2,@p3,@p4,@p5,@p6,@p7,@p77,@p777,@p8,@p9,@p10,@p17,@p188,@p18,@p1888,@p11,@p12,@p13,@p14,@p15,@p16";
 
-                        SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+                        SqlCommand cmd = new SqlCommand(cmdstring, Constants.foreignCon);
 
 
                         cmd.Parameters.AddWithValue("@p1", (Convert.ToDateTime(TXT_Date.Value.ToShortDateString())));
@@ -746,7 +773,7 @@ namespace ANRPC_Inventory
 
                         // cmd.Parameters.AddWithValue("@p6", (Convert.ToDateTime(TXT_Date.Value.ToShortDateString())));
 
-                        cmd.Parameters.AddWithValue("@p6", Convert.ToInt32(Cmb_AmrNo.SelectedValue));
+                        cmd.Parameters.AddWithValue("@p6", Cmb_AmrNo.Text);
                         cmd.Parameters.AddWithValue("@p7", (Cmb_FY.Text));
 
                         cmd.Parameters.AddWithValue("@p77", row.Cells[4].Value);
@@ -775,9 +802,9 @@ namespace ANRPC_Inventory
                             cmd.Parameters.AddWithValue("@p188", row.Cells[10].Value);//
                                                                                       ////////////////////////////////////////////////
                             string st = "exec SP_GetAllQuanArrived @p1,@p2,@p3,@p4,@p5,@p6 out";
-                            SqlCommand cmd2 = new SqlCommand(st, Constants.con);
+                            SqlCommand cmd2 = new SqlCommand(st, Constants.foreignCon);
 
-                            cmd2.Parameters.AddWithValue("@p1", Convert.ToInt32(Cmb_AmrNo.SelectedValue));
+                            cmd2.Parameters.AddWithValue("@p1", Cmb_AmrNo.Text);
                             cmd2.Parameters.AddWithValue("@p2", (Cmb_FY.Text));
 
                             cmd2.Parameters.AddWithValue("@p3", row.Cells[4].Value);
@@ -871,32 +898,13 @@ namespace ANRPC_Inventory
 
             if (executemsg == true)
             {
-                for (int i = 1; i <= 3; i++)
+
+                foreach (KeyValuePair<int, int> entry in signatureOrder)
                 {
-
-
-                    string cmdstring = "Exec  SP_InsertSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
-                    SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-
-                    cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(Cmb_AmrNo.Text));
-                    cmd.Parameters.AddWithValue("@TNO2", DBNull.Value);
-
-                    cmd.Parameters.AddWithValue("@FY", Cmb_FY.Text.ToString());
-                    cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
-                    cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
-                    cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
-
-                    cmd.Parameters.AddWithValue("@FN", 4);
-
-                    cmd.Parameters.AddWithValue("@SN", i);
-
-                    cmd.Parameters.AddWithValue("@D1", DBNull.Value);
-
-                    cmd.Parameters.AddWithValue("@D2", DBNull.Value);
-                    cmd.ExecuteNonQuery();
+                    SP_InsertSignatures(entry.Key, entry.Value);
                 }
-                SP_UpdateSignatures(1, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
+                SP_UpdateSignatures(1, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
                 SP_UpdateSignatures(2, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
                 ///////////////////////////////////////////////////
@@ -909,7 +917,7 @@ namespace ANRPC_Inventory
                 MessageBox.Show("لم يتم إدخال طلب الاستلام بنجاج!!");
             }
 
-            Constants.closecon();
+            Constants.closeForeignCon();
 
         }
 
@@ -928,7 +936,7 @@ namespace ANRPC_Inventory
         }
         public void UpdateEstlam()
         {
-            Constants.opencon();
+            Constants.openForeignCon();
 
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -943,7 +951,7 @@ namespace ANRPC_Inventory
                     {
                         string cmdstring = "exec SP_UpdateEstlam @ff1,@o1,@o2,@o3,@o4,@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p77,@p777,@p8,@p9,@p10,@p17,@p18,@p11,@p12,@p13,@p14,@p15,@p16";
 
-                        SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+                        SqlCommand cmd = new SqlCommand(cmdstring, Constants.foreignCon);
 
                         cmd.Parameters.AddWithValue("@ff1", FlagSign3);
                         cmd.Parameters.AddWithValue("@o1", TXT_Date.Value.ToShortDateString());
@@ -976,7 +984,7 @@ namespace ANRPC_Inventory
 
                         // cmd.Parameters.AddWithValue("@p6", (Convert.ToDateTime(TXT_Date.Value.ToShortDateString())));
 
-                        cmd.Parameters.AddWithValue("@p6", Convert.ToInt32(Cmb_AmrNo.Text));
+                        cmd.Parameters.AddWithValue("@p6", Cmb_AmrNo.Text);
                         cmd.Parameters.AddWithValue("@p7", (Cmb_FY.Text));
                         cmd.Parameters.AddWithValue("@p77", row.Cells[2].Value);
 
@@ -1104,7 +1112,7 @@ namespace ANRPC_Inventory
                 MessageBox.Show("لم يتم تعديل طلب الاستلام بنجاج!!");
             }
 
-            Constants.closecon();
+            Constants.closeForeignCon();
         }
         private void EditLogic()
         {
@@ -1196,13 +1204,53 @@ namespace ANRPC_Inventory
             #region dataGridView1
             if (dataGridView1.Rows.Count <= 0)
             {
-                //errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
+                errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
                 MessageBox.Show("لايمكن ان يتكون طلب الاستلام بدون بنود");
             }
             else if (dataGridView1.Rows.Count == 1 && dataGridView1.Rows[0].IsNewRow == true)
             {
-                //errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
+                errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
                 MessageBox.Show("لايمكن ان يتكون طلب الاستلام بدون بنود");
+            }
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                Console.WriteLine(dataGridView1.Rows.Count);
+                if (!row.IsNewRow)
+                {
+                    DataGridViewCell arrived, ordered;
+
+                    if (AddEditFlag == 1) //edit
+                    {
+                        ordered = row.Cells["Quan"];//col5
+
+                        arrived = row.Cells["QuanArrived"];
+                    }
+                    else
+                    {
+                        ordered = row.Cells["Quan"];//col10
+                        arrived = row.Cells["Quan2"];
+                    }
+
+                    if(arrived.Value.ToString() != "")
+                    {
+                        if (Convert.ToDouble(ordered.Value) != Convert.ToDouble(arrived.Value))
+                        {
+                            arrived.ErrorText = "يجب أن تساوي الكمية المطلوبة الكمية الواردة  ";
+                            errorsList.Add((alertProvider, dataGridView1, "تم ادخال مواصفة هذا التصنيف من قبل"));
+                        }
+                        else
+                        {
+                            arrived.ErrorText = "";
+                        }
+                    }
+                    else
+                    {
+                        arrived.ErrorText = "يجب أن كتابة الكمية";
+                        errorsList.Add((alertProvider, dataGridView1, "يجب أن كتابة الكمية"));
+                    }
+
+                }
             }
             #endregion
 
@@ -1248,7 +1296,6 @@ namespace ANRPC_Inventory
         }
         #endregion
 
-
         private void init()
         {
             alertProvider.Icon = SystemIcons.Warning;
@@ -1267,15 +1314,13 @@ namespace ANRPC_Inventory
             }
 
 
-            con = new SqlConnection(Constants.constring);
+
+            Constants.openForeignCon();
             Cmb_AmrNo.DrawMode = DrawMode.OwnerDrawFixed;
             Cmb_AmrNo.DrawItem += Cmb_AmrNo_DrawItem;
             Cmb_AmrNo.DropDownClosed += Cmb_AmrNo_DropDownClosed;
 
-            if (con != null && con.State == ConnectionState.Closed)
-            {
-                con.Open();
-            }
+
             this.dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
@@ -1284,7 +1329,7 @@ namespace ANRPC_Inventory
             // ******    AUTO COMPLETE
             //*******************************************
             string cmdstring = "select Amrshraa_No from   T_Awamershraa where  AmrSheraa_sanamalia='" + Cmb_FY + "'";
-            SqlCommand cmd = new SqlCommand(cmdstring, con);
+            SqlCommand cmd = new SqlCommand(cmdstring, Constants.foreignCon);
             SqlDataReader dr = cmd.ExecuteReader();
             //---------------------------------
             if (dr.HasRows == true)
@@ -1300,7 +1345,7 @@ namespace ANRPC_Inventory
 
             ///////////////////////////////////////
             string cmdstring2 = "SELECT [arab_unit] ,[eng_unit] ,[cod_unit] from Tunit";
-            SqlCommand cmd2 = new SqlCommand(cmdstring2, con);
+            SqlCommand cmd2 = new SqlCommand(cmdstring2, Constants.foreignCon);
             SqlDataReader dr2 = cmd2.ExecuteReader();
             //---------------------------------
             if (dr2.HasRows == true)
@@ -1315,15 +1360,14 @@ namespace ANRPC_Inventory
             //////////////////////////////////////////////
             Cmb_FY.SelectedIndex = 0;
 
-            con.Close();
+            Constants.closeForeignCon();
             reset();
         }
-
-        public Estlam_F()
+        public Estlam_Foreign()
         {
             InitializeComponent();
-
-            init(); 
+            init();
+            initiateSignatureOrder();
         }
 
         private void Cmb_AmrNo_DropDownClosed(object sender, EventArgs e)
@@ -1391,7 +1435,7 @@ namespace ANRPC_Inventory
                     MessageBox.Show("يجب اختيار امر الشراء  اولا");
                     return;
                 }
-                Constants.opencon();
+                Constants.openForeignCon();
                 int flag=0;
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
@@ -1399,9 +1443,9 @@ namespace ANRPC_Inventory
                     {
                         string cmdstring = "SP_DeleteEstlam @TNO,@FY,@D,@B,@TTNo,@FY2,@aot output";
 
-                        SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+                        SqlCommand cmd = new SqlCommand(cmdstring, Constants.foreignCon);
 
-                        cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(Cmb_AmrNo.SelectedValue));
+                        cmd.Parameters.AddWithValue("@TNO", Cmb_AmrNo.Text);
                         cmd.Parameters.AddWithValue("@FY", Cmb_FY.Text.ToString());
 
                         cmd.Parameters.AddWithValue("@D", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
@@ -1455,22 +1499,31 @@ namespace ANRPC_Inventory
                     Input_Reset();
                     cleargridview();
                 }
-                Constants.closecon();
+                Constants.closeForeignCon();
             }
         }
 
         private void Cmb_FY_SelectedIndexChanged(object sender, EventArgs e)
         {
             //call sp that get last num that eentered for this MM and this YYYY
-            Constants.opencon();
+            Constants.openForeignCon();
 
             // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
-            string cmdstring = @"select T_Awamershraa.Amrshraa_No from  T_Awamershraa left join T_Estlam on T_Awamershraa.Amrshraa_No = T_Estlam.Amrshraa_No
-                                and T_Awamershraa.AmrSheraa_sanamalia = T_Estlam.AmrSheraa_sanamalia
-                                where (T_Awamershraa.Sign14 is not null) and T_Awamershraa.AmrSheraa_sanamalia=@FY and (T_Estlam.Amrshraa_No is null) 
-                                group by T_Awamershraa.Amrshraa_No  order by  T_Awamershraa.Amrshraa_No";
+            string cmdstring = @"select 
+                              T_Awamershraa.Amrshraa_No 
+                            from 
+                              T_Awamershraa 
+                              left join T_Estlam on T_Awamershraa.Amrshraa_No = T_Estlam.Amrshraa_No  and T_Awamershraa.AmrSheraa_sanamalia = T_Estlam.AmrSheraa_sanamalia
+                            where 
+                              (T_Awamershraa.Sign14 is not null) 
+                              and T_Awamershraa.AmrSheraa_sanamalia = @FY 
+                              and (T_Estlam.Amrshraa_No is null) 
+                            group by 
+                              T_Awamershraa.Amrshraa_No 
+                            order by 
+                              T_Awamershraa.Amrshraa_No";
 
-            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+            SqlCommand cmd = new SqlCommand(cmdstring, Constants.foreignCon);
 
             // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
             cmd.Parameters.AddWithValue("@FY", Cmb_FY.Text);
@@ -1483,19 +1536,19 @@ namespace ANRPC_Inventory
             Cmb_AmrNo.ValueMember = "Amrshraa_No";
             Cmb_AmrNo.DisplayMember = "Amrshraa_No";
             Cmb_AmrNo.SelectedIndex = -1;
-            Constants.closecon();       
+            Constants.closeForeignCon();       
         }
 
 
         private void Cmb_FYear2_SelectedIndexChanged(object sender, EventArgs e)
         {
             //call sp that get last num that eentered for this MM and this YYYY
-            Constants.opencon();
+            Constants.openForeignCon();
 
             // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
             string cmdstring = "select  (Amrshraa_No),date,AmrShraa_No +' ==> '+  Convert(nvarchar(50),Date ) as x from T_Estlam where AmrSheraa_sanamalia=@FY and (Sign3 is null)  group by date,Amrshraa_No,AmrSheraa_sanamalia   order by Amrshraa_No ";
 
-            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+            SqlCommand cmd = new SqlCommand(cmdstring, Constants.foreignCon);
 
             // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
             cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
@@ -1508,14 +1561,13 @@ namespace ANRPC_Inventory
             Cmb_AmrNo2.ValueMember = "Amrshraa_No";
             Cmb_AmrNo2.DisplayMember = "x";
             Cmb_AmrNo2.SelectedIndex = -1;
-            Constants.closecon();
+            Constants.closeForeignCon();
             
         }
 
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
-
             if (!IsValidCase(VALIDATION_TYPES.SAVE))
             {
                 return;
@@ -1534,7 +1586,7 @@ namespace ANRPC_Inventory
                         //   {
                         if (row.Cells[23].Value == DBNull.Value || row.Cells[23].Value == null || row.Cells[23].Value.ToString() == "")
                         { // as long as eni estlmt ay kmya lazm a7ot tare5 el estlam bs lw goz2 msh 7a7ot mark eni estlmt el band kolo
-                            MessageBox.Show("يجب ادخال تاريخ الاستلام لاى بند تم استلام كل/جزء منه");
+                            MessageBox.Show("يجب ادخال تاريخ الاستلام لاى بند تم استلامه");
                             return;
                         }
                     }
@@ -1595,16 +1647,21 @@ namespace ANRPC_Inventory
                             MessageBox.Show("استلام كلى للبند");
                             dataGridView1.Rows[e.RowIndex].Cells[22].Value = "true";//تم الاستلام
                         }
-                        else if (String.Compare(dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString()) < 0)
+                        else
                         {
-                            MessageBox.Show("استلام جزئى للبند");
+                            MessageBox.Show("يجب استلام  كلي للبند ( امر شراء اجنبي)");
                             dataGridView1.Rows[e.RowIndex].Cells[22].Value = "false";//تم الاستلام
                         }
-                        else if (String.Compare(dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString()) > 0)
-                        {
-                            MessageBox.Show("الكمية الواردة اكبر من المطلوبة");
-                            dataGridView1.Rows[e.RowIndex].Cells[22].Value = "true";//تم الاستلام
-                        }
+                        //else if (String.Compare(dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString()) < 0)
+                        //{
+                        //    MessageBox.Show("يجب استلام  كلي للبند ( امر شراء اجنبي)");
+                        //    dataGridView1.Rows[e.RowIndex].Cells[22].Value = "false";//تم الاستلام
+                        //}
+                        //else if (String.Compare(dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString()) > 0)
+                        //{
+                        //    MessageBox.Show("الكمية الواردة اكبر من المطلوبة");
+                        //    dataGridView1.Rows[e.RowIndex].Cells[22].Value = "true";//تم الاستلام
+                        //}
                     }
                 }
                 }
@@ -1871,7 +1928,7 @@ namespace ANRPC_Inventory
             else
             {
                 Constants.Date_E = TXT_Date.Text;
-                Constants.AmrNo = Cmb_AmrNo.SelectedValue.ToString();
+                Constants.AmrNo = Cmb_AmrNo.Text;
                 Constants.AmrSanaMalya = Cmb_FY.Text;
                 Constants.MwardName = TXT_NameMward.Text;
 
@@ -1902,7 +1959,7 @@ namespace ANRPC_Inventory
             else
             {
                 Constants.Date_E = TXT_Date.Text;
-                Constants.AmrNo = Cmb_AmrNo.SelectedValue.ToString();
+                Constants.AmrNo = Cmb_AmrNo.Text;
                 Constants.AmrSanaMalya = Cmb_FY.Text;
                 Constants.MwardName = TXT_NameMward.Text;
 

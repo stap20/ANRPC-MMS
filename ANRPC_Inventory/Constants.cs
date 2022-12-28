@@ -89,7 +89,7 @@ namespace ANRPC_Inventory
 
         public static Boolean executemsg;
         public static SqlConnection con = new SqlConnection(Constants.constring);
-        public static SqlConnection con3 = new SqlConnection(Constants.constring3);
+        public static SqlConnection foreignCon = new SqlConnection(Constants.constring3);
         #endregion
 
         public static readonly Dictionary<string, string> SIGNATURE_TYPES = new Dictionary<string, string>
@@ -128,13 +128,6 @@ namespace ANRPC_Inventory
                 con.Open();
             }
         }
-        public static void opencon3()
-        {
-            if (con3 != null && con3.State == ConnectionState.Closed)
-            {
-                con3.Open();
-            }
-        }
         public static void closecon()
         {
             if (con != null && con.State == ConnectionState.Open)
@@ -142,6 +135,22 @@ namespace ANRPC_Inventory
                 con.Close();
             }
         }
+
+        public static void openForeignCon()
+        {
+            if (foreignCon != null && foreignCon.State == ConnectionState.Closed)
+            {
+                foreignCon.Open();
+            }
+        }
+        public static void closeForeignCon()
+        {
+            if (foreignCon != null && foreignCon.State == ConnectionState.Open)
+            {
+                foreignCon.Close();
+            }
+        }
+
         public static string GetStock(string group)
         {
             Constants.opencon();

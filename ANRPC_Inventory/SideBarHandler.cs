@@ -124,7 +124,7 @@ namespace ANRPC_Inventory
                 int activeBorderX, activeBorderY;
 
 
-                activeBorderX = this.currentActiveTab.Location.X+ 232 - 8;
+                activeBorderX = this.currentActiveTab.Location.X+ 253 - 8;
                 activeBorderY = this.currentActiveTab.Location.Y;
 
                 this.tabsActiveBorder.Location = new Point(activeBorderX, activeBorderY);

@@ -1,6 +1,6 @@
 ﻿namespace ANRPC_Inventory
 {
-    partial class Amrsheraa_PopUp
+    partial class Amrsheraa_PopUp_Foreign
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Amrsheraa_PopUp));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Amrsheraa_PopUp_Foreign));
             this.label3 = new System.Windows.Forms.Label();
             this.Addbtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -124,14 +124,10 @@
             this.CMB_TalbNo2.Enabled = false;
             this.CMB_TalbNo2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CMB_TalbNo2.FormattingEnabled = true;
-            this.CMB_TalbNo2.Items.AddRange(new object[] {
-            "2019_2020",
-            "2020_2021"});
             this.CMB_TalbNo2.Location = new System.Drawing.Point(158, 84);
             this.CMB_TalbNo2.Name = "CMB_TalbNo2";
             this.CMB_TalbNo2.Size = new System.Drawing.Size(169, 27);
             this.CMB_TalbNo2.TabIndex = 236;
-            this.CMB_TalbNo2.SelectedIndexChanged += new System.EventHandler(this.CMB_TalbNo2_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -166,9 +162,9 @@
             this.radioButton5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButton5.AutoSize = true;
             this.radioButton5.ForeColor = System.Drawing.Color.DarkBlue;
-            this.radioButton5.Location = new System.Drawing.Point(32, 3);
+            this.radioButton5.Location = new System.Drawing.Point(35, 3);
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(71, 17);
+            this.radioButton5.Size = new System.Drawing.Size(68, 17);
             this.radioButton5.TabIndex = 48;
             this.radioButton5.TabStop = true;
             this.radioButton5.Text = "امر مباشر";
@@ -180,9 +176,9 @@
             this.radioButton4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButton4.AutoSize = true;
             this.radioButton4.ForeColor = System.Drawing.Color.DarkBlue;
-            this.radioButton4.Location = new System.Drawing.Point(152, 26);
+            this.radioButton4.Location = new System.Drawing.Point(157, 26);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(94, 17);
+            this.radioButton4.Size = new System.Drawing.Size(89, 17);
             this.radioButton4.TabIndex = 47;
             this.radioButton4.TabStop = true;
             this.radioButton4.Text = "ممارسة محددة";
@@ -194,9 +190,9 @@
             this.radioButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButton3.AutoSize = true;
             this.radioButton3.ForeColor = System.Drawing.Color.DarkBlue;
-            this.radioButton3.Location = new System.Drawing.Point(159, 5);
+            this.radioButton3.Location = new System.Drawing.Point(164, 5);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(87, 17);
+            this.radioButton3.Size = new System.Drawing.Size(82, 17);
             this.radioButton3.TabIndex = 46;
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "ممارسة عامة";
@@ -208,9 +204,9 @@
             this.radioButton6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButton6.AutoSize = true;
             this.radioButton6.ForeColor = System.Drawing.Color.DarkBlue;
-            this.radioButton6.Location = new System.Drawing.Point(18, 26);
+            this.radioButton6.Location = new System.Drawing.Point(19, 26);
             this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(85, 17);
+            this.radioButton6.Size = new System.Drawing.Size(84, 17);
             this.radioButton6.TabIndex = 45;
             this.radioButton6.TabStop = true;
             this.radioButton6.Text = "عروض اسعار";
@@ -222,9 +218,9 @@
             this.radioButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButton2.AutoSize = true;
             this.radioButton2.ForeColor = System.Drawing.Color.DarkBlue;
-            this.radioButton2.Location = new System.Drawing.Point(297, 26);
+            this.radioButton2.Location = new System.Drawing.Point(298, 26);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(90, 17);
+            this.radioButton2.Size = new System.Drawing.Size(89, 17);
             this.radioButton2.TabIndex = 44;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "مناقصة محددة";
@@ -236,9 +232,9 @@
             this.radioButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButton1.AutoSize = true;
             this.radioButton1.ForeColor = System.Drawing.Color.DarkBlue;
-            this.radioButton1.Location = new System.Drawing.Point(304, 5);
+            this.radioButton1.Location = new System.Drawing.Point(305, 5);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(83, 17);
+            this.radioButton1.Size = new System.Drawing.Size(82, 17);
             this.radioButton1.TabIndex = 43;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "مناقصة عامة";
@@ -336,8 +332,6 @@
             this.CMB_FYear.Enabled = false;
             this.CMB_FYear.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CMB_FYear.FormattingEnabled = true;
-            this.CMB_FYear.Items.AddRange(new object[] {
-            "2020_2021"});
             this.CMB_FYear.Location = new System.Drawing.Point(504, 87);
             this.CMB_FYear.Name = "CMB_FYear";
             this.CMB_FYear.Size = new System.Drawing.Size(169, 27);
@@ -384,7 +378,6 @@
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dataGridView1.Size = new System.Drawing.Size(822, 170);
             this.dataGridView1.TabIndex = 18;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // pictureBox2
             // 
@@ -396,7 +389,7 @@
             this.pictureBox2.TabIndex = 20;
             this.pictureBox2.TabStop = false;
             // 
-            // Amrsheraa_PopUp
+            // Amrsheraa_PopUp_Foreign
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -406,7 +399,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Amrsheraa_PopUp";
+            this.Name = "Amrsheraa_PopUp_Foreign";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "TalbTawred";
             this.Load += new System.EventHandler(this.TalbTawred_Load);

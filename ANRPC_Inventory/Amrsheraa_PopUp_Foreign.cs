@@ -13,7 +13,7 @@ using System.IO;
 
 namespace ANRPC_Inventory
 {
-    public partial class Amrsheraa_PopUp : Form
+    public partial class Amrsheraa_PopUp_Foreign : Form
     {
           public SqlConnection con;//sql conn for anrpc_sms db
 
@@ -23,6 +23,8 @@ namespace ANRPC_Inventory
         private int AddEditFlag;
         public string BM;
         public string BM2;
+        public string BM3;
+        public string BM4;
         public Boolean executemsg;
         public double totalprice;
       //  private string TableQuery;
@@ -75,7 +77,7 @@ namespace ANRPC_Inventory
         AutoCompleteStringCollection UnitColl = new AutoCompleteStringCollection(); //empn
         AutoCompleteStringCollection TalbColl = new AutoCompleteStringCollection(); //empn
 
-        public Amrsheraa_PopUp()
+        public Amrsheraa_PopUp_Foreign()
         {
             InitializeComponent();
             this.SetStyle(ControlStyles.DoubleBuffer, true);
@@ -101,7 +103,7 @@ namespace ANRPC_Inventory
         }
         private void Getdata(string cmd)
         {
-            dataadapter = new SqlDataAdapter(cmd,Constants.con);
+            dataadapter = new SqlDataAdapter(cmd,Constants.foreignCon);
             table.Locale = System.Globalization.CultureInfo.InvariantCulture;
       
             dataadapter.Fill(table);
@@ -130,7 +132,7 @@ namespace ANRPC_Inventory
           //  dataGridView1.Enabled = false;
 
         }
-        private void GetData(int x, string y)
+        private void GetData(string x, string y)
         {
             if (string.IsNullOrWhiteSpace(TXT_TalbNo.Text))
             {
@@ -164,7 +166,7 @@ namespace ANRPC_Inventory
 		                                T_TalbTawreed_Benod.BIAN_TSNIF,T_TalbTawreed_Benod.ArrivalDate
                                     )
  
-                                select TalbTwareed_No2 ,FYear,Bnd_No,(RequestedQuan - AmrsheraaQuan) as RequestedQuan,Unit,BIAN_TSNIF ,STOCK_NO_ALL, StockQuan as Quan,ArrivalDate from GetAmrSheraa where  GetAmrSheraa.RequestedQuan > GetAmrSheraa.AmrsheraaQuan and TalbTwareed_No2 = " + x;
+                                select TalbTwareed_No2 ,FYear,Bnd_No,(RequestedQuan - AmrsheraaQuan) as RequestedQuan,Unit,BIAN_TSNIF ,STOCK_NO_ALL, StockQuan as Quan,ArrivalDate from GetAmrSheraa where  GetAmrSheraa.RequestedQuan > GetAmrSheraa.AmrsheraaQuan and TalbTwareed_No2 = '" + x + "'";
 
                 Getdata(TableQuery);
             }
@@ -176,7 +178,6 @@ namespace ANRPC_Inventory
             //dataGridView1.Dock = DockStyle.Bottom;
 
             HelperClass.comboBoxFiller(CMB_FYear, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
-
             this.dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
@@ -222,40 +223,43 @@ namespace ANRPC_Inventory
 
         private void CMB_FYear_SelectedIndexChanged(object sender, EventArgs e)
         {
-               Constants.opencon();
+               Constants.openForeignCon();
                CMB_TalbNo2.SelectedIndexChanged -= new EventHandler(CMB_TalbNo2_SelectedIndexChanged);
 
 
                TXT_TalbNo.AutoCompleteMode = AutoCompleteMode.None;
                 TXT_TalbNo.AutoCompleteSource = AutoCompleteSource.None; ;
             //tlbat el tawred bs el 5alst hia el a2dr a3ml mnha amr sheraa
-            string cmdstring3 = @"with GetAmrSheraa as (
-                                select T_TalbTawreed.[TalbTwareed_No], T_TalbTawreed.TalbTwareed_No2, 
-                                T_TalbTawreed_Benod.FYear,T_TalbTawreed_Benod.Bnd_No,T_TalbTawreed_Benod.Unit,T_TalbTawreed_Benod.BIAN_TSNIF,
-                                T_TalbTawreed_Benod.ArrivalDate,
-                                T_TalbTawreed_Benod.Quan as StockQuan,T_TalbTawreed_Benod.STOCK_NO_ALL,T_TalbTawreed_Benod.RequestedQuan , 
-                                Sum(T_BnodAwamershraa.Quan) as Quan  , Sum(ISNULL(T_BnodAwamershraa.Quan, 0 )) as  AmrsheraaQuan
-                                from T_TalbTawreed
+               ///////5-11-2021
+               
+                string cmdstring3 = @"with GetAmrSheraa as (
+                                    select T_TalbTawreed.[TalbTwareed_No], T_TalbTawreed.TalbTwareed_No2, 
+                                    T_TalbTawreed_Benod.FYear,T_TalbTawreed_Benod.Bnd_No,T_TalbTawreed_Benod.Unit,T_TalbTawreed_Benod.BIAN_TSNIF,
+                                    T_TalbTawreed_Benod.ArrivalDate,
+                                    T_TalbTawreed_Benod.Quan as StockQuan,T_TalbTawreed_Benod.STOCK_NO_ALL,T_TalbTawreed_Benod.RequestedQuan , 
+                                    Sum(T_BnodAwamershraa.Quan) as Quan  , Sum(ISNULL(T_BnodAwamershraa.Quan, 0 )) as  AmrsheraaQuan
+                                    from T_TalbTawreed
 
-                                left join  T_TalbTawreed_Benod on 
-                                    T_TalbTawreed_Benod.[TalbTwareed_No2] =  T_TalbTawreed.[TalbTwareed_No2]
+                                    left join  T_TalbTawreed_Benod on 
+                                        T_TalbTawreed_Benod.[TalbTwareed_No2] =  T_TalbTawreed.[TalbTwareed_No2]
 
-                                left join T_BnodAwamershraa on T_BnodAwamershraa.TalbTwareed_No = T_TalbTawreed.[TalbTwareed_No2]  
-                                and T_BnodAwamershraa.Rakm_Tasnif = T_TalbTawreed_Benod.STOCK_NO_ALL
+                                    left join T_BnodAwamershraa on T_BnodAwamershraa.TalbTwareed_No = T_TalbTawreed.[TalbTwareed_No2]  
+                                    and T_BnodAwamershraa.Rakm_Tasnif = T_TalbTawreed_Benod.STOCK_NO_ALL
 
-                                    where Mohmat_Sign is not null and T_TalbTawreed.TalbTwareed_No2 is not null 
-                                    and T_TalbTawreed.FYear='" + CMB_FYear.Text + @"' and T_TalbTawreed.BuyMethod='"+ BM + @"' --- change constants with variables
+                                        where Mohmat_Sign is not null and T_TalbTawreed.TalbTwareed_No2 is not null 
+                                        and T_TalbTawreed.FYear='" + CMB_FYear.Text + @"' and T_TalbTawreed.BuyMethod='" + BM + @"' --- change constants with variables
 
-                                group by T_TalbTawreed.[TalbTwareed_No], T_TalbTawreed.TalbTwareed_No2, T_TalbTawreed_Benod.Quan,
-		                                T_TalbTawreed_Benod.STOCK_NO_ALL,T_TalbTawreed_Benod.RequestedQuan,
-		                                T_TalbTawreed_Benod.FYear,T_TalbTawreed_Benod.Bnd_No,T_TalbTawreed_Benod.Unit,
-		                                T_TalbTawreed_Benod.BIAN_TSNIF,T_TalbTawreed_Benod.ArrivalDate
-                                    )
+                                    group by T_TalbTawreed.[TalbTwareed_No], T_TalbTawreed.TalbTwareed_No2, T_TalbTawreed_Benod.Quan,
+		                                    T_TalbTawreed_Benod.STOCK_NO_ALL,T_TalbTawreed_Benod.RequestedQuan,
+		                                    T_TalbTawreed_Benod.FYear,T_TalbTawreed_Benod.Bnd_No,T_TalbTawreed_Benod.Unit,
+		                                    T_TalbTawreed_Benod.BIAN_TSNIF,T_TalbTawreed_Benod.ArrivalDate
+                                        )
  
-                                select TalbTwareed_No2 from GetAmrSheraa where  GetAmrSheraa.RequestedQuan > GetAmrSheraa.AmrsheraaQuan group by TalbTwareed_No2";
+                                    select TalbTwareed_No2 from GetAmrSheraa where  GetAmrSheraa.RequestedQuan > GetAmrSheraa.AmrsheraaQuan group by TalbTwareed_No2";
 
 
-                SqlCommand cmd3 = new SqlCommand(cmdstring3, Constants.con);
+
+            SqlCommand cmd3 = new SqlCommand(cmdstring3, Constants.foreignCon);
                 SqlDataReader dr3 = cmd3.ExecuteReader();
                 //---------------------------------
                 if (dr3.HasRows == true)
@@ -283,7 +287,7 @@ namespace ANRPC_Inventory
                 CMB_TalbNo2.SelectedIndexChanged += new EventHandler(CMB_TalbNo2_SelectedIndexChanged);
 
 
-                Constants.closecon();
+                Constants.closeForeignCon();
         
             }
     
@@ -328,10 +332,10 @@ namespace ANRPC_Inventory
         public void SearchTalb(int x)
           {
                //call sp that get last num that eentered for this MM and this YYYY
-              Constants.opencon();
+              Constants.openForeignCon();
               // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
               string cmdstring = "select * from  T_TalbTawreed where TalbTwareed_No2=@TN and FYear=@FY";
-              SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+              SqlCommand cmd = new SqlCommand(cmdstring, Constants.foreignCon);
               if (x == 1)
               {
                   cmd.Parameters.AddWithValue("@TN", TXT_TalbNo.Text);
@@ -488,11 +492,11 @@ namespace ANRPC_Inventory
                   }*/
                   if (x == 1)
                   {
-                      GetData(Convert.ToInt32(TXT_TalbNo.Text), CMB_FYear.Text);
+                      GetData((TXT_TalbNo.Text), CMB_FYear.Text);
                   }
                   else if (x == 2)
                   {
-                      GetData(Convert.ToInt32(CMB_TalbNo2.Text), CMB_FYear.Text);
+                      GetData((CMB_TalbNo2.Text), CMB_FYear.Text);
                   }
                  
               }
@@ -530,7 +534,7 @@ namespace ANRPC_Inventory
               // searchbtn1 = false;
               //  DataGridViewReset();
 
-              Constants.closecon();
+               Constants.closeForeignCon();
           }
 
         private void TXT_TalbNo_KeyDown(object sender, KeyEventArgs e)
@@ -564,6 +568,8 @@ namespace ANRPC_Inventory
             {
                 BM = "1";
                 BM2 = radioButton1.Text;
+                BM3 = CMB_TalbNo2.Text;
+                BM4 = CMB_FYear.Text;
                 CMB_TalbNo2.Enabled = true;
                 CMB_FYear.Enabled = true;
 
@@ -584,6 +590,8 @@ namespace ANRPC_Inventory
             {
                 BM = "2";
                 BM2 = radioButton2.Text;
+                BM3 = CMB_TalbNo2.Text;
+                BM4 = CMB_FYear.Text;
                 CMB_TalbNo2.Enabled = true;
                 CMB_FYear.Enabled = true;
             }
@@ -602,6 +610,8 @@ namespace ANRPC_Inventory
             {
                 BM = "3";
                 BM2 = radioButton3.Text;
+                BM3 = CMB_TalbNo2.Text;
+                BM4 = CMB_FYear.Text;
                 CMB_TalbNo2.Enabled = true;
                 CMB_FYear.Enabled = true;
             }
@@ -620,6 +630,8 @@ namespace ANRPC_Inventory
             {
                 BM = "4";
                 BM2 = radioButton4.Text;
+                BM3 = CMB_TalbNo2.Text;
+                BM4 = CMB_FYear.Text;
                 CMB_TalbNo2.Enabled = true;
                 CMB_FYear.Enabled = true;
             }
@@ -638,6 +650,8 @@ namespace ANRPC_Inventory
             {
                 BM = "5";
                 BM2 = radioButton5.Text;
+                BM3 = CMB_TalbNo2.Text;
+                BM4 = CMB_FYear.Text;
                 CMB_TalbNo2.Enabled = true;
                 CMB_FYear.Enabled = true;
             }
@@ -656,6 +670,8 @@ namespace ANRPC_Inventory
             {
                 BM = "6";
                 BM2 = radioButton6.Text;
+                BM3 = CMB_TalbNo2.Text;
+                BM4 = CMB_FYear.Text;
                 CMB_TalbNo2.Enabled = true;
                 CMB_FYear.Enabled = true;
             }
@@ -684,11 +700,6 @@ namespace ANRPC_Inventory
         {
 
         }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
-    }
     
 }

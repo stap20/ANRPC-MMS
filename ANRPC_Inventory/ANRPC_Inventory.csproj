@@ -96,6 +96,18 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AmrSheraa_Foreign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AmrSheraa_Foreign.designer.cs">
+      <DependentUpon>AmrSheraa_Foreign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Amrsheraa_PopUp_Foreign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Amrsheraa_PopUp_Foreign.Designer.cs">
+      <DependentUpon>Amrsheraa_PopUp_Foreign.cs</DependentUpon>
+    </Compile>
     <Compile Include="conForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +115,18 @@
       <DependentUpon>conForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DrawedCircleText.cs" />
+    <Compile Include="Estlam_Foreign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Estlam_Foreign.Designer.cs">
+      <DependentUpon>Estlam_Foreign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FEdafaMakhzania_F_Foreign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FEdafaMakhzania_F_Foreign.Designer.cs">
+      <DependentUpon>FEdafaMakhzania_F_Foreign.cs</DependentUpon>
+    </Compile>
     <Compile Include="SearchForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -323,6 +347,12 @@
     <Compile Include="TalbMoaera.Designer.cs">
       <DependentUpon>TalbMoaera.cs</DependentUpon>
     </Compile>
+    <Compile Include="TalbTawred_Foreign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TalbTawred_Foreign.designer.cs">
+      <DependentUpon>TalbTawred_Foreign.cs</DependentUpon>
+    </Compile>
     <Compile Include="TalbTnfiz.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -361,8 +391,26 @@
     <Compile Include="ToWord.cs" />
     <Compile Include="TransHandler.cs" />
     <Compile Include="UnitsHandler.cs" />
+    <Compile Include="Warranty_PopUP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warranty_PopUP.designer.cs">
+      <DependentUpon>Warranty_PopUP.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AmrSheraa_Foreign.resx">
+      <DependentUpon>AmrSheraa_Foreign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Amrsheraa_PopUp_Foreign.resx">
+      <DependentUpon>Amrsheraa_PopUp_Foreign.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="conForm.resx">
       <DependentUpon>conForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Estlam_Foreign.resx">
+      <DependentUpon>Estlam_Foreign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FEdafaMakhzania_F_Foreign.resx">
+      <DependentUpon>FEdafaMakhzania_F_Foreign.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SearchForm.resx">
       <DependentUpon>SearchForm.cs</DependentUpon>
@@ -415,6 +463,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TalbMoaera.resx">
       <DependentUpon>TalbMoaera.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TalbTawred_Foreign.resx">
+      <DependentUpon>TalbTawred_Foreign.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TalbTawreed_R1.rdlc" />
     <EmbeddedResource Include="Edafa_R1.rdlc" />
@@ -476,6 +527,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TimeLineDrawerForm.resx">
       <DependentUpon>TimeLineDrawerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warranty_PopUP.resx">
+      <DependentUpon>Warranty_PopUP.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ANRPC_InventoryDataSet.xsc">
       <DependentUpon>ANRPC_InventoryDataSet.xsd</DependentUpon>

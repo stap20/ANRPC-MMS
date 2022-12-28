@@ -584,8 +584,6 @@ namespace ANRPC_Inventory
                         TXT_CodeEdara.Text = dr["FromEdaraName"].ToString();
                         TXT_Date.Text = dr["TransDate"].ToString();
                         TXT_TRNO.Text = dr["TR_NO"].ToString();
-                        Cmb_From.Text = dr["FromEdaraName"].ToString();
-                        Cmb_To.Text = dr["TToStock"].ToString();
 
                         if (TXT_TRNO.Text.ToString() != "")
                         {
@@ -608,6 +606,8 @@ namespace ANRPC_Inventory
                         string s5 = dr["Sign5"].ToString();
                         string s6 = dr["Sign6"].ToString();
 
+                        Cmb_From.Text = dr["FromEdaraName"].ToString();
+                        Cmb_To.Text = dr["TToStock"].ToString();
                         Cmb_FYear.Text = dr["FYear"].ToString();
 
                         if (s111 != "")
@@ -923,7 +923,7 @@ namespace ANRPC_Inventory
             }
 
             AddEditFlag = 1;
-            //TNO = TXT_EznNo.Text;
+            TNO = TXT_TRNO2.Text;
             FY = Cmb_FYear.Text;
         }
 

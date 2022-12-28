@@ -19,17 +19,22 @@ namespace ANRPC_Inventory
         enum APPLICATION_FORMS
         {
             TALB_TAWREED,
+            TALB_TAWREED_FOREIGN,
             TALB_ESLAH,
             TALB_TANFIZ,
             TALB_MOAYRA,
             AMR_SHERAA,
+            AMR_SHERAA_FOREIGN,
             AMR_SHERAA_KEMAWYAT,
             EZN_SARF,
             EDAFA_MAKHZANYA,
+            EDAFA_MAKHZANYA_FOREIGN,
             MOTABAA_FANYA,
+            MOTABAA_FANYA_FOREIGN,
             EZN_TAHWEEL,
             HARAKA,
             ESTLAM,
+            ESTLAM_FOREIGN,
             SEARCH,
             NEW_TASNIF,
             DASHBOARD,
@@ -42,11 +47,13 @@ namespace ANRPC_Inventory
             #region Edara
             privilages = new List<APPLICATION_FORMS>() {     
                 APPLICATION_FORMS.TALB_TAWREED,
+                APPLICATION_FORMS.TALB_TAWREED_FOREIGN,
                 APPLICATION_FORMS.TALB_ESLAH,
                 APPLICATION_FORMS.TALB_MOAYRA,
                 APPLICATION_FORMS.TALB_TANFIZ,
                 APPLICATION_FORMS.EZN_SARF,
                 APPLICATION_FORMS.MOTABAA_FANYA,
+                APPLICATION_FORMS.MOTABAA_FANYA_FOREIGN,
                 APPLICATION_FORMS.EZN_TAHWEEL,
                 APPLICATION_FORMS.SEARCH,
             };
@@ -58,10 +65,12 @@ namespace ANRPC_Inventory
             #region Chairman
             privilages = new List<APPLICATION_FORMS>() {
                 APPLICATION_FORMS.TALB_TAWREED,
+                APPLICATION_FORMS.TALB_TAWREED_FOREIGN,
                 APPLICATION_FORMS.TALB_ESLAH,
                 APPLICATION_FORMS.TALB_MOAYRA,
                 APPLICATION_FORMS.TALB_TANFIZ,
                 APPLICATION_FORMS.AMR_SHERAA,
+                APPLICATION_FORMS.AMR_SHERAA_FOREIGN,
                 APPLICATION_FORMS.SEARCH,
             };
 
@@ -72,10 +81,12 @@ namespace ANRPC_Inventory
             #region ViceChairman
             privilages = new List<APPLICATION_FORMS>() {
                 APPLICATION_FORMS.TALB_TAWREED,
+                APPLICATION_FORMS.TALB_TAWREED_FOREIGN,
                 APPLICATION_FORMS.TALB_ESLAH,
                 APPLICATION_FORMS.TALB_MOAYRA,
                 APPLICATION_FORMS.TALB_TANFIZ,
                 APPLICATION_FORMS.AMR_SHERAA,
+                APPLICATION_FORMS.AMR_SHERAA_FOREIGN,
                 APPLICATION_FORMS.SEARCH,
             };
 
@@ -86,6 +97,7 @@ namespace ANRPC_Inventory
             #region TechnicalFollowUp
             privilages = new List<APPLICATION_FORMS>() {
                 APPLICATION_FORMS.TALB_TAWREED,
+                APPLICATION_FORMS.TALB_TAWREED_FOREIGN,
                 APPLICATION_FORMS.TALB_ESLAH,
                 APPLICATION_FORMS.TALB_MOAYRA,
                 APPLICATION_FORMS.TALB_TANFIZ,
@@ -99,6 +111,7 @@ namespace ANRPC_Inventory
             #region NewTasnif
             privilages = new List<APPLICATION_FORMS>() {
                 APPLICATION_FORMS.TALB_TAWREED,
+                APPLICATION_FORMS.TALB_TAWREED_FOREIGN,
                 APPLICATION_FORMS.EZN_TAHWEEL,
                 APPLICATION_FORMS.SEARCH,
                 APPLICATION_FORMS.NEW_TASNIF,
@@ -111,6 +124,7 @@ namespace ANRPC_Inventory
             #region ChangeTasnif
             privilages = new List<APPLICATION_FORMS>() {
                 APPLICATION_FORMS.TALB_TAWREED,
+                APPLICATION_FORMS.TALB_TAWREED_FOREIGN,
                 APPLICATION_FORMS.EZN_TAHWEEL,
                 APPLICATION_FORMS.SEARCH,
                 APPLICATION_FORMS.NEW_TASNIF,
@@ -123,6 +137,7 @@ namespace ANRPC_Inventory
             #region Mwazna
             privilages = new List<APPLICATION_FORMS>() {
                 APPLICATION_FORMS.TALB_TAWREED,
+                APPLICATION_FORMS.TALB_TAWREED_FOREIGN,
                 APPLICATION_FORMS.TALB_ESLAH,
                 APPLICATION_FORMS.TALB_MOAYRA,
                 APPLICATION_FORMS.TALB_TANFIZ,
@@ -138,6 +153,7 @@ namespace ANRPC_Inventory
                 APPLICATION_FORMS.EZN_SARF,
                 APPLICATION_FORMS.EZN_TAHWEEL,
                 APPLICATION_FORMS.AMR_SHERAA,
+                APPLICATION_FORMS.AMR_SHERAA_FOREIGN,
                 APPLICATION_FORMS.SEARCH,
             };
 
@@ -159,6 +175,7 @@ namespace ANRPC_Inventory
             #region Stock
             privilages = new List<APPLICATION_FORMS>() {
                 APPLICATION_FORMS.AMR_SHERAA,
+                APPLICATION_FORMS.AMR_SHERAA_FOREIGN,
                 APPLICATION_FORMS.SEARCH,
             };
 
@@ -169,6 +186,7 @@ namespace ANRPC_Inventory
             #region GMInventory
             privilages = new List<APPLICATION_FORMS>() {
                 APPLICATION_FORMS.TALB_TAWREED,
+                APPLICATION_FORMS.TALB_TAWREED_FOREIGN,
                 APPLICATION_FORMS.TALB_ESLAH,
                 APPLICATION_FORMS.TALB_MOAYRA,
                 APPLICATION_FORMS.TALB_TANFIZ,
@@ -182,6 +200,7 @@ namespace ANRPC_Inventory
             #region InventoryControl
             privilages = new List<APPLICATION_FORMS>() {
                 APPLICATION_FORMS.TALB_TAWREED,
+                APPLICATION_FORMS.TALB_TAWREED_FOREIGN,
                 APPLICATION_FORMS.HARAKA,
                 APPLICATION_FORMS.SEARCH,
             };
@@ -193,6 +212,7 @@ namespace ANRPC_Inventory
             #region Estlam
             privilages = new List<APPLICATION_FORMS>() {
                 APPLICATION_FORMS.ESTLAM,
+                APPLICATION_FORMS.ESTLAM_FOREIGN,
                 APPLICATION_FORMS.SEARCH,
             };
 
@@ -203,6 +223,7 @@ namespace ANRPC_Inventory
             #region Edafa
             privilages = new List<APPLICATION_FORMS>() {
                 APPLICATION_FORMS.EDAFA_MAKHZANYA,
+                APPLICATION_FORMS.EDAFA_MAKHZANYA_FOREIGN,
                 APPLICATION_FORMS.SEARCH,
             };
 
@@ -233,6 +254,7 @@ namespace ANRPC_Inventory
             #region Purchases
             privilages = new List<APPLICATION_FORMS>() {
                 APPLICATION_FORMS.TALB_TAWREED,
+                APPLICATION_FORMS.TALB_TAWREED_FOREIGN,
                 APPLICATION_FORMS.TALB_ESLAH,
                 APPLICATION_FORMS.TALB_MOAYRA,
                 APPLICATION_FORMS.TALB_TANFIZ,
@@ -282,7 +304,18 @@ namespace ANRPC_Inventory
                                     },
                                 height: 54, padding: padd, appearance: appearance, isRL: true);
             }
-            
+
+            else if (form == APPLICATION_FORMS.TALB_TAWREED_FOREIGN)
+            {
+                tab = new Tab(font, "  طلب التوريد الاجنبي   ", color, 32, IconFont.Auto, IconChar.ClipboardList,
+                                    DockStyle.Top, (object sender, EventArgs e) =>
+                                    {
+                                        bool isOnlyConfirm = Constants.User_Type == "A" ? false : true;
+                                        SideBarBtnCLicked(sender, e, new TabsHandler("TalbTawred_Foreign", isOnlyConfirm));
+                                    },
+                                height: 54, padding: padd, appearance: appearance, isRL: true);
+            }
+
             else if(form == APPLICATION_FORMS.TALB_ESLAH)
             {
                 tab = new Tab(font, "  طلب الاصلاح    ", color, 32, IconFont.Auto, IconChar.ClipboardList,
@@ -323,6 +356,16 @@ namespace ANRPC_Inventory
                                     height: 54, padding: padd, appearance: appearance, isRL: true);
             }
 
+            else if (form == APPLICATION_FORMS.AMR_SHERAA_FOREIGN)
+            {
+                tab = new Tab(font, "  أمر شراء اجنبي   ", color, 35, IconFont.Auto, IconChar.MoneyCheckDollar,
+                                    DockStyle.Top, (object sender, EventArgs e) => {
+                                        bool isOnlyConfirm = Constants.User_Type == "B" ? false : true;
+                                        SideBarBtnCLicked(sender, e, new TabsHandler("AmrSheraa_Foreign", isOnlyConfirm));
+                                    },
+                                    height: 54, padding: padd, appearance: appearance, isRL: true);
+            }
+
             else if(form == APPLICATION_FORMS.AMR_SHERAA_KEMAWYAT)
             {
                 tab = new Tab(font, "  الكيماويات    ", color, 32, IconFont.Auto, IconChar.Search,
@@ -352,12 +395,32 @@ namespace ANRPC_Inventory
                                     height: 54, padding: padd, appearance: appearance, isRL: true);
             }
 
+            else if (form == APPLICATION_FORMS.EDAFA_MAKHZANYA_FOREIGN)
+            {
+                tab = new Tab(font, "  إضافة مخزنية اجنبي   ", color, 32, IconFont.Auto, IconChar.ClipboardCheck,
+                                    DockStyle.Top, (object sender, EventArgs e) => {
+                                        bool isOnlyConfirm = Constants.User_Type == "B" ? false : true;
+                                        SideBarBtnCLicked(sender, e, new TabsHandler("FEdafaMakhzania_F_Foreign", isOnlyConfirm));
+                                    },
+                                    height: 54, padding: padd, appearance: appearance, isRL: true);
+            }
+
             else if(form == APPLICATION_FORMS.MOTABAA_FANYA)
             {
                 tab = new Tab(font, "  المطابقة الفنية    ", color, 32, IconFont.Auto, IconChar.ClipboardCheck,
                                 DockStyle.Top, (object sender, EventArgs e) => {
                                     bool isOnlyConfirm = Constants.User_Type == "B" ? false : true;
                                     SideBarBtnCLicked(sender, e, new TabsHandler("FEdafaMakhzania_F", isOnlyConfirm));
+                                },
+                                height: 54, padding: padd, appearance: appearance, isRL: true);
+            }
+
+            else if (form == APPLICATION_FORMS.MOTABAA_FANYA_FOREIGN)
+            {
+                tab = new Tab(font, "  المطابقة الفنية اجنبي   ", color, 32, IconFont.Auto, IconChar.ClipboardCheck,
+                                DockStyle.Top, (object sender, EventArgs e) => {
+                                    bool isOnlyConfirm = Constants.User_Type == "B" ? false : true;
+                                    SideBarBtnCLicked(sender, e, new TabsHandler("FEdafaMakhzania_F_Foreign", isOnlyConfirm));
                                 },
                                 height: 54, padding: padd, appearance: appearance, isRL: true);
             }
@@ -388,6 +451,16 @@ namespace ANRPC_Inventory
                                     DockStyle.Top, (object sender, EventArgs e) => {
                                         bool isOnlyConfirm = Constants.User_Type == "B" ? false : true;
                                         SideBarBtnCLicked(sender, e, new TabsHandler("Estlam_F", isOnlyConfirm));
+                                    },
+                                    height: 54, padding: padd, appearance: appearance, isRL: true);
+            }
+
+            else if (form == APPLICATION_FORMS.ESTLAM_FOREIGN)
+            {
+                tab = new Tab(font, "  إذن استلام اجنبي   ", color, 32, IconFont.Auto, IconChar.ClipboardCheck,
+                                    DockStyle.Top, (object sender, EventArgs e) => {
+                                        bool isOnlyConfirm = Constants.User_Type == "B" ? false : true;
+                                        SideBarBtnCLicked(sender, e, new TabsHandler("Estlam_Foreign", isOnlyConfirm));
                                     },
                                     height: 54, padding: padd, appearance: appearance, isRL: true);
             }
@@ -471,7 +544,6 @@ namespace ANRPC_Inventory
             childForm.Show();
         }
 
-
         private void SideBarBtnCLicked(object sender, EventArgs e, Form childForm = null)
         {
             handleAppBar(sender);
@@ -484,7 +556,6 @@ namespace ANRPC_Inventory
 
             formwraper.Visible = true;
         }
-
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -506,11 +577,6 @@ namespace ANRPC_Inventory
         {
             this.WindowState = FormWindowState.Normal;
             btnWindowReset.SendToBack();
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void logOutBtn_Click(object sender, EventArgs e)
