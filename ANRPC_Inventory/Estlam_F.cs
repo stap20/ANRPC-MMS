@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using System.IO;
+
 namespace ANRPC_Inventory
 {
     public partial class Estlam_F : Form
@@ -112,10 +112,43 @@ namespace ANRPC_Inventory
             SAVE,
         }
         int currentSignNumber = 0;
+        bool isComeFromSearch = false;
+        DateTimePicker dateTimePicker1 = new DateTimePicker();
+        Dictionary<int, int> signatureOrder;
         #endregion
 
         //------------------------------------------ Helper ---------------------------------
         #region Helpers
+        private void initiateSignatureOrder()
+        {
+            //Dictionary to get values of signature (sign1 or sign2 ...) according to thier order in table
+            signatureOrder = new Dictionary<int, int>();
+            signatureOrder.Add(1, 1);
+            signatureOrder.Add(2, 2);
+            signatureOrder.Add(3, 3);
+        }
+
+        private void SP_InsertSignatures(int signNumber, int signOrder)
+        {
+            string cmdstring = "Exec  SP_InsertSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2,@SignOrder";
+            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+
+            cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(Cmb_AmrNo.Text));
+            cmd.Parameters.AddWithValue("@TNO2", DBNull.Value);
+
+            cmd.Parameters.AddWithValue("@FY", Cmb_FY.Text.ToString());
+            cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
+            cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
+            cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
+            cmd.Parameters.AddWithValue("@FN", 4);
+            cmd.Parameters.AddWithValue("@SN", signNumber);
+            cmd.Parameters.AddWithValue("@D1", DBNull.Value);
+            cmd.Parameters.AddWithValue("@D2", DBNull.Value);
+            cmd.Parameters.AddWithValue("@SignOrder", signOrder);
+
+            cmd.ExecuteNonQuery();
+        }
+
         private PictureBox CheckSignatures(Panel panel, int signNumber)
         {
             try
@@ -147,7 +180,6 @@ namespace ANRPC_Inventory
 
             return null;
         }
-
 
         private void errorProviderHandler(List<(ErrorProvider, Control, string)> errosList)
         {
@@ -210,7 +242,6 @@ namespace ANRPC_Inventory
 
         private void GetEstlamBnod(string amrNo, string fyear,bool isConfirm = false)
         {
-
             string TableQuery;
 
             if (isConfirm)
@@ -221,7 +252,6 @@ namespace ANRPC_Inventory
             {
                 TableQuery = "SELECT *  FROM [T_BnodAwamershraa] Where (quan2 is null or quan2<quan) and Amrshraa_No = " + amrNo + " and AmrSheraa_sanamalia='" + fyear + "'";
             }
-
 
             table.Clear();
 
@@ -311,29 +341,44 @@ namespace ANRPC_Inventory
                 dataGridView1.Columns["TotalPrice"].HeaderText = "الثمن الاجمالى";//col18
                 dataGridView1.Columns["TotalPrice"].Visible = false;
 
-                dataGridView1.Columns["ApplyDareba"].HeaderText = "تطبق الضريبة";//col19
+
+                dataGridView1.Columns["ApplyDiscount"].HeaderText = "تطبق الضريبة";//col19
+                dataGridView1.Columns["ApplyDiscount"].Visible = false;
+
+                dataGridView1.Columns["Discountpercent"].HeaderText = "نسبة الضريبة";//col20
+                dataGridView1.Columns["Discountpercent"].Visible = false;
+
+
+                dataGridView1.Columns["TotalPriceAfterDiscount"].HeaderText = "تطبق الضريبة";//col21
+                dataGridView1.Columns["TotalPriceAfterDiscount"].Visible = false;
+
+                dataGridView1.Columns["ApplyDareba"].HeaderText = "نسبة الضريبة";//col22
                 dataGridView1.Columns["ApplyDareba"].Visible = false;
 
-                dataGridView1.Columns["Darebapercent"].HeaderText = "نسبة الضريبة";//col20
+                dataGridView1.Columns["Darebapercent"].HeaderText = "نسبة الضريبة";//col23
                 dataGridView1.Columns["Darebapercent"].Visible = false;
 
-                dataGridView1.Columns["TotalPriceAfter"].HeaderText = "السعر الاجمالى ";//col21
+                dataGridView1.Columns["Darebapercent"].HeaderText = "نسبة الضريبة";//col23
+                dataGridView1.Columns["Darebapercent"].Visible = false;
+
+                dataGridView1.Columns["TotalPriceAfter"].HeaderText = "السعر الاجمالى ";//col24
                 dataGridView1.Columns["TotalPriceAfter"].Visible = false;
 
-                dataGridView1.Columns["LessQuanFlag"].HeaderText = "يوجد عجز ";//col24
+                dataGridView1.Columns["LessQuanFlag"].HeaderText = "يوجد عجز ";//col25
                 dataGridView1.Columns["LessQuanFlag"].Visible = false;
 
-                dataGridView1.Columns["NotIdenticalFlag"].HeaderText = "مطابق/غير مطابق ";//col25
+                dataGridView1.Columns["NotIdenticalFlag"].HeaderText = "مطابق/غير مطابق ";//col26
                 dataGridView1.Columns["NotIdenticalFlag"].Visible = false;
 
-                dataGridView1.Columns["TalbEsdarShickNo"].HeaderText = "طلب اصدار الشيك ";//col25
+                dataGridView1.Columns["TalbEsdarShickNo"].HeaderText = "طلب اصدار الشيك ";//col27
                 dataGridView1.Columns["TalbEsdarShickNo"].Visible = false;
 
-                dataGridView1.Columns["ShickNo"].HeaderText = "رقم الشيك ";//col25
+                dataGridView1.Columns["ShickNo"].HeaderText = "رقم الشيك ";//col28
                 dataGridView1.Columns["ShickNo"].Visible = false;
 
-                dataGridView1.Columns["ShickDate"].HeaderText = "تاريخ الشيك ";//col25
+                dataGridView1.Columns["ShickDate"].HeaderText = "تاريخ الشيك ";//col29
                 dataGridView1.Columns["ShickDate"].Visible = false;
+                dataGridView1.Columns["ExpirationDate"].Visible = false;
 
             }
         }
@@ -541,7 +586,8 @@ namespace ANRPC_Inventory
             changePanelState(signatureTable, false);
             BTN_Sigm1.Enabled = true;
 
-            changeDataGridViewColumnState(dataGridView1, true);
+            dataGridView1.AllowUserToDeleteRows = true;
+            dateTimePicker1.Enabled = true;
 
             Pic_Sign1.Image = null;
             FlagSign1 = 0;
@@ -595,18 +641,21 @@ namespace ANRPC_Inventory
             Dateold = Convert.ToDateTime(TXT_Date.Value.ToShortDateString());
         }
 
-        public void prepareSearchState()
+        public void prepareSearchState(bool isReset = true)
         {
             DisableControls();
-            Input_Reset();
 
-            if (Constants.isConfirmForm)
+            if (isReset)
             {
-                Cmb_FY.Enabled = true;
-                Cmb_AmrNo.Enabled = true;
-                BTN_Print.Enabled = true;
+                Input_Reset();
             }
-            
+            //if (!Constants.isConfirmForm)
+            //{
+            //    Cmb_FY.Enabled = true;
+            //    Cmb_AmrNo.Enabled = true;
+            //    BTN_Print.Enabled = true;
+            //}
+
         }
 
         public void reset()
@@ -643,8 +692,21 @@ namespace ANRPC_Inventory
             //signature btn
             changePanelState(signatureTable, false);
 
-            changeDataGridViewColumnState(dataGridView1, true);
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
 
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                for (int i = 0; i < row.Cells.Count; i++)
+                {
+                    row.Cells[i].ReadOnly = true;
+                }
+            }
+
+            dateTimePicker1.Visible = false;
+            dateTimePicker1.Enabled = false;
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
         }
@@ -757,8 +819,8 @@ namespace ANRPC_Inventory
                         cmd.Parameters.AddWithValue("@p8", row.Cells[6].Value);
 
 
-                        cmd.Parameters.AddWithValue("@p9", row.Cells[22].Value);
-                        cmd.Parameters.AddWithValue("@p10", row.Cells[23].Value);
+                        cmd.Parameters.AddWithValue("@p9", row.Cells["EstlamFlag"].Value);
+                        cmd.Parameters.AddWithValue("@p10", row.Cells["EstlamDate"].Value);
 
                         cmd.Parameters.AddWithValue("@p1888", row.Cells[13].Value);
 
@@ -871,30 +933,12 @@ namespace ANRPC_Inventory
 
             if (executemsg == true)
             {
-                for (int i = 1; i <= 3; i++)
+
+                foreach (KeyValuePair<int, int> entry in signatureOrder)
                 {
-
-
-                    string cmdstring = "Exec  SP_InsertSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
-                    SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-
-                    cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(Cmb_AmrNo.Text));
-                    cmd.Parameters.AddWithValue("@TNO2", DBNull.Value);
-
-                    cmd.Parameters.AddWithValue("@FY", Cmb_FY.Text.ToString());
-                    cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
-                    cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
-                    cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
-
-                    cmd.Parameters.AddWithValue("@FN", 4);
-
-                    cmd.Parameters.AddWithValue("@SN", i);
-
-                    cmd.Parameters.AddWithValue("@D1", DBNull.Value);
-
-                    cmd.Parameters.AddWithValue("@D2", DBNull.Value);
-                    cmd.ExecuteNonQuery();
+                    SP_InsertSignatures(entry.Key, entry.Value);
                 }
+
                 SP_UpdateSignatures(1, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
                 SP_UpdateSignatures(2, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
@@ -926,6 +970,7 @@ namespace ANRPC_Inventory
                 //  SP_UpdateSignatures(4, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
             }
         }
+
         public void UpdateEstlam()
         {
             Constants.opencon();
@@ -1106,6 +1151,7 @@ namespace ANRPC_Inventory
 
             Constants.closecon();
         }
+
         private void EditLogic()
         {
             UpdateEstlam();
@@ -1193,6 +1239,20 @@ namespace ANRPC_Inventory
             }
             #endregion
 
+            #region TXT_QuanTard
+            if (string.IsNullOrWhiteSpace(TXT_QuanTard.Text) || TXT_QuanTard.Text == "")
+            {
+                errorsList.Add((errorProvider, TXT_QuanTard, "تاكد من ادخال عدد الطرود"));
+            }
+            #endregion
+
+            #region TXT_QuanBnod
+            if (string.IsNullOrWhiteSpace(TXT_QuanBnod.Text) || TXT_QuanBnod.Text == "")
+            {
+                errorsList.Add((errorProvider, TXT_QuanBnod, "تاكد من ادخال عدد البنود"));
+            }
+            #endregion
+
             #region dataGridView1
             if (dataGridView1.Rows.Count <= 0)
             {
@@ -1204,6 +1264,63 @@ namespace ANRPC_Inventory
                 //errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
                 MessageBox.Show("لايمكن ان يتكون طلب الاستلام بدون بنود");
             }
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    DataGridViewCell arrived, ordered,date;
+
+                    date = row.Cells["EstlamDate"];
+                    if (AddEditFlag == 1) //edit
+                    {
+                        ordered = row.Cells["Quan"];//col5
+
+                        arrived = row.Cells["QuanArrived"];
+                    }
+                    else
+                    {
+                        ordered = row.Cells["Quan"];//col10
+                        arrived = row.Cells["Quan2"];
+                    }
+
+                    if (arrived.Value.ToString() != "")
+                    {
+
+                        if (Convert.ToDouble(arrived.Value) == 0)
+                        {
+                            arrived.ErrorText = "يجب أن لا تساوي الكمية الواردة صفر";
+                            errorsList.Add((alertProvider, dataGridView1, "يجب أن لا تساوي الكمية الواردة صفر"));
+                        }
+                        else if (Convert.ToDouble(arrived.Value) > Convert.ToDouble(ordered.Value))
+                        {
+                            arrived.ErrorText = "يجب أن تكون الكمية الواردة اقل من او تساوي الكمية المطلوبة";
+                            errorsList.Add((alertProvider, dataGridView1, "يجب أن تكون الكمية الواردة اقل من او تساوي الكمية المطلوبة"));
+                        }
+                        else
+                        {
+                            arrived.ErrorText = "";
+                        }
+                    }
+                    else
+                    {
+                        arrived.ErrorText = "يجب أن كتابة الكمية";
+                        errorsList.Add((alertProvider, dataGridView1, "يجب أن كتابة الكمية"));
+                    }
+
+                    if (date.Value.ToString() == "")
+                    {
+                        date.ErrorText = "من فضلك تأكد ادخال تاريخ الاستلام";
+                        errorsList.Add((alertProvider, dataGridView1, "من فضلك تأكد ادخال تاريخ الاستلام"));
+                    }
+                    else
+                    {
+                        date.ErrorText = "";
+                    }
+
+                }
+            }
+
             #endregion
 
             PictureBox signControl = CheckSignatures(signatureTable, currentSignNumber);
@@ -1254,6 +1371,8 @@ namespace ANRPC_Inventory
             alertProvider.Icon = SystemIcons.Warning;
             HelperClass.comboBoxFiller(Cmb_FY, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
             HelperClass.comboBoxFiller(Cmb_FYear2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
+            
+            dataGridView1.Controls.Add(dateTimePicker1);
 
             if (Constants.isConfirmForm)
             {
@@ -1323,17 +1442,35 @@ namespace ANRPC_Inventory
         {
             InitializeComponent();
 
-            init(); 
+            init();
+
+            initiateSignatureOrder();
+        }
+
+        public Estlam_F(string x, string y)
+        {
+            InitializeComponent();
+            Cmb_FY.Text = x;
+            Cmb_AmrNo.Text = y;
+
+
+            panel7.Visible = false;
+            panel2.Visible = false;
+
+            isComeFromSearch = true;
+        }
+
+        private void Estlam_Load(object sender, EventArgs e)
+        {
+            if (isComeFromSearch)
+            {
+                BTN_Search_Click(BTN_Search, e);
+            }
         }
 
         private void Cmb_AmrNo_DropDownClosed(object sender, EventArgs e)
         {
             toolTip2.Hide(Cmb_AmrNo);
-        }
-
-        private void Estlam_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void Addbtn_Click(object sender, EventArgs e)
@@ -1486,7 +1623,6 @@ namespace ANRPC_Inventory
             Constants.closecon();       
         }
 
-
         private void Cmb_FYear2_SelectedIndexChanged(object sender, EventArgs e)
         {
             //call sp that get last num that eentered for this MM and this YYYY
@@ -1512,7 +1648,6 @@ namespace ANRPC_Inventory
             
         }
 
-
         private void SaveBtn_Click(object sender, EventArgs e)
         {
 
@@ -1520,27 +1655,6 @@ namespace ANRPC_Inventory
             {
                 return;
             }
-
-
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                if (!row.IsNewRow)
-                {
-
-                    //  if (row.Cells[22].Value != DBNull.Value)
-                    if (row.Cells[11].Value != DBNull.Value && row.Cells[11].Value != null && row.Cells[11].Value.ToString() != "")
-                    {
-                        //  if (Convert.ToBoolean(row.Cells[22].Value) == true)
-                        //   {
-                        if (row.Cells[23].Value == DBNull.Value || row.Cells[23].Value == null || row.Cells[23].Value.ToString() == "")
-                        { // as long as eni estlmt ay kmya lazm a7ot tare5 el estlam bs lw goz2 msh 7a7ot mark eni estlmt el band kolo
-                            MessageBox.Show("يجب ادخال تاريخ الاستلام لاى بند تم استلام كل/جزء منه");
-                            return;
-                        }
-                    }
-                }
-            }
-
 
             if (AddEditFlag == 2)
             {
@@ -1579,106 +1693,88 @@ namespace ANRPC_Inventory
             Cmb_FY.Enabled = false;
         }
 
-        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void Column2_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (AddEditFlag == 2)
+            e.Handled = false;
+            return;
+        }
+
+        private void Column_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar)
+               && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
 
-
-                if (e.RowIndex >= 0)
-                {
-
-                    if (e.ColumnIndex == 11)
-                    {
-                        if (String.Compare(dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString()) == 0)
-                        {
-                            MessageBox.Show("استلام كلى للبند");
-                            dataGridView1.Rows[e.RowIndex].Cells[22].Value = "true";//تم الاستلام
-                        }
-                        else if (String.Compare(dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString()) < 0)
-                        {
-                            MessageBox.Show("استلام جزئى للبند");
-                            dataGridView1.Rows[e.RowIndex].Cells[22].Value = "false";//تم الاستلام
-                        }
-                        else if (String.Compare(dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString()) > 0)
-                        {
-                            MessageBox.Show("الكمية الواردة اكبر من المطلوبة");
-                            dataGridView1.Rows[e.RowIndex].Cells[22].Value = "true";//تم الاستلام
-                        }
-                    }
-                }
-                }
-            if (AddEditFlag == 1)
+                e.Handled = true;
+                return;
+            }
+            else
             {
-
-
-                if (e.RowIndex >= 0)
+                if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
                 {
+                    e.Handled = true;
+                    return;
 
-                    if (e.ColumnIndex == 6)
-                    {
-                        if (String.Compare(dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString()) == 0)
-                        {
-                            MessageBox.Show("استلام كلى للبند");
-                            dataGridView1.Rows[e.RowIndex].Cells[8].Value = "true";//تم الاستلام
-                        }
-                        else if (String.Compare(dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString()) < 0)
-                        {
-                            MessageBox.Show("استلام جزئى للبند");
-                            dataGridView1.Rows[e.RowIndex].Cells[8].Value = "false";//تم الاستلام
-                        }
-                        else if (String.Compare(dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString()) > 0)
-                        {
-                            MessageBox.Show("الكمية الواردة اكبر من المطلوبة");
-                            dataGridView1.Rows[e.RowIndex].Cells[8].Value = "true";//تم الاستلام
-                        }
-                    }
+                }
+                else
+                {
+                    e.Handled = false;
+                    return;
+                }
+
+
+            }
+
+        }
+
+        private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            string currentColumnName = dataGridView1.Columns[dataGridView1.CurrentCell.ColumnIndex].Name;
+
+            if (currentColumnName == "Quan2" )//reqQuan
+            {
+                e.Control.KeyPress -= new KeyPressEventHandler(Column_KeyPress);
+
+                //because 2 or 4 or 5 can accept digits also
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(Column_KeyPress);
+                }
+                return;
+
+            }
+            else
+            {
+                e.Control.KeyPress -= new KeyPressEventHandler(Column2_KeyPress);
+                //     //because 2 or 4 or 5 can accept digits also
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(Column2_KeyPress);
                 }
             }
-                /*
-                if (e.ColumnIndex == 17)
-                {
-                    if (e.RowIndex >= 0)
-                    {
-
-                          quan = Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString());
-
-                         price = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[17].Value.ToString());
-                         totalprice = ((decimal)quan * price);
-                    
-                        dataGridView1.Rows[e.RowIndex].Cells[18].Value =totalprice;
-                          dataGridView1.Rows[e.RowIndex].Cells[21].Value =totalprice;
-
-                    
-                    }
-                }
-
-                if ( e.ColumnIndex == 19)
-                {
-                    if (e.RowIndex >= 0)
-                    {
-                        if ((dataGridView1.Rows[e.RowIndex].Cells[18].Value.ToString() == "True") && dataGridView1.Rows[e.RowIndex].Cells[19].Value!=null)
-                        {
-                          dareba=(Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[19].Value))/100;
-                            dataGridView1.Rows[e.RowIndex].Cells[20].Value = totalprice+((decimal)dareba * totalprice);
-                        }
-                    }
-                }
-                if (e.ColumnIndex == 20)
-                {
-                    changedflag = 1;
-                }*/
-
-            
         }
 
-
-        private void dataGridView1_CellLeave(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-                  
-            
-        }
+            string currentColumnName = dataGridView1.Columns[e.ColumnIndex].Name;
 
+            if (e.RowIndex >= 0 && e.RowIndex != dataGridView1.NewRowIndex && 
+                currentColumnName != "EstlamDate" && currentColumnName != "EstlamFlag")
+            {
+                if (dataGridView1.Rows[e.RowIndex].Cells["Quan2"].Value.ToString() != "" && 
+                    Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells["Quan2"].Value) > 0)
+                {
+                    dataGridView1.Rows[e.RowIndex].Cells["EstlamFlag"].Value = "true";//تم الاستلام
+                }
+                else
+                {
+                    dataGridView1.Rows[e.RowIndex].Cells["EstlamFlag"].Value = "false";//تم الاستلام
+                }
+            }
+         
+        }
 
         private void TXT_QuanTard_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -1690,6 +1786,33 @@ namespace ANRPC_Inventory
             if (AddEditFlag == 2 && Cmb_AmrNo.SelectedIndex != -1)
             {
                 GetEstlamBnod(Cmb_AmrNo.SelectedValue.ToString(), Cmb_FY.Text,false);
+
+                foreach (DataGridViewColumn column in dataGridView1.Columns)
+                {
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    for (int i = 0; i < row.Cells.Count; i++)
+                    {
+                        string currentColumnName = dataGridView1.Columns[i].Name;
+                        row.Cells[i].ReadOnly = true;
+
+                        if (!row.IsNewRow)
+                        {
+                            if (currentColumnName == "Quan2")
+                            {
+                                row.Cells["Quan2"].ReadOnly = false;
+                                row.Cells["Quan2"].Style.BackColor = Color.LightGreen;
+                            }
+                            else if (currentColumnName == "EstlamDate")
+                            {
+                                row.Cells["EstlamDate"].Style.BackColor = Color.LightGreen;
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -1714,7 +1837,7 @@ namespace ANRPC_Inventory
 
         private void BTN_Search_Click(object sender, EventArgs e)
         {
-            if (!IsValidCase(VALIDATION_TYPES.SEARCH))
+            if (isComeFromSearch == false && !IsValidCase(VALIDATION_TYPES.SEARCH))
             {
                 return;
             }
@@ -1726,6 +1849,8 @@ namespace ANRPC_Inventory
 
             if (SearchEstlam(amr_no, fyear, false))
             {
+                prepareSearchState(false);
+
                 if (FlagSign2 != 1 && FlagSign1 != 1)
                 {
                     EditBtn.Enabled = true;
@@ -1736,7 +1861,6 @@ namespace ANRPC_Inventory
                 }
             }
         }
-
 
         private void BTN_Search_Motab3a_Click(object sender, EventArgs e)
         {
@@ -1758,6 +1882,8 @@ namespace ANRPC_Inventory
 
             if (SearchEstlam(amr_no, fyear, true))
             {
+                prepareSearchState(false);
+
                 EditBtn2.Enabled = true;
                 BTN_Print2.Enabled = true;
             }
@@ -1771,7 +1897,6 @@ namespace ANRPC_Inventory
             AddEditFlag = 0;
             reset();
         }
-
 
         private void browseBTN_Click(object sender, EventArgs e)
         {
@@ -1859,7 +1984,6 @@ namespace ANRPC_Inventory
 
             //popup.Dispose();
         }
-
 
         private void BTN_Print_Click(object sender, EventArgs e)
         {
@@ -2002,5 +2126,53 @@ namespace ANRPC_Inventory
 
 
         #endregion
+
+        private void DateTimePickerChange(object sender, EventArgs e)
+        {
+            dataGridView1.CurrentCell.Value = dateTimePicker1.Text.ToString();
+        }
+
+        private void DateTimePickerClose(object sender, EventArgs e)
+        {
+            dateTimePicker1.Visible = false;
+        }
+
+        private void DateTimePickerKeyDown(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = true;
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string currentColumnName = dataGridView1.Columns[e.ColumnIndex].Name;
+
+            if (e.RowIndex >= 0 && e.RowIndex != dataGridView1.NewRowIndex && currentColumnName == "EstlamDate")
+            {
+                dateTimePicker1.Visible=true;
+                dateTimePicker1.Format = DateTimePickerFormat.Short;
+                Rectangle oRectangle = dataGridView1.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
+                dateTimePicker1.Size = new Size(oRectangle.Width, oRectangle.Height);
+                dateTimePicker1.Location = new Point(oRectangle.X, oRectangle.Y);
+                dateTimePicker1.TextChanged += new EventHandler(DateTimePickerChange);
+                dateTimePicker1.KeyDown += new KeyEventHandler(DateTimePickerKeyDown);
+                dateTimePicker1.CloseUp += new EventHandler(DateTimePickerClose);
+
+            }
+        }
+
+        private void TXT_QuanBnod_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Constants.validatenumberkeypress(sender, e);
+        }
+
+        private void dataGridView1_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            string currentColumnName = dataGridView1.Columns[e.ColumnIndex].Name;
+
+            if (e.RowIndex >= 0 && e.RowIndex != dataGridView1.NewRowIndex && currentColumnName == "EstlamDate")
+            {
+                dateTimePicker1.Visible = false;
+            }
+        }
     }
 }

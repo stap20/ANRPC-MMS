@@ -115,11 +115,63 @@ namespace ANRPC_Inventory
             SAVE,
         }
         int currentSignNumber = 0;
+        bool isComeFromSearch = false;
+        Dictionary<int, int> signatureOrder;
         #endregion
 
 
         //------------------------------------------ Helper ---------------------------------
         #region Helpers
+        private void updateRasedAfter(int rowNumber)
+        {
+            Constants.opencon();
+            string x = "select quan from T_Tsnif where STOCK_NO_ALL=@st";
+            SqlCommand cmd = new SqlCommand(x, Constants.con);
+            cmd.Parameters.AddWithValue("@st", dataGridView1.Rows[rowNumber].Cells[15].Value.ToString());//stock_no_all
+            var scalar = cmd.ExecuteScalar();
+            if (scalar != DBNull.Value && scalar != null && dataGridView1.Rows[rowNumber].Cells[15].Value.ToString() != "") // Case where the DB value is null
+            {
+                double availablerased = Convert.ToDouble(scalar.ToString());
+
+                double quan = dataGridView1.Rows[rowNumber].Cells["Quan2"].Value.ToString() != "" ? Convert.ToDouble(dataGridView1.Rows[rowNumber].Cells["Quan2"].Value) : 0;
+
+                double newrased = availablerased + quan;
+                dataGridView1.Rows[rowNumber].Cells["Rased_After"].Value = newrased;
+                executemsg = true;
+            }
+            Constants.closecon();
+        }
+
+        private void initiateSignatureOrder()
+        {
+            //Dictionary to get values of signature (sign1 or sign2 ...) according to thier order in table
+            signatureOrder = new Dictionary<int, int>();
+            signatureOrder.Add(1, 1);
+            signatureOrder.Add(2, 2);
+            signatureOrder.Add(3, 3);
+            signatureOrder.Add(4, 4);
+        }
+
+        public void SP_InsertSignatures(int signNumber, int signOrder)
+        {
+            string cmdstring = "Exec  SP_InsertSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2,@SignOrder";
+            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+
+            cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_EdafaNo.Text));
+            //cmd.Parameters.AddWithValue("@TNO2", DBNull.Value);
+            cmd.Parameters.AddWithValue("@TNO2", Convert.ToInt32(TXT_TRNO.Text));
+            cmd.Parameters.AddWithValue("@FY", Cmb_FY2.Text.ToString());
+            cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
+            cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
+            cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
+            cmd.Parameters.AddWithValue("@FN", 5);
+            cmd.Parameters.AddWithValue("@SN", signNumber);
+            cmd.Parameters.AddWithValue("@D1", DBNull.Value);
+            cmd.Parameters.AddWithValue("@D2", DBNull.Value);
+            cmd.Parameters.AddWithValue("@SignOrder", signOrder);
+            cmd.ExecuteNonQuery();
+        }
+
         private PictureBox CheckSignatures(Panel panel, int signNumber)
         {
             try
@@ -216,24 +268,31 @@ namespace ANRPC_Inventory
             dataadapter.Fill(table);
             dataGridView1.DataSource = table;
 
+            dataGridView1.Columns["TalbTwareed_No"].HeaderText = "رقم طلب التوريد";//col4
+
+            dataGridView1.Columns["FYear"].HeaderText = "سنة مالية طلب التوريد";//col5
+
             dataGridView1.Columns["Bnd_No"].HeaderText = "رقم البند";//col6
-            dataGridView1.Columns["BndMwazna"].HeaderText = "بند موازنة";//col9
+
+            dataGridView1.Columns["NameEdara"].HeaderText = "الادارة الطالبة";//col8
+
+            dataGridView1.Columns["BndMwazna"].HeaderText = "بند موازنة";
+
             dataGridView1.Columns["Quan"].HeaderText = "الكمية";//col10
 
             dataGridView1.Columns["Quan2"].HeaderText = "الكمية الواردة";//col11
-            dataGridView1.Columns["Quan2"].DefaultCellStyle.BackColor = Color.SandyBrown;
 
             dataGridView1.Columns["Unit"].HeaderText = "الوحدة";//col12
+
             dataGridView1.Columns["Bayan"].HeaderText = "بيان المهمات";//col13
+
             dataGridView1.Columns["Rakm_Tasnif"].HeaderText = "رقم التصنيف";//col15
+
             dataGridView1.Columns["Rased_After"].HeaderText = "رصيد بعد";//col16
-            dataGridView1.Columns["UnitPrice"].HeaderText = "سعر الوحدة";//col17
-            dataGridView1.Columns["TotalPrice"].HeaderText = "الثمن الاجمالى";//col18
-            dataGridView1.Columns["ApplyDareba"].HeaderText = "تطبق الضريبة";//col19
-            dataGridView1.Columns["Darebapercent"].HeaderText = "نسبة الضريبة";//col20
-            dataGridView1.Columns["TotalPriceAfter"].HeaderText = "السعر الاجمالى ";//col21
+
             dataGridView1.Columns["NotIdenticalFlag"].HeaderText = "مطابق/غير مطابق ";
-            dataGridView1.Columns["ExpirationDate"].HeaderText = "تاريخ انتهاء الصلاحية ";//col28
+
+
 
             dataGridView1.Columns["Amrshraa_No"].HeaderText = "رقم أمر الشراء";//col0
             dataGridView1.Columns["Amrshraa_No"].Visible = false;
@@ -247,17 +306,32 @@ namespace ANRPC_Inventory
             dataGridView1.Columns["AmrSheraa_sanamalia"].HeaderText = "امر الشراء سنةمالية";//col3
             dataGridView1.Columns["AmrSheraa_sanamalia"].Visible = false;
 
-            dataGridView1.Columns["TalbTwareed_No"].HeaderText = "رقم طلب التوريد";//col4
-            dataGridView1.Columns["TalbTwareed_No"].Visible = false;
+            dataGridView1.Columns["UnitPrice"].HeaderText = "سعر الوحدة غير شامل الضريبة";//col17
+            dataGridView1.Columns["UnitPrice"].Visible = false;
 
-            dataGridView1.Columns["FYear"].HeaderText = "سنة مالية طلب التوريد";//col5
-            dataGridView1.Columns["FYear"].Visible = false;
+            dataGridView1.Columns["TotalPrice"].HeaderText = "الاجمالى غير شامل الضريبة و الخصم";//col18
+            dataGridView1.Columns["TotalPrice"].Visible = false;
+
+            dataGridView1.Columns["ApplyDiscount"].HeaderText = "تطبق الخصم";//col19
+            dataGridView1.Columns["ApplyDiscount"].Visible = false;
+
+            dataGridView1.Columns["Discountpercent"].HeaderText = "نسبة الخصم";//col20
+            dataGridView1.Columns["Discountpercent"].Visible = false;
+
+            dataGridView1.Columns["TotalPriceAfterDiscount"].HeaderText = "الاجمالى شامل الخصم ";//col21
+            dataGridView1.Columns["TotalPriceAfterDiscount"].Visible = false;
+
+            dataGridView1.Columns["ApplyDareba"].HeaderText = "تطبق الضريبة";//col22
+            dataGridView1.Columns["ApplyDareba"].Visible = false;
+
+            dataGridView1.Columns["Darebapercent"].HeaderText = "نسبة الضريبة";//col23
+            dataGridView1.Columns["Darebapercent"].Visible = false;
+
+            dataGridView1.Columns["TotalPriceAfter"].HeaderText = "الاجمالى شامل الخصم و الضريبة ";//col24
+            dataGridView1.Columns["TotalPriceAfter"].Visible = false;
 
             dataGridView1.Columns["CodeEdara"].HeaderText = "كود ادارة";//col7
             dataGridView1.Columns["CodeEdara"].Visible = false;
-
-            dataGridView1.Columns["NameEdara"].HeaderText = "الادارة الطالبة";//col8
-            dataGridView1.Columns["NameEdara"].Visible = false;
 
             dataGridView1.Columns["Makhzn"].HeaderText = "مخزن";//col14
             dataGridView1.Columns["Makhzn"].Visible = false;
@@ -280,6 +354,7 @@ namespace ANRPC_Inventory
 
             dataGridView1.Columns["ShickDate"].HeaderText = "تاريخ الشيك ";//col28
             dataGridView1.Columns["ShickDate"].Visible = false;//col28
+            dataGridView1.Columns["ExpirationDate"].Visible = false;
         }
 
         public bool GetAmrSheraaData(string amrNo, string fyear)
@@ -304,13 +379,12 @@ namespace ANRPC_Inventory
                    
                     TXT_Momayz.Text = dr["Momayz"].ToString();
 
-                    TXT_Edara.Text = dr["NameEdara"].ToString();
                     TXT_Date.Text = dr["Date_amrshraa"].ToString();
-                    TXT_BndMwazna.Text = dr["Bnd_Mwazna"].ToString();
                     TXT_Payment.Text = dr["Payment_Method"].ToString();
                     TXT_TaslemDate.Text = dr["Date_Tslem"].ToString();
                     TXT_TaslemPlace.Text = dr["Mkan_Tslem"].ToString();
                     TXT_Name.Text = dr["Shick_Name"].ToString();
+                    TXT_NameMward.Text = dr["Shick_Name"].ToString();
                     TXT_HesabMward1.Text = dr["Hesab_Mward"].ToString();
                     TXT_HesabMward2.Text = dr["Hesab_Mward"].ToString();
                     TXT_Egmali.Text = dr["Egmali"].ToString();
@@ -334,7 +408,6 @@ namespace ANRPC_Inventory
 
             return true;
         }
-
 
         public bool SearchEdafa(string edafaNo, string fyear, string momayz)
         {
@@ -497,7 +570,6 @@ namespace ANRPC_Inventory
             return true;
         }
 
-
         #endregion
 
         //------------------------------------------ State Handler ---------------------------------
@@ -570,8 +642,6 @@ namespace ANRPC_Inventory
             changePanelState(signatureTable, false);
             BTN_Sigm1.Enabled = true;
 
-            changeDataGridViewColumnState(dataGridView1, true);
-
             Pic_Sign1.Image = null;
             FlagSign1 = 0;
             Pic_Sign1.BackColor = Color.Green;
@@ -600,12 +670,13 @@ namespace ANRPC_Inventory
             {
                 BTN_Sign4.Enabled = true;
                 DeleteBtn.Enabled=true;
+                button1.Enabled = true;
 
                 Pic_Sign4.BackColor = Color.Green;
                 currentSignNumber = 4;
 
-                dataGridView1.Columns["LessQuanFlag"].ReadOnly = false;
                 dataGridView1.Columns["NotIdenticalFlag"].ReadOnly = false;//col25
+                dataGridView1.Columns["NotIdenticalFlag"].DefaultCellStyle.BackColor = Color.LightGreen;
             }
             else if (Constants.User_Type == "B")
             {
@@ -625,9 +696,6 @@ namespace ANRPC_Inventory
                         Pic_Sign3.BackColor = Color.Green;
                         currentSignNumber = 3;
                     }
-
-                    dataGridView1.Columns["LessQuanFlag"].ReadOnly = true;
-                    dataGridView1.Columns["NotIdenticalFlag"].ReadOnly = true;//col25
                 }
             }
 
@@ -638,12 +706,16 @@ namespace ANRPC_Inventory
             MNO = TXT_EdafaNo.Text;
         }
 
-        public void prepareSearchState()
+        public void prepareSearchState(bool isReset = true)
         {
             DisableControls();
-            Input_Reset();
 
-            if (Constants.isConfirmForm)
+            if (isReset)
+            {
+                Input_Reset();
+            }
+
+            if (!Constants.isConfirmForm)
             {
                 Cmb_CType.Enabled = true;
                 Cmb_FY2.Enabled = true;
@@ -695,10 +767,21 @@ namespace ANRPC_Inventory
             //signature btn
             changePanelState(signatureTable, false);
 
-            changeDataGridViewColumnState(dataGridView1, true);
-
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
+
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                for (int i = 0; i < row.Cells.Count; i++)
+                {
+                    row.Cells[i].ReadOnly = true;
+                }
+            }
         }
 
         public void resetSignature()
@@ -742,7 +825,6 @@ namespace ANRPC_Inventory
             Cmb_AmrNo.SelectedIndex = -1;
 
             //bian edara sec
-            TXT_Edara.Text = "";
             TXT_TaslemDate.Text = "";
             TXT_TaslemPlace.Text = "";
             TXT_Date.Value = DateTime.Today;
@@ -750,14 +832,12 @@ namespace ANRPC_Inventory
             //moward sec
             TXT_Payment.Text = "";
             TXT_Egmali.Text = "";
-            TXT_BndMwazna.Text = "";
             TXT_HesabMward1.Text = "";
             TXT_HesabMward2.Text = "";
 
             //sheraa methods
             TXT_Name.Text = "";
             TXT_NameMward.Text = "";
-            TXT_TalbNo.Text = "";
             TXT_Momayz.Text = "";
 
 
@@ -812,8 +892,8 @@ namespace ANRPC_Inventory
                     SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
 
                     cmd.Parameters.AddWithValue("@p1", Convert.ToInt32(TXT_EdafaNo.Text));
-                    cmd.Parameters.AddWithValue("@p3", Convert.ToInt32(Cmb_AmrNo.Text));
                     cmd.Parameters.AddWithValue("@p2", (Cmb_FY2.Text));
+                    cmd.Parameters.AddWithValue("@p3", Convert.ToInt32(Cmb_AmrNo.Text));
                     cmd.Parameters.AddWithValue("@p4", (Cmb_FY.Text));
                     cmd.Parameters.AddWithValue("@p44", (row.Cells[4].Value));
                     cmd.Parameters.AddWithValue("@p444", (row.Cells[5].Value));
@@ -822,8 +902,8 @@ namespace ANRPC_Inventory
                     cmd.Parameters.AddWithValue("@p6", (Convert.ToDateTime(TXT_Date.Value.ToShortDateString())));
 
                     cmd.Parameters.AddWithValue("@p7", Convert.ToDouble(row.Cells[11].Value));
-                    cmd.Parameters.AddWithValue("@p8", (row.Cells[24].Value));
-                    cmd.Parameters.AddWithValue("@p9", (row.Cells[25].Value));
+                    cmd.Parameters.AddWithValue("@p8", (row.Cells["LessQuanFlag"].Value));
+                    cmd.Parameters.AddWithValue("@p9", (row.Cells["NotIdenticalFlag"].Value));
                     cmd.Parameters.AddWithValue("@p10", (TXT_NameMward.Text));
 
 
@@ -918,13 +998,14 @@ namespace ANRPC_Inventory
                     {
                         executemsg = false;
                         Console.WriteLine(sqlEx);
+                        break;
                     }
 
                     flag = (int)cmd.Parameters["@p34"].Value;
 
                 }
             }
-            if (executemsg == true && flag == 1)
+            if (executemsg == true)
             {
                 string st = "exec SP_DeleteEdaraAlarm @p2,@p3,@p4";
                 SqlCommand cmd1 = new SqlCommand(st, Constants.con);
@@ -965,30 +1046,11 @@ namespace ANRPC_Inventory
                 }
 
                 //////////////////////////////////////////////////////////////////
-                for (int i = 1; i <= 4; i++)
+                foreach (KeyValuePair<int, int> entry in signatureOrder)
                 {
-
-
-                    string cmdstring = "Exec  SP_InsertSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
-                    SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-
-                    cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_EdafaNo.Text));
-                    //cmd.Parameters.AddWithValue("@TNO2", DBNull.Value);
-                    cmd.Parameters.AddWithValue("@TNO2", Convert.ToInt32(TXT_TRNO.Text));
-                    cmd.Parameters.AddWithValue("@FY", Cmb_FY2.Text.ToString());
-                    cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
-                    cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
-                    cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
-
-                    cmd.Parameters.AddWithValue("@FN", 5);
-
-                    cmd.Parameters.AddWithValue("@SN", i);
-
-                    cmd.Parameters.AddWithValue("@D1", DBNull.Value);
-
-                    cmd.Parameters.AddWithValue("@D2", DBNull.Value);
-                    cmd.ExecuteNonQuery();
+                    SP_InsertSignatures(entry.Key, entry.Value);
                 }
+
                 SP_UpdateSignatures(1, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
                 SP_UpdateSignatures(2, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
@@ -1000,10 +1062,6 @@ namespace ANRPC_Inventory
                 MessageBox.Show("تم الإضافة بنجاح  ! ");
 
                 reset();
-            }
-            else if (executemsg == true && flag == 2)
-            {
-                MessageBox.Show("تم إدخال رقم الاضافة المخزنية  من قبل  ! ");
             }
             else if (executemsg == false)
             {
@@ -1043,6 +1101,7 @@ namespace ANRPC_Inventory
             }
 
         }
+        
         public void InsertTrans2()
         {
             Constants.opencon();
@@ -1137,6 +1196,7 @@ namespace ANRPC_Inventory
 
 
         }
+        
         public void InsertTrans()
         {
             Constants.opencon();
@@ -1155,7 +1215,7 @@ namespace ANRPC_Inventory
 
                 if (!row.IsNewRow)
                 {
-                    if ((row.Cells[25].Value.ToString() == "True"))//lw motabk
+                    if ((row.Cells["NotIdenticalFlag"].Value.ToString() == "True"))//lw motabk
                     {
 
                         cmdstring = "exec SP_InsertTR1 @p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14,@p15,@p16,@p17,@p18,@p19,@p20,@p21,@p22,@p23,@p24,@p25,@p26,@p27,@p28,@p29";
@@ -1232,6 +1292,7 @@ namespace ANRPC_Inventory
 
 
         }
+        
         public void UpdateQuan2()
         {
             Constants.opencon();
@@ -1319,6 +1380,7 @@ namespace ANRPC_Inventory
                 }
             }
         }
+        
         public void UpdateQuan()
         {
             Constants.opencon();
@@ -1407,7 +1469,6 @@ namespace ANRPC_Inventory
             }
         }
 
-
         public void UpdateEdafa()
         {
             Constants.opencon();
@@ -1457,8 +1518,8 @@ namespace ANRPC_Inventory
 
                     cmd.Parameters.AddWithValue("@p6", (Convert.ToDateTime(TXT_Date.Value.ToShortDateString())));
                     cmd.Parameters.AddWithValue("@p7", Convert.ToDouble(row.Cells[11].Value));
-                    cmd.Parameters.AddWithValue("@p8", (row.Cells[24].Value));
-                    cmd.Parameters.AddWithValue("@p9", (row.Cells[25].Value));
+                    cmd.Parameters.AddWithValue("@p8", (row.Cells["LessQuanFlag"].Value));
+                    cmd.Parameters.AddWithValue("@p9", (row.Cells["NotIdenticalFlag"].Value));
                     cmd.Parameters.AddWithValue("@p10", (TXT_NameMward.Text));
 
 
@@ -1737,7 +1798,6 @@ namespace ANRPC_Inventory
         }
         #endregion
 
-
         //------------------------------------------ Validation Handler ---------------------------------
         #region Validation Handler
         private List<(ErrorProvider, Control, string)> ValidateAttachFile()
@@ -1858,6 +1918,39 @@ namespace ANRPC_Inventory
                 //errorsList.Add((errorProvider, dataGridView1, "لايمكن ان يتكون طلب توريد بدون بنود"));
                 MessageBox.Show("لايمكن ان يتكون طلب توريد بدون بنود");
             }
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                Console.WriteLine(dataGridView1.Rows.Count);
+                if (!row.IsNewRow)
+                {
+                    DataGridViewCell arrived, ordered;
+
+                    ordered = row.Cells["Quan"];//col10
+                    arrived = row.Cells["Quan2"];
+            
+
+                    if (arrived.Value.ToString() != "")
+                    {
+                        if (Convert.ToDouble(ordered.Value) != Convert.ToDouble(arrived.Value))
+                        {
+                            arrived.ErrorText = "يجب أن تساوي الكمية المطلوبة الكمية الواردة  ";
+                            errorsList.Add((alertProvider, dataGridView1, "تم ادخال مواصفة هذا التصنيف من قبل"));
+                        }
+                        else
+                        {
+                            arrived.ErrorText = "";
+                        }
+                    }
+                    else
+                    {
+                        arrived.ErrorText = "يجب أن كتابة الكمية";
+                        errorsList.Add((alertProvider, dataGridView1, "يجب أن كتابة الكمية"));
+                    }
+
+                }
+            }
+
             #endregion
 
             PictureBox signControl = CheckSignatures(signatureTable, currentSignNumber);
@@ -2020,14 +2113,36 @@ namespace ANRPC_Inventory
             reset();
         }
 
-
         public FEdafaMakhzania_F()
         {
             InitializeComponent();
 
             init();
+
+            initiateSignatureOrder();
         }
-               
+
+        public FEdafaMakhzania_F(string x, string y)
+        {
+            InitializeComponent();
+            Cmb_FY.Text = x;
+            TXT_EdafaNo.Text = y;
+
+
+            panel7.Visible = false;
+            panel2.Visible = false;
+
+            isComeFromSearch = true;
+        }
+
+        private void FEdafaMakhzania_F_Load(object sender, EventArgs e)
+        {
+            if (isComeFromSearch)
+            {
+                BTN_Search_Click(BTN_Search, e);
+            }
+        }
+
         private void Column2_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = false;
@@ -2126,7 +2241,6 @@ namespace ANRPC_Inventory
             }
         }
 
-
         private void Cmb_FY_SelectedIndexChanged(object sender, EventArgs e)
         {
             //call sp that get last num that eentered for this MM and this YYYY
@@ -2179,7 +2293,6 @@ namespace ANRPC_Inventory
             reset();
         }
   
-
         private void Cmb_FY2_SelectedIndexChanged(object sender, EventArgs e)
         {
             //go and get talbTawreed_no for this FYear
@@ -2229,7 +2342,6 @@ namespace ANRPC_Inventory
        
         }
 
-
         private void Cmb_FYear2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -2270,237 +2382,22 @@ namespace ANRPC_Inventory
             Cmb_EdafaNo2.SelectedIndex = -1;
             Constants.closecon();
         }
-
-        
+      
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 11 ||e.ColumnIndex==15) //if second cell
+            string currentColumnName = dataGridView1.Columns[e.ColumnIndex].Name;
+
+            if (e.RowIndex >= 0 && e.RowIndex != dataGridView1.NewRowIndex && currentColumnName == "Quan2")
             {
-                if (e.RowIndex >= 0 && dataGridView1.Rows[e.RowIndex].Cells[15].Value != null)
-                {
-
-                    Constants.opencon();
-                    string x = "select quan from T_Tsnif where STOCK_NO_ALL=@st";
-                    SqlCommand cmd = new SqlCommand(x, Constants.con);
-                    cmd.Parameters.AddWithValue("@st", dataGridView1.Rows[e.RowIndex].Cells[15].Value.ToString());//stock_no_all
-                    var scalar = cmd.ExecuteScalar();
-                    if (scalar != DBNull.Value && scalar != null && dataGridView1.Rows[e.RowIndex].Cells[15].Value.ToString() != "") // Case where the DB value is null
-                    {
-                        string g = scalar.ToString();
-                        double availablerased = Convert.ToDouble(g);
-                        double newrased;
-                        double quan = Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[11].Value);
-                        string xx = "select QuanArrived from T_Edafa where Edafa_No=@x and Edafa_FY=@Y and Bnd_No=@Z and TR_NO=@TRNO";
-                      SqlCommand  cmd2 = new SqlCommand(xx, Constants.con);
-
-
-                        cmd2.Parameters.AddWithValue("@X", TXT_EdafaNo.Text);//stock_no_all
-                        cmd2.Parameters.AddWithValue("@Y", Cmb_FY2.Text);//stock_no_all
-                        cmd2.Parameters.AddWithValue("@Z",dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString());//stock_no_all
-                        cmd2.Parameters.AddWithValue("@TRNO", TXT_TRNO.Text);
-                       var scalar2 = cmd2.ExecuteScalar();
-                        if (scalar2 != DBNull.Value && scalar2 != null)
-                        {
-
-
-                            oldvalue = Convert.ToDouble(scalar2.ToString());
-                          //  newrased = availablerased - oldvalue + quan; //equation di used lw ana 3deld el quanavailable fel t_tsnif w get a#dl b3d a5er sign
-                            newrased = availablerased + quan;
-                            dataGridView1.Rows[e.RowIndex].Cells[16].Value = newrased;
-                            executemsg = true;
-                        }
-                        else
-                        {
-                            oldvalue = 0;
-                           // newrased = availablerased - oldvalue + quan;
-                            newrased = availablerased + quan;
-                            dataGridView1.Rows[e.RowIndex].Cells[16].Value = newrased;
-                            executemsg = true;
-                        }
-
-                    }
-                    else
-                    {
-
-                    }
-                    Constants.closecon();
-                }
-            }
-            if (e.ColumnIndex == 16)
-            {
-                if (e.RowIndex >= 0)
-                {
-
-                      quan = Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString());
-
-                     price = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[16].Value.ToString());
-                     totalprice = ((decimal)quan * price);
-                    
-                    dataGridView1.Rows[e.RowIndex].Cells[17].Value =totalprice;
-                      dataGridView1.Rows[e.RowIndex].Cells[20].Value =totalprice;
-
-                    
-                }
+                updateRasedAfter(e.RowIndex);
             }
 
-            if ( e.ColumnIndex == 19)
-            {
-                if (e.RowIndex >= 0)
-                {
-                    if ((dataGridView1.Rows[e.RowIndex].Cells[18].Value.ToString() == "True") && dataGridView1.Rows[e.RowIndex].Cells[19].Value!=null)
-                    {
-                      dareba=(Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[19].Value))/100;
-                        dataGridView1.Rows[e.RowIndex].Cells[20].Value = totalprice+((decimal)dareba * totalprice);
-                    }
-                }
-            }
             if (e.ColumnIndex == 20)
             {
                 changedflag = 1;
             }
           
         }
-
-
-        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-                                    {
-                if (e.ColumnIndex == 20)
-            {
-                if (!string.IsNullOrEmpty(dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].ToString()))
-          {
-               // your code goes here
-         
-            decimal total = table.AsEnumerable().Sum(row => row.Field<decimal>("TotalPriceAfter"));
-                            //  TXT_Egmali.Text = total.ToString("N2");
-                             
-            //    dataGridView1.FooterRow.Cells[1].Text = "Total";
-            //   dataGridView1.FooterRow.Cells[1].HorizontalAlign = HorizontalAlign.Right;
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-               string edara = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-               TXT_Edara.Text += edara;
-            }
-  
-            }}
-
-        }
-
-        private void dataGridView1_CellLeave(object sender, DataGridViewCellEventArgs e)
-        {
-            if(e.ColumnIndex==15 ||e.ColumnIndex==11)
-            {
-                if (e.RowIndex >= 0 && dataGridView1.Rows[e.RowIndex].Cells[15].Value != null)
-                {
-
-                    Constants.opencon();
-                    string x = "select quan from T_Tsnif where STOCK_NO_ALL=@st";
-                    SqlCommand cmd = new SqlCommand(x, Constants.con);
-                    cmd.Parameters.AddWithValue("@st", dataGridView1.Rows[e.RowIndex].Cells[15].Value.ToString());//stock_no_all
-                    var scalar = cmd.ExecuteScalar();
-                    if (scalar != DBNull.Value && scalar != null && dataGridView1.Rows[e.RowIndex].Cells[15].Value.ToString() != "") // Case where the DB value is null
-                    {
-                        string g = scalar.ToString();
-                        double availablerased = Convert.ToDouble(g);
-                        double newrased;
-                        double quan = Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[11].Value);
-                        string xx = "select QuanArrived from T_Edafa where Edafa_No=@x and Edafa_FY=@Y and Bnd_No=@Z  and TR_NO=@TRNO";
-                        SqlCommand cmd2 = new SqlCommand(xx, Constants.con);
-
-
-                        cmd2.Parameters.AddWithValue("@X", TXT_EdafaNo.Text);//stock_no_all
-                        cmd2.Parameters.AddWithValue("@Y", Cmb_FY2.Text);//stock_no_all
-                        cmd2.Parameters.AddWithValue("@Z", dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString());//stock_no_all
-                        cmd2.Parameters.AddWithValue("@TRNO", TXT_TRNO.Text);//stock_no_all
-                        var scalar2 = cmd2.ExecuteScalar();
-                        if (scalar2 != DBNull.Value && scalar2 != null)
-                        {
-
-
-                            oldvalue = Convert.ToDouble(scalar2.ToString());
-                            //  newrased = availablerased - oldvalue + quan; //equation di used lw ana 3deld el quanavailable fel t_tsnif w get a#dl b3d a5er sign
-                            newrased = availablerased + quan;
-                            dataGridView1.Rows[e.RowIndex].Cells[16].Value = newrased;
-                            executemsg = true;
-                        }
-                        else
-                        {
-                            oldvalue = 0;
-                            // newrased = availablerased - oldvalue + quan;
-                            newrased = availablerased + quan;
-                            dataGridView1.Rows[e.RowIndex].Cells[16].Value = newrased;
-                            executemsg = true;
-                        }
-
-                    }
-                    else
-                    {
-
-                    }
-                    Constants.closecon();
-                }
-            }
-            
-            
-            /*
-            if (e.ColumnIndex == 20 && changedflag == 1)
-            {
-
-
-                    // your code goes here
-
-                    //decimal total = table.AsEnumerable().Sum(row => row.Field<decimal>("TotalPriceAfter"));
-                 //   decimal total = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
-
-                    decimal sum = 0;
-                    string edara="";
-                    string talbtawreed = "";
-                    string bndmwazna = "-"; 
-                                                foreach (DataGridViewRow row in dataGridView1.Rows)
-                    {
-                        if (!(row.Cells[e.ColumnIndex].Value == null || row.Cells[e.ColumnIndex].Value ==DBNull.Value))
-                        {
-
-                            sum = sum + Convert.ToDecimal(row.Cells[e.ColumnIndex].Value.ToString());
-                            if (e.RowIndex == 0)
-                            {
-
-
-                                edara = edara + row.Cells[8].Value.ToString() ;
-                                talbtawreed = talbtawreed + row.Cells[5].Value.ToString() ;
-                                bndmwazna = bndmwazna + row.Cells[9].Value.ToString() ;
-                                TXT_Egmali.Text = sum.ToString("N2");
-                                TXT_Edara.Text = edara;
-                                TXT_BndMwazna.Text = bndmwazna;
-                                TXT_TalbNo.Text = talbtawreed;
-                            }
-                            else if (e.RowIndex > 0)
-                            {
-                                edara = edara + row.Cells[8].Value.ToString() + "-";
-                                talbtawreed = talbtawreed + row.Cells[5].Value.ToString() + "-";
-                                bndmwazna = bndmwazna + row.Cells[9].Value.ToString() + "-";
-                                TXT_Egmali.Text = sum.ToString("N2");
-                                TXT_Edara.Text = edara;
-                                TXT_BndMwazna.Text = bndmwazna;
-                                TXT_TalbNo.Text = talbtawreed;
-                            }
-
-                        }
-                    }
-            }*/
-        }
-
-
-        ////////////////////
-
-        private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-            if (e.ColumnIndex == 1)
-            {
-                var oldValue = dataGridView1[e.ColumnIndex, e.RowIndex].Value;
-                var newValue = e.FormattedValue;
-            }
-        }
-
 
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -2564,7 +2461,6 @@ namespace ANRPC_Inventory
             }
         }
 
-
         private void BTN_Print_Click(object sender, EventArgs e)
         {
             if ((MessageBox.Show("هل تريد طباعة تقرير الاضافة المخزنية؟", "", MessageBoxButtons.YesNo)) == DialogResult.Yes)
@@ -2585,7 +2481,6 @@ namespace ANRPC_Inventory
                 }
             }
         }
-
         
         public int CheckDirect70()
         {
@@ -2640,64 +2535,32 @@ namespace ANRPC_Inventory
                 cleargridview();
 
                 GetAmrSheraaData(Cmb_AmrNo.SelectedValue.ToString(), Cmb_FY.Text);
-            }
-        }
-
-        private void dataGridView1_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.ColumnIndex == 11 || e.ColumnIndex == 15) //if second cell
-            {
-                if (e.RowIndex >= 0 && dataGridView1.Rows[e.RowIndex].Cells[15].Value != null)
+                foreach (DataGridViewColumn column in dataGridView1.Columns)
                 {
-
-                    Constants.opencon();
-                    string x = "select quan from T_Tsnif where STOCK_NO_ALL=@st";
-                    SqlCommand cmd = new SqlCommand(x, Constants.con);
-                    cmd.Parameters.AddWithValue("@st", dataGridView1.Rows[e.RowIndex].Cells[15].Value.ToString());//stock_no_all
-                    var scalar = cmd.ExecuteScalar();
-                    if (scalar != DBNull.Value && scalar != null && dataGridView1.Rows[e.RowIndex].Cells[15].Value.ToString() != "") // Case where the DB value is null
-                    {
-                        string g = scalar.ToString();
-                        double availablerased = Convert.ToDouble(g);
-                        double newrased;
-                        double quan = Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[11].Value);
-                        string xx = "select QuanArrived from T_Edafa where Edafa_No=@x and Edafa_FY=@Y and Bnd_No=@Z and TR_NO=@TRNO";
-                        SqlCommand cmd2 = new SqlCommand(xx, Constants.con);
-
-
-                        cmd2.Parameters.AddWithValue("@X", TXT_EdafaNo.Text);//stock_no_all
-                        cmd2.Parameters.AddWithValue("@Y", Cmb_FY2.Text);//stock_no_all
-                        cmd2.Parameters.AddWithValue("@Z", dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString());//stock_no_all
-                        cmd2.Parameters.AddWithValue("@TRNO", TXT_TRNO.Text);
-                        var scalar2 = cmd2.ExecuteScalar();
-                        if (scalar2 != DBNull.Value && scalar2 != null)
-                        {
-
-
-                            oldvalue = Convert.ToDouble(scalar2.ToString());
-                            //  newrased = availablerased - oldvalue + quan; //equation di used lw ana 3deld el quanavailable fel t_tsnif w get a#dl b3d a5er sign
-                            newrased = availablerased + quan;
-                            dataGridView1.Rows[e.RowIndex].Cells[16].Value = newrased;
-                            executemsg = true;
-                        }
-                        else
-                        {
-                            oldvalue = 0;
-                            // newrased = availablerased - oldvalue + quan;
-                            newrased = availablerased + quan;
-                            dataGridView1.Rows[e.RowIndex].Cells[16].Value = newrased;
-                            executemsg = true;
-                        }
-
-                    }
-                    else
-                    {
-
-                    }
-                    Constants.closecon();
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
+
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    for (int i = 0; i < row.Cells.Count; i++)
+                    {
+                        string currentColumnName = dataGridView1.Columns[i].Name;
+                        row.Cells[i].ReadOnly = true;
+
+                        if (!row.IsNewRow)
+                        {
+                            if (currentColumnName == "Quan2")
+                            {
+                                row.Cells["Quan2"].Value = 0;
+                                row.Cells["Quan2"].ReadOnly = false;
+                                row.Cells["Quan2"].Style.BackColor = Color.LightGreen;
+                            }
+                        }
+                    }
+                }
+
             }
-        }
+        } 
 
         private void Cmb_CType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -2743,39 +2606,6 @@ namespace ANRPC_Inventory
         {
             toolTip1.Show("مميز مستند ", TXT_TRNO);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         //------------------------------------------ Signature Handler ---------------------------------
         #region Signature Handler
@@ -2886,7 +2716,7 @@ namespace ANRPC_Inventory
 
         private void BTN_Search_Click(object sender, EventArgs e)
         {
-            if (!IsValidCase(VALIDATION_TYPES.SEARCH))
+            if (isComeFromSearch == false && !IsValidCase(VALIDATION_TYPES.SEARCH))
             {
                 return;
             }
@@ -2899,6 +2729,8 @@ namespace ANRPC_Inventory
 
             if (SearchEdafa(amr_no, fyear, momayz))
             {
+                prepareSearchState(false);
+
                 if (FlagSign2 != 1 && FlagSign1 != 1)
                 {
                     EditBtn.Enabled = true;
@@ -2907,6 +2739,8 @@ namespace ANRPC_Inventory
                 {
                     EditBtn.Enabled = false;
                 }
+
+                BTN_Estagal.Enabled = true;
             }
         }
 
@@ -2925,6 +2759,8 @@ namespace ANRPC_Inventory
 
             if (SearchEdafa(edafa_no, fyear, momayz))
             {
+                prepareSearchState(false);
+
                 EditBtn2.Enabled = true;
                 BTN_Print2.Enabled = true;
             }
@@ -2997,7 +2833,6 @@ namespace ANRPC_Inventory
                 TXT_TRNO2.Text = Cmb_CType2.SelectedValue.ToString();
             }
         }
-
 
         private void browseBTN_Click(object sender, EventArgs e)
         {
@@ -3094,5 +2929,6 @@ namespace ANRPC_Inventory
 
             popup.Dispose();
         }
+
     }
 }

@@ -92,17 +92,11 @@
             this.TXT_Payment = new System.Windows.Forms.TextBox();
             this.TXT_Date = new System.Windows.Forms.DateTimePicker();
             this.TXT_Egmali = new System.Windows.Forms.TextBox();
-            this.TXT_TalbNo = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.TXT_BndMwazna = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.TXT_Edara = new System.Windows.Forms.TextBox();
             this.TXT_TaslemDate = new System.Windows.Forms.TextBox();
             this.TXT_Momayz = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -863,10 +857,6 @@
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dataGridView1.Size = new System.Drawing.Size(1150, 258);
             this.dataGridView1.TabIndex = 230;
-            this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
-            this.dataGridView1.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellLeave);
-            this.dataGridView1.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseMove);
-            this.dataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
             // 
@@ -888,7 +878,7 @@
             this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-            this.label26.Location = new System.Drawing.Point(162, 98);
+            this.label26.Location = new System.Drawing.Point(162, 67);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(95, 19);
             this.label26.TabIndex = 286;
@@ -910,7 +900,7 @@
             // 
             this.TXT_HesabMward1.Enabled = false;
             this.TXT_HesabMward1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_HesabMward1.Location = new System.Drawing.Point(3, 32);
+            this.TXT_HesabMward1.Location = new System.Drawing.Point(3, 3);
             this.TXT_HesabMward1.Name = "TXT_HesabMward1";
             this.TXT_HesabMward1.Size = new System.Drawing.Size(77, 26);
             this.TXT_HesabMward1.TabIndex = 235;
@@ -919,7 +909,7 @@
             // 
             this.TXT_HesabMward2.Enabled = false;
             this.TXT_HesabMward2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_HesabMward2.Location = new System.Drawing.Point(86, 32);
+            this.TXT_HesabMward2.Location = new System.Drawing.Point(86, 3);
             this.TXT_HesabMward2.Name = "TXT_HesabMward2";
             this.TXT_HesabMward2.Size = new System.Drawing.Size(84, 26);
             this.TXT_HesabMward2.TabIndex = 234;
@@ -930,10 +920,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_TaslemPlace.Enabled = false;
             this.TXT_TaslemPlace.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_TaslemPlace.Location = new System.Drawing.Point(5, 90);
+            this.TXT_TaslemPlace.Location = new System.Drawing.Point(5, 61);
             this.TXT_TaslemPlace.Multiline = true;
             this.TXT_TaslemPlace.Name = "TXT_TaslemPlace";
-            this.TXT_TaslemPlace.Size = new System.Drawing.Size(95, 72);
+            this.TXT_TaslemPlace.Size = new System.Drawing.Size(95, 99);
             this.TXT_TaslemPlace.TabIndex = 233;
             // 
             // TXT_Name
@@ -949,10 +939,10 @@
             // 
             this.TXT_Payment.Enabled = false;
             this.TXT_Payment.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_Payment.Location = new System.Drawing.Point(3, 91);
+            this.TXT_Payment.Location = new System.Drawing.Point(3, 62);
             this.TXT_Payment.Multiline = true;
             this.TXT_Payment.Name = "TXT_Payment";
-            this.TXT_Payment.Size = new System.Drawing.Size(168, 67);
+            this.TXT_Payment.Size = new System.Drawing.Size(168, 100);
             this.TXT_Payment.TabIndex = 231;
             // 
             // TXT_Date
@@ -962,7 +952,7 @@
             this.TXT_Date.Enabled = false;
             this.TXT_Date.Font = new System.Drawing.Font("Arial", 12F);
             this.TXT_Date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.TXT_Date.Location = new System.Drawing.Point(5, 2);
+            this.TXT_Date.Location = new System.Drawing.Point(5, 3);
             this.TXT_Date.Name = "TXT_Date";
             this.TXT_Date.ShowUpDown = true;
             this.TXT_Date.Size = new System.Drawing.Size(125, 26);
@@ -972,19 +962,10 @@
             // 
             this.TXT_Egmali.Enabled = false;
             this.TXT_Egmali.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_Egmali.Location = new System.Drawing.Point(3, 61);
+            this.TXT_Egmali.Location = new System.Drawing.Point(3, 32);
             this.TXT_Egmali.Name = "TXT_Egmali";
             this.TXT_Egmali.Size = new System.Drawing.Size(132, 26);
             this.TXT_Egmali.TabIndex = 26;
-            // 
-            // TXT_TalbNo
-            // 
-            this.TXT_TalbNo.Enabled = false;
-            this.TXT_TalbNo.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_TalbNo.Location = new System.Drawing.Point(3, 65);
-            this.TXT_TalbNo.Name = "TXT_TalbNo";
-            this.TXT_TalbNo.Size = new System.Drawing.Size(171, 26);
-            this.TXT_TalbNo.TabIndex = 25;
             // 
             // label13
             // 
@@ -992,7 +973,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
             this.label13.ForeColor = System.Drawing.Color.Black;
-            this.label13.Location = new System.Drawing.Point(143, 64);
+            this.label13.Location = new System.Drawing.Point(143, 35);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(122, 19);
             this.label13.TabIndex = 23;
@@ -1003,66 +984,22 @@
             this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-            this.label14.Location = new System.Drawing.Point(180, 35);
+            this.label14.Location = new System.Drawing.Point(180, 6);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(85, 19);
             this.label14.TabIndex = 22;
             this.label14.Text = " : حساب مورد";
-            // 
-            // label15
-            // 
-            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-            this.label15.ForeColor = System.Drawing.Color.Black;
-            this.label15.Location = new System.Drawing.Point(180, 68);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(76, 19);
-            this.label15.TabIndex = 21;
-            this.label15.Text = " : طلب توريد";
-            // 
-            // TXT_BndMwazna
-            // 
-            this.TXT_BndMwazna.Enabled = false;
-            this.TXT_BndMwazna.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_BndMwazna.Location = new System.Drawing.Point(3, 3);
-            this.TXT_BndMwazna.Name = "TXT_BndMwazna";
-            this.TXT_BndMwazna.Size = new System.Drawing.Size(167, 26);
-            this.TXT_BndMwazna.TabIndex = 20;
-            // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-            this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(181, 6);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(84, 19);
-            this.label6.TabIndex = 19;
-            this.label6.Text = " : بند الموازنة";
             // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-            this.label5.Location = new System.Drawing.Point(181, 96);
+            this.label5.Location = new System.Drawing.Point(181, 67);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(84, 19);
             this.label5.TabIndex = 17;
             this.label5.Text = " : طريقة الدفع";
-            // 
-            // TXT_Edara
-            // 
-            this.TXT_Edara.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_Edara.Enabled = false;
-            this.TXT_Edara.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_Edara.Location = new System.Drawing.Point(5, 31);
-            this.TXT_Edara.Name = "TXT_Edara";
-            this.TXT_Edara.Size = new System.Drawing.Size(92, 26);
-            this.TXT_Edara.TabIndex = 16;
             // 
             // TXT_TaslemDate
             // 
@@ -1070,7 +1007,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_TaslemDate.Enabled = false;
             this.TXT_TaslemDate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_TaslemDate.Location = new System.Drawing.Point(5, 61);
+            this.TXT_TaslemDate.Location = new System.Drawing.Point(5, 32);
             this.TXT_TaslemDate.Name = "TXT_TaslemDate";
             this.TXT_TaslemDate.Size = new System.Drawing.Size(95, 26);
             this.TXT_TaslemDate.TabIndex = 15;
@@ -1079,23 +1016,11 @@
             // 
             this.TXT_Momayz.Enabled = false;
             this.TXT_Momayz.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_Momayz.Location = new System.Drawing.Point(3, 95);
+            this.TXT_Momayz.Location = new System.Drawing.Point(3, 64);
             this.TXT_Momayz.Multiline = true;
             this.TXT_Momayz.Name = "TXT_Momayz";
-            this.TXT_Momayz.Size = new System.Drawing.Size(159, 66);
+            this.TXT_Momayz.Size = new System.Drawing.Size(159, 97);
             this.TXT_Momayz.TabIndex = 14;
-            // 
-            // label12
-            // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-            this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(100, 34);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(95, 19);
-            this.label12.TabIndex = 10;
-            this.label12.Text = " : الادارة الطالبة";
             // 
             // label11
             // 
@@ -1113,7 +1038,7 @@
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-            this.label10.Location = new System.Drawing.Point(106, 94);
+            this.label10.Location = new System.Drawing.Point(106, 65);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(89, 19);
             this.label10.TabIndex = 8;
@@ -1124,7 +1049,7 @@
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-            this.label9.Location = new System.Drawing.Point(104, 64);
+            this.label9.Location = new System.Drawing.Point(104, 35);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(91, 19);
             this.label9.TabIndex = 7;
@@ -1135,7 +1060,7 @@
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-            this.label7.Location = new System.Drawing.Point(136, 5);
+            this.label7.Location = new System.Drawing.Point(136, 6);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(59, 19);
             this.label7.TabIndex = 5;
@@ -1607,8 +1532,6 @@
             this.panel5.Controls.Add(this.TXT_Momayz);
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.label26);
-            this.panel5.Controls.Add(this.TXT_TalbNo);
-            this.panel5.Controls.Add(this.label15);
             this.panel5.Location = new System.Drawing.Point(99, 4);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(259, 167);
@@ -1653,8 +1576,6 @@
             this.panel9.Controls.Add(this.TXT_Date);
             this.panel9.Controls.Add(this.label9);
             this.panel9.Controls.Add(this.label7);
-            this.panel9.Controls.Add(this.TXT_Edara);
-            this.panel9.Controls.Add(this.label12);
             this.panel9.Controls.Add(this.TXT_TaslemDate);
             this.panel9.Controls.Add(this.label10);
             this.panel9.Location = new System.Drawing.Point(638, 5);
@@ -1667,8 +1588,6 @@
             this.panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel10.Controls.Add(this.label14);
             this.panel10.Controls.Add(this.TXT_Payment);
-            this.panel10.Controls.Add(this.label6);
-            this.panel10.Controls.Add(this.TXT_BndMwazna);
             this.panel10.Controls.Add(this.label5);
             this.panel10.Controls.Add(this.TXT_HesabMward2);
             this.panel10.Controls.Add(this.TXT_Egmali);
@@ -1781,6 +1700,7 @@
             this.Name = "FEdafaMakhzania_F";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "TalbTawred";
+            this.Load += new System.EventHandler(this.FEdafaMakhzania_F_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.takalefTable.ResumeLayout(false);
@@ -1838,21 +1758,15 @@
         private System.Windows.Forms.ComboBox Cmb_FY;
         private System.Windows.Forms.TextBox TXT_EdafaNo;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox TXT_Edara;
         private System.Windows.Forms.TextBox TXT_TaslemDate;
         private System.Windows.Forms.TextBox TXT_Momayz;
         private System.Windows.Forms.TextBox TXT_Egmali;
-        private System.Windows.Forms.TextBox TXT_TalbNo;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox TXT_BndMwazna;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker TXT_Date;
         private System.Windows.Forms.DataGridView dataGridView1;

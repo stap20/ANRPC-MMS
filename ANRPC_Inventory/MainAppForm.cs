@@ -213,6 +213,7 @@ namespace ANRPC_Inventory
             privilages = new List<APPLICATION_FORMS>() {
                 APPLICATION_FORMS.ESTLAM,
                 APPLICATION_FORMS.ESTLAM_FOREIGN,
+                APPLICATION_FORMS.EZN_TAHWEEL,
                 APPLICATION_FORMS.SEARCH,
             };
 
@@ -243,7 +244,6 @@ namespace ANRPC_Inventory
 
             #region Transfer2
             privilages = new List<APPLICATION_FORMS>() {
-                APPLICATION_FORMS.EZN_TAHWEEL,
                 APPLICATION_FORMS.SEARCH,
             };
 

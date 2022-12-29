@@ -809,21 +809,6 @@ namespace ANRPC_Inventory
             }
         }
 
-        private void changeDataGridViewColumnState(DataGridView dataGridView, bool state)
-        {
-            try
-            {
-                foreach (DataGridViewColumn column in dataGridView.Columns)
-                {
-                    dataGridView.Columns[column.Index].ReadOnly = state;
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-        }
-
         public void PrepareAddState()
         {
             //Search sec
@@ -863,15 +848,14 @@ namespace ANRPC_Inventory
             //takalid types
             DisableTakalef();
 
-            changeDataGridViewColumnState(dataGridView1, true);
-
-            dataGridView1.AllowUserToAddRows = true;
-            dataGridView1.AllowUserToDeleteRows = true;
-
             Pic_Sign1.Image = null;
             FlagSign1 = 0;
             Pic_Sign1.BackColor = Color.Green;
             currentSignNumber = 1;
+
+            dataGridView1.ReadOnly = true;
+            dataGridView1.AllowUserToAddRows = true;
+            dataGridView1.AllowUserToDeleteRows = true;
         }
 
         public void PrepareEditState()
@@ -893,6 +877,14 @@ namespace ANRPC_Inventory
             DisableControls();
             BTN_Save2.Enabled = true;
 
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                for (int i = 0; i < row.Cells.Count; i++)
+                {
+                    row.Cells[i].ReadOnly = false;
+                }
+            }
+
             if (Constants.User_Type == "A")
             {
                 if (FlagSign2 != 1 && FlagSign1 == 1)
@@ -901,21 +893,33 @@ namespace ANRPC_Inventory
                     DeleteBtn.Enabled = true;
                     currentSignNumber = 2;
                 }
-                else if (FlagSign4 != 1 && FlagSign3 == 1)
+            }
+            else if (Constants.User_Type == "B")
+            {
+                if (Constants.UserTypeB == "NewTasnif")
+                {
+                    BTN_Sign3.Enabled = true;
+                    currentSignNumber = 3;
+                }
+                else if (Constants.UserTypeB == "Estlam")
                 {
                     BTN_Sign4.Enabled = true;
                     currentSignNumber = 4;
                 }
-            }
-            else if (Constants.User_Type == "B")
-            {
-                if (Constants.UserTypeB == "Sarf")
+                else if (Constants.UserTypeB == "Transfer1")
                 {
-                    BTN_Sign3.Enabled = true;
-                    //dataGridView1.ReadOnly = false;
-                    dataGridView1.Columns["Quan2"].ReadOnly = false;
-                    currentSignNumber = 3;
+                    if (FlagSign5 != 1 && FlagSign4 == 1)
+                    {
+                        BTN_Sign5.Enabled = true;
+                        currentSignNumber = 5;
+                    }
+                    else if(FlagSign6 != 1 && FlagSign5 == 1)
+                    {
+                        BTN_Sign6.Enabled = true;
+                        currentSignNumber = 6;
+                    }
                 }
+
                 else if (Constants.UserTypeB == "Tkalif" || Constants.UserTypeB == "Finance")
                 {
                     EnableTakalef();
@@ -923,7 +927,7 @@ namespace ANRPC_Inventory
             }
 
             AddEditFlag = 1;
-            TNO = TXT_TRNO2.Text;
+            TNO = TXT_TRansferNo.Text;
             FY = Cmb_FYear.Text;
         }
 
@@ -988,9 +992,21 @@ namespace ANRPC_Inventory
             //signature btn
             changePanelState(signatureTable, false);
 
-            changeDataGridViewColumnState(dataGridView1, true);
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
+
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                for (int i = 0; i < row.Cells.Count; i++)
+                {
+                    row.Cells[i].ReadOnly = true;
+                }
+            }
 
             //takalif
             DisableTakalef();
@@ -2305,40 +2321,28 @@ namespace ANRPC_Inventory
             string cmdstring = "";
             if (Constants.User_Type == "A")
             {
-                cmdstring = "select TransNo from T_EzonTahwel where FYear=@FY and FromEdaraCode=@CE ";//and TR_NO=@TR";
-
+                cmdstring = "select TransNo from T_EzonTahwel where FYear=@FY and FromEdaraCode=@CE and Sign2 is null";//and TR_NO=@TR";
             }
 
             else if (Constants.User_Type == "B" && Constants.UserTypeB == "NewTasnif")
             {
-
                 cmdstring = "select TransNo from T_EzonTahwel where FYear=@FY and TR_NO=@TR and( Sign1 is not null and Sign2 is not null)  and(Sign3 is null) ";
-
-
             }
             else if (Constants.User_Type == "B" && Constants.UserTypeB == "Estlam")
             {
-
                 cmdstring = "select TransNo from T_EzonTahwel where FYear=@FY and TR_NO=@TR and( Sign3 is not null)  and(Sign4 is null) ";
-
             }
             else if (Constants.User_Type == "B" && Constants.UserTypeB == "Transfer1")
             {
-
-                cmdstring = "select TransNo from T_EzonTahwel where FYear=@FY and TR_NO=@TR and( Sign4 is not null)  and(Sign5 is null) ";
-
-
+                cmdstring = "select TransNo from T_EzonTahwel where FYear=@FY and TR_NO=@TR and (( Sign4 is not null)  and(Sign5 is null)) or (( Sign5 is not null)  and(Sign6 is null) ) ";
             }
-            else if (Constants.User_Type == "B" && Constants.UserTypeB == "Transfer2")
-            {
-                cmdstring = "select TransNo from T_EzonTahwel where FYear=@FY and TR_NO=@TR and( Sign5 is not null)  and(Sign6 is null) ";
-
-            }
+            //else if (Constants.User_Type == "B" && Constants.UserTypeB == "Transfer2")
+            //{
+            //    cmdstring = "select TransNo from T_EzonTahwel where FYear=@FY and TR_NO=@TR and( Sign5 is not null)  and(Sign6 is null) ";
+            //}
             else if (Constants.User_Type == "B" && (Constants.UserTypeB == "Tkalif" || Constants.UserTypeB == "Finance"))
             {
-
                 cmdstring = "select TransNo from T_EzonTahwel where FYear=@FY and TR_NO=@TR and( Sign6 is not null)  ";
-
             }
 
             // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
@@ -2653,17 +2657,9 @@ namespace ANRPC_Inventory
             if (e.ColumnIndex == 13) // 1 should be your column index
             {
 
-                if (Convert.ToString(e.FormattedValue).Length != 8 && dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString() != "True")
-                {
-
-                    e.Cancel = true;
-                    MessageBox.Show("رقم التصنيف يجب ان يتكون من 8 ");
-                    //  dataGridView1.Rows[e.RowIndex].ErrorText = "please enter numeric";
-
-                }
                 //check that it exist in master 
                 //    else if (dataGridView1.Rows[e.RowIndex].Cells[6].Value != DBNull.Value)// && dataGridView1.Rows[e.RowIndex].Cells[11].Value != "true")
-                else if (e.FormattedValue != DBNull.Value && e.FormattedValue != "")// && dataGridView1.Rows[e.RowIndex].Cells[11].Value != "true")
+                if (e.FormattedValue != DBNull.Value && e.FormattedValue != "")// && dataGridView1.Rows[e.RowIndex].Cells[11].Value != "true")
                 {
                     string query = "exec Sp_CheckTasnif @a,@p1 out,@p2 out,@p3 out,@flag out ";
                     SqlCommand cmd = new SqlCommand(query, Constants.con);

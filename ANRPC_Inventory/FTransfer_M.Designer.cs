@@ -262,11 +262,11 @@
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Arial", 12F);
             this.label21.ForeColor = System.Drawing.Color.Maroon;
-            this.label21.Location = new System.Drawing.Point(357, 17);
+            this.label21.Location = new System.Drawing.Point(319, 20);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(45, 18);
+            this.label21.Size = new System.Drawing.Size(86, 18);
             this.label21.TabIndex = 23;
-            this.label21.Text = ":المستلم";
+            this.label21.Text = ":مخزن الاستلام";
             this.label21.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label22
@@ -343,7 +343,7 @@
             this.BTN_Sign4.BackColor = System.Drawing.Color.MistyRose;
             this.BTN_Sign4.Enabled = false;
             this.BTN_Sign4.ForeColor = System.Drawing.Color.Black;
-            this.BTN_Sign4.Location = new System.Drawing.Point(298, 4);
+            this.BTN_Sign4.Location = new System.Drawing.Point(262, 4);
             this.BTN_Sign4.Name = "BTN_Sign4";
             this.BTN_Sign4.Size = new System.Drawing.Size(53, 46);
             this.BTN_Sign4.TabIndex = 36;
@@ -624,8 +624,8 @@
             this.signatureTable.Controls.Add(this.panel13, 0, 1);
             this.signatureTable.Controls.Add(this.panel3, 2, 0);
             this.signatureTable.Controls.Add(this.panel14, 1, 0);
-            this.signatureTable.Controls.Add(this.panel16, 0, 0);
-            this.signatureTable.Controls.Add(this.panel17, 2, 1);
+            this.signatureTable.Controls.Add(this.panel16, 2, 1);
+            this.signatureTable.Controls.Add(this.panel17, 0, 0);
             this.signatureTable.Dock = System.Windows.Forms.DockStyle.Top;
             this.signatureTable.Location = new System.Drawing.Point(0, 0);
             this.signatureTable.Name = "signatureTable";
@@ -655,7 +655,7 @@
             this.Pic_Sign5.Enabled = false;
             this.Pic_Sign5.Location = new System.Drawing.Point(3, 3);
             this.Pic_Sign5.Name = "Pic_Sign5";
-            this.Pic_Sign5.Size = new System.Drawing.Size(200, 46);
+            this.Pic_Sign5.Size = new System.Drawing.Size(200, 42);
             this.Pic_Sign5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign5.TabIndex = 37;
             this.Pic_Sign5.TabStop = false;
@@ -680,7 +680,7 @@
             this.Pic_Sign6.Enabled = false;
             this.Pic_Sign6.Location = new System.Drawing.Point(3, 3);
             this.Pic_Sign6.Name = "Pic_Sign6";
-            this.Pic_Sign6.Size = new System.Drawing.Size(193, 46);
+            this.Pic_Sign6.Size = new System.Drawing.Size(193, 42);
             this.Pic_Sign6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign6.TabIndex = 289;
             this.Pic_Sign6.TabStop = false;
@@ -705,7 +705,7 @@
             this.Pic_Sign1.Enabled = false;
             this.Pic_Sign1.Location = new System.Drawing.Point(3, 3);
             this.Pic_Sign1.Name = "Pic_Sign1";
-            this.Pic_Sign1.Size = new System.Drawing.Size(260, 46);
+            this.Pic_Sign1.Size = new System.Drawing.Size(260, 42);
             this.Pic_Sign1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign1.TabIndex = 27;
             this.Pic_Sign1.TabStop = false;
@@ -731,7 +731,7 @@
             this.Pic_Sign2.Enabled = false;
             this.Pic_Sign2.Location = new System.Drawing.Point(3, 3);
             this.Pic_Sign2.Name = "Pic_Sign2";
-            this.Pic_Sign2.Size = new System.Drawing.Size(238, 46);
+            this.Pic_Sign2.Size = new System.Drawing.Size(238, 42);
             this.Pic_Sign2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign2.TabIndex = 29;
             this.Pic_Sign2.TabStop = false;
@@ -751,7 +751,6 @@
             this.DeleteBtn.TabIndex = 19;
             this.DeleteBtn.Text = "حذف";
             this.DeleteBtn.UseVisualStyleBackColor = false;
-            this.DeleteBtn.Visible = false;
             this.DeleteBtn.Click += new System.EventHandler(this.DeleteBtn_Click);
             // 
             // panel16
@@ -761,7 +760,7 @@
             this.panel16.Controls.Add(this.Pic_Sign4);
             this.panel16.Controls.Add(this.BTN_Sign4);
             this.panel16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel16.Location = new System.Drawing.Point(3, 3);
+            this.panel16.Location = new System.Drawing.Point(837, 64);
             this.panel16.Name = "panel16";
             this.panel16.Size = new System.Drawing.Size(411, 55);
             this.panel16.TabIndex = 293;
@@ -774,7 +773,7 @@
             this.Pic_Sign4.Enabled = false;
             this.Pic_Sign4.Location = new System.Drawing.Point(3, 3);
             this.Pic_Sign4.Name = "Pic_Sign4";
-            this.Pic_Sign4.Size = new System.Drawing.Size(289, 46);
+            this.Pic_Sign4.Size = new System.Drawing.Size(253, 46);
             this.Pic_Sign4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign4.TabIndex = 35;
             this.Pic_Sign4.TabStop = false;
@@ -786,7 +785,7 @@
             this.panel17.Controls.Add(this.Pic_Sign3);
             this.panel17.Controls.Add(this.BTN_Sign3);
             this.panel17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel17.Location = new System.Drawing.Point(837, 64);
+            this.panel17.Location = new System.Drawing.Point(3, 3);
             this.panel17.Name = "panel17";
             this.panel17.Size = new System.Drawing.Size(411, 55);
             this.panel17.TabIndex = 293;
@@ -799,7 +798,7 @@
             this.Pic_Sign3.Enabled = false;
             this.Pic_Sign3.Location = new System.Drawing.Point(3, 3);
             this.Pic_Sign3.Name = "Pic_Sign3";
-            this.Pic_Sign3.Size = new System.Drawing.Size(220, 46);
+            this.Pic_Sign3.Size = new System.Drawing.Size(220, 42);
             this.Pic_Sign3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign3.TabIndex = 31;
             this.Pic_Sign3.TabStop = false;

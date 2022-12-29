@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.IO;
 using Microsoft.Win32;
+using System.Reflection;
 
 namespace ANRPC_Inventory
 {
@@ -135,6 +136,7 @@ namespace ANRPC_Inventory
         int currentSignNumber = 0;
         double sumOfAmrsheraa = 0;
         double sumOfAmrsheraaBeforeDareba = 0;
+        bool isComeFromSearch = false;
         Dictionary<int, int> signatureOrder;
         #endregion
 
@@ -184,7 +186,7 @@ namespace ANRPC_Inventory
             TXT_EgmaliAfter.Text = sumOfAmrsheraa.ToString("N2");
             TXT_EgmaliDareba.Text = (sumOfAmrsheraa - sumOfAmrsheraaBeforeDareba).ToString("N2");
 
-            ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Egmali.Text), currencies[0]);
+            ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Egmali.Text), currencies[lastCurrencySelectedIdx]);
             txt_arabicword.Text = toWord.ConvertToArabic();
 
             #endregion
@@ -263,7 +265,7 @@ namespace ANRPC_Inventory
             errorProvider.Clear();
             foreach (var error in errosList)
             {
-                ////Txt_ReqQuan.Location = new Point(Txt_ReqQuan.Location.X + errorProvider.Icon.Width, Txt_ReqQuan.Location.Y);
+                //Txt_ReqQuan.Location = new Point(Txt_ReqQuan.Location.X + errorProvider.Icon.Width, Txt_ReqQuan.Location.Y);
                 //error.Item2.Width = error.Item2.Width - error.Item1.Icon.Width;
                 error.Item1.SetError(error.Item2, error.Item3);
             }
@@ -358,7 +360,10 @@ namespace ANRPC_Inventory
 
         private void GetAmrBnod(string amrNo, string fyear)
         {
-            table.Clear();
+            if (AddEditFlag == 0)
+            {
+                table.Clear();
+            }
 
             string TableQuery = "SELECT *  FROM [T_BnodAwamershraa] Where Amrshraa_No = '" + amrNo + "' and AmrSheraa_sanamalia='" + fyear + "'";
 
@@ -443,6 +448,7 @@ namespace ANRPC_Inventory
             dataGridView1.Columns["TalbEsdarShickNo"].Visible = false;
             dataGridView1.Columns["ShickNo"].Visible = false;
             dataGridView1.Columns["ShickDate"].Visible = false;
+            dataGridView1.Columns["ExpirationDate"].Visible = false;
         }
 
         public bool SearchAmrSheraa(string amrNo, string fyear)
@@ -484,6 +490,7 @@ namespace ANRPC_Inventory
                         TXT_EgmaliBefore.Text = dr["EgmaliBefore"].ToString();
                         TXT_EgmaliDareba.Text = dr["EgmaliDareba"].ToString();
                         cboCurrency.Text = dr["Currency"].ToString();
+
                         TXT_Origin.Text = dr["Origin"].ToString();
                         TXT_Cert.Text = dr["Certificates"].ToString();
                         TXT_ShelfLife.Text = dr["ShelfLife"].ToString();
@@ -770,12 +777,12 @@ namespace ANRPC_Inventory
 
             //bian edara sec
             changePanelState(panel19, false);
+            TXT_Date.Enabled = true;
             TXT_TaslemPlace.Enabled = true;
+            TXT_RefNo.Enabled = true;
 
             //mowazna value
-            changePanelState(panel11, false);
-            TXT_RefNo.Enabled = true;
-            TXT_Payment.Enabled = true;
+            changePanelState(panel11, true);
 
             //penalties sec
             changePanelState(panel21, true);
@@ -784,7 +791,7 @@ namespace ANRPC_Inventory
             changePanelState(panel10, true);
 
             //dareba sec
-            changePanelState(panel10, false);
+            changePanelState(panel14, false);
             TXT_ExchangeRate.Enabled = true;
 
 
@@ -806,8 +813,6 @@ namespace ANRPC_Inventory
             changePanelState(signatureTable, false);
             BTN_Sigm1.Enabled = true;
 
-            changeDataGridViewColumnState(dataGridView1, true);
-
             dataGridView1.AllowUserToAddRows = true;
             dataGridView1.AllowUserToDeleteRows = true;
 
@@ -815,6 +820,7 @@ namespace ANRPC_Inventory
             FlagSign1 = 0;
             Pic_Sign1.BackColor = Color.Green;
             currentSignNumber = 1;
+            cboCurrency.SelectedIndex = 0;
         }
 
         public void PrepareEditState()
@@ -870,12 +876,16 @@ namespace ANRPC_Inventory
             FY = Cmb_FY.Text;
         }
 
-        public void prepareSearchState()
+        public void prepareSearchState(bool isReset = true)
         {
             DisableControls();
-            Input_Reset();
 
-            if (Constants.isConfirmForm)
+            if (isReset)
+            {
+                Input_Reset();
+            }
+
+            if (!Constants.isConfirmForm)
             {
                 Cmb_FY.Enabled = true;
                 TXT_AmrNo.Enabled = true;
@@ -940,10 +950,21 @@ namespace ANRPC_Inventory
             //signature btn
             changePanelState(signatureTable, false);
 
-            changeDataGridViewColumnState(dataGridView1, true);
-
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
+
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                for (int i = 0; i < row.Cells.Count; i++)
+                {
+                    row.Cells[i].ReadOnly = true;
+                }
+            }
 
         }
 
@@ -1464,6 +1485,14 @@ namespace ANRPC_Inventory
             }
             #endregion
 
+
+            #region cboCurrency
+            if (string.IsNullOrWhiteSpace(cboCurrency.Text) || cboCurrency.SelectedIndex == -1)
+            {
+                errorsList.Add((errorProvider, cboCurrency, "تاكد من  اختيار العملة"));
+            }
+            #endregion
+
             return errorsList;
         }
 
@@ -1539,13 +1568,6 @@ namespace ANRPC_Inventory
             }
             #endregion
 
-            #region TXT_Name
-            if (string.IsNullOrWhiteSpace(TXT_Name.Text))
-            {
-                errorsList.Add((errorProvider, TXT_Name, "تاكد من  كتابة اسم المورد"));
-            }
-            #endregion
-
             #region dataGridView1
             if (dataGridView1.Rows.Count <= 0)
             {
@@ -1562,16 +1584,46 @@ namespace ANRPC_Inventory
             {
                 if (!row.IsNewRow)
                 {
-                    if (row.Cells[17].Value.ToString()=="")
+                    DataGridViewCell quan, unitPrice, darebaPercent, applyDareba;
+
+                    quan = row.Cells["Quan"];
+                    unitPrice = row.Cells["UnitPrice"];
+                    darebaPercent = row.Cells["Darebapercent"];
+                    applyDareba = row.Cells["ApplyDareba"];
+
+                    if (Convert.ToDouble(quan.Value) == 0)
                     {
-                        row.Cells[17].ErrorText= "يجب كتابة سعر الوحدة ";
-
-                        //errorsList.Add((alertProvider, row.Cells[10], "تم ادخال مواصفة هذا التصنيف من قبل"));
-
-                        break;
+                        quan.ErrorText = "يجب ان نكون الكمية المطلوبة اكبر من الصفر";
+                        errorsList.Add((alertProvider, dataGridView1, "يجب ان نكون الكمية المطلوبة اكبر من الصفر"));
                     }
+                    else
+                    {
+                        quan.ErrorText = "";
+                    }
+
+                    if (Convert.ToDouble(unitPrice.Value) == 0)
+                    {
+                        unitPrice.ErrorText = "يجب ان يكون سعر الوحدة اكبر من الصفر";
+                        errorsList.Add((alertProvider, dataGridView1, "يجب ان يكون سعر الوحدة اكبر من الصفر"));
+                    }
+                    else
+                    {
+                        unitPrice.ErrorText = "";
+                    }
+
+                    if (Convert.ToBoolean(applyDareba.Value) && Convert.ToDouble(darebaPercent.Value) > 100)
+                    {
+                        darebaPercent.ErrorText = "يجب ان لا تتعدي نسبة الضريبة %100";
+                        errorsList.Add((alertProvider, dataGridView1, "يجب ان لا تتعدي نسبة الضريبة %100"));
+                    }
+                    else
+                    {
+                        darebaPercent.ErrorText = "";
+                    }
+
                 }
             }
+
             #endregion
 
             PictureBox signControl = CheckSignatures(signatureTable, currentSignNumber);
@@ -1628,18 +1680,13 @@ namespace ANRPC_Inventory
             HelperClass.comboBoxFiller(Cmb_FY2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
             HelperClass.comboBoxFiller(Cmb_FY, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
             HelperClass.comboBoxFiller(Cmb_FYear2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
-            initiateSignatureOrder();
 
             // dataGridView1.Parent = panel1;
             //dataGridView1.Dock = DockStyle.Bottom;
-            currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.Egypt));
-            currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.Syria));
-            currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.UAE));
-            currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia));
-            currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.Tunisia));
-            currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.Gold));
             currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.USA));
             currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.EUR));
+            currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.GBP));
+
             //currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.GBP));
             //  cboCurrency.DataSource = currencies;
 
@@ -1740,6 +1787,28 @@ namespace ANRPC_Inventory
         {
             InitializeComponent();
             init();
+            initiateSignatureOrder();
+        }
+
+        public AmrSheraa_Foreign(string x, string y)
+        {
+            InitializeComponent();
+            Cmb_FY.Text = x;
+            TXT_AmrNo.Text = y;
+
+
+            panel7.Visible = false;
+            panel2.Visible = false;
+
+            isComeFromSearch = true;
+        }
+
+        private void AmrSheraa_Foreign_Load(object sender, EventArgs e)
+        {
+            if (isComeFromSearch)
+            {
+                BTN_Search_Click(BTN_Search, e);
+            }
         }
 
         private void Addbtn_Click(object sender, EventArgs e)
@@ -1991,11 +2060,45 @@ namespace ANRPC_Inventory
                 // Read the contents of testDialog's TextBox.سس
                 // this.txtResult.Text = popup.TextBox1.Text;
             }
-            else
-            {
-                //  this.txtResult.Text = "Cancelled";
-            }
             popup.Dispose();
+
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                for (int i = 0; i < row.Cells.Count; i++)
+                {
+                    string currentColumnName = dataGridView1.Columns[i].Name;
+                    row.Cells[i].ReadOnly = true;
+
+                    if (!row.IsNewRow)
+                    {
+                        if (currentColumnName == "Quan")
+                        {
+                            row.Cells["Quan"].ReadOnly = false;
+                            row.Cells["Quan"].Style.BackColor = Color.LightGreen;
+                        }
+                        else if (currentColumnName == "ApplyDareba")
+                        {
+                            row.Cells["ApplyDareba"].ReadOnly = false;
+                            row.Cells["ApplyDareba"].Style.BackColor = Color.LightGreen;
+                        }
+                        else if (currentColumnName == "Darebapercent")
+                        {
+                            row.Cells["Darebapercent"].ReadOnly = false;
+                            row.Cells["Darebapercent"].Style.BackColor = Color.LightGreen;
+                        }
+                        else if (currentColumnName == "UnitPrice")
+                        {
+                            row.Cells["UnitPrice"].ReadOnly = false;
+                            row.Cells["UnitPrice"].Style.BackColor = Color.LightGreen;
+                        }
+                    }
+                }
+            }
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
@@ -2027,37 +2130,37 @@ namespace ANRPC_Inventory
 
         private void TXT_Egmali_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                //  ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Egmali.Text), currencies[0]);
-                //   txt_englishword.Text = toWord.ConvertToEnglish();
-                // txt_arabicword.Text = toWord.ConvertToArabic();
-                //
+            //try
+            //{
+            //    //  ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Egmali.Text), currencies[0]);
+            //    //   txt_englishword.Text = toWord.ConvertToEnglish();
+            //    // txt_arabicword.Text = toWord.ConvertToArabic();
+            //    //
 
-                if (cboCurrency.SelectedIndex == 0)//USD
-                {
-                    ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Egmali.Text), currencies[6]);
-                    //   txt_englishword.Text = toWord.ConvertToEnglish();
-                    txt_arabicword.Text = toWord.ConvertToArabic();
-                }
-                else if (cboCurrency.SelectedIndex == 1)//EUR
-                {
-                    ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Egmali.Text), currencies[7]);
-                    //   txt_englishword.Text = toWord.ConvertToEnglish();
-                    txt_arabicword.Text = toWord.ConvertToArabic();
-                }
-                else if (cboCurrency.SelectedIndex == 2)//GBP
-                {
-                    ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Egmali.Text), currencies[8]);
-                    //   txt_englishword.Text = toWord.ConvertToEnglish();
-                    txt_arabicword.Text = toWord.ConvertToArabic();
-                }
-            }
-            catch (Exception ex)
-            {
-                //   txt_englishword.Text = String.Empty;
-                txt_arabicword.Text = String.Empty;
-            }
+            //    if (cboCurrency.SelectedIndex == 0)//USD
+            //    {
+            //        ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Egmali.Text), currencies[6]);
+            //        //   txt_englishword.Text = toWord.ConvertToEnglish();
+            //        txt_arabicword.Text = toWord.ConvertToArabic();
+            //    }
+            //    else if (cboCurrency.SelectedIndex == 1)//EUR
+            //    {
+            //        ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Egmali.Text), currencies[7]);
+            //        //   txt_englishword.Text = toWord.ConvertToEnglish();
+            //        txt_arabicword.Text = toWord.ConvertToArabic();
+            //    }
+            //    //else if (cboCurrency.SelectedIndex == 2)//GBP
+            //    //{
+            //    //    ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Egmali.Text), currencies[8]);
+            //    //    //   txt_englishword.Text = toWord.ConvertToEnglish();
+            //    //    txt_arabicword.Text = toWord.ConvertToArabic();
+            //    //}
+            //}
+            //catch (Exception ex)
+            //{
+            //    //   txt_englishword.Text = String.Empty;
+            //    txt_arabicword.Text = String.Empty;
+            //}
         }
 
         private void BTN_Save2_Click(object sender, EventArgs e)
@@ -2145,7 +2248,9 @@ namespace ANRPC_Inventory
 
         private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            if (dataGridView1.CurrentCell.ColumnIndex == 21 || dataGridView1.CurrentCell.ColumnIndex == 17 || dataGridView1.CurrentCell.ColumnIndex == 18 | dataGridView1.CurrentCell.ColumnIndex == 20)//reqQuan
+            string currentColumnName = dataGridView1.Columns[dataGridView1.CurrentCell.ColumnIndex].Name;
+
+            if (currentColumnName == "Quan" ||  currentColumnName == "Darebapercent" || currentColumnName == "UnitPrice")//reqQuan
             {
                 e.Control.KeyPress -= new KeyPressEventHandler(Column_KeyPress);
 
@@ -2203,20 +2308,6 @@ namespace ANRPC_Inventory
 
         private void cboCurrency_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (dataGridView1.Rows.Count > 1 && lastCurrencySelectedIdx != cboCurrency.SelectedIndex && AddEditFlag != 0) //because deafault is one
-            {
-                DialogResult dialogResult = MessageBox.Show("إذا قمت بالضغط علي نعم سوف يتم محو البيانات", "تحذير", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    ///////////////// Getdata(table);
-                }
-                else if (dialogResult == DialogResult.No)
-                {
-                    cboCurrency.SelectedIndex = lastCurrencySelectedIdx;
-                    //do something else
-                }
-            }
-
             // TXT_Currency.Text = cboCurrency.Text;
             // TXT_CurrencyTotal.Text = cboCurrency.Text;
 
@@ -2237,6 +2328,12 @@ namespace ANRPC_Inventory
             }
 
             lastCurrencySelectedIdx = cboCurrency.SelectedIndex;
+
+            if (TXT_Egmali.Text != "" && lastCurrencySelectedIdx != -1)
+            {
+                ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Egmali.Text), currencies[lastCurrencySelectedIdx]);
+                txt_arabicword.Text = toWord.ConvertToArabic();
+            }
         }
 
         private void TXT_AmrNo_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
@@ -2347,7 +2444,7 @@ namespace ANRPC_Inventory
 
         private void BTN_Search_Click(object sender, EventArgs e)
         {
-            if (!IsValidCase(VALIDATION_TYPES.SEARCH))
+            if (isComeFromSearch == false && !IsValidCase(VALIDATION_TYPES.SEARCH))
             {
                 return;
             }
@@ -2359,6 +2456,8 @@ namespace ANRPC_Inventory
 
             if (SearchAmrSheraa(amr_no, fyear))
             {
+                prepareSearchState(false);
+
                 if (FlagSign2 != 1 && FlagSign1 != 1)
                 {
                     EditBtn.Enabled = true;
@@ -2384,6 +2483,8 @@ namespace ANRPC_Inventory
 
             if (SearchAmrSheraa(amr_no, fyear))
             {
+                prepareSearchState(false);
+
                 EditBtn2.Enabled = true;
                 BTN_Print2.Enabled = true;
             }

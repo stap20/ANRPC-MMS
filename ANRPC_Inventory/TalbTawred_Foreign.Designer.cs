@@ -108,11 +108,11 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label37 = new System.Windows.Forms.Label();
             this.TXT_PriceSarf = new System.Windows.Forms.TextBox();
-            this.BTN_ConvertToEG = new System.Windows.Forms.Button();
             this.TXT_ArabicValue = new System.Windows.Forms.RichTextBox();
             this.TXT_AppValue = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.BTN_ConvertToEG = new System.Windows.Forms.Button();
             this.TXT_Tamen = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -808,7 +808,7 @@
             this.Pic_Sign2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Pic_Sign2.Location = new System.Drawing.Point(366, 8);
             this.Pic_Sign2.Name = "Pic_Sign2";
-            this.Pic_Sign2.Size = new System.Drawing.Size(219, 36);
+            this.Pic_Sign2.Size = new System.Drawing.Size(209, 36);
             this.Pic_Sign2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign2.TabIndex = 33;
             this.Pic_Sign2.TabStop = false;
@@ -850,7 +850,6 @@
             this.Pic_Sign1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign1.TabIndex = 30;
             this.Pic_Sign1.TabStop = false;
-            this.Pic_Sign1.Click += new System.EventHandler(this.Pic_Sign1_Click);
             // 
             // label17
             // 
@@ -907,7 +906,7 @@
             // 
             this.ChBTN_Tests.AutoSize = true;
             this.ChBTN_Tests.Enabled = false;
-            this.ChBTN_Tests.Location = new System.Drawing.Point(55, 59);
+            this.ChBTN_Tests.Location = new System.Drawing.Point(54, 59);
             this.ChBTN_Tests.Name = "ChBTN_Tests";
             this.ChBTN_Tests.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.ChBTN_Tests.Size = new System.Drawing.Size(69, 17);
@@ -982,6 +981,8 @@
             // 
             // checkedListBox1
             // 
+            this.checkedListBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.checkedListBox1.CheckOnClick = true;
             this.checkedListBox1.Enabled = false;
             this.checkedListBox1.FormattingEnabled = true;
@@ -989,10 +990,10 @@
             "Egypt",
             "Chine",
             "England"});
-            this.checkedListBox1.Location = new System.Drawing.Point(42, 76);
+            this.checkedListBox1.Location = new System.Drawing.Point(3, 76);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkedListBox1.Size = new System.Drawing.Size(86, 19);
+            this.checkedListBox1.Size = new System.Drawing.Size(121, 19);
             this.checkedListBox1.TabIndex = 3;
             // 
             // panel9
@@ -1103,7 +1104,6 @@
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dataGridView1.Size = new System.Drawing.Size(1142, 127);
             this.dataGridView1.TabIndex = 42;
-            this.dataGridView1.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellMouseEnter);
             this.dataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
             this.dataGridView1.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView1_UserDeletedRow);
             this.dataGridView1.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataGridView1_UserDeletingRow);
@@ -1120,7 +1120,6 @@
             this.panel6.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.panel6.Size = new System.Drawing.Size(220, 45);
             this.panel6.TabIndex = 21;
-            this.panel6.Paint += new System.Windows.Forms.PaintEventHandler(this.panel6_Paint);
             // 
             // BTN_Warranty
             // 
@@ -1178,12 +1177,10 @@
             this.panel5.Controls.Add(this.button1);
             this.panel5.Controls.Add(this.label37);
             this.panel5.Controls.Add(this.TXT_PriceSarf);
-            this.panel5.Controls.Add(this.BTN_ConvertToEG);
             this.panel5.Controls.Add(this.TXT_ArabicValue);
             this.panel5.Controls.Add(this.TXT_AppValue);
             this.panel5.Controls.Add(this.label14);
             this.panel5.Controls.Add(this.label11);
-            this.panel5.Enabled = false;
             this.panel5.Location = new System.Drawing.Point(361, 3);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(316, 146);
@@ -1206,7 +1203,7 @@
             this.label44.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label44.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label44.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label44.Location = new System.Drawing.Point(257, 118);
+            this.label44.Location = new System.Drawing.Point(256, 117);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(56, 22);
             this.label44.TabIndex = 343;
@@ -1245,7 +1242,7 @@
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(102, 30);
             this.label43.TabIndex = 340;
-            this.label43.Text = "Estmated Valeu";
+            this.label43.Text = "Estmated Value";
             this.label43.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // BTN_ConvertEG
@@ -1261,7 +1258,7 @@
             this.BTN_ConvertEG.ForeColor = System.Drawing.Color.DarkSalmon;
             this.BTN_ConvertEG.Location = new System.Drawing.Point(3, 65);
             this.BTN_ConvertEG.Name = "BTN_ConvertEG";
-            this.BTN_ConvertEG.Size = new System.Drawing.Size(70, 23);
+            this.BTN_ConvertEG.Size = new System.Drawing.Size(109, 23);
             this.BTN_ConvertEG.TabIndex = 339;
             this.BTN_ConvertEG.Text = "CH to EGP";
             this.BTN_ConvertEG.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1271,12 +1268,12 @@
             // TXT_CurrencyTotal
             // 
             this.TXT_CurrencyTotal.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_CurrencyTotal.Location = new System.Drawing.Point(15, 6);
+            this.TXT_CurrencyTotal.Location = new System.Drawing.Point(21, 7);
             this.TXT_CurrencyTotal.Name = "TXT_CurrencyTotal";
             this.TXT_CurrencyTotal.ReadOnly = true;
             this.TXT_CurrencyTotal.Size = new System.Drawing.Size(48, 26);
             this.TXT_CurrencyTotal.TabIndex = 330;
-            this.TXT_CurrencyTotal.Text = "EGP";
+            this.TXT_CurrencyTotal.Text = "USD";
             // 
             // button1
             // 
@@ -1288,7 +1285,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.button1.ForeColor = System.Drawing.Color.DarkSalmon;
-            this.button1.Location = new System.Drawing.Point(2, 2);
+            this.button1.Location = new System.Drawing.Point(6, 6);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(13, 29);
             this.button1.TabIndex = 332;
@@ -1317,27 +1314,6 @@
             this.TXT_PriceSarf.Name = "TXT_PriceSarf";
             this.TXT_PriceSarf.Size = new System.Drawing.Size(105, 26);
             this.TXT_PriceSarf.TabIndex = 330;
-            // 
-            // BTN_ConvertToEG
-            // 
-            this.BTN_ConvertToEG.BackColor = System.Drawing.Color.LightGray;
-            this.BTN_ConvertToEG.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_ConvertToEG.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_ConvertToEG.Enabled = false;
-            this.BTN_ConvertToEG.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
-            this.BTN_ConvertToEG.FlatAppearance.BorderSize = 3;
-            this.BTN_ConvertToEG.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_ConvertToEG.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.BTN_ConvertToEG.ForeColor = System.Drawing.Color.DarkSalmon;
-            this.BTN_ConvertToEG.Location = new System.Drawing.Point(74, 65);
-            this.BTN_ConvertToEG.Name = "BTN_ConvertToEG";
-            this.BTN_ConvertToEG.Size = new System.Drawing.Size(43, 23);
-            this.BTN_ConvertToEG.TabIndex = 331;
-            this.BTN_ConvertToEG.Text = "View";
-            this.BTN_ConvertToEG.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.BTN_ConvertToEG.UseVisualStyleBackColor = false;
-            this.BTN_ConvertToEG.Visible = false;
-            this.BTN_ConvertToEG.Click += new System.EventHandler(this.BTN_ConvertToEG_Click);
             // 
             // TXT_ArabicValue
             // 
@@ -1371,7 +1347,7 @@
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(308, 34);
             this.label14.TabIndex = 17;
-            this.label14.Text = "Estmated Valeu";
+            this.label14.Text = "Estmated Value";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.label14.Click += new System.EventHandler(this.label14_Click);
             // 
@@ -1385,6 +1361,27 @@
             this.label11.TabIndex = 5;
             this.label11.Text = "Figures";
             this.label11.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            // 
+            // BTN_ConvertToEG
+            // 
+            this.BTN_ConvertToEG.BackColor = System.Drawing.Color.LightGray;
+            this.BTN_ConvertToEG.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTN_ConvertToEG.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_ConvertToEG.Enabled = false;
+            this.BTN_ConvertToEG.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.BTN_ConvertToEG.FlatAppearance.BorderSize = 3;
+            this.BTN_ConvertToEG.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_ConvertToEG.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.BTN_ConvertToEG.ForeColor = System.Drawing.Color.DarkSalmon;
+            this.BTN_ConvertToEG.Location = new System.Drawing.Point(33, 10);
+            this.BTN_ConvertToEG.Name = "BTN_ConvertToEG";
+            this.BTN_ConvertToEG.Size = new System.Drawing.Size(43, 23);
+            this.BTN_ConvertToEG.TabIndex = 331;
+            this.BTN_ConvertToEG.Text = "View";
+            this.BTN_ConvertToEG.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.BTN_ConvertToEG.UseVisualStyleBackColor = false;
+            this.BTN_ConvertToEG.Visible = false;
+            this.BTN_ConvertToEG.Click += new System.EventHandler(this.BTN_ConvertToEG_Click);
             // 
             // TXT_Tamen
             // 
@@ -1546,7 +1543,6 @@
             this.Cmb_Currency.Enabled = false;
             this.Cmb_Currency.FormattingEnabled = true;
             this.Cmb_Currency.Items.AddRange(new object[] {
-            "EGP",
             "USD",
             "EUR",
             "GBP"});
@@ -1766,6 +1762,7 @@
             this.panel17.Controls.Add(this.panel12);
             this.panel17.Controls.Add(this.next_btn);
             this.panel17.Controls.Add(this.Addbtn2);
+            this.panel17.Controls.Add(this.BTN_ConvertToEG);
             this.panel17.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel17.Location = new System.Drawing.Point(0, 38);
             this.panel17.Name = "panel17";
@@ -2392,16 +2389,12 @@
             this.Cmb_TalbNo2.Name = "Cmb_TalbNo2";
             this.Cmb_TalbNo2.Size = new System.Drawing.Size(110, 27);
             this.Cmb_TalbNo2.TabIndex = 26;
-            this.Cmb_TalbNo2.SelectedIndexChanged += new System.EventHandler(this.Cmb_TalbNo2_SelectedIndexChanged);
             // 
             // Cmb_FYear2
             // 
             this.Cmb_FYear2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Cmb_FYear2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Cmb_FYear2.FormattingEnabled = true;
-            this.Cmb_FYear2.Items.AddRange(new object[] {
-            "2020_2021",
-            "2021_2022"});
             this.Cmb_FYear2.Location = new System.Drawing.Point(814, 36);
             this.Cmb_FYear2.Name = "Cmb_FYear2";
             this.Cmb_FYear2.Size = new System.Drawing.Size(110, 27);

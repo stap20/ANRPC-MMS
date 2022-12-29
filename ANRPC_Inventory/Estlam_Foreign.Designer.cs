@@ -62,10 +62,10 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.BTN_Print = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel13 = new System.Windows.Forms.Panel();
             this.BTN_PDF = new System.Windows.Forms.Button();
             this.browseBTN = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.signatureTable = new System.Windows.Forms.TableLayoutPanel();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -96,8 +96,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel7.SuspendLayout();
-            this.panel13.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel13.SuspendLayout();
             this.panel4.SuspendLayout();
             this.signatureTable.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -143,6 +143,7 @@
             this.TXT_QuanBnod.Name = "TXT_QuanBnod";
             this.TXT_QuanBnod.Size = new System.Drawing.Size(690, 26);
             this.TXT_QuanBnod.TabIndex = 231;
+            this.TXT_QuanBnod.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_QuanBnod_KeyPress);
             // 
             // dataGridView1
             // 
@@ -154,8 +155,10 @@
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dataGridView1.Size = new System.Drawing.Size(1096, 359);
             this.dataGridView1.TabIndex = 230;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellLeave);
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
+            this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
             // 
             // label5
             // 
@@ -284,7 +287,7 @@
             this.BTN_Search.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_Search.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.BTN_Search.ForeColor = System.Drawing.Color.Blue;
-            this.BTN_Search.Location = new System.Drawing.Point(720, 3);
+            this.BTN_Search.Location = new System.Drawing.Point(651, 3);
             this.BTN_Search.Name = "BTN_Search";
             this.BTN_Search.Size = new System.Drawing.Size(70, 31);
             this.BTN_Search.TabIndex = 336;
@@ -362,7 +365,7 @@
             this.DeleteBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DeleteBtn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
             this.DeleteBtn.ForeColor = System.Drawing.Color.Blue;
-            this.DeleteBtn.Location = new System.Drawing.Point(649, 3);
+            this.DeleteBtn.Location = new System.Drawing.Point(723, 3);
             this.DeleteBtn.Name = "DeleteBtn";
             this.DeleteBtn.Size = new System.Drawing.Size(68, 31);
             this.DeleteBtn.TabIndex = 28;
@@ -521,6 +524,24 @@
             this.panel7.Size = new System.Drawing.Size(1096, 134);
             this.panel7.TabIndex = 237;
             // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.TXT_NameMward);
+            this.panel3.Controls.Add(this.label8);
+            this.panel3.Controls.Add(this.label11);
+            this.panel3.Controls.Add(this.label5);
+            this.panel3.Controls.Add(this.TXT_QuanBnod);
+            this.panel3.Controls.Add(this.TXT_Sanf);
+            this.panel3.Controls.Add(this.label9);
+            this.panel3.Controls.Add(this.TXT_QuanTard);
+            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(773, 127);
+            this.panel3.TabIndex = 237;
+            // 
             // panel13
             // 
             this.panel13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -571,24 +592,6 @@
             this.browseBTN.Text = "إرفاق مرفقات";
             this.browseBTN.UseVisualStyleBackColor = false;
             this.browseBTN.Click += new System.EventHandler(this.browseBTN_Click);
-            // 
-            // panel3
-            // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.TXT_NameMward);
-            this.panel3.Controls.Add(this.label8);
-            this.panel3.Controls.Add(this.label11);
-            this.panel3.Controls.Add(this.label5);
-            this.panel3.Controls.Add(this.TXT_QuanBnod);
-            this.panel3.Controls.Add(this.TXT_Sanf);
-            this.panel3.Controls.Add(this.label9);
-            this.panel3.Controls.Add(this.TXT_QuanTard);
-            this.panel3.Location = new System.Drawing.Point(3, 3);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(773, 127);
-            this.panel3.TabIndex = 237;
             // 
             // panel4
             // 
@@ -924,9 +927,9 @@
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel7.ResumeLayout(false);
-            this.panel13.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel13.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.signatureTable.ResumeLayout(false);
             this.panel9.ResumeLayout(false);

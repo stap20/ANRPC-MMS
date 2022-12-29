@@ -62,10 +62,10 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.BTN_Print = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel13 = new System.Windows.Forms.Panel();
             this.BTN_PDF = new System.Windows.Forms.Button();
             this.browseBTN = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.signatureTable = new System.Windows.Forms.TableLayoutPanel();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -96,8 +96,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel7.SuspendLayout();
-            this.panel13.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel13.SuspendLayout();
             this.panel4.SuspendLayout();
             this.signatureTable.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -130,7 +130,7 @@
             this.TXT_QuanTard.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
             this.TXT_QuanTard.Location = new System.Drawing.Point(3, 33);
             this.TXT_QuanTard.Name = "TXT_QuanTard";
-            this.TXT_QuanTard.Size = new System.Drawing.Size(593, 26);
+            this.TXT_QuanTard.Size = new System.Drawing.Size(690, 26);
             this.TXT_QuanTard.TabIndex = 232;
             this.TXT_QuanTard.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_QuanTard_KeyPress);
             // 
@@ -141,8 +141,9 @@
             this.TXT_QuanBnod.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
             this.TXT_QuanBnod.Location = new System.Drawing.Point(3, 63);
             this.TXT_QuanBnod.Name = "TXT_QuanBnod";
-            this.TXT_QuanBnod.Size = new System.Drawing.Size(593, 26);
+            this.TXT_QuanBnod.Size = new System.Drawing.Size(690, 26);
             this.TXT_QuanBnod.TabIndex = 231;
+            this.TXT_QuanBnod.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_QuanBnod_KeyPress);
             // 
             // dataGridView1
             // 
@@ -154,8 +155,10 @@
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dataGridView1.Size = new System.Drawing.Size(1096, 359);
             this.dataGridView1.TabIndex = 230;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellLeave);
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
+            this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
             // 
             // label5
             // 
@@ -163,7 +166,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 12F);
             this.label5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label5.Location = new System.Drawing.Point(610, 68);
+            this.label5.Location = new System.Drawing.Point(707, 68);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(60, 18);
             this.label5.TabIndex = 17;
@@ -177,7 +180,7 @@
             this.TXT_Sanf.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
             this.TXT_Sanf.Location = new System.Drawing.Point(3, 95);
             this.TXT_Sanf.Name = "TXT_Sanf";
-            this.TXT_Sanf.Size = new System.Drawing.Size(594, 26);
+            this.TXT_Sanf.Size = new System.Drawing.Size(691, 26);
             this.TXT_Sanf.TabIndex = 15;
             // 
             // TXT_NameMward
@@ -187,7 +190,7 @@
             this.TXT_NameMward.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
             this.TXT_NameMward.Location = new System.Drawing.Point(3, 3);
             this.TXT_NameMward.Name = "TXT_NameMward";
-            this.TXT_NameMward.Size = new System.Drawing.Size(594, 26);
+            this.TXT_NameMward.Size = new System.Drawing.Size(691, 26);
             this.TXT_NameMward.TabIndex = 14;
             // 
             // label11
@@ -196,7 +199,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Arial", 12F);
             this.label11.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label11.Location = new System.Drawing.Point(601, 38);
+            this.label11.Location = new System.Drawing.Point(698, 38);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(69, 18);
             this.label11.TabIndex = 9;
@@ -221,7 +224,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Arial", 12F);
             this.label9.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label9.Location = new System.Drawing.Point(621, 100);
+            this.label9.Location = new System.Drawing.Point(718, 100);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(49, 18);
             this.label9.TabIndex = 7;
@@ -234,7 +237,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Arial", 12F);
             this.label8.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label8.Location = new System.Drawing.Point(605, 6);
+            this.label8.Location = new System.Drawing.Point(702, 6);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(65, 18);
             this.label8.TabIndex = 6;
@@ -284,7 +287,7 @@
             this.BTN_Search.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_Search.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.BTN_Search.ForeColor = System.Drawing.Color.Blue;
-            this.BTN_Search.Location = new System.Drawing.Point(720, 3);
+            this.BTN_Search.Location = new System.Drawing.Point(648, 3);
             this.BTN_Search.Name = "BTN_Search";
             this.BTN_Search.Size = new System.Drawing.Size(70, 31);
             this.BTN_Search.TabIndex = 336;
@@ -362,7 +365,7 @@
             this.DeleteBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DeleteBtn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
             this.DeleteBtn.ForeColor = System.Drawing.Color.Blue;
-            this.DeleteBtn.Location = new System.Drawing.Point(649, 3);
+            this.DeleteBtn.Location = new System.Drawing.Point(721, 3);
             this.DeleteBtn.Name = "DeleteBtn";
             this.DeleteBtn.Size = new System.Drawing.Size(68, 31);
             this.DeleteBtn.TabIndex = 28;
@@ -512,7 +515,6 @@
             // 
             // panel7
             // 
-            this.panel7.Controls.Add(this.panel13);
             this.panel7.Controls.Add(this.panel3);
             this.panel7.Controls.Add(this.panel5);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
@@ -521,16 +523,35 @@
             this.panel7.Size = new System.Drawing.Size(1096, 134);
             this.panel7.TabIndex = 237;
             // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.TXT_NameMward);
+            this.panel3.Controls.Add(this.label8);
+            this.panel3.Controls.Add(this.label11);
+            this.panel3.Controls.Add(this.label5);
+            this.panel3.Controls.Add(this.TXT_QuanBnod);
+            this.panel3.Controls.Add(this.TXT_Sanf);
+            this.panel3.Controls.Add(this.label9);
+            this.panel3.Controls.Add(this.TXT_QuanTard);
+            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(773, 127);
+            this.panel3.TabIndex = 237;
+            // 
             // panel13
             // 
             this.panel13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel13.Controls.Add(this.BTN_PDF);
             this.panel13.Controls.Add(this.browseBTN);
-            this.panel13.Location = new System.Drawing.Point(3, 3);
+            this.panel13.Location = new System.Drawing.Point(8, 12);
             this.panel13.Name = "panel13";
             this.panel13.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.panel13.Size = new System.Drawing.Size(94, 128);
+            this.panel13.Size = new System.Drawing.Size(44, 45);
             this.panel13.TabIndex = 285;
+            this.panel13.Visible = false;
             // 
             // BTN_PDF
             // 
@@ -545,7 +566,7 @@
             this.BTN_PDF.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.BTN_PDF.Location = new System.Drawing.Point(0, 66);
             this.BTN_PDF.Name = "BTN_PDF";
-            this.BTN_PDF.Size = new System.Drawing.Size(92, 59);
+            this.BTN_PDF.Size = new System.Drawing.Size(42, 59);
             this.BTN_PDF.TabIndex = 337;
             this.BTN_PDF.Text = "عرض المرفقات";
             this.BTN_PDF.UseVisualStyleBackColor = false;
@@ -565,29 +586,11 @@
             this.browseBTN.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.browseBTN.Location = new System.Drawing.Point(0, 0);
             this.browseBTN.Name = "browseBTN";
-            this.browseBTN.Size = new System.Drawing.Size(92, 66);
+            this.browseBTN.Size = new System.Drawing.Size(42, 66);
             this.browseBTN.TabIndex = 340;
             this.browseBTN.Text = "إرفاق مرفقات";
             this.browseBTN.UseVisualStyleBackColor = false;
             this.browseBTN.Click += new System.EventHandler(this.browseBTN_Click);
-            // 
-            // panel3
-            // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.TXT_NameMward);
-            this.panel3.Controls.Add(this.label8);
-            this.panel3.Controls.Add(this.label11);
-            this.panel3.Controls.Add(this.label5);
-            this.panel3.Controls.Add(this.TXT_QuanBnod);
-            this.panel3.Controls.Add(this.TXT_Sanf);
-            this.panel3.Controls.Add(this.label9);
-            this.panel3.Controls.Add(this.TXT_QuanTard);
-            this.panel3.Location = new System.Drawing.Point(100, 3);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(676, 127);
-            this.panel3.TabIndex = 237;
             // 
             // panel4
             // 
@@ -786,6 +789,7 @@
             this.panel10.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.panel10.BackgroundImage = global::ANRPC_Inventory.Properties.Resources.bar1;
             this.panel10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel10.Controls.Add(this.panel13);
             this.panel10.Controls.Add(this.BTN_Search_Motab3a);
             this.panel10.Controls.Add(this.BTN_Print2);
             this.panel10.Controls.Add(this.EditBtn2);
@@ -922,9 +926,9 @@
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel7.ResumeLayout(false);
-            this.panel13.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel13.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.signatureTable.ResumeLayout(false);
             this.panel9.ResumeLayout(false);

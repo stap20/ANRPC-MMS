@@ -1586,6 +1586,7 @@
             this.Padding = new System.Windows.Forms.Padding(2);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "TalbTawred";
+            this.Load += new System.EventHandler(this.AmrSheraa_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign2)).EndInit();

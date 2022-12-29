@@ -64,6 +64,7 @@ namespace ANRPC_Inventory
         public static string EdafaFY;
 
         public static int TalbNo;
+        public static string TalbNo_Foreign;
         public static string TalbFY;
         public static string MowardName;
 

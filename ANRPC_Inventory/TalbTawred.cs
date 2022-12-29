@@ -141,23 +141,61 @@ namespace ANRPC_Inventory
         #endregion
 
         #region myDefVariable
-            enum VALIDATION_TYPES
-            {
-                ADD_TASNIF,
-                ADD_NEW_TASNIF,
-                ATTACH_FILE,
-                SEARCH,
-                CONFIRM_SEARCH,
-                SAVE,
+        enum VALIDATION_TYPES
+        {
+            ADD_TASNIF,
+            ADD_NEW_TASNIF,
+            ATTACH_FILE,
+            SEARCH,
+            CONFIRM_SEARCH,
+            SAVE,
                
-            }
-            int currentSignNumber = 0;
-            bool isComeFromSearch = false;
-            int selectedTalbNo;
+        }
+        int currentSignNumber = 0;
+        bool isComeFromSearch = false;
+        int selectedTalbEdara;
+        Dictionary<int, int> signatureOrder;
         #endregion
 
         //------------------------------------------ Helper ---------------------------------
         #region Helpers
+        private void initiateSignatureOrder()
+        {
+            //Dictionary to get values of signature (sign1 or sign2 ...) according to thier order in table
+            signatureOrder = new Dictionary<int, int>();
+            signatureOrder.Add(1, 1);
+            signatureOrder.Add(2, 2);
+            signatureOrder.Add(3, 3);
+            signatureOrder.Add(8, 4);
+            signatureOrder.Add(12, 5);
+            signatureOrder.Add(4, 6);
+            signatureOrder.Add(11, 7);
+            signatureOrder.Add(5, 8);
+            signatureOrder.Add(9, 9);
+            signatureOrder.Add(7, 10);
+            signatureOrder.Add(6, 11); //not included sign7,sign9, sign13
+        }
+
+        private void SP_InsertSignatures(int signNumber, int signOrder)
+        {
+            string cmdstring = "Exec  SP_InsertSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2,@SignOrder";
+            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+
+            cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_TalbNo.Text));
+            cmd.Parameters.AddWithValue("@TNO2", DBNull.Value);
+
+            cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
+            cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
+            cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
+            cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
+            cmd.Parameters.AddWithValue("@FN", 1);
+            cmd.Parameters.AddWithValue("@SN", signNumber);
+            cmd.Parameters.AddWithValue("@D1", DBNull.Value);
+            cmd.Parameters.AddWithValue("@D2", DBNull.Value);
+            cmd.Parameters.AddWithValue("@SignOrder", signOrder);
+            cmd.ExecuteNonQuery();
+        }
+
         private decimal getApproxValue()
             {
                 decimal result;
@@ -299,31 +337,6 @@ namespace ANRPC_Inventory
             cmd.ExecuteNonQuery();
             Constants.closecon();
     }
-
-        public void SP_InsertSignatures(int signNumber,int formNumber,int talbNo,string fyear,DateTime creationDate,string codeEdara,string nameEdara)
-        {
-            string cmdstring = @"Exec  SP_InsertSignDates @TalbTwareed_No,@TalbTwareed_No2,@FYear,@CreationDate,@CodeEdara,
-                                    @NameEdara,@FormNo,@SignatureNo,@Date1,@Date2";
-
-            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-
-            cmd.Parameters.AddWithValue("@TalbTwareed_No", talbNo);
-            cmd.Parameters.AddWithValue("@TalbTwareed_No2", DBNull.Value);
-
-            cmd.Parameters.AddWithValue("@FYear", fyear);
-            cmd.Parameters.AddWithValue("@CreationDate", creationDate);
-            cmd.Parameters.AddWithValue("@CodeEdara", codeEdara);
-            cmd.Parameters.AddWithValue("@NameEdara", nameEdara);
-
-            cmd.Parameters.AddWithValue("@FormNo", formNumber);
-
-            cmd.Parameters.AddWithValue("@SignatureNo", signNumber);
-
-            cmd.Parameters.AddWithValue("@Date1", DBNull.Value);
-
-            cmd.Parameters.AddWithValue("@Date2", DBNull.Value);
-            cmd.ExecuteNonQuery();
-        }
 
         public void LoopGridview()
         {
@@ -563,7 +576,7 @@ namespace ANRPC_Inventory
                         TXT_RedirectedFor.Text = dr["RedirectedFor"].ToString();
                         TXT_RedirectedDate.Text = dr["RedirectedForDate"].ToString();
                         
-                        selectedTalbNo = Convert.ToInt32(dr["CodeEdara"].ToString());
+                        selectedTalbEdara = Convert.ToInt32(dr["CodeEdara"].ToString());
 
                         string s1 = dr["Req_Signature"].ToString();
                         string s2 = dr["Confirm_Sign1"].ToString();
@@ -1001,8 +1014,7 @@ namespace ANRPC_Inventory
             FlagSign1 = 0;
             Pic_Sign1.BackColor = Color.Green;
             currentSignNumber = 1;
-
-            dataGridView1.ReadOnly = true;
+           
             dataGridView1.AllowUserToAddRows = true;
             dataGridView1.AllowUserToDeleteRows = true;
         }
@@ -1154,11 +1166,14 @@ namespace ANRPC_Inventory
                 Input_Reset();
             }
 
-            Cmb_FYear.Enabled = true;
-            TXT_TalbNo.Enabled = true;
-            BTN_Print.Enabled=true;
-            TXT_TalbNo2.Enabled = false;
-            Cmb_Currency.Enabled = false;
+            if (!Constants.isConfirmForm)
+            {
+                Cmb_FYear.Enabled = true;
+                TXT_TalbNo.Enabled = true;
+                BTN_Print.Enabled = true;
+                TXT_TalbNo2.Enabled = false;
+                Cmb_Currency.Enabled = false;
+            }
         }
 
         public void reset()
@@ -1484,43 +1499,11 @@ namespace ANRPC_Inventory
             {
                 InsertTalbTawreedBnood();
 
-                // -------------------------------------- SIGNATURE WITH NEW LOGIC BUT NOT COMPLETED --------------------------------
-                /*for (int i = 1; i <= 2; i++)
+                foreach (KeyValuePair<int, int> entry in signatureOrder)
                 {
-                    SP_InsertSignatures(i, 1, Convert.ToInt32(TXT_TalbNo.Text), Cmb_FYear.Text.ToString(), 
-                                        Convert.ToDateTime(TXT_Date.Value.ToShortDateString()), Constants.CodeEdara, 
-                                       Constants.NameEdara);
-                }
-
-                SP_UpdateSignatures(1, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-                SP_UpdateSignatures(2, Convert.ToDateTime(DateTime.Now.ToShortDateString()));*/
-                //----------------------------------------------------------------------------------------------------------------
-
-                int[] sequence = { 1, 2, 3, 8,12,4,11,5,6 };
-                for (int i = 0; i < sequence.Length; i++)
-                {
-
-                    if (i != 10)
+                    if (entry.Key != 7 && entry.Key != 9)
                     {
-                        cmdstring = "Exec  SP_InsertSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
-                        cmd = new SqlCommand(cmdstring, Constants.con);
-
-                        cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_TalbNo.Text));
-                        cmd.Parameters.AddWithValue("@TNO2", DBNull.Value);
-
-                        cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
-                        cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
-                        cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
-                        cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
-
-                        cmd.Parameters.AddWithValue("@FN", 1);
-
-                        cmd.Parameters.AddWithValue("@SN", sequence[i]);
-
-                        cmd.Parameters.AddWithValue("@D1", DBNull.Value);
-
-                        cmd.Parameters.AddWithValue("@D2", DBNull.Value);
-                        cmd.ExecuteNonQuery();
+                        SP_InsertSignatures(entry.Key, entry.Value);
                     }
                 }
 
@@ -1905,6 +1888,12 @@ namespace ANRPC_Inventory
                         cmd3.Parameters.AddWithValue("@p2", Cmb_FYear.Text);
                         cmd3.Parameters.AddWithValue("@p3", flag2);
                         cmd3.ExecuteNonQuery();
+
+                        if (currentSignNumber == 5)
+                        {
+                            SP_InsertSignatures(7, signatureOrder[7]);
+                            SP_InsertSignatures(9, signatureOrder[9]);
+                        }
                     }
                     else if (flag2 == 4)
                     {
@@ -1916,6 +1905,12 @@ namespace ANRPC_Inventory
                         cmd3.Parameters.AddWithValue("@p2", Cmb_FYear.Text);
                         cmd3.Parameters.AddWithValue("@p3", flag2);
                         cmd3.ExecuteNonQuery();
+
+                        if (currentSignNumber == 5)
+                        {
+                            SP_InsertSignatures(7, signatureOrder[7]);
+                            SP_InsertSignatures(9, signatureOrder[9]);
+                        }
                     }
 
 
@@ -2875,6 +2870,8 @@ namespace ANRPC_Inventory
             InitializeComponent();
 
             init();
+
+            initiateSignatureOrder();
         }
 
         public TalbTawred(string x, string y)
@@ -2890,10 +2887,10 @@ namespace ANRPC_Inventory
             isComeFromSearch = true;
 
         }
+
         //======================================
         private void TalbTawred_Load(object sender, EventArgs e)
         {
-
             if (isComeFromSearch)
             {
                 BTN_SearchTalb_Click(BTN_SearchTalb, e);
@@ -3088,6 +3085,7 @@ namespace ANRPC_Inventory
                 }
             }
         }
+        
         public void SearchImage1(string stockall)
         {
             // string partialName = "webapi";
@@ -3103,7 +3101,6 @@ namespace ANRPC_Inventory
                 picflag = 1;
             }
         }
-
 
         private void TXT_StockNoAll_KeyDown(object sender, KeyEventArgs e)
         {
@@ -3219,6 +3216,19 @@ namespace ANRPC_Inventory
             }
 
             AddTasnifToDataGridView(CHK_NewTasnif.Checked);
+
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                for (int i = 0; i < row.Cells.Count; i++)
+                {
+                    row.Cells[i].ReadOnly = true;
+                }
+            }
         }
 
         private void CHK_NewTasnif_CheckedChanged(object sender, EventArgs e)
@@ -3630,7 +3640,7 @@ namespace ANRPC_Inventory
                         string query = "exec Sp_CheckTasnif @a,@code_edara,@p1 out,@p2 out,@p3 out,@flag out ";
                         SqlCommand cmd = new SqlCommand(query, Constants.con);
                         cmd.Parameters.AddWithValue("@a", (e.FormattedValue));
-                        cmd.Parameters.AddWithValue("@code_edara", selectedTalbNo);
+                        cmd.Parameters.AddWithValue("@code_edara", selectedTalbEdara);
 
                         cmd.Parameters.Add("@flag", SqlDbType.Int, 32);  //-------> output parameter
                         cmd.Parameters["@flag"].Direction = ParameterDirection.Output;

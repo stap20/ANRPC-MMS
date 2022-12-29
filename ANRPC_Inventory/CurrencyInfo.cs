@@ -4,7 +4,7 @@ namespace ANRPC_Inventory
 {
     public class CurrencyInfo
     {
-        public enum Currencies {Egypt = 0,Syria, UAE, SaudiArabia, Tunisia, Gold,USA,EUR };
+        public enum Currencies {Egypt = 0,Syria, UAE, SaudiArabia, Tunisia, Gold,USA,EUR,GBP };
 
         #region Constructors
 
@@ -162,6 +162,25 @@ namespace ANRPC_Inventory
                     Arabic310CurrencyName = "يوروهات";
                     Arabic1199CurrencyName = "يورو";
                       Arabic1CurrencyPartName = "سنت";
+                    Arabic2CurrencyPartName = "سنتان";
+                    Arabic310CurrencyPartName = "سنتات";
+                    Arabic1199CurrencyPartName = "سنتاً";
+                    PartPrecision = 2;
+                    IsCurrencyPartNameFeminine = false;
+                    break;
+                case Currencies.GBP:
+                    CurrencyID = 0;
+                    CurrencyCode = "GBP";
+                    IsCurrencyNameFeminine = true;
+                    EnglishCurrencyName = "Sterling Pounds";
+                    EnglishPluralCurrencyName = "Sterling Pounds";
+                    EnglishCurrencyPartName = "Piaster";
+                    EnglishPluralCurrencyPartName = "Piasteres";
+                    Arabic1CurrencyName = "جنيه استرليني";
+                    Arabic2CurrencyName = "يوروهان";
+                    Arabic310CurrencyName = "يوروهات";
+                    Arabic1199CurrencyName = "يورو";
+                    Arabic1CurrencyPartName = "سنت";
                     Arabic2CurrencyPartName = "سنتان";
                     Arabic310CurrencyPartName = "سنتات";
                     Arabic1199CurrencyPartName = "سنتاً";
