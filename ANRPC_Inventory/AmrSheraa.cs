@@ -2568,8 +2568,6 @@ namespace ANRPC_Inventory
 
             if (Sign1 != "" && Empn1 != "")
             {
-                //  MessageBox.Show("done");
-                // string result= Constants.CheckSign("1",Sign1);
                 Tuple<string, int, int, string, string> result = Constants.CheckSign("1", "3", Sign1, Empn1);
                 if (result.Item3 == 1)
                 {
@@ -2584,8 +2582,6 @@ namespace ANRPC_Inventory
                     FlagEmpn1 = "";
 
                 }
-
-
             }
         }
 
@@ -2621,8 +2617,6 @@ namespace ANRPC_Inventory
 
             if (Sign2 != "" && Empn2 != "")
             {
-                //  MessageBox.Show("done");
-                // string result= Constants.CheckSign("1",Sign1);
                 Tuple<string, int, int, string, string> result = Constants.CheckSign("2", "3", Sign2, Empn2);
                 if (result.Item3 == 1)
                 {
@@ -2636,14 +2630,6 @@ namespace ANRPC_Inventory
                     FlagSign2 = 0;
                     FlagEmpn2 = "";
                 }
-                // result.Item1;
-                // result.Item2;
-
-
-            }
-            else
-            {
-                //cancel
             }
         }
 
@@ -2655,8 +2641,6 @@ namespace ANRPC_Inventory
 
             if (Sign3 != "" && Empn3 != "")
             {
-                //  MessageBox.Show("done");
-                // string result= Constants.CheckSign("1",Sign1);
                 Tuple<string, int, int, string, string> result = Constants.CheckSign("3", "3", Sign3, Empn3);
                 if (result.Item3 == 1)
                 {
@@ -2681,8 +2665,6 @@ namespace ANRPC_Inventory
 
             if (Sign4 != "" && Empn4 != "")
             {
-                //  MessageBox.Show("done");
-                // string result= Constants.CheckSign("1",Sign1);
                 Tuple<string, int, int, string, string> result = Constants.CheckSign("4", "3", Sign4, Empn4);
                 if (result.Item3 == 1)
                 {
@@ -2707,8 +2689,6 @@ namespace ANRPC_Inventory
 
             if (Sign6 != "" && Empn6 != "")
             {
-                //  MessageBox.Show("done");
-                // string result= Constants.CheckSign("1",Sign1);
                 Tuple<string, int, int, string, string> result = Constants.CheckSign("6", "3", Sign6, Empn6);
                 if (result.Item3 == 1)
                 {

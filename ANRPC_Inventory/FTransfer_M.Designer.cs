@@ -375,7 +375,6 @@
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dataGridView1.Size = new System.Drawing.Size(1251, 157);
             this.dataGridView1.TabIndex = 42;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
             this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
             this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowEnter_1);
@@ -1951,6 +1950,7 @@
             this.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "TalbTawred";
+            this.Load += new System.EventHandler(this.FTransfer_M_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tBnodAwamershraaBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.aNRPC_InventoryDataSet)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);

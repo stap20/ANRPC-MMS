@@ -33,11 +33,14 @@ namespace ANRPC_Inventory.Resources
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FChemical));
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.BTN_Print2 = new System.Windows.Forms.Button();
+            this.EditBtn2 = new System.Windows.Forms.Button();
             this.BTN_Search_Motab3a = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.BTN_Save2 = new System.Windows.Forms.Button();
+            this.Txt_AmrNo2 = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.Cmb_FY2 = new System.Windows.Forms.ComboBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.signatureTable = new System.Windows.Forms.TableLayoutPanel();
             this.panel20 = new System.Windows.Forms.Panel();
@@ -48,23 +51,24 @@ namespace ANRPC_Inventory.Resources
             this.panel18 = new System.Windows.Forms.Panel();
             this.DeleteBtn2 = new System.Windows.Forms.Button();
             this.label27 = new System.Windows.Forms.Label();
-            this.Pic_Sign3 = new System.Windows.Forms.PictureBox();
-            this.BTN_Sign3 = new System.Windows.Forms.Button();
+            this.Pic_Sign4 = new System.Windows.Forms.PictureBox();
+            this.BTN_Sign4 = new System.Windows.Forms.Button();
             this.panel17 = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
             this.label26 = new System.Windows.Forms.Label();
-            this.BTN_Sign4 = new System.Windows.Forms.Button();
-            this.Pic_Sign4 = new System.Windows.Forms.PictureBox();
+            this.BTN_Sign3 = new System.Windows.Forms.Button();
+            this.Pic_Sign3 = new System.Windows.Forms.PictureBox();
             this.panel16 = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
             this.Pic_Sign2 = new System.Windows.Forms.PictureBox();
-            this.BTN_Sigm12 = new System.Windows.Forms.Button();
+            this.BTN_Sign2 = new System.Windows.Forms.Button();
             this.panel15 = new System.Windows.Forms.Panel();
             this.label17 = new System.Windows.Forms.Label();
-            this.BTN_Sigm1 = new System.Windows.Forms.Button();
+            this.BTN_Sign1 = new System.Windows.Forms.Button();
             this.Pic_Sign1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.BTN_Search = new System.Windows.Forms.Button();
+            this.BTN_Delete = new System.Windows.Forms.Button();
             this.BTN_Cancel = new System.Windows.Forms.Button();
             this.panel9 = new System.Windows.Forms.Panel();
             this.BTN_Print = new System.Windows.Forms.Button();
@@ -77,7 +81,6 @@ namespace ANRPC_Inventory.Resources
             this.BTN_Save = new System.Windows.Forms.Button();
             this.BTN_Add = new System.Windows.Forms.Button();
             this.BTN_Edit = new System.Windows.Forms.Button();
-            this.BTN_Delete = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
@@ -99,7 +102,10 @@ namespace ANRPC_Inventory.Resources
             this.TXT_TaslemPlace = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.panel13 = new System.Windows.Forms.Panel();
+            this.BTN_PDF = new System.Windows.Forms.Button();
+            this.browseBTN = new System.Windows.Forms.Button();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.TXT_TalbTawred = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.TXT_Mowared = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -163,9 +169,10 @@ namespace ANRPC_Inventory.Resources
             this.TXT_UnitPrice = new System.Windows.Forms.TextBox();
             this.TXT_Quantity = new System.Windows.Forms.TextBox();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel14 = new System.Windows.Forms.Panel();
-            this.TXT_TalbTawred = new System.Windows.Forms.ComboBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.alertProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -173,10 +180,10 @@ namespace ANRPC_Inventory.Resources
             this.panel20.SuspendLayout();
             this.panel19.SuspendLayout();
             this.panel18.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign4)).BeginInit();
             this.panel17.SuspendLayout();
             this.panel12.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign3)).BeginInit();
             this.panel16.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign2)).BeginInit();
             this.panel15.SuspendLayout();
@@ -186,11 +193,14 @@ namespace ANRPC_Inventory.Resources
             this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel10.SuspendLayout();
+            this.panel13.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel14.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.alertProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -207,21 +217,57 @@ namespace ANRPC_Inventory.Resources
             // 
             // panel7
             // 
-            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panel7.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel7.Controls.Add(this.BTN_Print2);
+            this.panel7.Controls.Add(this.EditBtn2);
             this.panel7.Controls.Add(this.BTN_Search_Motab3a);
-            this.panel7.Controls.Add(this.textBox1);
+            this.panel7.Controls.Add(this.BTN_Save2);
+            this.panel7.Controls.Add(this.Txt_AmrNo2);
             this.panel7.Controls.Add(this.label18);
             this.panel7.Controls.Add(this.label2);
-            this.panel7.Controls.Add(this.comboBox1);
-            this.panel7.Location = new System.Drawing.Point(1058, 12);
+            this.panel7.Controls.Add(this.Cmb_FY2);
+            this.panel7.Location = new System.Drawing.Point(434, 12);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(535, 51);
+            this.panel7.Size = new System.Drawing.Size(743, 51);
             this.panel7.TabIndex = 242;
+            // 
+            // BTN_Print2
+            // 
+            this.BTN_Print2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Print2.Font = new System.Drawing.Font("Arabic Typesetting", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_Print2.ForeColor = System.Drawing.Color.DarkSalmon;
+            this.BTN_Print2.Image = ((System.Drawing.Image)(resources.GetObject("BTN_Print2.Image")));
+            this.BTN_Print2.Location = new System.Drawing.Point(7, -1);
+            this.BTN_Print2.Name = "BTN_Print2";
+            this.BTN_Print2.Size = new System.Drawing.Size(53, 49);
+            this.BTN_Print2.TabIndex = 245;
+            this.BTN_Print2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BTN_Print2.UseVisualStyleBackColor = true;
+            this.BTN_Print2.Click += new System.EventHandler(this.BTN_Print2_Click);
+            // 
+            // EditBtn2
+            // 
+            this.EditBtn2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.EditBtn2.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.EditBtn2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.EditBtn2.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
+            this.EditBtn2.FlatAppearance.BorderSize = 3;
+            this.EditBtn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.EditBtn2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.EditBtn2.ForeColor = System.Drawing.Color.Maroon;
+            this.EditBtn2.Location = new System.Drawing.Point(139, 4);
+            this.EditBtn2.Name = "EditBtn2";
+            this.EditBtn2.Size = new System.Drawing.Size(72, 33);
+            this.EditBtn2.TabIndex = 243;
+            this.EditBtn2.Text = "تعديل";
+            this.EditBtn2.UseVisualStyleBackColor = false;
+            this.EditBtn2.Click += new System.EventHandler(this.EditBtn2_Click);
             // 
             // BTN_Search_Motab3a
             // 
+            this.BTN_Search_Motab3a.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BTN_Search_Motab3a.AutoEllipsis = true;
             this.BTN_Search_Motab3a.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.BTN_Search_Motab3a.BackgroundImage = global::ANRPC_Inventory.Properties.Resources.bar1;
@@ -232,23 +278,42 @@ namespace ANRPC_Inventory.Resources
             this.BTN_Search_Motab3a.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.BTN_Search_Motab3a.Image = global::ANRPC_Inventory.Properties.Resources.search_img;
             this.BTN_Search_Motab3a.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.BTN_Search_Motab3a.Location = new System.Drawing.Point(9, 7);
+            this.BTN_Search_Motab3a.Location = new System.Drawing.Point(217, 4);
             this.BTN_Search_Motab3a.Name = "BTN_Search_Motab3a";
             this.BTN_Search_Motab3a.Size = new System.Drawing.Size(93, 35);
             this.BTN_Search_Motab3a.TabIndex = 313;
             this.BTN_Search_Motab3a.Text = "بحث";
             this.BTN_Search_Motab3a.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BTN_Search_Motab3a.UseVisualStyleBackColor = false;
+            this.BTN_Search_Motab3a.Click += new System.EventHandler(this.BTN_Search_Motab3a_Click);
             // 
-            // textBox1
+            // BTN_Save2
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(321, 9);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(106, 29);
-            this.textBox1.TabIndex = 241;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.BTN_Save2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Save2.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.BTN_Save2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Save2.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
+            this.BTN_Save2.FlatAppearance.BorderSize = 3;
+            this.BTN_Save2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_Save2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.BTN_Save2.ForeColor = System.Drawing.Color.Maroon;
+            this.BTN_Save2.Location = new System.Drawing.Point(66, 4);
+            this.BTN_Save2.Name = "BTN_Save2";
+            this.BTN_Save2.Size = new System.Drawing.Size(67, 33);
+            this.BTN_Save2.TabIndex = 244;
+            this.BTN_Save2.Text = "حفظ";
+            this.BTN_Save2.UseVisualStyleBackColor = false;
+            this.BTN_Save2.Click += new System.EventHandler(this.BTN_Save2_Click);
+            // 
+            // Txt_AmrNo2
+            // 
+            this.Txt_AmrNo2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Txt_AmrNo2.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Txt_AmrNo2.Location = new System.Drawing.Point(529, 9);
+            this.Txt_AmrNo2.Name = "Txt_AmrNo2";
+            this.Txt_AmrNo2.Size = new System.Drawing.Size(106, 29);
+            this.Txt_AmrNo2.TabIndex = 241;
+            this.Txt_AmrNo2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label18
             // 
@@ -256,7 +321,7 @@ namespace ANRPC_Inventory.Resources
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label18.Location = new System.Drawing.Point(433, 12);
+            this.label18.Location = new System.Drawing.Point(641, 12);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(95, 21);
             this.label18.TabIndex = 240;
@@ -268,23 +333,23 @@ namespace ANRPC_Inventory.Resources
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label2.Location = new System.Drawing.Point(231, 12);
+            this.label2.Location = new System.Drawing.Point(439, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(84, 21);
             this.label2.TabIndex = 240;
             this.label2.Text = ":السنة المالية";
             // 
-            // comboBox1
+            // Cmb_FY2
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.Cmb_FY2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cmb_FY2.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Cmb_FY2.FormattingEnabled = true;
+            this.Cmb_FY2.Items.AddRange(new object[] {
             "2020_2021"});
-            this.comboBox1.Location = new System.Drawing.Point(108, 9);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(117, 29);
-            this.comboBox1.TabIndex = 241;
+            this.Cmb_FY2.Location = new System.Drawing.Point(316, 9);
+            this.Cmb_FY2.Name = "Cmb_FY2";
+            this.Cmb_FY2.Size = new System.Drawing.Size(117, 29);
+            this.Cmb_FY2.TabIndex = 241;
             // 
             // pictureBox1
             // 
@@ -315,7 +380,7 @@ namespace ANRPC_Inventory.Resources
             this.signatureTable.RowCount = 2;
             this.signatureTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.signatureTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.signatureTable.Size = new System.Drawing.Size(1620, 87);
+            this.signatureTable.Size = new System.Drawing.Size(1620, 107);
             this.signatureTable.TabIndex = 236;
             // 
             // panel20
@@ -324,9 +389,9 @@ namespace ANRPC_Inventory.Resources
             this.panel20.Controls.Add(this.TXT_ShickNo);
             this.panel20.Controls.Add(this.label22);
             this.panel20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel20.Location = new System.Drawing.Point(542, 46);
+            this.panel20.Location = new System.Drawing.Point(542, 56);
             this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(534, 38);
+            this.panel20.Size = new System.Drawing.Size(534, 48);
             this.panel20.TabIndex = 266;
             // 
             // TXT_ShickNo
@@ -357,9 +422,9 @@ namespace ANRPC_Inventory.Resources
             this.panel19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel19.Controls.Add(this.label23);
             this.panel19.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel19.Location = new System.Drawing.Point(3, 46);
+            this.panel19.Location = new System.Drawing.Point(3, 56);
             this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(533, 38);
+            this.panel19.Size = new System.Drawing.Size(533, 48);
             this.panel19.TabIndex = 266;
             this.panel19.Visible = false;
             // 
@@ -381,12 +446,12 @@ namespace ANRPC_Inventory.Resources
             this.panel18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel18.Controls.Add(this.DeleteBtn2);
             this.panel18.Controls.Add(this.label27);
-            this.panel18.Controls.Add(this.Pic_Sign3);
-            this.panel18.Controls.Add(this.BTN_Sign3);
+            this.panel18.Controls.Add(this.Pic_Sign4);
+            this.panel18.Controls.Add(this.BTN_Sign4);
             this.panel18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel18.Location = new System.Drawing.Point(1082, 46);
+            this.panel18.Location = new System.Drawing.Point(1082, 56);
             this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(535, 38);
+            this.panel18.Size = new System.Drawing.Size(535, 48);
             this.panel18.TabIndex = 266;
             // 
             // DeleteBtn2
@@ -400,12 +465,13 @@ namespace ANRPC_Inventory.Resources
             this.DeleteBtn2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.DeleteBtn2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DeleteBtn2.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.DeleteBtn2.Location = new System.Drawing.Point(378, 22);
+            this.DeleteBtn2.Location = new System.Drawing.Point(378, 25);
             this.DeleteBtn2.Name = "DeleteBtn2";
-            this.DeleteBtn2.Size = new System.Drawing.Size(52, 18);
+            this.DeleteBtn2.Size = new System.Drawing.Size(52, 20);
             this.DeleteBtn2.TabIndex = 266;
             this.DeleteBtn2.Text = "حذف";
             this.DeleteBtn2.UseVisualStyleBackColor = false;
+            this.DeleteBtn2.Click += new System.EventHandler(this.DeleteBtn2_Click);
             // 
             // label27
             // 
@@ -420,36 +486,38 @@ namespace ANRPC_Inventory.Resources
             this.label27.Text = ":توقيع المدير العام";
             this.label27.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // Pic_Sign3
+            // Pic_Sign4
             // 
-            this.Pic_Sign3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.Pic_Sign4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Pic_Sign3.Location = new System.Drawing.Point(3, 3);
-            this.Pic_Sign3.Name = "Pic_Sign3";
-            this.Pic_Sign3.Size = new System.Drawing.Size(369, 28);
-            this.Pic_Sign3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Pic_Sign3.TabIndex = 254;
-            this.Pic_Sign3.TabStop = false;
+            this.Pic_Sign4.Location = new System.Drawing.Point(3, 3);
+            this.Pic_Sign4.Name = "Pic_Sign4";
+            this.Pic_Sign4.Size = new System.Drawing.Size(369, 40);
+            this.Pic_Sign4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Pic_Sign4.TabIndex = 254;
+            this.Pic_Sign4.TabStop = false;
             // 
-            // BTN_Sign3
+            // BTN_Sign4
             // 
-            this.BTN_Sign3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Sign3.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.BTN_Sign3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BTN_Sign3.BackgroundImage")));
-            this.BTN_Sign3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_Sign3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_Sign3.Enabled = false;
-            this.BTN_Sign3.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
-            this.BTN_Sign3.FlatAppearance.BorderSize = 3;
-            this.BTN_Sign3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.BTN_Sign3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_Sign3.ForeColor = System.Drawing.Color.FloralWhite;
-            this.BTN_Sign3.Location = new System.Drawing.Point(378, 1);
-            this.BTN_Sign3.Name = "BTN_Sign3";
-            this.BTN_Sign3.Size = new System.Drawing.Size(52, 20);
-            this.BTN_Sign3.TabIndex = 255;
-            this.BTN_Sign3.Text = "توقيع";
-            this.BTN_Sign3.UseVisualStyleBackColor = false;
+            this.BTN_Sign4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Sign4.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.BTN_Sign4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BTN_Sign4.BackgroundImage")));
+            this.BTN_Sign4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTN_Sign4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Sign4.Enabled = false;
+            this.BTN_Sign4.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
+            this.BTN_Sign4.FlatAppearance.BorderSize = 3;
+            this.BTN_Sign4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.BTN_Sign4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_Sign4.ForeColor = System.Drawing.Color.FloralWhite;
+            this.BTN_Sign4.Location = new System.Drawing.Point(378, 1);
+            this.BTN_Sign4.Name = "BTN_Sign4";
+            this.BTN_Sign4.Size = new System.Drawing.Size(52, 24);
+            this.BTN_Sign4.TabIndex = 255;
+            this.BTN_Sign4.Text = "توقيع";
+            this.BTN_Sign4.UseVisualStyleBackColor = false;
+            this.BTN_Sign4.Click += new System.EventHandler(this.BTN_Sign4_Click);
             // 
             // panel17
             // 
@@ -458,19 +526,19 @@ namespace ANRPC_Inventory.Resources
             this.panel17.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel17.Location = new System.Drawing.Point(3, 3);
             this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(533, 37);
+            this.panel17.Size = new System.Drawing.Size(533, 47);
             this.panel17.TabIndex = 266;
             // 
             // panel12
             // 
             this.panel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel12.Controls.Add(this.label26);
-            this.panel12.Controls.Add(this.BTN_Sign4);
-            this.panel12.Controls.Add(this.Pic_Sign4);
+            this.panel12.Controls.Add(this.BTN_Sign3);
+            this.panel12.Controls.Add(this.Pic_Sign3);
             this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel12.Location = new System.Drawing.Point(0, 0);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(531, 35);
+            this.panel12.Size = new System.Drawing.Size(531, 45);
             this.panel12.TabIndex = 267;
             // 
             // label26
@@ -486,44 +554,46 @@ namespace ANRPC_Inventory.Resources
             this.label26.Text = ":توقيع مدير عام مساعد";
             this.label26.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // BTN_Sign4
+            // BTN_Sign3
             // 
-            this.BTN_Sign4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Sign4.BackColor = System.Drawing.Color.DarkSalmon;
-            this.BTN_Sign4.Enabled = false;
-            this.BTN_Sign4.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
-            this.BTN_Sign4.FlatAppearance.BorderSize = 3;
-            this.BTN_Sign4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.BTN_Sign4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_Sign4.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BTN_Sign4.Location = new System.Drawing.Point(348, 4);
-            this.BTN_Sign4.Name = "BTN_Sign4";
-            this.BTN_Sign4.Size = new System.Drawing.Size(53, 31);
-            this.BTN_Sign4.TabIndex = 251;
-            this.BTN_Sign4.Text = "توقيع";
-            this.BTN_Sign4.UseVisualStyleBackColor = false;
+            this.BTN_Sign3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Sign3.BackColor = System.Drawing.Color.DarkSalmon;
+            this.BTN_Sign3.Enabled = false;
+            this.BTN_Sign3.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
+            this.BTN_Sign3.FlatAppearance.BorderSize = 3;
+            this.BTN_Sign3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.BTN_Sign3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_Sign3.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BTN_Sign3.Location = new System.Drawing.Point(348, 6);
+            this.BTN_Sign3.Name = "BTN_Sign3";
+            this.BTN_Sign3.Size = new System.Drawing.Size(53, 31);
+            this.BTN_Sign3.TabIndex = 251;
+            this.BTN_Sign3.Text = "توقيع";
+            this.BTN_Sign3.UseVisualStyleBackColor = false;
+            this.BTN_Sign3.Click += new System.EventHandler(this.BTN_Sign3_Click);
             // 
-            // Pic_Sign4
+            // Pic_Sign3
             // 
-            this.Pic_Sign4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.Pic_Sign3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Pic_Sign4.Location = new System.Drawing.Point(4, 4);
-            this.Pic_Sign4.Name = "Pic_Sign4";
-            this.Pic_Sign4.Size = new System.Drawing.Size(338, 23);
-            this.Pic_Sign4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Pic_Sign4.TabIndex = 250;
-            this.Pic_Sign4.TabStop = false;
+            this.Pic_Sign3.Location = new System.Drawing.Point(4, 4);
+            this.Pic_Sign3.Name = "Pic_Sign3";
+            this.Pic_Sign3.Size = new System.Drawing.Size(338, 35);
+            this.Pic_Sign3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Pic_Sign3.TabIndex = 250;
+            this.Pic_Sign3.TabStop = false;
             // 
             // panel16
             // 
             this.panel16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel16.Controls.Add(this.label16);
             this.panel16.Controls.Add(this.Pic_Sign2);
-            this.panel16.Controls.Add(this.BTN_Sigm12);
+            this.panel16.Controls.Add(this.BTN_Sign2);
             this.panel16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel16.Location = new System.Drawing.Point(542, 3);
             this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(534, 37);
+            this.panel16.Size = new System.Drawing.Size(534, 47);
             this.panel16.TabIndex = 266;
             // 
             // label16
@@ -541,45 +611,47 @@ namespace ANRPC_Inventory.Resources
             // 
             // Pic_Sign2
             // 
-            this.Pic_Sign2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.Pic_Sign2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Pic_Sign2.Location = new System.Drawing.Point(4, 4);
             this.Pic_Sign2.Name = "Pic_Sign2";
-            this.Pic_Sign2.Size = new System.Drawing.Size(379, 26);
+            this.Pic_Sign2.Size = new System.Drawing.Size(379, 38);
             this.Pic_Sign2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign2.TabIndex = 252;
             this.Pic_Sign2.TabStop = false;
             // 
-            // BTN_Sigm12
+            // BTN_Sign2
             // 
-            this.BTN_Sigm12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Sigm12.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.BTN_Sigm12.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BTN_Sigm12.BackgroundImage")));
-            this.BTN_Sigm12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_Sigm12.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_Sigm12.Enabled = false;
-            this.BTN_Sigm12.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
-            this.BTN_Sigm12.FlatAppearance.BorderSize = 3;
-            this.BTN_Sigm12.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.BTN_Sigm12.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_Sigm12.ForeColor = System.Drawing.Color.FloralWhite;
-            this.BTN_Sigm12.Location = new System.Drawing.Point(389, 4);
-            this.BTN_Sigm12.Name = "BTN_Sigm12";
-            this.BTN_Sigm12.Size = new System.Drawing.Size(53, 31);
-            this.BTN_Sigm12.TabIndex = 253;
-            this.BTN_Sigm12.Text = "توقيع";
-            this.BTN_Sigm12.UseVisualStyleBackColor = false;
+            this.BTN_Sign2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Sign2.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.BTN_Sign2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BTN_Sign2.BackgroundImage")));
+            this.BTN_Sign2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTN_Sign2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Sign2.Enabled = false;
+            this.BTN_Sign2.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
+            this.BTN_Sign2.FlatAppearance.BorderSize = 3;
+            this.BTN_Sign2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.BTN_Sign2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_Sign2.ForeColor = System.Drawing.Color.FloralWhite;
+            this.BTN_Sign2.Location = new System.Drawing.Point(389, 7);
+            this.BTN_Sign2.Name = "BTN_Sign2";
+            this.BTN_Sign2.Size = new System.Drawing.Size(53, 31);
+            this.BTN_Sign2.TabIndex = 253;
+            this.BTN_Sign2.Text = "توقيع";
+            this.BTN_Sign2.UseVisualStyleBackColor = false;
+            this.BTN_Sign2.Click += new System.EventHandler(this.BTN_Sign2_Click);
             // 
             // panel15
             // 
             this.panel15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel15.Controls.Add(this.label17);
-            this.panel15.Controls.Add(this.BTN_Sigm1);
+            this.panel15.Controls.Add(this.BTN_Sign1);
             this.panel15.Controls.Add(this.Pic_Sign1);
             this.panel15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel15.Location = new System.Drawing.Point(1082, 3);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(535, 37);
+            this.panel15.Size = new System.Drawing.Size(535, 47);
             this.panel15.TabIndex = 266;
             // 
             // label17
@@ -595,33 +667,35 @@ namespace ANRPC_Inventory.Resources
             this.label17.Text = ":توقيع الاعداد";
             this.label17.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // BTN_Sigm1
+            // BTN_Sign1
             // 
-            this.BTN_Sigm1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Sigm1.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.BTN_Sigm1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BTN_Sigm1.BackgroundImage")));
-            this.BTN_Sigm1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_Sigm1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_Sigm1.Enabled = false;
-            this.BTN_Sigm1.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
-            this.BTN_Sigm1.FlatAppearance.BorderSize = 3;
-            this.BTN_Sigm1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.BTN_Sigm1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_Sigm1.ForeColor = System.Drawing.Color.FloralWhite;
-            this.BTN_Sigm1.Location = new System.Drawing.Point(396, 4);
-            this.BTN_Sigm1.Name = "BTN_Sigm1";
-            this.BTN_Sigm1.Size = new System.Drawing.Size(53, 31);
-            this.BTN_Sigm1.TabIndex = 245;
-            this.BTN_Sigm1.Text = "توقيع";
-            this.BTN_Sigm1.UseVisualStyleBackColor = false;
+            this.BTN_Sign1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Sign1.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.BTN_Sign1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BTN_Sign1.BackgroundImage")));
+            this.BTN_Sign1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTN_Sign1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Sign1.Enabled = false;
+            this.BTN_Sign1.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
+            this.BTN_Sign1.FlatAppearance.BorderSize = 3;
+            this.BTN_Sign1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.BTN_Sign1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_Sign1.ForeColor = System.Drawing.Color.FloralWhite;
+            this.BTN_Sign1.Location = new System.Drawing.Point(396, 7);
+            this.BTN_Sign1.Name = "BTN_Sign1";
+            this.BTN_Sign1.Size = new System.Drawing.Size(53, 31);
+            this.BTN_Sign1.TabIndex = 245;
+            this.BTN_Sign1.Text = "توقيع";
+            this.BTN_Sign1.UseVisualStyleBackColor = false;
+            this.BTN_Sign1.Click += new System.EventHandler(this.BTN_Sign1_Click);
             // 
             // Pic_Sign1
             // 
-            this.Pic_Sign1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.Pic_Sign1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Pic_Sign1.Location = new System.Drawing.Point(3, 4);
             this.Pic_Sign1.Name = "Pic_Sign1";
-            this.Pic_Sign1.Size = new System.Drawing.Size(385, 27);
+            this.Pic_Sign1.Size = new System.Drawing.Size(385, 39);
             this.Pic_Sign1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Pic_Sign1.TabIndex = 239;
             this.Pic_Sign1.TabStop = false;
@@ -630,13 +704,13 @@ namespace ANRPC_Inventory.Resources
             // 
             this.panel2.BackColor = System.Drawing.Color.Transparent;
             this.panel2.Controls.Add(this.BTN_Search);
+            this.panel2.Controls.Add(this.BTN_Delete);
             this.panel2.Controls.Add(this.BTN_Cancel);
             this.panel2.Controls.Add(this.panel9);
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.BTN_Save);
             this.panel2.Controls.Add(this.BTN_Add);
             this.panel2.Controls.Add(this.BTN_Edit);
-            this.panel2.Controls.Add(this.BTN_Delete);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 69);
             this.panel2.Name = "panel2";
@@ -653,13 +727,33 @@ namespace ANRPC_Inventory.Resources
             this.BTN_Search.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_Search.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.BTN_Search.ForeColor = System.Drawing.Color.Blue;
-            this.BTN_Search.Location = new System.Drawing.Point(1168, 4);
+            this.BTN_Search.Location = new System.Drawing.Point(1247, 4);
             this.BTN_Search.Name = "BTN_Search";
             this.BTN_Search.Size = new System.Drawing.Size(70, 31);
             this.BTN_Search.TabIndex = 335;
             this.BTN_Search.Text = "بحث";
             this.BTN_Search.UseVisualStyleBackColor = false;
             this.BTN_Search.Click += new System.EventHandler(this.BTN_Search_Click);
+            // 
+            // BTN_Delete
+            // 
+            this.BTN_Delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTN_Delete.AutoEllipsis = true;
+            this.BTN_Delete.BackColor = System.Drawing.Color.LightGray;
+            this.BTN_Delete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTN_Delete.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
+            this.BTN_Delete.FlatAppearance.BorderSize = 3;
+            this.BTN_Delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_Delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.BTN_Delete.ForeColor = System.Drawing.Color.Blue;
+            this.BTN_Delete.Location = new System.Drawing.Point(1173, 4);
+            this.BTN_Delete.Name = "BTN_Delete";
+            this.BTN_Delete.Size = new System.Drawing.Size(70, 31);
+            this.BTN_Delete.TabIndex = 301;
+            this.BTN_Delete.Text = "حذف";
+            this.BTN_Delete.UseVisualStyleBackColor = false;
+            this.BTN_Delete.Visible = false;
+            this.BTN_Delete.Click += new System.EventHandler(this.BTN_Delete_Click);
             // 
             // BTN_Cancel
             // 
@@ -671,7 +765,7 @@ namespace ANRPC_Inventory.Resources
             this.BTN_Cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_Cancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.BTN_Cancel.ForeColor = System.Drawing.Color.Blue;
-            this.BTN_Cancel.Location = new System.Drawing.Point(1243, 4);
+            this.BTN_Cancel.Location = new System.Drawing.Point(1322, 4);
             this.BTN_Cancel.Name = "BTN_Cancel";
             this.BTN_Cancel.Size = new System.Drawing.Size(70, 31);
             this.BTN_Cancel.TabIndex = 334;
@@ -794,7 +888,7 @@ namespace ANRPC_Inventory.Resources
             this.BTN_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_Save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
             this.BTN_Save.ForeColor = System.Drawing.Color.Blue;
-            this.BTN_Save.Location = new System.Drawing.Point(1319, 4);
+            this.BTN_Save.Location = new System.Drawing.Point(1398, 4);
             this.BTN_Save.Name = "BTN_Save";
             this.BTN_Save.Size = new System.Drawing.Size(70, 31);
             this.BTN_Save.TabIndex = 311;
@@ -839,25 +933,6 @@ namespace ANRPC_Inventory.Resources
             this.BTN_Edit.Text = "تعديل";
             this.BTN_Edit.UseVisualStyleBackColor = false;
             this.BTN_Edit.Click += new System.EventHandler(this.BTN_Edit_Click);
-            // 
-            // BTN_Delete
-            // 
-            this.BTN_Delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTN_Delete.AutoEllipsis = true;
-            this.BTN_Delete.BackColor = System.Drawing.Color.LightGray;
-            this.BTN_Delete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTN_Delete.FlatAppearance.BorderColor = System.Drawing.Color.DarkSalmon;
-            this.BTN_Delete.FlatAppearance.BorderSize = 3;
-            this.BTN_Delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_Delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-            this.BTN_Delete.ForeColor = System.Drawing.Color.Blue;
-            this.BTN_Delete.Location = new System.Drawing.Point(1395, 4);
-            this.BTN_Delete.Name = "BTN_Delete";
-            this.BTN_Delete.Size = new System.Drawing.Size(70, 31);
-            this.BTN_Delete.TabIndex = 301;
-            this.BTN_Delete.Text = "حذف";
-            this.BTN_Delete.UseVisualStyleBackColor = false;
-            this.BTN_Delete.Click += new System.EventHandler(this.BTN_Delete_Click);
             // 
             // panel3
             // 
@@ -1016,7 +1091,6 @@ namespace ANRPC_Inventory.Resources
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(755, 151);
             this.panel10.TabIndex = 243;
-            this.panel10.Paint += new System.Windows.Forms.PaintEventHandler(this.panel10_Paint);
             // 
             // CMB_Edara
             // 
@@ -1117,11 +1191,50 @@ namespace ANRPC_Inventory.Resources
             this.panel13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel13.Controls.Add(this.BTN_PDF);
+            this.panel13.Controls.Add(this.browseBTN);
             this.panel13.Location = new System.Drawing.Point(3, 3);
             this.panel13.Name = "panel13";
             this.panel13.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.panel13.Size = new System.Drawing.Size(106, 152);
             this.panel13.TabIndex = 284;
+            // 
+            // BTN_PDF
+            // 
+            this.BTN_PDF.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.BTN_PDF.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BTN_PDF.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BTN_PDF.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.BTN_PDF.FlatAppearance.BorderSize = 2;
+            this.BTN_PDF.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_PDF.ForeColor = System.Drawing.Color.DarkRed;
+            this.BTN_PDF.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.BTN_PDF.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.BTN_PDF.Location = new System.Drawing.Point(0, 77);
+            this.BTN_PDF.Name = "BTN_PDF";
+            this.BTN_PDF.Size = new System.Drawing.Size(104, 72);
+            this.BTN_PDF.TabIndex = 341;
+            this.BTN_PDF.Text = "عرض المرفقات";
+            this.BTN_PDF.UseVisualStyleBackColor = false;
+            // 
+            // browseBTN
+            // 
+            this.browseBTN.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.browseBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.browseBTN.Dock = System.Windows.Forms.DockStyle.Top;
+            this.browseBTN.Enabled = false;
+            this.browseBTN.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.browseBTN.FlatAppearance.BorderSize = 2;
+            this.browseBTN.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.browseBTN.ForeColor = System.Drawing.Color.DarkRed;
+            this.browseBTN.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.browseBTN.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.browseBTN.Location = new System.Drawing.Point(0, 0);
+            this.browseBTN.Name = "browseBTN";
+            this.browseBTN.Size = new System.Drawing.Size(104, 77);
+            this.browseBTN.TabIndex = 342;
+            this.browseBTN.Text = "إرفاق مرفقات";
+            this.browseBTN.UseVisualStyleBackColor = false;
             // 
             // panel11
             // 
@@ -1138,6 +1251,18 @@ namespace ANRPC_Inventory.Resources
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(337, 152);
             this.panel11.TabIndex = 244;
+            // 
+            // TXT_TalbTawred
+            // 
+            this.TXT_TalbTawred.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TXT_TalbTawred.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_TalbTawred.FormattingEnabled = true;
+            this.TXT_TalbTawred.Location = new System.Drawing.Point(11, 15);
+            this.TXT_TalbTawred.Name = "TXT_TalbTawred";
+            this.TXT_TalbTawred.Size = new System.Drawing.Size(197, 27);
+            this.TXT_TalbTawred.TabIndex = 313;
+            this.TXT_TalbTawred.SelectionChangeCommitted += new System.EventHandler(this.TXT_TalbTawred_SelectionChangeCommitted);
             // 
             // label8
             // 
@@ -1252,7 +1377,6 @@ namespace ANRPC_Inventory.Resources
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1620, 613);
             this.panel4.TabIndex = 250;
-            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
             // BTN_Calc
             // 
@@ -1416,7 +1540,7 @@ namespace ANRPC_Inventory.Resources
             this.L_HARBYA.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.L_HARBYA.Location = new System.Drawing.Point(572, 248);
             this.L_HARBYA.Name = "L_HARBYA";
-            this.L_HARBYA.Size = new System.Drawing.Size(362, 24);
+            this.L_HARBYA.Size = new System.Drawing.Size(363, 24);
             this.L_HARBYA.TabIndex = 306;
             this.L_HARBYA.Text = "يضاف 5 جنيه صندوق تكريم شهداء العمليات الحربية";
             // 
@@ -1474,7 +1598,7 @@ namespace ANRPC_Inventory.Resources
             this.L_DAREBA_NOLON.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.L_DAREBA_NOLON.Location = new System.Drawing.Point(628, 345);
             this.L_DAREBA_NOLON.Name = "L_DAREBA_NOLON";
-            this.L_DAREBA_NOLON.Size = new System.Drawing.Size(306, 24);
+            this.L_DAREBA_NOLON.Size = new System.Drawing.Size(308, 24);
             this.L_DAREBA_NOLON.TabIndex = 301;
             this.L_DAREBA_NOLON.Text = "يضاف 14% ضريبة القيمة المضافة للنولون";
             // 
@@ -1509,7 +1633,7 @@ namespace ANRPC_Inventory.Resources
             this.L_DAREBA_EDARIA.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.L_DAREBA_EDARIA.Location = new System.Drawing.Point(577, 311);
             this.L_DAREBA_EDARIA.Name = "L_DAREBA_EDARIA";
-            this.L_DAREBA_EDARIA.Size = new System.Drawing.Size(357, 24);
+            this.L_DAREBA_EDARIA.Size = new System.Drawing.Size(359, 24);
             this.L_DAREBA_EDARIA.TabIndex = 297;
             this.L_DAREBA_EDARIA.Text = "يضاف 14% ضريبة القيمة المضافة للكمية المطلوبة";
             // 
@@ -1682,7 +1806,6 @@ namespace ANRPC_Inventory.Resources
             this.CMB_Component.Name = "CMB_Component";
             this.CMB_Component.Size = new System.Drawing.Size(260, 32);
             this.CMB_Component.TabIndex = 242;
-            this.CMB_Component.SelectionChangeCommitted += new System.EventHandler(this.CMB_Component_SelectionChangeCommitted);
             // 
             // label14
             // 
@@ -1946,9 +2069,9 @@ namespace ANRPC_Inventory.Resources
             this.panel8.Controls.Add(this.signatureTable);
             this.panel8.Controls.Add(this.panel14);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel8.Location = new System.Drawing.Point(0, 798);
+            this.panel8.Location = new System.Drawing.Point(0, 778);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(1620, 122);
+            this.panel8.Size = new System.Drawing.Size(1620, 142);
             this.panel8.TabIndex = 251;
             // 
             // panel14
@@ -1961,17 +2084,15 @@ namespace ANRPC_Inventory.Resources
             this.panel14.Size = new System.Drawing.Size(1620, 32);
             this.panel14.TabIndex = 237;
             // 
-            // TXT_TalbTawred
+            // errorProvider
             // 
-            this.TXT_TalbTawred.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TXT_TalbTawred.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_TalbTawred.FormattingEnabled = true;
-            this.TXT_TalbTawred.Location = new System.Drawing.Point(11, 15);
-            this.TXT_TalbTawred.Name = "TXT_TalbTawred";
-            this.TXT_TalbTawred.Size = new System.Drawing.Size(197, 27);
-            this.TXT_TalbTawred.TabIndex = 313;
-            this.TXT_TalbTawred.SelectionChangeCommitted += new System.EventHandler(this.TXT_TalbTawred_SelectionChangeCommitted);
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider.ContainerControl = this;
+            // 
+            // alertProvider
+            // 
+            this.alertProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.alertProvider.ContainerControl = this;
             // 
             // FChemical
             // 
@@ -2007,11 +2128,11 @@ namespace ANRPC_Inventory.Resources
             this.panel19.PerformLayout();
             this.panel18.ResumeLayout(false);
             this.panel18.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign4)).EndInit();
             this.panel17.ResumeLayout(false);
             this.panel12.ResumeLayout(false);
             this.panel12.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign3)).EndInit();
             this.panel16.ResumeLayout(false);
             this.panel16.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign2)).EndInit();
@@ -2026,6 +2147,7 @@ namespace ANRPC_Inventory.Resources
             this.panel5.PerformLayout();
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
+            this.panel13.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -2035,6 +2157,8 @@ namespace ANRPC_Inventory.Resources
             this.panel8.ResumeLayout(false);
             this.panel14.ResumeLayout(false);
             this.panel14.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.alertProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2051,16 +2175,16 @@ namespace ANRPC_Inventory.Resources
         private System.Windows.Forms.Panel panel18;
         private System.Windows.Forms.Button DeleteBtn2;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.PictureBox Pic_Sign3;
-        private System.Windows.Forms.Button BTN_Sign3;
+        private System.Windows.Forms.PictureBox Pic_Sign4;
+        private System.Windows.Forms.Button BTN_Sign4;
         private System.Windows.Forms.Panel panel17;
         private System.Windows.Forms.Panel panel16;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.PictureBox Pic_Sign2;
-        private System.Windows.Forms.Button BTN_Sigm12;
+        private System.Windows.Forms.Button BTN_Sign2;
         private System.Windows.Forms.Panel panel15;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Button BTN_Sigm1;
+        private System.Windows.Forms.Button BTN_Sign1;
         private System.Windows.Forms.PictureBox Pic_Sign1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox TXT_AmrNo;
@@ -2090,10 +2214,10 @@ namespace ANRPC_Inventory.Resources
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox TXT_Egmali;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox Txt_AmrNo2;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox Cmb_FY2;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox TXT_Pay;
         private System.Windows.Forms.TextBox TXT_Shik;
@@ -2172,9 +2296,16 @@ namespace ANRPC_Inventory.Resources
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Button BTN_Sign4;
-        private System.Windows.Forms.PictureBox Pic_Sign4;
+        private System.Windows.Forms.Button BTN_Sign3;
+        private System.Windows.Forms.PictureBox Pic_Sign3;
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.ComboBox TXT_TalbTawred;
+        private System.Windows.Forms.Button BTN_Print2;
+        private System.Windows.Forms.Button EditBtn2;
+        private System.Windows.Forms.Button BTN_Save2;
+        private System.Windows.Forms.Button BTN_PDF;
+        private System.Windows.Forms.Button browseBTN;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ErrorProvider alertProvider;
     }
 }

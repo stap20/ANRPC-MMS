@@ -133,10 +133,42 @@ namespace ANRPC_Inventory
 
         }
         int currentSignNumber = 0;
+        bool isComeFromSearch = false;
+        Dictionary<int, int> signatureOrder;
         #endregion
 
         //------------------------------------------ Helper ---------------------------------
         #region Helpers
+        private void initiateSignatureOrder()
+        {
+            //Dictionary to get values of signature (sign1 or sign2 ...) according to thier order in table
+            signatureOrder = new Dictionary<int, int>();
+            signatureOrder.Add(1, 1);
+            signatureOrder.Add(2, 2);
+            signatureOrder.Add(3, 3);
+            signatureOrder.Add(4, 4);
+            signatureOrder.Add(5, 5);
+            signatureOrder.Add(6, 6);
+        }
+
+        public void SP_InsertSignatures(int signNumber, int signOrder)
+        {
+            string cmdstring = cmdstring = "Exec  SP_InsertSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2,@SignOrder";
+            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+            cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_TRansferNo.Text));
+            cmd.Parameters.AddWithValue("@TNO2", Convert.ToInt32(TXT_TRNO.Text));
+            cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
+            cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
+            cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
+            cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
+            cmd.Parameters.AddWithValue("@FN", 7);
+            cmd.Parameters.AddWithValue("@SN", signNumber);
+            cmd.Parameters.AddWithValue("@D1", DBNull.Value);
+            cmd.Parameters.AddWithValue("@D2", DBNull.Value);
+            cmd.Parameters.AddWithValue("@SignOrder", signOrder);
+            cmd.ExecuteNonQuery();
+        }
+
         private PictureBox CheckSignatures(Panel panel, int signNumber)
         {
             try
@@ -853,7 +885,6 @@ namespace ANRPC_Inventory
             Pic_Sign1.BackColor = Color.Green;
             currentSignNumber = 1;
 
-            dataGridView1.ReadOnly = true;
             dataGridView1.AllowUserToAddRows = true;
             dataGridView1.AllowUserToDeleteRows = true;
         }
@@ -931,10 +962,14 @@ namespace ANRPC_Inventory
             FY = Cmb_FYear.Text;
         }
 
-        public void prepareSearchState()
+        public void prepareSearchState(bool isReset = true)
         {
             DisableControls();
-            Input_Reset();
+
+            if (isReset)
+            {
+                Input_Reset();
+            }
 
             if (!Constants.isConfirmForm)
             {
@@ -1188,27 +1223,9 @@ namespace ANRPC_Inventory
                 InsertEznTahweelBnood();
                 ////////////////
 
-                for (int i = 1; i <= 5; i++)
+                foreach (KeyValuePair<int, int> entry in signatureOrder)
                 {
-                    cmdstring = "Exec  SP_InsertSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
-                    cmd = new SqlCommand(cmdstring, Constants.con);
-
-                    cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_TRansferNo.Text));
-                    cmd.Parameters.AddWithValue("@TNO2", Convert.ToInt32(TXT_TRNO.Text));
-
-                    cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
-                    cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
-                    cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
-                    cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
-
-                    cmd.Parameters.AddWithValue("@FN", 7);
-
-                    cmd.Parameters.AddWithValue("@SN", i);
-
-                    cmd.Parameters.AddWithValue("@D1", DBNull.Value);
-
-                    cmd.Parameters.AddWithValue("@D2", DBNull.Value);
-                    cmd.ExecuteNonQuery();
+                    SP_InsertSignatures(entry.Key, entry.Value);
                 }
 
                 SP_UpdateSignatures(1, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
@@ -1897,12 +1914,32 @@ namespace ANRPC_Inventory
         public FTransfer_M()
         {
             InitializeComponent();
-            //this.SetStyle(ControlStyles.DoubleBuffer, true);
-            //this.SetStyle(ControlStyles.UserPaint, true);
-            //this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
 
             init();
+
+            initiateSignatureOrder();
         }
+        public FTransfer_M(string x, string y)
+        {
+            InitializeComponent();
+            Cmb_FYear.Text = x;
+            TXT_TRansferNo.Text = y;
+
+
+            panel7.Visible = false;
+            panel2.Visible = false;
+
+            isComeFromSearch = true;
+        }
+
+        private void FTransfer_M_Load(object sender, EventArgs e)
+        {
+            if (isComeFromSearch)
+            {
+                BTN_Search_Click(BTN_Search, e);
+            }
+        }
+
         //===========================================================================
 
         public void SearchTasnif(int searchflag)
@@ -2084,8 +2121,6 @@ namespace ANRPC_Inventory
             surface.Dispose();
         }
 
-
-
         private void TXT_StockName_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)  // Search and get the data by the name 
@@ -2125,10 +2160,6 @@ namespace ANRPC_Inventory
             }
         }
 
-
-
-
-
         private void EditBtn_Click(object sender, EventArgs e)
         {
             AddEditFlag = 1;
@@ -2165,7 +2196,6 @@ namespace ANRPC_Inventory
 
             AddNewTasnifInDataGridView();
         }
-
 
         private void Cmb_FYear_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -2287,6 +2317,31 @@ namespace ANRPC_Inventory
                     Console.WriteLine(sqlEx);
                 }
             }
+
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                for (int i = 0; i < row.Cells.Count; i++)
+                {
+                    string currentColumnName = dataGridView1.Columns[i].Name;
+                    row.Cells[i].ReadOnly = true;
+
+                    if (!row.IsNewRow)
+                    {
+                        if (currentColumnName == "FNsbetSalhia")
+                        {
+                            row.Cells["FNsbetSalhia"].Value = 0;
+                            row.Cells["FNsbetSalhia"].ReadOnly = false;
+                            row.Cells["FNsbetSalhia"].Style.BackColor = Color.LightGreen;
+                        }
+                    }
+                }
+            }
+
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
@@ -2421,21 +2476,6 @@ namespace ANRPC_Inventory
             }
         }
 
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 4)
-            {
-
-                if (e.RowIndex >= 0 && dataGridView1.Rows[e.RowIndex].Cells[4].Value != null)
-                {
-                    //oldvalue = Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
-                }
-            }
-
-        }
-
-
         private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             if (e.ClickedItem.Name == "printTool")
@@ -2464,12 +2504,10 @@ namespace ANRPC_Inventory
             }
         }
 
-
         private void TXT_StockNoAll_TextChanged(object sender, EventArgs e)
         {
             Txt_ReqQuan.Text = "";
         }
-
 
         private void TXT_Momayz_TextChanged(object sender, EventArgs e)
         {
@@ -2539,7 +2577,6 @@ namespace ANRPC_Inventory
 
         }
 
-
         private void BTN_Print_Click(object sender, EventArgs e)
         {
             if ((MessageBox.Show("هل تريد طباعة تقرير اذن التحويل؟", "", MessageBoxButtons.YesNo)) == DialogResult.Yes)
@@ -2578,7 +2615,6 @@ namespace ANRPC_Inventory
                 SearchTasnif(3);
             }
         }
-
 
         private void Cmb_CType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -2638,7 +2674,6 @@ namespace ANRPC_Inventory
     
         }
 
-
         private void Cmb_To_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Cmb_To.SelectedIndex >= 0 && Cmb_From.SelectedIndex == Cmb_To.SelectedIndex)
@@ -2650,7 +2685,6 @@ namespace ANRPC_Inventory
                 return;
             }
         }
-
 
         private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
@@ -2744,7 +2778,6 @@ namespace ANRPC_Inventory
                 }
             }
         }
-
 
         //------------------------------------------ Signature Handler ---------------------------------
         #region Signature Handler
@@ -2907,7 +2940,7 @@ namespace ANRPC_Inventory
 
         private void BTN_Search_Click(object sender, EventArgs e)
         {
-            if (!IsValidCase(VALIDATION_TYPES.SEARCH))
+            if (isComeFromSearch == false && !IsValidCase(VALIDATION_TYPES.SEARCH))
             {
                 return;
             }
