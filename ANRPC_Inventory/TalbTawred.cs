@@ -1001,6 +1001,7 @@ namespace ANRPC_Inventory
 
             //new tasnif
             CHK_NewTasnif.Enabled = true;
+            checkBox3.Enabled = true;
 
             //signature btn
             changePanelState(panel13, false);
@@ -1228,6 +1229,7 @@ namespace ANRPC_Inventory
 
             //new tasnif
             CHK_NewTasnif.Enabled = false;
+            checkBox3.Enabled = false;
 
             //signature btn
             changePanelState(panel13, false);
@@ -1429,7 +1431,7 @@ namespace ANRPC_Inventory
                                 @RequiredFor,@ApproxAmount,@ArabicAmount,@Taamen,@BndMwazna,@Req_Signature,
                                 @BuyMethod,@ExchangeRate,@CurrencyBefore,@CurrencyAfter,
                                 @PDF,@NeedTestsFlag,@NeedAnalysisFlag,@OriginFlag,@Country,
-                                @TaamenFlag,@TaamenDate,@LUser,@flag output";
+                                @TaamenFlag,@TaamenDate,@IsChemical,@LUser,@flag output";
 
             SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
 
@@ -1476,6 +1478,7 @@ namespace ANRPC_Inventory
                 cmd.Parameters.AddWithValue("@TaamenDate", Convert.ToDateTime(TXT_DateTaamen.Text.ToString()));
             }
 
+            cmd.Parameters.AddWithValue("@IsChemical", checkBox3.Checked);
             cmd.Parameters.AddWithValue("@LUser", Constants.User_Name.ToString());
             cmd.Parameters.Add("@flag", SqlDbType.Int, 32);  //-------> output parameter
             cmd.Parameters["@flag"].Direction = ParameterDirection.Output;
@@ -1514,23 +1517,23 @@ namespace ANRPC_Inventory
 
                 //////////////////////////////////////////////////////////////////
 
-                if (MaxFlag > 0)
-                {
-                    for (int i = 0; i < MaxFlag; i++)
-                    {
-                        string query = @"exec SP_InsertTMaxQuan @TalbTwareed_No,@TalbTwareed_No2,@FYear,
-                                        @STOCK_NO_ALL,@Quan,@MaxQuan";
-                        SqlCommand cmd1 = new SqlCommand(query, Constants.con);
-                        cmd1.Parameters.AddWithValue("@TalbTwareed_No", array1[i, 0]);
-                        cmd1.Parameters.AddWithValue("@TalbTwareed_No2", array1[i, 1]);
-                        cmd1.Parameters.AddWithValue("@FYear", array1[i, 2]);
-                        cmd1.Parameters.AddWithValue("@STOCK_NO_ALL", array1[i, 3]);
-                        cmd1.Parameters.AddWithValue("@Quan", array1[i, 4]);
-                        cmd1.Parameters.AddWithValue("@MaxQuan", array1[i, 5]);
+                //if (MaxFlag > 0)
+                //{
+                //    for (int i = 0; i < MaxFlag; i++)
+                //    {
+                //        string query = @"exec SP_InsertTMaxQuan @TalbTwareed_No,@TalbTwareed_No2,@FYear,
+                //                        @STOCK_NO_ALL,@Quan,@MaxQuan";
+                //        SqlCommand cmd1 = new SqlCommand(query, Constants.con);
+                //        cmd1.Parameters.AddWithValue("@TalbTwareed_No", array1[i, 0]);
+                //        cmd1.Parameters.AddWithValue("@TalbTwareed_No2", array1[i, 1]);
+                //        cmd1.Parameters.AddWithValue("@FYear", array1[i, 2]);
+                //        cmd1.Parameters.AddWithValue("@STOCK_NO_ALL", array1[i, 3]);
+                //        cmd1.Parameters.AddWithValue("@Quan", array1[i, 4]);
+                //        cmd1.Parameters.AddWithValue("@MaxQuan", array1[i, 5]);
 
-                        cmd1.ExecuteNonQuery();
-                    }
-                }
+                //        cmd1.ExecuteNonQuery();
+                //    }
+                //}
 
                 MessageBox.Show("تم الإضافة بنجاح  ! ");
 
@@ -2823,11 +2826,11 @@ namespace ANRPC_Inventory
 
 
             //////////////////////////
+            //dr3.Close();
             TXT_StockNoAll.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             TXT_StockNoAll.AutoCompleteSource = AutoCompleteSource.CustomSource;
             TXT_StockNoAll.AutoCompleteCustomSource = TasnifColl;
 
-            //dr3.Close();
             TXT_PartNo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             TXT_PartNo.AutoCompleteSource = AutoCompleteSource.CustomSource;
             TXT_PartNo.AutoCompleteCustomSource = PartColl;
@@ -4740,5 +4743,92 @@ namespace ANRPC_Inventory
             TXT_AppValue.Text = sum.ToString();
         }
 
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.Rows.Count > 1 && (MessageBox.Show("سيتم محو البيانات هل تريد المتابعة؟", "", MessageBoxButtons.YesNo)) == DialogResult.Yes)
+            {
+                Input_Reset();
+            }
+
+            if (checkBox3.Checked)
+            {
+                TXT_StockNoAll.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+                TXT_StockNoAll.Clear();
+                TXT_PartNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+                TXT_PartNo.Clear();
+                TXT_StockName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+                TXT_StockName.Clear();
+
+                string cmdstring = "select STOCK_NO_ALL,Stock_NO_Nam ,PartNO,BIAN_TSNIF from T_Tsnif  where (StatusFlag in (0,1,2)) and CodeEdara= 1000";
+
+                // string cmdstring = "select * from T_Tsnif where STOCK_NO_G in( select STOCK_NO_G from t_groupsedarat where edaracode1=@EC or edaracode2=@EC or edaracode3=@EC or edaracode4 =@EC or edaracode5 =@EC)";
+
+                SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+                cmd.Parameters.AddWithValue("EC", "1000");
+                SqlDataReader dr = cmd.ExecuteReader();
+                //---------------------------------
+                if (dr.HasRows == true)
+                {
+                    while (dr.Read())
+                    {
+                        TasnifColl.Add(dr["STOCK_NO_ALL"].ToString());
+                        TasnifNameColl.Add(dr["BIAN_TSNIF"].ToString());
+                        PartColl.Add(dr["PartNO"].ToString());
+
+
+                    }
+                }
+                dr.Close();
+
+                TXT_StockNoAll.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                TXT_StockNoAll.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                TXT_StockNoAll.AutoCompleteCustomSource = TasnifColl;
+
+                TXT_PartNo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                TXT_PartNo.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                TXT_PartNo.AutoCompleteCustomSource = PartColl;
+
+                TXT_StockName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                TXT_StockName.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                TXT_StockName.AutoCompleteCustomSource = TasnifNameColl;
+
+            }
+
+            else
+            {
+                string cmdstring = "select STOCK_NO_ALL,Stock_NO_Nam ,PartNO,BIAN_TSNIF from T_Tsnif  where (StatusFlag in (0,1,2)) and CodeEdara=" + Constants.CodeEdara;
+
+                // string cmdstring = "select * from T_Tsnif where STOCK_NO_G in( select STOCK_NO_G from t_groupsedarat where edaracode1=@EC or edaracode2=@EC or edaracode3=@EC or edaracode4 =@EC or edaracode5 =@EC)";
+
+                SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+                cmd.Parameters.AddWithValue("EC", Constants.CodeEdara);
+                SqlDataReader dr = cmd.ExecuteReader();
+                //---------------------------------
+                if (dr.HasRows == true)
+                {
+                    while (dr.Read())
+                    {
+                        TasnifColl.Add(dr["STOCK_NO_ALL"].ToString());
+                        TasnifNameColl.Add(dr["BIAN_TSNIF"].ToString());
+                        PartColl.Add(dr["PartNO"].ToString());
+
+
+                    }
+                }
+                dr.Close();
+
+                TXT_StockNoAll.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                TXT_StockNoAll.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                TXT_StockNoAll.AutoCompleteCustomSource = TasnifColl;
+
+                TXT_PartNo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                TXT_PartNo.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                TXT_PartNo.AutoCompleteCustomSource = PartColl;
+
+                TXT_StockName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                TXT_StockName.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                TXT_StockName.AutoCompleteCustomSource = TasnifNameColl;
+            }
+        }
     }
 }

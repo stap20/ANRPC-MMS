@@ -1233,26 +1233,26 @@ namespace ANRPC_Inventory
                 SP_UpdateSignatures(2, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
                 //////////////////////////////////////////////////////////////////
-                if (MaxFlag > 0)
-                {
-                    for (int i = 0; i < MaxFlag; i++)
-                    {
-                        string query = "exec SP_InsertTMinQuan @p1,@p2,@p3,@p4,@p5,@p6,@p7";
-                        SqlCommand cmd1 = new SqlCommand(query, Constants.con);
-                        cmd1.Parameters.AddWithValue("@p1", array1[i, 0]);
-                        cmd1.Parameters.AddWithValue("@p2", array1[i, 1]);
-                        cmd1.Parameters.AddWithValue("@p3", array1[i, 2]);
-                        cmd1.Parameters.AddWithValue("@p4", array1[i, 3]);
-                        cmd1.Parameters.AddWithValue("@p5", array1[i, 4]);
-                        cmd1.Parameters.AddWithValue("@p6", array1[i, 5]);
-                        cmd1.Parameters.AddWithValue("@p7", DBNull.Value);
+                //if (MaxFlag > 0)
+                //{
+                //    for (int i = 0; i < MaxFlag; i++)
+                //    {
+                //        string query = "exec SP_InsertTMinQuan @p1,@p2,@p3,@p4,@p5,@p6,@p7";
+                //        SqlCommand cmd1 = new SqlCommand(query, Constants.con);
+                //        cmd1.Parameters.AddWithValue("@p1", array1[i, 0]);
+                //        cmd1.Parameters.AddWithValue("@p2", array1[i, 1]);
+                //        cmd1.Parameters.AddWithValue("@p3", array1[i, 2]);
+                //        cmd1.Parameters.AddWithValue("@p4", array1[i, 3]);
+                //        cmd1.Parameters.AddWithValue("@p5", array1[i, 4]);
+                //        cmd1.Parameters.AddWithValue("@p6", array1[i, 5]);
+                //        cmd1.Parameters.AddWithValue("@p7", DBNull.Value);
 
 
 
-                        cmd1.ExecuteNonQuery();
+                //        cmd1.ExecuteNonQuery();
 
-                    }
-                }
+                //    }
+                //}
 
                 MessageBox.Show("تم الإضافة بنجاح  ! ");
                 reset();
@@ -2695,9 +2695,11 @@ namespace ANRPC_Inventory
                 //    else if (dataGridView1.Rows[e.RowIndex].Cells[6].Value != DBNull.Value)// && dataGridView1.Rows[e.RowIndex].Cells[11].Value != "true")
                 if (e.FormattedValue != DBNull.Value && e.FormattedValue != "")// && dataGridView1.Rows[e.RowIndex].Cells[11].Value != "true")
                 {
-                    string query = "exec Sp_CheckTasnif @a,@p1 out,@p2 out,@p3 out,@flag out ";
+                    string query = "exec Sp_CheckTasnif @a,@code_edara,@p1 out,@p2 out,@p3 out,@flag out ";
                     SqlCommand cmd = new SqlCommand(query, Constants.con);
                     cmd.Parameters.AddWithValue("@a", (e.FormattedValue));
+                    cmd.Parameters.AddWithValue("@code_edara", "850");
+
                     cmd.Parameters.Add("@flag", SqlDbType.Int, 32);  //-------> output parameter
                     cmd.Parameters["@flag"].Direction = ParameterDirection.Output;
                     cmd.Parameters.Add("@p1", SqlDbType.NVarChar, 500);  //-------> output parameter
@@ -2710,6 +2712,7 @@ namespace ANRPC_Inventory
 
                     cmd.Parameters.Add("@p3", SqlDbType.Int, 32);  //-------> output parameter
                     cmd.Parameters["@p3"].Direction = ParameterDirection.Output;
+
 
                     int flag1;
 
@@ -2767,7 +2770,7 @@ namespace ANRPC_Inventory
                     catch (SqlException sqlEx)
                     {
                         executemsg = false;
-                        MessageBox.Show(sqlEx.ToString());
+                         Console.WriteLine(sqlEx.ToString());
                         flag1 = (int)cmd.Parameters["@flag"].Value;
                     }
                     if (flag1 == 2)

@@ -1072,22 +1072,22 @@ namespace ANRPC_Inventory
                 SP_UpdateSignatures(2, Convert.ToDateTime(DateTime.Now.ToShortDateString()));
 
                 //////////////////////////////////////////////////////////////////
-                if (MaxFlag > 0)
-                {
-                    for (int i = 0; i < MaxFlag; i++)
-                    {
-                        string query = "exec SP_InsertTMinQuan @p1,@p2,@p3,@p4,@p5,@p6,@p7";
-                        SqlCommand cmd1 = new SqlCommand(query, Constants.con);
-                        cmd1.Parameters.AddWithValue("@p1", array1[i, 0]);
-                        cmd1.Parameters.AddWithValue("@p2", array1[i, 1]);
-                        cmd1.Parameters.AddWithValue("@p3", array1[i, 2]);
-                        cmd1.Parameters.AddWithValue("@p4", array1[i, 3]);
-                        cmd1.Parameters.AddWithValue("@p5", array1[i, 4]);
-                        cmd1.Parameters.AddWithValue("@p6", array1[i, 5]);
-                        cmd1.Parameters.AddWithValue("@p7", DBNull.Value);
-                        cmd1.ExecuteNonQuery();
-                    }
-                }
+                //if (MaxFlag > 0)
+                //{
+                //    for (int i = 0; i < MaxFlag; i++)
+                //    {
+                //        string query = "exec SP_InsertTMinQuan @p1,@p2,@p3,@p4,@p5,@p6,@p7";
+                //        SqlCommand cmd1 = new SqlCommand(query, Constants.con);
+                //        cmd1.Parameters.AddWithValue("@p1", array1[i, 0]);
+                //        cmd1.Parameters.AddWithValue("@p2", array1[i, 1]);
+                //        cmd1.Parameters.AddWithValue("@p3", array1[i, 2]);
+                //        cmd1.Parameters.AddWithValue("@p4", array1[i, 3]);
+                //        cmd1.Parameters.AddWithValue("@p5", array1[i, 4]);
+                //        cmd1.Parameters.AddWithValue("@p6", array1[i, 5]);
+                //        cmd1.Parameters.AddWithValue("@p7", DBNull.Value);
+                //        cmd1.ExecuteNonQuery();
+                //    }
+                //}
 
                 MessageBox.Show("تم الإضافة بنجاح  ! ");
                 reset();

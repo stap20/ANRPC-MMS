@@ -70,6 +70,7 @@ namespace ANRPC_Inventory
                 APPLICATION_FORMS.TALB_MOAYRA,
                 APPLICATION_FORMS.TALB_TANFIZ,
                 APPLICATION_FORMS.AMR_SHERAA,
+                APPLICATION_FORMS.AMR_SHERAA_KEMAWYAT,
                 APPLICATION_FORMS.AMR_SHERAA_FOREIGN,
                 APPLICATION_FORMS.SEARCH,
             };
@@ -86,6 +87,7 @@ namespace ANRPC_Inventory
                 APPLICATION_FORMS.TALB_MOAYRA,
                 APPLICATION_FORMS.TALB_TANFIZ,
                 APPLICATION_FORMS.AMR_SHERAA,
+                APPLICATION_FORMS.AMR_SHERAA_KEMAWYAT,
                 APPLICATION_FORMS.AMR_SHERAA_FOREIGN,
                 APPLICATION_FORMS.SEARCH,
             };
@@ -153,6 +155,7 @@ namespace ANRPC_Inventory
                 APPLICATION_FORMS.EZN_SARF,
                 APPLICATION_FORMS.EZN_TAHWEEL,
                 APPLICATION_FORMS.AMR_SHERAA,
+                APPLICATION_FORMS.AMR_SHERAA_KEMAWYAT,
                 APPLICATION_FORMS.AMR_SHERAA_FOREIGN,
                 APPLICATION_FORMS.SEARCH,
             };
@@ -175,6 +178,7 @@ namespace ANRPC_Inventory
             #region Stock
             privilages = new List<APPLICATION_FORMS>() {
                 APPLICATION_FORMS.AMR_SHERAA,
+                APPLICATION_FORMS.AMR_SHERAA_KEMAWYAT,
                 APPLICATION_FORMS.AMR_SHERAA_FOREIGN,
                 APPLICATION_FORMS.SEARCH,
             };
@@ -368,9 +372,10 @@ namespace ANRPC_Inventory
 
             else if(form == APPLICATION_FORMS.AMR_SHERAA_KEMAWYAT)
             {
-                tab = new Tab(font, "  الكيماويات    ", color, 32, IconFont.Auto, IconChar.Search,
-                                    DockStyle.Top, (object sender, EventArgs e) => { 
-                                        SideBarBtnCLicked(sender, e, new FChemical()); 
+                tab = new Tab(font, " امر شراء الكيماويات ", color, 32, IconFont.Auto, IconChar.MoneyCheckDollar,
+                                    DockStyle.Top, (object sender, EventArgs e) => {
+                                        bool isOnlyConfirm = Constants.User_Type == "B" ? false : true;
+                                        SideBarBtnCLicked(sender, e, new TabsHandler("FChemical", isOnlyConfirm));
                                     },
                                     height: 54, padding: padd, appearance: appearance, isRL: true);
             }

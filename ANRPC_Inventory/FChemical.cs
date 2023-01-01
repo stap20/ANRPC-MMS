@@ -108,6 +108,7 @@ namespace ANRPC_Inventory.Resources
             SAVE,
 
         }
+        string curr_stock_no_all = "";
         int currentSignNumber = 0;
         bool isComeFromSearch = false;
         Dictionary<int, int> signatureOrder;
@@ -777,6 +778,7 @@ namespace ANRPC_Inventory.Resources
 
             SqlDataReader dr = cmd.ExecuteReader();
 
+            string talb_no = "";
             if (dr.HasRows == true)
             {
                 try
@@ -785,8 +787,7 @@ namespace ANRPC_Inventory.Resources
                     {
 
                         TXT_AmrNo.Text = dr["Amrshraa_No"].ToString();
-                        Cmb_FY.Text = dr["AmrSheraa_sanamalia"].ToString();
-                        TXT_TalbTawred.Text = dr["Talb_Twred"].ToString();
+
                         CMB_Edara.Text = dr["NameEdara"].ToString();
                         TXT_Date.Text = dr["Date_amrshraa"].ToString();
                         CMB_Sadr.Text = dr["Sadr_To"].ToString();
@@ -797,14 +798,19 @@ namespace ANRPC_Inventory.Resources
                         TXT_Shik.Text = dr["Shick_Name"].ToString();
                         TXT_Mowared.Text = dr["Hesab_Mward"].ToString();
 
-                        string s1 = dr["Sign1"].ToString();
-                        string s2 = dr["Sign12"].ToString();
-                        string s3 = dr["Sign13"].ToString();
-                        string s4 = dr["Sign14"].ToString();
-                        string s5 = dr["Sign3"].ToString();
-                        string s6 = dr["Sign33"].ToString();
-                        string s7 = dr["Sign2"].ToString();
+                        Cmb_FY.Text = dr["AmrSheraa_sanamalia"].ToString();
 
+
+                        string s1 = Convert.ToString(dr["Sign1"]);
+                        string s2 = Convert.ToString(dr["Sign12"]);
+                        string s3 = Convert.ToString(dr["Sign13"]);
+                        string s4 = Convert.ToString(dr["Sign14"]);
+                        string s5 = Convert.ToString(dr["Sign3"]);
+                        string s6 = Convert.ToString(dr["Sign33"]);
+                        string s7 = Convert.ToString(dr["Sign2"]);
+
+
+                        talb_no = dr["Talb_Twred"].ToString();
                         if (s1 != "")
                         {
                             string p = Constants.RetrieveSignature("1", "10", s1);
@@ -933,21 +939,23 @@ namespace ANRPC_Inventory.Resources
             //--------------------------------
             //CMB_Component.DataSource = null; //reset 
 
-            string query = "SELECT  [Component],[Compn_ID] FROM Compny_Master where [CompanyID] = @u  ";
-            SqlCommand cmd2 = new SqlCommand(query, Constants.con);
-            DataTable dts = new DataTable();
+            //string query = "SELECT  [Component],[Compn_ID] FROM Compny_Master where [CompanyID] = @u  ";
+            //SqlCommand cmd2 = new SqlCommand(query, Constants.con);
+            //DataTable dts = new DataTable();
 
-            cmd2.Parameters.AddWithValue("@u", Convert.ToInt32(CMB_Sadr.SelectedValue));
-            dts.Load(cmd2.ExecuteReader());
-            CMB_Component.DataSource = dts;
-            CMB_Component.ValueMember = "Compn_ID";
-            CMB_Component.DisplayMember = "Component";
+            //cmd2.Parameters.AddWithValue("@u", Convert.ToInt32(CMB_Sadr.SelectedValue));
+            //dts.Load(cmd2.ExecuteReader());
+            //CMB_Component.DataSource = dts;
+            //CMB_Component.ValueMember = "Compn_ID";
+            //CMB_Component.DisplayMember = "Component";
 
 
-            //=============================================================
+            ////=============================================================
 
             string cmdstring1;
             SqlCommand cmd1;
+
+            Constants.opencon();
 
             cmdstring1 = "select * from Awamershraa_Chemicals where Amrshraa_No=@TN and Sana_Malia=@FY";
             cmd1 = new SqlCommand(cmdstring1, Constants.con);
@@ -1019,6 +1027,8 @@ namespace ANRPC_Inventory.Resources
             Component_ID();
 
             Constants.closecon();
+
+            TXT_TalbTawred.Text = talb_no;
             return true;
         }
 
@@ -1422,13 +1432,14 @@ namespace ANRPC_Inventory.Resources
 
 
 
-            cmd.Parameters.AddWithValue("@p40", DBNull.Value);
+            cmd.Parameters.AddWithValue("@p40", FlagEmpn1);
             cmd.Parameters.AddWithValue("@p41", DBNull.Value);
             cmd.Parameters.AddWithValue("@p42", DBNull.Value);
             cmd.Parameters.AddWithValue("@p43", DBNull.Value);
             cmd.Parameters.AddWithValue("@p44", DBNull.Value);
             cmd.Parameters.AddWithValue("@p45", DBNull.Value);
             cmd.Parameters.AddWithValue("@p46", DBNull.Value);
+
             cmd.Parameters.AddWithValue("@p47", '1');
 
 
@@ -1883,6 +1894,11 @@ namespace ANRPC_Inventory.Resources
 
         private void init()
         {
+            HelperClass.comboBoxFiller(Cmb_FY2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
+            HelperClass.comboBoxFiller(Cmb_FY, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
+            HelperClass.comboBoxFiller(Cmb_Fy_Talb, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
+
+
             currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.Egypt));
             currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.Syria));
             currencies.Add(new CurrencyInfo(CurrencyInfo.Currencies.UAE));
@@ -1894,6 +1910,21 @@ namespace ANRPC_Inventory.Resources
             //---------------
             reset();
             AddEditFlag = 0;
+
+            if (Constants.isConfirmForm)
+            {
+                panel1.Visible = true;
+                panel2.Visible = false;
+                panel1.Dock = DockStyle.Top;
+            }
+            else
+            {
+                panel2.Visible = true;
+                panel1.Visible = false;
+                panel2.Dock = DockStyle.Top;
+            }
+
+
             //----------------
             con = new SqlConnection(Constants.constring);
             con.Open();
@@ -1933,13 +1964,7 @@ namespace ANRPC_Inventory.Resources
             TXT_TalbTawred.DisplayMember = "TalbTwareed_No";
             con.Close();
 
-            //sana_malia
-            //-------
-            Cmb_FY.Items.Add("2021_2022");
-            Cmb_FY.Items.Add("2022_2023");
-            Cmb_FY.Items.Add("2023_2024");
-
-
+           
 
             //-------------------------------------
             CMB_Edara.SelectedIndex = -1;
@@ -1963,7 +1988,7 @@ namespace ANRPC_Inventory.Resources
             TXT_AmrNo.Text = y;
 
 
-            panel7.Visible = false;
+            panel1.Visible = false;
             panel2.Visible = false;
 
             isComeFromSearch = true;
@@ -1983,6 +2008,7 @@ namespace ANRPC_Inventory.Resources
 
         private void CMB_Sadr_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            
             con = new SqlConnection(Constants.constring);
             con.Open();
 
@@ -1993,7 +2019,7 @@ namespace ANRPC_Inventory.Resources
        
 
             cmd.Parameters.AddWithValue("@u", Convert.ToInt32(CMB_Sadr.SelectedValue));
-            cmd.Parameters.AddWithValue("@t", TXT_TalbTawred.SelectedValue);
+            cmd.Parameters.AddWithValue("@t", curr_stock_no_all);
 
 
             SqlDataReader dr = cmd.ExecuteReader();
@@ -2309,11 +2335,32 @@ namespace ANRPC_Inventory.Resources
 
             // Components
             //-----------
+            string query100 = "SELECT  BndMwazna,NameEdara FROM T_TalbTawreed where [TalbTwareed_No] = @u  ";
+            SqlCommand cmd100 = new SqlCommand(query100, con);
+            DataTable dts100 = new DataTable();
+
+            cmd100.Parameters.AddWithValue("@u", TXT_TalbTawred.SelectedValue.ToString());
+            dts100.Load(cmd100.ExecuteReader());
+
+            TXT_BndMwazna.Text = dts100.Rows[0]["BndMwazna"].ToString();
+            CMB_Edara.Text = dts100.Rows[0]["NameEdara"].ToString();
+
+
+            string query0 = "SELECT  STOCK_NO_ALL FROM T_TalbTawreed_Benod where [TalbTwareed_No] = @u  ";
+            SqlCommand cmd0 = new SqlCommand(query0, con);
+            DataTable dts0 = new DataTable();
+
+            cmd0.Parameters.AddWithValue("@u", TXT_TalbTawred.SelectedValue.ToString());
+            dts0.Load(cmd0.ExecuteReader());
+
+            curr_stock_no_all = dts0.Rows[0]["STOCK_NO_ALL"].ToString();
+
+
             string query = "SELECT  DISTINCT [Component] FROM Compny_Master where [STOCK_NO_ALL] = @u  ";
             SqlCommand cmd = new SqlCommand(query, con);
             DataTable dts = new DataTable();
 
-            cmd.Parameters.AddWithValue("@u", TXT_TalbTawred.SelectedValue);
+            cmd.Parameters.AddWithValue("@u", curr_stock_no_all);
             dts.Load(cmd.ExecuteReader());
             CMB_Component.DataSource = dts;
             CMB_Component.ValueMember = "Component";
@@ -2331,7 +2378,7 @@ namespace ANRPC_Inventory.Resources
              SqlCommand cmd1 = new SqlCommand(query1, con);
              DataTable dts1 = new DataTable();
 
-             cmd1.Parameters.AddWithValue("@u", TXT_TalbTawred.SelectedValue);
+             cmd1.Parameters.AddWithValue("@u", curr_stock_no_all);
              dts1.Load(cmd1.ExecuteReader());
              CMB_Sadr.DataSource = dts1;
              CMB_Sadr.ValueMember = "CompanyID";
@@ -2474,5 +2521,28 @@ namespace ANRPC_Inventory.Resources
             DeleteLogic();
         }
 
+        private void Cmb_Fy_Talb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //call sp that get last num that eentered for this MM and this YYYY
+            Constants.opencon();
+
+            // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
+            string cmdstring = @"select T_TalbTawreed.TalbTwareed_No from T_TalbTawreed where IsChemical = 1 and Mohmat_Sign is not null and FYear = @FY";
+
+            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+
+            // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
+            cmd.Parameters.AddWithValue("@FY", Cmb_Fy_Talb.Text);
+            ///   cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
+
+            DataTable dts = new DataTable();
+
+            dts.Load(cmd.ExecuteReader());
+            TXT_TalbTawred.DataSource = dts;
+            TXT_TalbTawred.ValueMember = "TalbTwareed_No";
+            TXT_TalbTawred.DisplayMember = "TalbTwareed_No";
+            TXT_TalbTawred.SelectedIndex = -1;
+            Constants.closecon();
+        }
     }
 }

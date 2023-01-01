@@ -147,6 +147,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.BTN_SearchTalb = new System.Windows.Forms.Button();
             this.panel17 = new System.Windows.Forms.Panel();
+            this.label42 = new System.Windows.Forms.Label();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.label19 = new System.Windows.Forms.Label();
             this.CHK_NewTasnif = new System.Windows.Forms.CheckBox();
             this.panel11 = new System.Windows.Forms.Panel();
@@ -193,8 +195,6 @@
             this.panel16 = new System.Windows.Forms.Panel();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.alertProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label42 = new System.Windows.Forms.Label();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.panel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Sign11)).BeginInit();
@@ -1805,6 +1805,29 @@
             this.panel17.Size = new System.Drawing.Size(1148, 112);
             this.panel17.TabIndex = 306;
             // 
+            // label42
+            // 
+            this.label42.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.label42.ForeColor = System.Drawing.Color.Green;
+            this.label42.Location = new System.Drawing.Point(105, 15);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(108, 18);
+            this.label42.TabIndex = 337;
+            this.label42.Text = "طلب توريد كيماويات";
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(219, 20);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(15, 14);
+            this.checkBox3.TabIndex = 338;
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            // 
             // label19
             // 
             this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -2376,28 +2399,6 @@
             // 
             this.alertProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.alertProvider.ContainerControl = this;
-            // 
-            // label42
-            // 
-            this.label42.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label42.AutoSize = true;
-            this.label42.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label42.ForeColor = System.Drawing.Color.Green;
-            this.label42.Location = new System.Drawing.Point(105, 15);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(108, 18);
-            this.label42.TabIndex = 337;
-            this.label42.Text = "طلب توريد كيماويات";
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(219, 20);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(15, 14);
-            this.checkBox3.TabIndex = 338;
-            this.checkBox3.UseVisualStyleBackColor = true;
             // 
             // TalbTawred
             // 

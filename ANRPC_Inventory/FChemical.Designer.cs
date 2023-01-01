@@ -173,6 +173,8 @@ namespace ANRPC_Inventory.Resources
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.alertProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.Cmb_Fy_Talb = new System.Windows.Forms.ComboBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -1241,7 +1243,9 @@ namespace ANRPC_Inventory.Resources
             this.panel11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel11.Controls.Add(this.Cmb_Fy_Talb);
             this.panel11.Controls.Add(this.TXT_TalbTawred);
+            this.panel11.Controls.Add(this.label19);
             this.panel11.Controls.Add(this.label8);
             this.panel11.Controls.Add(this.TXT_Mowared);
             this.panel11.Controls.Add(this.label6);
@@ -1258,7 +1262,7 @@ namespace ANRPC_Inventory.Resources
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_TalbTawred.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_TalbTawred.FormattingEnabled = true;
-            this.TXT_TalbTawred.Location = new System.Drawing.Point(11, 15);
+            this.TXT_TalbTawred.Location = new System.Drawing.Point(11, 33);
             this.TXT_TalbTawred.Name = "TXT_TalbTawred";
             this.TXT_TalbTawred.Size = new System.Drawing.Size(197, 27);
             this.TXT_TalbTawred.TabIndex = 313;
@@ -1270,7 +1274,7 @@ namespace ANRPC_Inventory.Resources
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(244, 18);
+            this.label8.Location = new System.Drawing.Point(244, 36);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(67, 18);
             this.label8.TabIndex = 6;
@@ -1282,7 +1286,7 @@ namespace ANRPC_Inventory.Resources
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_Mowared.Enabled = false;
             this.TXT_Mowared.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_Mowared.Location = new System.Drawing.Point(11, 52);
+            this.TXT_Mowared.Location = new System.Drawing.Point(11, 64);
             this.TXT_Mowared.Name = "TXT_Mowared";
             this.TXT_Mowared.Size = new System.Drawing.Size(197, 26);
             this.TXT_Mowared.TabIndex = 20;
@@ -1294,7 +1298,7 @@ namespace ANRPC_Inventory.Resources
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(237, 55);
+            this.label6.Location = new System.Drawing.Point(237, 67);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(74, 18);
             this.label6.TabIndex = 19;
@@ -1306,7 +1310,7 @@ namespace ANRPC_Inventory.Resources
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(214, 96);
+            this.label5.Location = new System.Drawing.Point(214, 100);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(97, 18);
             this.label5.TabIndex = 17;
@@ -1317,7 +1321,7 @@ namespace ANRPC_Inventory.Resources
             this.TXT_Egmali.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TXT_Egmali.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.TXT_Egmali.Location = new System.Drawing.Point(11, 89);
+            this.TXT_Egmali.Location = new System.Drawing.Point(11, 93);
             this.TXT_Egmali.Multiline = true;
             this.TXT_Egmali.Name = "TXT_Egmali";
             this.TXT_Egmali.Size = new System.Drawing.Size(197, 52);
@@ -2094,6 +2098,35 @@ namespace ANRPC_Inventory.Resources
             this.alertProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.alertProvider.ContainerControl = this;
             // 
+            // Cmb_Fy_Talb
+            // 
+            this.Cmb_Fy_Talb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cmb_Fy_Talb.AutoCompleteCustomSource.AddRange(new string[] {
+            "2021-2022",
+            "2022-2023",
+            "2023-2024"});
+            this.Cmb_Fy_Talb.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Cmb_Fy_Talb.FormattingEnabled = true;
+            this.Cmb_Fy_Talb.Items.AddRange(new object[] {
+            "2020_2021"});
+            this.Cmb_Fy_Talb.Location = new System.Drawing.Point(11, 3);
+            this.Cmb_Fy_Talb.Name = "Cmb_Fy_Talb";
+            this.Cmb_Fy_Talb.Size = new System.Drawing.Size(197, 27);
+            this.Cmb_Fy_Talb.TabIndex = 337;
+            this.Cmb_Fy_Talb.SelectedIndexChanged += new System.EventHandler(this.Cmb_Fy_Talb_SelectedIndexChanged);
+            // 
+            // label19
+            // 
+            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Arial", 12F);
+            this.label19.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label19.Location = new System.Drawing.Point(241, 7);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(70, 18);
+            this.label19.TabIndex = 336;
+            this.label19.Text = ":السنة المالية";
+            // 
             // FChemical
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2307,5 +2340,7 @@ namespace ANRPC_Inventory.Resources
         private System.Windows.Forms.Button browseBTN;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.ErrorProvider alertProvider;
+        private System.Windows.Forms.ComboBox Cmb_Fy_Talb;
+        private System.Windows.Forms.Label label19;
     }
 }

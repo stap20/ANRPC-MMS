@@ -127,6 +127,7 @@
     <Compile Include="FEdafaMakhzania_F_Foreign.Designer.cs">
       <DependentUpon>FEdafaMakhzania_F_Foreign.cs</DependentUpon>
     </Compile>
+    <Compile Include="SearchData.cs" />
     <Compile Include="SearchForm.cs">
       <SubType>Form</SubType>
     </Compile>

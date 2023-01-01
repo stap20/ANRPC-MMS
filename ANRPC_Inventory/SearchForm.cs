@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.IO;
+using System.Runtime.Serialization;
 
 namespace ANRPC_Inventory
 {
@@ -81,9 +82,9 @@ namespace ANRPC_Inventory
 
         private void Cmb_FYear2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (CMB_Trans.Text != "")
+            if (cmbMostandType.Text != "")
             {
-                var tuple = HandleReports(CMB_Trans.Text);
+                var tuple = HandleReports(cmbMostandType.Text);
                 string FP = tuple.Item1;
                 string CN = tuple.Item2;
                 int FN= tuple.Item3;
@@ -122,7 +123,7 @@ namespace ANRPC_Inventory
                 SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
 
                 // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
-                cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
+                cmd.Parameters.AddWithValue("@FY", cmbYear.Text);
                 if (radioButton1.Checked == true)
                 {
                     cmd.Parameters.AddWithValue("@CE", Cmb_Edara.SelectedValue);
@@ -141,12 +142,12 @@ namespace ANRPC_Inventory
 
                 DataTable dts = new DataTable();
 
-                dts.Load(cmd.ExecuteReader());
-                Cmb_TalbNo2.DataSource = dts;
-                Cmb_TalbNo2.ValueMember = CN;
-                Cmb_TalbNo2.DisplayMember = CN;
-                Cmb_TalbNo2.SelectedIndex = -1;
-                Cmb_TalbNo2.SelectedIndexChanged += new EventHandler(Cmb_TalbNo2_SelectedIndexChanged);
+                //dts.Load(cmd.ExecuteReader());
+                //cmbReqNo.DataSource = dts;
+                //cmbReqNo.ValueMember = CN;
+                //cmbReqNo.DisplayMember = CN;
+                //cmbReqNo.SelectedIndex = -1;
+                //cmbReqNo.SelectedIndexChanged += new EventHandler(Cmb_TalbNo2_SelectedIndexChanged);
                 Constants.closecon();
             }
 
@@ -155,7 +156,7 @@ namespace ANRPC_Inventory
         {
             StepFlag = 0;
           //  SearchTalb(2);
-            GetTalbData(Cmb_TalbNo2.Text);
+            GetTalbData(cmbReqNo.Text);
          
             //CountDays(2);
         }
@@ -170,31 +171,31 @@ namespace ANRPC_Inventory
             {
                 cmdstring = "select * from  T_TalbTawreed where TalbTwareed_No=@TN and FYear=@FY and CodeEdara=@EC";
                 cmd = new SqlCommand(cmdstring, Constants.con);
-                cmd.Parameters.AddWithValue("@TN", Cmb_TalbNo2.Text);
-                cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
+                cmd.Parameters.AddWithValue("@TN", cmbReqNo.Text);
+                cmd.Parameters.AddWithValue("@FY", cmbYear.Text);
                 cmd.Parameters.AddWithValue("@EC", Constants.CodeEdara);
             }
             else if (x == 2 && Constants.User_Type == "A")
             {
                 cmdstring = "select * from  T_TalbTawreed where TalbTwareed_No=@TN and FYear=@FY and CodeEdara=@EC";
                 cmd = new SqlCommand(cmdstring, Constants.con);
-                cmd.Parameters.AddWithValue("@TN", Cmb_TalbNo2.Text);
-                cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
+                cmd.Parameters.AddWithValue("@TN", cmbReqNo.Text);
+                cmd.Parameters.AddWithValue("@FY", cmbYear.Text);
                 cmd.Parameters.AddWithValue("@EC", Constants.CodeEdara);
             }
             else if (x == 2 && Constants.User_Type == "B")
             {
                 cmdstring = "select * from  T_TalbTawreed where TalbTwareed_No=@TN and FYear=@FY";
                 cmd = new SqlCommand(cmdstring, Constants.con);
-                cmd.Parameters.AddWithValue("@TN", Cmb_TalbNo2.Text);
-                cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
+                cmd.Parameters.AddWithValue("@TN", cmbReqNo.Text);
+                cmd.Parameters.AddWithValue("@FY", cmbYear.Text);
             }
             else if (x == 2 && Constants.User_Type == "B")
             {
                 cmdstring = "select * from  T_TalbTawreed where TalbTwareed_No=@TN and FYear=@FY";
                 cmd = new SqlCommand(cmdstring, Constants.con);
-                cmd.Parameters.AddWithValue("@TN", Cmb_TalbNo2.Text);
-                cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
+                cmd.Parameters.AddWithValue("@TN", cmbReqNo.Text);
+                cmd.Parameters.AddWithValue("@FY", cmbYear.Text);
             }
             // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
 
@@ -272,13 +273,13 @@ namespace ANRPC_Inventory
 
         private void Search_TalbTawreed_Load(object sender, EventArgs e)
         {
-            HelperClass.comboBoxFiller(Cmb_FYear2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
-            HelperClass.comboBoxFiller(CMB_Trans, TransHandler.getTrans(), "TransName", "TransName", this);
+            HelperClass.comboBoxFiller(cmbYear, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
+            HelperClass.comboBoxFiller(cmbMostandType, TransHandler.getTrans(), "TransName", "TransName", this);
             dateTimePicker1.Text = DateTime.Now.ToShortDateString();
             dateTimePicker2.Text = DateTime.Now.ToShortDateString();
-            Cmb_TalbNo2.DrawMode = DrawMode.OwnerDrawFixed;
-            Cmb_TalbNo2.DrawItem += Cmb_TalbNo2_DrawItem;
-            Cmb_TalbNo2.DropDownClosed += Cmb_Edara_DropDownClosed;
+            cmbReqNo.DrawMode = DrawMode.OwnerDrawFixed;
+            cmbReqNo.DrawItem += Cmb_TalbNo2_DrawItem;
+            cmbReqNo.DropDownClosed += Cmb_Edara_DropDownClosed;
             Constants.opencon();
             string cmdstring = "select * from Edarat  ";
 
@@ -324,9 +325,9 @@ namespace ANRPC_Inventory
     toolTip2.ShowAlways = true;
     toolTip2.SetToolTip(this.Cmb_Edara, Cmb_Edara.SelectedText.ToString());
       */
-            Cmb_FYear2.SelectedIndex = -1;
-            Cmb_TalbNo2.SelectedIndex = -1; ;
-            Cmb_TalbNo2.Text = "";
+            cmbYear.SelectedIndex = -1;
+            cmbReqNo.SelectedIndex = -1; ;
+            cmbReqNo.Text = "";
         }
 
         private void Cmb_Edara_MouseHover(object sender, EventArgs e)
@@ -349,11 +350,11 @@ namespace ANRPC_Inventory
                 Cmb_Edara.Enabled = true;
                 dateTimePicker1.Enabled = false;
                 dateTimePicker2.Enabled = false;
-                Cmb_FYear2.Enabled =true;
-                Cmb_TalbNo2.Enabled = true;
-                Cmb_FYear2.SelectedIndex = -1;
-                Cmb_TalbNo2.SelectedIndex = -1; ;
-                Cmb_TalbNo2.Text = "";
+                cmbYear.Enabled =true;
+                cmbReqNo.Enabled = true;
+                cmbYear.SelectedIndex = -1;
+                cmbReqNo.SelectedIndex = -1; ;
+                cmbReqNo.Text = "";
             }
             else
             {
@@ -368,11 +369,11 @@ namespace ANRPC_Inventory
                 Cmb_Edara.Enabled = false;
                 dateTimePicker1.Enabled =true;
                 dateTimePicker2.Enabled = true;
-                Cmb_FYear2.Enabled =true;
-                Cmb_TalbNo2.Enabled = true;
-                Cmb_FYear2.SelectedIndex = -1;
-                Cmb_TalbNo2.SelectedIndex = -1; ;
-                Cmb_TalbNo2.Text = "";
+                cmbYear.Enabled =true;
+                cmbReqNo.Enabled = true;
+                cmbYear.SelectedIndex = -1;
+                cmbReqNo.SelectedIndex = -1; ;
+                cmbReqNo.Text = "";
             }
             else
             {
@@ -387,8 +388,8 @@ namespace ANRPC_Inventory
                 Cmb_Edara.Enabled =false;
                 dateTimePicker1.Enabled = false;
                 dateTimePicker2.Enabled = false;
-                Cmb_FYear2.Enabled = true;
-                Cmb_TalbNo2.Enabled = true;
+                cmbYear.Enabled = true;
+                cmbReqNo.Enabled = true;
             }
             else
             {
@@ -416,7 +417,7 @@ namespace ANRPC_Inventory
                 cmdstring = "select * from  T_TalbTawreed_Benod where TalbTwareed_No=@TN and FYear=@FY";// and CodeEdara=@EC";
                 cmd = new SqlCommand(cmdstring, Constants.con);
                 cmd.Parameters.AddWithValue("@TN",t);
-                cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
+                cmd.Parameters.AddWithValue("@FY", cmbYear.Text);
               //  cmd.Parameters.AddWithValue("@EC", Constants.CodeEdara);
             }
             else if ( Constants.User_Type == "B")
@@ -426,7 +427,7 @@ namespace ANRPC_Inventory
 
                 // cmd.Parameters.AddWithValue("@TN", Cmb_TalbNo2.Text);
                 cmd.Parameters.AddWithValue("@TN", t);
-                cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
+                cmd.Parameters.AddWithValue("@FY", cmbYear.Text);
             }
           
             // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
@@ -472,7 +473,7 @@ namespace ANRPC_Inventory
             
 
             string caption = "Selected value is: " + TalbData;
-            toolTip1.SetToolTip(Cmb_TalbNo2, caption);
+            toolTip1.SetToolTip(cmbReqNo, caption);
             toolTip1.AutoPopDelay = 5000;
             toolTip1.InitialDelay = 200;
             toolTip1.ReshowDelay = 100;
@@ -489,13 +490,13 @@ namespace ANRPC_Inventory
         }
         private void Cmb_Edara_DropDownClosed(object sender, EventArgs e)
         {
-            toolTip2.Hide(Cmb_TalbNo2);
+            toolTip2.Hide(cmbReqNo);
         }
 
         private void Cmb_TalbNo2_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (e.Index < 0) { return; } // added this line thanks to Andrew's comment
-          string text = Cmb_TalbNo2.GetItemText(Cmb_TalbNo2.Items[e.Index]);
+          string text = cmbReqNo.GetItemText(cmbReqNo.Items[e.Index]);
          // string text ="xxxxx";
             
             e.DrawBackground();
@@ -506,7 +507,7 @@ namespace ANRPC_Inventory
                 GetTalbData(text);
 
 
-                toolTip2.Show(ST, Cmb_TalbNo2, e.Bounds.Right, e.Bounds.Bottom);
+                toolTip2.Show(ST, cmbReqNo, e.Bounds.Right, e.Bounds.Bottom);
             }
             e.DrawFocusRectangle();
         }
@@ -518,21 +519,21 @@ namespace ANRPC_Inventory
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            Cmb_FYear2.SelectedIndex = -1;
-            Cmb_TalbNo2.SelectedIndex = -1; ;
-            Cmb_TalbNo2.Text = "";
+            cmbYear.SelectedIndex = -1;
+            cmbReqNo.SelectedIndex = -1; ;
+            cmbReqNo.Text = "";
         }
 
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
-            Cmb_FYear2.SelectedIndex = -1;
-            Cmb_TalbNo2.SelectedIndex = -1; ;
-            Cmb_TalbNo2.Text = "";
+            cmbYear.SelectedIndex = -1;
+            cmbReqNo.SelectedIndex = -1; ;
+            cmbReqNo.Text = "";
         }
 
         private void BTN_Form_Click(object sender, EventArgs e)
         {
-            if (Cmb_FYear2.SelectedIndex == -1 || Cmb_TalbNo2.SelectedIndex == -1)
+            if (cmbYear.SelectedIndex == -1 || cmbReqNo.SelectedIndex == -1)
             {
                 MessageBox.Show("يجب اختيار السنة المالية و رقم الطلب اولا");
                 return;
@@ -544,7 +545,7 @@ namespace ANRPC_Inventory
             }
             //----------------------
 
-            TalbTawred F = new TalbTawred(Cmb_FYear2.Text, Cmb_TalbNo2.Text);
+            TalbTawred F = new TalbTawred(cmbYear.Text, cmbReqNo.Text);
             // main Ff = new Main();
             Constants.currentOpened = F;
             F.MdiParent = this.MdiParent;
@@ -582,22 +583,139 @@ namespace ANRPC_Inventory
 
         private void BTN_Report_Click(object sender, EventArgs e)
         {
-            if (Cmb_FYear2.SelectedIndex == -1 || Cmb_TalbNo2.SelectedIndex == -1)
+            if (cmbYear.SelectedIndex == -1 || cmbReqNo.SelectedIndex == -1)
             {
                 MessageBox.Show("يجب اختيار السنة المالية و رقم الطلب  اولا");
                 return;
 
             }
 
-            Constants.TalbFY = Cmb_FYear2.Text;
-            Constants.TalbNo = Convert.ToInt32(Cmb_TalbNo2.Text);
-            var tuple = HandleReports(CMB_Trans.Text);
+            Constants.TalbFY = cmbYear.Text;
+            Constants.TalbNo = Convert.ToInt32(cmbReqNo.Text);
+            var tuple = HandleReports(cmbMostandType.Text);
             string FP = tuple.Item1;
             string CN = tuple.Item2;
             int FN = tuple.Item3;
             Constants.FormNo =FN;
             FReports f = new FReports();
             f.Show();
+        }
+
+
+
+        //public  Dictionary<MostndType, List<string>> MostndObj = new Dictionary<MostndType, List<string>>();
+      
+        
+        
+        public  List<string> mostndTypeInfo = new List<string>();
+
+
+        public enum MostndType
+        {
+            TalbTawreed,
+            EznSarf,
+            Estlam,
+            AmrSheraa,
+            EdafaMakhaznya,
+            EznTahwel,
+            TalbEslah,
+            TalbMoaayra,
+            talbTanfizAamal,       
+        }
+
+
+        public List<string> GetmostnadTypeInfo(MostndType type)
+        {
+            if (type == MostndType.TalbTawreed)
+            {
+                SearchData.formName = "TalbTawred";
+            }
+            else if (type == MostndType.EznSarf)
+            {
+                mostndTypeInfo.Add("type1");
+                mostndTypeInfo.Add("type2");
+                mostndTypeInfo.Add("type3");
+                SearchData.formName = "EznSarf_F";
+                return mostndTypeInfo;
+            }
+            else if(type == MostndType.Estlam)
+            {
+                SearchData.formName = "Estlam_F";
+            }
+            else if(type == MostndType.AmrSheraa)
+            {
+                SearchData.formName = "AmrSheraa";
+            }
+            else if(type == MostndType.EdafaMakhaznya)
+            {
+                mostndTypeInfo.Add("type3");
+                mostndTypeInfo.Add("type4");
+                mostndTypeInfo.Add("type5");
+                SearchData.formName = "FEdafaMakhzania_F";
+                return mostndTypeInfo;
+            }
+            else if(type == MostndType.EznTahwel)
+            {
+                mostndTypeInfo.Add("type6");
+                mostndTypeInfo.Add("type7");
+                mostndTypeInfo.Add("type8");
+                SearchData.formName = "FTransfer_M";
+            }
+            else if (type == MostndType.TalbEslah)
+            {
+                SearchData.formName = "TalbEslah";
+            }
+            else if (type == MostndType.TalbMoaayra)
+            {
+                SearchData.formName = "TalbMoaera";
+            }
+
+            else if (type == MostndType.talbTanfizAamal)
+            {
+                SearchData.formName = "TalbTnfiz";                
+            }
+       
+            return new List<string>();
+
+        }
+
+        public void getRequsetNUmbers()
+        {
+            DataTable dtRequestedNumbers = new DataTable();
+            SqlDataAdapter daRequestedNumbers = new SqlDataAdapter("select * from users", Constants.foreignCon);
+            Constants.openForeignCon();
+            daRequestedNumbers.Fill(dtRequestedNumbers);
+
+            cmbReqNo.DataSource= dtRequestedNumbers;
+
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            SearchData.reqNo = cmbReqNo.SelectedValue.ToString();
+            SearchData.year = cmbYear.SelectedValue.ToString();
+            SearchData.mostndType = cmbMostandType.SelectedValue.ToString();
+            SearchData.mostndTypeInfo = cmbMostandTypeInfo.SelectedValue.ToString();
+        }
+
+        private void cmbMostandType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MostndType type = (MostndType)cmbMostandType.SelectedIndex;
+            mostndTypeInfo.Clear();
+            mostndTypeInfo = GetmostnadTypeInfo(type);
+
+            if(mostndTypeInfo.Count > 0 )
+            {
+                cmbMostandTypeInfo.Visible = true;
+                string x = cmbMostandType.SelectedIndex.ToString();
+                MessageBox.Show(x);
+                HelperClass.comboBoxFiller(cmbMostandTypeInfo, mostndTypeInfo, "type", "type", this);
+            }
+            else
+            {
+                cmbMostandTypeInfo.Visible = false; ;
+            }
+
         }
     }
 }
