@@ -1762,15 +1762,14 @@ namespace ANRPC_Inventory
 
             reset();
         }
+
         public EznSarf_F()
         {
             InitializeComponent();
-            //this.SetStyle(ControlStyles.DoubleBuffer, true);
-            //this.SetStyle(ControlStyles.UserPaint, true);
-            //this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
 
             init();
         }
+
         //===========================================================================
 
         public void SearchTasnif(int searchflag)

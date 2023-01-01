@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using ANRPC_Inventory.Resources;
 using FontAwesome.Sharp;
 
 namespace ANRPC_Inventory
@@ -474,7 +473,7 @@ namespace ANRPC_Inventory
             {
                 tab = new Tab(font, "  البـــــحــــث    ", color, 32, IconFont.Auto, IconChar.Search,
                                     DockStyle.Top, (object sender, EventArgs e) => { 
-                                        SideBarBtnCLicked(sender, e, new Search()); 
+                                        SideBarBtnCLicked(sender, e, new SearchForm()); 
                                     },
                                     height: 54, padding: padd, appearance: appearance, isRL: true);
             }

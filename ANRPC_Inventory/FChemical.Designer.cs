@@ -1,5 +1,5 @@
 ﻿
-namespace ANRPC_Inventory.Resources
+namespace ANRPC_Inventory
 {
     partial class FChemical
     {

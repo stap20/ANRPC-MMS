@@ -12,7 +12,7 @@ using System.IO;
 using System.Windows.Forms;
 
 
-namespace ANRPC_Inventory.Resources
+namespace ANRPC_Inventory
 {
     public partial class FChemical : Form
     {
