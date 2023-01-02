@@ -153,7 +153,7 @@ namespace ANRPC_Inventory
 
         public void SP_InsertSignatures(int signNumber, int signOrder)
         {
-            string cmdstring = cmdstring = "Exec  SP_InsertSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2,@SignOrder";
+            string cmdstring  = "Exec  SP_InsertSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2,@SignOrder";
             SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
             cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_TRansferNo.Text));
             cmd.Parameters.AddWithValue("@TNO2", Convert.ToInt32(TXT_TRNO.Text));

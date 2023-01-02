@@ -197,9 +197,9 @@ namespace ANRPC_Inventory
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            SearchMostandTabsHandler frm = new SearchMostandTabsHandler();
-            this.Close();
-            frm.Show();
+           // SearchMostandTabsHandler frm = new SearchMostandTabsHandler();
+           // this.Close();
+           // frm.Show();
         }
 
         private void cmbMostandType_SelectedIndexChanged(object sender, EventArgs e)

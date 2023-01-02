@@ -250,7 +250,66 @@ namespace ANRPC_Inventory
             }
             else
             {
-                TableQuery = "SELECT *  FROM [T_BnodAwamershraa] Where (quan2 is null or quan2<quan) and Amrshraa_No = " + amrNo + " and AmrSheraa_sanamalia='" + fyear + "'";
+                TableQuery = @" with GetEstlamQuan as ( select T_Awamershraa.Amrshraa_No, 	
+                            T_BnodAwamershraa.AmrSheraa_sanamalia,T_BnodAwamershraa.Bnd_No,T_BnodAwamershraa.Unit,T_BnodAwamershraa.Bayan,
+                            T_BnodAwamershraa.Quan as AmrSheraaQuan,T_BnodAwamershraa.Rakm_Tasnif,T_BnodAwamershraa.Bnd_No as amr_bnd, 
+                            Sum(T_Estlam.QuanArrived) as Quan  , Sum(ISNULL(T_Estlam.QuanArrived, 0 )) as EstlamQuan
+                            from 
+                            T_BnodAwamershraa
+
+                            left join  T_Awamershraa on 
+                            T_Awamershraa.Amrshraa_No =  T_BnodAwamershraa.Amrshraa_No
+
+                            left join T_Estlam on T_Estlam.Amrshraa_No = T_BnodAwamershraa.Amrshraa_No 
+                            and T_Estlam.Bnd_No = T_BnodAwamershraa.Bnd_No
+
+                            where Sign14 is not null and T_Awamershraa.Amrshraa_No is not null 
+                            and T_Awamershraa.AmrSheraa_sanamalia='" + fyear + @"'
+
+                            group by T_Awamershraa.Amrshraa_No, T_BnodAwamershraa.Quan,
+	                            T_BnodAwamershraa.Rakm_Tasnif,
+	                            T_BnodAwamershraa.AmrSheraa_sanamalia,T_BnodAwamershraa.Bnd_No,T_BnodAwamershraa.Unit,
+	                            T_BnodAwamershraa.Bayan
+                            )
+
+                            select T_BnodAwamershraa.[Amrshraa_No]
+                                  ,[Monaksa_No]
+                                  ,[monaksa_sanamalia]
+                                  ,T_BnodAwamershraa.[AmrSheraa_sanamalia]
+                                  ,[TalbTwareed_No]
+                                  ,[FYear]
+                                  ,T_BnodAwamershraa.[Bnd_No]
+                                  ,[CodeEdara]
+                                  ,[NameEdara]
+                                  ,[BndMwazna]
+	                              ,(AmrSheraaQuan - EstlamQuan) as Quan
+                                  ,null as [Quan2]
+                                  ,T_BnodAwamershraa.[Unit]
+                                  ,T_BnodAwamershraa.[Bayan]
+                                  ,[Makhzn]
+                                  ,T_BnodAwamershraa.[Rakm_Tasnif]
+                                  ,[Rased_After]
+                                  ,[UnitPrice]
+                                  ,[TotalPrice]
+                                  ,[ApplyDiscount]
+                                  ,[Discountpercent]
+                                  ,[TotalPriceAfterDiscount]
+                                  ,[ApplyDareba]
+                                  ,[Darebapercent]
+                                  ,[TotalPriceAfter]
+                                  ,[EstlamFlag]
+                                  ,[EstlamDate]
+                                  ,[LessQuanFlag]
+                                  ,[NotIdenticalFlag]
+                                  ,[TalbEsdarShickNo]
+                                  ,[ShickNo]
+                                  ,[ShickDate]
+                                  ,[ExpirationDate] from GetEstlamQuan
+
+                            inner join T_BnodAwamershraa on GetEstlamQuan.Amrshraa_No = T_BnodAwamershraa.Amrshraa_No
+                            and GetEstlamQuan.amr_bnd = T_BnodAwamershraa.Bnd_No
+
+                            where  AmrSheraaQuan > EstlamQuan and GetEstlamQuan.Amrshraa_No  = " + amrNo;
             }
 
             table.Clear();
@@ -836,48 +895,49 @@ namespace ANRPC_Inventory
                         {
                             cmd.Parameters.AddWithValue("@p188", row.Cells[10].Value);//
                                                                                       ////////////////////////////////////////////////
-                            string st = "exec SP_GetAllQuanArrived @p1,@p2,@p3,@p4,@p5,@p6 out";
-                            SqlCommand cmd2 = new SqlCommand(st, Constants.con);
+                                                                                      //string st = "exec SP_GetAllQuanArrived @p1,@p2,@p3,@p4,@p5,@p6 out";
+                                                                                      //SqlCommand cmd2 = new SqlCommand(st, Constants.con);
 
-                            cmd2.Parameters.AddWithValue("@p1", Convert.ToInt32(Cmb_AmrNo.SelectedValue));
-                            cmd2.Parameters.AddWithValue("@p2", (Cmb_FY.Text));
+                            //cmd2.Parameters.AddWithValue("@p1", Convert.ToInt32(Cmb_AmrNo.SelectedValue));
+                            //cmd2.Parameters.AddWithValue("@p2", (Cmb_FY.Text));
 
-                            cmd2.Parameters.AddWithValue("@p3", row.Cells[4].Value);
-                            cmd2.Parameters.AddWithValue("@p4", row.Cells[5].Value);
-
-
-                            cmd2.Parameters.AddWithValue("@p5", row.Cells[6].Value);
-                            cmd2.Parameters.Add("@p6", SqlDbType.Float, 32);  //-------> output parameter
-                            cmd2.Parameters["@p6"].Direction = ParameterDirection.Output;
+                            //cmd2.Parameters.AddWithValue("@p3", row.Cells[4].Value);
+                            //cmd2.Parameters.AddWithValue("@p4", row.Cells[5].Value);
 
 
-                            double sumquan = 0;
-                            double currentTotal = 0;
-                            try
-                            {
-                                cmd2.ExecuteNonQuery();
-                                executemsg = true;
-                                sumquan = (double)cmd2.Parameters["@p6"].Value;
-                            }
-                            catch (SqlException sqlEx)
-                            {
-                                executemsg = false;
-                                MessageBox.Show(sqlEx.ToString());
-
-                            }
-                            currentTotal = Convert.ToDouble(row.Cells[11].Value);
-                            if (sumquan == 0)
-                            {
-                                cmd.Parameters.AddWithValue("@p18", row.Cells[11].Value);//
-                            }
-                            else if (sumquan > 0)
-                            {
-
-                                currentTotal = currentTotal - sumquan;
-                                cmd.Parameters.AddWithValue("@p18", currentTotal);//
+                            //cmd2.Parameters.AddWithValue("@p5", row.Cells[6].Value);
+                            //cmd2.Parameters.Add("@p6", SqlDbType.Float, 32);  //-------> output parameter
+                            //cmd2.Parameters["@p6"].Direction = ParameterDirection.Output;
 
 
-                            }
+                            //double sumquan = 0;
+                            //double currentTotal = 0;
+                            //try
+                            //{
+                            //    cmd2.ExecuteNonQuery();
+                            //    executemsg = true;
+                            //    sumquan = (double)cmd2.Parameters["@p6"].Value;
+                            //}
+                            //catch (SqlException sqlEx)
+                            //{
+                            //    executemsg = false;
+                            //    MessageBox.Show(sqlEx.ToString());
+
+                            //}
+                            cmd.Parameters.AddWithValue("@p18", row.Cells[11].Value);
+
+                            //if (sumquan == 0)
+                            //{
+                            //    cmd.Parameters.AddWithValue("@p18", row.Cells[11].Value);//
+                            //}
+                            //else if (sumquan > 0)
+                            //{
+
+                            //    currentTotal = currentTotal - sumquan;
+                            //    cmd.Parameters.AddWithValue("@p18", currentTotal);//
+
+
+                            //}
 
                             ///////////////////////////////////////////////////////////////////////////
 
@@ -1041,8 +1101,6 @@ namespace ANRPC_Inventory
 
                         if (row.Cells[8].Value.ToString() == "True")
                         {
-
-
                             cmd.Parameters.AddWithValue("@p10", ((row.Cells[9].Value)));
                         }
                         else
@@ -1308,7 +1366,7 @@ namespace ANRPC_Inventory
                         errorsList.Add((alertProvider, dataGridView1, "يجب أن كتابة الكمية"));
                     }
 
-                    if (date.Value.ToString() == "")
+                    if (AddEditFlag == 2 && date.Value.ToString() == "")
                     {
                         date.ErrorText = "من فضلك تأكد ادخال تاريخ الاستلام";
                         errorsList.Add((alertProvider, dataGridView1, "من فضلك تأكد ادخال تاريخ الاستلام"));
@@ -1602,10 +1660,31 @@ namespace ANRPC_Inventory
             Constants.opencon();
 
             // string cmdstring = "Exec SP_getlast @TRNO,@MM,@YYYY,@Num output";
-            string cmdstring = @"select T_Awamershraa.Amrshraa_No from  T_Awamershraa left join T_Estlam on T_Awamershraa.Amrshraa_No = T_Estlam.Amrshraa_No
-                                and T_Awamershraa.AmrSheraa_sanamalia = T_Estlam.AmrSheraa_sanamalia
-                                where (T_Awamershraa.Sign14 is not null) and T_Awamershraa.AmrSheraa_sanamalia=@FY and (T_Estlam.Amrshraa_No is null) 
-                                group by T_Awamershraa.Amrshraa_No  order by  T_Awamershraa.Amrshraa_No";
+            string cmdstring = @"with GetEstlamQuan as (
+                                select T_Awamershraa.Amrshraa_No, 
+	                                T_BnodAwamershraa.AmrSheraa_sanamalia,T_BnodAwamershraa.Bnd_No,T_BnodAwamershraa.Unit,T_BnodAwamershraa.Bayan,
+	                                T_BnodAwamershraa.Quan as AmrSheraaQuan,T_BnodAwamershraa.Rakm_Tasnif,T_BnodAwamershraa.Bnd_No as amr_bnd, 
+	                                Sum(T_Estlam.QuanArrived) as Quan  , Sum(ISNULL(T_Estlam.QuanArrived, 0 )) as EstlamQuan
+	                                from 
+	                                T_BnodAwamershraa
+
+	                                left join  T_Awamershraa on 
+	                                T_Awamershraa.Amrshraa_No =  T_BnodAwamershraa.Amrshraa_No
+
+	                                left join T_Estlam on T_Estlam.Amrshraa_No = T_BnodAwamershraa.Amrshraa_No 
+	                                and T_Estlam.Bnd_No = T_BnodAwamershraa.Bnd_No
+
+		                            where Sign14 is not null and T_Awamershraa.Amrshraa_No is not null 
+		                            and T_Awamershraa.AmrSheraa_sanamalia='" + Cmb_FY.Text + @"'
+
+	                                group by T_Awamershraa.Amrshraa_No, T_BnodAwamershraa.Quan,
+			                                T_BnodAwamershraa.Rakm_Tasnif,
+			                                T_BnodAwamershraa.AmrSheraa_sanamalia,T_BnodAwamershraa.Bnd_No,T_BnodAwamershraa.Unit,
+			                                T_BnodAwamershraa.Bayan
+                                    )
+ 
+
+                                    select Amrshraa_No from GetEstlamQuan where  AmrSheraaQuan > EstlamQuan group by Amrshraa_No";
 
             SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
 
@@ -1766,7 +1845,29 @@ namespace ANRPC_Inventory
                 if (dataGridView1.Rows[e.RowIndex].Cells["Quan2"].Value.ToString() != "" && 
                     Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells["Quan2"].Value) > 0)
                 {
-                    dataGridView1.Rows[e.RowIndex].Cells["EstlamFlag"].Value = "true";//تم الاستلام
+
+                    DataGridViewCell arrived, ordered;
+
+                    if (AddEditFlag == 1) //edit
+                    {
+                        ordered = dataGridView1.Rows[e.RowIndex].Cells["Quan"];//col5
+
+                        arrived = dataGridView1.Rows[e.RowIndex].Cells["QuanArrived"];
+                    }
+                    else
+                    {
+                        ordered = dataGridView1.Rows[e.RowIndex].Cells["Quan"];//col10
+                        arrived = dataGridView1.Rows[e.RowIndex].Cells["Quan2"];
+                    }
+
+                    if (Convert.ToDouble(ordered.Value) == Convert.ToDouble(arrived.Value))
+                    {
+                        dataGridView1.Rows[e.RowIndex].Cells["EstlamFlag"].Value = "true";//تم الاستلام
+                    }
+                    else
+                    {
+                        dataGridView1.Rows[e.RowIndex].Cells["EstlamFlag"].Value = "false";
+                    }
                 }
                 else
                 {

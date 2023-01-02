@@ -119,21 +119,51 @@ namespace ANRPC_Inventory
 
 
         #region myDefVariable
-            enum VALIDATION_TYPES
-            {
-                ADD_TASNIF,
-                ADD_NEW_TASNIF,
-                ATTACH_FILE,
-                SEARCH,
-                CONFIRM_SEARCH,
-                SAVE,
+        enum VALIDATION_TYPES
+        {
+            ADD_TASNIF,
+            ADD_NEW_TASNIF,
+            ATTACH_FILE,
+            SEARCH,
+            CONFIRM_SEARCH,
+            SAVE,
 
-            }
-            int currentSignNumber = 0;
+        }
+        int currentSignNumber = 0;
+        bool isComeFromSearch = false;
+        Dictionary<int, int> signatureOrder;
         #endregion
 
         //------------------------------------------ Helper ---------------------------------
         #region Helpers
+        private void initiateSignatureOrder()
+        {
+            //Dictionary to get values of signature (sign1 or sign2 ...) according to thier order in table
+            signatureOrder = new Dictionary<int, int>();
+            signatureOrder.Add(1, 1);
+            signatureOrder.Add(2, 2);
+            signatureOrder.Add(3, 3);
+            signatureOrder.Add(4, 4);
+        }
+
+        public void SP_InsertSignatures(int signNumber, int signOrder)
+        {
+            string cmdstring = "Exec  SP_InsertSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2,@SignOrder";
+            SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
+            cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_EznNo.Text));
+            cmd.Parameters.AddWithValue("@TNO2", Convert.ToInt32(TXT_TRNO.Text));
+            cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
+            cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
+            cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
+            cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
+            cmd.Parameters.AddWithValue("@FN", 2);
+            cmd.Parameters.AddWithValue("@SN", signNumber);
+            cmd.Parameters.AddWithValue("@D1", DBNull.Value);
+            cmd.Parameters.AddWithValue("@D2", DBNull.Value);
+            cmd.Parameters.AddWithValue("@SignOrder", signOrder);
+            cmd.ExecuteNonQuery();
+        }
+
         private PictureBox CheckSignatures(Panel panel, int signNumber)
         {
             try
@@ -1051,21 +1081,9 @@ namespace ANRPC_Inventory
             {
                 InsertEznSarfBnood();
 
-                for (int i = 1; i <= 4; i++)
+                foreach (KeyValuePair<int, int> entry in signatureOrder)
                 {
-                    cmdstring = "Exec  SP_InsertSignDates @TNO,@TNO2,@FY,@CD,@CE,@NE,@FN,@SN,@D1,@D2";
-                    cmd = new SqlCommand(cmdstring, Constants.con);
-                    cmd.Parameters.AddWithValue("@TNO", Convert.ToInt32(TXT_EznNo.Text));
-                    cmd.Parameters.AddWithValue("@TNO2", Convert.ToInt32(TXT_TRNO.Text));
-                    cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
-                    cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
-                    cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
-                    cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
-                    cmd.Parameters.AddWithValue("@FN", 2);
-                    cmd.Parameters.AddWithValue("@SN", i);
-                    cmd.Parameters.AddWithValue("@D1", DBNull.Value);
-                    cmd.Parameters.AddWithValue("@D2", DBNull.Value);
-                    cmd.ExecuteNonQuery();
+                    SP_InsertSignatures(entry.Key, entry.Value);
                 }
 
                 SP_UpdateSignatures(1, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
@@ -1768,7 +1786,31 @@ namespace ANRPC_Inventory
             InitializeComponent();
 
             init();
+
+            initiateSignatureOrder();
         }
+
+        public EznSarf_F(string x, string y)
+        {
+            InitializeComponent();
+            Cmb_FYear.Text = x;
+            TXT_EznNo.Text = y;
+
+
+            panel7.Visible = false;
+            eznSarfDataPanel.Visible = false;
+
+            isComeFromSearch = true;
+        }
+
+        private void FTransfer_M_Load(object sender, EventArgs e)
+        {
+            if (isComeFromSearch)
+            {
+                BTN_SearchEzn_Click(BTN_SearchEzn, e);
+            }
+        }
+
 
         //===========================================================================
 
@@ -2658,7 +2700,7 @@ namespace ANRPC_Inventory
 
         private void BTN_SearchEzn_Click(object sender, EventArgs e)
         {
-            if (!IsValidCase(VALIDATION_TYPES.SEARCH))
+            if (isComeFromSearch == false && !IsValidCase(VALIDATION_TYPES.SEARCH))
             {
                 return;
             }

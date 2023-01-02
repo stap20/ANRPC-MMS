@@ -444,7 +444,7 @@ namespace ANRPC_Inventory
                 tab = new Tab(font, "  حركة التصنيفات    ", color, 35, IconFont.Auto, IconChar.MoneyCheckDollar,
                                     DockStyle.Top, (object sender, EventArgs e) => {
                                         bool isOnlyConfirm = Constants.User_Type == "B" ? false : true;
-                                        SideBarBtnCLicked(sender, e, new TabsHandler("TasnifTrans", isOnlyConfirm));
+                                        SideBarBtnCLicked(sender, e, new TasnifTrans());
                                     },
                                     height: 54, padding: padd, appearance: appearance, isRL: true);
             }

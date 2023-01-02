@@ -17,8 +17,8 @@ namespace ANRPC_Inventory
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            //Application.Run(new FLogin());
-            Application.Run(new SearchForm());
+            Application.Run(new FLogin());
+            //Application.Run(new SearchForm());
 
         }
     }
