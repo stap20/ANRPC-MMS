@@ -2122,12 +2122,12 @@ namespace ANRPC_Inventory
             initiateSignatureOrder();
         }
 
-        public FEdafaMakhzania_F(string x, string y)
+        public FEdafaMakhzania_F(string x, string y,string momayz)
         {
             InitializeComponent();
             Cmb_FY.Text = x;
             TXT_EdafaNo.Text = y;
-
+            TXT_TRNO.Text = momayz;
 
             panel7.Visible = false;
             panel2.Visible = false;

@@ -98,12 +98,13 @@
             this.cmbMostandTypeInfo.Name = "cmbMostandTypeInfo";
             this.cmbMostandTypeInfo.Size = new System.Drawing.Size(260, 27);
             this.cmbMostandTypeInfo.TabIndex = 49;
+            this.cmbMostandTypeInfo.SelectedIndexChanged += new System.EventHandler(this.cmbMostandTypeInfo_SelectedIndexChanged);
             // 
             // btnSearch
             // 
             this.btnSearch.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.Location = new System.Drawing.Point(320, 413);
+            this.btnSearch.Location = new System.Drawing.Point(310, 321);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(220, 60);
             this.btnSearch.TabIndex = 48;
@@ -150,11 +151,11 @@
             this.cmbReqNo.Name = "cmbReqNo";
             this.cmbReqNo.Size = new System.Drawing.Size(260, 27);
             this.cmbReqNo.TabIndex = 26;
+            this.cmbReqNo.SelectedIndexChanged += new System.EventHandler(this.cmbReqNo_SelectedIndexChanged);
             // 
             // cmbYear
             // 
             this.cmbYear.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cmbYear.Enabled = false;
             this.cmbYear.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbYear.FormattingEnabled = true;
             this.cmbYear.Items.AddRange(new object[] {
@@ -202,8 +203,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SearchForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Track_TalbTawreed";
-            this.Load += new System.EventHandler(this.Search_TalbTawreed_Load);
+            this.Text = "SearchForm";
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

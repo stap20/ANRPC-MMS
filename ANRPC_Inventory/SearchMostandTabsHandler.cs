@@ -19,11 +19,6 @@ namespace ANRPC_Inventory
         private Panel tabsActiveBorder;
         private Form currentChildForm;
 
-        private string reqNo;
-        private string formName;
-        private string fyear;
-        private string trno;
-
         private void prepareSubTabsActiveIndecator()
         {
 
@@ -35,34 +30,31 @@ namespace ANRPC_Inventory
 
         private void prepareFormGetter()
         {
-            formGetter.Add("TalbTawred", () => { return new TalbTawred(this.reqNo,this.fyear); });
-            formGetter.Add("TalbTawred_Foreign", () => { return new TalbTawred_Foreign(this.reqNo, this.fyear); });
-            formGetter.Add("TalbTnfiz", () => { return new TalbTnfiz(this.reqNo, this.fyear); });
-            formGetter.Add("TalbMoaera", () => { return new TalbMoaera(this.reqNo, this.fyear); });
+            formGetter.Add("TalbTawred", () => { return new TalbTawred(SelectedMostand.mostandFinancialYear,SelectedMostand.mostandNumber); });
+            formGetter.Add("TalbTawred_Foreign", () => { return new TalbTawred_Foreign(SelectedMostand.mostandFinancialYear, SelectedMostand.mostandNumber); });
+            formGetter.Add("TalbTnfiz", () => { return new TalbTnfiz(SelectedMostand.mostandFinancialYear, SelectedMostand.mostandNumber); });
+            formGetter.Add("TalbMoaera", () => { return new TalbMoaera(SelectedMostand.mostandFinancialYear, SelectedMostand.mostandNumber); });
 
-            formGetter.Add("TalbEslah", () => { return new TalbEslah(this.reqNo, this.fyear); });
-            //formGetter.Add("EznSarf_F", () => { return new EznSarf_F(this.reqNo, this.fyear,this.trno); });
-            formGetter.Add("AmrSheraa", () => { return new AmrSheraa(this.reqNo, this.fyear); });
-            formGetter.Add("AmrSheraa_Foreign", () => { return new AmrSheraa_Foreign(this.reqNo, this.fyear); });
+            formGetter.Add("TalbEslah", () => { return new TalbEslah(SelectedMostand.mostandFinancialYear, SelectedMostand.mostandNumber); });
 
-            formGetter.Add("Estlam_F", () => { return new Estlam_F(); });
-            formGetter.Add("Estlam_Foreign", () => { return new Estlam_Foreign(); });
+            formGetter.Add("EznSarf_F", () => { return new EznSarf_F(SelectedMostand.mostandFinancialYear,SelectedMostand.mostandNumber,SelectedMostand.momayzMostand); });
 
-            //formGetter.Add("FEdafaMakhzania_F", () => { return new FEdafaMakhzania_F(this.reqNo, this.fyear,this.trno); });
-            //formGetter.Add("FEdafaMakhzania_F_Foreign", () => { return new FEdafaMakhzania_F_Foreign(this.reqNo, this.fyear); });
-            //formGetter.Add("FTransfer_M", () => { return new FTransfer_M(this.reqNo, this.fyear,trno); });
-            formGetter.Add("FChemical", () => { return new FChemical(); });
+            formGetter.Add("AmrSheraa", () => { return new AmrSheraa(SelectedMostand.mostandFinancialYear, SelectedMostand.mostandNumber); });
+            formGetter.Add("AmrSheraa_Foreign", () => { return new AmrSheraa_Foreign(SelectedMostand.mostandFinancialYear, SelectedMostand.mostandNumber); });
+
+            //formGetter.Add("Estlam_F", () => { return new Estlam_F(); });
+            //formGetter.Add("Estlam_Foreign", () => { return new Estlam_Foreign(); });
+
+            formGetter.Add("FEdafaMakhzania_F", () => { return new FEdafaMakhzania_F(SelectedMostand.mostandFinancialYear, SelectedMostand.mostandNumber, SelectedMostand.momayzMostand); });
+            formGetter.Add("FEdafaMakhzania_F_Foreign", () => { return new FEdafaMakhzania_F_Foreign(SelectedMostand.mostandFinancialYear, SelectedMostand.mostandNumber); });
+            formGetter.Add("FTransfer_M", () => { return new FTransfer_M(SelectedMostand.mostandFinancialYear, SelectedMostand.mostandNumber, SelectedMostand.momayzMostand); });
+            formGetter.Add("FChemical", () => { return new FChemical(SelectedMostand.mostandFinancialYear, SelectedMostand.mostandNumber); });
         }
 
 
-        public SearchMostandTabsHandler(string reqNo,string fyear,string formName,string trno)
+        public SearchMostandTabsHandler()
         {
             InitializeComponent();
-
-            this.reqNo = reqNo;
-            this.formName = formName;
-            this.fyear = fyear;
-            this.trno = trno;
 
             prepareFormGetter();
 
@@ -159,7 +151,7 @@ namespace ANRPC_Inventory
 
         private void btnDocumentDetails_Click(object sender, EventArgs e)
         {
-            TabBarBtnCLicked(sender, e, RGBColors.color1, formGetter[formName]());
+           TabBarBtnCLicked(sender, e, RGBColors.color1, formGetter[SelectedMostand.formName]());
         }
 
         private void btnDocumentTimeLine_Click(object sender, EventArgs e)

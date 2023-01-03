@@ -45,10 +45,10 @@ namespace ANRPC_Inventory
         public string Ename11;
         private string TableQuery;
         private int AddEditFlag;
-        public string  SignPath1="";
-        public string SignPath2="";
-        public string SignPath3="";
-        public string SignPath4="";
+        public string SignPath1 = "";
+        public string SignPath2 = "";
+        public string SignPath3 = "";
+        public string SignPath4 = "";
 
         public Boolean executemsg;
         public string stockallold;
@@ -240,7 +240,7 @@ namespace ANRPC_Inventory
             cmd.ExecuteNonQuery();
         }
 
-        private void GetEstlamBnod(string amrNo, string fyear,bool isConfirm = false)
+        private void GetEstlamBnod(string amrNo, string fyear, bool isConfirm = false)
         {
             string TableQuery;
 
@@ -442,7 +442,7 @@ namespace ANRPC_Inventory
             }
         }
 
-        public bool SearchEstlam(string amrNo, string fyear,bool isConfirm = true)
+        public bool SearchEstlam(string amrNo, string fyear, bool isConfirm = true)
         {
             Constants.opencon();
 
@@ -455,7 +455,7 @@ namespace ANRPC_Inventory
 
             cmd.Parameters.AddWithValue("@TN", amrNo);
             cmd.Parameters.AddWithValue("@FY", fyear);
-            cmd.Parameters.AddWithValue("@D", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));           
+            cmd.Parameters.AddWithValue("@D", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
 
             SqlDataReader dr = cmd.ExecuteReader();
 
@@ -464,7 +464,7 @@ namespace ANRPC_Inventory
                 try
                 {
                     while (dr.Read())
-                    {                   
+                    {
                         TXT_NameMward.Text = dr["NameMward"].ToString();
                         TXT_Date.Text = dr["Date"].ToString();
                         TXT_QuanBnod.Text = dr["Quan_Bnd"].ToString();
@@ -1193,7 +1193,7 @@ namespace ANRPC_Inventory
                 }
             }
 
-            if(executemsg == true)
+            if (executemsg == true)
             {
                 UpdateEstlamSignatureCycle();
 
@@ -1201,7 +1201,7 @@ namespace ANRPC_Inventory
 
                 reset();
             }
-            
+
             else if (executemsg == false)
             {
                 MessageBox.Show("لم يتم تعديل طلب الاستلام بنجاج!!");
@@ -1327,7 +1327,7 @@ namespace ANRPC_Inventory
             {
                 if (!row.IsNewRow)
                 {
-                    DataGridViewCell arrived, ordered,date;
+                    DataGridViewCell arrived, ordered, date;
 
                     date = row.Cells["EstlamDate"];
                     if (AddEditFlag == 1) //edit
@@ -1429,7 +1429,7 @@ namespace ANRPC_Inventory
             alertProvider.Icon = SystemIcons.Warning;
             HelperClass.comboBoxFiller(Cmb_FY, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
             HelperClass.comboBoxFiller(Cmb_FYear2, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
-            
+
             dataGridView1.Controls.Add(dateTimePicker1);
 
             if (Constants.isConfirmForm)
@@ -1587,7 +1587,7 @@ namespace ANRPC_Inventory
                     return;
                 }
                 Constants.opencon();
-                int flag=0;
+                int flag = 0;
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
                     if (!row.IsNewRow)
@@ -1612,7 +1612,7 @@ namespace ANRPC_Inventory
                             cmd.Parameters.AddWithValue("@FY2", (row.Cells[5].Value));
 
                         }
-                        if (AddEditFlag == 0 || AddEditFlag==1)
+                        if (AddEditFlag == 0 || AddEditFlag == 1)
                         {
 
 
@@ -1627,7 +1627,7 @@ namespace ANRPC_Inventory
                         cmd.Parameters.Add("@aot", SqlDbType.Int, 32);  //-------> output parameter
                         cmd.Parameters["@aot"].Direction = ParameterDirection.Output;
 
-                        
+
 
                         try
                         {
@@ -1643,8 +1643,8 @@ namespace ANRPC_Inventory
                         }
                     }
                 }
-             
-                if (executemsg == true )//)&& flag == 1)
+
+                if (executemsg == true)//)&& flag == 1)
                 {
                     MessageBox.Show("تم الحذف بنجاح");
                     Input_Reset();
@@ -1699,7 +1699,7 @@ namespace ANRPC_Inventory
             Cmb_AmrNo.ValueMember = "Amrshraa_No";
             Cmb_AmrNo.DisplayMember = "Amrshraa_No";
             Cmb_AmrNo.SelectedIndex = -1;
-            Constants.closecon();       
+            Constants.closecon();
         }
 
         private void Cmb_FYear2_SelectedIndexChanged(object sender, EventArgs e)
@@ -1724,7 +1724,7 @@ namespace ANRPC_Inventory
             Cmb_AmrNo2.DisplayMember = "x";
             Cmb_AmrNo2.SelectedIndex = -1;
             Constants.closecon();
-            
+
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
@@ -1745,7 +1745,7 @@ namespace ANRPC_Inventory
 
                 AddLogic();
             }
-            
+
             else if (AddEditFlag == 1)
             {
                 EditLogic();
@@ -1810,7 +1810,7 @@ namespace ANRPC_Inventory
         {
             string currentColumnName = dataGridView1.Columns[dataGridView1.CurrentCell.ColumnIndex].Name;
 
-            if (currentColumnName == "Quan2" )//reqQuan
+            if (currentColumnName == "Quan2")//reqQuan
             {
                 e.Control.KeyPress -= new KeyPressEventHandler(Column_KeyPress);
 
@@ -1839,10 +1839,10 @@ namespace ANRPC_Inventory
         {
             string currentColumnName = dataGridView1.Columns[e.ColumnIndex].Name;
 
-            if (e.RowIndex >= 0 && e.RowIndex != dataGridView1.NewRowIndex && 
+            if (e.RowIndex >= 0 && e.RowIndex != dataGridView1.NewRowIndex &&
                 currentColumnName != "EstlamDate" && currentColumnName != "EstlamFlag")
             {
-                if (dataGridView1.Rows[e.RowIndex].Cells["Quan2"].Value.ToString() != "" && 
+                if (dataGridView1.Rows[e.RowIndex].Cells["Quan2"].Value.ToString() != "" &&
                     Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells["Quan2"].Value) > 0)
                 {
 
@@ -1874,7 +1874,7 @@ namespace ANRPC_Inventory
                     dataGridView1.Rows[e.RowIndex].Cells["EstlamFlag"].Value = "false";//تم الاستلام
                 }
             }
-         
+
         }
 
         private void TXT_QuanTard_KeyPress(object sender, KeyPressEventArgs e)
@@ -1886,7 +1886,7 @@ namespace ANRPC_Inventory
         {
             if (AddEditFlag == 2 && Cmb_AmrNo.SelectedIndex != -1)
             {
-                GetEstlamBnod(Cmb_AmrNo.SelectedValue.ToString(), Cmb_FY.Text,false);
+                GetEstlamBnod(Cmb_AmrNo.SelectedValue.ToString(), Cmb_FY.Text, false);
 
                 foreach (DataGridViewColumn column in dataGridView1.Columns)
                 {
@@ -2249,7 +2249,7 @@ namespace ANRPC_Inventory
 
             if (e.RowIndex >= 0 && e.RowIndex != dataGridView1.NewRowIndex && currentColumnName == "EstlamDate")
             {
-                dateTimePicker1.Visible=true;
+                dateTimePicker1.Visible = true;
                 dateTimePicker1.Format = DateTimePickerFormat.Short;
                 Rectangle oRectangle = dataGridView1.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
                 dateTimePicker1.Size = new Size(oRectangle.Width, oRectangle.Height);

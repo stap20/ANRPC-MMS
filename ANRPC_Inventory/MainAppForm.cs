@@ -12,7 +12,7 @@ namespace ANRPC_Inventory
         private Form currentChildForm;
         List<Tab> sideBarTabsList = new List<Tab>();
         private SideBarHandler sideBarTabContainer;
-        IDictionary<string ,List<APPLICATION_FORMS>> usersApplicationPrivilages = new Dictionary<string, List<APPLICATION_FORMS>>();
+        IDictionary<string, List<APPLICATION_FORMS>> usersApplicationPrivilages = new Dictionary<string, List<APPLICATION_FORMS>>();
 
 
         enum APPLICATION_FORMS
@@ -44,7 +44,7 @@ namespace ANRPC_Inventory
         {
             List<APPLICATION_FORMS> privilages;
             #region Edara
-            privilages = new List<APPLICATION_FORMS>() {     
+            privilages = new List<APPLICATION_FORMS>() {
                 APPLICATION_FORMS.TALB_TAWREED,
                 APPLICATION_FORMS.TALB_TAWREED_FOREIGN,
                 APPLICATION_FORMS.TALB_ESLAH,
@@ -288,11 +288,11 @@ namespace ANRPC_Inventory
             Padding padd = new Padding(10, 0, 20, 0);
             Appearance appearance = new Appearance(0, Color.FromArgb(2, 163, 123), Color.FromArgb(2, 163, 123));
 
-            if(form == APPLICATION_FORMS.DASHBOARD)
+            if (form == APPLICATION_FORMS.DASHBOARD)
             {
                 tab = new Tab(font, "  لوحة القيادة    ", color, 32, IconFont.Auto, IconChar.ChartSimple,
-                                    DockStyle.Top, (object sender, EventArgs e) => { 
-                                        SideBarBtnCLicked(sender, e, new conForm()); 
+                                    DockStyle.Top, (object sender, EventArgs e) => {
+                                        SideBarBtnCLicked(sender, e, new conForm());
                                     },
                                     height: 54, padding: padd, appearance: appearance, isRL: true);
             }
@@ -319,7 +319,7 @@ namespace ANRPC_Inventory
                                 height: 54, padding: padd, appearance: appearance, isRL: true);
             }
 
-            else if(form == APPLICATION_FORMS.TALB_ESLAH)
+            else if (form == APPLICATION_FORMS.TALB_ESLAH)
             {
                 tab = new Tab(font, "  طلب الاصلاح    ", color, 32, IconFont.Auto, IconChar.ClipboardList,
                                     DockStyle.Top, (object sender, EventArgs e) => {
@@ -329,7 +329,7 @@ namespace ANRPC_Inventory
                                 height: 54, padding: padd, appearance: appearance, isRL: true);
             }
 
-            else if(form == APPLICATION_FORMS.TALB_TANFIZ)
+            else if (form == APPLICATION_FORMS.TALB_TANFIZ)
             {
                 tab = new Tab(font, "  طلب تنفيذ الأعمال    ", color, 32, IconFont.Auto, IconChar.ClipboardList,
                                     DockStyle.Top, (object sender, EventArgs e) => {
@@ -339,7 +339,7 @@ namespace ANRPC_Inventory
                                 height: 54, padding: padd, appearance: appearance, isRL: true);
             }
 
-            else if(form == APPLICATION_FORMS.TALB_MOAYRA)
+            else if (form == APPLICATION_FORMS.TALB_MOAYRA)
             {
                 tab = new Tab(font, "  طلب المعايرة    ", color, 32, IconFont.Auto, IconChar.ClipboardList,
                                     DockStyle.Top, (object sender, EventArgs e) => {
@@ -349,7 +349,7 @@ namespace ANRPC_Inventory
                                 height: 54, padding: padd, appearance: appearance, isRL: true);
             }
 
-            else if(form == APPLICATION_FORMS.AMR_SHERAA)
+            else if (form == APPLICATION_FORMS.AMR_SHERAA)
             {
                 tab = new Tab(font, "  أمر شراء    ", color, 35, IconFont.Auto, IconChar.MoneyCheckDollar,
                                     DockStyle.Top, (object sender, EventArgs e) => {
@@ -369,7 +369,7 @@ namespace ANRPC_Inventory
                                     height: 54, padding: padd, appearance: appearance, isRL: true);
             }
 
-            else if(form == APPLICATION_FORMS.AMR_SHERAA_KEMAWYAT)
+            else if (form == APPLICATION_FORMS.AMR_SHERAA_KEMAWYAT)
             {
                 tab = new Tab(font, " امر شراء الكيماويات ", color, 32, IconFont.Auto, IconChar.MoneyCheckDollar,
                                     DockStyle.Top, (object sender, EventArgs e) => {
@@ -379,7 +379,7 @@ namespace ANRPC_Inventory
                                     height: 54, padding: padd, appearance: appearance, isRL: true);
             }
 
-            else if(form == APPLICATION_FORMS.EZN_SARF)
+            else if (form == APPLICATION_FORMS.EZN_SARF)
             {
                 tab = new Tab(font, "  إذن الصرف    ", color, 35, IconFont.Auto, IconChar.CartFlatbed,
                                     DockStyle.Top, (object sender, EventArgs e) => {
@@ -389,7 +389,7 @@ namespace ANRPC_Inventory
                                     height: 54, padding: padd, appearance: appearance, isRL: true);
             }
 
-            else if(form == APPLICATION_FORMS.EDAFA_MAKHZANYA)
+            else if (form == APPLICATION_FORMS.EDAFA_MAKHZANYA)
             {
                 tab = new Tab(font, "  إضافة مخزنية    ", color, 32, IconFont.Auto, IconChar.ClipboardCheck,
                                     DockStyle.Top, (object sender, EventArgs e) => {
@@ -409,7 +409,7 @@ namespace ANRPC_Inventory
                                     height: 54, padding: padd, appearance: appearance, isRL: true);
             }
 
-            else if(form == APPLICATION_FORMS.MOTABAA_FANYA)
+            else if (form == APPLICATION_FORMS.MOTABAA_FANYA)
             {
                 tab = new Tab(font, "  المطابقة الفنية    ", color, 32, IconFont.Auto, IconChar.ClipboardCheck,
                                 DockStyle.Top, (object sender, EventArgs e) => {
@@ -429,7 +429,7 @@ namespace ANRPC_Inventory
                                 height: 54, padding: padd, appearance: appearance, isRL: true);
             }
 
-            else if(form == APPLICATION_FORMS.EZN_TAHWEEL)
+            else if (form == APPLICATION_FORMS.EZN_TAHWEEL)
             {
                 tab = new Tab(font, "  إذون التحويل    ", color, 32, IconFont.Auto, IconChar.DiagramPredecessor,
                                 DockStyle.Top, (object sender, EventArgs e) => {
@@ -439,7 +439,7 @@ namespace ANRPC_Inventory
                                 height: 54, padding: padd, appearance: appearance, isRL: true);
             }
 
-            else if(form == APPLICATION_FORMS.HARAKA)
+            else if (form == APPLICATION_FORMS.HARAKA)
             {
                 tab = new Tab(font, "  حركة التصنيفات    ", color, 35, IconFont.Auto, IconChar.MoneyCheckDollar,
                                     DockStyle.Top, (object sender, EventArgs e) => {
@@ -449,7 +449,7 @@ namespace ANRPC_Inventory
                                     height: 54, padding: padd, appearance: appearance, isRL: true);
             }
 
-            else if(form == APPLICATION_FORMS.ESTLAM)
+            else if (form == APPLICATION_FORMS.ESTLAM)
             {
                 tab = new Tab(font, "  إذن استلام    ", color, 32, IconFont.Auto, IconChar.ClipboardCheck,
                                     DockStyle.Top, (object sender, EventArgs e) => {
@@ -469,20 +469,20 @@ namespace ANRPC_Inventory
                                     height: 54, padding: padd, appearance: appearance, isRL: true);
             }
 
-            else if(form == APPLICATION_FORMS.SEARCH)
+            else if (form == APPLICATION_FORMS.SEARCH)
             {
                 tab = new Tab(font, "  البـــــحــــث    ", color, 32, IconFont.Auto, IconChar.Search,
-                                    DockStyle.Top, (object sender, EventArgs e) => { 
-                                        SideBarBtnCLicked(sender, e, new SearchForm()); 
+                                    DockStyle.Top, (object sender, EventArgs e) => {
+                                        SideBarBtnCLicked(sender, e, new SearchForm());
                                     },
                                     height: 54, padding: padd, appearance: appearance, isRL: true);
             }
 
-            else if(form == APPLICATION_FORMS.NEW_TASNIF)
+            else if (form == APPLICATION_FORMS.NEW_TASNIF)
             {
                 tab = new Tab(font, "  تصنيف جديد    ", color, 32, IconFont.Auto, IconChar.Search,
-                                    DockStyle.Top, (object sender, EventArgs e) => { 
-                                        SideBarBtnCLicked(sender, e, new Tasnif()); 
+                                    DockStyle.Top, (object sender, EventArgs e) => {
+                                        SideBarBtnCLicked(sender, e, new Tasnif());
                                     },
                                     height: 54, padding: padd, appearance: appearance, isRL: true);
             }
@@ -495,7 +495,7 @@ namespace ANRPC_Inventory
 
             sideBarTabsList.Add(getTabByFormType(APPLICATION_FORMS.DASHBOARD));
 
-            for(int i = 0; i < forms.Count; i++)
+            for (int i = 0; i < forms.Count; i++)
             {
                 sideBarTabsList.Add(getTabByFormType(forms[i]));
             }
@@ -564,7 +564,7 @@ namespace ANRPC_Inventory
         private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        } 
+        }
 
         private void btn_max_Click(object sender, EventArgs e)
         {

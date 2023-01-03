@@ -29,10 +29,10 @@ namespace ANRPC_Inventory
 
         private void queryData()
         {
-            string codeEdara = "850";
-            int TalbTwareed_No = 8;
-            string FYear = "2022_2023";
-            string formNo = "1";
+            string codeEdara = Constants.CodeEdara;
+            string TalbTwareed_No = SelectedMostand.mostandNumber;
+            string FYear = SelectedMostand.mostandFinancialYear;
+            string formNo = SelectedMostand.formNo.ToString();
             SqlConnection sqlConnction = new SqlConnection(Constants.constring);
             SqlDataAdapter daTalabTawreed = new SqlDataAdapter(@"select *, 
                                                                   cast(

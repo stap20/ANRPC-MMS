@@ -136,7 +136,7 @@ namespace ANRPC_Inventory
             cmd.Parameters.AddWithValue("@CD", Convert.ToDateTime(TXT_Date.Value.ToShortDateString()));
             cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
             cmd.Parameters.AddWithValue("@NE", Constants.NameEdara);
-            cmd.Parameters.AddWithValue("@FN", 10);
+            cmd.Parameters.AddWithValue("@FN", 12);
             cmd.Parameters.AddWithValue("@SN", signNumber);
             cmd.Parameters.AddWithValue("@D1", DBNull.Value);
             cmd.Parameters.AddWithValue("@D2", DBNull.Value);

@@ -1850,7 +1850,28 @@ namespace ANRPC_Inventory
 
             initiateSignatureOrder();
         }
-               
+
+        public FEdafaMakhzania_F_Foreign(string x, string y)
+        {
+            InitializeComponent();
+            Cmb_FY.Text = x;
+            TXT_EdafaNo.Text = y;
+
+            panel7.Visible = false;
+            panel2.Visible = false;
+
+            isComeFromSearch = true;
+        }
+
+
+        private void FEdafaMakhzania_F_Foreign_Load(object sender, EventArgs e)
+        {
+            if (isComeFromSearch)
+            {
+                BTN_Search_Click(BTN_Search, e);
+            }
+        }
+
         private void Column2_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = false;
@@ -2346,7 +2367,7 @@ namespace ANRPC_Inventory
 
         private void BTN_Search_Click(object sender, EventArgs e)
         {
-            if (!IsValidCase(VALIDATION_TYPES.SEARCH))
+            if (isComeFromSearch == false && !IsValidCase(VALIDATION_TYPES.SEARCH))
             {
                 return;
             }
@@ -2538,5 +2559,6 @@ namespace ANRPC_Inventory
 
             popup.Dispose();
         }
+
     }
 }

@@ -1656,6 +1656,7 @@
             this.Name = "FEdafaMakhzania_F_Foreign";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "TalbTawred";
+            this.Load += new System.EventHandler(this.FEdafaMakhzania_F_Foreign_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.takalefTable.ResumeLayout(false);

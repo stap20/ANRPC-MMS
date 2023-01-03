@@ -16,105 +16,105 @@ namespace ANRPC_Inventory
     public partial class EznSarf_F : Form
     {
         #region Def Variables
-            List<CurrencyInfo> currencies = new List<CurrencyInfo>();
-            Image DefaulteImg;
-            Image image1;
-            Image image2;
-            string[,] array1 = new string[100, 6];
-            string Image1;
-            string Image2;
+        List<CurrencyInfo> currencies = new List<CurrencyInfo>();
+        Image DefaulteImg;
+        Image image1;
+        Image image2;
+        string[,] array1 = new string[100, 6];
+        string Image1;
+        string Image2;
 
-            public int indeximg = 0;
-            byte[] img1;
-            byte[] img2;
-            int picflag = 0;
-            public DataTable DT = new DataTable();
-            private BindingSource bindingsource1 = new BindingSource();
-            private string TableQuery;
-            private int AddEditFlag;
-            public Boolean executemsg;
-            public double totalprice;
-            public double oldvalue;
-          //  private string TableQuery;
-            public string stockallold;
-            public DataTable table = new DataTable();
-            public SqlDataAdapter dataadapter;
-            public DataSet ds = new DataSet();
-            ///////////////////////
-            public string Sign1;
-            public string Sign2;
-            public string Sign3;
-            public string Sign4;
-            public string Sign5;
-            public string Sign6;
-            public string Sign7;
+        public int indeximg = 0;
+        byte[] img1;
+        byte[] img2;
+        int picflag = 0;
+        public DataTable DT = new DataTable();
+        private BindingSource bindingsource1 = new BindingSource();
+        private string TableQuery;
+        private int AddEditFlag;
+        public Boolean executemsg;
+        public double totalprice;
+        public double oldvalue;
+        //  private string TableQuery;
+        public string stockallold;
+        public DataTable table = new DataTable();
+        public SqlDataAdapter dataadapter;
+        public DataSet ds = new DataSet();
+        ///////////////////////
+        public string Sign1;
+        public string Sign2;
+        public string Sign3;
+        public string Sign4;
+        public string Sign5;
+        public string Sign6;
+        public string Sign7;
 
-            public string Empn1;
-            public string Empn2;
-            public string Empn3;
-            public string Empn4;
-            public string Empn5;
-            public string Empn6;
-            public string Empn7;
+        public string Empn1;
+        public string Empn2;
+        public string Empn3;
+        public string Empn4;
+        public string Empn5;
+        public string Empn6;
+        public string Empn7;
 
-            public string FlagEmpn1;
-            public string FlagEmpn2;
-            public string FlagEmpn3;
-            public string FlagEmpn4;
-            public string FlagEmpn5;
-            public string FlagEmpn6;
-            public string FlagEmpn7;
-
-
-            public int FlagSign1; 
-            public int FlagSign2;
-            public int FlagSign3;
-            public int FlagSign4;
-            public int FlagSign5;
-            public int FlagSign6;
-            public int FlagSign7;
+        public string FlagEmpn1;
+        public string FlagEmpn2;
+        public string FlagEmpn3;
+        public string FlagEmpn4;
+        public string FlagEmpn5;
+        public string FlagEmpn6;
+        public string FlagEmpn7;
 
 
+        public int FlagSign1;
+        public int FlagSign2;
+        public int FlagSign3;
+        public int FlagSign4;
+        public int FlagSign5;
+        public int FlagSign6;
+        public int FlagSign7;
 
 
-            public string wazifa1;
-            public string wazifa2;
-            public string wazifa3;
-            public string wazifa4;
-            public string wazifa5;
-            public string wazifa6;
-            public string wazifa7;
-            public string wazifa8;
-            public string wazifa9;
-            public string wazifa10;
-            public string wazifa11;
 
-            public string Ename1;
-            public string Ename2;
-            public string Ename3;
-            public string Ename4;
-            public string Ename5;
-            public string Ename6;
-            public string Ename7;
-            public string Ename8;
-            public string Ename9;
-            public string Ename10;
-            public string Ename11;
 
-            public string pp;
-            public string TNO;
-            public string FY;
-            public int r;
-            public int rowflag = 0;
-            public int MaxFlag;
-         //  public string TableQuery;
-        
-            AutoCompleteStringCollection TasnifColl = new AutoCompleteStringCollection(); //empn
-            AutoCompleteStringCollection TasnifNameColl = new AutoCompleteStringCollection(); //empn
+        public string wazifa1;
+        public string wazifa2;
+        public string wazifa3;
+        public string wazifa4;
+        public string wazifa5;
+        public string wazifa6;
+        public string wazifa7;
+        public string wazifa8;
+        public string wazifa9;
+        public string wazifa10;
+        public string wazifa11;
 
-            AutoCompleteStringCollection UnitColl = new AutoCompleteStringCollection(); //empn
-            AutoCompleteStringCollection EznColl = new AutoCompleteStringCollection(); //empn
-            AutoCompleteStringCollection PartColl = new AutoCompleteStringCollection(); //empn
+        public string Ename1;
+        public string Ename2;
+        public string Ename3;
+        public string Ename4;
+        public string Ename5;
+        public string Ename6;
+        public string Ename7;
+        public string Ename8;
+        public string Ename9;
+        public string Ename10;
+        public string Ename11;
+
+        public string pp;
+        public string TNO;
+        public string FY;
+        public int r;
+        public int rowflag = 0;
+        public int MaxFlag;
+        //  public string TableQuery;
+
+        AutoCompleteStringCollection TasnifColl = new AutoCompleteStringCollection(); //empn
+        AutoCompleteStringCollection TasnifNameColl = new AutoCompleteStringCollection(); //empn
+
+        AutoCompleteStringCollection UnitColl = new AutoCompleteStringCollection(); //empn
+        AutoCompleteStringCollection EznColl = new AutoCompleteStringCollection(); //empn
+        AutoCompleteStringCollection PartColl = new AutoCompleteStringCollection(); //empn
         #endregion
 
 
@@ -266,7 +266,7 @@ namespace ANRPC_Inventory
                     cmd.ExecuteNonQuery();
                 }
             }
-            
+
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 if (!row.IsNewRow)
@@ -459,7 +459,6 @@ namespace ANRPC_Inventory
             }
 
         }
-
 
         private void GetEznBnod(string eznNo, string fyear, string momayz)
         {
@@ -654,7 +653,7 @@ namespace ANRPC_Inventory
                                 Ename5 = p.Split(':')[1];
                                 wazifa5 = p.Split(':')[2];
                                 pp = p.Split(':')[0];
-                               // ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "5"]).Image = Image.FromFile(@pp);
+                                // ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "5"]).Image = Image.FromFile(@pp);
                                 FlagSign5 = 1;
                                 FlagEmpn5 = s5;
                                 //((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "5"]).BackColor = Color.Green;
@@ -665,7 +664,7 @@ namespace ANRPC_Inventory
                         }
                         else
                         {
-                           // ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "5"]).BackColor = Color.Red;
+                            // ((PictureBox)this.bottomPanel.Controls["Pic_Sign" + "5"]).BackColor = Color.Red;
                         }
                     }
                 }
@@ -818,7 +817,7 @@ namespace ANRPC_Inventory
                     DeleteBtn.Enabled = true;
                     currentSignNumber = 2;
                 }
-                else if(FlagSign4 != 1 && FlagSign3 == 1)
+                else if (FlagSign4 != 1 && FlagSign3 == 1)
                 {
                     BTN_Sign4.Enabled = true;
                     currentSignNumber = 4;
@@ -844,12 +843,16 @@ namespace ANRPC_Inventory
             FY = Cmb_FYear.Text;
         }
 
-        public void prepareSearchState()
+        public void prepareSearchState(bool isReset = true)
         {
             DisableControls();
-            Input_Reset();
 
-            if (Constants.isConfirmForm)
+            if (isReset)
+            {
+                Input_Reset();
+            }
+
+            if (!Constants.isConfirmForm)
             {
                 Cmb_FYear.Enabled = true;
                 Cmb_CType.Enabled = true;
@@ -907,7 +910,7 @@ namespace ANRPC_Inventory
             //signature btn
             changePanelState(signatureTable, false);
 
-            changeDataGridViewColumnState(dataGridView1,true);
+            changeDataGridViewColumnState(dataGridView1, true);
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
 
@@ -961,7 +964,7 @@ namespace ANRPC_Inventory
             //fyear sec
             Cmb_CType.Text = "";
             Cmb_CType.SelectedIndex = -1;
-            
+
             Cmb_FYear.Text = "";
             Cmb_FYear.SelectedIndex = -1;
 
@@ -1072,7 +1075,7 @@ namespace ANRPC_Inventory
             catch (SqlException sqlEx)
             {
                 executemsg = false;
-                Console.WriteLine(sqlEx);                
+                Console.WriteLine(sqlEx);
             }
 
             flag = (int)cmd.Parameters["@aot"].Value;
@@ -1160,8 +1163,8 @@ namespace ANRPC_Inventory
             {
                 while (dr.Read())
                 {
-                    if (!(string.IsNullOrWhiteSpace(dr["quan1"].ToString()) || string.IsNullOrEmpty(dr["quan1"].ToString()))) 
-                    { 
+                    if (!(string.IsNullOrWhiteSpace(dr["quan1"].ToString()) || string.IsNullOrEmpty(dr["quan1"].ToString())))
+                    {
                         string cmdstring2 = "Exec SP_UndoVirtualQuan2 @TNO,@QUAN";
                         SqlCommand cmd2 = new SqlCommand(cmdstring2, Constants.con);
 
@@ -1279,7 +1282,7 @@ namespace ANRPC_Inventory
             try
             {
                 cmd.ExecuteNonQuery();
-                executemsg = true;               
+                executemsg = true;
             }
             catch (SqlException sqlEx)
             {
@@ -1385,7 +1388,7 @@ namespace ANRPC_Inventory
                 {
                     executemsg = false;
                     Console.WriteLine(sqlEx);
-                    
+
                 }
 
                 flag = (int)cmd.Parameters["@aot"].Value;
@@ -1415,30 +1418,30 @@ namespace ANRPC_Inventory
             List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
 
             #region TXT_StockNoAll
-                if (string.IsNullOrWhiteSpace(TXT_StockNoAll.Text))
+            if (string.IsNullOrWhiteSpace(TXT_StockNoAll.Text))
+            {
+                errorsList.Add((errorProvider, TXT_StockNoAll, "يجب اختيار التصنيف المراد اضافته"));
+            }
+            else if (TXT_StockNoAll.Text.Length != 8)
+            {
+                errorsList.Add((alertProvider, TXT_StockNoAll, "رقم التصنيف يجب ان يتكون من 8"));
+            }
+            else if (Txt_Quan.Text == "")
+            {
+                errorsList.Add((alertProvider, TXT_StockNoAll, "هذا التصنيف غير موجود"));
+            }
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (!row.IsNewRow)
                 {
-                    errorsList.Add((errorProvider, TXT_StockNoAll, "يجب اختيار التصنيف المراد اضافته"));
-                }
-                else if (TXT_StockNoAll.Text.Length != 8)
-                {
-                    errorsList.Add((alertProvider, TXT_StockNoAll, "رقم التصنيف يجب ان يتكون من 8"));
-                }
-                else if (Txt_Quan.Text == "")
-                {
-                    errorsList.Add((alertProvider, TXT_StockNoAll, "هذا التصنيف غير موجود"));
-                }
-                foreach (DataGridViewRow row in dataGridView1.Rows)
-                {
-                    if (!row.IsNewRow)
+                    if (row.Cells[9].Value.ToString().ToLower() == TXT_StockNoAll.Text.ToLower() && TXT_StockNoAll.Text != "")
                     {
-                        if (row.Cells[9].Value.ToString().ToLower() == TXT_StockNoAll.Text.ToLower() && TXT_StockNoAll.Text != "")
-                        {
-                            errorsList.Add((alertProvider, TXT_StockNoAll, "تم ادخال رقم هذا التصنيف من قبل"));
+                        errorsList.Add((alertProvider, TXT_StockNoAll, "تم ادخال رقم هذا التصنيف من قبل"));
 
-                            break;
-                        }
+                        break;
                     }
                 }
+            }
             #endregion
 
             #region Txt_ReqQuan
@@ -1478,24 +1481,24 @@ namespace ANRPC_Inventory
             List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
 
             #region Cmb_FYear
-                if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
-                {
-                    errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
-                }
+            if (string.IsNullOrWhiteSpace(Cmb_FYear.Text) || Cmb_FYear.SelectedIndex == -1)
+            {
+                errorsList.Add((errorProvider, Cmb_FYear, "تاكد من  اختيار السنة المالية"));
+            }
             #endregion
 
             #region Cmb_CType
-                if (string.IsNullOrWhiteSpace(Cmb_CType.Text) || Cmb_CType.SelectedIndex == -1)
-                {
-                    errorsList.Add((errorProvider, Cmb_CType, "تاكد من  اختيار نوع إذن الصرف"));
-                }
+            if (string.IsNullOrWhiteSpace(Cmb_CType.Text) || Cmb_CType.SelectedIndex == -1)
+            {
+                errorsList.Add((errorProvider, Cmb_CType, "تاكد من  اختيار نوع إذن الصرف"));
+            }
             #endregion
 
             #region TXT_EznNo
-                if (string.IsNullOrWhiteSpace(TXT_EznNo.Text))
-                {
-                    errorsList.Add((errorProvider, TXT_EznNo, "يجب اختيار رقم إذن الصرف"));
-                }
+            if (string.IsNullOrWhiteSpace(TXT_EznNo.Text))
+            {
+                errorsList.Add((errorProvider, TXT_EznNo, "يجب اختيار رقم إذن الصرف"));
+            }
             #endregion
 
             return errorsList;
@@ -1554,7 +1557,7 @@ namespace ANRPC_Inventory
 
             return errorsList;
         }
-        
+
         private List<(ErrorProvider, Control, string)> ValidateSave()
         {
             List<(ErrorProvider, Control, string)> errorsList = new List<(ErrorProvider, Control, string)>();
@@ -1790,12 +1793,12 @@ namespace ANRPC_Inventory
             initiateSignatureOrder();
         }
 
-        public EznSarf_F(string x, string y)
+        public EznSarf_F(string x, string y,string momayz)
         {
             InitializeComponent();
             Cmb_FYear.Text = x;
             TXT_EznNo.Text = y;
-
+            TXT_TRNO.Text = momayz;
 
             panel7.Visible = false;
             eznSarfDataPanel.Visible = false;
@@ -1850,11 +1853,11 @@ namespace ANRPC_Inventory
                     TXT_StockName.Text = dr["STOCK_NO_NAM"].ToString();
                     TXT_StockBian.Text = dr["BIAN_TSNIF"].ToString();
                     TXT_Unit.Text = dr["Unit"].ToString();
-                    if (dr["SafeAmount"] == DBNull.Value  || dr["SafeAmount"].ToString() =="0")
+                    if (dr["SafeAmount"] == DBNull.Value || dr["SafeAmount"].ToString() == "0")
                     {
                         checkBox1.Checked = false;
                     }
-                    else if(dr["SafeAmount"].ToString() =="1")
+                    else if (dr["SafeAmount"].ToString() == "1")
                     {
 
 
@@ -1862,9 +1865,9 @@ namespace ANRPC_Inventory
                     }
 
 
-                    if (dr["StrategeAmount"] == DBNull.Value ||  dr["StrategeAmount"] .ToString()=="0" )
+                    if (dr["StrategeAmount"] == DBNull.Value || dr["StrategeAmount"].ToString() == "0")
                     {
-                        checkBox2.Checked= false;
+                        checkBox2.Checked = false;
                     }
                     else if (dr["StrategeAmount"].ToString() == "1")
                     {
@@ -1903,8 +1906,8 @@ namespace ANRPC_Inventory
                 Image2 = "";
                 picflag = 0;
 
-               //SearchImage1(TXT_StockNoAll.Text);
-               //SearchImage2(TXT_StockNoAll.Text);
+                //SearchImage1(TXT_StockNoAll.Text);
+                //SearchImage2(TXT_StockNoAll.Text);
             }
             else
             {
@@ -1943,7 +1946,7 @@ namespace ANRPC_Inventory
             this.dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
-          
+
         }
 
         private void TXT_StockName_KeyDown(object sender, KeyEventArgs e)
@@ -1974,7 +1977,7 @@ namespace ANRPC_Inventory
 
                 AddEditFlag = 2;
                 TXT_Edara.Text = Constants.NameEdara;
-            }       
+            }
         }
 
 
@@ -2005,19 +2008,19 @@ namespace ANRPC_Inventory
                     array1[MaxFlag - 1, 5] = Quan_Min.Text;
 
                 }
-                    
+
             }
 
-            AddNewTasnifInDataGridView();       
+            AddNewTasnifInDataGridView();
         }
-        
+
 
         private void Cmb_FYear_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (AddEditFlag == 0)
             {
                 Constants.opencon();
-               
+
                 TXT_EznNo.AutoCompleteMode = AutoCompleteMode.None;
                 TXT_EznNo.AutoCompleteSource = AutoCompleteSource.None; ;
 
@@ -2042,7 +2045,7 @@ namespace ANRPC_Inventory
 
                     }
                 }
-              
+
                 TXT_EznNo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 TXT_EznNo.AutoCompleteSource = AutoCompleteSource.CustomSource;
                 TXT_EznNo.AutoCompleteCustomSource = EznColl;
@@ -2060,9 +2063,9 @@ namespace ANRPC_Inventory
 
                 Constants.opencon();
                 string cmdstring = "select ( COALESCE(MAX(EznSarf_No), 0)) from  T_EznSarf where FYear=@FY and TR_NO=@TRNO ";
-                
+
                 SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
-                
+
                 cmd.Parameters.AddWithValue("@FY", Cmb_FYear.Text.ToString());
                 cmd.Parameters.AddWithValue("@TRNO", TXT_TRNO.Text.ToString());
                 int flag;
@@ -2158,18 +2161,18 @@ namespace ANRPC_Inventory
         }
 
         private void Editbtn_Click_1(object sender, EventArgs e)
-          {
-              if ((MessageBox.Show("هل تريد تعديل اذن الصرف ؟", "", MessageBoxButtons.YesNo)) == DialogResult.Yes)
-              {
-                    if (string.IsNullOrEmpty(TXT_EznNo.Text) || string.IsNullOrEmpty(Cmb_FYear.Text)|| string.IsNullOrEmpty(TXT_TRNO.Text))
-                    {
-                        MessageBox.Show("يجب اختيار نوع اذن الصرف و رقم اذن الصرف المراد تعديله و السنة المالية");
-                        return;
-                    }
+        {
+            if ((MessageBox.Show("هل تريد تعديل اذن الصرف ؟", "", MessageBoxButtons.YesNo)) == DialogResult.Yes)
+            {
+                if (string.IsNullOrEmpty(TXT_EznNo.Text) || string.IsNullOrEmpty(Cmb_FYear.Text) || string.IsNullOrEmpty(TXT_TRNO.Text))
+                {
+                    MessageBox.Show("يجب اختيار نوع اذن الصرف و رقم اذن الصرف المراد تعديله و السنة المالية");
+                    return;
+                }
 
-                    PrepareConfirmState();
-              }
-          }
+                PrepareConfirmState();
+            }
+        }
 
         private void Cmb_FYear2_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -2187,7 +2190,7 @@ namespace ANRPC_Inventory
             }
             else if (Constants.User_Type == "B")
             {
-                if(Constants.UserTypeB == "Sarf")
+                if (Constants.UserTypeB == "Sarf")
                 {
                     cmdstring = "select (EznSarf_No) from  T_EznSarf where FYear=@FY and ( Sign1 is not null and Sign2 is not null)  and(Sign3 is null) and TR_NO=@TRNO  ";
                 }
@@ -2204,22 +2207,22 @@ namespace ANRPC_Inventory
 
             SqlCommand cmd = new SqlCommand(cmdstring, Constants.con);
 
-              // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
-              cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
-              cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
-              cmd.Parameters.AddWithValue("@TRNO",TXT_TRNO2.Text);
+            // cmd.Parameters.AddWithValue("@C1", row.Cells[0].Value);
+            cmd.Parameters.AddWithValue("@FY", Cmb_FYear2.Text);
+            cmd.Parameters.AddWithValue("@CE", Constants.CodeEdara);
+            cmd.Parameters.AddWithValue("@TRNO", TXT_TRNO2.Text);
 
             DataTable dts = new DataTable();
-              
-              dts.Load(cmd.ExecuteReader());
-              Cmb_EznNo2.DataSource = dts;
-              Cmb_EznNo2.ValueMember = "EznSarf_No";
-              Cmb_EznNo2.DisplayMember = "EznSarf_No";
-              Cmb_EznNo2.SelectedIndex = -1;
-              Cmb_EznNo2.SelectedIndexChanged += new EventHandler(Cmb_TalbNo2_SelectedIndexChanged);
-              Constants.closecon();
-            
-          }
+
+            dts.Load(cmd.ExecuteReader());
+            Cmb_EznNo2.DataSource = dts;
+            Cmb_EznNo2.ValueMember = "EznSarf_No";
+            Cmb_EznNo2.DisplayMember = "EznSarf_No";
+            Cmb_EznNo2.SelectedIndex = -1;
+            Cmb_EznNo2.SelectedIndexChanged += new EventHandler(Cmb_TalbNo2_SelectedIndexChanged);
+            Constants.closecon();
+
+        }
 
         private void Cmb_TalbNo2_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -2254,10 +2257,10 @@ namespace ANRPC_Inventory
         {
 
             decimal sum = 0;
-        
+
             if (e.ColumnIndex == 11)
             {
-                if (e.RowIndex >= 0 && dataGridView1.Rows[e.RowIndex].Cells[11].Value != null  && dataGridView1.Rows[e.RowIndex].Cells[11].Value != DBNull.Value)
+                if (e.RowIndex >= 0 && dataGridView1.Rows[e.RowIndex].Cells[11].Value != null && dataGridView1.Rows[e.RowIndex].Cells[11].Value != DBNull.Value)
                 {
 
                     sum = sum + Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[11].Value);
@@ -2266,7 +2269,7 @@ namespace ANRPC_Inventory
             }
             if (e.ColumnIndex == 4) //if second cell
             {
-                        if (e.RowIndex >= 0 && dataGridView1.Rows[e.RowIndex].Cells[9].Value!=null)
+                if (e.RowIndex >= 0 && dataGridView1.Rows[e.RowIndex].Cells[9].Value != null)
                 {
 
                     Constants.opencon();
@@ -2274,7 +2277,7 @@ namespace ANRPC_Inventory
                     SqlCommand cmd = new SqlCommand(x, Constants.con);
                     cmd.Parameters.AddWithValue("@st", dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString());//stock_no_all
                     var scalar = cmd.ExecuteScalar();
-                    if (scalar != DBNull.Value && scalar != null && dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString()!="") // Case where the DB value is null
+                    if (scalar != DBNull.Value && scalar != null && dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString() != "") // Case where the DB value is null
                     {
                         string g = scalar.ToString();
                         double availablerased = Convert.ToDouble(g);
@@ -2282,12 +2285,12 @@ namespace ANRPC_Inventory
                         double quan = Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
                         string xx = "select Quan2 from T_EznSarf_Benod where EznSarf_No=@x and FYear=@Y and Bnd_No=@Z";
                         SqlCommand cmd2 = new SqlCommand(xx, Constants.con);
-                      
-                        
+
+
                         cmd2.Parameters.AddWithValue("@X", dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());//stock_no_all
                         cmd2.Parameters.AddWithValue("@Y", dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());//stock_no_all
                         cmd2.Parameters.AddWithValue("@Z", dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString());//stock_no_all
-                       
+
                         var scalar2 = cmd2.ExecuteScalar();
                         if (scalar2 != DBNull.Value && scalar2 != null)
                         {
@@ -2326,10 +2329,10 @@ namespace ANRPC_Inventory
                     Constants.TasnifNo = dataGridView1.CurrentRow.Cells[0].Value.ToString();
                     Constants.TasnifName = dataGridView1.CurrentRow.Cells[0].Value.ToString();
                     Constants.Desc = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-                    Constants.Quan= dataGridView1.CurrentRow.Cells[2].Value.ToString();
+                    Constants.Quan = dataGridView1.CurrentRow.Cells[2].Value.ToString();
                     Constants.RakmEdafa = dataGridView1.CurrentRow.Cells[4].Value.ToString();
                     Constants.DateEdafa = dataGridView1.CurrentRow.Cells[8].Value.ToString();
-                    
+
                     Constants.FormNo = 1;
                     FReports F = new FReports();
                     F.Show();
@@ -2442,7 +2445,7 @@ namespace ANRPC_Inventory
 
         private void TXT_Total_TextChanged(object sender, EventArgs e)
         {
-            if(TXT_Total.Text != "")
+            if (TXT_Total.Text != "")
             {
                 ToWord toWord = new ToWord(Convert.ToDecimal(TXT_Total.Text), currencies[0]);
                 TXT_ArabicValue.Text = toWord.ConvertToArabic();
@@ -2452,7 +2455,7 @@ namespace ANRPC_Inventory
 
         private void Cmb_CType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!(string.IsNullOrEmpty(Cmb_CType.Text)||string.IsNullOrWhiteSpace(Cmb_CType.Text)||Cmb_CType.SelectedIndex == -1))
+            if (!(string.IsNullOrEmpty(Cmb_CType.Text) || string.IsNullOrWhiteSpace(Cmb_CType.Text) || Cmb_CType.SelectedIndex == -1))
             {
                 TXT_TRNO.Text = Cmb_CType.SelectedValue.ToString();
             }
@@ -2713,6 +2716,8 @@ namespace ANRPC_Inventory
 
             if (SearchEznSarf(ezn_no, fyear, momayz))
             {
+                prepareSearchState(false);
+
                 if (FlagSign2 != 1 && FlagSign1 != 1)
                 {
                     Editbtn2.Enabled = true;
@@ -2722,6 +2727,32 @@ namespace ANRPC_Inventory
                     Editbtn2.Enabled = false;
                 }
             }
+        }
+
+        private void BTN_Search_Motab3a_Click(object sender, EventArgs e)
+        {
+            if (!IsValidCase(VALIDATION_TYPES.CONFIRM_SEARCH))
+            {
+                return;
+            }
+
+            string ezn_no = Cmb_EznNo2.Text;
+            string fyear = Cmb_FYear2.Text;
+            string momayz = TXT_TRNO2.Text;
+
+            reset();
+
+            if (SearchEznSarf(ezn_no, fyear, momayz))
+            {
+                prepareSearchState(false);
+
+                Editbtn.Enabled = true;
+                BTN_Print2.Enabled = true;
+            }
+
+            TXT_EznNo.Enabled = false;
+            Cmb_FYear.Enabled = false;
+            Cmb_CType.Enabled = false;
         }
 
         private void dataGridView1_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
@@ -2864,30 +2895,6 @@ namespace ANRPC_Inventory
         private void TXT_Total_KeyPress(object sender, KeyPressEventArgs e)
         {
             Constants.validatenumbersanddecimal(TXT_Total.Text, e);
-        }
-
-        private void BTN_Search_Motab3a_Click(object sender, EventArgs e)
-        {
-            if (!IsValidCase(VALIDATION_TYPES.CONFIRM_SEARCH))
-            {
-                return;
-            }
-
-            string ezn_no = Cmb_EznNo2.Text;
-            string fyear = Cmb_FYear2.Text;
-            string momayz = TXT_TRNO2.Text;
-
-            reset();
-
-            if (SearchEznSarf(ezn_no, fyear, momayz))
-            {
-                Editbtn.Enabled = true;
-                BTN_Print2.Enabled = true;
-            }
-
-            TXT_EznNo.Enabled = false;
-            Cmb_FYear.Enabled = false;
-            Cmb_CType.Enabled = false;
         }
 
         private void BTN_Print2_Click(object sender, EventArgs e)
