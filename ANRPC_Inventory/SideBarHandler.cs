@@ -18,7 +18,7 @@ namespace ANRPC_Inventory
         private IconButton currentActiveTab;
         private Panel tabsActiveBorder;
         private Panel sideBarPanel = new Panel();
-
+        private int containerWidth;
         private List<Tab> tabsList;
 
         private struct RGBColors
@@ -29,14 +29,16 @@ namespace ANRPC_Inventory
         }
 
 
-        public SideBarHandler(List<Tab> tabsList,Panel container)
+        public SideBarHandler(List<Tab> tabsList, Panel container)
         {
 
-            foreach(Tab tab in tabsList)
+            containerWidth = container.Width;
+
+            foreach (Tab tab in tabsList)
             {
                 IconButton iconButton = tab.getTab();
 
-                iconButton.Click += new EventHandler((object sender,EventArgs e) =>
+                iconButton.Click += new EventHandler((object sender, EventArgs e) =>
                 {
                     ActivateButton(sender, RGBColors.color1);
                     tab.getOnClickCallback();
@@ -56,6 +58,8 @@ namespace ANRPC_Inventory
             this.currentActiveTab.PerformClick();
 
             container.Controls.Add(this.sideBarPanel);
+
+            
             this.sideBarPanel.BringToFront();
         }
 
@@ -124,7 +128,7 @@ namespace ANRPC_Inventory
                 int activeBorderX, activeBorderY;
 
 
-                activeBorderX = this.currentActiveTab.Location.X+ 271 - 8;
+                activeBorderX = this.currentActiveTab.Location.X + containerWidth  - 8;
                 activeBorderY = this.currentActiveTab.Location.Y;
 
                 this.tabsActiveBorder.Location = new Point(activeBorderX, activeBorderY);

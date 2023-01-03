@@ -194,7 +194,8 @@ namespace ANRPC_Inventory
             string FYear = SelectedMostand.mostandFinancialYear;
             string formNo = SelectedMostand.formNo.ToString();
             SqlConnection sqlConnction = new SqlConnection(SelectedMostand.isForeign ? Constants.constring3 : Constants.constring);
-            SqlDataAdapter daTalabTawreed = new SqlDataAdapter(@"select *, 
+
+            string query = @"select *, 
                                                                   cast(
                                                                     iif(Date2 is NULL, 0, 1) as bit
                                                                   ) as isDone, 
@@ -212,7 +213,8 @@ namespace ANRPC_Inventory
                                                                   ) AS Duration 
                                                                 FROM 
                                                                   T_SignaturesDates 
-                                                                where TalbTwareed_No = " + TalbTwareed_No + " and FormNo=" + formNo + " AND FYear='" + FYear + "' order by SignOrder", sqlConnction);
+                                                                where TalbTwareed_No = " + TalbTwareed_No + " and FormNo=" + formNo + " AND FYear='" + FYear + "' order by SignOrder";
+            SqlDataAdapter daTalabTawreed = new SqlDataAdapter(query, sqlConnction);
 
             sqlConnction.Open();
             daTalabTawreed.Fill(dtTalabTawreed);

@@ -511,6 +511,7 @@ namespace ANRPC_Inventory
             prepareSideBarTabsAction(usersApplicationPrivilages[Constants.UserTypeB]);
 
             sideBarTabContainer = new SideBarHandler(sideBarTabsList, panelButtons);
+       
         }
 
         private void handleAppBar(object senderBtn)
