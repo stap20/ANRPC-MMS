@@ -1945,6 +1945,7 @@
             this.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "TalbTawred";
+            this.Load += new System.EventHandler(this.EznSarf_F_Load);
             this.bottomPanel.ResumeLayout(false);
             this.bottomPanel.PerformLayout();
             this.takalefTable.ResumeLayout(false);

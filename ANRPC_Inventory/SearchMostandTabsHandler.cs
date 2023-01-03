@@ -14,7 +14,7 @@ namespace ANRPC_Inventory
 {
     public partial class SearchMostandTabsHandler : Form
     {
-        IDictionary<string, Func<Form>> formGetter = new Dictionary<string, Func<Form>>();
+        Dictionary<string, Func<Form>> formGetter = new Dictionary<string, Func<Form>>();
         private IconButton currentActiveTab;
         private Panel tabsActiveBorder;
         private Form currentChildForm;

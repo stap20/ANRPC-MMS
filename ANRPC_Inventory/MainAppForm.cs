@@ -12,7 +12,7 @@ namespace ANRPC_Inventory
         private Form currentChildForm;
         List<Tab> sideBarTabsList = new List<Tab>();
         private SideBarHandler sideBarTabContainer;
-        IDictionary<string, List<APPLICATION_FORMS>> usersApplicationPrivilages = new Dictionary<string, List<APPLICATION_FORMS>>();
+        Dictionary<string, List<APPLICATION_FORMS>> usersApplicationPrivilages = new Dictionary<string, List<APPLICATION_FORMS>>();
 
 
         enum APPLICATION_FORMS

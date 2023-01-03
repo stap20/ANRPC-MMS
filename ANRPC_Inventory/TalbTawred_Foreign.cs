@@ -4825,7 +4825,7 @@ namespace ANRPC_Inventory
 
         private void BTN_SearchTalb_Click(object sender, EventArgs e)
         {
-            if (!IsValidCase(VALIDATION_TYPES.SEARCH))
+            if (isComeFromSearch == false && !IsValidCase(VALIDATION_TYPES.SEARCH))
             {
                 return;
             }

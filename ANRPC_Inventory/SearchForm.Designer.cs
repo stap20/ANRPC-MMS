@@ -144,9 +144,6 @@
             this.cmbReqNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbReqNo.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbReqNo.FormattingEnabled = true;
-            this.cmbReqNo.Items.AddRange(new object[] {
-            "2019_2020",
-            "2020_2021"});
             this.cmbReqNo.Location = new System.Drawing.Point(24, 153);
             this.cmbReqNo.Name = "cmbReqNo";
             this.cmbReqNo.Size = new System.Drawing.Size(260, 27);
@@ -158,9 +155,6 @@
             this.cmbYear.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cmbYear.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbYear.FormattingEnabled = true;
-            this.cmbYear.Items.AddRange(new object[] {
-            "2020_2021",
-            "2021_2022"});
             this.cmbYear.Location = new System.Drawing.Point(24, 108);
             this.cmbYear.Name = "cmbYear";
             this.cmbYear.Size = new System.Drawing.Size(260, 27);

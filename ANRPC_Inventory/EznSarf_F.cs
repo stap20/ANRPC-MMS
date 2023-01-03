@@ -1806,7 +1806,7 @@ namespace ANRPC_Inventory
             isComeFromSearch = true;
         }
 
-        private void FTransfer_M_Load(object sender, EventArgs e)
+        private void EznSarf_F_Load(object sender, EventArgs e)
         {
             if (isComeFromSearch)
             {

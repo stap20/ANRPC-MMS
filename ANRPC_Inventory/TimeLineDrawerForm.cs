@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,12 +9,15 @@ using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Services.Description;
 using System.Windows.Forms;
+using static ANRPC_Inventory.SearchForm;
 
 namespace ANRPC_Inventory
 {
     public partial class TimeLineDrawerForm : Form
     {
+        Dictionary<(int,bool), Dictionary<int,string>> signatureDictionary = new Dictionary<(int, bool), Dictionary<int, string>>();
         List<TimeLineCircleDetails> list = new List<TimeLineCircleDetails>();
         private DataTable dtTalabTawreed = new DataTable();
         int totalDone, totalCircles;
@@ -27,13 +31,169 @@ namespace ANRPC_Inventory
             LASTINPROGRESS,
         }
 
+        private void prepareSignatureDicts()
+        {
+            Dictionary<int, string> cycle;
+
+            #region TALB_TAWREED
+            cycle = new Dictionary<int, string>();
+            cycle[1] = "إعداد الطلب";
+            cycle[2] = "التصديق";
+            cycle[3] = "إعتماد مدير عام الادارة الطالبة";
+            cycle[4] = "مدير إدارة التصنيفات";
+            cycle[5] = "مراقبة المخزون";
+            cycle[6] = "الموازنة 1";
+            cycle[7] = "الموازنة 2";
+            cycle[8] = "مدير قطاع المشتريات";
+            cycle[9] = "المتابعة الفنية";
+            cycle[10] = "إعتماد رئيس مجلس الإدارة";
+            cycle[11] = "مدير عام المهمات";
+
+            signatureDictionary[(1,false)] = cycle;
+            #endregion
+
+            #region TALB_TAWREED_FOREIGN
+            cycle = new Dictionary<int, string>();
+            cycle[1] = "إعداد الطلب";
+            cycle[2] = "التصديق";
+            cycle[3] = "إعتماد مدير عام الادارة الطالبة";
+            cycle[4] = "مدير إدارة التصنيفات";
+            cycle[5] = "مراقبة المخزون";
+            cycle[6] = "الموازنة 1";
+            cycle[7] = "الموازنة 2";
+            cycle[8] = "مدير قطاع المشتريات";
+            cycle[9] = "المتابعة الفنية";
+            cycle[10] = "إعتماد رئيس مجلس الإدارة";
+            cycle[11] = "مدير عام المهمات";
+
+            signatureDictionary[(1,true)] = cycle;
+            #endregion
+
+            #region TALB_ESLAH
+            cycle = new Dictionary<int, string>();
+            cycle[1] = "إعداد الطلب";
+            cycle[2] = "التصديق";
+            cycle[3] = "إعتماد مدير عام الادارة الطالبة";
+            cycle[4] = "الموازنة 1";
+            cycle[5] = "الموازنة 2";
+            cycle[6] = "مدير قطاع المشتريات";
+            cycle[7] = "المتابعة الفنية";
+            cycle[8] = "إعتماد رئيس مجلس الإدارة";
+            cycle[9] = "مدير عام المهمات";
+
+            signatureDictionary[(8, false)] = cycle;
+            #endregion
+
+            #region TALB_TANFIZ
+            cycle = new Dictionary<int, string>();
+            cycle[1] = "إعداد الطلب";
+            cycle[2] = "التصديق";
+            cycle[3] = "إعتماد مدير عام الادارة الطالبة";
+            cycle[4] = "الموازنة 1";
+            cycle[5] = "الموازنة 2";
+            cycle[6] = "مدير قطاع المشتريات";
+            cycle[7] = "المتابعة الفنية";
+            cycle[8] = "إعتماد رئيس مجلس الإدارة";
+            cycle[9] = "مدير عام المهمات";
+
+            signatureDictionary[(10, false)] = cycle;
+            #endregion
+
+            #region TALB_MOAYRA
+            cycle = new Dictionary<int, string>();
+            cycle[1] = "إعداد الطلب";
+            cycle[2] = "التصديق";
+            cycle[3] = "إعتماد مدير عام الادارة الطالبة";
+            cycle[4] = "الموازنة 1";
+            cycle[5] = "الموازنة 2";
+            cycle[6] = "مدير قطاع المشتريات";
+            cycle[7] = "المتابعة الفنية";
+            cycle[8] = "إعتماد رئيس مجلس الإدارة";
+            cycle[9] = "مدير عام المهمات";
+
+            signatureDictionary[(9, false)] = cycle;
+            #endregion
+
+            #region AMR_SHERAA
+            cycle = new Dictionary<int, string>();
+            cycle[1] = "إعداد أمرالشراء";
+            cycle[2] = "التصديق";
+            cycle[3] = "مدير قطاع المشتريات";
+            cycle[4] = "مدير عام المهمات";
+
+            signatureDictionary[(3, false)] = cycle;
+            #endregion
+
+            #region AMR_SHERAA_FOREIGN
+            cycle = new Dictionary<int, string>();
+            cycle[1] = "إعداد أمرالشراء";
+            cycle[2] = "التصديق";
+            cycle[3] = "مدير قطاع المشتريات";
+            cycle[4] = "مدير عام المهمات";
+
+            signatureDictionary[(3, true)] = cycle;
+            #endregion
+
+            #region AMR_SHERAA_KEMAWYAT
+            cycle = new Dictionary<int, string>();
+            cycle[1] = "إعداد أمرالشراء";
+            cycle[2] = "التصديق";
+            cycle[3] = "مدير قطاع المشتريات";
+            cycle[4] = "مدير عام المهمات";
+
+            signatureDictionary[(12, false)] = cycle;
+            #endregion
+
+            #region EZN_SARF
+            cycle = new Dictionary<int, string>();
+            cycle[1] = "إعداد إذن الصرف";
+            cycle[2] = "إعتماد مدير عام الادارة الطالبة";
+            cycle[3] = "أمين المخزن";
+            cycle[4] = "المستلم";
+
+            signatureDictionary[(2, false)] = cycle;
+            #endregion
+
+            #region EDAFA_MAKHZANYA
+            cycle = new Dictionary<int, string>();
+            cycle[1] = "مخزن الاستلام";
+            cycle[2] = "إعتماد مدير عام الادارة الطالبة";
+            cycle[3] = "أمين المخزن";
+            cycle[4] = "مدير قطاع المخازن";
+
+            signatureDictionary[(5, false)] = cycle;
+            #endregion
+
+            #region EDAFA_MAKHZANYA_FOREIGN
+            cycle = new Dictionary<int, string>();
+            cycle[1] = "مخزن الاستلام";
+            cycle[2] = "إعتماد مدير عام الادارة الطالبة";
+            cycle[3] = "أمين المخزن";
+            cycle[4] = "مدير قطاع المخازن";
+
+            signatureDictionary[(5, true)] = cycle;
+            #endregion
+
+            #region EZN_TAHWEEL
+            cycle = new Dictionary<int, string>();
+            cycle[1] = "الراسل";
+            cycle[2] = "إعتماد مدير عام الادارة الطالبة";
+            cycle[3] = "مدير إدارة التصنيفات";
+            cycle[4] = "مخزن الاستلام";
+            cycle[5] = "مدير إدارة المخازن";
+            cycle[6] = "مدير قطاع المخازن";
+
+            signatureDictionary[(7, false)] = cycle;
+            #endregion 
+        }
+
         private void queryData()
         {
             string codeEdara = Constants.CodeEdara;
-            string TalbTwareed_No = SelectedMostand.mostandNumber;
+            string TalbTwareed_No = SelectedMostand.isForeign ? "'"+SelectedMostand.mostandNumber+"'" : SelectedMostand.mostandNumber;
             string FYear = SelectedMostand.mostandFinancialYear;
             string formNo = SelectedMostand.formNo.ToString();
-            SqlConnection sqlConnction = new SqlConnection(Constants.constring);
+            SqlConnection sqlConnction = new SqlConnection(SelectedMostand.isForeign ? Constants.constring3 : Constants.constring);
             SqlDataAdapter daTalabTawreed = new SqlDataAdapter(@"select *, 
                                                                   cast(
                                                                     iif(Date2 is NULL, 0, 1) as bit
@@ -52,7 +212,7 @@ namespace ANRPC_Inventory
                                                                   ) AS Duration 
                                                                 FROM 
                                                                   T_SignaturesDates 
-                                                                where TalbTwareed_No = " + TalbTwareed_No + " and FormNo=" + formNo + " AND FYear='" + FYear + "'", sqlConnction);
+                                                                where TalbTwareed_No = " + TalbTwareed_No + " and FormNo=" + formNo + " AND FYear='" + FYear + "' order by SignOrder", sqlConnction);
 
             sqlConnction.Open();
             daTalabTawreed.Fill(dtTalabTawreed);
@@ -61,35 +221,9 @@ namespace ANRPC_Inventory
             sqlConnction.Close();
         }
 
-        private string getCurrentListOfSignaturesDescription(int formType, int signType)
+        private string getSignatureDescription(int formNo, int signOrder)
         {
-            Dictionary<int, List<string>> signatureDictionary = new Dictionary<int, List<string>>();
-
-            signatureDictionary.Add(0, new List<string>());
-            signatureDictionary.Add(1, new List<string>());
-
-            signatureDictionary[0].Add("إعداد الطلب");
-            signatureDictionary[0].Add("التصديق");
-            signatureDictionary[0].Add("الإعتماد");
-            signatureDictionary[0].Add("الموازنة 1");
-            signatureDictionary[0].Add("مدير قطاع المشتريات");
-            signatureDictionary[0].Add("مدير عام المهمات");
-            signatureDictionary[0].Add("إعتماد رئيس مجلس الإدارة");
-            signatureDictionary[0].Add("مدير إدارة التصنيفات");
-            signatureDictionary[0].Add("المتابعة الفنية");
-
-            signatureDictionary[0].Add("");
-
-            signatureDictionary[0].Add("الموازنة 2");
-            signatureDictionary[0].Add("مراقبة المخزون");
-            signatureDictionary[0].Add("");
-
-            return signatureDictionary[formType - 1][signType - 1];
-        }
-
-        private string getSignatureDescription(int formNo, int SignNo)
-        {
-            return getCurrentListOfSignaturesDescription(formNo, SignNo);
+            return signatureDictionary[(formNo, SelectedMostand.isForeign)][signOrder];
         }
 
         private TimeLineCircleDetails circleDetailsFiller(DataRow row, CircleType type)
@@ -112,7 +246,7 @@ namespace ANRPC_Inventory
             symbol = "";
 
             formNo = Convert.ToInt32(row["FormNo"]);
-            signNo = Convert.ToInt32(row["SignatureNo"]);
+            signNo = Convert.ToInt32(row["SignOrder"]);
 
             details.isDone = Convert.ToBoolean(row["isDone"]);
             details.donePercent = 0;
@@ -285,6 +419,7 @@ namespace ANRPC_Inventory
         public TimeLineDrawerForm()
         {
             InitializeComponent();
+            prepareSignatureDicts();
             HandleTimeLineView();
         }
 

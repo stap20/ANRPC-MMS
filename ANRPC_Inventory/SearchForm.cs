@@ -46,7 +46,7 @@ namespace ANRPC_Inventory
 
             #region TALB_TAWREED_FOREIGN
 
-            mostandData = new Mostand("طلب التوريد الاجنبي", "TalbTawred_Foreign", 1);
+            mostandData = new Mostand("طلب التوريد الاجنبي", "TalbTawred_Foreign", 1,true);
             MostandatData[MostndType.TALB_TAWREED_FOREIGN] = mostandData;
             #endregion
 
@@ -76,7 +76,7 @@ namespace ANRPC_Inventory
 
             #region AMR_SHERAA_FOREIGN
 
-            mostandData = new Mostand("أمر شراء اجنبي", "AmrSheraa_Foreign", 3);
+            mostandData = new Mostand("أمر شراء اجنبي", "AmrSheraa_Foreign", 3, true);
             MostandatData[MostndType.AMR_SHERAA_FOREIGN] = mostandData;
             #endregion
 
@@ -100,7 +100,7 @@ namespace ANRPC_Inventory
 
             #region EDAFA_MAKHZANYA_FOREIGN
 
-            mostandData = new Mostand("إضافة مخزنية اجنبي", "FEdafaMakhzania_F_Foreign", 5);
+            mostandData = new Mostand("إضافة مخزنية اجنبي", "FEdafaMakhzania_F_Foreign", 5, true);
             MostandatData[MostndType.EDAFA_MAKHZANYA_FOREIGN] = mostandData;
             #endregion
 
@@ -180,64 +180,69 @@ namespace ANRPC_Inventory
 
             if (type == MostndType.TALB_TAWREED)
             {
-                cmdstring = "select (TalbTwareed_No) as mostand_number from  T_TalbTawreed where FYear = '" + cmbYear.Text + "'";
+                cmdstring = "select (TalbTwareed_No) as mostand_number from  T_TalbTawreed where FYear = '" + cmbYear.Text + "' and CodeEdara = '" +Constants.CodeEdara + "'";
             }
 
             else if (type == MostndType.TALB_TAWREED_FOREIGN)
             {
-                cmdstring = "select (TalbTwareed_No) as mostand_number from  T_TalbTawreed where FYear = '" + cmbYear.Text + "'";
+                cmdstring = "select (TalbTwareed_No) as mostand_number from  T_TalbTawreed where FYear = '" + cmbYear.Text + "' and CodeEdara = '" + Constants.CodeEdara + "'";
             }
 
             else if (type == MostndType.TALB_ESLAH)
             {
-                cmdstring = "select (Eslah_No) as mostand_number from T_TalbEslah where FYear = '" + cmbYear.Text + "'";
+                cmdstring = "select (Eslah_No) as mostand_number from T_TalbEslah where FYear = '" + cmbYear.Text + "' and CodeEdara = '" + Constants.CodeEdara + "'";
             }
 
             else if (type == MostndType.TALB_TANFIZ)
             {
-                cmdstring = "select (Tanfiz_No) as mostand_number from  T_TalbTanfiz where FYear = '" + cmbYear.Text + "'";
+                cmdstring = "select (Tanfiz_No) as mostand_number from  T_TalbTanfiz where FYear = '" + cmbYear.Text + "' and CodeEdara = '" + Constants.CodeEdara + "'";
             }
 
             else if (type == MostndType.TALB_MOAYRA)
             {
-                cmdstring = "select (Moaera_No) as mostand_number from  T_TalbMoaera where FYear = '" + cmbYear.Text + "'";
+                cmdstring = "select (Moaera_No) as mostand_number from  T_TalbMoaera where FYear = '" + cmbYear.Text + "' and CodeEdara = '" + Constants.CodeEdara + "'";
             }
 
             else if (type == MostndType.AMR_SHERAA)
             {
-                cmdstring = "select (Amrshraa_No) as mostand_number from  T_Awamershraa where AmrSheraa_sanamalia= '" + cmbYear.Text + "'";
+                cmdstring = "select (Amrshraa_No) as mostand_number from  T_Awamershraa where AmrSheraa_sanamalia= '" + cmbYear.Text + "' and CodeEdara = '" + Constants.CodeEdara + "'";
             }
 
             else if (type == MostndType.AMR_SHERAA_FOREIGN)
             {
-                cmdstring = "select (Amrshraa_No) as mostand_number from  T_Awamershraa where AmrSheraa_sanamalia= '" + cmbYear.Text + "'";
+                cmdstring = "select (Amrshraa_No) as mostand_number from  T_Awamershraa where AmrSheraa_sanamalia= '" + cmbYear.Text + "' and CodeEdara = '" + Constants.CodeEdara + "'";
             }
 
             else if (type == MostndType.AMR_SHERAA_KEMAWYAT) // have issue here will see it later
             {
-                cmdstring = "select (Amrshraa_No) as mostand_number from  T_Awamershraa where AmrSheraa_sanamalia= '" + cmbYear.Text + "'";
+                cmdstring = "select (Amrshraa_No) as mostand_number from  T_Awamershraa where AmrSheraa_sanamalia= '" + cmbYear.Text + "' and CodeEdara = '" + Constants.CodeEdara + "'";
             }
 
             else if (type == MostndType.EZN_SARF)
             {
-                cmdstring = "select(EznSarf_No) as mostand_number from T_EznSarf where FYear = '" + cmbYear.Text + "' and TR_NO = " + cmbMostandTypeInfo.SelectedValue.ToString();
+                cmdstring = "select(EznSarf_No) as mostand_number from T_EznSarf where FYear = '" + cmbYear.Text + "' and TR_NO = " + cmbMostandTypeInfo.SelectedValue.ToString() + " and CodeEdara = '" + Constants.CodeEdara + "'";
             }
 
             else if (type == MostndType.EDAFA_MAKHZANYA)
             {
-                cmdstring = "SELECT [Edafa_No] as mostand_number from T_Edafa where Edafa_FY = '" + cmbYear.Text + "' and TR_NO = " + cmbMostandTypeInfo.SelectedValue.ToString() + " group by Edafa_No order by  Edafa_No";
+                cmdstring = "SELECT [Edafa_No] as mostand_number from T_Edafa where Edafa_FY = '" + cmbYear.Text + "' and TR_NO = " + cmbMostandTypeInfo.SelectedValue.ToString() + " and CodeEdara = '"+ Constants.CodeEdara + "' group by Edafa_No order by  Edafa_No";
             }
 
             else if (type == MostndType.EDAFA_MAKHZANYA_FOREIGN)
             {
-                cmdstring = "SELECT [Edafa_No] as mostand_number from T_Edafa where Edafa_FY = '" + cmbYear.Text + "' group by Edafa_No order by  Edafa_No";
+                cmdstring = "SELECT [Edafa_No] as mostand_number from T_Edafa where Edafa_FY = '" + cmbYear.Text + " and CodeEdara = '" + Constants.CodeEdara  + "' group by Edafa_No order by  Edafa_No";
             }
 
             else if (type == MostndType.EZN_TAHWEEL)
             {
-                cmdstring = "select TransNo as mostand_number from T_EzonTahwel where FYear= '" + cmbYear.Text + "' and TR_NO = " + cmbMostandTypeInfo.SelectedValue.ToString();
+                cmdstring = "select TransNo as mostand_number from T_EzonTahwel where FYear= '" + cmbYear.Text + "' and TR_NO = " + cmbMostandTypeInfo.SelectedValue.ToString() + " and CodeEdara = '" + Constants.CodeEdara + "'";
             }
 
+
+            if(cmdstring == "")
+            {
+                return;
+            }
 
             SqlCommand cmd = new SqlCommand(cmdstring, isForeign ? Constants.foreignCon : Constants.con);
 
@@ -266,25 +271,52 @@ namespace ANRPC_Inventory
 
             prepareMostandatNames();
             fillMostandNamesCombo();
+
+            HelperClass.comboBoxFiller(cmbYear, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
+
+            cmbMostandType.SelectedIndex = -1;
+            cmbYear.SelectedIndex = -1;
         }
 
+        private void showSearchTabHandler()
+        {
+            Panel panel = new Panel();
+            panel.Dock = DockStyle.Fill;
+
+            panel1.Hide();
+
+            this.Controls.Add(panel);
+
+            //End
+            SearchMostandTabsHandler childForm = new SearchMostandTabsHandler();
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+
+            panel.Controls.Add(childForm);
+
+            childForm.BringToFront();
+            childForm.Show();
+        }
+        
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            SearchMostandTabsHandler frm = new SearchMostandTabsHandler();
-            this.Close();
-            frm.Show();
+            showSearchTabHandler();
         }
 
         private void cmbMostandType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if(cmbMostandType.SelectedIndex == -1)
+            {
+                return;  
+            }
+
             MostndType type = (MostndType)cmbMostandType.SelectedValue;
             Mostand mostand = MostandatData[type];
 
             SelectedMostand.formName = mostand.formName;
             SelectedMostand.formNo = mostand.formNo;
             SelectedMostand.isForeign = mostand.isForeign;
-
-            HelperClass.comboBoxFiller(cmbYear, FinancialYearHandler.getFinancialYear(), "FinancialYear", "FinancialYear", this);
 
             if (handleMostandTypes(type))
             {
@@ -312,6 +344,11 @@ namespace ANRPC_Inventory
 
         private void cmbMostandTypeInfo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cmbMostandTypeInfo.SelectedIndex == -1)
+            {
+                return;
+            }
+
             SelectedMostand.momayzMostand = cmbMostandTypeInfo.SelectedValue.ToString();
         }
     }
